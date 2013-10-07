@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="de.mysterycode.wcf.toDo" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
+  <packageinformation>
+		<packagename>ToDo</packagename>
+		<packagedescription></packagedescription>
+		<isunique>1</isunique>
+		<version>1.0.0 Alpha 1</version>
+		<date>2013-10-11</date>
+	</packageinformation>
+	
+	<requiredpackages>
+		<requiredpackage minversion="2.0.0 Beta 10">com.woltlab.wcf</requiredpackage>
+	</requiredpackages>
+	
+	<authorinformation>
+		<author>Florian Gail</author>
+		<authorurl>http://www.mysterycode.de</authorurl>
+	</authorinformation>
+	
+	<instructions type="install">
+		<instruction type="file">files.tar</instruction>
+		<instruction type="template">template.tar</instruction>
+		<instruction type="sql">install.sql</instruction>
+    <instruction type="pageMenu">pageMenu.xml</instruction>
+		<instruction type="option">option.xml</instruction>
+		<instruction type="groupOption">groupOption.xml</instruction>
+		<instruction type="language">language/*.xml</instruction>
+	</instructions>
+</package>
