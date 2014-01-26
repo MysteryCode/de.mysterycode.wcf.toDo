@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com/XSD/language.xsd" languagecode="de">
+	
+	<category name="wcf.acp.group">
+		<item name="wcf.acp.group.option.category.user.toDo"><![CDATA[ToDo-Liste]]></item>
+		
+		<item name="wcf.acp.group.option.category.user.toDo.toDo"><![CDATA[ToDos]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canViewList"><![CDATA[Kann Liste sehen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canViewDetail"><![CDATA[Kann Details sehen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canAdd"><![CDATA[Kann ToDos hinzufügen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canEdit"><![CDATA[Kann ToDos bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canEditOwn"><![CDATA[Kann eigene ToDos bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canDelete"><![CDATA[Kann ToDos löschen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canDeleteOwn"><![CDATA[Kann eigene ToDos löschen]]></item>
+		
+		<item name="wcf.acp.group.option.category.user.toDo.responsible"><![CDATA[Zuweisungen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.responsible.canView"><![CDATA[Kann Zuweisungen sehen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.responsible.canAdd"><![CDATA[Kann Zuweisungen erstellen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.responsible.canEdit"><![CDATA[Kann Zuweisungen bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.toDo.responsible.canDelete"><![CDATA[Kann Zuweisungen löschen]]></item>
+		
+		<item name="wcf.acp.group.option.category.user.toDo.comment"><![CDATA[ToDo-Liste]]></item>
+		<item name="wcf.acp.group.option.user.toDo.comment.canAdd"><![CDATA[Kann ToDos kommentieren]]></item>
+		<item name="wcf.acp.group.option.user.toDo.comment.canEdit"><![CDATA[Kann Kommentare bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.toDo.comment.canEditOwn"><![CDATA[Kann eigene Kommentare bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.toDo.comment.canDelete"><![CDATA[Kann Kommentare löschen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.comment.canDeleteOwn"><![CDATA[Kann eigene Kommentare löschen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.comment.canEditResponse"><![CDATA[Kann Antworten bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.toDo.comment.canDeleteResponse"><![CDATA[Kann Antworten löschen]]></item>
+	</category>
+	
+	<category name="wcf.acp.option">
+		<item name="wcf.acp.option.category.toDo"><![CDATA[ToDo-Liste]]></item>
+		
+		<item name="wcf.acp.option.category.toDo.general"><![CDATA[Allgemein]]></item>
+		<item name="wcf.acp.option.todo_set_status_on_create"><![CDATA[Status beim Erstellen wählbar]]></item>
+		<item name="wcf.acp.option.todo_private_enable"><![CDATA[Private ToDos aktivieren]]></item>
+		<item name="wcf.acp.option.todo_description_html_enable"><![CDATA[HTML in Beschreibungen verwenden]]></item>
+		<item name="wcf.acp.option.todo_note_html_enable"><![CDATA[HTML in Notizen verwenden]]></item>
+		<item name="wcf.acp.option.todo_comments_enable"><![CDATA[Kommentare aktivieren]]></item>
+		<item name="wcf.acp.option.todo_category_enable"><![CDATA[Kategoriezuordnung aktivieren]]></item>
+		
+		<item name="wcf.acp.option.category.toDo.warning"><![CDATA[Warnungen]]></item>
+		<item name="wcf.acp.option.todo_unsolved_warning"><![CDATA[Information bei unabgeschlossenen ToDos anzeigen]]></item>
+		<item name="wcf.acp.option.todo_overdue_warning"><![CDATA[Warnung bei überfälligen ToDos anzeigen]]></item>
+		
+		<item name="wcf.acp.option.toDoList"><![CDATA[ToDo-Liste]]></item>
+	</category>
+	
+	<category name="wcf.dashboard.box">
+		<item name="wcf.dashboard.box.de.mysterycode.wcf.toDo.statistics"><![CDATA[ToDo-Statistik]]></item>
+	</category>
+	
+	<category name="wcf.header.menu">
+		<item name="wcf.header.menu.toDo"><![CDATA[ToDo-Liste]]></item>
+	</category>
+	
+	<category name="wcf.toDo">
+		<item name="wcf.toDo.taskList"><![CDATA[ToDo-Liste]]></item>
+		<item name="wcf.toDo.taskList.tasks"><![CDATA[Aufgaben]]></item>
+		
+		<item name="wcf.toDo.task"><![CDATA[Aufgabe]]></item>
+		<item name="wcf.toDo.task.title"><![CDATA[Titel]]></item>
+		<item name="wcf.toDo.task.description"><![CDATA[Beschreibung]]></item>
+		<item name="wcf.toDo.task.detail"><![CDATA[Details]]></item>
+		<item name="wcf.toDo.task.note"><![CDATA[Notizen]]></item>
+		<item name="wcf.toDo.task.optional"><![CDATA[(optional)]]></item>
+		<item name="wcf.toDo.task.status"><![CDATA[Status]]></item>
+		<item name="wcf.toDo.task.responsible"><![CDATA[Verantwortlich]]></item>
+		<item name="wcf.toDo.task.submitTime"><![CDATA[Erstellungsdatum]]></item>
+		<item name="wcf.toDo.task.submitter"><![CDATA[Ersteller]]></item>
+		<item name="wcf.toDo.task.endTime"><![CDATA[Fälligkeitsdatum]]></item>
+		<item name="wcf.toDo.task.delete"><![CDATA[ToDo löschen]]></item>
+		<item name="wcf.toDo.task.edit"><![CDATA[ToDo bearbeiten]]></item>
+		<item name="wcf.toDo.task.add"><![CDATA[ToDo hinzufügen]]></item>
+		<item name="wcf.toDo.task.general"><![CDATA[Allgemeines]]></item>
+		<item name="wcf.toDo.task.list"><![CDATA[ToDos auflisten]]></item>
+		<item name="wcf.toDo.task.showDetails"><![CDATA[ToDos auflisten]]></item>
+		<item name="wcf.toDo.task.unsolved"><![CDATA[Offen]]></item>
+		<item name="wcf.toDo.task.work"><![CDATA[In Bearbeitung]]></item>
+		<item name="wcf.toDo.task.solved"><![CDATA[Abgeschlossen]]></item>
+		<item name="wcf.toDo.task.canceled"><![CDATA[Verworfen]]></item>
+		<item name="wcf.toDo.task.error"><![CDATA[Fehler?]]></item>
+		<item name="wcf.toDo.task.private"><![CDATA[Als privat markieren]]></item>
+		<item name="wcf.toDo.task.important"><![CDATA[Als wichtig markieren]]></item>
+		<item name="wcf.toDo.task.priority"><![CDATA[Priorität]]></item>
+		<item name="wcf.toDo.task.priority.normal"><![CDATA[normal]]></item>
+		<item name="wcf.toDo.task.priority.high"><![CDATA[hoch]]></item>
+		<item name="wcf.toDo.task.priority.low"><![CDATA[gering]]></item>
+		<item name="wcf.toDo.task.privacy"><![CDATA[Privatsphäre]]></item>
+		<item name="wcf.toDo.task.privacy.public"><![CDATA[öffentlich]]></item>
+		<item name="wcf.toDo.task.privacy.private"><![CDATA[privat]]></item>
+		<item name="wcf.toDo.task.unsolved.reminderSingular"><![CDATA[ausstehende Aufgabe in der <a href="{link controller='ToDoList'}{/link}">ToDo-Liste</a>]]></item>
+		<item name="wcf.toDo.task.unsolved.reminderPlural"><![CDATA[ausstehende Aufgaben in der <a href="{link controller='ToDoList'}{/link}">ToDo-Liste</a>]]></item>
+		<item name="wcf.toDo.task.overdue.reminderSingular"><![CDATA[überfällige Aufgabe in der <a href="{link controller='ToDoList'}{/link}">ToDo-Liste</a>]]></item>
+		<item name="wcf.toDo.task.overdue.reminderPlural"><![CDATA[überfällige Aufgaben in der <a href="{link controller='ToDoList'}{/link}">ToDo-Liste</a>]]></item>
+		
+		<item name="wcf.toDo.comments"><![CDATA[Kommentare]]></item>
+		<item name="wcf.toDo.comment"><![CDATA[Kommentare auf ein ToDo]]></item>
+		<item name="wcf.toDo.comment.response"><![CDATA[Antwort auf einen ToDo-Kommentar]]></item>
+		<item name="wcf.toDo.comment.notification.message"><![CDATA[Hat einen Kommentar in einem ToDo von Ihnen verfasst.]]></item>
+		<item name="wcf.toDo.commentResponse.notification.message"><![CDATA[Hat auf einen Kommentar von Ihnen geantwortet.]]></item>
+		<item name="wcf.toDo.commentResponse.notification.mail"><![CDATA[Es wurde ein neuer Kommentar zu einem ToDo von Ihnen verfasst.]]></item>
+		<item name="wcf.toDo.comments.noEntries"><![CDATA[Es sind noch Kommentare vorhanden. Sie besitzen nicht die notwendigen Zugriffsrechte, um einen Kommentar verfassen zu können.]]></item>
+		
+		<item name="wcf.toDo.category"><![CDATA[Kategorie]]></item>
+		<item name="wcf.toDo.category.title"><![CDATA[Titel]]></item>
+		<item name="wcf.toDo.category.choose"><![CDATA[Bitte wählen...]]></item>
+		<item name="wcf.toDo.category.placeholder"><![CDATA[--------------------]]></item>
+		<item name="wcf.toDo.category.notAvailable"><![CDATA[ohne Kategorie]]></item>
+		
+		<item name="wcf.toDo.dashboard.stat.all"><![CDATA[Gesamtanzahl ToDos]]></item>
+		<item name="wcf.toDo.dashboard.stat.unsolved"><![CDATA[ToDos offen]]></item>
+		<item name="wcf.toDo.dashboard.stat.work"><![CDATA[ToDos in Bearbeitung]]></item>
+		<item name="wcf.toDo.dashboard.stat.solved"><![CDATA[ToDos abgeschlossen]]></item>
+		<item name="wcf.toDo.dashboard.stat.canceled"><![CDATA[ToDos verworfen]]></item>
+	</category>
+	
+	<category name="wcf.user.notification">
+		<item name="wcf.user.notification.de.mysterycode.wcf.toDo"><![CDATA[ToDos]]></item>
+		<item name="wcf.user.notification.de.mysterycode.wcf.toDo.toDoComment.notification.comment"><![CDATA[Neuer Kommentar in Ihren ToDos]]></item>
+		<item name="wcf.user.notification.de.mysterycode.wcf.toDo.toDoComment.response.notification.commentResponse"><![CDATA[Neue Antwort auf einen Kommentar in Ihren ToDos]]></item>
+		<item name="wcf.user.notification.de.mysterycode.wcf.toDo.toDoComment.response.notification.commentResponseOwner"><![CDATA[Neue Antwort auf einen Kommentar von Ihnen]]></item>
+	</category>
+	
+</language>

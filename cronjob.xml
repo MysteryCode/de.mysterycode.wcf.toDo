@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/cronjob.xsd">
+	<import>
+		<cronjob>
+			<classname>wcf\system\cronjob\DeleteUnusedToDoCategoriesCronjob</classname>
+			<description><![CDATA[Deletes unused ToDo-categories]]></description>
+			<description language="de"><![CDATA[Löscht nicht verwendete ToDo-Kategorien]]></description>
+			<startminute>*</startminute>
+			<starthour>*</starthour>
+			<startdom>*</startdom>
+			<startmonth>*</startmonth>
+			<startdow>1</startdow>
+			<active>1</active>
+			<canbeedited>1</canbeedited>
+			<canbedisabled>1</canbedisabled>
+		</cronjob>
+	</import>
+</data>
