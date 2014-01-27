@@ -15,9 +15,7 @@
 		
 		<item name="wcf.acp.group.option.category.user.toDo.responsible"><![CDATA[Zuweisungen]]></item>
 		<item name="wcf.acp.group.option.user.toDo.responsible.canView"><![CDATA[Kann Zuweisungen sehen]]></item>
-		<item name="wcf.acp.group.option.user.toDo.responsible.canAdd"><![CDATA[Kann Zuweisungen erstellen]]></item>
 		<item name="wcf.acp.group.option.user.toDo.responsible.canEdit"><![CDATA[Kann Zuweisungen bearbeiten]]></item>
-		<item name="wcf.acp.group.option.user.toDo.responsible.canDelete"><![CDATA[Kann Zuweisungen löschen]]></item>
 		
 		<item name="wcf.acp.group.option.category.user.toDo.comment"><![CDATA[ToDo-Liste]]></item>
 		<item name="wcf.acp.group.option.user.toDo.comment.canAdd"><![CDATA[Kann ToDos kommentieren]]></item>
@@ -49,6 +47,8 @@
 	
 	<category name="wcf.dashboard.box">
 		<item name="wcf.dashboard.box.de.mysterycode.wcf.toDo.statistics"><![CDATA[ToDo-Statistik]]></item>
+		<item name="wcf.dashboard.box.de.mysterycode.wcf.toDo.outstanding"><![CDATA[Ausstehende ToDos]]></item>
+		<item name="wcf.dashboard.box.de.mysterycode.wcf.toDo.noresponsible"><![CDATA[Nicht zugewiesen]]></item>
 	</category>
 	
 	<category name="wcf.header.menu">

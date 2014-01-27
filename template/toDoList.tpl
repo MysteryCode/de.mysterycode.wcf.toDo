@@ -56,8 +56,8 @@
 			{foreach from=$tasks item=task}
 				<tr>
 					<td class="columnIcon">
-						{if $__wcf->getSession()->getPermission('user.toDo.toDo.canEdit')}<a href="{link controller='ToDoEdit' id=$task.id}{/link}" title="{lang}wcf.toDo.task.edit{/lang}"><span class="icon icon16 icon-pencil pointer" title="{lang}wcf.toDo.task.edit{/lang}"></span></a>{else}<span class="icon icon16 icon-pencil disabled"></span>{/if}
-						{if $__wcf->getSession()->getPermission('user.toDo.toDo.canDelete')}<a href="{link controller='ToDoDelete' id=$task.id}{/link}" title="{lang}wcf.toDo.task.delete{/lang}"><span class="icon icon16 icon-remove jsDeleteButton pointer" title="{lang}wcf.toDo.task.delete{/lang}"></span></a>{else}<span class="icon icon16 icon-remove disabled"></span>{/if}</td>
+						{if $__wcf->getSession()->getPermission('user.toDo.toDo.canEdit') || ($__wcf->getSession()->getPermission('user.toDo.toDo.canEditOwn') && $task.submitter == $__wcf->getUser()->userID)}<a href="{link controller='ToDoEdit' id=$task.id}{/link}" title="{lang}wcf.toDo.task.edit{/lang}"><span class="icon icon16 icon-pencil pointer" title="{lang}wcf.toDo.task.edit{/lang}"></span></a>{else}<span class="icon icon16 icon-pencil disabled"></span>{/if}
+						{if $__wcf->getSession()->getPermission('user.toDo.toDo.canDelete') || ($__wcf->getSession()->getPermission('user.toDo.toDo.canDeleteOwn') && $task.submitter == $__wcf->getUser()->userID)}<a href="{link controller='ToDoDelete' id=$task.id}{/link}" title="{lang}wcf.toDo.task.delete{/lang}"><span class="icon icon16 icon-remove jsDeleteButton pointer" title="{lang}wcf.toDo.task.delete{/lang}"></span></a>{else}<span class="icon icon16 icon-remove disabled"></span>{/if}</td>
 					<td class="columnID">
 						{$task.id}</td>
 					{if TODO_CATEGORY_ENABLE}

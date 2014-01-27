@@ -1,6 +1,7 @@
 <?php
 namespace wcf\system\dashboard\box;
 use wcf\data\dashboard\box\DashboardBox;
+use wcf\data\user\User;
 use wcf\page\IPage;
 use wcf\system\dashboard\box\AbstractSidebarDashboardBox;
 use wcf\system\WCF;
@@ -16,6 +17,9 @@ use wcf\system\WCF;
  */
 
 class ToDoOutstandingDashboardBox extends AbstractSidebarDashboardBox {
+	
+	public $toDoList = array();
+	
 	public function init(DashboardBox $box, IPage $page) {
 		parent::init($box, $page);
 		
@@ -27,28 +31,24 @@ class ToDoOutstandingDashboardBox extends AbstractSidebarDashboardBox {
 			LIMIT 5";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
-		$this->unsolved = $statement->fetchArray();
 		
-		$sql = "SELECT COUNT(*)
-			FROM wcf" . WCF_N . "_todo,wcf" . WCF_N . "_todo_to_user
-			WHERE wcf" . WCF_N . "_todo.id = wcf" . WCF_N . "_todo_to_user.toDoID
-				AND wcf" . WCF_N . "_todo.status != 3
-				AND wcf" . WCF_N . "_todo.status != 4
-				AND wcf" . WCF_N . "_todo.endTime < " . TIME_NOW . "
-				AND wcf" . WCF_N . "_todo.endTime != 0
-				AND wcf" . WCF_N . "_todo_to_user.userID = " . WCF::getUser()->userID. "
-			LIMIT 5";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute();
-		$this->overdue = $statement->fetchArray();
+		while($stat = $statement->fetchArray()) {
+			$user = new User($stat['submitter']);
+			$this->toDoList[] = array(
+				'id' => $stat['id'],
+				'title' => $stat['title'],
+				'submitter' => $stat['submitter'],
+				'username' => $user->username,
+				'timestamp' => $stat['timestamp']
+			);
+		}
 		
 		WCF::getTPL()->assign(array(
-			'unsolvedToDos' => $this->unsolved['COUNT(*)'],
-			'overdueToDos' => $this->overdue['COUNT(*)']
+			'toDoList' => $this->toDoList
 		));
 	}
 	
 	protected function render() {
-		return WCF::getTPL()->fetch('dashboardBoxToDoWarning', 'wcf');
+		return WCF::getTPL()->fetch('dashboardBoxToDoOutstanding', 'wcf');
 	}
 }

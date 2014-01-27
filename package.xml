@@ -37,5 +37,6 @@
 		<instruction type="template">template.tar</instruction>
 		<instruction type="language">language/*.xml</instruction>
 		<instruction type="dashboardBox">dashboardBox.xml</instruction>
+		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 	</instructions>
 </package>

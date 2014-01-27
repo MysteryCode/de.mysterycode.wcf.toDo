@@ -24,7 +24,7 @@ class ToDoListPage extends AbstractPage {
 	
 	public $tasks = array();
 	public $categoryList = array();
-
+	
 	/**
 	 * @see wcf\page\IPage::assignVariables()
 	 */
@@ -37,9 +37,9 @@ class ToDoListPage extends AbstractPage {
 		$statement->execute();
 		
 		$this->categoryList[0] = array(
-				'id' => 0,
-				'title' => WCF::getLanguage()->get('wcf.toDo.category.notAvailable'),
-				'color' => 'gray'
+			'id' => 0,
+			'title' => WCF::getLanguage()->get('wcf.toDo.category.notAvailable'),
+			'color' => 'gray'
 		);
 		
 		while ($row = $statement->fetchArray()) {
@@ -65,6 +65,7 @@ class ToDoListPage extends AbstractPage {
 				'id' => $row['id'],
 				'title' => $row['title'],
 				'status' => $row['status'],
+				'submitter' => $row['submitter'],
 				'responsible' => $this->getResponsible($row['id']),
 				'submitTime' => $row['timestamp'],
 				'endTime' => $row['endTime'],
@@ -76,7 +77,7 @@ class ToDoListPage extends AbstractPage {
 			);
 			$a++;
 		}
-
+		
 		WCF::getTPL()->assign(array(
 			'tasks' => $this->tasks,
 			'entryCount' => $a,
@@ -91,7 +92,6 @@ class ToDoListPage extends AbstractPage {
 			ORDER BY userID ASC";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
-		
 		
 		$this->responsibles = array();
 		$i = 1;

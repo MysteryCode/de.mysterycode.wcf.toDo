@@ -144,7 +144,7 @@
 			</dl>
 		</fieldset>
 		
-		{if ($__wcf->getSession()->getPermission('user.toDo.responsible.canAdd') && $action == 'add') || ($__wcf->getSession()->getPermission('user.toDo.responsible.canEdit') && $action == 'edit')}
+		{if $__wcf->getSession()->getPermission('user.toDo.responsible.canEdit')}
 			<fieldset>
 				<legend>{lang}wcf.toDo.task.responsible{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></legend>
 				

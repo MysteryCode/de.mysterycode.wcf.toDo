@@ -126,7 +126,7 @@ class ToDoAddForm extends AbstractForm {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		
-		if(!empty($this->responsibles)) {
+		if(!empty($this->responsibles) && WCF::getSession()->getPermission('user.toDo.responsible.canEdit')) {
 			// get id of created todo
 			$sql = "SELECT *
 				FROM wcf" . WCF_N . "_todo
@@ -152,8 +152,9 @@ class ToDoAddForm extends AbstractForm {
 		
 		$this->saved();
 		
-		$this->title = $this->description = $this->note = $this->endTime = '';
+		$this->title = $this->description = $this->note = $this->endTime = $this->newCategory = '';
 		$this->status = 1;
+		$this->category = 0;
 		$this->private = $this->important = 'off';
 		$this->responsibles = array();
 		

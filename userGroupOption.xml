@@ -71,19 +71,7 @@
 				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="user.toDo.responsible.canAdd">
-				<categoryname>user.toDo.responsible</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
 			<option name="user.toDo.responsible.canEdit">
-				<categoryname>user.toDo.responsible</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="user.toDo.responsible.canDelete">
 				<categoryname>user.toDo.responsible</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>

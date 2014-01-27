@@ -17,7 +17,7 @@ use wcf\system\WCF;
 
 class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 	
-	public $toDoStat = array();
+	public $toDoList = array();
 	
 	public function init(DashboardBox $box, IPage $page) {
 		parent::init($box, $page);
@@ -27,7 +27,7 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		$stat = $statement->fetchArray();
-		$this->toDoStat[0] = array(
+		$this->toDoList[0] = array(
 			'type' => 'all',
 			'count' => $stat['COUNT(*)']
 		);
@@ -38,7 +38,7 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		$stat = $statement->fetchArray();
-		$this->toDoStat[1] = array(
+		$this->toDoList[1] = array(
 			'type' => 'unsolved',
 			'count' => $stat['COUNT(*)']
 		);
@@ -50,7 +50,7 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		$stat = $statement->fetchArray();
-		$this->toDoStat[2] = array(
+		$this->toDoList[2] = array(
 			'type' => 'work',
 			'count' => $stat['COUNT(*)']
 		);
@@ -62,7 +62,7 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		$stat = $statement->fetchArray();
-		$this->toDoStat[3] = array(
+		$this->toDoList[3] = array(
 			'type' => 'solved',
 			'count' => $stat['COUNT(*)']
 		);
@@ -74,13 +74,13 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		$stat = $statement->fetchArray();
-		$this->toDoStat[4] = array(
+		$this->toDoList[4] = array(
 			'type' => 'canceled',
 			'count' => $stat['COUNT(*)']
 		);
 		
 		WCF::getTPL()->assign(array(
-			'toDoStat' => $this->toDoStat
+			'toDoList' => $this->toDoList
 		));
 	}
 	

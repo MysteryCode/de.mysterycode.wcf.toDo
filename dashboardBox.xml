@@ -9,5 +9,9 @@
 			<classname><![CDATA[wcf\system\dashboard\box\ToDoOutstandingDashboardBox]]></classname>
 			<boxtype>sidebar</boxtype>
 		</dashboardbox>
+		<dashboardbox name="de.mysterycode.wcf.toDo.noresponsible">
+			<classname><![CDATA[wcf\system\dashboard\box\ToDoNoResponsibleDashboardBox]]></classname>
+			<boxtype>sidebar</boxtype>
+		</dashboardbox>
 	</import>
 </data>

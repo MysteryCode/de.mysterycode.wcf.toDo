@@ -5,6 +5,7 @@ use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\LanguageFactory;
 use wcf\system\user\storage\UserStorageHandler;
@@ -29,8 +30,6 @@ class ToDoEditForm extends AbstractForm {
 	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.header.menu.toDo';
-	
-	public $neededPermissions = array('user.toDo.toDo.canEdit');
 	
 	public $description = '';
 	public $note = '';
@@ -132,23 +131,25 @@ class ToDoEditForm extends AbstractForm {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		
-		// delete existing responsibles
-		$sql = "DELETE FROM wcf" . WCF_N . "_todo_to_user
-			WHERE toDoID = " . $this->toDoID;
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute();
-		
-		if(!empty($this->responsibles)) {
-			// create responsibles new
-			for($i=0; $i<count($this->responsibles); $i++) {
-				$sql = "INSERT INTO wcf" . WCF_N . "_todo_to_user
+		if(WCF::getSession()->getPermission('user.toDo.responsible.canEdit')) {
+			// delete existing responsibles
+			$sql = "DELETE FROM wcf" . WCF_N . "_todo_to_user
+				WHERE toDoID = " . $this->toDoID;
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute();
+			
+			if(!empty($this->responsibles)) {
+				// create responsibles new
+				for($i=0; $i<count($this->responsibles); $i++) {
+					$sql = "INSERT INTO wcf" . WCF_N . "_todo_to_user
 					(toDoID, userID)
 					VALUES (
 						'" . $this->toDoID . "',
 						'" . $this->responsibles[$i] . "'
 					);";
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute();
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute();
+				}
 			}
 		}
 		
@@ -175,6 +176,11 @@ class ToDoEditForm extends AbstractForm {
 		$statement->execute();
 		$item = $statement->fetchArray();
 		
+		if(!$item)
+			throw new IllegalLinkException();
+		
+		if(!WCF::getSession()->getPermission('user.toDo.toDo.canEdit') && !(WCF::getSession()->getPermission('user.toDo.toDo.canEditOwn') && $item['submitter'] == WCF::getUser()->userID))
+			throw new PermissionDeniedException();
 		
 		$this->title = $item['title'];
 		$this->description = $item['description'];

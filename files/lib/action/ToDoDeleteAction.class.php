@@ -2,6 +2,8 @@
 
 namespace wcf\action;
 use wcf\system\WCF;
+use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\LinkHandler;
 use wcf\util\ArrayUtil;
 use wcf\util\HeaderUtil;
@@ -36,6 +38,19 @@ class ToDoDeleteAction extends AbstractAction {
 		
 		if($this->toDoID == 0)
 			throw new IllegalLinkException();
+		
+		$sql = "SELECT *
+			FROM wcf" . WCF_N . "_todo
+			WHERE id = " . $this->toDoID;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute();
+		$item = $statement->fetchArray();
+		
+		if(!$item)
+			throw new IllegalLinkException();
+		
+		if(!WCF::getSession()->getPermission('user.toDo.toDo.canDelete') && !(WCF::getSession()->getPermission('user.toDo.toDo.canDeleteOwn') && $item['submitter'] == WCF::getUser()->userID))
+			throw new PermissionDeniedException();
 		
 		$sql = "DELETE FROM wcf" . WCF_N . "_todo
 			WHERE id = '" . $this->toDoID . "'";

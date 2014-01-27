@@ -6,7 +6,6 @@ use wcf\data\comment\Comment;
 use wcf\system\comment\manager\AbstractCommentManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
-use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
