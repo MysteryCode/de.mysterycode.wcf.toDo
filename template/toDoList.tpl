@@ -10,7 +10,17 @@
 
 <body id="tpl{$templateName|ucfirst}">
 
-{include file='header'}
+{capture assign='headerNavigation'}
+	
+{/capture}
+
+{if $__boxSidebar|isset && $__boxSidebar}
+	{capture assign='sidebar'}
+		{@$__boxSidebar}
+	{/capture}
+{/if}
+
+{include file='header' sidebarOrientation='right'}
 
 <header class="boxHeadline">
 	<h1>{lang}wcf.toDo.taskList{/lang}</h1>

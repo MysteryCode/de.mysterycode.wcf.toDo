@@ -1,6 +1,8 @@
 <?php
 namespace wcf\page;
 use wcf\data\user\User;
+use wcf\system\dashboard\DashboardHandler;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -78,9 +80,13 @@ class ToDoListPage extends AbstractPage {
 			$a++;
 		}
 		
+		DashboardHandler::getInstance()->loadBoxes('com.wcfsolutions.wsif.CategoryListPage', $this);
+		
 		WCF::getTPL()->assign(array(
 			'tasks' => $this->tasks,
 			'entryCount' => $a,
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoListPage'),
+			'sidebarName' => 'de.mysterycode.wcf.ToDoListPage',
 			'allowSpidersToIndexThisPage' => false
 		));
 	}

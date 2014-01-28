@@ -36,5 +36,12 @@
 			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
 			<classname>wcf\system\user\activity\event\ToDoCommentResponseUserActivityEvent</classname>
 		</type>
+		<!--Dashboard-->
+		<type>
+			<name>de.mysterycode.wcf.ToDoListPage</name>
+			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+			<allowcontent>0</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
 	</import>
 </data>
