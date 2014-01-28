@@ -59,7 +59,7 @@ class ToDoAddForm extends AbstractForm {
 		if (isset($_POST['category'])) $this->category = StringUtil::trim($_POST['category']);
 		if (isset($_POST['newCategory'])) $this->newCategory = StringUtil::trim($_POST['newCategory']);
 		
-		$this->responsibles = $this->validateReponsibles($_POST['responsibles']);
+		if (isset($_POST['responsibles'])) $this->responsibles = $this->validateReponsibles($_POST['responsibles']);
 		
 		if ($this->newCategory != '' && TODO_CATEGORY_ENABLE) $this->category = $this->createCategory($this->newCategory);
 	}
