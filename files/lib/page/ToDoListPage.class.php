@@ -80,7 +80,7 @@ class ToDoListPage extends AbstractPage {
 			$a++;
 		}
 		
-		DashboardHandler::getInstance()->loadBoxes('com.wcfsolutions.wsif.CategoryListPage', $this);
+		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoListPage', $this);
 		
 		WCF::getTPL()->assign(array(
 			'tasks' => $this->tasks,
