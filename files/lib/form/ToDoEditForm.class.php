@@ -200,10 +200,11 @@ class ToDoEditForm extends AbstractForm {
 		else
 			$this->important = 'on';
 		
-		if($item['endTime'] > 0)
+		if($item['endTime'] > 0) {
 			$this->endTime = DateUtil::getDateTimeByTimestamp($item['endTime']);
 			$this->endTime->setTimezone(WCF::getUser()->getTimeZone());
 			$this->endTime = $this->endTime->format('c');
+		}
 		
 	}
 
