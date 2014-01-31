@@ -92,7 +92,7 @@
 	<div class="container containerPadding marginTop toDoContainer">
 		<fieldset>
 			<legend>{lang}wcf.toDo.task.description{/lang}</legend>
-			{if TODO_DESCRIPTION_HTML_ENABLE}{@$toDo.description}{else}{$toDo.description|newlineToBreak}{/if}
+			{if TODO_DESCRIPTION_HTML_ENABLE}{@$toDo.description}{else}{@$toDo.description|newlineToBreak}{/if}
 		</fieldset>
 	</div>
 {/if}
@@ -100,7 +100,7 @@
 	<div class="container containerPadding marginTop toDoContainer">
 		<fieldset>
 			<legend>{lang}wcf.toDo.task.note{/lang}</legend>
-			{if TODO_NOTE_HTML_ENABLE}{@$toDo.note}{else}{$toDo.note|newlineToBreak}{/if}
+			{if TODO_NOTE_HTML_ENABLE}{@$toDo.note}{else}{@$toDo.note|newlineToBreak}{/if}
 		</fieldset>
 	</div>
 {/if}
