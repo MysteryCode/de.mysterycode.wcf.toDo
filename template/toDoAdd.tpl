@@ -67,8 +67,8 @@
 					<dd>
 						{if $categoryList}
 							<select id="category" name="category">
-								<option value="0" {if $category == 0}selected{/if}>{lang}wcf.toDo.category.choose{/lang}</option>
-								<option value="0" >{lang}wcf.toDo.category.placeholder{/lang}</option>
+								<option value="" {if $category == 0}selected{/if}>{lang}wcf.toDo.category.choose{/lang}</option>
+								<option value="" >{lang}wcf.toDo.category.placeholder{/lang}</option>
 								{foreach from=$categoryList item=item}
 									<option value="{$item.id}" {if $category == $item.id}selected{/if}>{$item.title}</option>
 								{/foreach}
@@ -92,6 +92,8 @@
 					<dt><label for="status">{lang}wcf.toDo.task.status{/lang}</label></dt>
 					<dd>
 						<select id="status" name="status" required="required">
+							<option value="" {if $category == 0}selected{/if}>{lang}wcf.toDo.status.choose{/lang}</option>
+							<option value="" >{lang}wcf.toDo.status.placeholder{/lang}</option>
 							<option value="1" {if $status==1}selected="selected"{/if}>{lang}wcf.toDo.task.unsolved{/lang}</option>
 							<option value="2" {if $status==2}selected="selected"{/if}>{lang}wcf.toDo.task.work{/lang}</option>
 							<option value="3" {if $status==3}selected="selected"{/if}>{lang}wcf.toDo.task.solved{/lang}</option>
@@ -116,14 +118,14 @@
 			</dl>
 			
 			<dl{if $errorField == 'private'} class="formError"{/if}>
-				<dt><label for="private">{lang}wcf.toDo.task.private{/lang}
+				<dt><label for="private">{lang}wcf.toDo.task.private{/lang}</label></dt>
 				<dd>
 					<input type="checkbox" id="private" name="private" {if $private == 'on'}checked{/if} />
 				</dd>
 			</dl>
 			
 			<dl{if $errorField == 'important'} class="formError"{/if}>
-				<dt><label for="important">{lang}wcf.toDo.task.important{/lang}
+				<dt><label for="important">{lang}wcf.toDo.task.important{/lang}</label></dt>
 				<dd>
 					<input type="checkbox" id="important" name="important" {if $important == 'on'}checked{/if} />
 				</dd>
