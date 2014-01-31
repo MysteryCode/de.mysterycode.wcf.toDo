@@ -11,6 +11,7 @@ use wcf\system\language\LanguageFactory;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
+use wcf\util\DateUtil;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\util\UserUtil;
@@ -200,7 +201,9 @@ class ToDoEditForm extends AbstractForm {
 			$this->important = 'on';
 		
 		if($item['endTime'] > 0)
-			$this->endTime = date('Y-m-d H:i', $item['endTime']);
+			$this->endTime = DateUtil::getDateTimeByTimestamp($item['endTime']);
+			$this->endTime->setTimezone(WCF::getUser()->getTimeZone());
+			$this->endTime = $this->endTime->format('c');
 		
 	}
 
