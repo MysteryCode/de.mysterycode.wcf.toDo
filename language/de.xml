@@ -52,7 +52,8 @@
 	</category>
 	
 	<category name="wcf.dashboard.objectType">
-		<item name="wcf.dashboard.objectType.de.mysterycode.wcf.toDoList"><![CDATA[ToDo-Liste]]></item>
+		<item name="wcf.dashboard.objectType.de.mysterycode.wcf.ToDoListPage"><![CDATA[ToDo Übersichtsseite]]></item>
+		<item name="wcf.dashboard.objectType.de.mysterycode.wcf.ToDoPage"><![CDATA[ToDo Detailseite]]></item>
 	</category>
 	
 	<category name="wcf.header.menu">
@@ -84,7 +85,8 @@
 		<item name="wcf.toDo.task.work"><![CDATA[In Bearbeitung]]></item>
 		<item name="wcf.toDo.task.solved"><![CDATA[Abgeschlossen]]></item>
 		<item name="wcf.toDo.task.canceled"><![CDATA[Verworfen]]></item>
-		<item name="wcf.toDo.task.error"><![CDATA[Fehler?]]></item>
+		<item name="wcf.toDo.task.paused"><![CDATA[Pausiert]]></item>
+		<item name="wcf.toDo.task.preparation"><![CDATA[In Vorbereitung]]></item>
 		<item name="wcf.toDo.task.private"><![CDATA[Als privat markieren]]></item>
 		<item name="wcf.toDo.task.important"><![CDATA[Als wichtig markieren]]></item>
 		<item name="wcf.toDo.task.priority"><![CDATA[Priorität]]></item>
@@ -118,6 +120,9 @@
 		<item name="wcf.toDo.dashboard.stat.work"><![CDATA[ToDos in Bearbeitung]]></item>
 		<item name="wcf.toDo.dashboard.stat.solved"><![CDATA[ToDos abgeschlossen]]></item>
 		<item name="wcf.toDo.dashboard.stat.canceled"><![CDATA[ToDos verworfen]]></item>
+		
+		<item name="wcf.toDo.status.choose"><![CDATA[Bitte wählen...]]></item>
+		<item name="wcf.toDo.status.placeholder"><![CDATA[--------------------]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">

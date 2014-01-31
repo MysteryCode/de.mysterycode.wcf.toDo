@@ -2,8 +2,10 @@
 namespace wcf\page;
 use wcf\data\user\User;
 use wcf\system\comment\CommentHandler;
+use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -89,6 +91,8 @@ class ToDoPage extends AbstractPage {
 		if($todo['private'] == 1 && $todo['submitter'] != WCF::getUser()->userID)
 			throw new PermissionDeniedException();
 		
+		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoPage', $this);
+		
 		WCF::getTPL()->assign(array(
 			'submitterusername' => $submitter->username,
 			'responsibles' => $this->getResponsible($todo['id']),
@@ -100,7 +104,9 @@ class ToDoPage extends AbstractPage {
                            'lastCommentTime' => $this->commentList->getMinCommentTime(),
                            'commentsPerPage' => $this->commentManager->getCommentsPerPage(),
 			'likeData' => (MODULE_LIKE ? $this->commentList->getLikeData() : array()),
-                           'toDo' => $todo
+                           'toDo' => $todo,
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoPage'),
+			'sidebarName' => 'de.mysterycode.wcf.ToDoPage',
 		));
 	}
 	

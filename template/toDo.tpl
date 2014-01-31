@@ -15,7 +15,18 @@
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
-{include file='header'}
+
+{capture assign='headerNavigation'}
+	
+{/capture}
+
+{if $__boxSidebar|isset && $__boxSidebar}
+	{capture assign='sidebar'}
+		{@$__boxSidebar}
+	{/capture}
+{/if}
+
+{include file='header' sidebarOrientation='right'}s
 
 <header class="boxHeadline">
 	<h1>{lang}wcf.toDo.task.detail{/lang}</h1>
@@ -50,15 +61,17 @@
 			<dt>{lang}wcf.toDo.task.status{/lang}</dt>
 			<dd>
 				{if $toDo.status == 1}
-					<span class="label badge red">{lang}wcf.toDo.task.unsolved{/lang}</span>
+					<span class="label badge red unsolvedBadge">{lang}wcf.toDo.task.unsolved{/lang}</span>
 				{elseif $toDo.status == 2}
-					<span class="label badge yellow">{lang}wcf.toDo.task.work{/lang}</span>
+					<span class="label badge yellow workBadge">{lang}wcf.toDo.task.work{/lang}</span>
 				{elseif $toDo.status == 3}
-					<span class="label badge green">{lang}wcf.toDo.task.solved{/lang}</span>
+					<span class="label badge green solvedbadge">{lang}wcf.toDo.task.solved{/lang}</span>
 				{elseif $toDo.status == 4}
-					<span class="label badge gray">{lang}wcf.toDo.task.canceled{/lang}</span>
-				{else}
-					<span class="label badge red">{lang}wcf.toDo.task.error{/lang}</span>
+					<span class="label badge gray canceledBadge">{lang}wcf.toDo.task.canceled{/lang}</span>
+				{elseif $toDo.status == 5}
+					<span class="label badge gray pendingBadge">{lang}wcf.toDo.task.preparation{/lang}</span>
+				{elseif $toDo.status == 6}
+					<span class="label badge gray pausedBadge">{lang}wcf.toDo.task.paused{/lang}</span>
 				{/if}
 			</dd>
 			<dt>{lang}wcf.toDo.task.priority{/lang}</dt>
