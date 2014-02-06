@@ -78,7 +78,7 @@ class ToDoAddForm extends AbstractForm {
 			throw new UserInputException('description');
 		}
 		
-		if (empty($this->status) && TODO_SET_STATUS_ON_CREATE) {
+		if (empty($this->status) && TODO_SET_STATUS_ON_CREATE && WCF::getSession()->getPermission('user.toDo.status.canEdit')) {
 			throw new UserInputException('status');
 		}
 		
@@ -108,7 +108,13 @@ class ToDoAddForm extends AbstractForm {
 		if($this->endTime == '')
 			$this->endTime = 0;
 		
-		// creat todo
+		// change ' to "
+		// TODO version 1.0.1 (prepared statement)
+		$this->title = str_replace("'", "\'", $this->title);
+		$this->description = str_replace("'", "\'", $this->description);
+		$this->note = str_replace("'", "\'", $this->note);
+		
+		// create todo
 		$sql = "INSERT INTO wcf" . WCF_N . "_todo
 			(title, description, note, status, submitter, timestamp, endTime, private, important, category)
 			VALUES (

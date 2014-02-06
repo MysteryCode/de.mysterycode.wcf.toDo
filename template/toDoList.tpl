@@ -53,7 +53,7 @@
 				{if TODO_CATEGORY_ENABLE}
 					<th class="tiny">{lang}wcf.toDo.category{/lang}</th>
 				{/if}
-				<th colspan="2" class="columnTitle">{lang}wcf.toDo.task.title{/lang}</th>
+				<th {if $__wcf->getSession()->getPermission('user.toDo.status.canView')}colspan="2"{/if} class="columnTitle">{lang}wcf.toDo.task.title{/lang}</th>
 				{if $__wcf->getSession()->getPermission('user.toDo.responsible.canView')}
 					<th class="columnText">{lang}wcf.toDo.task.responsible{/lang}</th>
 				{/if}
@@ -74,18 +74,22 @@
 						<td class="tiny">
 							<span class="label badge {$task.categorycolor}">{$task.categoryname}</span></td>
 					{/if}
-					<td class="columnText columnToDoStatus">
-						{if $task.status == 1}
-							<span class="label badge red">{lang}wcf.toDo.task.unsolved{/lang}</span>
-						{elseif $task.status == 2}
-							<span class="label badge yellow">{lang}wcf.toDo.task.work{/lang}</span>
-						{elseif $task.status == 3}
-							<span class="label badge green">{lang}wcf.toDo.task.solved{/lang}</span>
-						{elseif $task.status == 4}
-							<span class="label badge gray">{lang}wcf.toDo.task.canceled{/lang}</span>
-						{else}
-							<span class="label badge red">{lang}wcf.toDo.task.error{/lang}</span>
-						{/if}</td>
+					{if $__wcf->getSession()->getPermission('user.toDo.status.canView')}
+						<td class="columnText columnToDoStatus">
+							{if $task.status == 1}
+								<span class="label badge red unsolvedBadge">{lang}wcf.toDo.task.unsolved{/lang}</span>
+							{elseif $task.status == 2}
+								<span class="label badge yellow workBadge">{lang}wcf.toDo.task.work{/lang}</span>
+							{elseif $task.status == 3}
+								<span class="label badge green solvedBadge">{lang}wcf.toDo.task.solved{/lang}</span>
+							{elseif $task.status == 4}
+								<span class="label badge gray canceledBadge">{lang}wcf.toDo.task.canceled{/lang}</span>
+							{elseif $task.status == 5}
+								<span class="label badge gray pendingBadge">{lang}wcf.toDo.task.preparation{/lang}</span>
+							{elseif $task.status == 6}
+								<span class="label badge gray pausedBadge">{lang}wcf.toDo.task.paused{/lang}</span>
+							{/if}</td>
+					{/if}
 					<td class="columnTitle columnToDoTitle {if $task.important == 1}importantToDo{/if}">
 						{if $__wcf->getSession()->getPermission('user.toDo.toDo.canViewDetail')}<a href="{link controller='ToDo' id=$task.id}{/link}">{$task.title}</a>{else}{$task.title}{/if}</td>
 					{if $__wcf->getSession()->getPermission('user.toDo.responsible.canView')}

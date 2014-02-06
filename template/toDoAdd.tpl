@@ -18,7 +18,7 @@
 {include file='header'}
 
 <header class="boxHeadline">
-	<h1>{lang}wcf.toDo.task.edit{/lang}</h1>
+	<h1>{lang}wcf.toDo.task.{@$action}{/lang}</h1>
 </header>
 
 {include file='userNotice'}
@@ -87,17 +87,19 @@
 				</dl>
 			{/if}
 			
-			{if TODO_SET_STATUS_ON_CREATE || $action == 'edit'}
+			{if (TODO_SET_STATUS_ON_CREATE || $action == 'edit') && $__wcf->getSession()->getPermission('user.toDo.status.canEdit')}
 				<dl{if $errorField == 'status'} class="formError"{/if}>
 					<dt><label for="status">{lang}wcf.toDo.task.status{/lang}</label></dt>
 					<dd>
 						<select id="status" name="status" required="required">
 							<option value="" {if $category == 0}selected{/if}>{lang}wcf.toDo.status.choose{/lang}</option>
 							<option value="" >{lang}wcf.toDo.status.placeholder{/lang}</option>
+							<option value="5" {if $status==5}selected="selected"{/if}>{lang}wcf.toDo.task.preparation{/lang}</option>
 							<option value="1" {if $status==1}selected="selected"{/if}>{lang}wcf.toDo.task.unsolved{/lang}</option>
 							<option value="2" {if $status==2}selected="selected"{/if}>{lang}wcf.toDo.task.work{/lang}</option>
 							<option value="3" {if $status==3}selected="selected"{/if}>{lang}wcf.toDo.task.solved{/lang}</option>
 							<option value="4" {if $status==4}selected="selected"{/if}>{lang}wcf.toDo.task.canceled{/lang}</option>
+							<option value="6" {if $status==6}selected="selected"{/if}>{lang}wcf.toDo.task.paused{/lang}</option>
 						</select>
 						{if $errorField == 'status'}
 							<small class="innerError">

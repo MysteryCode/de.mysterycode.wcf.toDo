@@ -35,7 +35,7 @@ class ToDoEditForm extends AbstractForm {
 	public $description = '';
 	public $note = '';
 	public $responsibles = array();
-	public $status = '';
+	public $status = 0;
 	public $title = '';
 	public $toDoID = 0;
 	public $endTime = 0;
@@ -88,7 +88,7 @@ class ToDoEditForm extends AbstractForm {
 			throw new UserInputException('description');
 		}
 		
-		if (empty($this->status)) {
+		if (empty($this->status) && WCF::getSession()->getPermission('user.toDo.status.canEdit')) {
 			throw new UserInputException('status');
 		}
 		
@@ -118,17 +118,35 @@ class ToDoEditForm extends AbstractForm {
 		if($this->endTime == '')
 			$this->endTime = 0;
 		
-		$sql = "UPDATE wcf" . WCF_N . "_todo
-			SET title = '" . $this->title . "',
-				description = '" . $this->description . "',
-				note = '" . $this->note . "',
-				status = " . $this->status . ",
-				endTime = " . $this->endTime . ",
-				private = " . $privateInt . ",
-				important = " . $importantInt . ",
-				category = " . $this->category . ",
-				updatetimestamp = " . TIME_NOW . "
-			WHERE id = '" . $this->toDoID . "'";
+		// change ' to "
+		// TODO version 1.0.1 (prepared statement)
+		$this->title = str_replace("'", "\'", $this->title);
+		$this->description = str_replace("'", "\'", $this->description);
+		$this->note = str_replace("'", "\'", $this->note);
+		
+		if(WCF::getSession()->getPermission('user.toDo.status.canEdit'))
+			$sql = "UPDATE wcf" . WCF_N . "_todo
+				SET title = '" . $this->title . "',
+					description = '" . $this->description . "',
+					note = '" . $this->note . "',
+					status = " . $this->status . ",
+					endTime = " . $this->endTime . ",
+					private = " . $privateInt . ",
+					important = " . $importantInt . ",
+					category = " . $this->category . ",
+					updatetimestamp = " . TIME_NOW . "
+				WHERE id = '" . $this->toDoID . "'";
+		else
+			$sql = "UPDATE wcf" . WCF_N . "_todo
+				SET title = '" . $this->title . "',
+					description = '" . $this->description . "',
+					note = '" . $this->note . "',
+					endTime = " . $this->endTime . ",
+					private = " . $privateInt . ",
+					important = " . $importantInt . ",
+					category = " . $this->category . ",
+					updatetimestamp = " . TIME_NOW . "
+				WHERE id = '" . $this->toDoID . "'";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		
