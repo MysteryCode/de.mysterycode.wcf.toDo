@@ -13,11 +13,15 @@
 		<item name="wcf.acp.group.option.user.toDo.toDo.canDelete"><![CDATA[Kann ToDos löschen]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canDeleteOwn"><![CDATA[Kann eigene ToDos löschen]]></item>
 		
+		<item name="wcf.acp.group.option.category.user.toDo.status"><![CDATA[Status]]></item>
+		<item name="wcf.acp.group.option.user.toDo.status.canView"><![CDATA[Kann Status sehen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.status.canEdit"><![CDATA[Kann Status bearbeiten]]></item>
+		
 		<item name="wcf.acp.group.option.category.user.toDo.responsible"><![CDATA[Zuweisungen]]></item>
 		<item name="wcf.acp.group.option.user.toDo.responsible.canView"><![CDATA[Kann Zuweisungen sehen]]></item>
 		<item name="wcf.acp.group.option.user.toDo.responsible.canEdit"><![CDATA[Kann Zuweisungen bearbeiten]]></item>
 		
-		<item name="wcf.acp.group.option.category.user.toDo.comment"><![CDATA[ToDo-Liste]]></item>
+		<item name="wcf.acp.group.option.category.user.toDo.comment"><![CDATA[Kommentare]]></item>
 		<item name="wcf.acp.group.option.user.toDo.comment.canAdd"><![CDATA[Kann ToDos kommentieren]]></item>
 		<item name="wcf.acp.group.option.user.toDo.comment.canEdit"><![CDATA[Kann Kommentare bearbeiten]]></item>
 		<item name="wcf.acp.group.option.user.toDo.comment.canEditOwn"><![CDATA[Kann eigene Kommentare bearbeiten]]></item>
