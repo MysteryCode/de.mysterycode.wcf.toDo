@@ -3,7 +3,6 @@ namespace wcf\system\cronjob;
 use wcf\data\cronjob\Cronjob;
 use wcf\system\cronjob\AbstractCronjob;
 use wcf\system\WCF;
-use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
