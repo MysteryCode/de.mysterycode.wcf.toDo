@@ -26,7 +26,7 @@
 	{/capture}
 {/if}
 
-{include file='header' sidebarOrientation='right'}s
+{include file='header' sidebarOrientation='right'}
 
 <header class="boxHeadline">
 	<h1>{lang}wcf.toDo.task.detail{/lang}</h1>
