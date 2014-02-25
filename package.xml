@@ -3,8 +3,8 @@
 	<packageinformation>
 		<packagename><![CDATA[ToDo-Liste]]></packagename>
 		<packagedescription><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
-		<version>1.0.0</version>
-		<date>2014-01-31</date>
+		<version>1.0.1</version>
+		<date>2014-02-25</date>
 	</packageinformation>
 	
 	<requiredpackages>
@@ -39,5 +39,9 @@
 		<instruction type="dashboardBox">dashboardBox.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
+	</instructions>
+	<instructions type="update" fromversion="1.0.0">
+		<instruction type="file">files.tar</instruction>
+		<instruction type="template">template.tar</instruction>
 	</instructions>
 </package>
