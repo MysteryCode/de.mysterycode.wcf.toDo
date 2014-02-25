@@ -63,6 +63,14 @@ class ToDoListPage extends AbstractPage {
 		$a = 0;
 		while ($row = $statement->fetchArray()) {
 			
+			if(isset($this->categoryList[$row['category']])) {
+				$title = $this->categoryList[$row['category']]['title'];
+				$color = $this->categoryList[$row['category']]['color'];
+			} else {
+				$title = $this->categoryList[0]['title'];
+				$color = $this->categoryList[0]['color'];
+			}
+			
 			$this->tasks[] = array(
 				'id' => $row['id'],
 				'title' => $row['title'],
@@ -72,8 +80,8 @@ class ToDoListPage extends AbstractPage {
 				'submitTime' => $row['timestamp'],
 				'endTime' => $row['endTime'],
 				'category' => $row['category'],
-				'categoryname' => $this->categoryList[$row['category']]['title'],
-				'categorycolor' => $this->categoryList[$row['category']]['color'],
+				'categoryname' => $title,
+				'categorycolor' => $color,
 				'important' => $row['important'],
 				'private' => $row['private']
 			);
