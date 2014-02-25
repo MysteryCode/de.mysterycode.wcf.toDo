@@ -27,6 +27,8 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		
+		$test = array();
+		
 		while($row = $statement->fetchArray()) {
 			$test[] = $row['category'];
 		}
