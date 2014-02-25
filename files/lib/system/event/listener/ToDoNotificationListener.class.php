@@ -26,7 +26,7 @@ class ToDoNotificationListener implements IEventListener {
 		$sql = "SELECT COUNT(*)
 			FROM wcf" . WCF_N . "_todo,wcf" . WCF_N . "_todo_to_user
 			WHERE wcf" . WCF_N . "_todo.id = wcf" . WCF_N . "_todo_to_user.toDoID
-				AND (wcf" . WCF_N . "_todo.status = 1 OR wcf" . WCF_N . "_todo.status = 2)
+				AND wcf" . WCF_N . "_todo.status = 1
 				AND wcf" . WCF_N . "_todo_to_user.userID = " . WCF::getUser()->userID;
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
