@@ -325,6 +325,7 @@ class ToDoEditForm extends AbstractForm {
 			ORDER BY title ASC";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
+		$categories = array();
 		while ($row = $statement->fetchArray()) {
 			$categories[] = array(
 				'id' => $row["id"],
