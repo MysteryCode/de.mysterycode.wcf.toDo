@@ -17,6 +17,9 @@
 			<category name="user.toDo.comment">
 				<parent>user.toDo</parent>
 			</category>
+			<category name="user.toDo.warning">
+				<parent>user.toDo</parent>
+			</category>
 		</categories>
 		
 		<options>
@@ -118,6 +121,19 @@
 			</option>
 			<option name="user.toDo.comment.canDeleteResponse">
 				<categoryname>user.toDo.comment</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="user.toDo.warning.canSee">
+				<categoryname>user.toDo.warning</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.warning.canHide">
+				<categoryname>user.toDo.warning</categoryname>
 				<optiontype>boolean</optiontype>
 				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
