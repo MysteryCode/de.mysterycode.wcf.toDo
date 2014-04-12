@@ -3,8 +3,8 @@
 	<packageinformation>
 		<packagename><![CDATA[ToDo-Liste]]></packagename>
 		<packagedescription><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
-		<version>1.0.1</version>
-		<date>2014-02-25</date>
+		<version>1.0.2</version>
+		<date>2014-04-12</date>
 	</packageinformation>
 	
 	<requiredpackages>
@@ -32,16 +32,17 @@
 		<instruction type="cronjob">cronjob.xml</instruction>
 	</instructions>
 	
-	<instructions type="update" fromversion="1.0.0 RC 2">
-		<instruction type="file">files.tar</instruction>
-		<instruction type="template">template.tar</instruction>
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="dashboardBox">dashboardBox.xml</instruction>
-		<instruction type="userGroupOption">userGroupOption.xml</instruction>
-		<instruction type="objectType">objectType.xml</instruction>
-	</instructions>
 	<instructions type="update" fromversion="1.0.0">
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">template.tar</instruction>
+		<instruction type="option">option.xml</instruction>
+		<instruction type="userGroupOption">userGroupOption.xml</instruction>
+		<instruction type="language">language/*.xml</instruction>
+	</instructions>
+	<instructions type="update" fromversion="1.0.1">
+		<instruction type="template">template.tar</instruction>
+		<instruction type="option">option.xml</instruction>
+		<instruction type="userGroupOption">userGroupOption.xml</instruction>
+		<instruction type="language">language/*.xml</instruction>
 	</instructions>
 </package>
