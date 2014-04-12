@@ -1,4 +1,4 @@
-{if $__wcf->getUser()->userID != 0}
+{if $__wcf->getUser()->userID != 0 && $__wcf->getSession()->getPermission('user.toDo.warning.canSee')}
 	{if $unsolvedToDoCount|isset && $unsolvedToDoCount > 0 && TODO_UNSOLVED_WARNING}
 		<p class="info toDoInfo" id="todoWarningUnsolved">{$unsolvedToDoCount} {lang}wcf.toDo.task.unsolved.reminder{if $unsolvedToDoCount == 1}Singular{else}Plural{/if}{/lang}{if $__wcf->getSession()->getPermission('user.toDo.warning.canHide')}<span class="icon icon-remove pointer" style="float:right;" onclick="hideToDoWarning('todoWarningUnsolved');"></span>{/if}</p>
 	{/if}
