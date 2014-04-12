@@ -106,12 +106,15 @@
 		<item name="wcf.toDo.task.overdue.reminderPlural"><![CDATA[überfällige Aufgaben in der <a href="{link controller='ToDoList'}{/link}">ToDo-Liste</a>]]></item>
 		
 		<item name="wcf.toDo.comments"><![CDATA[Kommentare]]></item>
-		<item name="wcf.toDo.comment"><![CDATA[Kommentare auf ein ToDo]]></item>
+		<item name="wcf.toDo.comment"><![CDATA[Kommentare zu einem ToDo]]></item>
 		<item name="wcf.toDo.comment.response"><![CDATA[Antwort auf einen ToDo-Kommentar]]></item>
-		<item name="wcf.toDo.comment.notification.message"><![CDATA[Hat einen Kommentar in einem ToDo von Ihnen verfasst.]]></item>
-		<item name="wcf.toDo.commentResponse.notification.message"><![CDATA[Hat auf einen Kommentar von Ihnen geantwortet.]]></item>
-		<item name="wcf.toDo.commentResponse.notification.mail"><![CDATA[Es wurde ein neuer Kommentar zu einem ToDo von Ihnen verfasst.]]></item>
-		<item name="wcf.toDo.comments.noEntries"><![CDATA[Es sind noch Kommentare vorhanden. Sie besitzen nicht die notwendigen Zugriffsrechte, um einen Kommentar verfassen zu können.]]></item>
+		<item name="wcf.toDo.comment.notification.message"><![CDATA[Hat einen Kommentar zu einem ToDo von Ihnen verfasst.]]></item>
+		<item name="wcf.toDo.comment.notification.mail"><![CDATA[Es wurde ein Kommentar zu einem ToDo von Ihnen verfasst.]]></item>
+		<item name="wcf.toDo.commentResponse.notification.message"><![CDATA[Hat auf Ihren Kommentar geantwortet.]]></item>
+		<item name="wcf.toDo.commentResponse.notification.mail"><![CDATA[Es wurde eine Antwort auf Ihren Kommentar verfasst.]]></item>
+		<item name="wcf.toDo.commentResponseOwner.notification.message"><![CDATA[Hat auf einen Kommentar von Ihnen geantwortet.]]></item>
+		<item name="wcf.toDo.commentResponseOwner.notification.mail"><![CDATA[Es wurde eine Antwort auf Ihren Kommentar verfasst.]]></item>
+		<item name="wcf.toDo.comments.noEntries"><![CDATA[Es sind noch keine Kommentare vorhanden. Sie besitzen nicht die notwendigen Zugriffsrechte, um einen Kommentar verfassen zu können.]]></item>
 		
 		<item name="wcf.toDo.category"><![CDATA[Kategorie]]></item>
 		<item name="wcf.toDo.category.title"><![CDATA[Titel]]></item>
