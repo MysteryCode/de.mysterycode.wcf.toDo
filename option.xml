@@ -48,10 +48,20 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
+			<option name="todo_unsolved_warning_hide_duration">
+				<categoryname>toDo.warning</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>168</defaultvalue>
+			</option>
 			<option name="todo_overdue_warning">
 				<categoryname>toDo.warning</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="todo_overdue_warning_hide_duration">
+				<categoryname>toDo.warning</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>48</defaultvalue>
 			</option>
 		</options>
 	</import>
