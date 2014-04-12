@@ -48,7 +48,11 @@
 		
 		<item name="wcf.acp.option.category.toDo.warning"><![CDATA[Warnings]]></item>
 		<item name="wcf.acp.option.todo_unsolved_warning"><![CDATA[Warning for unsolved ToDos]]></item>
+		<item name="wcf.acp.option.todo_unsolved_warning_hide_duration"><![CDATA[Hiding duration]]></item>
+		<item name="wcf.acp.option.todo_unsolved_warning_hide_duration.description"><![CDATA[Time in hours for which the warning for unsolved ToDos can be hidden]]></item>
 		<item name="wcf.acp.option.todo_overdue_warning"><![CDATA[Warning for overdue ToDos]]></item>
+		<item name="wcf.acp.option.todo_overdue_warning_hide_duration"><![CDATA[Hiding duration]]></item>
+		<item name="wcf.acp.option.todo_overdue_warning_hide_duration.description"><![CDATA[Time in hours for which the warning for overdue ToDos can be hidden]]></item>
 		
 		<item name="wcf.acp.option.toDoList"><![CDATA[ToDo-List]]></item>
 	</category>
