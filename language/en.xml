@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com/XSD/language.xsd" languagecode="en">
+	
+	<category name="wcf.acp.group">
+		
+	</category>
+	
+	<category name="wcf.acp.option">
+	
+	</category>
+	
+	<category name="wcf.dashboard.box">
+	  
+	</category>
+	
+	<category name="wcf.dashboard.objectType">
+		
+	</category>
+	
+	<category name="wcf.header.menu">
+		
+	</category>
+	
+	<category name="wcf.toDo">
+		
+	</category>
+	
+	<category name="wcf.user.notification">
+		
+	</category>
+	
+</language>
