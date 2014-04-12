@@ -29,6 +29,10 @@
 		<item name="wcf.acp.group.option.user.toDo.comment.canDeleteOwn"><![CDATA[Kann eigene Kommentare löschen]]></item>
 		<item name="wcf.acp.group.option.user.toDo.comment.canEditResponse"><![CDATA[Kann Antworten bearbeiten]]></item>
 		<item name="wcf.acp.group.option.user.toDo.comment.canDeleteResponse"><![CDATA[Kann Antworten löschen]]></item>
+		
+		<item name="wcf.acp.group.option.category.user.toDo.warning"><![CDATA[Warnungen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.warning.canSee"><![CDATA[Kann Warnungen sehen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.warning.canHide"><![CDATA[Kann Warnungen ausblenden]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">
