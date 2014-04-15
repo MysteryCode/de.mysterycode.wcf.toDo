@@ -46,7 +46,7 @@ class ToDoListPage extends SortablePage {
 	 *
 	 * @see \wcf\page\SortablePage::$validSortFields
 	 */
-	public $validSortFields = array (
+	public $validSortFields = array(
 		'status',
 		'category',
 		'title',
@@ -70,24 +70,17 @@ class ToDoListPage extends SortablePage {
 	 * @see \wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 	public $objectListClassName = 'wcf\data\todo\ToDoList';
-	public $neededModules = array (
-		'TODOLIST' 
-	);
-	public $neededPermissions = array (
-		'user.toDo.toDo.canViewList' 
-	);
+	public $neededModules = array('TODOLIST');
+	public $neededPermissions = array('user.toDo.toDo.canViewList');
 	
 	/**
 	 *
 	 * @see \wcf\page\MultipleLinkPage::initObjectList()
 	 */
 	protected function initObjectList() {
-		parent::initObjectList ();
+		parent::initObjectList();
 		
-		$this->objectList->getConditionBuilder()->add( "private = ? or submitter = ?", array (
-			0,
-			WCF::getUser ()->userID 
-		) );
+		$this->objectList->getConditionBuilder()->add("private = ? or submitter = ?", array (0, WCF::getUser()->userID));
 	}
 	
 	/**
@@ -95,14 +88,14 @@ class ToDoListPage extends SortablePage {
 	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
-		parent::assignVariables ();
+		parent::assignVariables();
 		
-		DashboardHandler::getInstance()->loadBoxes( 'de.mysterycode.wcf.ToDoListPage', $this );
+		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoListPage', $this);
 		
-		WCF::getTPL ()->assign ( array (
-			'entryCount' => count( $this->objectList->objects ),
-			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed( 'com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoListPage' ),
+		WCF::getTPL()->assign(array(
+			'entryCount' => count($this->objectList->objects),
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoListPage'),
 			'sidebarName' => 'de.mysterycode.wcf.ToDoListPage' 
-		) );
+		));
 	}
 }

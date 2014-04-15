@@ -72,12 +72,8 @@ class ToDoCategoryPage extends SortablePage {
 	 * @see \wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 	public $objectListClassName = 'wcf\data\todo\ToDoList';
-	public $neededPermissions = array(
-		'user.toDo.toDo.canViewList' 
-	);
-	public $neededModules = array(
-		'TODOLIST' 
-	);
+	public $neededPermissions = array('user.toDo.toDo.canViewList');
+	public $neededModules = array('TODOLIST');
 	public $categoryID = 0;
 	
 	/**
@@ -87,8 +83,7 @@ class ToDoCategoryPage extends SortablePage {
 	public function readParameters() {
 		parent::readParameters();
 		
-		if(isset($_REQUEST ['id']))
-			$this->categoryID = intval($_REQUEST ['id']);
+		if(isset($_REQUEST['id'])) $this->categoryID = intval($_REQUEST['id']);
 	}
 	
 	/**
@@ -98,11 +93,8 @@ class ToDoCategoryPage extends SortablePage {
 	protected function initObjectList() {
 		parent::initObjectList();
 		
-		$this->objectList->getConditionBuilder()->add( "(private = ? or submitter = ?)", array(
-			0,
-			WCF::getUser()->userID 
-		));
-		$this->objectList->getConditionBuilder()->add( "category = ?", array($this->categoryID));
+		$this->objectList->getConditionBuilder()->add("(private = ? or submitter = ?)", array(0, WCF::getUser()->userID));
+		$this->objectList->getConditionBuilder()->add("category = ?", array($this->categoryID));
 	}
 	
 	/**
@@ -122,7 +114,7 @@ class ToDoCategoryPage extends SortablePage {
 		if(!$category)
 			throw new IllegalLinkException();
 		
-		$this->title = $category ['title'];
+		$this->title = $category['title'];
 	}
 	
 	/**
@@ -132,7 +124,7 @@ class ToDoCategoryPage extends SortablePage {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		WCF::getBreadcrumbs()->add( new Breadcrumb( WCF::getLanguage()->get('wcf.toDo.taskList'), LinkHandler::getInstance()->getLink('ToDoList', array())));
+		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.toDo.taskList'), LinkHandler::getInstance()->getLink('ToDoList', array())));
 		
 		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoListPage', $this);
 		
