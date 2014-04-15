@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
+	<import>
+		<!-- comment -->
+		<type>
+			<name>de.mysterycode.wcf.toDo.toDoComment</name>
+			<definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
+			<classname>wcf\system\comment\manager\ToDoCommentManager</classname>
+		</type>
+		<!-- notifications -->
+		<type>
+			<name>de.mysterycode.wcf.toDo.toDo.notification</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>wcf\system\user\notification\object\type\ToDoUserNotificationObjectType</classname>
+			<category>de.mysterycode.wcf.toDo</category>
+		</type>
+		
+		<type>
+			<name>de.mysterycode.wcf.toDo.toDoComment.notification</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>wcf\system\user\notification\object\type\ToDoCommentUserNotificationObjectType</classname>
+			<category>de.mysterycode.wcf.toDo</category>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.toDo.toDoComment.response.notification</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>wcf\system\user\notification\object\type\ToDoCommentResponseUserNotificationObjectType</classname>
+			<category>de.mysterycode.wcf.toDo</category>
+		</type>
+		<!-- recent activity -->
+		<type>
+			<name>de.mysterycode.wcf.toDo.toDoComment.recentActivityEvent</name>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>wcf\system\user\activity\event\ToDoCommentUserActivityEvent</classname>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.toDo.toDoComment.response.recentActivityEvent</name>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>wcf\system\user\activity\event\ToDoCommentResponseUserActivityEvent</classname>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.toDo.toDo.recentActivityEvent</name>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>wcf\system\user\activity\event\ToDoUserActivityEvent</classname>
+		</type>
+		<!-- Activity Points -->
+		<type>
+			<name>de.mysterycode.wcf.toDo.toDo.activityPointEvent</name>
+			<definitionname>com.woltlab.wcf.user.activityPointEvent</definitionname>
+			<points>5</points>
+		</type>
+		<!-- user online locations -->
+		<type>
+			<name>de.mysterycode.wcf.ToDoListPage</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<controller>wcf\page\ToDoListPage</controller>
+			<languagevariable>wcf.user.usersOnline.location.ToDoListPage</languagevariable>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.ToDoCategoryPage</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<controller>wcf\page\ToDoCategoryPage</controller>
+			<languagevariable>wcf.user.usersOnline.location.ToDoCategoryPage</languagevariable>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.ToDoPage</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<classname>wcf\system\user\online\location\ToDoLocation</classname>
+			<controller>wcf\page\ToDoPage</controller>
+			<languagevariable>wcf.user.usersOnline.location.ToDoPage</languagevariable>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.ToDoAddForm</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<classname>wcf\system\user\online\location\ToDoLocation</classname>
+			<controller>wcf\form\ToDoAddForm</controller>
+			<languagevariable>wcf.user.usersOnline.location.ToDoAddForm</languagevariable>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.ToDoEditForm</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<classname>wcf\system\user\online\location\ToDoLocation</classname>
+			<controller>wcf\form\ToDoEditForm</controller>
+			<languagevariable>wcf.user.usersOnline.location.ToDoEditForm</languagevariable>
+		</type>
+		<!--Dashboard-->
+		<type>
+			<name>de.mysterycode.wcf.ToDoListPage</name>
+			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+			<allowcontent>0</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.ToDoPage</name>
+			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+			<allowcontent>0</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.ToDoCategoryPage</name>
+			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+			<allowcontent>0</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+	</import>
+</data>
