@@ -2,6 +2,7 @@
 
 namespace wcf\page;
 use wcf\data\todo\ToDoCache;
+use wcf\data\todo\ToDo;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\data\user\User;
 use wcf\data\ILinkableObject;
@@ -53,8 +54,7 @@ class ToDoPage extends AbstractPage {
 	public function readParameters() {
 		parent::readParameters();
 		
-		if(isset( $_REQUEST['id'] ))
-			$this->todoID = intval( $_REQUEST['id'] );
+		if(isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
 	}
 	
 	/**
@@ -64,22 +64,22 @@ class ToDoPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 		
-		$this->todo = ToDoCache::getInstance()->getToDo( $this->todoID );
+		$this->todo = new ToDo($this->todoID);
 		if($this->todo === null) {
 			throw new IllegalLinkException();
 		}
 		
-		$this->objectTypeID = CommentHandler::getInstance()->getObjectTypeID( 'de.mysterycode.wcf.toDo.toDoComment' );
-		$objectType = CommentHandler::getInstance()->getObjectType( $this->objectTypeID );
+		$this->objectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDoComment');
+		$objectType = CommentHandler::getInstance()->getObjectType($this->objectTypeID);
 		$this->commentManager = $objectType->getProcessor();
-		$this->commentList = CommentHandler::getInstance()->getCommentList( $this->commentManager, $this->objectTypeID, $this->todoID );
+		$this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->objectTypeID, $this->todoID);
 		
-		WCF::getBreadcrumbs()->add( new Breadcrumb( WCF::getLanguage()->get( 'wcf.header.menu.toDo' ), LinkHandler::getInstance()->getLink( 'ToDoList', array() ) ) );
+		WCF::getBreadcrumbs()->add( new Breadcrumb( WCF::getLanguage()->get('wcf.header.menu.toDo'), LinkHandler::getInstance()->getLink('ToDoList', array())));
 		
 		if($this->todo->categorytitle != '') {
-			WCF::getBreadcrumbs()->add( new Breadcrumb( $this->todo->categorytitle, LinkHandler::getInstance()->getLink( 'ToDoCategory', array(
+			WCF::getBreadcrumbs()->add(new Breadcrumb($this->todo->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
 				'id' => $this->todo->category 
-			) ) ) );
+			))));
 		}
 		
 		// users online
@@ -99,22 +99,22 @@ class ToDoPage extends AbstractPage {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		$submitter = new User( $this->todo->submitter );
+		$submitter = new User($this->todo->submitter);
 		
-		DashboardHandler::getInstance()->loadBoxes( 'de.mysterycode.wcf.ToDoPage', $this );
+		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoPage', $this);
 		
-		WCF::getTPL()->assign( array(
+		WCF::getTPL()->assign(array(
 			'submitterusername' => $submitter->username,
 			'responsibles' => $this->todo->getResponsibleIDs(),
 			'commentList' => $this->commentList,
 			'commentObjectTypeID' => $this->objectTypeID,
-			'commentCanAdd' => $this->commentManager->canAdd( $this->todoID ),
+			'commentCanAdd' => $this->commentManager->canAdd($this->todoID),
 			'lastCommentTime' => $this->commentList->getMinCommentTime(),
 			'commentsPerPage' => $this->commentManager->getCommentsPerPage(),
 			'likeData' =>(MODULE_LIKE ? $this->commentList->getLikeData() : array()),
 			'todo' => $this->todo,
-			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed( 'com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoPage' ),
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoPage'),
 			'sidebarName' => 'de.mysterycode.wcf.ToDoPage' 
-		) );
+		));
 	}
 }
