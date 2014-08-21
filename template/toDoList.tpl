@@ -116,7 +116,7 @@
 </div>
 
 {if $items}
-	{if TODO_MOBILE_OPTIMIZATION_ENABLE}
+
 		<div class="marginTop">
 			<ul class="wbbBoardList todoList">
 				<li class="wbbCategory wbbDepth1 tabularBox tabularBoxTitle todoDepth1">
@@ -197,82 +197,6 @@
 				</li>
 			</ul>
 		</div>
-	{else}
-		<div class="tabularBox tabularBoxTitle marginTop toDoContainer">
-			<header>
-				<h2>{lang}wcf.toDo.taskList.tasks{/lang} <span class="badge badgeInverse">{$entryCount}</span></h2>
-			</header>
-			
-			<table class="table">
-				<thead>
-					<tr>
-						<th colspan="2" class="columnID">ID</th>
-						{if TODO_CATEGORY_ENABLE}
-							<th class="tiny{if $sortField == 'category'} active {@$sortOrder}{/if}">{lang}wcf.toDo.category{/lang}</th>
-						{/if}
-						<th {if $__wcf->getSession()->getPermission('user.toDo.status.canView')}colspan="2"{/if} class="columnTitle{if $sortField == 'title' || $sortField == 'status'} active {@$sortOrder}{/if}">{lang}wcf.toDo.task.title{/lang}</th>
-						{if $__wcf->getSession()->getPermission('user.toDo.responsible.canView')}
-							<th class="columnText">{lang}wcf.toDo.task.responsible{/lang}</th>
-						{/if}
-						<th class="columnDate{if $sortField == 'timestamp'} active {@$sortOrder}{/if}">{lang}wcf.toDo.task.submitTime{/lang}</th>
-						<th class="columnDate{if $sortField == 'endTime'} active {@$sortOrder}{/if}">{lang}wcf.toDo.task.endTime{/lang}</th>
-					</tr>
-				</thead>
-				
-				<tbody>
-					{foreach from=$objects item=task}
-						<tr>
-							<td class="columnIcon">
-								{if $task->canEdit()}<a href="{link controller='ToDoEdit' id=$task->id}{/link}" title="{lang}wcf.toDo.task.edit{/lang}"><span class="icon icon16 icon-pencil pointer" title="{lang}wcf.toDo.task.edit{/lang}"></span></a>{else}<span class="icon icon16 icon-pencil disabled"></span>{/if}
-								{if $task->canDelete()}<a href="{link controller='ToDoDelete' id=$task->id}{/link}" title="{lang}wcf.toDo.task.delete{/lang}"><span class="icon icon16 icon-remove jsDeleteButton pointer" title="{lang}wcf.toDo.task.delete{/lang}"></span></a>{else}<span class="icon icon16 icon-remove disabled"></span>{/if}</td>
-							<td class="columnID">
-								{$task->id}</td>
-							{if TODO_CATEGORY_ENABLE}
-								<td>
-									{if $task->categorytitle != ''}
-										<a href="{link controller='ToDoCategory' id=$task->category}{/link}"><span class="label badge {$task->categorycolor}">{$task->categorytitle}</span></a>
-									{else}
-										<span class="label badge gray">{lang}wcf.toDo.category.notAvailable{/lang}</span>
-									{/if}
-								</td>
-							{/if}
-							{if $__wcf->getSession()->getPermission('user.toDo.status.canView')}
-								<td class="columnText columnToDoStatus">
-									{if $task->status == 1}
-										<span class="label badge red unsolvedBadge">{lang}wcf.toDo.task.unsolved{/lang}</span>
-									{elseif $task->status == 2}
-										<span class="label badge yellow workBadge">{lang}wcf.toDo.task.work{/lang}</span>
-									{elseif $task->status == 3}
-										<span class="label badge green solvedBadge">{lang}wcf.toDo.task.solved{/lang}</span>
-									{elseif $task->status == 4}
-										<span class="label badge gray canceledBadge">{lang}wcf.toDo.task.canceled{/lang}</span>
-									{elseif $task->status == 5}
-										<span class="label badge gray pendingBadge">{lang}wcf.toDo.task.preparation{/lang}</span>
-									{elseif $task->status == 6}
-										<span class="label badge gray pausedBadge">{lang}wcf.toDo.task.paused{/lang}</span>
-									{/if}</td>
-							{/if}
-							<td class="columnTitle columnToDoTitle {if $task->important == 1}importantToDo{/if}">
-								{if $task->canEnter()}<a href="{link controller='ToDo' object=$task}{/link}">{$task->title}</a>{else}{$task->title}{/if}</td>
-							{if $__wcf->getSession()->getPermission('user.toDo.responsible.canView')}
-								<td class="columnText columnToDoResponsible">
-									<ul>
-										{foreach from=$task->getResponsibles item=responsible}
-											<li><a href="{link controller='User' id=$responsible->userID}{/link}" class="userLink" data-user-id="{$responsible->userID}">{$responsible->username}</a></li>
-										{/foreach}
-									</ul>
-								</td>
-							{/if}
-							<td class="columnDate">
-								{@$task->timestamp|time}</td>
-							<td class="columnDate">
-								{if $task->endTime>0}{@$task->endTime|time}{/if}</td>
-						</tr>
-					{/foreach}
-				</tbody>
-			</table>
-		</div>
-	{/if}
 {else}
 	<p class="info">{lang}wcf.toDo.taskList.noTasks{/lang}</p>
 {/if}
