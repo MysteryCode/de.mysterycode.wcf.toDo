@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\system\dashboard\box;
 use wcf\data\dashboard\box\DashboardBox;
 use wcf\page\IPage;
