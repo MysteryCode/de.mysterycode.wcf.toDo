@@ -83,15 +83,15 @@
 {if $items}
 
 		<div class="marginTop">
-			<ul class="todoList">
-				<li class="tabularBox tabularBoxTitle todoDepth1">
+			<ul class="wbbBoardList todoList">
+				<li class="wbbCategory wbbDepth1 tabularBox tabularBoxTitle todoDepth1">
 					<header>
 						<h2>{lang}wcf.toDo.taskList.tasks{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
 					</header>
 					<ul class="jsClipboardContainer"  data-type="de.mysterycode.wcf.toDo.toDo">
 						{assign var=anchor value=$__wcf->getAnchor('top')}
 						{foreach from=$objects item=task}
-							<li class="message todoContainer todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject" id="todo{$task->id}" data-todo-id="{@$task->id}"{if $task->canEdit()} data-can-edit="{if $task->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$task->id}{/link}"{/if}  data-user-id="{@$task->submitter}"
+							<li class="message wbbBoardContainer todoContainer wbbDepth2 todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject" id="todo{$task->id}" data-todo-id="{@$task->id}"{if $task->canEdit()} data-can-edit="{if $task->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$task->id}{/link}"{/if}  data-user-id="{@$task->submitter}"
 								{if $task->canEdit()}
 									data-is-disabled="{if $task->isDisabled}1{else}0{/if}" data-is-deleted="{if $task->isDeleted}1{else}0{/if}"
 									data-can-enable="{@$task->canEnable()}" data-can-delete="{@$task->canDelete()}" data-can-delete-completely="{@$task->canDeleteCompletely()}" data-can-restore="{@$task->canRestore()}"
@@ -101,12 +101,12 @@
 										<li class="jsOnly"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$task->id}" /></li>
 									</ul>
 								{/if}
-								<div class="todo box32">
+								<div class="wbbBoard todo box32">
 									<div>
 										<div class="containerHeadline">
 											<h3 class="{if $task->important == 1}importantToDo{/if}">{if $task->canEnter()}{if $task->private}<span class="icon icon16 icon-key"></span> {/if}<a href="{link controller='ToDo' object=$task}{/link}">{$task->title}</a>{else}{$task->title}{/if}</h3>
 											
-											<p class="todoDescription">
+											<p class="wbbBoardDescription todoDescription">
 												{if $task->status == 1}
 													<span class="label badge red unsolvedBadge">{lang}wcf.toDo.task.unsolved{/lang}</span>
 												{elseif $task->status == 2}
@@ -128,7 +128,7 @@
 												{/if}
 											</p>
 										</div>
-										<div class="todoStats">
+										<div class="wbbStats todoStats">
 											<dl class="plain statsDataList">
 												<dt>{lang}wcf.toDo.task.submitTime{/lang}</dt>
 												<dd>{@$task->timestamp|time}</dd>
@@ -141,7 +141,7 @@
 											{/if}
 										</div>
 										{if $task->getResponsiblePreview() && $__wcf->getSession()->getPermission('user.toDo.responsible.canView')}
-											<aside class="todoResponsible">
+											<aside class="wbbLastPost todoResponsible">
 												<div>
 													<div>
 														<small>{lang}wcf.toDo.task.responsibles{/lang}</small>
