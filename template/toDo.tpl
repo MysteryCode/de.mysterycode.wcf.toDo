@@ -4,11 +4,45 @@
 	<title>{lang}wcf.toDo.task.detail{/lang} - {PAGE_TITLE|language}</title>
 	
 	{include file='headInclude'}
-	
+
+	<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Moderation{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+	<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Todo{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-			new WCF.Search.User('#responsibles', null, false, [ ], true);
+			WCF.Language.addObject({
+				'wcf.todo.confirmDelete': '{lang}wcf.todo.confirmDelete{/lang}',
+				'wcf.todo.confirmTrash': '{lang}wcf.todo.confirmTrash{/lang}',
+				'wcf.todo.confirmTrash.reason': '{lang}wcf.todo.confirmTrash.reason{/lang}',
+				'wcf.todo.edit': '{lang}wcf.toDo.edit{/lang}',
+				'wcf.todo.edit.delete': '{lang}wcf.toDo.edit.delete{/lang}',
+				'wcf.todo.edit.disable': '{lang}wcf.toDo.edit.disable{/lang}',
+				'wcf.todo.edit.enable': '{lang}wcf.toDo.edit.enable{/lang}',
+				'wcf.todo.edit.restore': '{lang}wcf.toDo.edit.restore{/lang}',
+				'wcf.todo.edit.trash': '{lang}wcf.toDo.edit.trash{/lang}',
+				'wcf.moderation.report.reportContent': '{lang}wcf.moderation.report.reportContent{/lang}',
+				'wcf.moderation.report.success': '{lang}wcf.moderation.report.success{/lang}'
+			});
+			
+			var $updateHandler = new WCF.Todo.UpdateHandler.Todo();
+			var $inlineEditor = new WCF.Todo.InlineEditor('.todo');
+			$inlineEditor.setUpdateHandler($updateHandler);
+			$inlineEditor.setEnvironment('todo', {@$todo->id}, '{$todo->getLink()}');
+			$inlineEditor.setPermissions({
+				canEnableTodo: {if $todo->canEnable()}1{else}0{/if},
+				canDeleteTodo: {if $todo->canDelete()}1{else}0{/if},
+				canDeleteTodoCompletely: {if $todo->canDeleteCompletely()}1{else}0{/if},
+				canRestoreTodo: {if $todo->canRestore()}1{else}0{/if}
+			});
+
+			new WCF.Moderation.Report.Content('de.mysterycode.wcf.toDo.toDo', '.jsReportTodo');
+
+			{if $todo->isDisabled || $todo->isDeleted}
+				$('.sidebar').addClass('{if $todo->isDeleted}deleted{else}disabled{/if}');
+			{/if}
+
+			{event name='javascriptInit'}
 		});
 		//]]>
 	</script>
@@ -28,8 +62,21 @@
 
 {include file='header' sidebarOrientation='right'}
 
-<header class="boxHeadline">
+<header class="boxHeadline todo" data-todo-id="{@$todo->id}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$todo->id}{/link}"{/if}  data-user-id="{@$todo->submitter}"
+	{if $todo->canEdit()}
+		data-is-disabled="{if $todo->isDisabled}1{else}0{/if}" data-is-deleted="{if $todo->isDeleted}1{else}0{/if}"
+		data-can-enable="{@$todo->canEnable()}" data-can-delete="{@$todo->canDelete()}" data-can-delete-completely="{@$todo->canDeleteCompletely()}" data-can-restore="{@$todo->canRestore()}"
+	{/if}>
+	
 	<h1>{lang}wcf.toDo.task.detail{/lang}</h1>
+	
+	<nav class="jsMobileNavigation buttonGroupNavigation">
+		<ul class="buttonGroup">{*
+			*}{if $todo->canEdit()}<li><a class="button jsTodoInlineEditor jsOnly"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
+			*}<li class="jsReportTodo jsOnly" data-object-id="{@$todo->id}"><a title="{lang}wcf.moderation.report.reportContent{/lang}" class="button jsTooltip"><span class="icon icon16 icon-warning-sign"></span> <span class="invisible">{lang}wcf.moderation.report.reportContent{/lang}</span></a></li>{*
+			*}{event name='buttons'}{*
+		*}</ul>
+	</nav>
 </header>
 
 {include file='userNotice'}
@@ -39,8 +86,6 @@
 		<nav>
 			<ul>
 				{content}
-					{if $__wcf->getSession()->getPermission('user.toDo.toDo.canEdit')}<li><a href="{link controller='ToDoEdit' id=$todo->id}{/link}" title="{lang}wcf.toDo.task.edit{/lang}" class="button"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.toDo.task.edit{/lang}</span></a></li>{/if}
-					<li><a href="{link controller='ToDoList'}{/link}" title="{lang}wcf.toDo.task.list{/lang}" class="button"><span class="icon icon16 icon-reorder"></span> <span>{lang}wcf.toDo.task.list{/lang}</span></a></li>
 					{event name='contentNavigationButtonsTop'}
 				{/content}
 			</ul>
@@ -128,7 +173,7 @@
 	<div class="container containerPadding marginTop toDoContainer">
 		<fieldset>
 			<legend>{lang}wcf.toDo.task.description{/lang}</legend>
-			{if TODO_DESCRIPTION_HTML_ENABLE && $todo->html_description == 1}{@$todo->description}{else}{@$todo->description|newlineToBreak}{/if}
+			{@$todo->getFormattedDescription()}
 		</fieldset>
 	</div>
 {/if}
@@ -136,7 +181,7 @@
 	<div class="container containerPadding marginTop toDoContainer">
 		<fieldset>
 			<legend>{lang}wcf.toDo.task.note{/lang}</legend>
-			{if TODO_NOTE_HTML_ENABLE && $todo->html_notes == 1}{@$todo->note}{else}{@$todo->note|newlineToBreak}{/if}
+			{@$todo->getFormattedNote()}
 		</fieldset>
 	</div>
 {/if}
@@ -157,8 +202,6 @@
 		<nav>
 			<ul>
 				{content}
-					{if $__wcf->getSession()->getPermission('user.toDo.toDo.canEdit')}<li><a href="{link controller='ToDoEdit' id=$todo->id}{/link}" title="{lang}wcf.toDo.task.edit{/lang}" class="button"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.toDo.task.edit{/lang}</span></a></li>{/if}
-					<li><a href="{link controller='ToDoList'}{/link}" title="{lang}wcf.toDo.task.list{/lang}" class="button"><span class="icon icon16 icon-reorder"></span> <span>{lang}wcf.toDo.task.list{/lang}</span></a></li>
 					{event name='contentNavigationButtonsBottom'}
 				{/content}
 				

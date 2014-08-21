@@ -5,13 +5,15 @@
 	
 	{include file='headInclude'}
 	
-	<script data-relocate="true">
-		//<![CDATA[
-		$(function() {
-			new WCF.Search.User('#responsibles', null, false, [ ], true);
-		});
-		//]]>
-	</script>
+	{if $canEditResponsible}
+		<script data-relocate="true">
+			//<![CDATA[
+			$(function() {
+				new WCF.Search.User('#responsibles', null, false, [ ], true);
+			});
+			//]]>
+		</script>
+	{/if}
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
@@ -47,36 +49,12 @@
 		<fieldset>
 			<legend>{lang}wcf.toDo.task.general{/lang}</legend>
 			
-			<dl{if $errorField == 'title'} class="formError"{/if}>
-				<dt><label for="title">{lang}wcf.toDo.task.title{/lang}</label></dt>
-				<dd>
-					<input type="text" id="title" name="title" value="{$title}" required="required" maxlength="255" class="long" />
-					{if $errorField == 'title'}
-						<small class="innerError">
-							{if $errorType == 'empty'}
-								{lang}wcf.global.form.error.empty{/lang}
-							{/if}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-			
-			{if TODO_CATEGORY_ENABLE}
-				<dl{if $errorField == 'category'} class="formError"{/if}>
-					<dt><label for="category">{lang}wcf.toDo.category{/lang}</label></dt>
+			{if $action == 'add' || ($action == 'edit' && $todo->canEdit())}
+				<dl{if $errorField == 'title'} class="formError"{/if}>
+					<dt><label for="title">{lang}wcf.toDo.task.title{/lang}</label></dt>
 					<dd>
-						{if $toDoCategoryList}
-							<select id="category" name="category">
-								<option value="" {if $toDoCategory == 0}selected{/if}>{lang}wcf.toDo.category.choose{/lang}</option>
-								<option value="" >{lang}wcf.toDo.category.placeholder{/lang}</option>
-								{foreach from=$toDoCategoryList item=item}
-									<option value="{$item.id}" {if $toDoCategory == $item.id}selected{/if}>{$item.title}</option>
-								{/foreach}
-								
-							</select>
-						{/if}
-						<input type="text" id="newCategory" name="newCategory" value="" maxlength="255" class="long" />
-						{if $errorField == 'category'}
+						<input type="text" id="title" name="title" value="{$title}" required="required" maxlength="255" class="long" />
+						{if $errorField == 'title'}
 							<small class="innerError">
 								{if $errorType == 'empty'}
 									{lang}wcf.global.form.error.empty{/lang}
@@ -85,9 +63,39 @@
 						{/if}
 					</dd>
 				</dl>
+				
+				{if TODO_CATEGORY_ENABLE}
+					<dl{if $errorField == 'category'} class="formError"{/if}>
+						<dt><label for="category">{lang}wcf.toDo.category{/lang}</label></dt>
+						<dd>
+							{if $toDoCategoryList}
+								<select id="category" name="category">
+									<option value="" {if $toDoCategory == 0}selected{/if}>{lang}wcf.toDo.category.choose{/lang}</option>
+									<option value="" >{lang}wcf.toDo.category.placeholder{/lang}</option>
+									{foreach from=$toDoCategoryList item=item}
+										<option value="{$item.id}" {if $toDoCategory == $item.id}selected{/if}>{$item.title}</option>
+									{/foreach}
+								</select>
+							{/if}
+							{if $__wcf->getSession()->getPermission('user.toDo.toDo.canAddCategory')}
+								<input type="text" id="newCategory" name="newCategory" value="" maxlength="255" class="long" />
+							{/if}
+							{if !$toDoCategoryList && !$__wcf->getSession()->getPermission('user.toDo.toDo.canAddCategory')}
+								{lang}wcf.toDo.category.noCategory{/lang}
+							{/if}
+							{if $errorField == 'category'}
+								<small class="innerError">
+									{if $errorType == 'empty'}
+										{lang}wcf.global.form.error.empty{/lang}
+									{/if}
+								</small>
+							{/if}
+						</dd>
+					</dl>
+				{/if}
 			{/if}
 			
-			{if (TODO_SET_STATUS_ON_CREATE || $action == 'edit') && $__wcf->getSession()->getPermission('user.toDo.status.canEdit')}
+			{if (TODO_SET_STATUS_ON_CREATE || $action == 'edit') && $canEditStatus}
 				<dl{if $errorField == 'status'} class="formError"{/if}>
 					<dt><label for="status">{lang}wcf.toDo.task.status{/lang}</label></dt>
 					<dd>
@@ -112,62 +120,55 @@
 				</dl>
 			{/if}
 			
-			{if TODO_PROGRESS_ENABLE}
-				<dl{if $errorField == 'progress'} class="formError"{/if}>
-					<dt><label for="progress">{lang}wcf.toDo.task.progress{/lang}</label></dt>
+			{if $action == 'add' || ($action == 'edit' && $todo->canEdit())}
+				{if TODO_PROGRESS_ENABLE}
+					<dl{if $errorField == 'progress'} class="formError"{/if}>
+						<dt><label for="progress">{lang}wcf.toDo.task.progress{/lang}</label></dt>
+						<dd>
+							<input type="text" id="progress" name="progress" value="{$progress}" maxlength="3" class="long" />
+						</dd>
+					</dl>
+				{/if}
+				
+				<dl{if $errorField == 'endTime'} class="formError"{/if}>
+					<dt><label for="endTime">{lang}wcf.toDo.task.endTime{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></label></dt>
 					<dd>
-						<input type="text" id="progress" name="progress" value="{$progress}" maxlength="3" class="long" />
+						<input type="datetime" id="endTime" name="endTime" value="{if $endTime > 0}{$endTime}{/if}" />
 					</dd>
 				</dl>
-			{/if}
-			
-			<dl{if $errorField == 'endTime'} class="formError"{/if}>
-				<dt><label for="endTime">{lang}wcf.toDo.task.endTime{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></label></dt>
-				<dd>
-					<input type="datetime" id="endTime" name="endTime" value="{if $endTime > 0}{$endTime}{/if}" />
-				</dd>
-			</dl>
-			
-			<dl{if $errorField == 'remembertime'} class="formError"{/if}>
-				<dt><label for="remembertime">{lang}wcf.toDo.task.remembertime{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></label></dt>
-				<dd>
-					<input type="date" id="remembertime" name="remembertime" value="{if $remembertime > 0}{$remembertime}{/if}" />
-				</dd>
-			</dl>
-			
-			<dl{if $errorField == 'private'} class="formError"{/if}>
-				<dt><label for="private">{lang}wcf.toDo.task.private{/lang}</label></dt>
-				<dd>
-					<input type="checkbox" id="private" name="private" {if $private == '1'}checked{/if} />
-				</dd>
-			</dl>
-			
-			<dl{if $errorField == 'important'} class="formError"{/if}>
-				<dt><label for="important">{lang}wcf.toDo.task.important{/lang}</label></dt>
-				<dd>
-					<input type="checkbox" id="important" name="important" {if $important == '1'}checked{/if} />
-				</dd>
-			</dl>
-			
-			<dl{if $errorField == 'description'} class="formError"{/if}>
-				<dt><label for="description">{lang}wcf.toDo.task.description{/lang}</label></dt>
-				<dd>
-					<textarea id="description" name="description" rows="10" cols="10">{$description}</textarea>
-					{if $errorField == 'description'}
-						<small class="innerError">
-							{if $errorType == 'empty'}
-								{lang}wcf.global.form.error.empty{/lang}
-							{/if}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-			
-			{if TODO_DESCRIPTION_HTML_ENABLE && $__wcf->getSession()->getPermission('user.toDo.toDo.canUseHtml')}
-				<dl{if $errorField == 'html_description'} class="formError"{/if}>
-					<dt><label for="html_description">{lang}wcf.toDo.task.htmlEnable{/lang}</label></dt>
+				
+				<dl{if $errorField == 'remembertime'} class="formError"{/if}>
+					<dt><label for="remembertime">{lang}wcf.toDo.task.remembertime{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></label></dt>
 					<dd>
-						<input type="checkbox" id="html_description" name="html_description" {if $html_description == '1'}checked{/if} />
+						<input type="date" id="remembertime" name="remembertime" value="{if $remembertime > 0}{$remembertime}{/if}" />
+					</dd>
+				</dl>
+				
+				<dl{if $errorField == 'private'} class="formError"{/if}>
+					<dt><label for="private">{lang}wcf.toDo.task.private{/lang}</label></dt>
+					<dd>
+						<input type="checkbox" id="private" name="private" {if $private == '1'}checked{/if} />
+					</dd>
+				</dl>
+				
+				<dl{if $errorField == 'important'} class="formError"{/if}>
+					<dt><label for="important">{lang}wcf.toDo.task.important{/lang}</label></dt>
+					<dd>
+						<input type="checkbox" id="important" name="important" {if $important == '1'}checked{/if} />
+					</dd>
+				</dl>
+				
+				<dl{if $errorField == 'description'} class="formError"{/if}>
+					<dt><label for="description">{lang}wcf.toDo.task.description{/lang}</label></dt>
+					<dd>
+						<textarea id="description" name="description" rows="10" cols="10">{$description}</textarea>
+						{if $errorField == 'description'}
+							<small class="innerError">
+								{if $errorType == 'empty'}
+									{lang}wcf.global.form.error.empty{/lang}
+								{/if}
+							</small>
+						{/if}
 					</dd>
 				</dl>
 			{/if}
@@ -175,38 +176,58 @@
 			{event name='additionalFields'}
 		</fieldset>
 		
-		{if $__wcf->getSession()->getPermission('user.toDo.responsible.canEdit')}
+		{if $canEditResponsible}
 			<fieldset>
 				<legend>{lang}wcf.toDo.task.responsible{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></legend>
 				
 				<dl{if $errorField == 'responsibles'} class="formError"{/if}>
 					<dt><label for="responsibles">{lang}wcf.toDo.task.responsible{/lang}</label></dt>
 					<dd>
-						<textarea id="responsibles" name="responsibles" class="long" cols="20" rows="2">{$responsibles}</textarea>
+						<textarea id="responsibles" name="responsibles" class="long" cols="20" rows="4">{$responsibles}</textarea>
 					</dd>
 				</dl>
 			</fieldset>
 		{/if}
 		
-		<fieldset>
-			<legend>{lang}wcf.toDo.task.note{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></legend>
-			
-			<dl{if $errorField == 'note'} class="formError"{/if}>
-				<dt><label for="note">{lang}wcf.toDo.task.note{/lang}</label></dt>
-				<dd>
-					<textarea id="note" name="note" rows="10" cols="20">{$note}</textarea>
-				</dd>
-			</dl>
-			
-			{if TODO_NOTE_HTML_ENABLE && $__wcf->getSession()->getPermission('user.toDo.toDo.canUseHtml')}
-				<dl{if $errorField == 'html_notes'} class="formError"{/if}>
-					<dt><label for="html_notes">{lang}wcf.toDo.task.htmlEnable{/lang}</label></dt>
+		{if $action == 'add' || ($action == 'edit' && $todo->canEdit())}
+			<fieldset>
+				<legend>{lang}wcf.toDo.task.note{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></legend>
+				
+				<dl{if $errorField == 'note'} class="formError"{/if}>
+					<dt><label for="note">{lang}wcf.toDo.task.note{/lang}</label></dt>
 					<dd>
-						<input type="checkbox" id="html_notes" name="html_notes" {if $html_notes == '1'}checked{/if} />
+						<textarea id="note" name="note" rows="10" cols="20">{$note}</textarea>
 					</dd>
 				</dl>
-			{/if}
-		</fieldset>
+			</fieldset>
+			
+			<fieldset>
+				<legend>{lang}wcf.toDo.editor.settings{/lang}</legend>
+				
+				<dl{if $errorField == 'enableSmilies'} class="formError"{/if}>
+					<dt><label for="enableSmilies">{lang}wcf.toDo.editor.enableSmilies{/lang}</label></dt>
+					<dd>
+						<input type="checkbox" id="enableSmilies" name="enableSmilies" {if $enableSmilies == '1'}checked{/if} />
+					</dd>
+				</dl>
+				
+				{if TODO_NOTE_HTML_ENABLE && $__wcf->getSession()->getPermission('user.toDo.toDo.canUseHtml')}
+					<dl{if $errorField == 'enableHtml'} class="formError"{/if}>
+						<dt><label for="enableHtml">{lang}wcf.toDo.editor.htmlEnable{/lang}</label></dt>
+						<dd>
+							<input type="checkbox" id="enableHtml" name="enableHtml" {if $enableHtml == '1'}checked{/if} />
+						</dd>
+					</dl>
+				{/if}
+				
+				<dl{if $errorField == 'enableBBCodes'} class="formError"{/if}>
+					<dt><label for="enableBBCodes">{lang}wcf.toDo.editor.enableBBCodes{/lang}</label></dt>
+					<dd>
+						<input type="checkbox" id="enableBBCodes" name="enableBBCodes" {if $enableBBCodes == '1'}checked{/if} />
+					</dd>
+				</dl>
+			</fieldset>
+		{/if}
 		
 		{event name='fieldsets'}
 		
@@ -233,6 +254,8 @@
 </div>
 
 {include file='footer'}
+{include file='wysiwyg' wysiwygSelector='description'}
+{include file='wysiwyg' wysiwygSelector='note'}
 
 </body>
 </html>

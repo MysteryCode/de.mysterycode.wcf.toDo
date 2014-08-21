@@ -4,7 +4,9 @@ namespace wcf\data\todo;
 use wcf\data\user\User;
 use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
+use wcf\data\IMessage;
 use wcf\system\comment\CommentHandler;
+use wcf\system\bbcode\MessageParser;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\cache\builder\UserOptionCacheBuilder;
@@ -20,13 +22,13 @@ use wcf\util\StringUtil;
 /**
  * Represents a todo.
  *
- * @author Florian Gail
- * @copyright 2014 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
-final class ToDo extends DatabaseObject implements IRouteController {
+final class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteController, IMessage {
 	/**
 	 *
 	 * @see \wcf\data\DatabaseObject::$databaseTableName
@@ -45,6 +47,10 @@ final class ToDo extends DatabaseObject implements IRouteController {
 	 * @var array<integer>
 	 */
 	protected $responsibleIDs = null;
+	
+	public $enableSmilies = true;
+	public $enableHtml = false;
+	public $enableBBCodes = true;
 	
 	/**
 	 *
@@ -159,17 +165,217 @@ final class ToDo extends DatabaseObject implements IRouteController {
 		return $responsibleList;
 	}
 	
+	public function getResponsiblePreview() {
+		$users = array();
+		$sql = "SELECT		*
+			FROM		wcf" . WCF_N . "_todo_to_user
+			WHERE		toDoID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql, 5);
+		$statement->execute(array($this->id));
+		
+		while ($row = $statement->fetchArray()) {
+			$users[] = $row;
+		}
+	
+		return $users;
+	}
+	
+	public function getFormattedDescription() {
+		// parse and return message
+		MessageParser::getInstance()->setOutputType('text/html');
+		return MessageParser::getInstance()->parse($this->description, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
+	}
+	
+	public function getFormattedNote() {
+		// parse and return message
+		MessageParser::getInstance()->setOutputType('text/html');
+		return MessageParser::getInstance()->parse($this->note, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
+	}
+	
+	/**
+	 * @see	\wcf\system\breadcrumb\IBreadcrumbProvider::getBreadcrumb()
+	 */
+	public function getBreadcrumb() {
+		return new Breadcrumb($this->getTitle(), $this->getLink());
+	}
+	
+	public function getBreadcrumbs() {
+		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.header.menu.toDo'), LinkHandler::getInstance()->getLink('ToDoList', array())));
+		if($this->todo->categorytitle != '') {
+			WCF::getBreadcrumbs()->add(new Breadcrumb($this->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
+				'id' => $this->category
+			))));
+		}
+		//WCF::getBreadcrumbs()->add(new Breadcrumb($this->title, LinkHandler::getInstance()->getLink('ToDo', array('object' => $this))));
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessage::getFormattedMessage()
+	 */
+	public function getFormattedMessage() {
+		// parse and return message
+		MessageParser::getInstance()->setOutputType('text/html');
+		return MessageParser::getInstance()->parse($this->description, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessage::getMessage()
+	 */
+	public function getMessage() {
+		return $this->description;
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessage::isVisible()
+	 */
+	public function isVisible() {
+		return $this->canEnter();
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessage::__toString()
+	 */
+	public function __toString() {
+		return $this->getFormattedMessage();
+	}
+	
+	/**
+	 * @see	\wcf\data\IUserContent::getTime()
+	 */
+	public function getTime() {
+		return $this->timestamp;
+	}
+	
+	/**
+	 * @see	\wcf\data\IUserContent::getUserID()
+	 */
+	public function getUserID() {
+		return $this->submitter;
+	}
+	
+	/**
+	 * @see	\wcf\data\IUserContent::getUsername()
+	 */
+	public function getUsername() {
+		return $this->getUser()->username;
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessage::getExcerpt()
+	 */
+	public function getExcerpt($maxLength = 255) {
+		MessageParser::getInstance()->setOutputType('text/html');
+		$simplified = MessageParser::getInstance()->parse($this->description, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
+		if(strlen($simplified) > 255)
+			return nl2br(mb_substr(StringUtil::stripHTML($simplified), 0, 255)).' …';
+		else
+			return nl2br(StringUtil::stripHTML($simplified));
+	}
+	
+	public function getUser() {
+		return new User($this->submitter);
+	}
+	
 	public function getLink() {
 		return LinkHandler::getInstance()->getLink('ToDo', array(
 			'application' => 'wcf',
-			'id' => $this->id
+			'object' => $this
 		));
 	}
 	
-	public function checkPermissions() {
-		if ($this->private == 1 && $this->submitter != WCF::getUser ()->userID)
+	public function canEnter() {
+		if($this->isDisabled && !$this->canModerate())
 			return false;
+		if($this->isDeleted && !$this->canModerate())
+			return false;
+		if($this->private == 0)
+			return true;
+		if($this->private == 1 && $this->submitter == WCF::getUser()->userID)
+			return true;
+		if(in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+			return true;
 		
-		return true;
+		return false;
+	}
+	
+	public function canEdit() {
+		if(WCF::getSession()->getPermission('mod.toDo.canEdit'))
+			return true;
+		if(WCF::getSession()->getPermission('user.toDo.toDo.canEditOwn') && $this->submitter == WCF::getUser()->userID)
+			return true;
+		if(WCF::getSession()->getPermission('user.toDo.toDo.canEditAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+			return true;
+		
+		return false;
+	}
+	
+	public function canDelete() {
+		if(WCF::getSession()->getPermission('mod.toDo.canDelete'))
+			return true;
+		if(WCF::getSession()->getPermission('user.toDo.toDo.canDeleteOwn') && $this->submitter == WCF::getUser()->userID)
+			return true;
+		if(WCF::getSession()->getPermission('user.toDo.toDo.canDeleteAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+			return true;
+		
+		return false;
+	}
+	
+	public function canEnable() {
+		if(WCF::getSession()->getPermission('mod.toDo.canEnable'))
+			return true;
+	
+		return false;
+	}
+	
+	public function canDeleteCompletely() {
+		if(WCF::getSession()->getPermission('mod.toDo.canDelete'))
+			return true;
+	
+		return false;
+	}
+	
+	public function canRestore() {
+		if(WCF::getSession()->getPermission('mod.toDo.canRestore'))
+			return true;
+	
+		return false;
+	}
+	
+	public function canEditStatus() {
+		if(WCF::getSession()->getPermission('user.toDo.status.canEditOwn') && $this->submitter == WCF::getUser()->userID)
+			return true;
+		if(WCF::getSession()->getPermission('user.toDo.status.canEditAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+			return true;
+		if(WCF::getSession()->getPermission('mod.toDo.status.canEdit'))
+			return true;
+		
+		return false;
+	}
+	
+	public function canEditResponsible() {
+		if(WCF::getSession()->getPermission('user.toDo.responsible.canEditOwn') && $this->submitter == WCF::getUser()->userID)
+			return true;
+		if(WCF::getSession()->getPermission('user.toDo.responsible.canEditAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+			return true;
+		if(WCF::getSession()->getPermission('mod.toDo.responsible.canEdit'))
+			return true;
+		
+		return false;
+	}
+	
+	public function canModerate() {
+		$validPermissions = array(
+			'mod.toDo.canEdit',
+			'mod.toDo.canDelete',
+			'mod.toDo.canEnable'
+		);
+		
+		foreach ($validPermissions as $permission) {
+			if (WCF::getSession()->getPermission($permission)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }

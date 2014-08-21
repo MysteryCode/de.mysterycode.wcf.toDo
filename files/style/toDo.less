@@ -60,6 +60,24 @@
 	}
     .todoContainer {
         position: relative;
+        border: 0;
+        border-radius: 0;
+        
+        &:last-child {
+            border-bottom-left-radius: @wcfContainerBorderRadius;
+            border-bottom-right-radius: @wcfContainerBorderRadius;
+            
+            .todo {
+                border-bottom-left-radius: @wcfContainerBorderRadius;
+                border-bottom-right-radius: @wcfContainerBorderRadius;
+            }
+        }
+        &:not(:last-child) {
+            border-bottom: 1px solid @wcfContainerBorderColor;
+        }
+        > ul.messageQuickOptions {
+            float: right;
+        }
     }
     .todoNode1 {
 		background-color: @wcfContainerBackgroundColor;
@@ -77,7 +95,7 @@
 		margin-top: 0;
 		position: absolute;
 		top: @wcfGapMedium;
-		width: 34%;
+		width: 32%;
 		
 		> div > div {
 			> ul {
@@ -107,6 +125,22 @@
 		}
 	}
 }
+
+// moderation buttons
+.boxHeadline.todo {
+    position: relative;
+    
+    > nav.buttonGroupNavigation {
+        position: absolute;
+        right: 4px;
+        top: 0px;
+    }
+}
+
+
+
+
+
 
 // old style
 .toDoContainer {

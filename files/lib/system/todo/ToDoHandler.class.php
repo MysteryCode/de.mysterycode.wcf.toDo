@@ -1,5 +1,7 @@
 <?php
 namespace wcf\system\todo;
+use wcf\data\todo\ToDo;
+use wcf\data\todo\ToDoList;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\SingletonFactory;
@@ -8,11 +10,11 @@ use wcf\system\WCF;
 /**
  * Handles todo data.
  *
- * @author Florian Gail
- * @copyright 2014 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoHandler extends SingletonFactory {
 	/**
@@ -51,7 +53,7 @@ class ToDoHandler extends SingletonFactory {
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$statement->execute($conditionBuilder->getParameters());
 				$row = $statement->fetchArray();
-				$this->unreadConversationCount[$userID] = $row['count'];
+				$this->unsolvedTodoCount[$userID] = $row['count'];
 				
 				UserStorageHandler::getInstance()->update($userID, 'unsolvedTodoCount', serialize($this->unsolvedTodoCount[$userID]));
 			}
