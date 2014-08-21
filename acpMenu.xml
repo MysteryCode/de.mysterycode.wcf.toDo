@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/acpMenu.xsd">
+	<import>
+		<acpmenuitem name="wcf.acp.menu.link.toDoCategory">
+			<parent>wcf.acp.menu.link.community</parent>
+		</acpmenuitem>
+		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.list">
+			<controller><![CDATA[wcf\acp\page\ToDoCategoryListPage]]></controller>
+			<parent>wcf.acp.menu.link.toDoCategory</parent>
+			<showorder>1</showorder>
+		</acpmenuitem>
+		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.add">
+			<controller><![CDATA[wcf\acp\form\ToDoCategoryAddForm]]></controller>
+			<parent>wcf.acp.menu.link.toDoCategory</parent>
+			<permissions>admin.content.toDo.category.canAdd</permissions>
+			<showorder>2</showorder>
+		</acpmenuitem>
+	</import>
+</data>

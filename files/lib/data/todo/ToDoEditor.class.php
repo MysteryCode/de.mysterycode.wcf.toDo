@@ -2,17 +2,16 @@
 
 namespace wcf\data\todo;
 use wcf\data\DatabaseObjectEditor;
-use wcf\system\cache\builder\ToDoCacheBuilder;
 use wcf\system\WCF;
 
 /**
  * Provides functions to edit todos.
  *
- * @author Florian Gail
- * @copyright 2014 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoEditor extends DatabaseObjectEditor {
 	/**
@@ -42,17 +41,7 @@ class ToDoEditor extends DatabaseObjectEditor {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		
 		foreach($users as $userID => $todos) {
-			$statement->execute(array(
-				$todos,
-				$userID 
-			));
+			$statement->execute(array($todos, $userID));
 		}
-	}
-	
-	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
-	 */
-	public static function resetCache() {
-		ToDoCacheBuilder::getInstance()->reset();
 	}
 }
