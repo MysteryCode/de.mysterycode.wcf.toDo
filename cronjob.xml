@@ -12,7 +12,7 @@
 			<startdow>1</startdow>
 			<active>1</active>
 			<canbeedited>0</canbeedited>
-			<canbedisabled>1</canbedisabled>
+			<canbedisabled>0</canbedisabled>
 		</cronjob>
 		<cronjob>
 			<classname>wcf\system\cronjob\ToDoReminderCronjob</classname>

@@ -55,6 +55,11 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
+			<option name="todo_delete_obsolete_categories">
+				<categoryname>toDo.general</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
 			
 			<option name="todo_todos_per_page">
 				<categoryname>toDo.sort</categoryname>

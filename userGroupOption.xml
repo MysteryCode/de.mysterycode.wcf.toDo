@@ -20,6 +20,23 @@
 			<category name="user.toDo.warning">
 				<parent>user.toDo</parent>
 			</category>
+			
+			<category name="mod.toDo">
+				<parent>mod</parent>
+			</category>
+			<category name="mod.toDo.comment">
+				<parent>mod.toDo</parent>
+			</category>
+			<category name="mod.toDo.status">
+				<parent>mod.toDo</parent>
+			</category>
+			<category name="mod.toDo.responsible">
+				<parent>mod.toDo</parent>
+			</category>
+			
+			<category name="admin.content.toDo">
+				<parent>admin.content</parent>
+			</category>
 		</categories>
 		
 		<options>
@@ -38,17 +55,13 @@
 			<option name="user.toDo.toDo.canAdd">
 				<categoryname>user.toDo.toDo</categoryname>
 				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="user.toDo.toDo.canEdit">
+			<option name="user.toDo.toDo.canAddWithoutModeration">
 				<categoryname>user.toDo.toDo</categoryname>
 				<optiontype>boolean</optiontype>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="user.toDo.toDo.canDelete">
-				<categoryname>user.toDo.toDo</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
+				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="user.toDo.toDo.canEditOwn">
@@ -66,17 +79,30 @@
 			<option name="user.toDo.toDo.canDeleteOwn">
 				<categoryname>user.toDo.toDo</categoryname>
 				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="user.toDo.toDo.canDeleteAssigned">
 				<categoryname>user.toDo.toDo</categoryname>
 				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="user.toDo.toDo.canUseHtml">
 				<categoryname>user.toDo.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canAddCategory">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canViewPrivate">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
 			</option>
 			
 			<option name="user.toDo.status.canView">
@@ -85,14 +111,16 @@
 				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="user.toDo.status.canEdit">
+			<option name="user.toDo.status.canEditOwn">
 				<categoryname>user.toDo.status</categoryname>
 				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="user.toDo.status.canEditAssigned">
 				<categoryname>user.toDo.status</categoryname>
 				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			
@@ -102,9 +130,16 @@
 				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="user.toDo.responsible.canEdit">
+			<option name="user.toDo.responsible.canEditOwn">
 				<categoryname>user.toDo.responsible</categoryname>
 				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.responsible.canEditAssigned">
+				<categoryname>user.toDo.responsible</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			
@@ -114,17 +149,7 @@
 				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="user.toDo.comment.canEdit">
-				<categoryname>user.toDo.comment</categoryname>
-				<optiontype>boolean</optiontype>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
 			<option name="user.toDo.comment.canEditOwn">
-				<categoryname>user.toDo.comment</categoryname>
-				<optiontype>boolean</optiontype>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="user.toDo.comment.canDelete">
 				<categoryname>user.toDo.comment</categoryname>
 				<optiontype>boolean</optiontype>
 				<admindefaultvalue>1</admindefaultvalue>
@@ -132,18 +157,6 @@
 			<option name="user.toDo.comment.canDeleteOwn">
 				<categoryname>user.toDo.comment</categoryname>
 				<optiontype>boolean</optiontype>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="user.toDo.comment.canEditResponse">
-				<categoryname>user.toDo.comment</categoryname>
-				<optiontype>boolean</optiontype>
-				<userdefaultvalue>1</userdefaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="user.toDo.comment.canDeleteResponse">
-				<categoryname>user.toDo.comment</categoryname>
-				<optiontype>boolean</optiontype>
-				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			
@@ -159,6 +172,93 @@
 				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
+			
+			
+			<option name="mod.toDo.canEdit">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.canDelete">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.canViewDeleted">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.canRestore">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.canDeleteCompletely">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.canEnable">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="mod.toDo.comment.canEdit">
+				<categoryname>mod.toDo.comment</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.comment.canDelete">
+				<categoryname>mod.toDo.comment</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.comment.canModerate">
+				<categoryname>mod.toDo.comment</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="mod.toDo.status.canEdit">
+				<categoryname>mod.toDo.status</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="mod.toDo.responsible.canEdit">
+				<categoryname>mod.toDo.responsible</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			
+			<option name="admin.content.toDo.category.canAdd">
+				<categoryname>admin.content.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.toDo.category.canEdit">
+				<categoryname>admin.content.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.toDo.category.canDelete">
+				<categoryname>admin.content.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
 		</options>
 	</import>
+	<delete>
+		<option name="user.toDo.toDo.canEdit" />
+		<option name="user.toDo.toDo.canDelete" />
+		<option name="user.toDo.status.canEdit" />
+		<option name="user.toDo.responsible.canEdit" />
+		<option name="user.toDo.comment.canEdit" />
+		<option name="user.toDo.comment.canDelete" />
+		<option name="user.toDo.comment.canEditResponse" />
+		<option name="user.toDo.comment.canDeleteResponse" />
+	</delete>
 </data>

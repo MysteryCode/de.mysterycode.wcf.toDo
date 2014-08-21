@@ -6,7 +6,7 @@
 		<p class="jsOnly error toDoWarning" id="todoWarningOverdue">{$overdueToDoCount} {lang}wcf.toDo.task.overdue.reminder{if $overdueToDoCount == 1}Singular{else}Plural{/if}{/lang}{if $__wcf->getSession()->getPermission('user.toDo.warning.canHide')}<a><span class="icon icon-remove pointer" style="float:right;"></span></a>{/if}</p>
 	{/if}
 	{if $__wcf->getSession()->getPermission('user.toDo.warning.canHide')}
-		<script type="text/javascript" data-relocate="true">
+		<script data-relocate="true">
 			//<![CDATA[
 				if (document.cookie.indexOf('todoWarningUnsolved=pause') > -1)
 					$('#todoWarningUnsolved').hide();
