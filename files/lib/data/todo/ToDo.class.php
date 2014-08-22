@@ -47,10 +47,6 @@ final class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteCo
 	 */
 	protected $responsibleIDs = null;
 	
-	public $enableSmilies = true;
-	public $enableHtml = false;
-	public $enableBBCodes = true;
-	
 	/**
 	 *
 	 * @see \wcf\data\DatabaseObject::__construct()
