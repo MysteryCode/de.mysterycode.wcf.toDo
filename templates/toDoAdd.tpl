@@ -16,10 +16,10 @@
 		{/if}
 		//<![CDATA[
 		$(function() {	
-			WCF.Message.Submit.registerButton('text', $('#messageContainer > .formSubmit > input[type=submit]'));
+			WCF.Message.Submit.registerButton('description', $('#messageContainer > .formSubmit > input[type=submit]'));
 			new WCF.Message.FormGuard();
 			
-			WCF.System.Dependency.Manager.register('CKEditor', function() { new WCF.Message.UserMention('text'); });
+			WCF.System.Dependency.Manager.register('CKEditor', function() { new WCF.Message.UserMention('description'); });
 		});
 		//]]>
 	</script>
@@ -187,7 +187,7 @@
 				<dl class="wide{if $errorField == 'description'} formError{/if}">
 					<dt><label>{lang}wcf.toDo.task.description{/lang}</label></dt>
 					<dd>
-						<textarea id="text" name="description" rows="20" cols="40">{$description}</textarea>
+						<textarea id="description" name="description" rows="20" cols="40">{$description}</textarea>
 						{if $errorField == 'description'}
 							<small class="innerError">
 								{if $errorType == 'empty'}
@@ -201,7 +201,7 @@
 				{event name='messageFields'}
 			</fieldset>
 			
-			{include file='messageFormTabs' wysiwygContainerID='text'}
+			{include file='messageFormTabs' wysiwygSelector='description' wysiwygContainerID='description'}
 			
 			<fieldset>
 				<legend>{lang}wcf.toDo.task.note{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></legend>
@@ -237,7 +237,7 @@
 </div>
 
 {include file='footer'}
-{include file='wysiwyg' wysiwygSelector='text'}
+{include file='wysiwyg'}
 
 </body>
 </html>
