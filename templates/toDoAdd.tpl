@@ -5,19 +5,21 @@
 	
 	{include file='headInclude'}
 	
-	{if $canEditResponsible}
-		<script data-relocate="true">
+	
+	<script data-relocate="true">
+		{if $canEditResponsible}
 			//<![CDATA[
 			$(function() {
 				new WCF.Search.User('#responsibles', null, false, [ ], true);
 			});
 			//]]>
-		</script>
-	{/if}
-	<script data-relocate="true">
+		{/if}
 		//<![CDATA[
 		$(function() {	
-			WCF.System.Dependency.Manager.register('CKEditor', function() { new WCF.Message.UserMention('description'); });
+			WCF.Message.Submit.registerButton('text', $('#messageContainer > .formSubmit > input[type=submit]'));
+			new WCF.Message.FormGuard();
+			
+			WCF.System.Dependency.Manager.register('CKEditor', function() { new WCF.Message.UserMention('text'); });
 		});
 		//]]>
 	</script>
@@ -183,9 +185,9 @@
 				<legend>{lang}wcf.global.description{/lang}</legend>
 				
 				<dl class="wide{if $errorField == 'description'} formError{/if}">
-					<dt><label for="description">{lang}wcf.toDo.task.description{/lang}</label></dt>
+					<dt><label>{lang}wcf.toDo.task.description{/lang}</label></dt>
 					<dd>
-						<textarea id="description" name="description" rows="10" cols="10">{$description}</textarea>
+						<textarea id="text" name="description" rows="20" cols="40">{$description}</textarea>
 						{if $errorField == 'description'}
 							<small class="innerError">
 								{if $errorType == 'empty'}
@@ -196,17 +198,24 @@
 					</dd>
 				</dl>
 				
+				{event name='messageFields'}
 			</fieldset>
+			
+			{event name='fieldsets'}
+			
+			{include file='messageFormTabs' wysiwygContainerID='text'}
 			
 			<fieldset>
 				<legend>{lang}wcf.toDo.task.note{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></legend>
 				<dl class="wide{if $errorField == 'note'} formError{/if}">
-					<dt><label for="note">{lang}wcf.toDo.task.note{/lang}</label></dt>
+					<dt><label>{lang}wcf.toDo.task.note{/lang}</label></dt>
 					<dd>
 						<textarea id="note" name="note" rows="10" cols="20">{$note}</textarea>
 					</dd>
 				</dl>
 			</fieldset>
+			
+			
 		{/if}
 		
 		{event name='fieldsets'}
@@ -226,15 +235,13 @@
 					<li><a href="{link controller='ToDoList'}{/link}" title="{lang}wcf.toDo.task.list{/lang}" class="button"><span class="icon icon16 icon-reorder"></span> <span>{lang}wcf.toDo.task.list{/lang}</span></a></li>
 					{event name='contentNavigationButtonsBottom'}
 				{/content}
-				
 			</ul>
 		</nav>
 	{/hascontent}
 </div>
 
 {include file='footer'}
-{include file='wysiwyg' wysiwygSelector='description'}
-{include file='wysiwyg' wysiwygSelector='note'}
+{include file='wysiwyg' wysiwygSelector='text'}
 
 </body>
 </html>
