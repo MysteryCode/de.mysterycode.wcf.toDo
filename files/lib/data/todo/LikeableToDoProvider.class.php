@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\data\todo;
 use wcf\data\like\object\ILikeObject;
 use wcf\data\like\ILikeObjectTypeProvider;

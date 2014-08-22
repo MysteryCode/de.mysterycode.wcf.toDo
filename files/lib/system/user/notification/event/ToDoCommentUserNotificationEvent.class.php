@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\system\user\notification\event;
 use wcf\data\comment\Comment;
 use wcf\data\todo\ToDo;

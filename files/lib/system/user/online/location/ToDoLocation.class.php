@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\system\user\online\location;
 use wcf\data\todo\ToDoList;
 use wcf\data\user\online\UserOnline;

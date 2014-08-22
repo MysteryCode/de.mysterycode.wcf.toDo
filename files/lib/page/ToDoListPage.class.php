@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\page;
 use wcf\data\todo\ToDoList;
 use wcf\data\user\User;

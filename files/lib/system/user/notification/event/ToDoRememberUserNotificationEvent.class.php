@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\system\user\notification\event;
 use wcf\data\todo\ToDo;
 use wcf\system\request\LinkHandler;

@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\data\todo;
 use wcf\data\user\User;
 use wcf\data\DatabaseObject;
@@ -114,7 +113,7 @@ final class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteCo
 		
 		return $todoList->getObjects();
 	}
-	
+
 	/**
 	 *
 	 * @see \wcf\data\IStorableObject::getDatabaseTableAlias()

@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\data\todo;
 use wcf\data\todo\ToDo;
 use wcf\system\cache\builder\ToDoCacheBuilder;

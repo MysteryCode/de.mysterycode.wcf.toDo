@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\data\todo;
 use wcf\data\like\object\AbstractLikeObject;
 use wcf\data\todo\ToDoEditor;

@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\system\user\notification\object\type;
 use wcf\system\user\notification\object\type\AbstractUserNotificationObjectType;
 use wcf\system\user\notification\object\type\ICommentUserNotificationObjectType;

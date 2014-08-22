@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\acp\form;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;

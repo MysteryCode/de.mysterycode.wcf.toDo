@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\form;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;

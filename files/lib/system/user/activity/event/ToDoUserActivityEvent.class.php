@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\system\user\activity\event;
 use wcf\data\todo\ToDoList;
 use wcf\system\user\activity\event\IUserActivityEvent;

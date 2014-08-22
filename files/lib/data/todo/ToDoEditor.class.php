@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\data\todo;
 use wcf\data\DatabaseObjectEditor;
 use wcf\system\WCF;

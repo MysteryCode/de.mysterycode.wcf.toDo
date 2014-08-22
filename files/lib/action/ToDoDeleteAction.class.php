@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\action;
 use wcf\data\todo\ToDoAction;
 use wcf\system\request\LinkHandler;
