@@ -201,8 +201,6 @@
 				{event name='messageFields'}
 			</fieldset>
 			
-			{event name='fieldsets'}
-			
 			{include file='messageFormTabs' wysiwygContainerID='text'}
 			
 			<fieldset>
@@ -214,8 +212,6 @@
 					</dd>
 				</dl>
 			</fieldset>
-			
-			
 		{/if}
 		
 		{event name='fieldsets'}
