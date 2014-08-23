@@ -44,7 +44,7 @@
 						<td class="columnTitle">
 							<h3>{$category.title}</h3></td>
 						<td class="columnTitle">
-							<span class="label badge {$category.color}">{$category.title}</span></td>
+							<span class="label badge" style="background-color:{$category.color};">{$category.title}</span></td>
 					</tr>
 				{/foreach}
 			{else}

@@ -25,7 +25,10 @@ class ToDoCategoryAddForm extends AbstractForm {
 	
 	public $categoryID = 0;
 	public $title = '';
-	public $color = '';
+	public $color = 'rgba(150, 150, 150, 1)';
+	public $isClosed = 0;
+	public $isDisabled = 0;
+	public $description = '';
 	
 	/**
 	 * @see	wcf\form\IForm::readFormParameters()
@@ -35,6 +38,10 @@ class ToDoCategoryAddForm extends AbstractForm {
 		
 		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
 		if (isset($_POST['color'])) $this->color = StringUtil::trim($_POST['color']);
+		if (isset($_POST['description'])) $this->description = StringUtil::trim($_POST['description']);
+		
+		if (isset($_POST['isClosed'])) $this->isClosed = true;
+		if (isset($_POST['isDisabled'])) $this->isDisabled = true;
 	}
 	
 	/**
@@ -46,9 +53,8 @@ class ToDoCategoryAddForm extends AbstractForm {
 		if (empty($this->title)) {
 			throw new UserInputException('title');
 		}
-		
 		if (empty($this->color)) {
-			throw new UserInputException('author');
+			throw new UserInputException('color');
 		}
 	}
 	
@@ -59,17 +65,21 @@ class ToDoCategoryAddForm extends AbstractForm {
 		parent::save();
 		
 		$sql = "INSERT INTO wcf" . WCF_N . "_todo_category
-			(title, color)
+			(title, color, isClosed, isDisabled, description)
 			VALUES (
 				'" . $this->title . "',
-				'" . $this->color . "'
+				'" . $this->color . "',
+				'" . $this->isClosed . "',
+				'" . $this->isDisabled . "',
+				'" . $this->description . "'
 			);";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		
 		$this->saved();
 		
-		$this->title = $this->color = '';
+		$this->title = $this->color = $this->description = '';
+		$this->isClosed = $this->isDisabled = 0;
 		
 		WCF::getTPL()->assign(array(
 			'success' => true
@@ -85,6 +95,9 @@ class ToDoCategoryAddForm extends AbstractForm {
 		WCF::getTPL()->assign(array(
 			'title' => $this->title,
 			'color' => $this->color,
+			'isClosed' => $this->isClosed,
+			'isDisabled' => $this->isDisabled,
+			'description' => $this->description,
 			'action' => 'add'
 		));
 	}

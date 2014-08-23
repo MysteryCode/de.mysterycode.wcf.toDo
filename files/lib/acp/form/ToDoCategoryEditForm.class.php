@@ -26,7 +26,10 @@ class ToDoCategoryEditForm extends AbstractForm {
 	
 	public $categoryID = 0;
 	public $title = '';
-	public $color = '';
+	public $color = 'rgba(150, 150, 150, 1)';
+	public $isClosed = 0;
+	public $isDisabled = 0;
+	public $description = '';
 	
 	/**
 	 * @see	wcf\page\IPage::readParameters()
@@ -45,6 +48,10 @@ class ToDoCategoryEditForm extends AbstractForm {
 		
 		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
 		if (isset($_POST['color'])) $this->color = StringUtil::trim($_POST['color']);
+		if (isset($_POST['description'])) $this->description = StringUtil::trim($_POST['description']);
+		
+		if (isset($_POST['isClosed'])) $this->isClosed = true;
+		if (isset($_POST['isDisabled'])) $this->isDisabled = true;
 	}
 	
 	/**
@@ -56,9 +63,8 @@ class ToDoCategoryEditForm extends AbstractForm {
 		if (empty($this->title)) {
 			throw new UserInputException('title');
 		}
-		
 		if (empty($this->color)) {
-			throw new UserInputException('author');
+			throw new UserInputException('color');
 		}
 	}
 	
@@ -70,7 +76,10 @@ class ToDoCategoryEditForm extends AbstractForm {
 		
 		$sql = "UPDATE wcf" . WCF_N . "_todo_category
 				SET title = '" . $this->title . "',
-					color = '" . $this->color . "'
+					color = '" . $this->color . "',
+					isClosed = '" . $this->isClosed . "',
+					isDisabled = '" . $this->isDisabled . "',
+					description = '" . $this->description . "'
 				WHERE id = " . $this->categoryID . ";";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
@@ -103,6 +112,9 @@ class ToDoCategoryEditForm extends AbstractForm {
 		
 		$this->title = $category['title'];
 		$this->color = $category['color'];
+		$this->isClosed = $category['isClosed'];
+		$this->isDisabled = $category['isDisabled'];
+		$this->description = $category['description'];
 	}
 	
 	/**
@@ -115,6 +127,9 @@ class ToDoCategoryEditForm extends AbstractForm {
 			'id' => $this->categoryID,
 			'title' => $this->title,
 			'color' => $this->color,
+			'isClosed' => $this->isClosed,
+			'isDisabled' => $this->isDisabled,
+			'description' => $this->description,
 			'action' => 'edit'
 		));
 	}

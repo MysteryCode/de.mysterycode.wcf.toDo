@@ -52,3 +52,5 @@ CREATE TABLE wcf1_todo_to_user (
 );
 
 ALTER TABLE wcf1_user ADD todos int(10) NOT NULL DEFAULT 0;
+
+ALTER TABLE wcf1_todo ADD FOREIGN KEY (category) REFERENCES wcf1_todo_category (id) ON DELETE CASCADE;
