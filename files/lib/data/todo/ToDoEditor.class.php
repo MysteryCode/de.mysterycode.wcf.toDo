@@ -1,6 +1,8 @@
 <?php
 namespace wcf\data\todo;
 use wcf\data\DatabaseObjectEditor;
+use wcf\data\IEditableCachedObject;
+use wcf\system\cache\builder\ToDoCacheBuilder;
 use wcf\system\WCF;
 
 /**
@@ -12,7 +14,7 @@ use wcf\system\WCF;
  * @package	de.mysterycode.wcf.toDo
  * @category	WCF
  */
-class ToDoEditor extends DatabaseObjectEditor {
+class ToDoEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 *
 	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
@@ -42,5 +44,12 @@ class ToDoEditor extends DatabaseObjectEditor {
 		foreach($users as $userID => $todos) {
 			$statement->execute(array($todos, $userID));
 		}
+	}
+	
+	/**
+	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 */
+	public static function resetCache() {
+		ToDoCacheBuilder::getInstance()->reset();
 	}
 }
