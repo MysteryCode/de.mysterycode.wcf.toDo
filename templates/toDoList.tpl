@@ -79,6 +79,9 @@
 </div>
 
 {if $items}
+
+	{$catCount}
+	
 	<div class="marginTop">
 		<ul class="todoList">
 			<li class="tabularBox tabularBoxTitle todoDepth1">
