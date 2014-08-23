@@ -82,8 +82,7 @@ class ToDoListPage extends SortablePage {
 	public $enableTracking = true;
 	
 	/**
-	 * available categories
-	 * @var	array<\wcf\data\category\Category>
+	 * available cached categories
 	 */
 	public $categories = array();
 	
@@ -108,7 +107,8 @@ class ToDoListPage extends SortablePage {
 		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoListPage', $this);
 		
 		WCF::getTPL()->assign(array(
-			'catCount' => count(ToDoCache::getInstance()->getCategories()),
+			'categories' => $this->categories,
+			'countCat' => count(ToDoCache::getInstance()->getCategories()),
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoListPage'),
 			'sidebarName' => 'de.mysterycode.wcf.ToDoListPage',
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
