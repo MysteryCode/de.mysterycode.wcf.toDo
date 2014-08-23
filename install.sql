@@ -35,6 +35,10 @@ DROP TABLE IF EXISTS wcf1_todo_category;
 CREATE TABLE wcf1_todo_category (
 	id			bigint(20)	NOT NULL AUTO_INCREMENT,
 	title			tinytext		NOT NULL,
+	description		text,
+	showOrder			int(10)		NOT NULL DEFAULT 0,
+	isDisabled		tinyint(1)	NOT NULL DEFAULT 0,
+	isClosed		tinyint(1)	NOT NULL DEFAULT 0,
 	color			varchar(255)	NOT NULL DEFAULT 'blue',
 	PRIMARY KEY (id)
 );
