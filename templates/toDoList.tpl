@@ -40,6 +40,8 @@
 			
 			new WCF.Todo.Clipboard($updateHandler);
 			WCF.Clipboard.init('wcf\\page\\ToDoListPage', {@$hasMarkedItems}, { });
+			
+			new WCF.Todo.TodoPreview();
 		});
 		//]]>
 	</script>

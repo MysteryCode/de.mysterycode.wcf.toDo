@@ -489,4 +489,44 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 				UserNotificationHandler::getInstance()->fireEvent('assign', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todoID)), $userIDs);
 		}
 	}
+	
+	/**
+	 * Validates todo profile preview.
+	 */
+	public function validateGetTodoProfile() {
+		if (count($this->objectIDs) != 1) {
+			throw new UserInputException('objectIDs');
+		}
+	}
+	
+	/**
+	 * Returns todo profile preview.
+	 * 
+	 * @return	array
+	 */
+	public function getTodoProfile() {
+		$todoID = reset($this->objectIDs);
+		
+		if ($todoID) {
+			$todoList = new ToDoList();
+			$todoList->getConditionBuilder()->add("todo_table.id = ?", array($todoID));
+			$todoList->readObjects();
+			$todoProfiles = $todoList->getObjects();
+			
+			if (empty($todoProfiles)) {
+				WCF::getTPL()->assign('unknownTodo', true);
+			}
+			else {
+				WCF::getTPL()->assign('todo', reset($todoProfiles));
+			}
+		}
+		else {
+			WCF::getTPL()->assign('unknownTodo', true);
+		}
+		
+		return array(
+			'template' => WCF::getTPL()->fetch('toDoPreview'),
+			'todoID' => $todoID
+		);
+	}
 }

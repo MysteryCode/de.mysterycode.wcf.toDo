@@ -12,6 +12,76 @@
 WCF.Todo = {};
 
 /**
+ * Loads todo previews.
+ * 
+ * @see	WCF.Popover
+ */
+WCF.Todo.TodoPreview = WCF.Popover.extend({
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+	
+	/**
+	 * list of todos
+	 * @var	object
+	 */
+	_todoProfile: { },
+	
+	/**
+	 * @see	WCF.Popover.init()
+	 */
+	init: function() {
+		this._super('.todoLink');
+		
+		this._proxy = new WCF.Action.Proxy({
+			showLoadingOverlay: false
+		});
+	},
+	
+	/**
+	 * @see	WCF.Popover._loadContent()
+	 */
+	_loadContent: function() {
+		var $element = $('#' + this._activeElementID);
+		var $todoID = $element.data('todoID');
+		
+		if (this._todoProfile[$todoID]) {
+			// use cached todolist
+			this._insertContent(this._activeElementID, this._todoProfile[$todoID], true);
+		}
+		else {
+			this._proxy.setOption('data', {
+				actionName: 'getToDoProfile',
+				className: 'wcf\\data\\todo\\ToDoAction',
+				objectIDs: [ $todoID ]
+			});
+			
+			var $elementID = this._activeElementID;
+			var self = this;
+			this._proxy.setOption('success', function(data, textStatus, jqXHR) {
+				// cache todo
+				self._todoProfile[$todoID] = data.returnValues.template;
+				
+				// show todo
+				self._insertContent($elementID, data.returnValues.template, true);
+			});
+			this._proxy.setOption('failure', function(data, jqXHR, textStatus, errorThrown) {
+				// cache todo
+				self._todoProfile[$todoID] = data.message;
+				
+				// show todo
+				self._insertContent($elementID, data.message, true);
+				
+				return false;
+			});
+			this._proxy.sendRequest();
+		}
+	}
+});
+
+/**
  * Provides a generic update handler for todos.
  */
 WCF.Todo.UpdateHandler = Class.extend({

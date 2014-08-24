@@ -45,7 +45,7 @@
 										{/if}
 									</div>
 									<div class="containerHeadline" style="float:left;">
-										<h3 class="{if $task->important == 1}importantToDo{/if}">{if $task->canEnter()}{if $task->private}<span class="icon icon16 icon-key"></span> {/if}<a href="{link controller='ToDo' object=$task}{/link}">{$task->title}</a>{else}{$task->title}{/if}</h3>
+										<h3 class="{if $task->important == 1}importantToDo{/if}">{if $task->canEnter()}{if $task->private}<span class="icon icon16 icon-key"></span> {/if}<a href="{link controller='ToDo' object=$task}{/link}" class="todoLink" data-todo-id="{$task->id}">{$task->title}</a>{else}{$task->title}{/if}</h3>
 									</div>
 									<div style="clear:both;"></div>
 									<!--
