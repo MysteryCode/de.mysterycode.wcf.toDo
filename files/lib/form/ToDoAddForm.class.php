@@ -55,6 +55,7 @@ class ToDoAddForm extends MessageForm {
 	public $title = '';
 	public $private = 0;
 	public $important = 0;
+	public $priority = 1;
 	public $category = 0;
 	public $newCategory = '';
 	public $progress = 0;
@@ -76,6 +77,7 @@ class ToDoAddForm extends MessageForm {
 		if(isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d H:i', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
 		if(isset($_POST['note'])) $this->note = StringUtil::trim($_POST['note']);
 		if(isset($_POST['status'])) $this->status = StringUtil::trim($_POST['status']);
+		if(isset($_POST['priority'])) $this->priority = StringUtil::trim($_POST['priority']);
 		if(isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
 		if(isset($_POST['private'])) $this->private = 1;
 		if(isset($_POST['important'])) $this->important = 1;
@@ -123,6 +125,7 @@ class ToDoAddForm extends MessageForm {
 				'title' => $this->title,
 				'description' => $this->description,
 				'note' => $this->note,
+				'priority' => $this->priority,
 				'submitter' => WCF::getUser()->userID,
 				'timestamp' => TIME_NOW,
 				'endTime' => $this->endTime,
@@ -177,6 +180,7 @@ class ToDoAddForm extends MessageForm {
 			'description' => $this->description,
 			'note' => $this->note,
 			'status' => $this->status,
+			'priority' => $this->priority,
 			'responsibles' => $this->responsibles,
 			'endTime' => $this->endTime,
 			'private' => $this->private,

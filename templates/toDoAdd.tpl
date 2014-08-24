@@ -78,8 +78,6 @@
 						<dt><label for="status">{lang}wcf.toDo.task.status{/lang}</label></dt>
 						<dd>
 							<select id="status" name="status" required="required">
-								<option value="" {if $toDoCategory == 0}selected{/if}>{lang}wcf.toDo.status.choose{/lang}</option>
-								<option value="" >{lang}wcf.toDo.status.placeholder{/lang}</option>
 								<option value="5" {if $status==5}selected="selected"{/if}>{lang}wcf.toDo.task.preparation{/lang}</option>
 								<option value="1" {if $status==1}selected="selected"{/if}>{lang}wcf.toDo.task.unsolved{/lang}</option>
 								<option value="2" {if $status==2}selected="selected"{/if}>{lang}wcf.toDo.task.work{/lang}</option>
@@ -98,10 +96,14 @@
 					</dl>
 				{/if}
 				
-				<dl{if $errorField == 'important'} class="formError"{/if}>
-					<dt></dt>
+				<dl>
+					<dt><label for="priority">{lang}wcf.toDo.task.priority{/lang}</label></dt>
 					<dd>
-						<label for="important"><input type="checkbox" id="important" name="important" {if $important == '1'}checked{/if} /> {lang}wcf.toDo.task.important{/lang}</label>
+						<select id="priority" name="priority">
+							<option value="0" class="priority-{$priority}" {if $priority==0}selected="selected"{/if}>{lang}wcf.toDo.task.priority.low{/lang}</option>
+							<option value="1" class="priority-{$priority}" {if $priority==1}selected="selected"{/if}>{lang}wcf.toDo.task.priority.normal{/lang}</option>
+							<option value="2" class="priority-{$priority}" {if $priority==2}selected="selected"{/if}>{lang}wcf.toDo.task.priority.high{/lang}</option>
+						</select>
 					</dd>
 				</dl>
 				
@@ -155,6 +157,7 @@
 					<dt><label for="endTime">{lang}wcf.toDo.task.endTime{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></label></dt>
 					<dd>
 						<input type="datetime" id="endTime" name="endTime" value="{if $endTime > 0}{$endTime}{/if}" />
+						<span class="icon icon16 icon-time"></span>
 					</dd>
 				</dl>
 				
@@ -162,6 +165,7 @@
 					<dt><label for="remembertime">{lang}wcf.toDo.task.remembertime{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></label></dt>
 					<dd>
 						<input type="date" id="remembertime" name="remembertime" value="{if $remembertime > 0}{$remembertime}{/if}" />
+						<span class="icon icon16 icon-time"></span>
 					</dd>
 				</dl>
 			{/if}

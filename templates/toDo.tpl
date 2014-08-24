@@ -114,7 +114,7 @@
 			<dd>
 				{if $__wcf->getSession()->getPermission('user.toDo.status.canView')}
 					{if $todo->status == 1}
-						<span class="label badge red unsolvedBadge">{lang}wcf.toDo.task.unsolved{/lang}</span>
+						<span class="label badge orange unsolvedBadge">{lang}wcf.toDo.task.unsolved{/lang}</span>
 					{elseif $todo->status == 2}
 						<span class="label badge yellow workBadge">{lang}wcf.toDo.task.work{/lang}</span>
 					{elseif $todo->status == 3}
@@ -138,7 +138,11 @@
 				</dd>
 			{/if}
 			<dt>{lang}wcf.toDo.task.priority{/lang}</dt>
-			<dd>{if $todo->important == 1}<span class="label badge red">{lang}wcf.toDo.task.priority.high{/lang}</span>{else}<span class="label badge gray">{lang}wcf.toDo.task.priority.normal{/lang}</span>{/if}</dd>
+			<dd>
+				{if $todo->priority == 0}<span class="label badge green">{lang}wcf.toDo.task.priority.low{/lang}</span>{/if}
+				{if $todo->priority == 1}<span class="label badge grey">{lang}wcf.toDo.task.priority.normal{/lang}</span>{/if}
+				{if $todo->priority == 2}<span class="label badge red">{lang}wcf.toDo.task.priority.high{/lang}</span>{/if}
+			</dd>
 			<dt>{lang}wcf.toDo.task.privacy{/lang}</dt>
 			<dd>{if $todo->private == 1}{lang}wcf.toDo.task.privacy.private{/lang}{else}{lang}wcf.toDo.task.privacy.public{/lang}{/if}</dd>
 			{if $todo->timestamp > 0}

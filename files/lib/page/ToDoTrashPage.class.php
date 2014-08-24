@@ -8,7 +8,9 @@ use wcf\page\SortablePage;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\dashboard\DashboardHandler;
 use wcf\system\request\LinkHandler;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -94,8 +96,11 @@ class ToDoTrashPage extends SortablePage {
 	public function assignVariables() {
 		parent::assignVariables();
 		
+		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoArchivePage', $this);
 		
 		WCF::getTPL()->assign(array(
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoTrashPage'),
+			'sidebarName' => 'de.mysterycode.wcf.ToDoArchivePage',
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
 		));
 	}

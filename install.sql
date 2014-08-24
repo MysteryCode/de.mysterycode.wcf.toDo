@@ -12,6 +12,7 @@ CREATE TABLE wcf1_todo (
 	private			int(1)		NOT NULL DEFAULT 0,
 	comments			int(1)		NOT NULL DEFAULT 1,
 	important		int(1)		NOT NULL DEFAULT 0,
+	priority		int(1)		NOT NULL DEFAULT 0,
 	category			bigint(20)	NOT NULL DEFAULT 1,
 	updatetimestamp		bigint(20)	NOT NULL DEFAULT 0,
 	progress			int(3)		NOT NULL DEFAULT 0,

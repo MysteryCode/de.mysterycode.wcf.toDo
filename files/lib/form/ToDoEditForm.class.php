@@ -42,7 +42,8 @@ class ToDoEditForm extends ToDoAddForm {
 	public $description = '';
 	public $note = '';
 	public $responsibles = array();
-	public $status = 0;
+	public $status = 1;
+	public $priority = 1;
 	public $title = '';
 	public $todoID = 0;
 	public $endTime = 0;
@@ -83,6 +84,7 @@ class ToDoEditForm extends ToDoAddForm {
 		if(isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d H:i', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
 		if(isset($_POST['note'])) $this->note = StringUtil::trim($_POST['note']);
 		if(isset($_POST['status'])) $this->status = StringUtil::trim($_POST['status']);
+		if(isset($_POST['priority'])) $this->priority = StringUtil::trim($_POST['priority']);
 		if(isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
 		if(isset($_POST['private'])) $this->private = 1;
 		if(isset($_POST['important'])) $this->important = 1;
@@ -111,6 +113,7 @@ class ToDoEditForm extends ToDoAddForm {
 					'title' => $this->title,
 					'description' => $this->description,
 					'note' => $this->note,
+					'priority' => $this->priority,
 					'submitter' => WCF::getUser()->userID,
 					'updatetimestamp' => TIME_NOW,
 					'endTime' => $this->endTime,
@@ -160,6 +163,7 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->description = $this->todo->description;
 		$this->note = $this->todo->note;
 		$this->status = $this->todo->status;
+		$this->priority = $this->todo->priority;
 		$this->category = $this->todo->category;
 		$this->enableSmilies = $this->todo->enableSmilies;
 		$this->enableHtml = $this->todo->enableHtml;

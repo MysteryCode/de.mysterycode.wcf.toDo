@@ -6,7 +6,7 @@
 		<packagedescription><![CDATA[Gives the possibility to manage ToDos in several custom categories on your website]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
 		<version>1.1.0 RC 2</version>
-		<date>2014-08-23</date>
+		<date>2014-08-24</date>
 	</packageinformation>
 	
 	<requiredpackages>

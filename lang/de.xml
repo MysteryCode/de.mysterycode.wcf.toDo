@@ -108,6 +108,7 @@
 		<item name="wcf.acp.todo.category.edit"><![CDATA[ToDo-Kategorie bearbeiten]]></item>
 		<item name="wcf.acp.todo.category.title"><![CDATA[Kategorie-Titel]]></item>
 		<item name="wcf.acp.todo.category.color"><![CDATA[Label-Farbe]]></item>
+		<item name="wcf.acp.todo.category.settings"><![CDATA[Label-Farbe]]></item>
 		<item name="wcf.acp.todo.category.preview"><![CDATA[Vorschau]]></item>
 		<item name="wcf.acp.todo.category.noItems"><![CDATA[Es sind noch keine ToDo-Kategorien vorhanden.]]></item>
 	</category>
@@ -139,9 +140,10 @@
 	</category>
 	
 	<category name="wcf.header.menu">
-		<item name="wcf.header.menu.toDo"><![CDATA[ToDo-Liste]]></item>
-		<item name="wcf.header.menu.toDo.archive"><![CDATA[Abgeschlossene ToDos]]></item>
-		<item name="wcf.header.menu.toDo.trash"><![CDATA[Verworfene ToDos]]></item>
+		<item name="wcf.header.menu.toDo"><![CDATA[TODO-Liste]]></item>
+		<item name="wcf.header.menu.toDo.active"><![CDATA[Aktive Aufgaben]]></item>
+		<item name="wcf.header.menu.toDo.archive"><![CDATA[Abgeschlossene Aufgaben]]></item>
+		<item name="wcf.header.menu.toDo.trash"><![CDATA[Verworfene Aufgaben]]></item>
 	</category>
 	
 	<category name="wcf.moderation">
@@ -162,6 +164,7 @@
 		<item name="wcf.toDo.task"><![CDATA[Aufgabe]]></item>
 		<item name="wcf.toDo.task.title"><![CDATA[Titel]]></item>
 		<item name="wcf.toDo.task.description"><![CDATA[Beschreibung]]></item>
+		<item name="wcf.toDo.task.legend"><![CDATA[Legende]]></item>
 		<item name="wcf.toDo.task.detail"><![CDATA[Details zum ToDo „{$todo->title}“]]></item>
 		<item name="wcf.toDo.task.htmlEnable"><![CDATA[HTML verwenden]]></item>
 		<item name="wcf.toDo.task.note"><![CDATA[Notizen]]></item>

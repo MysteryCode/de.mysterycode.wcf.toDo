@@ -4,31 +4,61 @@
 
 // mobile style
 .todoList {
-	max-width: 350px;
-	width: 100%;
-	height: 100%;
-	max-height: 100%;
-	float: left;
-	padding: 0 10px 7px 0;
-
+	> li {
+		width:360px;
+		height:100%;
+		float:left;
+		margin:6px;
+		border-top-left-radius:6px;
+		border-top-right-radius:6px;
+		box-shadow: 0 0 5px #ddd;
+		border: 1px solid grey;
+		
+		.containerHeadline > h3, .containerHeadline span, .containerHeadline small {
+			max-width:210px;
+		}
+	}
     .todoDepth1 {
         margin-top: @wcfGapMedium;
     }
     .todoDepth2 {
-		&.todoContainer > .todo {
-			padding-left: 14px;
-		}
+		height:100% !important;
 	}
-    > li.tabularBox {
-        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
-    }
+
     .todo {
-        min-height: 44px;
-		padding: @wcfGapSmall;
-		padding-right: 51%;
+        min-height: 26px;
+		max-height: 100%;
+		padding: 8px 12px 3px 0;
 		
-		.transition(background, .1s);
+		> div { float:none; }
 		
+		> div > .status, .priority {
+			padding-left:8px;
+			float:left;
+		}
+		
+		&.priority-0 {
+			//background-color: #E0EEBB;
+			a {
+				color: green;
+			}
+		}
+		&.priority-1 {
+			//background-color: #F1F1F1;
+			a {
+			//	color: blu;
+			}
+		}
+		&.priority-2 {
+			//background-color: #F3CBCB;
+			a {
+				color: red;
+			}
+		}
+		
+		> div > .containerHeadline {
+			padding-left:8px;
+		}
 		&:hover {
 			background-color: @wcfContainerHoverBackgroundColor;
 		}
@@ -138,49 +168,5 @@
         position: absolute;
         right: 4px;
         top: 0px;
-    }
-}
-
-
-
-
-
-
-// old style
-.toDoContainer {
-    .columnToDoStatus {
-        width: 100px;
-    }
-    .columnLabel {
-        min-width: 105px;
-    }
-    .progressbar_main {
-        position: relative;
-        border: 1px solid #AAAAAA;
-        color: #222222;
-        border-radius: 4px;
-        overflow: hidden;
-        text-align: left;
-        display:inline-block;
-        height: 25px;
-        width: calc(100% - 2px);
-        background-image: -moz-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
-        background-image: -webkit-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
-        background-image: -ms-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
-        background-image: -o-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
-        .progressbar_inner {
-            background-color: @wcfContainerBackgroundColor;
-            height: 26px;
-            margin-top: -1px;
-            margin-left: -1px;
-            float: right;
-        }
-        .progressbar_text {
-            vertical-align: middle;
-            padding-left: 3px;
-        }
-    }
-    #toDoCommentList {
-     margin: 0 -21px -14px;
     }
 }

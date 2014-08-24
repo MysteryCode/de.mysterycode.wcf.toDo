@@ -49,11 +49,9 @@
 
 {capture assign='headerNavigation'}{/capture}
 
-{capture assign='sidebar'}
-	{@$__boxSidebar}
-{/capture}
+{include file='toDoListSidebar'}
 
-{include file='header' sidebarOrientation='right'}
+{include file='header' sidebarOrientation='left'}
 
 <header class="boxHeadline">
 	<h1>{lang}wcf.toDo.taskList{/lang}</h1>
@@ -70,6 +68,7 @@
 		<nav>
 			<ul>
 				{content}
+					{if $__wcf->getSession()->getPermission('user.toDo.toDo.canAddCategory')}<li><a href="{link controller='ToDoCategoryAdd'}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.category.add{/lang}</span></a></li>{/if}
 					{if $__wcf->getSession()->getPermission('user.toDo.toDo.canAdd')}<li><a href="{link controller='ToDoAdd'}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
 					{event name='contentNavigationButtonsTop'}
 				{/content}
@@ -95,15 +94,41 @@
 		<nav>
 			<ul>
 				{content}
+					{if $__wcf->getSession()->getPermission('user.toDo.toDo.canAddCategory')}<li><a href="{link controller='ToDoCategoryAdd'}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.category.add{/lang}</span></a></li>{/if}
 					{if $__wcf->getSession()->getPermission('user.toDo.toDo.canAdd')}<li><a href="{link controller='ToDoAdd'}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
 					{event name='contentNavigationButtonsBottom'}
 				{/content}
-				
 			</ul>
 		</nav>
 	{/hascontent}
 	
 	<nav class="jsClipboardEditor" data-types="[ 'de.mysterycode.wcf.toDo.toDo' ]"></nav>
+</div>
+
+<div class="container marginTop">
+	<ul class="containerList infoBoxList">
+		<li class="box32">
+			<span class="icon icon32 icon-pushpin"></span>
+			
+			<div>
+				<div class="containerHeadline">
+					<h3>{lang}wcf.toDo.task.legend{/lang}</h3><br />
+					
+					<p>
+						<strong>{lang}wcf.toDo.task.priority{/lang}:</strong> <span class="label badge green">{lang}wcf.toDo.task.priority.low{/lang}</span> <span class="label badge red">{lang}wcf.toDo.task.priority.high{/lang}</span> | 
+
+						<strong>{lang}wcf.toDo.task.status{/lang}:</strong>
+						<span class="label badge orange unsolvedBadge">{lang}wcf.toDo.task.unsolved{/lang}</span>
+						<span class="label badge yellow workBadge">{lang}wcf.toDo.task.work{/lang}</span>
+						<span class="label badge green solvedBadge">{lang}wcf.toDo.task.solved{/lang}</span>
+						<span class="label badge gray canceledBadge">{lang}wcf.toDo.task.canceled{/lang}</span>
+						<span class="label badge gray pendingBadge">{lang}wcf.toDo.task.preparation{/lang}</span>
+						<span class="label badge gray pausedBadge">{lang}wcf.toDo.task.paused{/lang}</span>
+					</p>
+				</div>
+			</div>
+		</li>
+	</ul>
 </div>
 
 {include file='footer'}
