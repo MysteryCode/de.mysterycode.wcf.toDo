@@ -4,22 +4,20 @@
 
 // mobile style
 .todoList {
+
 	> li {
-		width:360px;
+		width:320px;
 		height:100%;
 		float:left;
 		margin:6px;
-		border-top-left-radius:6px;
-		border-top-right-radius:6px;
 		box-shadow: 0 0 5px #ddd;
-		border: 1px solid grey;
-		
-		.containerHeadline > h3, .containerHeadline span, .containerHeadline small {
-			max-width:210px;
-		}
+		border: 6px solid #cccccc;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
 	}
     .todoDepth1 {
         margin-top: @wcfGapMedium;
+		border-radius: 12px !important;
     }
     .todoDepth2 {
 		height:100% !important;
@@ -28,13 +26,19 @@
     .todo {
         min-height: 26px;
 		max-height: 100%;
-		padding: 8px 12px 3px 0;
+		padding: 6px 6px 8px 8px;
 		
-		> div { float:none; }
+		&.box32 > *:not(:first-child) { margin:0; }
 		
-		> div > .status, .priority {
-			padding-left:8px;
+		> div { float:none; margin:0; padding: 0 0 0 0; }
+		
+		> div > div {
+			padding: 4px 4px 0 0;
 			float:left;
+			
+			> .badge {
+				border: 1px solid #777777;
+			}
 		}
 		
 		&.priority-0 {

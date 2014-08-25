@@ -191,8 +191,8 @@
 		<item name="wcf.toDo.task.important"><![CDATA[Als wichtig markieren]]></item>
 		<item name="wcf.toDo.task.priority"><![CDATA[Priorität]]></item>
 		<item name="wcf.toDo.task.priority.normal"><![CDATA[normal]]></item>
-		<item name="wcf.toDo.task.priority.high"><![CDATA[hoch]]></item>
-		<item name="wcf.toDo.task.priority.low"><![CDATA[gering]]></item>
+		<item name="wcf.toDo.task.priority.high"><![CDATA[wichtig!]]></item>
+		<item name="wcf.toDo.task.priority.low"><![CDATA[unwichtig]]></item>
 		<item name="wcf.toDo.task.privacy"><![CDATA[Privatsphäre]]></item>
 		<item name="wcf.toDo.task.privacy.public"><![CDATA[öffentlich]]></item>
 		<item name="wcf.toDo.task.privacy.private"><![CDATA[privat]]></item>

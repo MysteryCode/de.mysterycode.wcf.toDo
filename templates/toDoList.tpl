@@ -81,9 +81,7 @@
 
 {if $items}
 	{foreach from=$categories item=cat}
-		<div class="marginTop">
-			{include file='toDoListNode'}
-		</div>
+		{include file='toDoListNode'}
 	{/foreach}
 {else}
 	<p class="info">{lang}wcf.toDo.taskList.noTasks{/lang}</p>
