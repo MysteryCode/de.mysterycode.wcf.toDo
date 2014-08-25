@@ -1,7 +1,7 @@
 <?php
-
 namespace wcf\system\cache\builder;
 use wcf\data\todo\ToDoList;
+use wcf\data\todo\ToDoCategoryList;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\cache\builder\AbstractCacheBuilder;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -23,13 +23,32 @@ class ToDoCacheBuilder extends AbstractCacheBuilder {
 	 */
 	protected function rebuild(array $parameters) {
 		$data = array(
-			'todos' => array () 
+			'todos' => array (),
+			'categories' => array ()
 		);
 		
-		$todoList = new ToDoList ();
+		// get todos
+		$todoList = new ToDoList();
 		$todoList->sqlOrderBy = 'todo_table.id ASC';
 		$todoList->readObjects();
 		$data['todos'] = $todoList->getObjects();
+		
+		// get categories
+		$sql = "SELECT		*
+			FROM		wcf".WCF_N."_todo_category
+			ORDER BY	id";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute();
+		while ($object = $statement->fetchObject('wcf\data\todo\ToDoCategory')) {
+			$data['categories'][$object->id] = $object;
+		}
+		
+		/* get todo categories
+		$categoryList = new ToDoCategoryList();
+		$categoryList->sqlOrderBy = 'id ASC';
+		$categoryList->readObjects();
+		$data['categories'] = $categoryList->getObjects();
+		*/
 		return $data;
 	}
 }

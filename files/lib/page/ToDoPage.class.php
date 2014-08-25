@@ -1,7 +1,5 @@
 <?php
-
 namespace wcf\page;
-use wcf\data\todo\ToDoCache;
 use wcf\data\todo\ToDo;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\data\user\User;
@@ -20,11 +18,11 @@ use wcf\util\StringUtil;
 /**
  * Shows the toDo detail page.
  *
- * @author Florian Gail
- * @copyright 2014 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoPage extends AbstractPage {
 	/**
@@ -40,7 +38,14 @@ class ToDoPage extends AbstractPage {
 	public $usersOnlineList = null;
 	
 	public $neededModules = array('TODOLIST');
-	public $neededPermissions = array('user.toDo.toDo.canViewDetail');
+	
+	//public $neededPermissions = array('user.toDo.toDo.canViewDetail');
+	
+	/**
+	 * @see	\wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
+	
 	public $todoID = 0;
 	public $todo = null;
 	public $commentManager = null;
@@ -65,9 +70,11 @@ class ToDoPage extends AbstractPage {
 		parent::readData();
 		
 		$this->todo = new ToDo($this->todoID);
-		if($this->todo === null) {
+		if($this->todo === null)
 			throw new IllegalLinkException();
-		}
+		
+		if(!$this->todo->canEnter())
+			throw new PermissionDeniedException();
 		
 		$this->objectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDoComment');
 		$objectType = CommentHandler::getInstance()->getObjectType($this->objectTypeID);
@@ -111,7 +118,7 @@ class ToDoPage extends AbstractPage {
 			'commentCanAdd' => $this->commentManager->canAdd($this->todoID),
 			'lastCommentTime' => $this->commentList->getMinCommentTime(),
 			'commentsPerPage' => $this->commentManager->getCommentsPerPage(),
-			'likeData' =>(MODULE_LIKE ? $this->commentList->getLikeData() : array()),
+			'likeData' => (MODULE_LIKE ? $this->commentList->getLikeData() : array()),
 			'todo' => $this->todo,
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoPage'),
 			'sidebarName' => 'de.mysterycode.wcf.ToDoPage' 

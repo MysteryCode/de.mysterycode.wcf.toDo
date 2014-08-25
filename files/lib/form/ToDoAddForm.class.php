@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\form;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
@@ -26,11 +25,11 @@ use wcf\util\UserUtil;
 /**
  * Shows the toDoAdd form.
  *
- * @author Florian Gail
- * @copyright 2014 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoAddForm extends MessageForm {
 	/**
@@ -56,12 +55,16 @@ class ToDoAddForm extends MessageForm {
 	public $title = '';
 	public $private = 0;
 	public $important = 0;
+	public $priority = 1;
 	public $category = 0;
 	public $newCategory = '';
 	public $progress = 0;
 	public $remembertime = 0;
-	public $html_description = 0;
-	public $html_notes = 0;
+	public $enableSmilies = 0;
+	public $enableHtml = 0;
+	public $enableBBCodes = 0;
+	public $canEditStatus = 0;
+	public $canEditResponsible = 0;
 	
 	/**
 	 *
@@ -74,6 +77,7 @@ class ToDoAddForm extends MessageForm {
 		if(isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d H:i', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
 		if(isset($_POST['note'])) $this->note = StringUtil::trim($_POST['note']);
 		if(isset($_POST['status'])) $this->status = StringUtil::trim($_POST['status']);
+		if(isset($_POST['priority'])) $this->priority = StringUtil::trim($_POST['priority']);
 		if(isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
 		if(isset($_POST['private'])) $this->private = 1;
 		if(isset($_POST['important'])) $this->important = 1;
@@ -81,8 +85,9 @@ class ToDoAddForm extends MessageForm {
 		if(isset($_POST['newCategory'])) $this->newCategory = StringUtil::trim($_POST['newCategory']);
 		if(isset($_POST['progress'])) $this->progress = StringUtil::trim($_POST['progress']);
 		if(isset($_POST['remembertime']) && $_POST['remembertime'] > 0 && $_POST['remembertime'] != '') $this->remembertime = \DateTime::createFromFormat('Y-m-d', $_POST['remembertime'], WCF::getUser()->getTimeZone())->getTimestamp();
-		if(isset($_POST['html_description'])) $this->html_description = 1;
-		if(isset($_POST['html_notes'])) $this->html_notes = 1;
+		if(isset($_POST['enableSmilies'])) $this->enableSmilies = 1;
+		if(isset($_POST['enableHtml']) && WCF::getSession()->getPermission('user.toDo.canUseHtml')) $this->enableHtml = 1;
+		if(isset($_POST['enableBBCodes'])) $this->enableBBCodes = 1;
 		if(isset($_POST['responsibles'])) $this->responsibles = StringUtil::trim($_POST['responsibles']);
 		
 		if($this->newCategory != '' && TODO_CATEGORY_ENABLE) $this->category = $this->createCategory($this->newCategory);
@@ -101,7 +106,7 @@ class ToDoAddForm extends MessageForm {
 			throw new UserInputException('description');
 		}
 		
-		if(empty($this->status) && TODO_SET_STATUS_ON_CREATE && WCF::getSession()->getPermission('user.toDo.status.canEdit')) {
+		if(empty($this->status) && TODO_SET_STATUS_ON_CREATE && $this->canEditStatus()) {
 			throw new UserInputException('status');
 		}
 		
@@ -120,7 +125,7 @@ class ToDoAddForm extends MessageForm {
 				'title' => $this->title,
 				'description' => $this->description,
 				'note' => $this->note,
-				'status' => $this->status,
+				'priority' => $this->priority,
 				'submitter' => WCF::getUser()->userID,
 				'timestamp' => TIME_NOW,
 				'endTime' => $this->endTime,
@@ -128,23 +133,37 @@ class ToDoAddForm extends MessageForm {
 				'important' => $this->important,
 				'category' => $this->category,
 				'progress' => $this->progress,
-				'html_description' => $this->html_description,
-				'html_notes' => $this->html_notes,
-				'remembertime' => $this->remembertime
+				'remembertime' => $this->remembertime,
+				'enableSmilies' => $this->enableSmilies,
+				'enableHtml' => $this->enableHtml,
+				'enableBBCodes' => $this->enableBBCodes
 			) 
 		);
 		
-		if($this->disableToDo) {
+		if (!WCF::getSession()->getPermission('user.toDo.toDo.canAddWithoutModeration')) {
 			$todoData['data']['isDisabled'] = 1;
 		}
 		
-		$this->objectAction = new ToDoAction( array(), 'create', $todoData);
+		if($this->canEditStatus()) {
+			$todoData['data']['status'] = $this->status;
+		}
+		
+		$this->objectAction = new ToDoAction(array(), 'create', $todoData);
 		$resultValues = $this->objectAction->executeAction();
-		$this->updateResponsibles($resultValues['returnValues']->id, $this->responsibles);
+		
+		if($this->canEditResponsible()) {
+			$this->updateResponsibles($resultValues['returnValues']->id, $this->responsibles);
+		}
+		
 		$this->saved();
 		
-		HeaderUtil::redirect($resultValues['returnValues']->getLink());
-		exit();
+		if ($resultValues['returnValues']->isDisabled && !WCF::getSession()->getPermission('mod.toDo.canEnable')) {
+			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('ToDoCategory', array('application' => 'wcf', 'id' => $this->category)), WCF::getLanguage()->get('wcf.todo.moderation.redirect'), 30);
+		}
+		else {
+			HeaderUtil::redirect($resultValues['returnValues']->getLink());
+		}
+		exit;
 	}
 	
 	/**
@@ -161,6 +180,7 @@ class ToDoAddForm extends MessageForm {
 			'description' => $this->description,
 			'note' => $this->note,
 			'status' => $this->status,
+			'priority' => $this->priority,
 			'responsibles' => $this->responsibles,
 			'endTime' => $this->endTime,
 			'private' => $this->private,
@@ -168,9 +188,12 @@ class ToDoAddForm extends MessageForm {
 			'toDoCategory' => $this->category,
 			'toDoCategoryList' => $this->getCategories(),
 			'progress' => $this->progress,
-			'html_description' => $this->html_description,
-			'html_notes' => $this->html_notes,
+			'enableSmilies' => $this->enableSmilies,
+			'enableHtml' => $this->enableHtml,
+			'enableBBCodes' => $this->enableBBCodes,
 			'remembertime' => $this->remembertime,
+			'canEditStatus' => $this->canEditStatus(),
+			'canEditResponsible' => $this->canEditResponsible(),
 			'action' => 'add' 
 		));
 	}
@@ -179,7 +202,7 @@ class ToDoAddForm extends MessageForm {
 		if($todoID == 0)
 			return null;
 		
-		$responsibleList = UserProfile::getUserProfilesByUsername( ArrayUtil::trim( explode(',', $search)));
+		$responsibleList = UserProfile::getUserProfilesByUsername(ArrayUtil::trim(explode(',', $search)));
 		
 		$userIDs = array();
 		$checkArray = array();
@@ -187,10 +210,10 @@ class ToDoAddForm extends MessageForm {
 			if($user && !in_array($user->userID, $existingResponsibles)) {
 				$userIDs[] = $user->userID;
 				$sql = "INSERT INTO wcf" . WCF_N . "_todo_to_user
-					(toDoID, userID)
-					VAlUES(?, ?);";
+					(toDoID, userID, username)
+					VAlUES(?, ?, ?);";
 				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array($todoID, $user->userID));
+				$statement->execute(array($todoID, $user->userID, $user->username));
 			}
 			$checkArray[] = $user->userID;
 		}
@@ -252,5 +275,23 @@ class ToDoAddForm extends MessageForm {
 			);
 		}
 		return $categories;
+	}
+	
+	public function canEditStatus() {
+		if(WCF::getSession()->getPermission('user.toDo.status.canEditOwn'))
+			return true;
+		if(WCF::getSession()->getPermission('mod.toDo.status.canEdit'))
+			return true;
+	
+		return false;
+	}
+	
+	public function canEditResponsible() {
+		if(WCF::getSession()->getPermission('user.toDo.responsible.canEditOwn'))
+			return true;
+		if(WCF::getSession()->getPermission('mod.toDo.responsible.canEdit'))
+			return true;
+	
+		return false;
 	}
 }

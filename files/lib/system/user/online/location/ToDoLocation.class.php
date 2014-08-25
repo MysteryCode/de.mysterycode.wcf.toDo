@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\system\user\online\location;
 use wcf\data\todo\ToDoList;
 use wcf\data\user\online\UserOnline;
@@ -9,11 +8,11 @@ use wcf\system\WCF;
 /**
  * Provides the todo user online location
  *
- * @author Florian Gail
- * @copyright 2014 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoLocation implements IUserOnlineLocation {
 	/**
@@ -22,7 +21,7 @@ class ToDoLocation implements IUserOnlineLocation {
 	 * @var array<integer>
 	 */
 	protected $todoIDs = array();
-	protected $todos = array();
+	protected $todos = null;
 	
 	/**
 	 *
@@ -59,14 +58,11 @@ class ToDoLocation implements IUserOnlineLocation {
 		if(empty($this->todoIDs)) {
 			return;
 		}
+		
 		$this->todoIDs = array_unique($this->todoIDs);
 		
 		$todoList = new ToDoList();
-		
 		$todoList->getConditionBuilder()->add('todo_table.id IN (?)', array($this->todoIDs));
-		$todoList->getConditionBuilder()->add('(todo_table.private = ? or todo_table.submitter = ?)', array(0, WCF::getUser()->userID));
-		//$todoList->getConditionBuilder()->add('todo_table.isDisabled = ?', array(0));
-		//$todoList->getConditionBuilder()->add('todo_table.isDeleted = ?', array(0));
 		$todoList->readObjects();
 		
 		$this->todos = $todoList->getObjects();

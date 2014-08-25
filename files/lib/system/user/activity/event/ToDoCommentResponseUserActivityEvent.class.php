@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\system\user\activity\event;
 use wcf\data\comment\CommentList;
 use wcf\data\comment\response\CommentResponseList;

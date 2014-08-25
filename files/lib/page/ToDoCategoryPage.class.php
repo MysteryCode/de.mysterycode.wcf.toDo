@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\page;
 use wcf\data\todo\ToDo;
 use wcf\data\user\User;
@@ -8,6 +7,7 @@ use wcf\data\ILinkableObject;
 use wcf\page\SortablePage;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
+use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -19,11 +19,11 @@ use wcf\util\StringUtil;
 /**
  * Shows the todo category page.
  *
- * @author Florian Gail
- * @copyright 2014 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoCategoryPage extends SortablePage {
 	/**
@@ -72,8 +72,16 @@ class ToDoCategoryPage extends SortablePage {
 	 * @see \wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 	public $objectListClassName = 'wcf\data\todo\ToDoList';
+	
 	public $neededPermissions = array('user.toDo.toDo.canViewList');
+	
 	public $neededModules = array('TODOLIST');
+	
+	/**
+	 * @see	\wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
+	
 	public $categoryID = 0;
 	
 	/**
@@ -93,7 +101,6 @@ class ToDoCategoryPage extends SortablePage {
 	protected function initObjectList() {
 		parent::initObjectList();
 		
-		$this->objectList->getConditionBuilder()->add("(private = ? or submitter = ?)", array(0, WCF::getUser()->userID));
 		$this->objectList->getConditionBuilder()->add("category = ?", array($this->categoryID));
 	}
 	
@@ -131,9 +138,9 @@ class ToDoCategoryPage extends SortablePage {
 		WCF::getTPL()->assign( array(
 			'id' => $this->categoryID,
 			'title' => $this->title,
-			'entryCount' => count($this->objectList->objects),
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoCategoryPage'),
-			'sidebarName' => 'de.mysterycode.wcf.ToDoCategoryPage' 
+			'sidebarName' => 'de.mysterycode.wcf.ToDoCategoryPage',
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
 		));
 	}
 }

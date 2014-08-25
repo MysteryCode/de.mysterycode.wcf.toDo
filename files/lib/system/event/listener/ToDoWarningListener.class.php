@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\system\event\listener;
 use wcf\system\event\IEventListener;
 use wcf\system\todo\ToDoHandler;
@@ -8,11 +7,11 @@ use wcf\system\WCF;
 /**
  * Shows the todo warning listener.
  *
- * @author Florian Gail
- * @copyright 2013 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoWarningListener implements IEventListener {
 	public $unsolved = 0;
@@ -28,9 +27,9 @@ class ToDoWarningListener implements IEventListener {
 			$this->overdue = ToDoHandler::getInstance()->getOverdueTodoCount(WCF::getUser()->userID);
 		}
 		
-		WCF::getTPL ()->assign ( array (
+		WCF::getTPL ()->assign(array(
 			'unsolvedToDoCount' => $this->unsolved,
 			'overdueToDoCount' => $this->overdue 
-		) );
+		));
 	}
 }

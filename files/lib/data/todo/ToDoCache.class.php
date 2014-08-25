@@ -1,13 +1,12 @@
 <?php
-
 namespace wcf\data\todo;
 use wcf\data\todo\ToDo;
 use wcf\system\cache\builder\ToDoCacheBuilder;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\language\LanguageFactory;
-use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
-use wcf\system\visitTracker\VisitTracker;
+//use wcf\system\language\LanguageFactory;
+//use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
+//use wcf\system\visitTracker\VisitTracker;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
@@ -29,6 +28,13 @@ class ToDoCache extends SingletonFactory {
 	protected $cachedTodos = array();
 	
 	/**
+	 * cached todo categories
+	 *
+	 * @var array<\wcf\data\todo\ToDo>
+	 */
+	protected $cachedCategories = array();
+	
+	/**
 	 * users online
 	 *
 	 * @var array<array>
@@ -40,7 +46,8 @@ class ToDoCache extends SingletonFactory {
 	 * @see \wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
-		$this->cachedTodos = ToDoCacheBuilder::getInstance()->getData( array(), 'todos');
+		$this->cachedTodos = ToDoCacheBuilder::getInstance()->getData(array(), 'todos');
+		$this->cachedCategories = ToDoCacheBuilder::getInstance()->getData(array(), 'categories');
 	}
 	
 	/**
@@ -67,7 +74,7 @@ class ToDoCache extends SingletonFactory {
 	}
 	
 	/**
-	 * Returns the todo with the given todo id from cache.
+	 * Returns the todo with the given id from cache.
 	 *
 	 * @param integer $todoID        	
 	 * @return \wcf\data\todo\ToDo
@@ -80,6 +87,19 @@ class ToDoCache extends SingletonFactory {
 	}
 	
 	/**
+	 * Returns the todo category with the given id from cache.
+	 *
+	 * @param integer $catID        	
+	 * @return \wcf\data\todo\ToDo
+	 */
+	public function getCategory($catID) {
+		if(!isset($this->cachedCategories[$catID]))
+			return null;
+		
+		return $this->cachedCategories[$catID];
+	}
+	
+	/**
 	 * Returns a list of all todos.
 	 *
 	 * @return array<\wcf\data\todo\ToDo>
@@ -88,6 +108,15 @@ class ToDoCache extends SingletonFactory {
 		return $this->cachedTodos;
 	}
 	
+	/**
+	 * Returns a list of all todos.
+	 *
+	 * @return array<\wcf\data\todo\ToDo>
+	 */
+	public function getCategories() {
+		return $this->cachedCategories;
+	}
+
 	/**
 	 * Returns the users online list.
 	 *

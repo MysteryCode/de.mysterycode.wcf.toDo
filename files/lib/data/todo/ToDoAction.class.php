@@ -1,8 +1,6 @@
 <?php
-
 namespace wcf\data\todo;
 use wcf\data\todo\ToDo;
-use wcf\data\todo\ToDoCache;
 use wcf\data\todo\ToDoList;
 use wcf\data\todo\ToDoEditor;
 use wcf\data\object\type\ObjectTypeCache;
@@ -11,7 +9,6 @@ use wcf\data\user\notification\UserNotificationList;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\cache\builder\ToDoCacheBuilder;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\comment\CommentHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -31,11 +28,11 @@ use wcf\util\StringUtil;
 /**
  * Executes todo-related actions.
  *
- * @author Florian Gail
- * @copyright 2014 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoAction extends AbstractDatabaseObjectAction {
 	/**
@@ -56,18 +53,14 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @see wcf\data\AbstractDatabaseObjectAction::create()
 	 */
 	public function create() {
-		$languageID =((! isset( $this->parameters['data']['languageID'] ) || $this->parameters['data']['languageID'] === null) ? LanguageFactory::getInstance()->getDefaultLanguageID() : $this->parameters['data']['languageID']);
-		
 		$todo = parent::create();
 		
 		if(!$todo->isDisabled) {
 			$todoAction = new ToDoAction(array($todo), 'publish');
 			$todoAction->executeAction();
 		} else {
-			ModerationQueueActivationManager::getInstance()->addModeratedContent( 'de.mysterycode.wcf.toDo.toDo', $todo->id );
+			ModerationQueueActivationManager::getInstance()->addModeratedContent('de.mysterycode.wcf.toDo.toDo', $todo->id);
 		}
-		
-		ToDoCacheBuilder::getInstance()->reset();
 		
 		return $todo;
 	}
@@ -76,20 +69,15 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * Publishes the given todos for the first time.
 	 */
 	public function publish() {
-		$this->loadToDos();
+		$this->loadTodos();
 		
-		foreach( $this->objects as $todo ) {
+		foreach($this->objects as $todo) {
 			if($todo->submitter) {
-				UserActivityEventHandler::getInstance()->fireEvent( 'de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->id, 1, $todo->submitter, $todo->timestamp );
-				UserActivityPointHandler::getInstance()->fireEvent( 'de.mysterycode.wcf.toDo.toDo.activityPointEvent', $todo->id, $todo->submitter );
-			}
-			
-			if($todo->submitter) {
+				UserActivityEventHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->id, 1, $todo->submitter, $todo->timestamp);
+				UserActivityPointHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $todo->id, $todo->submitter);
 				ToDoEditor::updateUserToDoCounter(array($todo->submitter => 1));
 			}
 		}
-		
-		ToDoCacheBuilder::getInstance()->reset();
 	}
 	
 	/**
@@ -97,10 +85,23 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @see \wcf\data\AbstractDatabaseObjectAction::update()
 	 */
 	public function update() {
-		if(isset( $this->parameters['data'] )) {
+		if(isset($this->parameters['data'])) {
 			$todoIDs = array();
-			foreach( $this->objects as $todo ) {
+			foreach($this->objects as $todo) {
 				$todoIDs[] = $todo->id;
+				$users = array();
+				if(WCF::getUser()->userID != $todo->submitter) {
+					$users = array_unique($todo->getResponsibleIDs());
+				} else {
+					$users = array_unique(array_merge(array($todo->submitter), $todo->getResponsibleIDs()));
+				}
+				if(!empty($users)) {
+					if(isset($this->parameters['data']['status']) && !isset($this->parameters['data']['title'])) {
+						UserNotificationHandler::getInstance()->fireEvent('editStatus', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->id)), $users);
+					} else {
+						UserNotificationHandler::getInstance()->fireEvent('edit', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->id)), $users);
+					}
+				}
 			}
 		}
 		
@@ -111,11 +112,15 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * Validating parameters for enabling todos.
 	 */
 	public function validateEnable() {
-		$this->loadToDos();
+		$this->loadTodos();
 		
-		foreach( $this->objects as $todo ) {
+		foreach($this->objects as $todo) {
 			if(!$todo->isDisabled || $todo->isDeleted) {
-				throw new UserInputException( 'objectIDs' );
+				throw new UserInputException('objectIDs');
+			}
+			
+			if (!$todo->canEnable()) {
+				throw new PermissionDeniedException();
 			}
 		}
 	}
@@ -126,29 +131,27 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @return array<array>
 	 */
 	public function enable() {
-		if(empty( $this->objects )) {
+		if(empty($this->objects)) {
 			$this->readObjects();
 		}
 		
 		// update todos
 		$todoIDs = array();
-		foreach( $this->objects as $todo ) {
-			$todo->update( array(
-					'isDisabled' => 0 
-			) );
+		foreach($this->objects as $todo) {
+			$todo->update(array(
+				'isDisabled' => 0 
+			));
 			
 			$todoIDs[] = $todo->id;
-			$this->addToDoData( $todo->getDecoratedObject(), 'isDisabled', 0 );
+			$this->addToDoData($todo->getDecoratedObject(), 'isDisabled', 0);
 		}
 		
-		$todoAction = new ToDoAction( $this->objects, 'publish' );
+		$todoAction = new ToDoAction($this->objects, 'publish');
 		$todoAction->executeAction();
 		
-		$this->removeModeratedContent( $todoIDs );
+		$this->removeModeratedContent($todoIDs);
 		
 		$this->unmarkToDos();
-		
-		ToDoCacheBuilder::getInstance()->reset();
 		
 		return $this->getToDoData();
 	}
@@ -157,11 +160,15 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * Validating parameters for disabling todos.
 	 */
 	public function validateDisable() {
-		$this->loadToDos();
+		$this->loadTodos();
 		
-		foreach( $this->objects as $todo ) {
+		foreach($this->objects as $todo) {
 			if($todo->isDisabled || $todo->isDeleted) {
 				throw new UserInputException( 'objectIDs' );
+			}
+			
+			if (!$todo->canEnable()) {
+				throw new PermissionDeniedException();
 			}
 		}
 	}
@@ -172,25 +179,25 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @return array<array>
 	 */
 	public function disable() {
-		if(empty( $this->objects )) {
+		if(empty($this->objects)) {
 			$this->readObjects();
 		}
 		
 		$todoIDs = $categoryStats = array();
-		foreach( $this->objects as $todo ) {
-			$todo->update( array(
-					'isDisabled' => 1 
-			) );
+		foreach($this->objects as $todo) {
+			$todo->update(array(
+				'isDisabled' => 1 
+			));
 			
 			$todoIDs[] = $todo->id;
-			$this->addToDoData( $todo->getDecoratedObject(), 'isDisabled', 1 );
+			$this->addToDoData($todo->getDecoratedObject(), 'isDisabled', 1);
+			
+			ModerationQueueActivationManager::getInstance()->addModeratedContent('de.mysterycode.wcf.toDo.toDo', $todo->id);
 		}
 		
-		$this->removeActivityEvents( $todoIDs );
+		$this->removeActivityEvents($todoIDs);
 		
 		$this->unmarkToDos();
-		
-		ToDoCacheBuilder::getInstance()->reset();
 		
 		return $this->getToDoData();
 	}
@@ -199,11 +206,15 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * Validating parameters for trashing todos.
 	 */
 	public function validateTrash() {
-		$this->loadToDos();
+		$this->loadTodos();
 		
-		foreach( $this->objects as $todo ) {
+		foreach($this->objects as $todo) {
 			if($todo->isDeleted) {
-				throw new UserInputException( 'objectIDs' );
+				throw new UserInputException('objectIDs');
+			}
+			
+			if (!$todo->canDelete()) {
+				throw new PermissionDeniedException();
 			}
 		}
 	}
@@ -214,32 +225,30 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @return array<array>
 	 */
 	public function trash() {
-		if(empty( $this->objects )) {
+		if(empty($this->objects)) {
 			$this->readObjects();
 		}
 		
-		$deleteReason =(isset( $this->parameters['data']['reason'] ) ? StringUtil::trim( $this->parameters['data']['reason'] ) : '');
+		$deleteReason = (isset($this->parameters['data']['reason']) ? StringUtil::trim($this->parameters['data']['reason']) : '');
 		
 		$todoIDs = array();
-		foreach( $this->objects as $todo ) {
-			$todo->update( array(
+		foreach($this->objects as $todo) {
+			$todo->update(array(
 				'isDeleted' => 1,
 				'deleteTime' => TIME_NOW,
 				'deletedByID' => WCF::getUser()->userID,
 				'deletedBy' => WCF::getUser()->username,
 				'deleteReason' => $deleteReason 
-			) );
+			));
 			
 			$todoIDs[] = $todo->id;
-			$this->addToDoData( $todo->getDecoratedObject(), 'isDeleted', 1 );
-			$this->addToDoData( $todo->getDecoratedObject(), 'deleteNote', WCF::getLanguage()->getDynamicVariable( 'wcf.todo.deleteNote', array(
-				'todo' => new ToDo( $todo->id ) 
-			) ) );
+			$this->addToDoData($todo->getDecoratedObject(), 'isDeleted', 1);
+			$this->addToDoData($todo->getDecoratedObject(), 'deleteNote', WCF::getLanguage()->getDynamicVariable('wcf.todo.deleteNote', array(
+				'todo' => new ToDo($todo->id) 
+			)));
 		}
 		
 		$this->unmarkToDos();
-		
-		ToDoCacheBuilder::getInstance()->reset();
 		
 		return $this->getToDoData();
 	}
@@ -248,11 +257,15 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * Validating parameters for deleting todos.
 	 */
 	public function validateDelete() {
-		$this->loadToDos();
+		$this->loadTodos();
 		
-		foreach( $this->objects as $todo ) {
+		foreach($this->objects as $todo) {
 			if(!$todo->isDeleted) {
-				throw new UserInputException( 'objectIDs' );
+				throw new UserInputException('objectIDs');
+			}
+			
+			if (!$todo->canDeleteyCompletely()) {
+				throw new PermissionDeniedException();
 			}
 		}
 	}
@@ -263,37 +276,35 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @return array<array>
 	 */
 	public function delete() {
-		if(empty( $this->objects )) {
+		if(empty($this->objects)) {
 			$this->readObjects();
 		}
 		
 		$todoIDs = $userCounters = array();
-		foreach( $this->objects as $todo ) {
+		foreach($this->objects as $todo) {
 			$todoIDs[] = $todo->id;
 			
-			if(! isset( $userCounters[$todo->submitter] )) {
+			if(! isset($userCounters[$todo->submitter])) {
 				$userCounters[$todo->submitter] = 0;
 			}
 			$userCounters[$todo->submitter] --;
 		}
 		
-		$this->removeActivityEvents( $todoIDs );
+		$this->removeActivityEvents($todoIDs);
 		
-		ToDoEditor::updateUserToDoCounter( $userCounters );
+		ToDoEditor::updateUserToDoCounter($userCounters);
 		
-		UserActivityPointHandler::getInstance()->removeEvents( 'com.wcfsolutions.wsif.activityPointEvent.todo', $todoIDs );
+		UserActivityPointHandler::getInstance()->removeEvents('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $todoIDs);
 		
-		CommentHandler::getInstance()->deleteObjects( 'de.mysterycode.wcf.toDo.toDo', $todoIDs );
+		CommentHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo.toDo', $todoIDs);
 		
-		foreach( $this->objects as $todo ) {
+		foreach($this->objects as $todo) {
 			$todo->delete();
 			
-			$this->addToDoData( $todo->getDecoratedObject(), 'deleted', $todo->getCategory()->getLink() );
+			$this->addToDoData($todo->getDecoratedObject(), 'deleted', LinkHandler::getInstance()->getLink('ToDoList', array()));
 		}
 		
 		$this->unmarkToDos();
-		
-		ToDoCacheBuilder::getInstance()->reset();
 		
 		return $this->getToDoData();
 	}
@@ -302,11 +313,15 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * Validating parameters for restoring todos.
 	 */
 	public function validateRestore() {
-		$this->loadToDos();
+		$this->loadTodos();
 		
-		foreach( $this->objects as $todo ) {
+		foreach($this->objects as $todo) {
 			if(!$todo->isDeleted) {
-				throw new UserInputException( 'objectIDs' );
+				throw new UserInputException('objectIDs');
+			}
+			
+			if (!$todo->canRestore()) {
+				throw new PermissionDeniedException();
 			}
 		}
 	}
@@ -317,27 +332,25 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @return array<array>
 	 */
 	public function restore() {
-		if(empty( $this->objects )) {
+		if(empty($this->objects)) {
 			$this->readObjects();
 		}
 		
 		$todoIDs = array();
-		foreach( $this->objects as $todo ) {
-			$todo->update( array(
+		foreach($this->objects as $todo) {
+			$todo->update(array(
 				'isDeleted' => 0,
 				'deleteTime' => 0,
 				'deletedByID' => 0,
 				'deletedBy' => '',
 				'deleteReason' => 0 
-			) );
+			));
 			
 			$todoIDs[] = $todo->id;
-			$this->addToDoData( $todo->getDecoratedObject(), 'isDeleted', 0 );
+			$this->addToDoData($todo->getDecoratedObject(), 'isDeleted', 0);
 		}
 		
 		$this->unmarkToDos();
-		
-		ToDoCacheBuilder::getInstance()->reset();
 		
 		return $this->getToDoData();
 	}
@@ -351,23 +364,23 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * Unmarks all todos.
 	 */
 	public function unmarkAll() {
-		ClipboardHandler::getInstance()->removeItems( ClipboardHandler::getInstance()->getObjectTypeID( 'de.mysterycode.wcf.toDo.toDo' ) );
+		ClipboardHandler::getInstance()->removeItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo'));
 	}
 	
 	/**
 	 * Loads todos for given object ids.
 	 */
-	protected function loadToDos() {
-		if(empty( $this->objectIDs )) {
-			throw new UserInputException( 'objectIDs' );
+	protected function loadTodos() {
+		if(empty($this->objectIDs)) {
+			throw new UserInputException('objectIDs');
 		}
 		
-		if(empty( $this->objects )) {
+		if(empty($this->objects)) {
 			$this->readObjects();
 		}
 		
-		if(empty( $this->objects )) {
-			throw new UserInputException( 'objectIDs' );
+		if(empty($this->objects)) {
+			throw new UserInputException('objectIDs');
 		}
 	}
 	
@@ -379,7 +392,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @param mixed $value        	
 	 */
 	protected function addToDoData(ToDo $todo, $key, $value) {
-		if(! isset( $this->todoData[$todo->id] )) {
+		if(!isset($this->todoData[$todo->id])) {
 			$this->todoData[$todo->id] = array();
 		}
 		
@@ -403,7 +416,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @param array<integer> $todoIDs        	
 	 */
 	protected function removeModeratedContent(array $todoIDs) {
-		ModerationQueueActivationManager::getInstance()->removeModeratedContent( 'de.mysterycode.wcf.toDo.toDo', $todoIDs );
+		ModerationQueueActivationManager::getInstance()->removeModeratedContent('de.mysterycode.wcf.toDo.toDo', $todoIDs);
 	}
 	
 	/**
@@ -412,8 +425,8 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @param array<integer> $todoIDs        	
 	 */
 	protected function removeActivityEvents(array $todoIDs) {
-		UserActivityEventHandler::getInstance()->removeEvents( 'com.wcfsolutions.wsif.recentActivityEvent.todo', $todoIDs );
-		UserActivityPointHandler::getInstance()->removeEvents( 'com.wcfsolutions.wsif.activityPointEvent.todo', $todoIDs );
+		UserActivityEventHandler::getInstance()->removeEvents('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todoIDs);
+		UserActivityPointHandler::getInstance()->removeEvents('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $todoIDs);
 	}
 	
 	/**
@@ -422,14 +435,98 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @param array<integer> $todoIDs        	
 	 */
 	protected function unmarkToDos(array $todoIDs = array()) {
-		if(empty( $todoIDs )) {
-			foreach( $this->objects as $todo ) {
+		if(empty($todoIDs)) {
+			foreach($this->objects as $todo) {
 				$todoIDs[] = $todo->id;
 			}
 		}
 		
-		if(! empty( $todoIDs )) {
-			ClipboardHandler::getInstance()->unmark( $todoIDs, ClipboardHandler::getInstance()->getObjectTypeID( 'de.mysterycode.wcf.toDo.toDo' ) );
+		if(!empty($todoIDs)) {
+			ClipboardHandler::getInstance()->unmark($todoIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo'));
 		}
+	}
+	
+	/**
+	 * Handles the responsible users od a todo
+	 * 
+	 * 
+	 */
+	public function updateResponsibles() {
+		foreach($this->objects as $todo) {
+			// get responsibles
+			$responsibleList = UserProfile::getUserProfilesByUsername(ArrayUtil::trim(explode(',', $this->parameters['userIDs'])));
+			
+			$userIDs = array();
+			$checkArray = array();
+			foreach($responsibleList as $user) {
+				if($user && !in_array($user->userID, $todo->getResponsibleIDs())) {
+					// add new users to list
+					$userIDs[] = $user->userID;
+					$sql = "INSERT INTO wcf" . WCF_N . "_todo_to_user
+						(toDoID, userID, username)
+						VAlUES(?, ?, ?);";
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute(array($todoID, $user->userID, $user->username));
+			
+				}
+				// not obsolete users
+				$checkArray[] = $user->userID;
+			}
+			
+			// delete obsolete users from list
+			foreach($todo->getResponsibleIDs() as $responsible) {
+				if(!in_array($responsible, $checkArray)) {
+					$sql = "DELETE FROM wcf" . WCF_N . "_todo_to_user
+						WHERE toDoID = ?
+							AND userID = ?";
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute(array($todoID, $responsible));
+				}
+			}
+			
+			// fire notification for new assigned users
+			if(!empty($userIDs))
+				UserNotificationHandler::getInstance()->fireEvent('assign', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todoID)), $userIDs);
+		}
+	}
+	
+	/**
+	 * Validates todo profile preview.
+	 */
+	public function validateGetTodoProfile() {
+		if (count($this->objectIDs) != 1) {
+			throw new UserInputException('objectIDs');
+		}
+	}
+	
+	/**
+	 * Returns todo profile preview.
+	 * 
+	 * @return	array
+	 */
+	public function getTodoProfile() {
+		$todoID = reset($this->objectIDs);
+		
+		if ($todoID) {
+			$todoList = new ToDoList();
+			$todoList->getConditionBuilder()->add("todo_table.id = ?", array($todoID));
+			$todoList->readObjects();
+			$todoProfiles = $todoList->getObjects();
+			
+			if (empty($todoProfiles)) {
+				WCF::getTPL()->assign('unknownTodo', true);
+			}
+			else {
+				WCF::getTPL()->assign('todo', reset($todoProfiles));
+			}
+		}
+		else {
+			WCF::getTPL()->assign('unknownTodo', true);
+		}
+		
+		return array(
+			'template' => WCF::getTPL()->fetch('toDoPreview'),
+			'todoID' => $todoID
+		);
 	}
 }

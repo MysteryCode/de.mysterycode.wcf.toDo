@@ -1,5 +1,4 @@
 <?php
-
 namespace wcf\action;
 use wcf\data\todo\ToDoAction;
 use wcf\system\request\LinkHandler;
@@ -8,11 +7,11 @@ use wcf\util\HeaderUtil;
 /**
  * Represents the toDoDelete action.
  *
- * @author Florian Gail
- * @copyright 2014 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoDeleteAction extends AbstractAction {
 	public $neededPermissions = array('user.toDo.toDo.canDelete');
