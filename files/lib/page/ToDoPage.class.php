@@ -1,7 +1,6 @@
 <?php
 
 namespace wcf\page;
-use wcf\data\todo\ToDoCache;
 use wcf\data\todo\ToDo;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\data\user\User;
@@ -20,11 +19,11 @@ use wcf\util\StringUtil;
 /**
  * Shows the toDo detail page.
  *
- * @author Florian Gail
- * @copyright 2014 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoPage extends AbstractPage {
 	/**
@@ -40,7 +39,12 @@ class ToDoPage extends AbstractPage {
 	public $usersOnlineList = null;
 	
 	public $neededModules = array('TODOLIST');
-	public $neededPermissions = array('user.toDo.toDo.canViewDetail');
+	
+	/**
+	 * @see	\wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
+	
 	public $todoID = 0;
 	public $todo = null;
 	public $commentManager = null;
@@ -65,9 +69,11 @@ class ToDoPage extends AbstractPage {
 		parent::readData();
 		
 		$this->todo = new ToDo($this->todoID);
-		if($this->todo === null) {
+		if($this->todo === null)
 			throw new IllegalLinkException();
-		}
+		
+		if(!$this->todo->canEnter())
+			throw new PermissionDeniedException();
 		
 		$this->objectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDoComment');
 		$objectType = CommentHandler::getInstance()->getObjectType($this->objectTypeID);
@@ -80,15 +86,6 @@ class ToDoPage extends AbstractPage {
 			WCF::getBreadcrumbs()->add(new Breadcrumb($this->todo->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
 				'id' => $this->todo->category 
 			))));
-		}
-		
-		// users online
-		if (MODULE_USERS_ONLINE) {
-			$this->usersOnlineList = new UsersOnlineList();
-			$this->usersOnlineList->getConditionBuilder()->add('((session.objectType = ? AND session.objectID = ?) OR (session.parentObjectType = ? AND session.parentObjectID = ?))', array('de.mysterycode.wcf.toDo.toDo', $this->todoID, 'de.mysterycode.wcf.toDo.toDo', $this->todoID));
-			$this->usersOnlineList->readStats();
-			$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
-			$this->usersOnlineList->readObjects();
 		}
 	}
 	
@@ -111,10 +108,25 @@ class ToDoPage extends AbstractPage {
 			'commentCanAdd' => $this->commentManager->canAdd($this->todoID),
 			'lastCommentTime' => $this->commentList->getMinCommentTime(),
 			'commentsPerPage' => $this->commentManager->getCommentsPerPage(),
-			'likeData' =>(MODULE_LIKE ? $this->commentList->getLikeData() : array()),
+			'likeData' => (MODULE_LIKE ? $this->commentList->getLikeData() : array()),
 			'todo' => $this->todo,
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoPage'),
-			'sidebarName' => 'de.mysterycode.wcf.ToDoPage' 
+			'sidebarName' => 'de.mysterycode.wcf.ToDoPage',
+			'attachmentList' => $this->todo->getAttachments()
 		));
+	}
+	
+	/**
+	 * @see	\wcf\page\ITrackablePage::getObjectType()
+	 */
+	public function getObjectType() {
+		return 'de.mysterycode.wcf.toDo.toDo';
+	}
+	
+	/**
+	 * @see	\wcf\page\ITrackablePage::getObjectID()
+	 */
+	public function getObjectID() {
+		return $this->todoID;
 	}
 }

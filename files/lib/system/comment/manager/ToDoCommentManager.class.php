@@ -3,7 +3,7 @@
 namespace wcf\system\comment\manager;
 use wcf\data\comment\response\CommentResponse;
 use wcf\data\comment\Comment;
-use wcf\data\todo\ToDoCache;
+use wcf\data\todo\ToDo;
 use wcf\system\comment\manager\AbstractCommentManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -12,11 +12,11 @@ use wcf\util\StringUtil;
 /**
  * Shows the todo comment manager.
  *
- * @author Florian Gail
- * @copyright 2013 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoCommentManager extends AbstractCommentManager {
 	protected $currentToDo = null;
@@ -82,15 +82,15 @@ class ToDoCommentManager extends AbstractCommentManager {
 	 * @see \wcf\system\comment\manager\ICommentManager::canModerate()
 	 */
 	public function canModerate($objectTypeID, $objectID) {
-		if(! $this->isAccessible($objectID)) {
+		if(!$this->isAccessible($objectID)) {
 			return false;
 		}
 		
-		if(! WCF::getUser()->userID) {
+		if(!WCF::getUser()->userID) {
 			return false;
 		}
 		
-		return WCF::getSession()->getPermission('mod.canModerateToDoComment');
+		return WCF::getSession()->getPermission('mod.toDo.comment.canModerate');
 	}
 	
 	/**
@@ -99,7 +99,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	 * @param array $todoID        	
 	 */
 	protected function setCurrentToDo($todoID) {
-		$this->currentToDo = ToDoCache::getInstance()->getToDo($todoID);
+		$this->currentToDo = new ToDo($todoID);
 	}
 	
 	/**
@@ -109,15 +109,15 @@ class ToDoCommentManager extends AbstractCommentManager {
 	public function isAccessible($objectID, $validateWritePermission = false) {
 		$this->setCurrentToDo($objectID);
 		
+		if(!$this->currentToDo)
+			return false;
+		
 		// check object id
 		if(!$this->currentToDo->id)
 			return false;
 			
-			// check view permission
-		if(!WCF::getSession()->getPermission('user.toDo.toDo.canViewDetail'))
-			return false;
-		
-		if($this->currentToDo->private == 1 && $this->currentToDo->submitter != WCF::getUser()->userID)
+		// check view permission
+		if(!$this->currentToDo->canEnter())
 			return false;
 		
 		return true;
@@ -128,7 +128,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	 * @see \wcf\system\comment\manager\ICommentManager::canEdit()
 	 */
 	protected function canEdit($isOwner) {
-		return $this->canModify($isOwner, 'user.toDo.comment.canEdit');
+		return $this->canModify($isOwner, 'mod.toDo.comment.canEdit');
 	}
 	
 	/**
@@ -136,7 +136,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	 * @see \wcf\system\comment\manager\ICommentManager::canDelete()
 	 */
 	protected function canDelete($isOwner) {
-		return $this->canModify($isOwner, 'user.toDo.comment.canDelete');
+		return $this->canModify($isOwner, 'mod.toDo.comment.canDelete');
 	}
 	
 	/**
@@ -177,9 +177,8 @@ class ToDoCommentManager extends AbstractCommentManager {
 	 * @see \wcf\system\comment\manager\ICommentManager::getLink()
 	 */
 	public function getLink($objectTypeID, $objectID) {
-		return LinkHandler::getInstance()->getLink('ToDo', array(
-			'id' => $objectID 
-		));
+		$todo = new ToDo($objectID);
+		return $todo->getLink();
 	}
 	
 	/**
@@ -194,5 +193,6 @@ class ToDoCommentManager extends AbstractCommentManager {
 		return WCF::getLanguage()->getDynamicVariable('wcf.toDo.comment');
 	}
 	public function updateCounter($objectID, $value) {
+		
 	}
 }

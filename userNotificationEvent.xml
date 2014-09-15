@@ -24,7 +24,6 @@
 			<name>create</name>
 			<objecttype>de.mysterycode.wcf.toDo.toDo.notification</objecttype>
 			<classname>wcf\system\user\notification\event\ToDoCreateUserNotificationEvent</classname>
-			<preset>1</preset>
 		</event>
 		<event>
 			<name>edit</name>

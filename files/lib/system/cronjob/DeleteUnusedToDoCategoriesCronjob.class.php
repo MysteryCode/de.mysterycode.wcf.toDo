@@ -9,46 +9,49 @@ use wcf\util\StringUtil;
 /**
  * Delete unused todo-categories.
  *
- * @author Florian Gail
- * @copyright 2013 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 	public function execute(Cronjob $cronjob) {
-		parent::execute ( $cronjob );
+		parent::execute($cronjob);
+		
+		if(!TODO_DELETE_OBSOLETE_CATEGORIES)
+			return;
 		
 		// read used categories
 		$sql = "SELECT category
 			FROM wcf" . WCF_N . "_todo
 			GROUP BY category";
-		$statement = WCF::getDB ()->prepareStatement ( $sql );
-		$statement->execute ();
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute();
 		
-		$test = array ();
+		$test = array();
 		
-		while ( $row = $statement->fetchArray () ) {
-			$test [] = $row ['category'];
+		while($row = $statement->fetchArray()) {
+			$test[] = $row['category'];
 		}
 		
 		// read all categories
 		$sql = "SELECT *
 			FROM wcf" . WCF_N . "_todo_category";
-		$statement = WCF::getDB ()->prepareStatement ( $sql );
-		$statement->execute ();
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute();
 		
-		while ( $row = $statement->fetchArray () ) {
+		$delete = array();
+		while($row = $statement->fetchArray()) {
 			// check whether category is used
-			if (! in_array ( $row ['id'], $test )) {
-				// if not used delete the category
-				$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
-					WHERE id = ?";
-				$statementDelete = WCF::getDB ()->prepareStatement ( $sql );
-				$statementDelete->execute ( array (
-						$row ['id'] 
-				) );
+			if (!in_array($row['id'], $test)) {
+				$delete[] = $row['id'];
 			}
 		}
+		
+		$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
+				WHERE id IN ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($delete));
 	}
 }

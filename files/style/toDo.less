@@ -1,18 +1,19 @@
 .importantToDo, .importantToDo a {
     color: #ff0000;
 }
-
-// mobile style
+// list pages
 .todoList {
+    > li {
+		margin:6px;
+		border-top-left-radius: @wcfContainerBorderRadius;
+		border-top-right-radius: @wcfContainerBorderRadius;
+	}
     .todoDepth1 {
         margin-top: @wcfGapMedium;
     }
     .todoDepth2 {
 		&.todoContainer > .todo {
-			padding-left: 43px;
-		}
-		&.wbbCategory > header {
-			padding-left: 43px;
+			//padding-left: 43px;
 		}
 	}
     > li.tabularBox {
@@ -22,9 +23,13 @@
         min-height: 44px;
 		padding: @wcfGapSmall;
 		padding-right: 51%;
-		
 		.transition(background, .1s);
-		
+		&.box32 > *:not(:first-child) {
+		    margin:0;
+		}
+		> div {
+			float: none;
+		}
 		&:hover {
 			background-color: @wcfContainerHoverBackgroundColor;
 		}
@@ -33,7 +38,6 @@
 		&.todoContainer > .todoNode1 {
 			padding-left: 43px;
 		}
-		
 		&.todoDepth1 > header {
 			padding-left: 43px;
 		}
@@ -44,13 +48,11 @@
 		position: absolute;
 		top: @wcfGapMedium;
 		width: 16%;
-		
 		> dl {
 			> dt {
 				line-height: @wcfBaseLineHeight;
 				width: 48%;
 			}
-			
 			> dd {
 				font-weight: normal;
 				font-size: @wcfSmallFontSize;
@@ -60,16 +62,30 @@
 	}
     .todoContainer {
         position: relative;
+        border: 0;
+        border-radius: 0;
+        &:last-child {
+            border-bottom-left-radius: @wcfContainerBorderRadius;
+            border-bottom-right-radius: @wcfContainerBorderRadius;
+            .todo {
+                border-bottom-left-radius: @wcfContainerBorderRadius;
+                border-bottom-right-radius: @wcfContainerBorderRadius;
+            }
+        }
+        &:not(:last-child) {
+            border-bottom: 1px solid @wcfContainerBorderColor;
+        }
+        > ul.messageQuickOptions {
+            float: right;
+        }
     }
     .todoNode1 {
 		background-color: @wcfContainerBackgroundColor;
 	}
-
 	.todoNode2 {
 		background-color: @wcfContainerAccentBackgroundColor;
 	}
-	
-	.wbbBoard > div > .containerHeadline > h3 {
+	.todo > div > .containerHeadline > h3 {
 		font-weight: normal;
 	}
     .todoResponsible {
@@ -77,8 +93,7 @@
 		margin-top: 0;
 		position: absolute;
 		top: @wcfGapMedium;
-		width: 34%;
-		
+		width: 32%;
 		> div > div {
 			> ul {
 				overflow: hidden;
@@ -92,14 +107,12 @@
                     padding-right: @wcfGapTiny;
 				}
 			}
-			
 			> small {
 				display: block;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				word-wrap: normal;
-				
 				time {
 					color: @wcfDimmedColor;
 				}
@@ -107,15 +120,25 @@
 		}
 	}
 }
-
-// old style
+// seperator description <=> attachments
+.todoContainer > .attachmentFileList > fieldset > legend {
+     border-top: 1px solid @wcfContainerBorderColor;
+}
+// moderation buttons
+.boxHeadline.todo {
+    position: relative;
+    > nav.buttonGroupNavigation {
+        position: absolute;
+        right: 4px;
+        top: 0px;
+    }
+}
+// prioPicker
+#prioPicker > span {
+    cursor: pointer;
+}
+// detail page
 .toDoContainer {
-    .columnToDoStatus {
-        width: 100px;
-    }
-    .columnLabel {
-        min-width: 105px;
-    }
     .progressbar_main {
         position: relative;
         border: 1px solid #AAAAAA;

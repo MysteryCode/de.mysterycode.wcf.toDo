@@ -1,5 +1,8 @@
 <?php
+
 namespace wcf\system\todo;
+use wcf\data\todo\ToDo;
+use wcf\data\todo\ToDoList;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\SingletonFactory;
@@ -8,11 +11,11 @@ use wcf\system\WCF;
 /**
  * Handles todo data.
  *
- * @author Florian Gail
- * @copyright 2014 Florian Gail <http://www.mysterycode.de/>
- * @license Creative Commons <by-nc-nd> <http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
- * @package de.mysterycode.wcf.toDo
- * @category WCF
+ * @author	Florian Gail
+ * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ * @category	WCF
  */
 class ToDoHandler extends SingletonFactory {
 	/**
@@ -33,11 +36,11 @@ class ToDoHandler extends SingletonFactory {
 		if (!isset($this->unsolvedTodoCount[$userID])) {
 			$this->unsolvedTodoCount[$userID] = 0;
 			
-			UserStorageHandler::getInstance()->loadStorage(array($userID));
+			//UserStorageHandler::getInstance()->loadStorage(array($userID));
 			
-			$data = UserStorageHandler::getInstance()->getStorage(array($userID), 'unsolvedTodoCount');
+			//$data = UserStorageHandler::getInstance()->getStorage(array($userID), 'unsolvedTodoCount');
 			
-			if ($data[$userID] === null) {
+			//if ($data[$userID] === null) {
 				$conditionBuilder = new PreparedStatementConditionBuilder();
 				$conditionBuilder->add('todo.id = todo_to_user.toDoID');
 				$conditionBuilder->add('todo.status = ?', array(1));
@@ -51,13 +54,13 @@ class ToDoHandler extends SingletonFactory {
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$statement->execute($conditionBuilder->getParameters());
 				$row = $statement->fetchArray();
-				$this->unreadConversationCount[$userID] = $row['count'];
+				$this->unsolvedTodoCount[$userID] = $row['count'];
 				
-				UserStorageHandler::getInstance()->update($userID, 'unsolvedTodoCount', serialize($this->unsolvedTodoCount[$userID]));
-			}
-			else {
-				$this->unsolvedTodoCount[$userID] = unserialize($data[$userID]);
-			}
+				//UserStorageHandler::getInstance()->update($userID, 'unsolvedTodoCount', serialize($this->unsolvedTodoCount[$userID]));
+			//}
+			//else {
+				//$this->unsolvedTodoCount[$userID] = unserialize($data[$userID]);
+			//}
 		}
 		
 		return $this->unsolvedTodoCount[$userID];
@@ -69,11 +72,11 @@ class ToDoHandler extends SingletonFactory {
 		if (!isset($this->overdueTodoCount[$userID])) {
 			$this->overdueTodoCount[$userID] = 0;
 				
-			UserStorageHandler::getInstance()->loadStorage(array($userID));
+			//UserStorageHandler::getInstance()->loadStorage(array($userID));
 				
-			$data = UserStorageHandler::getInstance()->getStorage(array($userID), 'overdueTodoCount');
+			//$data = UserStorageHandler::getInstance()->getStorage(array($userID), 'overdueTodoCount');
 				
-			if ($data[$userID] === null) {
+			//if ($data[$userID] === null) {
 				$conditionBuilder = new PreparedStatementConditionBuilder();
 				$conditionBuilder->add('todo.id = todo_to_user.toDoID');
 				$conditionBuilder->add('todo.status != ?', array(3));
@@ -91,11 +94,11 @@ class ToDoHandler extends SingletonFactory {
 				$row = $statement->fetchArray();
 				$this->overdueTodoCount[$userID] = $row['count'];
 	
-				UserStorageHandler::getInstance()->update($userID, 'overdueTodoCount', serialize($this->overdueTodoCount[$userID]));
-			}
-			else {
-				$this->overdueTodoCount[$userID] = unserialize($data[$userID]);
-			}
+				//UserStorageHandler::getInstance()->update($userID, 'overdueTodoCount', serialize($this->overdueTodoCount[$userID]));
+			//}
+			//else {
+				//$this->overdueTodoCount[$userID] = unserialize($data[$userID]);
+			//}
 		}
 	
 		return $this->overdueTodoCount[$userID];
