@@ -79,10 +79,10 @@ class ToDoHandler extends SingletonFactory {
 			//if ($data[$userID] === null) {
 				$conditionBuilder = new PreparedStatementConditionBuilder();
 				$conditionBuilder->add('todo.id = todo_to_user.toDoID');
-				$conditionBuilder->add('todo.status != ?', array(3));
-				$conditionBuilder->add('todo.status != ?', array(4));
+				$conditionBuilder->add('todo.status <> ?', array(3));
+				$conditionBuilder->add('todo.status <> ?', array(4));
 				$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
-				$conditionBuilder->add('todo.endTime != ?', array(0));
+				$conditionBuilder->add('todo.endTime <> ?', array(0));
 				$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
 	
 				$sql = "SELECT	COUNT(*) AS count
