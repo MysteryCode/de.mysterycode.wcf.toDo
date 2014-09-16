@@ -50,7 +50,7 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 		}
 		
 		$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
-				WHERE id IN ?";
+				WHERE id IN (?)";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($delete));
 	}

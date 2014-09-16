@@ -40,7 +40,7 @@ class ToDoRememberNotificationCronjob extends AbstractCronjob {
 		
 		$sql = "UPDATE wcf" . WCF_N . "_todo
 			SET remembertime = ?
-			WHERE id IN ?";
+			WHERE id IN (?)";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(0, $todoIDs));
 	}
