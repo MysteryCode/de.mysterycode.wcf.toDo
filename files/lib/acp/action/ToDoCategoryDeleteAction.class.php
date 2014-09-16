@@ -38,15 +38,15 @@ class ToDoCategoryDeleteAction extends AbstractAction {
 		
 		if($this->categoryID != 0) {
 			$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
-				WHERE id = " . $this->categoryID;
+				WHERE id = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute();
+			$statement->execute(array($this->categoryID));
 			
 			$sql = "UPDATE wcf" . WCF_N . "_todo
-				SET category = 0
-				WHERE category = " . $this->categoryID;
+				SET category = ?
+				WHERE category = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute();
+			$statement->execute(array(0, $this->categoryID));
 		}
 		
 		$this->executed();
