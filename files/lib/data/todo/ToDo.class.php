@@ -143,7 +143,7 @@ final class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteCo
 		foreach($this->getResponsibleIDs() as $responsible) {
 			$user = new User($responsible);
 			if($user->username != '') {
-				$string .= $user->username . ', ';
+				$string .= StringUtil::encodeHTML($user->username) . ', ';
 			}
 		}
 		return substr($string, 0, -2);
@@ -154,7 +154,7 @@ final class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteCo
 		foreach($this->getResponsibleIDs() as $responsible) {
 			$user = new User($responsible);
 			if($user) {
-				$string .= '<a href="' . LinkHandler::getInstance()->getLink('User', array('application' => 'wcf', 'object' => $user)) . '" class="userlink" data-user-id="' . $user->userID . '">' . $user->username . '</a>, ';
+				$string .= '<a href="' . LinkHandler::getInstance()->getLink('User', array('application' => 'wcf', 'object' => $user)) . '" class="userlink" data-user-id="' . $user->userID . '">' . StringUtil::encodeHTML($user->username) . '</a>, ';
 			}
 		}
 		return substr($string, 0, -2);
