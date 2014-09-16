@@ -51,6 +51,8 @@ class ToDoCategoryAddForm extends AbstractForm {
 		if (empty($this->color)) {
 			throw new UserInputException('color');
 		}
+		
+		// validate color
 		$regex = new Regex('rgba\(\d{1,3}, \d{1,3}, \d{1,3}, (1|1\.00?|0|0?\.[0-9]{1,2})\)');
 		if (!$regex->match($this->color)) {
 			throw new UserInputException('color', 'notValid');
@@ -65,12 +67,9 @@ class ToDoCategoryAddForm extends AbstractForm {
 		
 		$sql = "INSERT INTO wcf" . WCF_N . "_todo_category
 			(title, color)
-			VALUES (
-				'" . $this->title . "',
-				'" . $this->color . "'
-			);";
+			VALUES (?, ?);";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute();
+		$statement->execute(array($this->title, $this->color));
 		
 		$this->saved();
 		

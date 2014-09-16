@@ -41,11 +41,11 @@ class ToDoCategoryEditForm extends ToDoCategoryAddForm {
 	 */
 	public function save() {
 		$sql = "UPDATE wcf" . WCF_N . "_todo_category
-			SET title = '" . $this->title . "',
-				color = '" . $this->color . "'
-			WHERE id = " . $this->categoryID . ";";
+			SET title = ?,
+				color = ?
+			WHERE id = ?;";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute();
+		$statement->execute(array($this->title, $this->color, $this->categoryID));
 		
 		$this->saved();
 		
@@ -65,9 +65,9 @@ class ToDoCategoryEditForm extends ToDoCategoryAddForm {
 		
 		$sql = "SELECT *
 			FROM wcf" . WCF_N . "_todo_category
-			WHERE id = '" . $this->categoryID . "'";
+			WHERE id = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute();
+		$statement->execute(array($this->categoryID));
 		$category = $statement->fetchArray();
 		
 		if(!$category)
