@@ -3,6 +3,7 @@
 namespace wcf\system\cronjob;
 use wcf\data\cronjob\Cronjob;
 use wcf\system\cronjob\AbstractCronjob;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -49,9 +50,11 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 			}
 		}
 		
+		$conditions = new PreparedStatementConditionBuilder();
+		$conditions->add("id IN (?)", array($delete));
 		$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
-				WHERE id IN (?)";
+				".$conditions;
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($delete));
+		$statement->execute(array($conditions->getParameters()));
 	}
 }

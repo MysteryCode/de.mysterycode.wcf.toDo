@@ -9,6 +9,7 @@ use wcf\data\user\UserEditor;
 use wcf\data\user\UserList;
 use wcf\data\user\UserProfile;
 use wcf\system\cronjob\AbstractCronjob;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;
@@ -38,10 +39,12 @@ class ToDoRememberNotificationCronjob extends AbstractCronjob {
 			$todoIDs[] = $todo->id;
 		}
 		
+		$conditions = new PreparedStatementConditionBuilder();
+		$conditions->add("id IN (?)", array($todoIDs));
 		$sql = "UPDATE wcf" . WCF_N . "_todo
 			SET remembertime = ?
-			WHERE id IN (?)";
+			".$conditions;
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(0, $todoIDs));
+		$statement->execute(array(0, $conditions->getParameters()));
 	}
 }
