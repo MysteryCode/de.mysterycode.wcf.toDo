@@ -11,7 +11,7 @@
 			<environment>user</environment>
 			<templatename>footer</templatename>
 			<eventname>copyright</eventname>
-			<templatecode><![CDATA[{if $templateName == 'toDo' || $templateName == 'toDoAdd' || $templateName == 'toDoCategory' || $templateName == 'toDoList'}<address class="copyright marginTop">{lang}wcf.toDo.copyright{/lang}</address>{/if}]]></templatecode>
+			<templatecode><![CDATA[{if $templateName == 'toDo' || $templateName == 'toDoAdd' || $templateName == 'toDoCategory' || $templateName == 'toDoList' || $templateName == 'myToDos' || $templateName == 'toDoTrash' || $templateName == 'toDoArchive'}<address class="copyright marginTop">{lang}wcf.toDo.copyright{/lang}</address>{/if}]]></templatecode>
 		</templatelistener>
 	</import>
 </data>
