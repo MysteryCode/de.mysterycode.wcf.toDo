@@ -1,1 +1,1 @@
-ALTER TABLE wcf1_todo		MODIFY	submitter	int(10);
+ALTER TABLE wcf1_todo		CHANGE	submitter	submitter	int(10);
