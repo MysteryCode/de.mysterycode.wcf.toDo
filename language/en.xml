@@ -218,6 +218,9 @@
 		<item name="wcf.toDo.task.participate.shure"><![CDATA[Do you want to tackle this ToDo?]]></item>
 		<item name="wcf.toDo.task.participate.success"><![CDATA[You have been added successfully.]]></item>
 		<item name="wcf.toDo.task.participate.alreadyAssigned"><![CDATA[You are already responsible for this ToDo.]]></item>
+		<item name="wcf.toDo.task.solve"><![CDATA[Mark as solved]]></item>
+		<item name="wcf.toDo.task.solve.shure"><![CDATA[Do you want to mark this ToDo as solved?]]></item>
+		<item name="wcf.toDo.task.solve.success"><![CDATA[You have marked this ToDo as solved.]]></item>
 		
 		<item name="wcf.toDo.comments"><![CDATA[Comments]]></item>
 		<item name="wcf.toDo.comment"><![CDATA[New comment (ToDo)]]></item>

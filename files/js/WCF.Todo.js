@@ -931,6 +931,12 @@ WCF.Todo.Participate = Class.extend({
 			
 			this._dialog.wcfDialog('close');
 			this._notification.show();
+			
+			setTimeout(
+				function() {
+					location.reload();
+				}, 1000
+			);
 		}
 	},
 	
@@ -967,6 +973,167 @@ WCF.Todo.Participate = Class.extend({
 			parameters: {
 				userID: this._userID,
 				objectID: this._objectID
+			}
+		});
+		this._proxy.sendRequest();
+	}
+});
+
+/**
+ * Changes the status into solved
+ */
+WCF.Todo.MarkSolved = Class.extend({
+	/**
+	 * list of buttons
+	 * @var	object
+	 */
+	_buttons: { },
+	
+	/**
+	 * button selector
+	 * @var	string
+	 */
+	_buttonSelector: '',
+	
+	/**
+	 * dialog overlay
+	 * @var	jQuery
+	 */
+	_dialog: null,
+	
+	/**
+	 * notification object
+	 * @var	WCF.System.Notification
+	 */
+	_notification: null,
+	
+	/**
+	 * object id
+	 * @var	integer
+	 */
+	_objectID: 0,
+	
+	/**
+	 * user id
+	 * @var	integer
+	 */
+	_userID: 0,
+	
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+	
+	/**
+	 * Creates a new WCF.Todo.MarkSolved object.
+	 * 
+	 * @param	string		objectType
+	 * @param	string		buttonSelector
+	 */
+	init: function(buttonSelector) {
+		this._buttonSelector = buttonSelector;
+		
+		this._buttons = { };
+		this._notification = null;
+		this._objectID = 0;
+		this._userID = 0;
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		
+		this._initButtons();
+		
+		WCF.DOMNodeInsertedHandler.addCallback('WCF.Todo.MarkSolved', $.proxy(this._initButtons, this));
+	},
+	
+	/**
+	 * Initializes the feature for all matching buttons.
+	 */
+	_initButtons: function() {
+		var self = this;
+		$(this._buttonSelector).each(function(index, button) {
+			var $button = $(button);
+			var $buttonID = $button.wcfIdentify();
+			
+			if (!self._buttons[$buttonID]) {
+				self._buttons[$buttonID] = $button;
+				$button.click($.proxy(self._click, self));
+			}
+		});
+	},
+	
+	/**
+	 * Handles clicks on the button.
+	 * 
+	 * @param	object		event
+	 */
+	_click: function(event) {
+		this._objectID = $(event.currentTarget).data('objectID');
+		this._userID = $(event.currentTarget).data('userID');
+		
+		this._showDialog();
+		this._dialog.find('.jsSubmitMarkSolved').click($.proxy(this._submit, this));
+	},
+	
+	/**
+	 * Handles successful AJAX requests.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		if (data.returnValues.success) {
+			if (this._notification === null) {
+				this._notification = new WCF.System.Notification(WCF.Language.get('wcf.toDo.task.solve.success'));
+			}
+			
+			this._dialog.wcfDialog('close');
+			this._notification.show();
+			
+			setTimeout(
+				function() {
+					location.reload();
+				}, 1000
+			);
+		}
+	},
+	
+	/**
+	 * Displays the dialog overlay.
+	 * 
+	 * @param	string		template
+	 */
+	_showDialog: function() {
+		if (this._dialog === null) {
+			this._dialog = $('#markSolvedDialog');
+			if (!this._dialog.length) {
+				this._dialog = $('<div id="markSolvedDialog" />').hide().appendTo(document.body);
+			}
+		}
+		
+		$html = WCF.Language.get('wcf.toDo.task.solve.shure')
+				+ '<div class="formSubmit">'
+				+	'<button class="jsSubmitMarkSolved buttonPrimary" accesskey="s">' + WCF.Language.get('wcf.global.button.submit') + '</button>'
+				+ '</div>';
+		
+		this._dialog.html($html).wcfDialog({
+			title: WCF.Language.get('wcf.toDo.task.solve')
+		}).wcfDialog('render');
+	},
+	
+	/**
+	 * Submits the request.
+	 */
+	_submit: function() {
+		this._proxy.setOption('data', {
+			actionName: 'editStatus',
+			className: 'wcf\\data\\todo\\ToDoAction',
+			parameters: {
+				userID: this._userID,
+				objectID: this._objectID,
+				status: 3
 			}
 		});
 		this._proxy.sendRequest();

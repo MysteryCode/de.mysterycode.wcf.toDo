@@ -25,7 +25,10 @@
 				'wcf.moderation.report.success': '{lang}wcf.moderation.report.success{/lang}',
 				'wcf.toDo.task.participate': '{lang}wcf.toDo.task.participate{/lang}',
 				'wcf.toDo.task.participate.success': '{lang}wcf.toDo.task.participate.success{/lang}',
-				'wcf.toDo.task.participate.shure': '{lang}wcf.toDo.task.participate.shure{/lang}'
+				'wcf.toDo.task.participate.shure': '{lang}wcf.toDo.task.participate.shure{/lang}',
+				'wcf.toDo.task.solve': '{lang}wcf.toDo.task.solve{/lang}',
+				'wcf.toDo.task.solve.success': '{lang}wcf.toDo.task.solve.success{/lang}',
+				'wcf.toDo.task.solve.shure': '{lang}wcf.toDo.task.solve.shure{/lang}'
 				
 			});
 			
@@ -43,6 +46,7 @@
 			new WCF.Moderation.Report.Content('de.mysterycode.wcf.toDo.toDo', '.jsReportTodo');
 			
 			new WCF.Todo.Participate('.jsParticipateTodo');
+			new WCF.Todo.MarkSolved('.jsMarkSolvedTodo');
 			
 			{if $todo->isDisabled || $todo->isDeleted}
 				$('.sidebar').addClass('{if $todo->isDeleted}deleted{else}disabled{/if}');
@@ -81,6 +85,7 @@
 			*}{if $todo->canEdit()}<li><a class="button jsTodoInlineEditor jsOnly"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
 			*}<li class="jsReportTodo jsOnly" data-object-id="{@$todo->id}"><a title="{lang}wcf.moderation.report.reportContent{/lang}" class="button jsTooltip"><span class="icon icon16 icon-warning-sign"></span> <span class="invisible">{lang}wcf.moderation.report.reportContent{/lang}</span></a></li>{*
 			*}{if $todo->canParticipate()}<li class="jsParticipateTodo jsOnly" data-object-id="{@$todo->id}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.participate{/lang}" class="button jsTooltip"><span class="icon icon16 icon-signin"></span> <span class="invisible">{lang}wcf.toDo.task.participate{/lang}</span></a></li>{/if}{*
+			*}{if $todo->canEditStatus() && $todo->status != 3}<li class="jsMarkSolvedTodo jsOnly" data-object-id="{@$todo->id}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.solve{/lang}" class="button jsTooltip"><span class="icon icon16 icon-check"></span> <span class="invisible">{lang}wcf.toDo.task.solve{/lang}</span></a></li>{/if}{*
 			*}{event name='buttons'}{*
 		*}</ul>
 	</nav>
