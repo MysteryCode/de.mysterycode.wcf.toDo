@@ -274,7 +274,7 @@ final class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteCo
 		$text = $this->getFormattedMessage();
 		return StringUtil::truncateHTML($text, 255);
 // 		if(strlen($text) > 255)
-// 			return nl2br(mb_substr(StringUtil::stripHTML($text), 0, 255)).' â€¦';
+// 			return nl2br(mb_substr(StringUtil::stripHTML($text), 0, 255)).' …';
 // 		else
 // 			return nl2br(StringUtil::stripHTML($text));
 	}
