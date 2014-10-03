@@ -143,7 +143,7 @@ final class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteCo
 		foreach($this->getResponsibleIDs() as $responsible) {
 			$user = new User($responsible);
 			if($user->username != '') {
-				$string .= StringUtil::encodeHTML($user->username) . ', ';
+				$string .= $user->username . ', ';
 			}
 		}
 		return substr($string, 0, -2);
