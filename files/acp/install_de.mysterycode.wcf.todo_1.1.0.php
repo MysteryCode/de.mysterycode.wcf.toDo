@@ -32,7 +32,7 @@ if ($row === false) {
 }
 
 // unset notification settings for creating todos - also needed when reinstalling
-// workaround
+// 
 $sql = "DELETE FROM	wcf".WCF_N."_user_notification_event_to_user
 	WHERE		eventID = (SELECT eventID FROM wcf".WCF_N."_user_notification_event WHERE eventName = ? AND className = ?)";
 $statement = WCF::getDB()->prepareStatement($sql);
