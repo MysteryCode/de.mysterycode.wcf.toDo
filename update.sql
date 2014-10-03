@@ -20,3 +20,5 @@ ALTER TABLE wcf1_todo_to_user	ADD	username		varchar(255)	NOT NULL DEFAULT '';
 ALTER TABLE wcf1_user		ADD	todos		int(10)		NOT NULL DEFAULT 0;
 
 ALTER TABLE wcf1_todo		ADD	FOREIGN KEY (category) REFERENCES wcf1_todo_category (id) ON DELETE CASCADE;
+ALTER TABLE wcf1_todo		MODIFY	submitter	int(10);
+ALTER TABLE wcf1_todo		ADD	FOREIGN KEY (submitter) REFERENCES wcf1_user (userID) ON DELETE SET NULL;

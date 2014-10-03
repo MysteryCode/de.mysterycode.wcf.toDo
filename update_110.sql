@@ -1,0 +1,1 @@
+ALTER TABLE wcf1_todo		MODIFY	submitter	int(10);
