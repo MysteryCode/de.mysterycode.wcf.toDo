@@ -593,4 +593,41 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		
 		return array('submitted' => 1);
 	}
+	
+	/**
+	 * Validates userID and todoID
+	 *
+	 */
+	public function validateEditStatus() {
+		$this->readInteger('objectID');
+		$this->readInteger('userID');
+
+		if($this->parameters['objectID'] == 0)
+			throw new IllegalLinkException();
+		$object = new ToDo($this->parameters['objectID']);
+		if($object === null)
+			throw new IllegalLinkException();
+		if(!$object->canEditStatus())
+			throw new PermissionDeniedException();
+		if(!new User($this->parameters['userID']) === null)
+			throw new PermissionDeniedException();
+	}
+	
+	/**
+	 * Adds the current user to the responsibles
+	 * 
+	 */
+	public function editStatus() {
+		$this->readInteger('objectID');
+		$this->readInteger('userID');
+		$this->readInteger('status');
+		
+		$user = new User($this->parameters['userID']);
+		$object = new ToDo($this->parameters['objectID']);
+		
+		$todoAction = new ToDoAction(array($object), 'update', array('data' => array('status' => $this->parameters['status'])));
+		$todoAction->executeAction();
+		
+		return array('success' => 1);
+	}
 }
