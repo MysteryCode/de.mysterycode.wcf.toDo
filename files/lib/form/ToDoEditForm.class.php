@@ -137,11 +137,6 @@ class ToDoEditForm extends ToDoAddForm {
 			$this->remembertime->setTimezone(WCF::getUser()->getTimeZone());
 			$this->remembertime = $this->remembertime->format('Y-m-d');
 		}
-		
-		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.header.menu.toDo'), LinkHandler::getInstance()->getLink('ToDoList', array())));
-		WCF::getBreadcrumbs()->add(new Breadcrumb($this->title, LinkHandler::getInstance()->getLink('ToDo', array(
-			'id' => $this->todoID 
-		))));
 	}
 	
 	/**
@@ -150,6 +145,15 @@ class ToDoEditForm extends ToDoAddForm {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
+		
+		if($this->todo->categorytitle != '') {
+			WCF::getBreadcrumbs()->add(new Breadcrumb($this->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
+				'id' => $this->category
+			))));
+		}
+		WCF::getBreadcrumbs()->add(new Breadcrumb($this->title, LinkHandler::getInstance()->getLink('ToDo', array(
+			'id' => $this->todoID 
+		))));
 		
 		WCF::getTPL()->assign( array(
 			'id' => $this->todoID,
