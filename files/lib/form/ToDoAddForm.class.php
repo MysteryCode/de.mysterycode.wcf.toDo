@@ -274,7 +274,7 @@ class ToDoAddForm extends MessageForm {
 		
 		$sql = "INSERT INTO wcf" . WCF_N . "_todo_category
 			(title, color)
-			VAlUES( ?);";
+			VAlUES(?, ?);";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($title, 'rgba(150,150,150,1)'));
 		
