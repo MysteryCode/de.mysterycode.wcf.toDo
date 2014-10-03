@@ -6,7 +6,7 @@
 		<packagedescription><![CDATA[Gives the possibility to manage ToDos in several custom categories on your website]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
 		<version>1.1.1</version>
-		<date>2014-09-14</date>
+		<date>2014-10-03</date>
 	</packageinformation>
 	
 	<requiredpackages>
@@ -72,7 +72,7 @@
 	<instructions type="update" fromversion="1.1.0 RC 2">
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
-		<instruction type="sql">update_new.sql</instruction>
+		<instruction type="sql">update_110rc2.sql</instruction>
     		<instruction type="pageMenu">pageMenu.xml</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
 		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
@@ -88,6 +88,7 @@
 		<instruction type="clipboardAction">clipboardAction.xml</instruction>
 	</instructions>
 	<instructions type="update" fromversion="1.1.0">
-		
+		<instruction type="file">files.tar</instruction>
+		<instruction type="sql">update_110.sql</instruction>
 	</instructions>
 </package>
