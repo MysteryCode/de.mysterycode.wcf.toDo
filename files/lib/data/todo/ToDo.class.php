@@ -311,7 +311,7 @@ final class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteCo
 			return false;
 		if($this->isDeleted && !$this->canModerate())
 			return false;
-		if($this->private == 0)
+		if($this->private == 0 && WCF::getSession()->getPermission('user.toDo.toDo.canViewDetail'))
 			return true;
 		if($this->private == 1 && $this->submitter == WCF::getUser()->userID)
 			return true;
