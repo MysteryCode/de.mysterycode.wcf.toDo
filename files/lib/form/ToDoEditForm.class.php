@@ -147,8 +147,8 @@ class ToDoEditForm extends ToDoAddForm {
 		parent::assignVariables();
 		
 		if($this->todo->categorytitle != '') {
-			WCF::getBreadcrumbs()->add(new Breadcrumb($this->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
-				'id' => $this->category
+			WCF::getBreadcrumbs()->add(new Breadcrumb($this->todo->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
+				'id' => $this->todo->category
 			))));
 		}
 		WCF::getBreadcrumbs()->add(new Breadcrumb($this->title, LinkHandler::getInstance()->getLink('ToDo', array(
