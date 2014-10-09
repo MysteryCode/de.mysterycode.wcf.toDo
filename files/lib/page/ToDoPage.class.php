@@ -69,7 +69,8 @@ class ToDoPage extends AbstractPage {
 		parent::readData();
 		
 		$this->todo = new ToDo($this->todoID);
-		if($this->todo === null)
+		
+		if($this->todo === null || !$this->todo->id)
 			throw new IllegalLinkException();
 		
 		if(!$this->todo->canEnter())
