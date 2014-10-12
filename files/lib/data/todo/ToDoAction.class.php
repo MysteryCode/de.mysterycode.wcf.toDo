@@ -21,6 +21,7 @@ use wcf\system\exception\UserInputException;
 use wcf\system\language\LanguageFactory;
 use wcf\system\like\LikeHandler;
 use wcf\system\moderation\queue\ModerationQueueActivationManager;
+use wcf\system\request\LinkHandler;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\user\activity\point\UserActivityPointHandler;
