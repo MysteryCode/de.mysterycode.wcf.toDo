@@ -135,6 +135,14 @@ class ToDoAddForm extends MessageForm {
 		if(empty($this->category) && empty($this->newCategory) && TODO_CATEGORY_ENABLE) {
 			throw new UserInputException('category');
 		}
+		
+		if(empty($this->progress) && TODO_PROGRESS_ENABLE) {
+			throw new UserInputException('progress');
+		}
+		
+		if($this->progress < 0 || $this->progress > 100) {
+			throw new UserInputException('progress', 'inValid');
+		}
 	}
 	
 	/**

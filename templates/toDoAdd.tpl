@@ -145,7 +145,7 @@
 					<dl{if $errorField == 'progress'} class="formError"{/if}>
 						<dt><label for="progress">{lang}wcf.toDo.task.progress{/lang}</label></dt>
 						<dd>
-							<input type="text" id="progress" name="progress" value="{$progress}" maxlength="3" class="long" />
+							<input type="number" id="progress" name="progress" value="{$progress}" min="0" max="100" maxlength="3" class="medium" />
 						</dd>
 					</dl>
 				{/if}
