@@ -25,7 +25,7 @@ CREATE TABLE wcf1_todo (
 	isDisabled		tinyint(1)	NOT NULL DEFAULT 0,
 	isDeleted		tinyint(1)	NOT NULL DEFAULT 0,
 	deleteTime		int(10)		NOT NULL DEFAULT 0,
-	deletedByID		int(10)		NOT NULL DEFAULT 0,
+	deletedByID		int(10),
 	deletedBy		varchar(255)	NOT NULL DEFAULT '',
 	deleteReason		text,
 	cumulativeLikes		MEDIUMINT(7)	NOT NULL DEFAULT 0,
