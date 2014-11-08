@@ -5,8 +5,8 @@
 		<packagename language="de"><![CDATA[ToDo-Liste]]></packagename>
 		<packagedescription><![CDATA[Gives the possibility to manage ToDos in several custom categories on your website]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
-		<version>1.1.2</version>
-		<date>2014-10-07</date>
+		<version>1.1.3</version>
+		<date>2014-11-08</date>
 	</packageinformation>
 	
 	<requiredpackages>
@@ -48,29 +48,13 @@
 		<instruction type="clipboardAction">clipboardAction.xml</instruction>
 	</instructions>
 	
-	<instructions type="update" fromversion="1.0.3">
+	<instructions type="update" fromversion="1.1.2">
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
-		<instruction type="sql">update_103.sql</instruction>
-    		<instruction type="pageMenu">pageMenu.xml</instruction>
-		<instruction type="objectType">objectType.xml</instruction>
-		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
-		<instruction type="option">option.xml</instruction>
-		<instruction type="templateListener">templateListener.xml</instruction>
-		<instruction type="userGroupOption">userGroupOption.xml</instruction>
+		<instruction type="sql">update.sql</instruction>
 		<instruction type="language">language/*.xml</instruction>
-		<instruction type="eventListener">eventListener.xml</instruction>
-		<instruction type="dashboardBox">dashboardBox.xml</instruction>
-		<instruction type="cronjob">cronjob_update.xml</instruction>
+		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
-		<instruction type="script">acp/install_de.mysterycode.wcf.todo_1.1.0.php</instruction>
 		<instruction type="script">acp/update_de.mysterycode.wcf.todo_1.1.0.php</instruction>
-		<instruction type="acpTemplate">acpTemplates.tar</instruction>
-		<instruction type="clipboardAction">clipboardAction.xml</instruction>
-	</instructions>
-	<instructions type="update" fromversion="1.1.1 pl 1">
-		<instruction type="file">files.tar</instruction>
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="templateListener">templateListener.xml</instruction>
 	</instructions>
 </package>
