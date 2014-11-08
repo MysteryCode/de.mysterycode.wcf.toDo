@@ -239,6 +239,8 @@ class ToDoAddForm extends MessageForm {
 		
 		$responsibleList = UserProfile::getUserProfilesByUsername(ArrayUtil::trim(explode(',', $search)));
 		
+		$responsibleList = array_unique($responsibleList);
+		
 		$userIDs = array();
 		$checkArray = array();
 		foreach($responsibleList as $user) {
