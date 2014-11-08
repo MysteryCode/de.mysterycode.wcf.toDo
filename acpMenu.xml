@@ -7,6 +7,7 @@
 		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.list">
 			<controller><![CDATA[wcf\acp\page\ToDoCategoryListPage]]></controller>
 			<parent>wcf.acp.menu.link.toDoCategory</parent>
+			<permissions>admin.content.toDo.category.canEdit,admin.content.toDo.category.canDelete</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.add">
