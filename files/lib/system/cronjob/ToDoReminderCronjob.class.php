@@ -28,6 +28,7 @@ use wcf\util\StringUtil;
 class ToDoReminderCronjob extends AbstractCronjob {
 	public function execute(Cronjob $cronjob) {
 		$check = TIME_NOW;
+		$todoIDs = array();
 		
 		$todoList = new ToDoList();
 		$todoList->getConditionBuilder()->add('todo_table.remembertime > ?', array(0));
@@ -41,12 +42,15 @@ class ToDoReminderCronjob extends AbstractCronjob {
 			$todoIDs[] = $todo->id;
 		}
 		
-		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("id IN (?)", array($todoIDs));
-		$sql = "UPDATE wcf" . WCF_N . "_todo
-			SET remembertime = ?
-			".$conditions;
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(0, $conditions->getParameters()));
+		if(!empty($todoIDs)) {
+			$conditions = new PreparedStatementConditionBuilder();
+			$conditions->add("id IN (?)", array($todoIDs));
+			
+			$sql = "UPDATE wcf" . WCF_N . "_todo
+				SET remembertime = ?
+				".$conditions;
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array_merge(array(0), $conditions->getParameters()));
+		}
 	}
 }
