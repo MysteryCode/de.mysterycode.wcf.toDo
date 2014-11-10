@@ -55,6 +55,6 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 		$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
 				".$conditions;
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($conditions->getParameters()));
+		$statement->execute($conditions->getParameters());
 	}
 }
