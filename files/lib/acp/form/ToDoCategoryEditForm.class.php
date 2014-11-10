@@ -16,7 +16,6 @@ use wcf\util\StringUtil;
  * @package	de.mysterycode.wcf.toDo
  * @category 	WCF
  */
-
 class ToDoCategoryEditForm extends ToDoCategoryAddForm {
 	/**
 	 * @see	wcf\page\AbstractPage::$activeMenuItem
