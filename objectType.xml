@@ -7,6 +7,11 @@
 			<definitionname>com.woltlab.wcf.category</definitionname>
 			<classname>wcf\system\todo\category\TodoCategoryType</classname>
 		</type>
+		<!-- acl -->
+		<type>
+			<name>de.mysterycode.wcf.toDo.category</name>
+			<definitionname>com.woltlab.wcf.acl</definitionname>
+		</type>
 		<!-- like -->
 		<type>
 			<name>de.mysterycode.wcf.toDo.toDo</name>
