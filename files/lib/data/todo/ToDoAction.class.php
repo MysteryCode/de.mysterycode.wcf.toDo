@@ -87,7 +87,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		
 		foreach($this->objects as $todo) {
 			if($todo->submitter) {
-				UserActivityEventHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->id, 1, $todo->submitter, $todo->timestamp);
+				UserActivityEventHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->id, WCF::getLanguage()->languageID), $todo->submitter, $todo->timestamp);
 				UserActivityPointHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $todo->id, $todo->submitter);
 				ToDoEditor::updateUserToDoCounter(array($todo->submitter => 1));
 			}
