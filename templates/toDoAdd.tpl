@@ -32,7 +32,7 @@
 	</script>
 </head>
 
-<body id="tpl{$templateName|ucfirst}">
+<body id="tpl_{$templateNameApplication}_{$templateName}" data-template="{$templateName}" data-application="{$templateNameApplication}">
 {include file='header'}
 
 <header class="boxHeadline">
