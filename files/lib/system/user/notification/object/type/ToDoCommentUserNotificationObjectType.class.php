@@ -18,18 +18,19 @@ class ToDoCommentUserNotificationObjectType extends AbstractUserNotificationObje
 	protected static $decoratorClassName = 'wcf\system\user\notification\object\CommentUserNotificationObject';
 	protected static $objectClassName = 'wcf\data\comment\Comment';
 	protected static $objectListClassName = 'wcf\data\comment\CommentList';
+
 	public function getOwnerID($objectID) {
 		$sql = "SELECT *
 			FROM wcf" . WCF_N . "_comment comment
 			LEFT JOIN wcf" . WCF_N . "_todo todo
 			ON (todo.id = comment.objectID)
 			WHERE comment.commentID = ?";
-		$statement = WCF::getDB ()->prepareStatement ( $sql );
-		$statement->execute ( array (
-				$objectID 
-		) );
-		$row = $statement->fetchArray ();
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			$objectID
+		));
+		$row = $statement->fetchArray();
 		
-		return ($row ? $row ['submitter'] : 0);
+		return ($row ? $row['submitter'] : 0);
 	}
 }

@@ -15,24 +15,15 @@ use wcf\system\WCF;
  */
 class ToDoEditor extends DatabaseObjectEditor {
 	/**
-	 *
 	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\todo\ToDo';
 	
 	/**
-	 *
-	 * @see \wcf\data\IEditableObject::update()
-	 */
-	public function update(array $parameters = array()) {
-		parent::update ($parameters);
-	}
-	
-	/**
 	 * Updates the todo counter of the given users.
 	 *
 	 * @param array $users
-	 *        	=> todo counter increase/decrease
+	 *        => todo counter increase/decrease
 	 */
 	public static function updateUserToDoCounter(array $users) {
 		$sql = "UPDATE	wcf" . WCF_N . "_user
@@ -40,7 +31,7 @@ class ToDoEditor extends DatabaseObjectEditor {
 			WHERE	userID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		
-		foreach($users as $userID => $todos) {
+		foreach ($users as $userID => $todos) {
 			$statement->execute(array($todos, $userID));
 		}
 	}

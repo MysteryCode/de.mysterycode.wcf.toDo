@@ -23,47 +23,51 @@ class ToDoLocation implements IUserOnlineLocation {
 	 */
 	protected $todoIDs = array();
 	protected $todos = null;
-	
+
 	/**
 	 *
 	 * @see \wcf\system\user\online\location\IUserOnlineLocation::cache()
 	 */
 	public function cache(UserOnline $user) {
-		if($user->objectID) {
+		if ($user->objectID) {
 			$this->todoIDs[] = $user->objectID;
 		}
 	}
-	
+
 	/**
 	 *
 	 * @see \wcf\system\user\online\location\IUserOnlineLocation::get()
 	 */
 	public function get(UserOnline $user, $languageVariable = '') {
-		if($this->todos === null) {
+		if ($this->todos === null) {
 			$this->readToDos();
 		}
 		
-		if(!isset($this->todos[$user->objectID])) {
+		if (!isset($this->todos[$user->objectID])) {
 			return '';
 		}
 		
-		return WCF::getLanguage()->getDynamicVariable($languageVariable, array('todo' => $this->todos[$user->objectID]));
+		return WCF::getLanguage()->getDynamicVariable($languageVariable, array(
+			'todo' => $this->todos[$user->objectID]
+		));
 	}
-	
+
 	/**
 	 * Loads the toDos.
 	 */
 	protected function readToDos() {
 		$this->todos = array();
 		
-		if(empty($this->todoIDs)) {
+		if (empty($this->todoIDs)) {
 			return;
 		}
 		
 		$this->todoIDs = array_unique($this->todoIDs);
 		
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add('todo_table.id IN (?)', array($this->todoIDs));
+		$todoList->getConditionBuilder()->add('todo_table.id IN (?)', array(
+			$this->todoIDs
+		));
 		$todoList->readObjects();
 		
 		$this->todos = $todoList->getObjects();

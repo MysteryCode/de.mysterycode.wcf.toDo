@@ -20,7 +20,7 @@ class ToDoUserNotificationObject extends DatabaseObjectDecorator implements IUse
 	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\todo\ToDo';
-	
+
 	/**
 	 *
 	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getObjectID()
@@ -28,7 +28,7 @@ class ToDoUserNotificationObject extends DatabaseObjectDecorator implements IUse
 	public function getObjectID() {
 		return $this->id;
 	}
-	
+
 	/**
 	 *
 	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getTitle()
@@ -36,7 +36,7 @@ class ToDoUserNotificationObject extends DatabaseObjectDecorator implements IUse
 	public function getTitle() {
 		return $this->title;
 	}
-	
+
 	/**
 	 *
 	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getURL()
@@ -44,7 +44,7 @@ class ToDoUserNotificationObject extends DatabaseObjectDecorator implements IUse
 	public function getURL() {
 		return $this->getLink();
 	}
-	
+
 	/**
 	 *
 	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getAuthorID()

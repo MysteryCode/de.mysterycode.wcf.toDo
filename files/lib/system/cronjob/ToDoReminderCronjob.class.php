@@ -26,31 +26,42 @@ use wcf\util\StringUtil;
  * @category	WCF
  */
 class ToDoReminderCronjob extends AbstractCronjob {
+
 	public function execute(Cronjob $cronjob) {
 		$check = TIME_NOW;
 		$todoIDs = array();
 		
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add('todo_table.remembertime > ?', array(0));
-		$todoList->getConditionBuilder()->add('todo_table.remembertime <= ?', array($check));
+		$todoList->getConditionBuilder()->add('todo_table.remembertime > ?', array(
+			0
+		));
+		$todoList->getConditionBuilder()->add('todo_table.remembertime <= ?', array(
+			$check
+		));
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
-		foreach($todos as $todo) {
-			$users = array_unique(array_merge(array($todo->submitter), $todo->getResponsibleIDs()));
+		foreach ($todos as $todo) {
+			$users = array_unique(array_merge(array(
+				$todo->submitter
+			), $todo->getResponsibleIDs()));
 			UserNotificationHandler::getInstance()->fireEvent('remember', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject($todo), $users);
 			$todoIDs[] = $todo->id;
 		}
 		
-		if(!empty($todoIDs)) {
+		if (!empty($todoIDs)) {
 			$conditions = new PreparedStatementConditionBuilder();
-			$conditions->add("id IN (?)", array($todoIDs));
+			$conditions->add("id IN (?)", array(
+				$todoIDs
+			));
 			
 			$sql = "UPDATE wcf" . WCF_N . "_todo
 				SET remembertime = ?
-				".$conditions;
+				" . $conditions;
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array_merge(array(0), $conditions->getParameters()));
+			$statement->execute(array_merge(array(
+				0
+			), $conditions->getParameters()));
 		}
 	}
 }

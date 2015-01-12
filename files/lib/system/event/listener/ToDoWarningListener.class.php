@@ -17,20 +17,20 @@ use wcf\system\WCF;
 class ToDoWarningListener implements IEventListener {
 	public $unsolved = 0;
 	public $overdue = 0;
-	
+
 	/**
 	 *
 	 * @see \wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
-		if(WCF::getUser()->userID != 0) {
+		if (WCF::getUser()->userID != 0) {
 			$this->unsolved = ToDoHandler::getInstance()->getUnsolovedTodoCount(WCF::getUser()->userID);
 			$this->overdue = ToDoHandler::getInstance()->getOverdueTodoCount(WCF::getUser()->userID);
 		}
 		
-		WCF::getTPL ()->assign(array(
+		WCF::getTPL()->assign(array(
 			'unsolvedToDoCount' => $this->unsolved,
-			'overdueToDoCount' => $this->overdue 
+			'overdueToDoCount' => $this->overdue
 		));
 	}
 }

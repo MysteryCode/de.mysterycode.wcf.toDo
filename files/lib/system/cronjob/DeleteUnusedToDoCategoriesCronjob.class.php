@@ -17,43 +17,46 @@ use wcf\util\StringUtil;
  * @category	WCF
  */
 class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
+
 	public function execute(Cronjob $cronjob) {
 		parent::execute($cronjob);
-		
-		if(!TODO_DELETE_OBSOLETE_CATEGORIES)
+
+		if (!TODO_DELETE_OBSOLETE_CATEGORIES)
 			return;
-		
-		// read used categories
+
+			// read used categories
 		$sql = "SELECT category
 			FROM wcf" . WCF_N . "_todo
 			GROUP BY category";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
-		
+
 		$test = array();
-		
-		while($row = $statement->fetchArray()) {
+
+		while ($row = $statement->fetchArray()) {
 			$test[] = $row['category'];
 		}
-		
+
 		// read all categories
 		$sql = "SELECT *
 			FROM wcf" . WCF_N . "_todo_category";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
-		
+
 		$delete = array();
-		while($row = $statement->fetchArray()) {
+		while ($row = $statement->fetchArray()) {
 			// check whether category is used
 			if (!in_array($row['id'], $test)) {
 				$delete[] = $row['id'];
 			}
 		}
-		
+
 		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("id IN (?)", array($delete));
+		$conditions->add("id IN (?)", array(
+			$delete
+		));
 		$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
-				".$conditions;
+				" . $conditions;
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditions->getParameters());
 	}

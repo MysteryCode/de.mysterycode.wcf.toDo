@@ -22,15 +22,14 @@ class ToDoCommentManager extends AbstractCommentManager {
 	protected $currentToDo = null;
 	
 	/**
-	 *
 	 * @see \wcf\system\comment\manager\ICommentManager::canAdd()
 	 */
 	public function canAdd($objectID) {
-		if(!$this->isAccessible($objectID)) {
+		if (!$this->isAccessible($objectID)) {
 			return false;
 		}
 		
-		if(!WCF::getUser()->userID) {
+		if (!WCF::getUser()->userID) {
 			return false;
 		}
 		
@@ -38,7 +37,6 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 *
 	 * @see \wcf\system\comment\manager\ICommentManager::canEditComment()
 	 */
 	public function canEditComment(Comment $comment) {
@@ -48,7 +46,6 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 *
 	 * @see \wcf\system\comment\manager\ICommentManager::canEditResponse()
 	 */
 	public function canEditResponse(CommentResponse $response) {
@@ -58,7 +55,6 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 *
 	 * @see \wcf\system\comment\manager\ICommentManager::canDeleteComment()
 	 */
 	public function canDeleteComment(Comment $comment) {
@@ -68,7 +64,6 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 *
 	 * @see \wcf\system\comment\manager\ICommentManager::canDeleteResponse()
 	 */
 	public function canDeleteResponse(CommentResponse $response) {
@@ -78,15 +73,14 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 *
 	 * @see \wcf\system\comment\manager\ICommentManager::canModerate()
 	 */
 	public function canModerate($objectTypeID, $objectID) {
-		if(!$this->isAccessible($objectID)) {
+		if (!$this->isAccessible($objectID)) {
 			return false;
 		}
 		
-		if(!WCF::getUser()->userID) {
+		if (!WCF::getUser()->userID) {
 			return false;
 		}
 		
@@ -103,28 +97,26 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 *
 	 * @see \wcf\system\comment\manager\ICommentManager::isAccessible()
 	 */
 	public function isAccessible($objectID, $validateWritePermission = false) {
 		$this->setCurrentToDo($objectID);
 		
-		if(!$this->currentToDo)
-			return false;
-		
-		// check object id
-		if(!$this->currentToDo->id)
+		if (!$this->currentToDo)
 			return false;
 			
-		// check view permission
-		if(!$this->currentToDo->canEnter())
+			// check object id
+		if (!$this->currentToDo->id)
+			return false;
+			
+			// check view permission
+		if (!$this->currentToDo->canEnter())
 			return false;
 		
 		return true;
 	}
 	
 	/**
-	 *
 	 * @see \wcf\system\comment\manager\ICommentManager::canEdit()
 	 */
 	protected function canEdit($isOwner) {
@@ -148,24 +140,24 @@ class ToDoCommentManager extends AbstractCommentManager {
 	 */
 	protected function canModify($isOwner, $modifyPermission) {
 		// disallow guests
-		if(!WCF::getUser()->userID) {
+		if (!WCF::getUser()->userID) {
 			return false;
 		}
 		
-		if($this->currentToDo === null) {
+		if ($this->currentToDo === null) {
 			return false;
 		}
 		
 		// check access
-		if(!$this->isAccessible($this->currentToDo->id)) {
+		if (!$this->isAccessible($this->currentToDo->id)) {
 			return false;
 		}
 		
-		if(WCF::getSession()->getPermission($modifyPermission)) {
+		if (WCF::getSession()->getPermission($modifyPermission)) {
 			return true;
 		}
 		
-		if($isOwner && WCF::getSession()->getPermission($modifyPermission) . 'Own') {
+		if ($isOwner && WCF::getSession()->getPermission($modifyPermission) . 'Own') {
 			return true;
 		}
 		
@@ -173,7 +165,6 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 *
 	 * @see \wcf\system\comment\manager\ICommentManager::getLink()
 	 */
 	public function getLink($objectTypeID, $objectID) {
@@ -182,17 +173,17 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 *
 	 * @see \wcf\system\comment\manager\ICommentManager::getTitle()
 	 */
 	public function getTitle($objectTypeID, $objectID, $isResponse = false) {
-		if($isResponse) {
+		if ($isResponse) {
 			return WCF::getLanguage()->get('wcf.toDo.comment.response');
 		}
 		
 		return WCF::getLanguage()->getDynamicVariable('wcf.toDo.comment');
 	}
+	
 	public function updateCounter($objectID, $value) {
-		
+
 	}
 }

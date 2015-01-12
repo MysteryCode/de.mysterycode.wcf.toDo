@@ -5,9 +5,9 @@ use wcf\data\todo\ToDo;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\data\user\User;
 use wcf\data\ILinkableObject;
-use wcf\system\comment\CommentHandler;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
+use wcf\system\comment\CommentHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -83,7 +83,7 @@ class ToDoPage extends AbstractPage {
 		
 		WCF::getBreadcrumbs()->add( new Breadcrumb( WCF::getLanguage()->get('wcf.header.menu.toDo'), LinkHandler::getInstance()->getLink('ToDoList', array())));
 		
-		if($this->todo->categorytitle != '') {
+		if ($this->todo->categorytitle != '') {
 			WCF::getBreadcrumbs()->add(new Breadcrumb($this->todo->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
 				'id' => $this->todo->category 
 			))));

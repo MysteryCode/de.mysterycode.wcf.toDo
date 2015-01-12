@@ -21,16 +21,18 @@ class ToDoUserActivityEvent extends SingletonFactory implements IUserActivityEve
 	 * @var	string
 	 */
 	protected $languageVariable = 'wcf.user.profile.recentActivity.todo';
-	
+
 	public function prepare(array $events) {
 		
 		$objectIDs = array();
-		foreach($events as $event) {
+		foreach ($events as $event) {
 			$objectIDs[] = $event->objectID;
 		}
 		
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add("todo_table.id IN (?)", array($objectIDs));
+		$todoList->getConditionBuilder()->add("todo_table.id IN (?)", array(
+			$objectIDs
+		));
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
@@ -43,13 +45,13 @@ class ToDoUserActivityEvent extends SingletonFactory implements IUserActivityEve
 				}
 				$event->setIsAccessible();
 				
-				
-				$text = WCF::getLanguage()->getDynamicVariable($this->languageVariable, array('todo' => $todo));
+				$text = WCF::getLanguage()->getDynamicVariable($this->languageVariable, array(
+					'todo' => $todo
+				));
 				$event->setTitle($text);
 				
 				$event->setDescription($todo->getExcerpt());
-			}
-			else {
+			} else {
 				$event->setIsOrphaned();
 			}
 		}

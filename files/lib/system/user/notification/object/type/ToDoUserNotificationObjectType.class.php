@@ -17,16 +17,17 @@ class ToDoUserNotificationObjectType extends AbstractUserNotificationObjectType 
 	protected static $decoratorClassName = 'wcf\system\user\notification\object\ToDoUserNotificationObject';
 	protected static $objectClassName = 'wcf\data\todo\ToDo';
 	protected static $objectListClassName = 'wcf\data\todo\ToDoList';
+
 	public function getOwnerID($objectID) {
 		$sql = "SELECT *
 			FROM wcf" . WCF_N . "_todo todo
 			WHERE todo.id = ?";
-		$statement = WCF::getDB()->prepareStatement( $sql );
-		$statement->execute( array(
-			$objectID 
-		) );
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			$objectID
+		));
 		$row = $statement->fetchArray();
 		
-		return($row ? $row['submitter'] : 0);
+		return ($row ? $row['submitter'] : 0);
 	}
 }
