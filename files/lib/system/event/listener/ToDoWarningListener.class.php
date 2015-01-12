@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\system\event\listener;
-use wcf\system\event\IEventListener;
+use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\todo\ToDoHandler;
 use wcf\system\WCF;
 
@@ -14,15 +14,14 @@ use wcf\system\WCF;
  * @package	de.mysterycode.wcf.toDo
  * @category	WCF
  */
-class ToDoWarningListener implements IEventListener {
+class ToDoWarningListener implements IParameterizedEventListener {
 	public $unsolved = 0;
 	public $overdue = 0;
-
+	
 	/**
-	 *
-	 * @see \wcf\system\event\IEventListener::execute()
+	 * @see \wcf\system\event\listener\IParameterizedEventListener::execute()
 	 */
-	public function execute($eventObj, $className, $eventName) {
+	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		if (WCF::getUser()->userID != 0) {
 			$this->unsolved = ToDoHandler::getInstance()->getUnsolovedTodoCount(WCF::getUser()->userID);
 			$this->overdue = ToDoHandler::getInstance()->getOverdueTodoCount(WCF::getUser()->userID);
