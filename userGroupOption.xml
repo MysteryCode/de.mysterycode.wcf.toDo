@@ -251,36 +251,42 @@ xml]]>
 				<categoryname>mod.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.toDo.canDelete">
 				<categoryname>mod.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.toDo.canViewDeleted">
 				<categoryname>mod.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.toDo.canRestore">
 				<categoryname>mod.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.toDo.canDeleteCompletely">
 				<categoryname>mod.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.toDo.canEnable">
 				<categoryname>mod.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			
@@ -288,18 +294,21 @@ xml]]>
 				<categoryname>mod.toDo.comment</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.toDo.comment.canDelete">
 				<categoryname>mod.toDo.comment</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.toDo.comment.canModerate">
 				<categoryname>mod.toDo.comment</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			
@@ -307,6 +316,7 @@ xml]]>
 				<categoryname>mod.toDo.status</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			
@@ -314,6 +324,7 @@ xml]]>
 				<categoryname>mod.toDo.responsible</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			
