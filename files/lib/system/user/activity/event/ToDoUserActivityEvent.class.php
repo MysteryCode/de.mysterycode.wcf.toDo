@@ -23,7 +23,6 @@ class ToDoUserActivityEvent extends SingletonFactory implements IUserActivityEve
 	protected $languageVariable = 'wcf.user.profile.recentActivity.todo';
 
 	public function prepare(array $events) {
-		
 		$objectIDs = array();
 		foreach ($events as $event) {
 			$objectIDs[] = $event->objectID;
