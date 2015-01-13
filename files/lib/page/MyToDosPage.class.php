@@ -2,8 +2,8 @@
 
 namespace wcf\page;
 use wcf\data\todo\ToDo;
-use wcf\data\user\User;
 use wcf\data\user\online\UsersOnlineList;
+use wcf\data\user\User;
 use wcf\data\ILinkableObject;
 use wcf\page\SortablePage;
 use wcf\system\breadcrumb\Breadcrumb;

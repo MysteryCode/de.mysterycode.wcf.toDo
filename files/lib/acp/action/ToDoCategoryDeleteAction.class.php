@@ -2,9 +2,9 @@
 
 namespace wcf\acp\action;
 use wcf\action\AbstractAction;
-use wcf\system\WCF;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\request\LinkHandler;
+use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 
 /**

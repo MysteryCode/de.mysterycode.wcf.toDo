@@ -1,10 +1,10 @@
 <?php
 
 namespace wcf\data\todo;
-use wcf\data\todo\ToDo;
-use wcf\data\todo\ToDoList;
-use wcf\data\todo\ToDoEditor;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\todo\ToDo;
+use wcf\data\todo\ToDoEditor;
+use wcf\data\todo\ToDoList;
 use wcf\data\user\notification\event\UserNotificationEventList;
 use wcf\data\user\notification\UserNotificationList;
 use wcf\data\user\User;
@@ -386,7 +386,9 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	/**
 	 * Does nothing.
 	 */
-	public function validateUnmarkAll() { }
+	public function validateUnmarkAll() {
+		
+	}
 	
 	/**
 	 * Unmarks all todos.
@@ -569,7 +571,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		if ($object === null)
 			throw new IllegalLinkException();
 		if (in_array($this->parameters['userID'], $object->getResponsibleIDs()))
-			throw new NamedUserException(\wcf\system\WCF::getLanguage()->getDynamicVariable('wcf.toDo.task.participate.alreadyAssigned'));
+			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.toDo.task.participate.alreadyAssigned'));
 		if (!$object->canParticipate())
 			throw new PermissionDeniedException();
 		if (!new User($this->parameters['userID']) === null)

@@ -1,11 +1,11 @@
 <?php
 
 namespace wcf\system\moderation\queue;
-use wcf\data\todo\ToDoCache;
+use wcf\data\moderation\queue\ModerationQueue;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
+use wcf\data\todo\ToDoCache;
 use wcf\data\todo\ToDoList;
-use wcf\data\moderation\queue\ModerationQueue;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\moderation\queue\AbstractModerationQueueHandler;
 use wcf\system\moderation\queue\ModerationQueueManager;
