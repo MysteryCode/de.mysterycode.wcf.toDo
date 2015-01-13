@@ -21,14 +21,6 @@ class ToDoEditor extends DatabaseObjectEditor {
 	protected static $baseClass = 'wcf\data\todo\ToDo';
 	
 	/**
-	 *
-	 * @see \wcf\data\IEditableObject::update()
-	 */
-	public function update(array $parameters = array()) {
-		parent::update ($parameters);
-	}
-	
-	/**
 	 * Updates the todo counter of the given users.
 	 *
 	 * @param array $users
