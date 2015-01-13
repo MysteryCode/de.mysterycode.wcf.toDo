@@ -36,13 +36,13 @@ class ToDoReminderCronjob extends AbstractCronjob {
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
-		foreach($todos as $todo) {
+		foreach ($todos as $todo) {
 			$users = array_unique(array_merge(array($todo->submitter), $todo->getResponsibleIDs()));
 			UserNotificationHandler::getInstance()->fireEvent('remember', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject($todo), $users);
 			$todoIDs[] = $todo->id;
 		}
 		
-		if(!empty($todoIDs)) {
+		if (!empty($todoIDs)) {
 			$conditions = new PreparedStatementConditionBuilder();
 			$conditions->add("id IN (?)", array($todoIDs));
 			

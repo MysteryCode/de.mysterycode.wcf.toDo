@@ -26,7 +26,7 @@ class ToDoDeleteAction extends AbstractAction {
 	public function readParameters() {
 		parent::readParameters();
 		
-		if(isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
+		if (isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
 	}
 	
 	public function execute() {

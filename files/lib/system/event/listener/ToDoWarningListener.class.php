@@ -23,7 +23,7 @@ class ToDoWarningListener implements IEventListener {
 	 * @see \wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
-		if(WCF::getUser()->userID != 0) {
+		if (WCF::getUser()->userID != 0) {
 			$this->unsolved = ToDoHandler::getInstance()->getUnsolovedTodoCount(WCF::getUser()->userID);
 			$this->overdue = ToDoHandler::getInstance()->getOverdueTodoCount(WCF::getUser()->userID);
 		}

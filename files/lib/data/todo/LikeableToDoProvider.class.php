@@ -19,12 +19,12 @@ class LikeableToDoProvider extends AbstractObjectTypeProvider implements ILikeOb
 	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$className
 	 */
 	public $className = 'wcf\data\todo\ToDo';
-
+	
 	/**
 	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$decoratorClassName
 	 */
 	public $decoratorClassName = 'wcf\data\todo\LikeableToDo';
-
+	
 	/**
 	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$listClassName
 	 */

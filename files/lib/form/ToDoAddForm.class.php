@@ -94,23 +94,23 @@ class ToDoAddForm extends MessageForm {
 	public function readFormParameters() {
 		parent::readFormParameters();
 		
-		if(isset($_POST['description'])) $this->description = StringUtil::trim($_POST['description']);
-		if(isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d H:i', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
-		if(isset($_POST['note'])) $this->note = StringUtil::trim($_POST['note']);
-		if(isset($_POST['status'])) $this->status = StringUtil::trim($_POST['status']);
-		if(isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
-		if(isset($_POST['private'])) $this->private = 1;
-		if(isset($_POST['priority'])) $this->important = StringUtil::trim($_POST['priority']);
-		if(isset($_POST['category'])) $this->category = StringUtil::trim($_POST['category']);
-		if(isset($_POST['newCategory'])) $this->newCategory = StringUtil::trim($_POST['newCategory']);
-		if(isset($_POST['progress'])) $this->progress = StringUtil::trim($_POST['progress']);
-		if(isset($_POST['remembertime']) && $_POST['remembertime'] > 0 && $_POST['remembertime'] != '') $this->remembertime = \DateTime::createFromFormat('Y-m-d', $_POST['remembertime'], WCF::getUser()->getTimeZone())->getTimestamp();
-		if(isset($_POST['enableSmilies'])) $this->enableSmilies = 1;
-		if(isset($_POST['enableHtml']) && WCF::getSession()->getPermission('user.toDo.canUseHtml')) $this->enableHtml = 1;
-		if(isset($_POST['enableBBCodes'])) $this->enableBBCodes = 1;
-		if(isset($_POST['responsibles'])) $this->responsibles = StringUtil::trim($_POST['responsibles']);
+		if (isset($_POST['description'])) $this->description = StringUtil::trim($_POST['description']);
+		if (isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d H:i', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
+		if (isset($_POST['note'])) $this->note = StringUtil::trim($_POST['note']);
+		if (isset($_POST['status'])) $this->status = StringUtil::trim($_POST['status']);
+		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
+		if (isset($_POST['private'])) $this->private = 1;
+		if (isset($_POST['priority'])) $this->important = StringUtil::trim($_POST['priority']);
+		if (isset($_POST['category'])) $this->category = StringUtil::trim($_POST['category']);
+		if (isset($_POST['newCategory'])) $this->newCategory = StringUtil::trim($_POST['newCategory']);
+		if (isset($_POST['progress'])) $this->progress = StringUtil::trim($_POST['progress']);
+		if (isset($_POST['remembertime']) && $_POST['remembertime'] > 0 && $_POST['remembertime'] != '') $this->remembertime = \DateTime::createFromFormat('Y-m-d', $_POST['remembertime'], WCF::getUser()->getTimeZone())->getTimestamp();
+		if (isset($_POST['enableSmilies'])) $this->enableSmilies = 1;
+		if (isset($_POST['enableHtml']) && WCF::getSession()->getPermission('user.toDo.canUseHtml')) $this->enableHtml = 1;
+		if (isset($_POST['enableBBCodes'])) $this->enableBBCodes = 1;
+		if (isset($_POST['responsibles'])) $this->responsibles = StringUtil::trim($_POST['responsibles']);
 		
-		if($this->newCategory != '' && TODO_CATEGORY_ENABLE) $this->category = $this->createCategory($this->newCategory);
+		if ($this->newCategory != '' && TODO_CATEGORY_ENABLE) $this->category = $this->createCategory($this->newCategory);
 		
 		MessageQuoteManager::getInstance()->readFormParameters();
 	}
@@ -120,27 +120,27 @@ class ToDoAddForm extends MessageForm {
 	 * @see wcf\form\IForm::validate()
 	 */
 	public function validate() {
-		if(empty($this->title)) {
+		if (empty($this->title)) {
 			throw new UserInputException('title');
 		}
 		
-		if(empty($this->description)) {
+		if (empty($this->description)) {
 			throw new UserInputException('description');
 		}
 		
-		if(empty($this->status) && TODO_SET_STATUS_ON_CREATE && $this->canEditStatus()) {
+		if (empty($this->status) && TODO_SET_STATUS_ON_CREATE && $this->canEditStatus()) {
 			throw new UserInputException('status');
 		}
 		
-		if(empty($this->category) && empty($this->newCategory) && TODO_CATEGORY_ENABLE) {
+		if (empty($this->category) && empty($this->newCategory) && TODO_CATEGORY_ENABLE) {
 			throw new UserInputException('category');
 		}
 		
-		if(empty($this->progress) && TODO_PROGRESS_ENABLE) {
+		if (empty($this->progress) && TODO_PROGRESS_ENABLE) {
 			throw new UserInputException('progress');
 		}
 		
-		if($this->progress < 0 || $this->progress > 100) {
+		if ($this->progress < 0 || $this->progress > 100) {
 			throw new UserInputException('progress', 'inValid');
 		}
 	}
@@ -175,14 +175,14 @@ class ToDoAddForm extends MessageForm {
 			$todoData['data']['isDisabled'] = 1;
 		}
 		
-		if($this->canEditStatus()) {
+		if ($this->canEditStatus()) {
 			$todoData['data']['status'] = $this->status;
 		}
 		
 		$this->objectAction = new ToDoAction(array(), 'create', $todoData);
 		$resultValues = $this->objectAction->executeAction();
 		
-		if($this->canEditResponsible()) {
+		if ($this->canEditResponsible()) {
 			$this->updateResponsibles($resultValues['returnValues']->id, $this->responsibles);
 		}
 		
@@ -234,7 +234,7 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	public function updateResponsibles($todoID = 0, $search, $existingResponsibles = array()) {
-		if($todoID == 0)
+		if ($todoID == 0)
 			return null;
 		
 		$responsibleList = UserProfile::getUserProfilesByUsername(ArrayUtil::trim(explode(',', $search)));
@@ -243,8 +243,8 @@ class ToDoAddForm extends MessageForm {
 		
 		$userIDs = array();
 		$checkArray = array();
-		foreach($responsibleList as $user) {
-			if($user && !in_array($user->userID, $existingResponsibles)) {
+		foreach ($responsibleList as $user) {
+			if ($user && !in_array($user->userID, $existingResponsibles)) {
 				$userIDs[] = $user->userID;
 				$sql = "INSERT INTO wcf" . WCF_N . "_todo_to_user
 					(toDoID, userID, username)
@@ -255,9 +255,9 @@ class ToDoAddForm extends MessageForm {
 			$checkArray[] = $user->userID;
 		}
 		
-		if($todoID != 0) {
-			foreach($existingResponsibles as $responsible) {
-				if(!in_array($responsible, $checkArray)) {
+		if ($todoID != 0) {
+			foreach ($existingResponsibles as $responsible) {
+				if (!in_array($responsible, $checkArray)) {
 					$sql = "DELETE FROM wcf" . WCF_N . "_todo_to_user
 						WHERE toDoID = ?
 							AND userID = ?";
@@ -267,7 +267,7 @@ class ToDoAddForm extends MessageForm {
 			}
 		}
 		
-		if(!empty($userIDs))
+		if (!empty($userIDs))
 			UserNotificationHandler::getInstance()->fireEvent('assign', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todoID)), $userIDs);
 	}
 	
@@ -279,7 +279,7 @@ class ToDoAddForm extends MessageForm {
 		$statement->execute(array($title));
 		$item = $statement->fetchArray();
 		
-		if($item)
+		if ($item)
 			return $item['id'];
 		
 		$sql = "INSERT INTO wcf" . WCF_N . "_todo_category
@@ -305,7 +305,7 @@ class ToDoAddForm extends MessageForm {
 			ORDER BY title ASC";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
-		while($row = $statement->fetchArray()) {
+		while ($row = $statement->fetchArray()) {
 			$categories[] = array(
 				'id' => $row["id"],
 				'title' => $row["title"] 
@@ -315,18 +315,18 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	public function canEditStatus() {
-		if(WCF::getSession()->getPermission('user.toDo.status.canEditOwn'))
+		if (WCF::getSession()->getPermission('user.toDo.status.canEditOwn'))
 			return true;
-		if(WCF::getSession()->getPermission('mod.toDo.status.canEdit'))
+		if (WCF::getSession()->getPermission('mod.toDo.status.canEdit'))
 			return true;
 		
 		return false;
 	}
 	
 	public function canEditResponsible() {
-		if(WCF::getSession()->getPermission('user.toDo.responsible.canEditOwn'))
+		if (WCF::getSession()->getPermission('user.toDo.responsible.canEditOwn'))
 			return true;
-		if(WCF::getSession()->getPermission('mod.toDo.responsible.canEdit'))
+		if (WCF::getSession()->getPermission('mod.toDo.responsible.canEdit'))
 			return true;
 		
 		return false;

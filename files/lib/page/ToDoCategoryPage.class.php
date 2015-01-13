@@ -92,7 +92,7 @@ class ToDoCategoryPage extends SortablePage {
 	public function readParameters() {
 		parent::readParameters();
 		
-		if(isset($_REQUEST['id'])) $this->categoryID = intval($_REQUEST['id']);
+		if (isset($_REQUEST['id'])) $this->categoryID = intval($_REQUEST['id']);
 	}
 	
 	/**
@@ -119,7 +119,7 @@ class ToDoCategoryPage extends SortablePage {
 		$statement->execute(array($this->categoryID));
 		$category = $statement->fetchArray();
 		
-		if(!$category)
+		if (!$category)
 			throw new IllegalLinkException();
 		
 		$this->title = $category['title'];

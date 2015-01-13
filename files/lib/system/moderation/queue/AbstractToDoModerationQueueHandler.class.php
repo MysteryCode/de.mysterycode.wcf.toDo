@@ -37,7 +37,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 */
 	public function assignQueues(array $queues) {
 		$todoIDs = array();
-		foreach($queues as $queue) {
+		foreach ($queues as $queue) {
 			$todoIDs[] = $queue->objectID;
 		}
 		
@@ -51,15 +51,15 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		$statement->execute($conditionBuilder->getParameters());
 		
 		$todos = array();
-		while($row = $statement->fetchArray()) {
+		while ($row = $statement->fetchArray()) {
 			$todos[$row['id']] = new ToDo($row['id']);
 		}
 		
 		$orphanedQueueIDs = $assignments = array();
-		foreach($queues as $queue) {
+		foreach ($queues as $queue) {
 			$assignUser = false;
 			
-			if(!isset($todos[$queue->objectID])) {
+			if (!isset($todos[$queue->objectID])) {
 				$orphanedQueueIDs[] = $queue->queueID;
 				continue;
 			}
@@ -95,7 +95,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::isValid()
 	 */
 	public function isValid($objectID) {
-		if($this->getTodo($objectID) === null) {
+		if ($this->getTodo($objectID) === null) {
 			return false;
 		}
 		
@@ -109,9 +109,9 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 * @return	\wcf\data\todo\ToDo
 	 */
 	protected function getTodo($objectID) {
-		if(!array_key_exists($objectID, self::$todos)) {
+		if (!array_key_exists($objectID, self::$todos)) {
 			self::$todos[$objectID] = new ToDo($objectID);
-			if(!self::$todos[$objectID]->id) {
+			if (!self::$todos[$objectID]->id) {
 				self::$todos[$objectID] = null;
 			}
 		}
@@ -124,7 +124,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 */
 	public function populate(array $queues) {
 		$todos = $objectIDs = array();
-		foreach($queues as $object) {
+		foreach ($queues as $object) {
 			$objectIDs[] = $object->objectID;
 		}
 		
@@ -137,8 +137,8 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		
 		$todos = $todoList->getObjects();
 		
-		foreach($queues as $object) {
-			if(isset($todos[$object->objectID])) {
+		foreach ($queues as $object) {
+			if (isset($todos[$object->objectID])) {
 				$object->setAffectedObject($todos[$object->objectID]);
 			}
 			else {
@@ -151,7 +151,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::removeContent()
 	 */
 	public function removeContent(ModerationQueue $queue, $message) {
-		if($this->isValid($queue->objectID) && !$this->getTodo($queue->objectID)->isDeleted) {
+		if ($this->isValid($queue->objectID) && !$this->getTodo($queue->objectID)->isDeleted) {
 			$todoAction = new ToDoAction(array($this->getTodo($queue->objectID)), 'trash', array('reason' => $message));
 			$todoAction->executeAction();
 		}

@@ -33,10 +33,10 @@ class ToDoCategoryDeleteAction extends AbstractAction {
 	}
 	
 	public function execute() {
-		if($this->categoryID == 0)
+		if ($this->categoryID == 0)
 			throw new IllegalLinkException();
 		
-		if($this->categoryID != 0) {
+		if ($this->categoryID != 0) {
 			$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
 				WHERE id = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);

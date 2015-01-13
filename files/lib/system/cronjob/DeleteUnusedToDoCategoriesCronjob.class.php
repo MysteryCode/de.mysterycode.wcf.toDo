@@ -20,7 +20,7 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 	public function execute(Cronjob $cronjob) {
 		parent::execute($cronjob);
 		
-		if(!TODO_DELETE_OBSOLETE_CATEGORIES)
+		if (!TODO_DELETE_OBSOLETE_CATEGORIES)
 			return;
 		
 		// read used categories
@@ -32,7 +32,7 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 		
 		$test = array();
 		
-		while($row = $statement->fetchArray()) {
+		while ($row = $statement->fetchArray()) {
 			$test[] = $row['category'];
 		}
 		
@@ -43,7 +43,7 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 		$statement->execute();
 		
 		$delete = array();
-		while($row = $statement->fetchArray()) {
+		while ($row = $statement->fetchArray()) {
 			// check whether category is used
 			if (!in_array($row['id'], $test)) {
 				$delete[] = $row['id'];

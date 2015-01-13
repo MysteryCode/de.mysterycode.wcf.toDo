@@ -45,7 +45,7 @@ class ToDoEditForm extends ToDoAddForm {
 	public function readParameters() {
 		parent::readParameters();
 		
-		if(isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
+		if (isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
 		$this->todo = new ToDo($this->todoID);
 		if (!$this->todo->id)
 			throw new IllegalLinkException();
@@ -60,7 +60,7 @@ class ToDoEditForm extends ToDoAddForm {
 	public function save() {
 		$todoData = array('data' => array());
 		
-		if($this->todo->canEdit()) {
+		if ($this->todo->canEdit()) {
 			$todoData = array(
 				'data' => array(
 					'title' => $this->title,
@@ -83,14 +83,14 @@ class ToDoEditForm extends ToDoAddForm {
 			);
 		}
 		
-		if($this->canEditStatus()) {
+		if ($this->canEditStatus()) {
 			$todoData['data']['status'] = $this->status;
 		}
 		
 		$this->objectAction = new ToDoAction(array($this->todo), 'update', $todoData);
 		$this->objectAction->executeAction();
 		
-		if($this->canEditResponsible()) {
+		if ($this->canEditResponsible()) {
 			$this->updateResponsibles($this->todo->id, $this->responsibles, $this->todo->getResponsibleIDs());
 		}
 		
@@ -109,7 +109,7 @@ class ToDoEditForm extends ToDoAddForm {
 		
 		$this->responsibles = $this->todo->getFormattedResponsibles();
 		
-		if(!$this->todo->canEdit() && !$this->canEditStatus() && !$this->canEditResponsible())
+		if (!$this->todo->canEdit() && !$this->canEditStatus() && !$this->canEditResponsible())
 			throw new PermissionDeniedException();
 		
 		$this->title = $this->todo->title;
@@ -126,13 +126,13 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->canEditStatus = $this->canEditStatus();
 		$this->canEditResponsible = $this->canEditResponsible();
 		
-		if($this->todo->endTime > 0) {
+		if ($this->todo->endTime > 0) {
 			$this->endTime = DateUtil::getDateTimeByTimestamp($this->todo->endTime);
 			$this->endTime->setTimezone(WCF::getUser()->getTimeZone());
 			$this->endTime = $this->endTime->format('c');
 		}
 		
-		if($this->todo->remembertime > 0) {
+		if ($this->todo->remembertime > 0) {
 			$this->remembertime = DateUtil::getDateTimeByTimestamp($this->todo->remembertime);
 			$this->remembertime->setTimezone(WCF::getUser()->getTimeZone());
 			$this->remembertime = $this->remembertime->format('Y-m-d');
@@ -146,7 +146,7 @@ class ToDoEditForm extends ToDoAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		if($this->todo->categorytitle != '') {
+		if ($this->todo->categorytitle != '') {
 			WCF::getBreadcrumbs()->add(new Breadcrumb($this->todo->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
 				'id' => $this->todo->category
 			))));

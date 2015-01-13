@@ -1,4 +1,5 @@
 <?php
+
 namespace wcf\system\worker;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -26,7 +27,7 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 	 * @see	\wcf\system\worker\AbstractWorker::$limit
 	 */
 	protected $limit = 400;
-	
+
 	/**
 	 * @see	\wcf\system\worker\AbstractRebuildDataWorker::initObjectList
 	 */
@@ -53,12 +54,16 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 		
 		// fetch cumulative likes
 		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("objectTypeID = ?", array(ObjectTypeCache::getInstance()->getObjectTypeIDByName('com.woltlab.wcf.like.likeableObject', 'de.mysterycode.wcf.toDo.toDo')));
-		$conditions->add("objectID IN (?)", array($this->objectList->getObjectIDs()));
+		$conditions->add("objectTypeID = ?", array(
+			ObjectTypeCache::getInstance()->getObjectTypeIDByName('com.woltlab.wcf.like.likeableObject', 'de.mysterycode.wcf.toDo.toDo')
+		));
+		$conditions->add("objectID IN (?)", array(
+			$this->objectList->getObjectIDs()
+		));
 		
 		$sql = "SELECT	objectID, cumulativeLikes
-			FROM	wcf".WCF_N."_like_object
-			".$conditions;
+			FROM	wcf" . WCF_N . "_like_object
+			" . $conditions;
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditions->getParameters());
 		$cumulativeLikes = array();

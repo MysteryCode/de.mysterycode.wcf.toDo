@@ -58,7 +58,7 @@ class ToDoPage extends AbstractPage {
 	public function readParameters() {
 		parent::readParameters();
 		
-		if(isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
+		if (isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
 	}
 	
 	/**
@@ -70,10 +70,10 @@ class ToDoPage extends AbstractPage {
 		
 		$this->todo = new ToDo($this->todoID);
 		
-		if($this->todo === null || !$this->todo->id)
+		if ($this->todo === null || !$this->todo->id)
 			throw new IllegalLinkException();
 		
-		if(!$this->todo->canEnter())
+		if (!$this->todo->canEnter())
 			throw new PermissionDeniedException();
 		
 		$this->objectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDoComment');
@@ -83,7 +83,7 @@ class ToDoPage extends AbstractPage {
 		
 		WCF::getBreadcrumbs()->add( new Breadcrumb( WCF::getLanguage()->get('wcf.header.menu.toDo'), LinkHandler::getInstance()->getLink('ToDoList', array())));
 		
-		if($this->todo->categorytitle != '') {
+		if ($this->todo->categorytitle != '') {
 			WCF::getBreadcrumbs()->add(new Breadcrumb($this->todo->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
 				'id' => $this->todo->category 
 			))));

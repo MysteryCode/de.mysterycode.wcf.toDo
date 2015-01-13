@@ -40,7 +40,7 @@ class ToDoEditor extends DatabaseObjectEditor {
 			WHERE	userID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		
-		foreach($users as $userID => $todos) {
+		foreach ($users as $userID => $todos) {
 			$statement->execute(array($todos, $userID));
 		}
 	}

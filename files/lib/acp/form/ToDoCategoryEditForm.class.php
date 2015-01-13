@@ -60,7 +60,7 @@ class ToDoCategoryEditForm extends ToDoCategoryAddForm {
 	public function readData() {
 		parent::readData();
 		
-		if($this->categoryID == 0)
+		if ($this->categoryID == 0)
 			throw new IllegalLinkException();
 		
 		$sql = "SELECT *
@@ -70,7 +70,7 @@ class ToDoCategoryEditForm extends ToDoCategoryAddForm {
 		$statement->execute(array($this->categoryID));
 		$category = $statement->fetchArray();
 		
-		if(!$category)
+		if (!$category)
 			throw new IllegalLinkException();
 		
 		$this->title = $category['title'];
