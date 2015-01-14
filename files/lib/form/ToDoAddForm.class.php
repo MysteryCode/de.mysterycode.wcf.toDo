@@ -137,10 +137,11 @@ class ToDoAddForm extends MessageForm {
 		}
 		
 		if (empty($this->progress) && TODO_PROGRESS_ENABLE) {
-			throw new UserInputException('progress');
+			$this->progess = 0;
+// 			throw new UserInputException('progress');
 		}
 		
-		if ($this->progress < 0 || $this->progress > 100) {
+		if (($this->progress < 0 || $this->progress > 100) && TODO_PROGRESS_ENABLE) {
 			throw new UserInputException('progress', 'inValid');
 		}
 	}
