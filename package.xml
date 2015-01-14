@@ -51,10 +51,8 @@
 	<instructions type="update" fromversion="1.1.3">
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
-		<instruction type="sql">update.sql</instruction>
 		<instruction type="language">language/*.xml</instruction>
-		<instruction type="templateListener">templateListener.xml</instruction>
-		<instruction type="acpMenu">acpMenu.xml</instruction>
-		<instruction type="script">acp/update_de.mysterycode.wcf.todo_1.1.0.php</instruction>
+		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
+		<instruction type="acpTemplate">acpTemplates.tar</instruction>
 	</instructions>
 </package>
