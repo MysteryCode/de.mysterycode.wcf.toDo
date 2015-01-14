@@ -50,7 +50,7 @@ class ToDoReminderCronjob extends AbstractCronjob {
 				SET remembertime = ?
 				".$conditions;
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array_merge(array(0), $conditions->getParameters()));
+			$statement->execute($conditions->getParameters());
 		}
 	}
 }
