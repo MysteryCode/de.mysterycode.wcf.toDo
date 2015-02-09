@@ -22,7 +22,7 @@ class ToDoCommentResponseUserNotificationEvent extends AbstractUserNotificationE
 	
 	public function getMessage() {
 		$comment = new Comment($this->userNotificationObject->commentID);
-		$todo = new ToDo($this->userNotificationObject->objectID);
+		$todo = new ToDo($comment->objectID);
 		
 		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponse.notification.message', array(
 			'todo' => $todo,
@@ -32,7 +32,7 @@ class ToDoCommentResponseUserNotificationEvent extends AbstractUserNotificationE
 	
 	public function getEmailMessage($notificationType = 'instant') {
 		$comment = new Comment($this->userNotificationObject->commentID);
-		$todo = new ToDo($this->userNotificationObject->objectID);
+		$todo = new ToDo($comment->objectID);
 		
 		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponse.notification.mail', array(
 			'todo' => $todo,
@@ -42,7 +42,7 @@ class ToDoCommentResponseUserNotificationEvent extends AbstractUserNotificationE
 	
 	public function getLink() {
 		$comment = new Comment($this->userNotificationObject->commentID);
-		$todo = new ToDo($this->userNotificationObject->objectID);
+		$todo = new ToDo($comment->objectID);
 		
 		return LinkHandler::getInstance()->getLink('ToDo', array(
 			'application' => 'wcf',
