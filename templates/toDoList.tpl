@@ -160,6 +160,10 @@
 											{else}
 												<span class="label badge gray">{lang}wcf.toDo.category.notAvailable{/lang}</span>
 											{/if}
+											
+											{if TODO_PROGRESS_ENABLE}
+												<span class="label badge {if $task->progress > 33}{if $task->progress > 66}green{else}yellow{/if}{else}red{/if}">{$task->progress}%</span>
+											{/if}
 										</p>
 										
 										{if $task->isDeleted}
