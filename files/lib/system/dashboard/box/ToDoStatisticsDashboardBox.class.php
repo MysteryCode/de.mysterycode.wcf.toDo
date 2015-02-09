@@ -75,9 +75,15 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 			'count' => $stat['COUNT(id)']
 		);
 		
-		WCF::getTPL()->assign(array(
-			'todoStat' => $this->todoStat
-		));
+		if (!WCF::getSession()->getPermission('user.toDo.toDo.canViewList')) {
+			WCF::getTPL()->assign(array(
+				'todoStat' => array()
+			));
+		} else {
+			WCF::getTPL()->assign(array(
+				'todoStat' => $this->todoStat
+			));
+		}
 	}
 	
 	protected function render() {
