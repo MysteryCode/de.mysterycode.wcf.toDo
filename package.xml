@@ -10,7 +10,7 @@
 	</packageinformation>
 	
 	<requiredpackages>
-		<requiredpackage minversion="2.0.6"><![CDATA[com.woltlab.wcf]]></requiredpackage>
+		<requiredpackage minversion="2.0.10"><![CDATA[com.woltlab.wcf]]></requiredpackage>
 	</requiredpackages>
 	
 	<excludedpackages>
