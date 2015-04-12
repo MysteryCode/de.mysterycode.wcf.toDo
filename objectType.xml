@@ -23,11 +23,11 @@
 		</type>
 		<!-- visit tracker -->
 		<type>
-			<name>com.woltlab.wbb.board</name>
+			<name>de.mysterycode.wcf.toDo.category</name>
 			<definitionname>com.woltlab.wcf.visitTracker.objectType</definitionname>
 		</type>
 		<type>
-			<name>com.woltlab.wbb.thread</name>
+			<name>de.mysterycode.wcf.toDo</name>
 			<definitionname>com.woltlab.wcf.visitTracker.objectType</definitionname>
 		</type>
 		<!-- like -->
