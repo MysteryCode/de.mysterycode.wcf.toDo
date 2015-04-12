@@ -4,10 +4,10 @@
 		<categories>
 			<!-- user -->
 			<category name="user.category">
-				<objecttype>de.mysterycode.wcf.todo.category</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</category>
 			<category name="user.todo">
-				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</category>
 		</categories>
 		
