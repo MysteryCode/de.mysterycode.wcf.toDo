@@ -155,6 +155,10 @@
 											{/if}
 										</p>
 										
+										{if TODO_PROGRESS_ENABLE}
+											<span class="label badge {if $task->progress > 33}{if $task->progress > 66}green{else}yellow{/if}{else}red{/if}">{$task->progress}%</span>
+										{/if}
+										
 										{if $task->isDeleted}
 											<small>
 												{lang}wcf.toDo.deleteNote{/lang}
