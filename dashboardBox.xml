@@ -13,5 +13,10 @@
 			<classname><![CDATA[wcf\system\dashboard\box\ToDoNoResponsibleDashboardBox]]></classname>
 			<boxtype>sidebar</boxtype>
 		</dashboardbox>
+		
+		<dashboardbox name="de.mysterycode.wcf.toDo.latest">
+			<classname><![CDATA[wcf\system\dashboard\box\LatestToDosContentDashboardBox]]></classname>
+			<boxtype>content</boxtype>
+		</dashboardbox>
 	</import>
 </data>

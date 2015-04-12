@@ -19,6 +19,10 @@
 			<category name="dashboard.sidebar.wcf.todo.outstanding">
 				<parent>dashboard.sidebar</parent>
 			</category>
+			
+			<category name="dashboard.content.wcf.todo.latest">
+				<parent>dashboard.content</parent>
+			</category>
 		</categories>
 		<options>
 			<option name="toDoList">
@@ -123,6 +127,12 @@ DESC:wcf.global.sortOrder.descending]]></selectoptions>
 			</option>
 			<option name="todo_outstanding_dashboard_box_items">
 				<categoryname>dashboard.sidebar.wcf.todo.outstanding</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>5</defaultvalue>
+			</option>
+			
+			<option name="todo_latest_dashboard_box_items">
+				<categoryname>dashboard.content.wcf.todo.latest</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>5</defaultvalue>
 			</option>
