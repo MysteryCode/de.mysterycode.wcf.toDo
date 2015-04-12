@@ -35,6 +35,10 @@ use wcf\util\UserUtil;
  */
 class ToDoAddForm extends MessageForm {
 	/**
+<<<<<<< HEAD
+	 *
+=======
+>>>>>>> master
 	 * @see wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.header.menu.toDo';
@@ -53,6 +57,10 @@ class ToDoAddForm extends MessageForm {
 	public $disableToDo = false;
 	
 	/**
+<<<<<<< HEAD
+	 *
+=======
+>>>>>>> master
 	 * @see \wcf\form\MessageForm::$enableMultilingualism
 	 */
 	public $enableMultilingualism = true;
@@ -86,6 +94,10 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
+<<<<<<< HEAD
+	 *
+=======
+>>>>>>> master
 	 * @see wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
@@ -113,6 +125,10 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
+<<<<<<< HEAD
+	 *
+=======
+>>>>>>> master
 	 * @see wcf\form\IForm::validate()
 	 */
 	public function validate() {
@@ -133,15 +149,27 @@ class ToDoAddForm extends MessageForm {
 		}
 		
 		if (empty($this->progress) && TODO_PROGRESS_ENABLE) {
+<<<<<<< HEAD
+			$this->progess = 0;
+// 			throw new UserInputException('progress');
+		}
+		
+		if (($this->progress < 0 || $this->progress > 100) && TODO_PROGRESS_ENABLE) {
+=======
 			throw new UserInputException('progress');
 		}
 		
 		if ($this->progress < 0 || $this->progress > 100) {
+>>>>>>> master
 			throw new UserInputException('progress', 'inValid');
 		}
 	}
 	
 	/**
+<<<<<<< HEAD
+	 *
+=======
+>>>>>>> master
 	 * @see wcf\form\IForm::save()
 	 */
 	public function save() {
@@ -186,7 +214,11 @@ class ToDoAddForm extends MessageForm {
 		$this->saved();
 		
 		if ($resultValues['returnValues']->isDisabled && !WCF::getSession()->getPermission('mod.toDo.canEnable')) {
+<<<<<<< HEAD
+			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('ToDoCategory', array('application' => 'wcf', 'id' => $this->category)), WCF::getLanguage()->get('wcf.todo.moderation.redirect'), 30);
+=======
 			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('ToDoCategory', array('application' => 'wcf', 'id' => $this->category)), WCF::getLanguage()->get('wcf.toDo.moderation.redirect'), 30);
+>>>>>>> master
 		}
 		else {
 			HeaderUtil::redirect($resultValues['returnValues']->getLink());
@@ -195,6 +227,10 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
+<<<<<<< HEAD
+	 *
+=======
+>>>>>>> master
 	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/eventListener.xsd">
 	<import>
+<<<<<<< HEAD
+=======
 		<!-- show hint -->
+>>>>>>> master
 		<eventlistener>
 			<eventclassname>wcf\page\AbstractPage</eventclassname>
 			<eventname>assignVariables</eventname>
@@ -9,6 +12,8 @@
 			<environment>user</environment>
 			<inherit>1</inherit>
 		</eventlistener>
+<<<<<<< HEAD
+=======
 		
 		<!-- renaming users -->
 		<eventlistener>
@@ -23,5 +28,6 @@
 			<listenerclassname>wcf\system\event\listener\ToDoUserActionRenameListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
+>>>>>>> master
 	</import>
 </data>

@@ -7,6 +7,10 @@
 			<classname>wcf\system\user\notification\event\ToDoCommentUserNotificationEvent</classname>
 			<preset>1</preset>
 			<options>toDoList</options>
+<<<<<<< HEAD
+			<permissions>user.toDo.toDo.canViewList</permissions>
+=======
+>>>>>>> master
 		</event>
 		<event>
 			<name>commentResponse</name>
@@ -14,6 +18,10 @@
 			<classname>wcf\system\user\notification\event\ToDoCommentResponseUserNotificationEvent</classname>
 			<preset>1</preset>
 			<options>toDoList</options>
+<<<<<<< HEAD
+			<permissions>user.toDo.toDo.canViewList</permissions>
+=======
+>>>>>>> master
 		</event>
 		<event>
 			<name>commentResponseOwner</name>
@@ -21,6 +29,10 @@
 			<classname>wcf\system\user\notification\event\ToDoCommentResponseOwnerUserNotificationEvent</classname>
 			<preset>1</preset>
 			<options>toDoList</options>
+<<<<<<< HEAD
+			<permissions>user.toDo.toDo.canViewList</permissions>
+=======
+>>>>>>> master
 		</event>
 		
 		<event>
@@ -28,6 +40,10 @@
 			<objecttype>de.mysterycode.wcf.toDo.toDo.notification</objecttype>
 			<classname>wcf\system\user\notification\event\ToDoCreateUserNotificationEvent</classname>
 			<options>toDoList</options>
+<<<<<<< HEAD
+			<permissions>user.toDo.toDo.canViewList</permissions>
+=======
+>>>>>>> master
 		</event>
 		<event>
 			<name>edit</name>
@@ -35,6 +51,10 @@
 			<classname>wcf\system\user\notification\event\ToDoEditUserNotificationEvent</classname>
 			<preset>1</preset>
 			<options>toDoList</options>
+<<<<<<< HEAD
+			<permissions>user.toDo.toDo.canViewList</permissions>
+=======
+>>>>>>> master
 		</event>
 		<event>
 			<name>editStatus</name>
@@ -42,6 +62,10 @@
 			<classname>wcf\system\user\notification\event\ToDoEditStatusUserNotificationEvent</classname>
 			<preset>1</preset>
 			<options>toDoList</options>
+<<<<<<< HEAD
+			<permissions>user.toDo.toDo.canViewList</permissions>
+=======
+>>>>>>> master
 		</event>
 		<event>
 			<name>assign</name>
@@ -49,6 +73,10 @@
 			<classname>wcf\system\user\notification\event\ToDoAssignUserNotificationEvent</classname>
 			<preset>1</preset>
 			<options>toDoList</options>
+<<<<<<< HEAD
+			<permissions>user.toDo.toDo.canViewList</permissions>
+=======
+>>>>>>> master
 		</event>
 		<event>
 			<name>remember</name>
@@ -56,6 +84,10 @@
 			<classname>wcf\system\user\notification\event\ToDoRememberUserNotificationEvent</classname>
 			<preset>1</preset>
 			<options>toDoList</options>
+<<<<<<< HEAD
+			<permissions>user.toDo.toDo.canViewList</permissions>
+=======
+>>>>>>> master
 		</event>
 	</import>
 </data>

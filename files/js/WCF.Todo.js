@@ -664,7 +664,9 @@ WCF.Todo.UpdateHandler.Todo = WCF.Todo.UpdateHandler.extend({
 	 */
 	_enable: function(todoID, ignorePosts) {
 		this._super(todoID);
-
+		
+		$('.todoContainer').removeClass('todoDisabled');
+		
 		$('.sidebar').removeClass('disabled');
 	},
 
@@ -705,7 +707,9 @@ WCF.Todo.UpdateHandler.Todo = WCF.Todo.UpdateHandler.extend({
 	 */
 	_restore: function(todoID) {
 		this._super(todoID);
-
+		
+		$('.todoContainer').removeClass('todoDeleted');
+		
 		$('.sidebar').removeClass('deleted');
 		$('.sidebar > div > .todoDeleteNote').remove();
 	}

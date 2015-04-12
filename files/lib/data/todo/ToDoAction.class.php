@@ -369,7 +369,11 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 			$todo->update(array(
 				'isDeleted' => 0,
 				'deleteTime' => 0,
+<<<<<<< HEAD
+				'deletedByID' => 0,
+=======
 				'deletedByID' => null,
+>>>>>>> master
 				'deletedBy' => '',
 				'deleteReason' => 0 
 			));
@@ -386,7 +390,13 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	/**
 	 * Does nothing.
 	 */
+<<<<<<< HEAD
+	public function validateUnmarkAll() {
+		
+	}
+=======
 	public function validateUnmarkAll() { }
+>>>>>>> master
 	
 	/**
 	 * Unmarks all todos.

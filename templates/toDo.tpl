@@ -106,7 +106,7 @@
 </div>
 
 {assign var='objectID' value=$todo->id}
-<div class="container containerPadding marginTop todoContainer">
+<div class="container containerPadding marginTop todoContainer{if $todo->isDeleted} todoDeleted{/if}{if $todo->isDisabled} todoDisabled{/if}">
 	{event name='beforeInfo'}
 	<fieldset>
 		<legend>{$todo->title}</legend>
@@ -123,9 +123,9 @@
 					{/if}
 				</dd>
 			{/if}
-			<dt>{lang}wcf.toDo.task.status{/lang}</dt>
-			<dd>
-				{if $__wcf->getSession()->getPermission('user.toDo.status.canView')}
+			{if $__wcf->getSession()->getPermission('user.toDo.status.canView')}
+				<dt>{lang}wcf.toDo.task.status{/lang}</dt>
+				<dd>
 					{if $todo->status == 1}
 						<span class="label badge red unsolvedBadge">{lang}wcf.toDo.task.unsolved{/lang}</span>
 					{elseif $todo->status == 2}
@@ -139,8 +139,8 @@
 					{elseif $todo->status == 6}
 						<span class="label badge gray pausedBadge">{lang}wcf.toDo.task.paused{/lang}</span>
 					{/if}
-				{/if}
-			</dd>
+				</dd>
+			{/if}
 			{if TODO_PROGRESS_ENABLE}
 				<dt>{lang}wcf.toDo.task.progress{/lang}</dt>
 				<dd>

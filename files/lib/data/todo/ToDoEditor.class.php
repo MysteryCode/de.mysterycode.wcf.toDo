@@ -15,6 +15,10 @@ use wcf\system\WCF;
  */
 class ToDoEditor extends DatabaseObjectEditor {
 	/**
+<<<<<<< HEAD
+	 *
+=======
+>>>>>>> master
 	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\todo\ToDo';
@@ -23,7 +27,11 @@ class ToDoEditor extends DatabaseObjectEditor {
 	 * Updates the todo counter of the given users.
 	 *
 	 * @param array $users
+<<<<<<< HEAD
+	 *        	=> todo counter increase/decrease
+=======
 	 *        => todo counter increase/decrease
+>>>>>>> master
 	 */
 	public static function updateUserToDoCounter(array $users) {
 		$sql = "UPDATE	wcf" . WCF_N . "_user

@@ -155,12 +155,17 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::removeContent()
 	 */
 	public function removeContent(ModerationQueue $queue, $message) {
+<<<<<<< HEAD
+		if ($this->isValid($queue->objectID) && !$this->getTodo($queue->objectID)->isDeleted) {
+			$todoAction = new ToDoAction(array($this->getTodo($queue->objectID)), 'trash', array('reason' => $message));
+=======
 		if ($this->isValid($queue->objectID) && ! $this->getTodo($queue->objectID)->isDeleted) {
 			$todoAction = new ToDoAction(array(
 				$this->getTodo($queue->objectID)
 			), 'trash', array(
 				'reason' => $message
 			));
+>>>>>>> master
 			$todoAction->executeAction();
 		}
 	}

@@ -23,7 +23,11 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 	
 	public function getMessage() {
 		$comment = new Comment($this->userNotificationObject->commentID);
+<<<<<<< HEAD
+		$todo = new ToDo($comment->objectID);
+=======
 		$todo = new ToDo($this->userNotificationObject->objectID);
+>>>>>>> master
 		$commentAuthor = new User($comment->userID);
 		
 		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponseOwner.notification.message', array(
@@ -35,7 +39,11 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 	
 	public function getEmailMessage($notificationType = 'instant') {
 		$comment = new Comment($this->userNotificationObject->commentID);
+<<<<<<< HEAD
+		$todo = new ToDo($comment->objectID);
+=======
 		$todo = new ToDo($this->userNotificationObject->objectID);
+>>>>>>> master
 		$commentAuthor = new User($comment->userID);
 		
 		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponseOwner.notification.mail', array(
@@ -47,7 +55,11 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 	
 	public function getLink() {
 		$comment = new Comment($this->userNotificationObject->commentID);
+<<<<<<< HEAD
+		$todo = new ToDo($comment->objectID);
+=======
 		$todo = new ToDo($this->userNotificationObject->objectID);
+>>>>>>> master
 		
 		return LinkHandler::getInstance()->getLink('ToDo', array(
 			'application' => 'wcf',
