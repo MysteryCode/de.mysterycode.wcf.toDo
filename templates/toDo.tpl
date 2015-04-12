@@ -106,7 +106,7 @@
 </div>
 
 {assign var='objectID' value=$todo->id}
-<div class="container containerPadding marginTop todoContainer">
+<div class="container containerPadding marginTop todoContainer{if $todo->isDeleted} todoDeleted{/if}{if $todo->isDisabled} todoDisabled{/if}">
 	{event name='beforeInfo'}
 	<fieldset>
 		<legend>{$todo->title}</legend>
