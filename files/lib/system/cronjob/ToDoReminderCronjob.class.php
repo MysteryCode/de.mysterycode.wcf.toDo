@@ -33,6 +33,7 @@ class ToDoReminderCronjob extends AbstractCronjob {
 		$todoList = new ToDoList();
 		$todoList->getConditionBuilder()->add('todo_table.remembertime > ?', array(0));
 		$todoList->getConditionBuilder()->add('todo_table.remembertime <= ?', array($check));
+		$todoList->getConditionBuilder()->add('todo_table.status IN (?)', array(array(1, 2, 5)));
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
