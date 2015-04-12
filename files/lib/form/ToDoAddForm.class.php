@@ -157,7 +157,7 @@ class ToDoAddForm extends MessageForm {
 				'endTime' => $this->endTime,
 				'private' => $this->private,
 				'important' => $this->important,
-				'category' => $this->category,
+				'category' => $this->category ?: null,
 				'progress' => $this->progress,
 				'remembertime' => $this->remembertime,
 				'enableSmilies' => $this->enableSmilies,

@@ -210,7 +210,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 			$this->readObjects();
 		}
 		
-		$todoIDs = $categoryStats = array();
+		$todoIDs = array();
 		foreach ($this->objects as $todo) {
 			$todo->update(array(
 				'isDisabled' => 1 
