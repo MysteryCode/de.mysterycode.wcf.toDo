@@ -12,6 +12,24 @@
 			<name>de.mysterycode.wcf.toDo.category</name>
 			<definitionname>com.woltlab.wcf.acl</definitionname>
 		</type>
+		<!-- collapsible content -->
+		<type>
+			<name>de.mysterycode.wcf.toDo</name>
+			<definitionname>com.woltlab.wcf.collapsibleContent</definitionname>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.toDo</name>
+			<definitionname>com.woltlab.wcf.collapsibleContent</definitionname>
+		</type>
+		<!-- visit tracker -->
+		<type>
+			<name>com.woltlab.wbb.board</name>
+			<definitionname>com.woltlab.wcf.visitTracker.objectType</definitionname>
+		</type>
+		<type>
+			<name>com.woltlab.wbb.thread</name>
+			<definitionname>com.woltlab.wcf.visitTracker.objectType</definitionname>
+		</type>
 		<!-- like -->
 		<type>
 			<name>de.mysterycode.wcf.toDo.toDo</name>
@@ -73,7 +91,7 @@
 			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
 			<classname>wcf\system\user\activity\event\ToDoUserActivityEvent</classname>
 		</type>
-		<!-- Activity Points -->
+		<!-- activity points -->
 		<type>
 			<name>de.mysterycode.wcf.toDo.toDo.activityPointEvent</name>
 			<definitionname>com.woltlab.wcf.user.activityPointEvent</definitionname>
@@ -177,6 +195,12 @@
 			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
 			<classname><![CDATA[wcf\system\worker\ToDoRebuildDataWorker]]></classname>
 			<nicevalue>240</nicevalue>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.toDo.category</name>
+			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
+			<classname><![CDATA[wcf\system\worker\ToDoCategoryRebuildDataWorker]]></classname>
+			<nicevalue>250</nicevalue>
 		</type>
 	</import>
 </data>
