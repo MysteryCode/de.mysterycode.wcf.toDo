@@ -66,19 +66,11 @@ class ToDoEditForm extends ToDoAddForm {
 					'title' => $this->title,
 					'description' => $this->description,
 					'note' => $this->note,
-<<<<<<< HEAD
-					'submitter' => WCF::getUser()->userID,
-=======
->>>>>>> master
 					'updatetimestamp' => TIME_NOW,
 					'endTime' => $this->endTime,
 					'private' => $this->private,
 					'important' => $this->important,
 					'category' => $this->category,
-<<<<<<< HEAD
-					'updatetimestamp' => TIME_NOW,
-=======
->>>>>>> master
 					'progress' => $this->progress,
 					'enableSmilies' => $this->enableSmilies,
 					'enableHtml' => $this->enableHtml,

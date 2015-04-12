@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
 	<import>
-<<<<<<< HEAD
-=======
 		<!-- category -->
 		<type>
 			<name>de.mysterycode.wcf.toDo</name>
@@ -14,15 +12,12 @@
 			<name>de.mysterycode.wcf.toDo.category</name>
 			<definitionname>com.woltlab.wcf.acl</definitionname>
 		</type>
->>>>>>> master
 		<!-- like -->
 		<type>
 			<name>de.mysterycode.wcf.toDo.toDo</name>
 			<definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
 			<classname>wcf\data\todo\LikeableToDoProvider</classname>
 		</type>
-<<<<<<< HEAD
-=======
 		<!-- tagging -->
 		<type>
 			<name>de.mysterycode.wcf.toDo.toDo</name>
@@ -40,7 +35,6 @@
 			<definitionname>com.woltlab.wcf.label.objectType</definitionname>
 			<classname>wcf\system\label\object\type\TodoCategoryLabelObjectTypeHandler</classname>
 		</type>
->>>>>>> master
 		<!-- comment -->
 		<type>
 			<name>de.mysterycode.wcf.toDo.toDoComment</name>

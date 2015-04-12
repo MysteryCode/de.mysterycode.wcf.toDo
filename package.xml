@@ -5,18 +5,6 @@
 		<packagename language="de"><![CDATA[ToDo-Liste]]></packagename>
 		<packagedescription><![CDATA[Gives the possibility to manage ToDos in several custom categories on your website]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
-<<<<<<< HEAD
-		<version>1.1.5</version>
-		<date>2015-02-09</date>
-	</packageinformation>
-	
-	<requiredpackages>
-		<requiredpackage minversion="2.0.10"><![CDATA[com.woltlab.wcf]]></requiredpackage>
-	</requiredpackages>
-	
-	<excludedpackages>
-		<excludedpackage version="1.0.0"><![CDATA[de.mysterycode.wcf.toDo.categoryManager]]></excludedpackage>
-=======
 		<version>1.2.0 Alpha 1</version>
 		<date>2014-11-08</date>
 	</packageinformation>
@@ -27,7 +15,6 @@
 	
 	<excludedpackages>
 		<excludedpackage version="1.0.0 Alpha 1"><![CDATA[de.mysterycode.wcf.toDo.categoryManager]]></excludedpackage>
->>>>>>> master
 	</excludedpackages>
 	
 	<optionalpackages>
@@ -43,10 +30,7 @@
 	<instructions type="install">
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
-		<instruction type="acpTemplate">acpTemplates.tar</instruction>
-		
 		<instruction type="sql">install.sql</instruction>
-		
     		<instruction type="pageMenu">pageMenu.xml</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
 		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
@@ -59,16 +43,8 @@
 		<instruction type="cronjob">cronjob.xml</instruction>
 		<instruction type="aclOption">aclOption.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
-		<instruction type="clipboardAction">clipboardAction.xml</instruction>
-		
 		<instruction type="script">acp/install_de.mysterycode.wcf.todo_1.1.0.php</instruction>
+		<instruction type="acpTemplate">acpTemplates.tar</instruction>
+		<instruction type="clipboardAction">clipboardAction.xml</instruction>
 	</instructions>
-<<<<<<< HEAD
-	
-	<instructions type="update" fromversion="1.1.4">
-		<instruction type="file">files.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-	</instructions>
-=======
->>>>>>> master
 </package>

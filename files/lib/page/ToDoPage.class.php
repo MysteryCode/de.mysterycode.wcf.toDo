@@ -58,11 +58,7 @@ class ToDoPage extends AbstractPage {
 	public function readParameters() {
 		parent::readParameters();
 		
-<<<<<<< HEAD
-		if (isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
-=======
 		if(isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
->>>>>>> master
 	}
 	
 	/**
@@ -74,17 +70,10 @@ class ToDoPage extends AbstractPage {
 		
 		$this->todo = new ToDo($this->todoID);
 		
-<<<<<<< HEAD
-		if ($this->todo === null || !$this->todo->id)
-			throw new IllegalLinkException();
-		
-		if (!$this->todo->canEnter())
-=======
 		if($this->todo === null || !$this->todo->id)
 			throw new IllegalLinkException();
 		
 		if(!$this->todo->canEnter())
->>>>>>> master
 			throw new PermissionDeniedException();
 		
 		$this->objectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDoComment');

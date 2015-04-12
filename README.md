@@ -4,11 +4,7 @@ Identifier: de.mysterycode.wcf.toDo
 
 Status
 ----------------
-<<<<<<< HEAD
-[![Build Status](https://travis-ci.org/MysteryCode/de.mysterycode.wcf.toDo.svg?branch=1.1.x)](https://travis-ci.org/MysteryCode/de.mysterycode.wcf.toDo)
-=======
 [![Build Status](https://travis-ci.org/MysteryCode/de.mysterycode.wcf.toDo.svg?branch=master)](https://travis-ci.org/MysteryCode/de.mysterycode.wcf.toDo)
->>>>>>> master
 
 License
 ----------------
