@@ -17,14 +17,13 @@ use wcf\util\StringUtil;
  * @category	WCF
  */
 class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
-
 	public function execute(Cronjob $cronjob) {
 		parent::execute($cronjob);
 
 		if (!TODO_DELETE_OBSOLETE_CATEGORIES)
 			return;
 
-			// read used categories
+		// read used categories
 		$sql = "SELECT category
 			FROM wcf" . WCF_N . "_todo
 			GROUP BY category";
@@ -51,7 +50,7 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 			}
 		}
 
-		if (!empty($delete)) {
+		if(!empty($delete)) {
 			$conditions = new PreparedStatementConditionBuilder();
 			$conditions->add("id IN (?)", array($delete));
 			$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
