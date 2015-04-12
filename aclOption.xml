@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com/XSD/maelstrom/aclOption.xsd">
+	<import>
+		<categories>
+			<!-- user -->
+			<category name="user.category">
+				<objecttype>de.mysterycode.wcf.todo.category</objecttype>
+			</category>
+			<category name="user.todo">
+				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+			</category>
+		</categories>
+		
+		<options>
+			<!-- user.category -->
+			<option name="user.canViewCategory">
+				<categoryname>user.category</categoryname>
+				<objecttype>de.mysterycode.inventar.category</objecttype>
+			</option>
+			<option name="user.canEnterCategory">
+				<categoryname>user.category</categoryname>
+				<objecttype>de.mysterycode.inventar.category</objecttype>
+			</option>
+			<!-- user.todo -->
+			<option name="user.canViewTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+			</option>
+			<option name="user.canEnterTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+			</option>
+			
+			<option name="user.canEditOwnTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+			</option>
+			<option name="user.canDeleteOwnTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+			</option>
+			
+			<option name="user.canEditStatus">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+			</option>
+			<option name="user.canEditResponsibles">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+			</option>
+			<option name="user.canEditReminder">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+			</option>
+			<option name="user.canEditDate">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+			</option>
+		</options>
+	</import>
+</data>
