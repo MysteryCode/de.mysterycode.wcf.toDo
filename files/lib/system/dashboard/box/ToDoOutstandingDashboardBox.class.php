@@ -25,11 +25,15 @@ class ToDoOutstandingDashboardBox extends AbstractSidebarDashboardBox {
 		$todoList->getConditionBuilder()->add('(status = ? OR status = ?)', array(1, 2));
 		$todoList->readObjects();
 		
-		//WCF::getUser()->userID
-		
-		WCF::getTPL()->assign(array(
-			'todoList' => $todoList->getObjects()
-		));
+		if (!WCF::getSession()->getPermission('user.toDo.toDo.canViewList')) {
+			WCF::getTPL()->assign(array(
+				'todoList' => array()
+			));
+		} else {
+			WCF::getTPL()->assign(array(
+				'todoList' => $todoList->getObjects()
+			));
+		}
 	}
 	
 	protected function render() {

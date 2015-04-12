@@ -27,9 +27,15 @@ class ToDoNoResponsibleDashboardBox extends AbstractSidebarDashboardBox {
 		$todoList->getConditionBuilder()->add('status != ?', array(3));
 		$todoList->readObjects();
 		
-		WCF::getTPL()->assign(array(
-			'todoList' => $todoList->getObjects()
-		));
+		if (!WCF::getSession()->getPermission('user.toDo.toDo.canViewList')) {
+			WCF::getTPL()->assign(array(
+				'todoList' => array()
+			));
+		} else {
+			WCF::getTPL()->assign(array(
+				'todoList' => $todoList->getObjects()
+			));
+		}
 	}
 	
 	protected function render() {

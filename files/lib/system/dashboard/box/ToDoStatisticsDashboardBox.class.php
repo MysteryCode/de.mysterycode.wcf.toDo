@@ -21,63 +21,69 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 	public function init(DashboardBox $box, IPage $page) {
 		parent::init($box, $page);
 		
-		$sql = "SELECT COUNT(id)
-			FROM wcf" . WCF_N . "_todo";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute();
-		$stat = $statement->fetchArray();
-		$this->todoStat[0] = array(
-			'type' => 'all',
-			'count' => $stat['COUNT(id)']
-		);
-		
-		$sql = "SELECT COUNT(id)
-			FROM wcf" . WCF_N . "_todo
-			WHERE wcf" . WCF_N . "_todo.status = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(1));
-		$stat = $statement->fetchArray();
-		$this->todoStat[1] = array(
-			'type' => 'unsolved',
-			'count' => $stat['COUNT(id)']
-		);
-		
-		$sql = "SELECT COUNT(id)
-			FROM wcf" . WCF_N . "_todo
-			WHERE wcf" . WCF_N . "_todo.status = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(2));
-		$stat = $statement->fetchArray();
-		$this->todoStat[2] = array(
-			'type' => 'work',
-			'count' => $stat['COUNT(id)']
-		);
-		
-		$sql = "SELECT COUNT(id)
-			FROM wcf" . WCF_N . "_todo
-			WHERE wcf" . WCF_N . "_todo.status = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(3));
-		$stat = $statement->fetchArray();
-		$this->todoStat[3] = array(
-			'type' => 'solved',
-			'count' => $stat['COUNT(id)']
-		);
-		
-		$sql = "SELECT COUNT(id)
-			FROM wcf" . WCF_N . "_todo
-			WHERE wcf" . WCF_N . "_todo.status = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(4));
-		$stat = $statement->fetchArray();
-		$this->todoStat[4] = array(
-			'type' => 'canceled',
-			'count' => $stat['COUNT(id)']
-		);
-		
-		WCF::getTPL()->assign(array(
-			'todoStat' => $this->todoStat
-		));
+		if (WCF::getSession()->getPermission('user.toDo.toDo.canViewList')) {
+			$sql = "SELECT COUNT(id)
+				FROM wcf" . WCF_N . "_todo";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute();
+			$stat = $statement->fetchArray();
+			$this->todoStat[0] = array(
+				'type' => 'all',
+				'count' => $stat['COUNT(id)']
+			);
+			
+			$sql = "SELECT COUNT(id)
+				FROM wcf" . WCF_N . "_todo
+				WHERE wcf" . WCF_N . "_todo.status = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(1));
+			$stat = $statement->fetchArray();
+			$this->todoStat[1] = array(
+				'type' => 'unsolved',
+				'count' => $stat['COUNT(id)']
+			);
+			
+			$sql = "SELECT COUNT(id)
+				FROM wcf" . WCF_N . "_todo
+				WHERE wcf" . WCF_N . "_todo.status = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(2));
+			$stat = $statement->fetchArray();
+			$this->todoStat[2] = array(
+				'type' => 'work',
+				'count' => $stat['COUNT(id)']
+			);
+			
+			$sql = "SELECT COUNT(id)
+				FROM wcf" . WCF_N . "_todo
+				WHERE wcf" . WCF_N . "_todo.status = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(3));
+			$stat = $statement->fetchArray();
+			$this->todoStat[3] = array(
+				'type' => 'solved',
+				'count' => $stat['COUNT(id)']
+			);
+			
+			$sql = "SELECT COUNT(id)
+				FROM wcf" . WCF_N . "_todo
+				WHERE wcf" . WCF_N . "_todo.status = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(4));
+			$stat = $statement->fetchArray();
+			$this->todoStat[4] = array(
+				'type' => 'canceled',
+				'count' => $stat['COUNT(id)']
+			);
+			
+			WCF::getTPL()->assign(array(
+				'todoStat' => $this->todoStat
+			));
+		} else {
+			WCF::getTPL()->assign(array(
+				'todoStat' => array()
+			));
+		}
 	}
 	
 	protected function render() {
