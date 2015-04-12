@@ -239,15 +239,16 @@ class ToDoAddForm extends MessageForm {
 		$userIDs = array();
 		$checkArray = array();
 		foreach ($responsibleList as $user) {
-			if ($user && !in_array($user->userID, $existingResponsibles)) {
+			if ($user && $user !== null && !in_array($user->userID, $existingResponsibles)) {
 				$userIDs[] = $user->userID;
 				$sql = "INSERT INTO wcf" . WCF_N . "_todo_to_user
 					(toDoID, userID, username)
 					VAlUES(?, ?, ?);";
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$statement->execute(array($todoID, $user->userID, $user->username));
+				
+				$checkArray[] = $user->userID;
 			}
-			$checkArray[] = $user->userID;
 		}
 		
 		if ($todoID != 0) {
