@@ -51,13 +51,13 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 			}
 		}
 
-		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("id IN (?)", array(
-			$delete
-		));
-		$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
-				" . $conditions;
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditions->getParameters());
+		if (!empty($delete)) {
+			$conditions = new PreparedStatementConditionBuilder();
+			$conditions->add("id IN (?)", array($delete));
+			$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
+				".$conditions;
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute($conditions->getParameters());
+		}
 	}
 }
