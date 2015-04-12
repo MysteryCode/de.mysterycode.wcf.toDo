@@ -35,7 +35,7 @@ class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 		$todo = new ToDo($this->userNotificationObject->objectID);
 		
 		return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.mail', array(
-			'todo' => todo,
+			'todo' => $todo,
 			'author' => $this->author 
 		));
 	}
