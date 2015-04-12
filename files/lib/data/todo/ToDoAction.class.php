@@ -369,7 +369,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 			$todo->update(array(
 				'isDeleted' => 0,
 				'deleteTime' => 0,
-				'deletedByID' => NULL,
+				'deletedByID' => null,
 				'deletedBy' => '',
 				'deleteReason' => 0 
 			));
