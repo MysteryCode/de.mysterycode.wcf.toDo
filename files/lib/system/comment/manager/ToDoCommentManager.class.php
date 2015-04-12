@@ -22,7 +22,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 	protected $currentToDo = null;
 	
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> master
 	 * @see \wcf\system\comment\manager\ICommentManager::canAdd()
 	 */
 	public function canAdd($objectID) {
@@ -38,7 +41,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> master
 	 * @see \wcf\system\comment\manager\ICommentManager::canEditComment()
 	 */
 	public function canEditComment(Comment $comment) {
@@ -48,7 +54,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> master
 	 * @see \wcf\system\comment\manager\ICommentManager::canEditResponse()
 	 */
 	public function canEditResponse(CommentResponse $response) {
@@ -58,7 +67,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> master
 	 * @see \wcf\system\comment\manager\ICommentManager::canDeleteComment()
 	 */
 	public function canDeleteComment(Comment $comment) {
@@ -68,7 +80,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> master
 	 * @see \wcf\system\comment\manager\ICommentManager::canDeleteResponse()
 	 */
 	public function canDeleteResponse(CommentResponse $response) {
@@ -78,7 +93,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> master
 	 * @see \wcf\system\comment\manager\ICommentManager::canModerate()
 	 */
 	public function canModerate($objectTypeID, $objectID) {
@@ -103,7 +121,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> master
 	 * @see \wcf\system\comment\manager\ICommentManager::isAccessible()
 	 */
 	public function isAccessible($objectID, $validateWritePermission = false) {
@@ -111,12 +132,21 @@ class ToDoCommentManager extends AbstractCommentManager {
 		
 		if (!$this->currentToDo)
 			return false;
+<<<<<<< HEAD
 		
 		// check object id
 		if (!$this->currentToDo->id)
 			return false;
 			
 		// check view permission
+=======
+			
+			// check object id
+		if (!$this->currentToDo->id)
+			return false;
+			
+			// check view permission
+>>>>>>> master
 		if (!$this->currentToDo->canEnter())
 			return false;
 		
@@ -124,7 +154,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> master
 	 * @see \wcf\system\comment\manager\ICommentManager::canEdit()
 	 */
 	protected function canEdit($isOwner) {
@@ -173,7 +206,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> master
 	 * @see \wcf\system\comment\manager\ICommentManager::getLink()
 	 */
 	public function getLink($objectTypeID, $objectID) {
@@ -182,7 +218,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> master
 	 * @see \wcf\system\comment\manager\ICommentManager::getTitle()
 	 */
 	public function getTitle($objectTypeID, $objectID, $isResponse = false) {
@@ -192,7 +231,13 @@ class ToDoCommentManager extends AbstractCommentManager {
 		
 		return WCF::getLanguage()->getDynamicVariable('wcf.toDo.comment');
 	}
+<<<<<<< HEAD
 	public function updateCounter($objectID, $value) {
 		
+=======
+	
+	public function updateCounter($objectID, $value) {
+
+>>>>>>> master
 	}
 }

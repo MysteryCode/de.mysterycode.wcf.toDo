@@ -75,6 +75,7 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 			'count' => $stat['COUNT(id)']
 		);
 		
+<<<<<<< HEAD
 		if (!WCF::getSession()->getPermission('user.toDo.toDo.canViewList')) {
 			WCF::getTPL()->assign(array(
 				'todoStat' => array()
@@ -84,6 +85,11 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 				'todoStat' => $this->todoStat
 			));
 		}
+=======
+		WCF::getTPL()->assign(array(
+			'todoStat' => $this->todoStat
+		));
+>>>>>>> master
 	}
 	
 	protected function render() {

@@ -1,10 +1,10 @@
 <?php
 
 namespace wcf\system\moderation\queue\report;
-use wcf\data\todo\ToDo;
-use wcf\system\moderation\queue\AbstractToDoModerationQueueHandler;
 use wcf\data\moderation\queue\ViewableModerationQueue;
+use wcf\data\todo\ToDo;
 use wcf\system\moderation\queue\report\IModerationQueueReportHandler;
+use wcf\system\moderation\queue\AbstractToDoModerationQueueHandler;
 use wcf\system\WCF;
 
 /**

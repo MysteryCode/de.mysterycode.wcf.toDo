@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
 	<import>
+<<<<<<< HEAD
+=======
+		<!-- category -->
+		<type>
+			<name>de.mysterycode.wcf.toDo</name>
+			<definitionname>com.woltlab.wcf.category</definitionname>
+			<classname>wcf\system\todo\category\TodoCategoryType</classname>
+		</type>
+		<!-- acl -->
+		<type>
+			<name>de.mysterycode.wcf.toDo.category</name>
+			<definitionname>com.woltlab.wcf.acl</definitionname>
+		</type>
+>>>>>>> master
 		<!-- like -->
 		<type>
 			<name>de.mysterycode.wcf.toDo.toDo</name>
 			<definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
 			<classname>wcf\data\todo\LikeableToDoProvider</classname>
 		</type>
+<<<<<<< HEAD
+=======
+		<!-- tagging -->
+		<type>
+			<name>de.mysterycode.wcf.toDo.toDo</name>
+			<definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
+			<classname>wcf\system\tagging\TaggableTodo</classname>
+		</type>
+		<!-- labels -->
+		<type>
+			<name>de.mysterycode.wcf.toDo.toDo</name>
+			<definitionname>com.woltlab.wcf.label.object</definitionname>
+			<classname>wcf\system\label\object\TodoLabelObjectHandler</classname>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.toDo.category</name>
+			<definitionname>com.woltlab.wcf.label.objectType</definitionname>
+			<classname>wcf\system\label\object\type\TodoCategoryLabelObjectTypeHandler</classname>
+		</type>
+>>>>>>> master
 		<!-- comment -->
 		<type>
 			<name>de.mysterycode.wcf.toDo.toDoComment</name>

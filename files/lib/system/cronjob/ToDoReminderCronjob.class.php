@@ -26,25 +26,45 @@ use wcf\util\StringUtil;
  * @category	WCF
  */
 class ToDoReminderCronjob extends AbstractCronjob {
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 	public function execute(Cronjob $cronjob) {
 		$check = TIME_NOW;
 		$todoIDs = array();
 		
 		$todoList = new ToDoList();
+<<<<<<< HEAD
 		$todoList->getConditionBuilder()->add('todo_table.remembertime > ?', array(0));
 		$todoList->getConditionBuilder()->add('todo_table.remembertime <= ?', array($check));
 		$todoList->getConditionBuilder()->add('todo_table.status IN (?)', array(array(1, 2, 5)));
+=======
+		$todoList->getConditionBuilder()->add('todo_table.remembertime > ?', array(
+			0
+		));
+		$todoList->getConditionBuilder()->add('todo_table.remembertime <= ?', array(
+			$check
+		));
+>>>>>>> master
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
 		foreach ($todos as $todo) {
+<<<<<<< HEAD
 			$users = array_unique(array_merge(array($todo->submitter), $todo->getResponsibleIDs()));
+=======
+			$users = array_unique(array_merge(array(
+				$todo->submitter
+			), $todo->getResponsibleIDs()));
+>>>>>>> master
 			UserNotificationHandler::getInstance()->fireEvent('remember', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject($todo), $users);
 			$todoIDs[] = $todo->id;
 		}
 		
 		if (!empty($todoIDs)) {
 			$conditions = new PreparedStatementConditionBuilder();
+<<<<<<< HEAD
 			$conditions->add("id IN (?)", array($todoIDs));
 			
 			$sql = "UPDATE wcf" . WCF_N . "_todo
@@ -52,6 +72,19 @@ class ToDoReminderCronjob extends AbstractCronjob {
 				".$conditions;
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array_merge(array(0), $conditions->getParameters()));
+=======
+			$conditions->add("id IN (?)", array(
+				$todoIDs
+			));
+			
+			$sql = "UPDATE wcf" . WCF_N . "_todo
+				SET remembertime = ?
+				" . $conditions;
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array_merge(array(
+				0
+			), $conditions->getParameters()));
+>>>>>>> master
 		}
 	}
 }

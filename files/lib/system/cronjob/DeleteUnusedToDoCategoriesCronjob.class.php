@@ -17,6 +17,7 @@ use wcf\util\StringUtil;
  * @category	WCF
  */
 class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
+<<<<<<< HEAD
 	public function execute(Cronjob $cronjob) {
 		parent::execute($cronjob);
 		
@@ -24,11 +25,22 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 			return;
 		
 		// read used categories
+=======
+
+	public function execute(Cronjob $cronjob) {
+		parent::execute($cronjob);
+
+		if (!TODO_DELETE_OBSOLETE_CATEGORIES)
+			return;
+
+			// read used categories
+>>>>>>> master
 		$sql = "SELECT category
 			FROM wcf" . WCF_N . "_todo
 			GROUP BY category";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
+<<<<<<< HEAD
 		
 		$test = array();
 		
@@ -36,12 +48,25 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 			$test[] = $row['category'];
 		}
 		
+=======
+
+		$test = array();
+
+		while ($row = $statement->fetchArray()) {
+			$test[] = $row['category'];
+		}
+
+>>>>>>> master
 		// read all categories
 		$sql = "SELECT *
 			FROM wcf" . WCF_N . "_todo_category";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> master
 		$delete = array();
 		while ($row = $statement->fetchArray()) {
 			// check whether category is used
@@ -49,6 +74,7 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 				$delete[] = $row['id'];
 			}
 		}
+<<<<<<< HEAD
 		
 		if (!empty($delete)) {
 			$conditions = new PreparedStatementConditionBuilder();
@@ -58,5 +84,16 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute($conditions->getParameters());
 		}
+=======
+
+		$conditions = new PreparedStatementConditionBuilder();
+		$conditions->add("id IN (?)", array(
+			$delete
+		));
+		$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
+				" . $conditions;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditions->getParameters());
+>>>>>>> master
 	}
 }

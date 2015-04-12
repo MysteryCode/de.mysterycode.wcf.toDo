@@ -1,11 +1,18 @@
 <?php
 namespace wcf\acp\page;
+<<<<<<< HEAD
 use wcf\page\AbstractPage;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
  * Shows the toDoCategoryList page.
+=======
+use wcf\acp\page\AbstractCategoryListPage;
+
+/**
+ * Shows the todo category list page.
+>>>>>>> master
  *
  * @author	Florian Gail
  * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
@@ -13,6 +20,7 @@ use wcf\util\StringUtil;
  * @package	de.mysterycode.wcf.toDo
  * @category 	WCF
  */
+<<<<<<< HEAD
 
 class ToDoCategoryListPage extends AbstractPage {
 	/**
@@ -46,4 +54,21 @@ class ToDoCategoryListPage extends AbstractPage {
 			'categoryList' => $this->categoryList
 		));
 	}
+=======
+class ToDoCategoryListPage extends AbstractCategoryListPage {
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
+	public $activeMenuItem = 'wcf.acp.menu.link.toDoCategory.list';
+	
+	/**
+	 * @see	\wcf\acp\page\AbstractCategoryListPage::$objectTypeName
+	 */
+	public $objectTypeName = 'de.mysterycode.wcf.toDo';
+	
+	/**
+	 * @see	\wcf\acp\page\AbstractCategoryListPage::$pageTitle
+	 */
+	public $pageTitle = 'wcf.acp.todo.category.list';
+>>>>>>> master
 }

@@ -31,7 +31,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 * @var	array<\wcf\data\todo\ToDo>
 	 */
 	protected static $todos = array();
-	
+
 	/**
 	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::assignQueues()
 	 */
@@ -42,11 +42,13 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		}
 		
 		$conditionBuilder = new PreparedStatementConditionBuilder();
-		$conditionBuilder->add('id IN (?)', array($todoIDs));
+		$conditionBuilder->add('id IN (?)', array(
+			$todoIDs
+		));
 		
 		$sql = "SELECT	id
-			FROM	wcf".WCF_N."_todo
-			".$conditionBuilder;
+			FROM	wcf" . WCF_N . "_todo
+			" . $conditionBuilder;
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditionBuilder->getParameters());
 		
@@ -75,22 +77,23 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		ModerationQueueManager::getInstance()->removeOrphans($orphanedQueueIDs);
 		ModerationQueueManager::getInstance()->setAssignment($assignments);
 	}
-	
 
 	/**
 	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::getContainerID()
 	 */
 	public function getContainerID($objectID) {
 		$sql = "SELECT	category
-			FROM	wcf".WCF_N."_todo
+			FROM	wcf" . WCF_N . "_todo
 			WHERE	id = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->getTodo($objectID)->id));
+		$statement->execute(array(
+			$this->getTodo($objectID)->id
+		));
 		$row = $statement->fetchArray();
-	
-		return ($row['category'] ?: 0);
+		
+		return ($row['category'] ?  : 0);
 	}
-	
+
 	/**
 	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::isValid()
 	 */
@@ -101,7 +104,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		
 		return true;
 	}
-	
+
 	/**
 	 * Returns a todo object by id or null if id is invalid.
 	 * 
@@ -118,7 +121,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		
 		return self::$todos[$objectID];
 	}
-	
+
 	/**
 	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::populate()
 	 */
@@ -130,9 +133,11 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		
 		$todoList = new ToDoList();
 		$todoList->sqlSelects .= ", user_avatar.*, user_table.*";
-		$todoList->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user user_table ON (user_table.userID = todo_table.submitter)";
-		$todoList->sqlJoins .= " LEFT JOIN wcf".WCF_N."_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
-		$todoList->getConditionBuilder()->add("todo_table.id IN (?)", array($objectIDs));
+		$todoList->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_user user_table ON (user_table.userID = todo_table.submitter)";
+		$todoList->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
+		$todoList->getConditionBuilder()->add("todo_table.id IN (?)", array(
+			$objectIDs
+		));
 		$todoList->readObjects();
 		
 		$todos = $todoList->getObjects();
@@ -140,19 +145,27 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		foreach ($queues as $object) {
 			if (isset($todos[$object->objectID])) {
 				$object->setAffectedObject($todos[$object->objectID]);
-			}
-			else {
+			} else {
 				$object->setIsOrphaned();
 			}
 		}
 	}
-	
+
 	/**
 	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::removeContent()
 	 */
 	public function removeContent(ModerationQueue $queue, $message) {
+<<<<<<< HEAD
 		if ($this->isValid($queue->objectID) && !$this->getTodo($queue->objectID)->isDeleted) {
 			$todoAction = new ToDoAction(array($this->getTodo($queue->objectID)), 'trash', array('reason' => $message));
+=======
+		if ($this->isValid($queue->objectID) && ! $this->getTodo($queue->objectID)->isDeleted) {
+			$todoAction = new ToDoAction(array(
+				$this->getTodo($queue->objectID)
+			), 'trash', array(
+				'reason' => $message
+			));
+>>>>>>> master
 			$todoAction->executeAction();
 		}
 	}
