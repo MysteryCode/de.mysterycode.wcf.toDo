@@ -35,7 +35,6 @@ use wcf\util\UserUtil;
  */
 class ToDoAddForm extends MessageForm {
 	/**
-	 *
 	 * @see wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.header.menu.toDo';
@@ -54,7 +53,6 @@ class ToDoAddForm extends MessageForm {
 	public $disableToDo = false;
 	
 	/**
-	 *
 	 * @see \wcf\form\MessageForm::$enableMultilingualism
 	 */
 	public $enableMultilingualism = true;
@@ -88,7 +86,6 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
-	 *
 	 * @see wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
@@ -116,7 +113,6 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
-	 *
 	 * @see wcf\form\IForm::validate()
 	 */
 	public function validate() {
@@ -146,7 +142,6 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
-	 *
 	 * @see wcf\form\IForm::save()
 	 */
 	public function save() {
@@ -191,7 +186,7 @@ class ToDoAddForm extends MessageForm {
 		$this->saved();
 		
 		if ($resultValues['returnValues']->isDisabled && !WCF::getSession()->getPermission('mod.toDo.canEnable')) {
-			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('ToDoCategory', array('application' => 'wcf', 'id' => $this->category)), WCF::getLanguage()->get('wcf.todo.moderation.redirect'), 30);
+			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('ToDoCategory', array('application' => 'wcf', 'id' => $this->category)), WCF::getLanguage()->get('wcf.toDo.moderation.redirect'), 30);
 		}
 		else {
 			HeaderUtil::redirect($resultValues['returnValues']->getLink());
@@ -200,7 +195,6 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
-	 *
 	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
