@@ -14,39 +14,33 @@ use wcf\system\user\notification\object\IUserNotificationObject;
  * @category	WCF
  */
 class ToDoUserNotificationObject extends DatabaseObjectDecorator implements IUserNotificationObject {
-	
 	/**
-	 *
 	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\todo\ToDo';
-
+	
 	/**
-	 *
 	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getObjectID()
 	 */
 	public function getObjectID() {
 		return $this->id;
 	}
-
+	
 	/**
-	 *
 	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getTitle()
 	 */
 	public function getTitle() {
-		return $this->title;
+		return '';
 	}
-
+	
 	/**
-	 *
 	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getURL()
 	 */
 	public function getURL() {
-		return $this->getLink();
+		return '';
 	}
-
+	
 	/**
-	 *
 	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getAuthorID()
 	 */
 	public function getAuthorID() {
