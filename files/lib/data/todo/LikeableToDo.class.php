@@ -19,35 +19,35 @@ class LikeableToDo extends AbstractLikeObject {
 	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\todo\ToDo';
-
+	
 	/**
 	 * @see	\wcf\data\like\object\ITitle::getTitle()
 	 */
 	public function getTitle() {
 		return $this->title;
 	}
-
+	
 	/**
 	 * @see	\wcf\data\like\object\ILikeObject::getURL()
 	 */
 	public function getURL() {
 		return $this->getLink();
 	}
-
+	
 	/**
 	 * @see	\wcf\data\like\object\ILikeObject::getUserID()
 	 */
 	public function getUserID() {
 		return $this->submitter;
 	}
-
+	
 	/**
 	 * @see	\wcf\data\like\object\ILikeObject::getObjectID()
 	 */
 	public function getObjectID() {
 		return $this->id;
 	}
-
+	
 	/**
 	 * @see	\wcf\data\like\object\ILikeObject::updateLikeCounter()
 	 */
