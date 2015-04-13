@@ -1,8 +1,8 @@
 <?php
 
 namespace wcf\system\tagging;
-use wcf\data\todo\TaggedToDoList;
 use wcf\data\tag\Tag;
+use wcf\data\todo\TaggedToDoList;
 use wcf\system\tagging\AbstractTaggable;
 
 /**
