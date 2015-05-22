@@ -21,7 +21,7 @@ class TaggedToDoList extends AccessibleToDoList {
 		parent::__construct();
 		
 		$this->getConditionBuilder()->add('tag_to_object.objectTypeID = ? AND tag_to_object.languageID = ? AND tag_to_object.tagID = ?', array(TagEngine::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo'), $tag->languageID, $tag->tagID));
-		$this->getConditionBuilder()->add('todo.id = tag_to_object.objectID');
+		$this->getConditionBuilder()->add('todo.todoID = tag_to_object.objectID');
 	}
 	
 	/**
