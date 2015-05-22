@@ -28,7 +28,7 @@ class ToDoList extends DatabaseObjectList {
 		if (!empty($this->sqlSelects))
 			$this->sqlSelects .= ',';
 		$this->sqlSelects .= " todo_category.title as categorytitle, todo_category.color as categorycolor";
-		$this->sqlJoins = " LEFT JOIN wcf" . WCF_N . "_todo_category todo_category ON (todo_table.category = todo_category.id)";
+		$this->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_todo_category todo_category ON (todo_table.category = todo_category.id)";
 		
 		// visible status
 		if (!WCF::getSession()->getPermission('mod.toDo.canViewDeleted')) {
