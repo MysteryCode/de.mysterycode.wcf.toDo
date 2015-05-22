@@ -32,7 +32,7 @@ use wcf\util\StringUtil;
  * @package	de.mysterycode.wcf.toDo
  * @category	WCF
  */
-final class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteController, IMessage {
+class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteController, IMessage {
 	/**
 	 *
 	 * @see \wcf\data\DatabaseObject::$databaseTableName
