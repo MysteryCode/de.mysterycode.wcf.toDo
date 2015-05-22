@@ -82,16 +82,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::getContainerID()
 	 */
 	public function getContainerID($objectID) {
-		$sql = "SELECT	category
-			FROM	wcf" . WCF_N . "_todo
-			WHERE	todoID = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
-			$this->getTodo($objectID)->todoID
-		));
-		$row = $statement->fetchArray();
-		
-		return ($row['category'] ?  : 0);
+		return $this->getTodo($objectID)->getCategory();
 	}
 
 	/**
