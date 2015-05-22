@@ -70,7 +70,7 @@ class ToDoEditForm extends ToDoAddForm {
 					'endTime' => $this->endTime,
 					'private' => $this->private,
 					'important' => $this->important,
-					'category' => $this->category,
+					'categoryID' => $this->categoryID,
 					'progress' => $this->progress,
 					'enableSmilies' => $this->enableSmilies,
 					'enableHtml' => $this->enableHtml,
@@ -114,7 +114,8 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->description = $this->todo->description;
 		$this->note = $this->todo->note;
 		$this->statusID = $this->todo->statusID;
-		$this->category = $this->todo->category;
+		$this->categoryID = $this->todo->categoryID;
+		$this->category = $this->todo->getCategory();
 		$this->enableSmilies = $this->todo->enableSmilies;
 		$this->enableHtml = $this->todo->enableHtml;
 		$this->enableBBCodes = $this->todo->enableBBCodes;

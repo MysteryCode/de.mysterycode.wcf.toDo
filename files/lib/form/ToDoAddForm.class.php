@@ -1,6 +1,8 @@
 <?php
 
 namespace wcf\form;
+use wcf\data\category\CategoryAction;
+use wcf\data\todo\category\TodoCategoryList;
 use wcf\data\todo\status\TodoStatusList;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
@@ -68,7 +70,8 @@ class ToDoAddForm extends MessageForm {
 	public $title = '';
 	public $private = 0;
 	public $important = 0;
-	public $category = 0;
+	public $categoryID = 0;
+	public $category = null;
 	public $newCategory = '';
 	public $progress = 0;
 	public $remembertime = 0;
@@ -77,8 +80,9 @@ class ToDoAddForm extends MessageForm {
 	public $enableBBCodes = 0;
 	public $canEditStatus = 0;
 	public $canEditResponsible = 0;
-	
+
 	public $statusList = array();
+	public $categoryList = array();
 	
 	/**
 	 * @see	\wcf\form\IPage::readParameters()
@@ -101,7 +105,7 @@ class ToDoAddForm extends MessageForm {
 		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
 		if (isset($_POST['private'])) $this->private = 1;
 		if (isset($_POST['priority'])) $this->important = StringUtil::trim($_POST['priority']);
-		if (isset($_POST['category'])) $this->category = StringUtil::trim($_POST['category']);
+		if (isset($_POST['categoryID'])) $this->categoryID = StringUtil::trim($_POST['categoryID']);
 		if (isset($_POST['newCategory'])) $this->newCategory = StringUtil::trim($_POST['newCategory']);
 		if (isset($_POST['progress'])) $this->progress = StringUtil::trim($_POST['progress']);
 		if (isset($_POST['remembertime']) && $_POST['remembertime'] > 0 && $_POST['remembertime'] != '') $this->remembertime = \DateTime::createFromFormat('Y-m-d', $_POST['remembertime'], WCF::getUser()->getTimeZone())->getTimestamp();
@@ -110,7 +114,7 @@ class ToDoAddForm extends MessageForm {
 		if (isset($_POST['enableBBCodes'])) $this->enableBBCodes = 1;
 		if (isset($_POST['responsibles'])) $this->responsibles = StringUtil::trim($_POST['responsibles']);
 		
-		if ($this->newCategory != '' && TODO_CATEGORY_ENABLE) $this->category = $this->createCategory($this->newCategory);
+		if ($this->newCategory != '' && TODO_CATEGORY_ENABLE) $this->categoryID = $this->createCategory( StringUtil::trim($this->newCategory));
 		
 		MessageQuoteManager::getInstance()->readFormParameters();
 	}
@@ -131,8 +135,8 @@ class ToDoAddForm extends MessageForm {
 			throw new UserInputException('status');
 		}
 		
-		if (empty($this->category) && empty($this->newCategory) && TODO_CATEGORY_ENABLE) {
-			throw new UserInputException('category');
+		if (empty($this->categoryID) && empty($this->newCategory) && TODO_CATEGORY_ENABLE) {
+			throw new UserInputException('categoryID');
 		}
 		
 		if (empty($this->progress) && TODO_PROGRESS_ENABLE) {
@@ -159,7 +163,7 @@ class ToDoAddForm extends MessageForm {
 				'endTime' => $this->endTime,
 				'private' => $this->private,
 				'important' => $this->important,
-				'category' => $this->category ?: null,
+				'categoryID' => $this->categoryID ?: null,
 				'progress' => $this->progress,
 				'remembertime' => $this->remembertime,
 				'enableSmilies' => $this->enableSmilies,
@@ -189,7 +193,7 @@ class ToDoAddForm extends MessageForm {
 		$this->saved();
 		
 		if ($resultValues['returnValues']->isDisabled && !WCF::getSession()->getPermission('mod.toDo.canEnable')) {
-			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('ToDoCategory', array('application' => 'wcf', 'id' => $this->category)), WCF::getLanguage()->get('wcf.toDo.moderation.redirect'), 30);
+			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('ToDoCategory', array('application' => 'wcf', 'id' => $this->categoryID)), WCF::getLanguage()->get('wcf.toDo.moderation.redirect'), 30);
 		}
 		else {
 			HeaderUtil::redirect($resultValues['returnValues']->getLink());
@@ -206,6 +210,10 @@ class ToDoAddForm extends MessageForm {
 		$statusList = new TodoStatusList();
 		$statusList->readObjects();
 		$this->statusList = $statusList->getObjects();
+		
+		$categoryList = new TodoCategoryList();
+		$categoryList->readObjects();
+		$this->categoryList = $categoryList->getObjects();
 	}
 	
 	/**
@@ -227,8 +235,9 @@ class ToDoAddForm extends MessageForm {
 			'endTime' => $this->endTime,
 			'private' => $this->private,
 			'important' => $this->important,
-			'toDoCategory' => $this->category,
-			'toDoCategoryList' => $this->getCategories(),
+			'categoryID' => $this->categoryID,
+			'category' => $this->category,
+			'categoryList' => $this->categoryList,
 			'progress' => $this->progress,
 			'enableSmilies' => $this->enableSmilies,
 			'enableHtml' => $this->enableHtml,
@@ -282,46 +291,26 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	public function createCategory($title) {
-		$sql = "SELECT *
-			FROM wcf" . WCF_N . "_todo_category
-			WHERE title = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($title));
-		$item = $statement->fetchArray();
-		
-		if ($item)
-			return $item['id'];
-		
-		$sql = "INSERT INTO wcf" . WCF_N . "_todo_category
-			(title, color)
-			VAlUES(?, ?);";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($title, 'rgba(150,150,150,1)'));
-		
-		$sql = "SELECT *
-			FROM wcf" . WCF_N . "_todo_category
-			WHERE title = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($title));
-		$item = $statement->fetchArray();
-		
-		return $item['id'];
-	}
-	
-	public function getCategories() {
-		$categories = array();
-		$sql = "SELECT *
-			FROM wcf" . WCF_N . "_todo_category
-			ORDER BY title ASC";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute();
-		while ($row = $statement->fetchArray()) {
-			$categories[] = array(
-				'id' => $row["id"],
-				'title' => $row["title"] 
-			);
+		$objectType = CategoryHandler::getInstance()->getObjectTypeByName('de.mysterycode.toDo');
+		if ($objectType === null) {
+			throw new SystemException("Unknown category object type with name 'de.mysterycode.toDo'");
 		}
-		return $categories;
+		
+		$categoryAction = new CategoryAction(array(), 'create', array(
+			'data' => array(
+				'additionalData' => serialize(array('color' => 'blue')),
+				'description' => '',
+				'isDisabled' => 0,
+				'objectTypeID' => $objectType->objectTypeID,
+				'parentCategoryID' => null,
+				'showOrder' => null,
+				'title' => $title
+			)
+		));
+		$categoryAction->executeAction();
+		$returnValues = $categoryAction->getReturnValues();
+		
+		return $returnValues['returnValues']->categoryID;
 	}
 	
 	public function canEditStatus() {
