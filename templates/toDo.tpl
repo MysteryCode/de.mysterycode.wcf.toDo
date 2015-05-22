@@ -126,7 +126,6 @@
 			{if $__wcf->getSession()->getPermission('user.toDo.status.canView') && $todo->status}
 				<dt>{lang}wcf.toDo.task.status{/lang}</dt>
 				<dd>
-					
 					<span class="label badge {$todo->getStatus()->cssClass}" id="todoStatus{$todo->getStatus()->statusID}">{$todo->getStatus()->getTitle()}</span>
 				</dd>
 			{/if}
