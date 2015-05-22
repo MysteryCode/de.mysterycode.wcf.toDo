@@ -10,6 +10,7 @@ use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\dashboard\DashboardHandler;
+use wcf\system\like\LikeHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
@@ -82,6 +83,12 @@ class ToDoListPage extends SortablePage {
 	public $enableTracking = true;
 	
 	/**
+	 * like data for posts
+	 * @var	array<\wcf\data\like\object\LikeObject>
+	 */
+	public $likeData = array();
+	
+	/**
 	 *
 	 * @see \wcf\page\MultipleLinkPage::initObjectList()
 	 */
@@ -90,6 +97,24 @@ class ToDoListPage extends SortablePage {
 		
 		$this->objectList->getConditionBuilder()->add("status != ?", array(3));
 		$this->objectList->getConditionBuilder()->add("status != ?", array(4));
+	}
+	
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+		
+		// fetch likes
+		if (MODULE_LIKE) {
+			$todoIDs = array();
+			foreach ($this->objectList as $todo) {
+				$todoIDs[] = $todo->todoID;
+			}
+			$objectType = LikeHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo');
+			LikeHandler::getInstance()->loadLikeObjects($objectType, $todoIDs);
+			$this->likeData = LikeHandler::getInstance()->getLikeObjects($objectType);
+		}
 	}
 	
 	/**
@@ -105,6 +130,7 @@ class ToDoListPage extends SortablePage {
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoListPage'),
 			'sidebarName' => 'de.mysterycode.wcf.ToDoListPage',
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
+			'likeData' => $this->likeData
 		));
 	}
 }

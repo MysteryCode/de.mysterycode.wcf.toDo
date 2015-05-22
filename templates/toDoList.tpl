@@ -40,6 +40,8 @@
 			
 			new WCF.Todo.Clipboard($updateHandler);
 			WCF.Clipboard.init('wcf\\page\\ToDoListPage', {@$hasMarkedItems}, { });
+			
+			{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}new WCF.Todo.Like({if $__wcf->getUser()->userID && $category->getPermission('canLikeTodo)}1{else}0{/if}, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});{/if}
 		});
 		//]]>
 	</script>
@@ -125,11 +127,15 @@
 				<ul class="jsClipboardContainer"  data-type="de.mysterycode.wcf.toDo.toDo">
 					{assign var=anchor value=$__wcf->getAnchor('top')}
 					{foreach from=$objects item=task}
-						<li id="todo{$task->id}" class="message todoContainer todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject jsTodo{if $task->isDeleted} messageDeleted{/if}" data-todo-id="{@$task->id}" data-element-id="{@$task->id}"{if $task->canEdit()} data-can-edit="{if $task->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$task->id}{/link}"{/if}  data-user-id="{@$task->submitter}"
+						<li id="todo{$task->id}" class="message todoContainer todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject jsTodo{if $task->isDeleted} messageDeleted{/if}" data-todo-id="{@$task->id}" data-element-id="{@$task->id}"{if $task->canEdit()}
+							data-can-edit="{if $task->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$task->id}{/link}"{/if}
+							data-user-id="{@$task->submitter}"
 							{if $task->canEdit()}
 								data-is-disabled="{if $task->isDisabled}1{else}0{/if}" data-is-deleted="{if $task->isDeleted}1{else}0{/if}"
 								data-can-enable="{@$task->canEnable()}" data-can-delete="{@$task->canDelete()}" data-can-delete-completely="{@$task->canDeleteCompletely()}" data-can-restore="{@$task->canRestore()}"
-							{/if}>
+							{/if}
+							data-object-type="de.mysterycode.wcf.toDo.toDo" data-like-liked="{if $likeData[$task->todoID]|isset}{@$likeData[$task->todoID]->liked}{/if}" data-like-likes="{if $likeData[$task->todoID]|isset}{@$likeData[$task->todoID]->likes}{else}0{/if}" data-like-dislikes="{if $likeData[$task->todoID]|isset}{@$likeData[$task->todoID]->dislikes}{else}0{/if}" data-like-users='{if $likeData[$task->todoID]|isset}{ {implode from=$likeData[$task->todoID]->getUsers() item=likeUser}"{@$likeUser->userID}": { "username": "{$likeUser->username|encodeJSON}" }{/implode} }{else}{ }{/if}'
+							>
 							{if $task->canEdit()}
 								<ul class="messageQuickOptions">
 									<li class="jsOnly"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$task->id}" /></li>
