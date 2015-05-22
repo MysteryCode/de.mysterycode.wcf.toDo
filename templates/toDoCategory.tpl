@@ -62,7 +62,6 @@
 					<dd>
 						<select id="sortField" name="sortField">
 							<option value="title"{if $sortField == 'title'} selected="selected"{/if}>{lang}wcf.toDo.task.title{/lang}</option>
-							<option value="category"{if $sortField == 'category'} selected="selected"{/if}>{lang}wcf.toDo.category{/lang}</option>
 							<option value="endTime"{if $sortField == 'endTime'} selected="selected"{/if}>{lang}wcf.toDo.task.endTime{/lang}</option>
 							<option value="status"{if $sortField == 'status'} selected="selected"{/if}>{lang}wcf.toDo.task.status{/lang}</option>
 							<option value="submitter"{if $sortField == 'submitter'} selected="selected"{/if}>{lang}wcf.toDo.task.submitter{/lang}</option>

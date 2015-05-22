@@ -62,7 +62,7 @@
 					<dd>
 						<select id="sortField" name="sortField">
 							<option value="title"{if $sortField == 'title'} selected="selected"{/if}>{lang}wcf.toDo.task.title{/lang}</option>
-							<option value="category"{if $sortField == 'category'} selected="selected"{/if}>{lang}wcf.toDo.category{/lang}</option>
+							<option value="categoryID"{if $sortField == 'categoryID'} selected="selected"{/if}>{lang}wcf.toDo.category{/lang}</option>
 							<option value="endTime"{if $sortField == 'endTime'} selected="selected"{/if}>{lang}wcf.toDo.task.endTime{/lang}</option>
 							<option value="status"{if $sortField == 'status'} selected="selected"{/if}>{lang}wcf.toDo.task.status{/lang}</option>
 							<option value="submitter"{if $sortField == 'submitter'} selected="selected"{/if}>{lang}wcf.toDo.task.submitter{/lang}</option>
@@ -144,8 +144,8 @@
 												<span class="label badge {$todo->getStatus()->cssClass}" id="todoStatus{$todo->getStatus()->statusID}">{$todo->getStatus()->getTitle()}</span>
 											{/if}
 											
-											{if $task->categorytitle != ''}
-												<a href="{link controller='ToDoCategory' id=$task->category}{/link}"><span class="label badge" style="background-color: {$task->categorycolor};">{$task->categorytitle}</span></a>
+											{if $task->getCategory()}
+												<a href="{$task->getCategory()->getLink()}"><span class="label badge" style="background-color: {$task->getCategory()->color};">{$task->getCategory()->getTitle()}</span></a>
 											{else}
 												<span class="label badge gray">{lang}wcf.toDo.category.notAvailable{/lang}</span>
 											{/if}

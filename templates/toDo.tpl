@@ -118,10 +118,10 @@
 			{if TODO_CATEGORY_ENABLE}
 				<dt>{lang}wcf.toDo.category{/lang}</dt>
 				<dd>
-					{if $todo->categorytitle != ''}
-						<a href="{link controller='ToDoCategory' id=$todo->category}{/link}"><span class="label badge" style="background-color:  {$todo->categorycolor};">{$todo->categorytitle}</span></a>
+					{if $todo->getCategory()}
+						<a href="{$todo->getCategory()->getLink()}"><span class="label badge" style="background-color: {$todo->getCategory()->color};">{$todo->getCategory()->getTitle()}</span></a>
 					{else}
-						<span class="label badge {$todo->categorycolor}">{$todo->categorytitle}</span>
+						<span class="label badge gray">{lang}wcf.toDo.category.notAvailable{/lang}</span>
 					{/if}
 				</dd>
 			{/if}
