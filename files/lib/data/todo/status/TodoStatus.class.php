@@ -2,6 +2,7 @@
 
 namespace wcf\data\todo\status;
 use wcf\data\DatabaseObject;
+use wcf\system\WCF;
 
 /**
  * Represents a todo status.
@@ -22,4 +23,8 @@ class TodoStatus extends DatabaseObject {
 	 * @see \wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'statusID';
+	
+	public function getTitle() {
+		return WCF::getLanguage()->get($this->subject);
+	}
 }
