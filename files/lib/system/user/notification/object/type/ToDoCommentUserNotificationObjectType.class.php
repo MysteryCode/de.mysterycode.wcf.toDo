@@ -23,7 +23,7 @@ class ToDoCommentUserNotificationObjectType extends AbstractUserNotificationObje
 		$sql = "SELECT *
 			FROM wcf" . WCF_N . "_comment comment
 			LEFT JOIN wcf" . WCF_N . "_todo todo
-			ON (todo.id = comment.objectID)
+			ON (todo.todoID = comment.objectID)
 			WHERE comment.commentID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(

@@ -43,7 +43,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	 *
 	 * @see \wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
-	protected static $databaseTableIndexName = 'id';
+	protected static $databaseTableIndexName = 'todoID';
 	
 	/**
 	 * list of responsible ids
@@ -58,36 +58,11 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	public $enableHtml = false;
 	public $enableBBCodes = true;
 	
-	/**
-	 *
-	 * @see \wcf\data\DatabaseObject::__construct()
-	 */
-	public function __construct($id, $row = null, DatabaseObject $object = null) {
-		if ($id !== null) {
-			$sql = "SELECT		todo_table.*, todo_category.title as categorytitle, todo_category.color as categorycolor
-				FROM		wcf" . WCF_N . "_todo todo_table
-				LEFT JOIN	wcf" . WCF_N . "_todo_category todo_category
-				ON		(todo_table.category = todo_category.id)
-				WHERE		todo_table.id = ?";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($id));
-			$row = $statement->fetchArray();
-			
-			// enforce data type 'array'
-			if ($row === false)
-				$row = array();
-		} else if ($object !== null) {
-			$row = $object->data;
-		}
-		
-		$this->handleData($row);
-	}
-	
 	public function getResponsibleIDs() {
 		$userIDs = array();
 		$sql = "SELECT		*
 			FROM		wcf" . WCF_N . "_todo_to_user
-			WHERE		toDoID = ?";
+			WHERE		todoID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->id));
 		
@@ -99,15 +74,6 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	/**
-	 *
-	 * @see \wcf\data\DatabaseObject::__get()
-	 */
-	public function __get($name) {
-		$value = parent::__get($name);
-		return $value;
-	}
-	
-	/**
 	 * Returns a list of todos.
 	 *
 	 * @param array $todoIDs        	
@@ -115,7 +81,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	 */
 	public static function getToDos(array $todoIDs) {
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add("todo_table.id IN (?)", array($todoIDs));
+		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", array($todoIDs));
 		$todoList->readObjects();
 		
 		return $todoList->getObjects();
@@ -175,7 +141,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 		$users = array();
 		$sql = "SELECT		*
 			FROM		wcf" . WCF_N . "_todo_to_user
-			WHERE		toDoID = ?";
+			WHERE		todoID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql, 5);
 		$statement->execute(array($this->id));
 		
@@ -224,7 +190,6 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 				'id' => $this->category
 			))));
 		}
-		//WCF::getBreadcrumbs()->add(new Breadcrumb($this->title, LinkHandler::getInstance()->getLink('ToDo', array('object' => $this))));
 	}
 	
 	/**

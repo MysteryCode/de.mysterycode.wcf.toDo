@@ -42,7 +42,7 @@ class ToDoHandler extends SingletonFactory {
 			
 			//if ($data[$userID] === null) {
 				$conditionBuilder = new PreparedStatementConditionBuilder();
-				$conditionBuilder->add('todo.id = todo_to_user.toDoID');
+				$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
 				$conditionBuilder->add('todo.status = ?', array(1));
 				$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
 				$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
@@ -78,7 +78,7 @@ class ToDoHandler extends SingletonFactory {
 				
 			//if ($data[$userID] === null) {
 				$conditionBuilder = new PreparedStatementConditionBuilder();
-				$conditionBuilder->add('todo.id = todo_to_user.toDoID');
+				$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
 				$conditionBuilder->add('todo.status <> ?', array(3));
 				$conditionBuilder->add('todo.status <> ?', array(4));
 				$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));

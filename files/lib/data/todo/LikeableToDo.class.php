@@ -45,7 +45,7 @@ class LikeableToDo extends AbstractLikeObject {
 	 * @see	\wcf\data\like\object\ILikeObject::getObjectID()
 	 */
 	public function getObjectID() {
-		return $this->id;
+		return $this->todoID;
 	}
 	
 	/**

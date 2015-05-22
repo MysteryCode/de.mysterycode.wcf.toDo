@@ -21,7 +21,7 @@ class ToDoUserNotificationObjectType extends AbstractUserNotificationObjectType 
 	public function getOwnerID($objectID) {
 		$sql = "SELECT *
 			FROM wcf" . WCF_N . "_todo todo
-			WHERE todo.id = ?";
+			WHERE todo.todoID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(
 			$objectID

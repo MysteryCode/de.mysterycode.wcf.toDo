@@ -66,14 +66,14 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		
 		// update attachments
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
-			$this->parameters['attachmentHandler']->updateObjectID($todo->id);
+			$this->parameters['attachmentHandler']->updateObjectID($todo->todoID);
 		}
 		
 		if (!$todo->isDisabled) {
 			$todoAction = new ToDoAction(array($todo), 'publish');
 			$todoAction->executeAction();
 		} else {
-			ModerationQueueActivationManager::getInstance()->addModeratedContent('de.mysterycode.wcf.toDo.toDo', $todo->id);
+			ModerationQueueActivationManager::getInstance()->addModeratedContent('de.mysterycode.wcf.toDo.toDo', $todo->todoID);
 		}
 		
 		return $todo;
@@ -87,8 +87,8 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		
 		foreach ($this->objects as $todo) {
 			if ($todo->submitter) {
-				UserActivityEventHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->id, WCF::getLanguage()->languageID, $todo->submitter, $todo->timestamp);
-				UserActivityPointHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $todo->id, $todo->submitter);
+				UserActivityEventHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->todoID, WCF::getLanguage()->languageID, $todo->submitter, $todo->timestamp);
+				UserActivityPointHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $todo->todoID, $todo->submitter);
 				ToDoEditor::updateUserToDoCounter(array($todo->submitter => 1));
 			}
 			$users = array();
@@ -99,7 +99,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 			while ($row = $statement->fetchArray()) {
 				$users[] = $row['userID'];
 			}
-			UserNotificationHandler::getInstance()->fireEvent('create', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->id)), $users);
+			UserNotificationHandler::getInstance()->fireEvent('create', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->todoID)), $users);
 		}
 	}
 	
@@ -115,7 +115,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		if (isset($this->parameters['data'])) {
 			$todoIDs = array();
 			foreach ($this->objects as $todo) {
-				$todoIDs[] = $todo->id;
+				$todoIDs[] = $todo->todoID;
 				$users = array();
 				if (WCF::getUser()->userID != $todo->submitter) {
 					$users = array_diff(array_unique($todo->getResponsibleIDs()), array(WCF::getUser()->userID));
@@ -124,9 +124,9 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 				}
 				if (!empty($users)) {
 					if (isset($this->parameters['data']['status']) && !isset($this->parameters['data']['title'])) {
-						UserNotificationHandler::getInstance()->fireEvent('editStatus', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->id)), $users);
+						UserNotificationHandler::getInstance()->fireEvent('editStatus', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->todoID)), $users);
 					} else {
-						UserNotificationHandler::getInstance()->fireEvent('edit', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->id)), $users);
+						UserNotificationHandler::getInstance()->fireEvent('edit', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->todoID)), $users);
 					}
 				}
 			}
@@ -169,7 +169,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 				'isDisabled' => 0 
 			));
 			
-			$todoIDs[] = $todo->id;
+			$todoIDs[] = $todo->todoID;
 			$this->addToDoData($todo->getDecoratedObject(), 'isDisabled', 0);
 		}
 		
@@ -216,10 +216,10 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 				'isDisabled' => 1 
 			));
 			
-			$todoIDs[] = $todo->id;
+			$todoIDs[] = $todo->todoID;
 			$this->addToDoData($todo->getDecoratedObject(), 'isDisabled', 1);
 			
-			ModerationQueueActivationManager::getInstance()->addModeratedContent('de.mysterycode.wcf.toDo.toDo', $todo->id);
+			ModerationQueueActivationManager::getInstance()->addModeratedContent('de.mysterycode.wcf.toDo.toDo', $todo->todoID);
 		}
 		
 		$this->removeActivityEvents($todoIDs);
@@ -268,10 +268,10 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 				'deleteReason' => $deleteReason 
 			));
 			
-			$todoIDs[] = $todo->id;
+			$todoIDs[] = $todo->todoID;
 			$this->addToDoData($todo->getDecoratedObject(), 'isDeleted', 1);
 			$this->addToDoData($todo->getDecoratedObject(), 'deleteNote', WCF::getLanguage()->getDynamicVariable('wcf.todo.deleteNote', array(
-				'todo' => new ToDo($todo->id) 
+				'todo' => new ToDo($todo->todoID) 
 			)));
 		}
 		
@@ -309,7 +309,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		
 		$todoIDs = $userCounters = array();
 		foreach ($this->objects as $todo) {
-			$todoIDs[] = $todo->id;
+			$todoIDs[] = $todo->todoID;
 			
 			if (! isset($userCounters[$todo->submitter])) {
 				$userCounters[$todo->submitter] = 0;
@@ -374,7 +374,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 				'deleteReason' => 0 
 			));
 			
-			$todoIDs[] = $todo->id;
+			$todoIDs[] = $todo->todoID;
 			$this->addToDoData($todo->getDecoratedObject(), 'isDeleted', 0);
 		}
 		
@@ -420,11 +420,11 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	 * @param mixed $value        	
 	 */
 	protected function addToDoData(ToDo $todo, $key, $value) {
-		if (!isset($this->todoData[$todo->id])) {
-			$this->todoData[$todo->id] = array();
+		if (!isset($this->todoData[$todo->todoID])) {
+			$this->todoData[$todo->todoID] = array();
 		}
 		
-		$this->todoData[$todo->id][$key] = $value;
+		$this->todoData[$todo->todoID][$key] = $value;
 	}
 	
 	/**
@@ -465,7 +465,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	protected function unmarkToDos(array $todoIDs = array()) {
 		if (empty($todoIDs)) {
 			foreach ($this->objects as $todo) {
-				$todoIDs[] = $todo->id;
+				$todoIDs[] = $todo->todoID;
 			}
 		}
 		

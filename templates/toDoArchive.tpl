@@ -124,14 +124,14 @@
 				<ul class="jsClipboardContainer"  data-type="de.mysterycode.wcf.toDo.toDo">
 					{assign var=anchor value=$__wcf->getAnchor('top')}
 					{foreach from=$objects item=task}
-						<li id="todo{$task->id}" class="message todoContainer todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject jsTodo{if $task->isDeleted} messageDeleted{/if}" data-todo-id="{@$task->id}" data-element-id="{@$task->id}"{if $task->canEdit()} data-can-edit="{if $task->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$task->id}{/link}"{/if}  data-user-id="{@$task->submitter}"
+						<li id="todo{$task->todoID}" class="message todoContainer todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject jsTodo{if $task->isDeleted} messageDeleted{/if}" data-todo-id="{@$task->todoID}" data-element-id="{@$task->todoID}"{if $task->canEdit()} data-can-edit="{if $task->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$task->todoID}{/link}"{/if}  data-user-id="{@$task->submitter}"
 							{if $task->canEdit()}
 								data-is-disabled="{if $task->isDisabled}1{else}0{/if}" data-is-deleted="{if $task->isDeleted}1{else}0{/if}"
 								data-can-enable="{@$task->canEnable()}" data-can-delete="{@$task->canDelete()}" data-can-delete-completely="{@$task->canDeleteCompletely()}" data-can-restore="{@$task->canRestore()}"
 							{/if}>
 							{if $task->canEdit()}
 								<ul class="messageQuickOptions">
-									<li class="jsOnly"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$task->id}" /></li>
+									<li class="jsOnly"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$task->todoID}" /></li>
 								</ul>
 							{/if}
 							<div class="todo box32">

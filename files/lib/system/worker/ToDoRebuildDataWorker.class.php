@@ -34,7 +34,7 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 	protected function initObjectList() {
 		parent::initObjectList();
 		
-		$this->objectList->sqlOrderBy = 'todo_table.id';
+		$this->objectList->sqlOrderBy = 'todo_table.todoID';
 	}
 
 	/**

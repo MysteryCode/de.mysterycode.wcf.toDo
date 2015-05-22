@@ -29,7 +29,7 @@ class ToDoUserActivityEvent extends SingletonFactory implements IUserActivityEve
 		}
 		
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add("todo_table.id IN (?)", array(
+		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", array(
 			$objectIDs
 		));
 		$todoList->readObjects();

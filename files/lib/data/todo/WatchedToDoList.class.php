@@ -28,7 +28,7 @@ class WatchedToDoList extends ViewableToDoList {
 			$objectTypeID = UserObjectWatchHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo');
 			
 			// add conditions
-			$this->sqlConditionJoins = "LEFT JOIN wcf".WCF_N."_todo todo ON (todo.id = user_object_watch.objectID)";
+			$this->sqlConditionJoins = "LEFT JOIN wcf".WCF_N."_todo todo ON (todo.todoID = user_object_watch.objectID)";
 			
 			$this->getConditionBuilder()->add('user_object_watch.objectTypeID = ?', array($objectTypeID));
 			$this->getConditionBuilder()->add('user_object_watch.userID = ?', array(WCF::getUser()->userID));

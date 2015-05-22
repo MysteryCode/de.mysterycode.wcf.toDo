@@ -35,7 +35,7 @@
 			var $updateHandler = new WCF.Todo.UpdateHandler.Todo();
 			var $inlineEditor = new WCF.Todo.InlineEditor('.todo');
 			$inlineEditor.setUpdateHandler($updateHandler);
-			$inlineEditor.setEnvironment('todo', {@$todo->id}, '{$todo->getLink()}');
+			$inlineEditor.setEnvironment('todo', {@$todo->todoID}, '{$todo->getLink()}');
 			$inlineEditor.setPermissions({
 				canEnableTodo: {if $todo->canEnable()}1{else}0{/if},
 				canDeleteTodo: {if $todo->canDelete()}1{else}0{/if},
@@ -74,7 +74,7 @@
 
 {include file='header' sidebarOrientation='right'}
 
-<header class="boxHeadline todo jsTodo" data-todo-id="{@$todo->id}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$todo->id}{/link}"{/if} data-user-id="{$__wcf->user->userID}"
+<header class="boxHeadline todo jsTodo" data-todo-id="{@$todo->todoID}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$todo->todoID}{/link}"{/if} data-user-id="{$__wcf->user->userID}"
 	{if $todo->canEdit()}
 		data-is-disabled="{if $todo->isDisabled}1{else}0{/if}" data-is-deleted="{if $todo->isDeleted}1{else}0{/if}"
 		data-can-enable="{@$todo->canEnable()}" data-can-delete="{@$todo->canDelete()}" data-can-delete-completely="{@$todo->canDeleteCompletely()}" data-can-restore="{@$todo->canRestore()}"
@@ -85,9 +85,9 @@
 	<nav class="jsMobileNavigation buttonGroupNavigation">
 		<ul class="buttonGroup">{*
 			*}{if $todo->canEdit()}<li><a class="button jsTodoInlineEditor jsOnly"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
-			*}<li class="jsReportTodo jsOnly" data-object-id="{@$todo->id}"><a title="{lang}wcf.moderation.report.reportContent{/lang}" class="button jsTooltip"><span class="icon icon16 icon-warning-sign"></span> <span class="invisible">{lang}wcf.moderation.report.reportContent{/lang}</span></a></li>{*
-			*}{if $todo->canParticipate() && $todo->statusID != 1}<li class="jsParticipateTodo jsOnly" data-object-id="{@$todo->id}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.participate{/lang}" class="button jsTooltip"><span class="icon icon16 icon-signin"></span> <span class="invisible">{lang}wcf.toDo.task.participate{/lang}</span></a></li>{/if}{*
-			*}{if $todo->canEditStatus() && $todo->statusID != 1}<li class="jsMarkSolvedTodo jsOnly" data-object-id="{@$todo->id}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.solve{/lang}" class="button jsTooltip"><span class="icon icon16 icon-check"></span> <span class="invisible">{lang}wcf.toDo.task.solve{/lang}</span></a></li>{/if}{*
+			*}<li class="jsReportTodo jsOnly" data-object-id="{@$todo->todoID}"><a title="{lang}wcf.moderation.report.reportContent{/lang}" class="button jsTooltip"><span class="icon icon16 icon-warning-sign"></span> <span class="invisible">{lang}wcf.moderation.report.reportContent{/lang}</span></a></li>{*
+			*}{if $todo->canParticipate() && $todo->statusID != 1}<li class="jsParticipateTodo jsOnly" data-object-id="{@$todo->todoID}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.participate{/lang}" class="button jsTooltip"><span class="icon icon16 icon-signin"></span> <span class="invisible">{lang}wcf.toDo.task.participate{/lang}</span></a></li>{/if}{*
+			*}{if $todo->canEditStatus() && $todo->statusID != 1}<li class="jsMarkSolvedTodo jsOnly" data-object-id="{@$todo->todoID}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.solve{/lang}" class="button jsTooltip"><span class="icon icon16 icon-check"></span> <span class="invisible">{lang}wcf.toDo.task.solve{/lang}</span></a></li>{/if}{*
 			*}{event name='buttons'}{*
 		*}</ul>
 	</nav>
@@ -107,7 +107,7 @@
 	{/hascontent}
 </div>
 
-{assign var='objectID' value=$todo->id}
+{assign var='objectID' value=$todo->todoID}
 <div class="container containerPadding marginTop todoContainer{if $todo->isDeleted} todoDeleted{/if}{if $todo->isDisabled} todoDisabled{/if}">
 	{event name='beforeInfo'}
 	<fieldset>

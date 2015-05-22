@@ -66,7 +66,7 @@ class ViewableToDo extends DatabaseObjectDecorator {
 			if (WCF::getUser()->userID) {
 				$this->effectiveVisitTime = max($this->visitTime, $this->categoryVisitTime, VisitTracker::getInstance()->getVisitTime('de.mysterycode.wcf.toDo'));
 			} else {
-				$this->effectiveVisitTime = max(VisitTracker::getInstance()->getObjectVisitTime('de.mysterycode.wcf.toDo', $this->id), VisitTracker::getInstance()->getObjectVisitTime('de.mysterycode.wcf.toDo.category', $this->categoryID), VisitTracker::getInstance()->getVisitTime('de.mysterycode.wcf.toDo'));
+				$this->effectiveVisitTime = max(VisitTracker::getInstance()->getObjectVisitTime('de.mysterycode.wcf.toDo', $this->todoID), VisitTracker::getInstance()->getObjectVisitTime('de.mysterycode.wcf.toDo.category', $this->categoryID), VisitTracker::getInstance()->getVisitTime('de.mysterycode.wcf.toDo'));
 			}
 			if ($this->effectiveVisitTime === null) {
 				$this->effectiveVisitTime = 0;

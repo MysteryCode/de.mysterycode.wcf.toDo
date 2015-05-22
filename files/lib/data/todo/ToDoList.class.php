@@ -28,7 +28,7 @@ class ToDoList extends DatabaseObjectList {
 		if (!empty($this->sqlSelects))
 			$this->sqlSelects .= ',';
 		$this->sqlSelects .= " todo_category.title as categorytitle, todo_category.color as categorycolor";
-		$this->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_todo_category todo_category ON (todo_table.category = todo_category.id)";
+		$this->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_todo_category todo_category ON (todo_table.category = todo_category.categoryID)";
 		
 		// visible status
 		if (!WCF::getSession()->getPermission('mod.toDo.canViewDeleted')) {
@@ -45,6 +45,6 @@ class ToDoList extends DatabaseObjectList {
 			$this->getConditionBuilder()->add('todo_table.isDisabled = 0');
 		
 		if (!WCF::getSession()->getPermission('user.toDo.toDo.canViewPrivate'))
-			$this->getConditionBuilder()->add("(private = ? or submitter = ? or (SELECT assigns.toDoID FROM wcf" . WCF_N . "_todo_to_user assigns WHERE assigns.toDoID = todo_table.id AND assigns.userID = ?) = todo_table.id)", array (0, WCF::getUser()->userID, WCF::getUser()->userID));
+			$this->getConditionBuilder()->add("(private = ? or submitter = ? or (SELECT assigns.toDoID FROM wcf" . WCF_N . "_todo_to_user assigns WHERE assigns.toDoID = todo_table.todoID AND assigns.userID = ?) = todo_table.todoID)", array (0, WCF::getUser()->userID, WCF::getUser()->userID));
 	}
 }

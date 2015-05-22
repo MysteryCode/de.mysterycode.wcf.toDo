@@ -69,7 +69,7 @@ class ToDoLocation implements IUserOnlineLocation {
 		$this->todoIDs = array_unique($this->todoIDs);
 		
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add('todo_table.id IN (?)', array(
+		$todoList->getConditionBuilder()->add('todo_table.todoID IN (?)', array(
 			$this->todoIDs
 		));
 		$todoList->readObjects();

@@ -89,7 +89,7 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->objectAction->executeAction();
 		
 		if ($this->canEditResponsible()) {
-			$this->updateResponsibles($this->todo->id, $this->responsibles, $this->todo->getResponsibleIDs());
+			$this->updateResponsibles($this->todo->todoID, $this->responsibles, $this->todo->getResponsibleIDs());
 		}
 		
 		$this->saved();

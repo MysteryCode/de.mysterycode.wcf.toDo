@@ -23,7 +23,7 @@ class ToDoUserNotificationObject extends DatabaseObjectDecorator implements IUse
 	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getObjectID()
 	 */
 	public function getObjectID() {
-		return $this->id;
+		return $this->todoID;
 	}
 	
 	/**

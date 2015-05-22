@@ -42,11 +42,11 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		}
 		
 		$conditionBuilder = new PreparedStatementConditionBuilder();
-		$conditionBuilder->add('id IN (?)', array(
+		$conditionBuilder->add('todoID IN (?)', array(
 			$todoIDs
 		));
 		
-		$sql = "SELECT	id
+		$sql = "SELECT	todoID
 			FROM	wcf" . WCF_N . "_todo
 			" . $conditionBuilder;
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -54,7 +54,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		
 		$todos = array();
 		while ($row = $statement->fetchArray()) {
-			$todos[$row['id']] = new ToDo($row['id']);
+			$todos[$row['todoID']] = new ToDo($row['todoID']);
 		}
 		
 		$orphanedQueueIDs = $assignments = array();
@@ -84,10 +84,10 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	public function getContainerID($objectID) {
 		$sql = "SELECT	category
 			FROM	wcf" . WCF_N . "_todo
-			WHERE	id = ?";
+			WHERE	todoID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(
-			$this->getTodo($objectID)->id
+			$this->getTodo($objectID)->todoID
 		));
 		$row = $statement->fetchArray();
 		
@@ -114,7 +114,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	protected function getTodo($objectID) {
 		if (!array_key_exists($objectID, self::$todos)) {
 			self::$todos[$objectID] = new ToDo($objectID);
-			if (!self::$todos[$objectID]->id) {
+			if (!self::$todos[$objectID]->todoID) {
 				self::$todos[$objectID] = null;
 			}
 		}
@@ -135,7 +135,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		$todoList->sqlSelects .= ", user_avatar.*, user_table.*";
 		$todoList->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_user user_table ON (user_table.userID = todo_table.submitter)";
 		$todoList->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
-		$todoList->getConditionBuilder()->add("todo_table.id IN (?)", array(
+		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", array(
 			$objectIDs
 		));
 		$todoList->readObjects();

@@ -76,7 +76,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 
 		foreach ($this->objects as $todo) {
 			if ($todo->isDisabled && !$todo->isDeleted && $todo->canEnable()) {
-				$todoIDs[] = $todo->id;
+				$todoIDs[] = $todo->todoID;
 			}
 		}
 
@@ -93,7 +93,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 
 		foreach ($this->objects as $todo) {
 			if (!$todo->isDisabled && !$todo->isDeleted && $todo->canEnable()) {
-				$todoIDs[] = $todo->id;
+				$todoIDs[] = $todo->todoID;
 			}
 		}
 
@@ -110,7 +110,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 
 		foreach ($this->objects as $todo) {
 			if (!$todo->isDeleted && $todo->canDelete()) {
-				$todoIDs[] = $todo->id;
+				$todoIDs[] = $todo->todoID;
 			}
 		}
 
@@ -127,7 +127,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 
 		foreach ($this->objects as $todo) {
 			if ($todo->isDeleted && $todo->canDeleteCompletely()) {
-				$todoIDs[] = $todo->id;
+				$todoIDs[] = $todo->todoID;
 			}
 		}
 
@@ -144,7 +144,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 
 		foreach ($this->objects as $todo) {
 			if ($todo->isDeleted && $todo->canRestore()) {
-				$todoIDs[] = $todo->id;
+				$todoIDs[] = $todo->todoID;
 			}
 		}
 

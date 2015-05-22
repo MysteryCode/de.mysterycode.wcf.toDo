@@ -22,17 +22,17 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 		parent::init($box, $page);
 		
 		if (WCF::getSession()->getPermission('user.toDo.toDo.canViewList')) {
-			$sql = "SELECT COUNT(id)
+			$sql = "SELECT COUNT(todoID)
 				FROM wcf" . WCF_N . "_todo";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute();
 			$stat = $statement->fetchArray();
 			$this->todoStat[0] = array(
 				'type' => 'all',
-				'count' => $stat['COUNT(id)']
+				'count' => $stat['COUNT(todoID)']
 			);
 			
-			$sql = "SELECT COUNT(id)
+			$sql = "SELECT COUNT(todoID)
 				FROM wcf" . WCF_N . "_todo
 				WHERE wcf" . WCF_N . "_todo.status = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
@@ -40,10 +40,10 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 			$stat = $statement->fetchArray();
 			$this->todoStat[1] = array(
 				'type' => 'unsolved',
-				'count' => $stat['COUNT(id)']
+				'count' => $stat['COUNT(todoID)']
 			);
 			
-			$sql = "SELECT COUNT(id)
+			$sql = "SELECT COUNT(todoID)
 				FROM wcf" . WCF_N . "_todo
 				WHERE wcf" . WCF_N . "_todo.status = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
@@ -51,10 +51,10 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 			$stat = $statement->fetchArray();
 			$this->todoStat[2] = array(
 				'type' => 'work',
-				'count' => $stat['COUNT(id)']
+				'count' => $stat['COUNT(todoID)']
 			);
 			
-			$sql = "SELECT COUNT(id)
+			$sql = "SELECT COUNT(todoID)
 				FROM wcf" . WCF_N . "_todo
 				WHERE wcf" . WCF_N . "_todo.status = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
@@ -62,10 +62,10 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 			$stat = $statement->fetchArray();
 			$this->todoStat[3] = array(
 				'type' => 'solved',
-				'count' => $stat['COUNT(id)']
+				'count' => $stat['COUNT(todoID)']
 			);
 			
-			$sql = "SELECT COUNT(id)
+			$sql = "SELECT COUNT(todoID)
 				FROM wcf" . WCF_N . "_todo
 				WHERE wcf" . WCF_N . "_todo.status = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
@@ -73,7 +73,7 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 			$stat = $statement->fetchArray();
 			$this->todoStat[4] = array(
 				'type' => 'canceled',
-				'count' => $stat['COUNT(id)']
+				'count' => $stat['COUNT(todoID)']
 			);
 			
 			WCF::getTPL()->assign(array(

@@ -70,7 +70,7 @@ class ToDoPage extends AbstractPage {
 		
 		$this->todo = new ToDo($this->todoID);
 		
-		if($this->todo === null || !$this->todo->id)
+		if($this->todo === null || !$this->todo->todoID)
 			throw new IllegalLinkException();
 		
 		if(!$this->todo->canEnter())

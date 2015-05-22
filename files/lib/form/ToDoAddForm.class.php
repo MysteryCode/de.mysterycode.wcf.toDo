@@ -181,7 +181,7 @@ class ToDoAddForm extends MessageForm {
 		$resultValues = $this->objectAction->executeAction();
 		
 		if ($this->canEditResponsible()) {
-			$this->updateResponsibles($resultValues['returnValues']->id, $this->responsibles);
+			$this->updateResponsibles($resultValues['returnValues']->todoID, $this->responsibles);
 		}
 		
 		MessageQuoteManager::getInstance()->saved();

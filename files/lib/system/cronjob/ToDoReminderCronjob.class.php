@@ -40,12 +40,12 @@ class ToDoReminderCronjob extends AbstractCronjob {
 		foreach ($todos as $todo) {
 			$users = array_unique(array_merge(array($todo->submitter), $todo->getResponsibleIDs()));
 			UserNotificationHandler::getInstance()->fireEvent('remember', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject($todo), $users);
-			$todoIDs[] = $todo->id;
+			$todoIDs[] = $todo->todoID;
 		}
 		
 		if (!empty($todoIDs)) {
 			$conditions = new PreparedStatementConditionBuilder();
-			$conditions->add("id IN (?)", array($todoIDs));
+			$conditions->add("todoID IN (?)", array($todoIDs));
 			
 			$sql = "UPDATE wcf" . WCF_N . "_todo
 				SET remembertime = ?

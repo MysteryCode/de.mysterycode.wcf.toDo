@@ -104,12 +104,12 @@ class ToDoCommentManager extends AbstractCommentManager {
 		
 		if (!$this->currentToDo)
 			return false;
-			
-			// check object id
-		if (!$this->currentToDo->id)
+		
+		// check object id
+		if (!$this->currentToDo->todoID)
 			return false;
-			
-			// check view permission
+		
+		// check view permission
 		if (!$this->currentToDo->canEnter())
 			return false;
 		
@@ -149,7 +149,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 		}
 		
 		// check access
-		if (!$this->isAccessible($this->currentToDo->id)) {
+		if (!$this->isAccessible($this->currentToDo->todoID)) {
 			return false;
 		}
 		

@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS wcf1_todo;
 CREATE TABLE wcf1_todo (
-	id			int(10)		NOT NULL AUTO_INCREMENT,
+	todoID			int(10)		NOT NULL AUTO_INCREMENT,
 	title			tinytext		NOT NULL,
 	description		text		NOT NULL,
 	note			text		NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE wcf1_todo (
 	deleteReason		text,
 	cumulativeLikes		mediumint(7)	NOT NULL DEFAULT 0,
 	attachments		mediumint(7)	NOT NULL DEFAULT 0,
-	PRIMARY KEY (id)
+	PRIMARY KEY (todoID)
 );
 
 DROP TABLE IF EXISTS wcf1_todo_status;
@@ -45,10 +45,10 @@ CREATE TABLE wcf1_todo_status (
 
 DROP TABLE IF EXISTS wcf1_todo_to_user;
 CREATE TABLE wcf1_todo_to_user (
-	toDoID			bigint(20)	NOT NULL,
-	userID			bigint(20)	NOT NULL DEFAULT 0,
+	todoID			int(10),
+	userID			int(10),
 	username			varchar(255)	NOT NULL DEFAULT '',
-	PRIMARY KEY (toDoID,userID)
+	PRIMARY KEY (todoID, userID)
 );
 
 INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (1, 'abgeschlossen', 99, 'green');
@@ -58,3 +58,6 @@ ALTER TABLE wcf1_user ADD todos int(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_todo ADD FOREIGN KEY (submitter) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE wcf1_todo ADD FOREIGN KEY (deletedByID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE wcf1_todo ADD FOREIGN KEY (statusID) REFERENCES wcf1_todo_status (statusID) ON DELETE SET NULL;
+
+ALTER TABLE wcf1_todo_to_user ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE wcf1_todo_to_user ADD FOREIGN KEY (todoID) REFERENCES wcf1_todo (todoID) ON DELETE CASCADE;

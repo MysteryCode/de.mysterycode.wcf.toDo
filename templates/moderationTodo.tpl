@@ -28,7 +28,7 @@
 					<footer class="messageOptions">
 						<nav class="jsMobileNavigation buttonGroupNavigation">
 							<ul class="smallButtons buttonGroup">{*
-								*}{if $todo->canEdit()}<li><a href="{link application='wcf' controller='ToDoEdit' id=$todo->id}{/link}" title="{lang}wcf.toDo.task.edit{/lang}" class="button jsTodoEditButton"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
+								*}{if $todo->canEdit()}<li><a href="{link application='wcf' controller='ToDoEdit' id=$todo->todoID}{/link}" title="{lang}wcf.toDo.task.edit{/lang}" class="button jsTodoEditButton"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
 								*}<li class="toTopLink"><a href="{@$__wcf->getAnchor('top')}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 icon-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>{*
 								*}{event name='messageOptions'}{*
 							*}</ul>
