@@ -88,7 +88,9 @@ class MyToDosPage extends SortablePage {
 	protected function initObjectList() {
 		parent::initObjectList();
 		
-		$this->objectList->getConditionBuilder()->add("submitter = ?", array(WCF::getUser()->userID));
+		$this->objectList->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_todo_to_user user_assigns ON (todo_table.todoID = user_assigns.todoID)";
+		
+		$this->objectList->getConditionBuilder()->add("(submitter = ? OR user_assigns.userID = ?)", array(WCF::getUser()->userID, WCF::getUser()->userID));
 	}
 	
 	/**
