@@ -197,11 +197,8 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	
 	public function getBreadcrumbs() {
 		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.header.menu.toDo'), LinkHandler::getInstance()->getLink('ToDoList', array())));
-		if ($this->todo->categorytitle != '') {
-			WCF::getBreadcrumbs()->add(new Breadcrumb($this->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
-				'id' => $this->category
-			))));
-		}
+		if ($this->getCategory())
+			WCF::getBreadcrumbs()->add($this->getCategory()->getBreadCrumb());
 	}
 	
 	/**
