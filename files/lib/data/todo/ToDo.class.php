@@ -3,6 +3,7 @@
 namespace wcf\data\todo;
 use wcf\data\attachment\Attachment;
 use wcf\data\attachment\GroupedAttachmentList;
+use wcf\data\todo\status\TodoStatus;
 use wcf\data\user\User;
 use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
@@ -50,6 +51,8 @@ final class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteCo
 	 * @var array<integer>
 	 */
 	protected $responsibleIDs = null;
+	
+	public $status = null;
 	
 	public $enableSmilies = true;
 	public $enableHtml = false;
@@ -195,6 +198,16 @@ final class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteCo
 		// parse and return message
 		MessageParser::getInstance()->setOutputType('text/html');
 		return MessageParser::getInstance()->parse($this->note, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
+	}
+	
+	public function getStatus() {
+		if (!$this->statusID)
+			return null;
+		
+		if (!$this->status)
+			$this->status = new TodoStatus($this->statusID);
+		
+		return $this->status;
 	}
 	
 	/**
