@@ -3,6 +3,7 @@
 namespace wcf\data\todo;
 use wcf\data\attachment\Attachment;
 use wcf\data\attachment\GroupedAttachmentList;
+use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\status\TodoStatus;
 use wcf\data\user\User;
 use wcf\data\DatabaseObject;
@@ -53,6 +54,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	protected $responsibleIDs = null;
 	
 	public $status = null;
+	public $category = null;
 	
 	public $enableSmilies = true;
 	public $enableHtml = false;
@@ -174,6 +176,16 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 			$this->status = new TodoStatus($this->statusID);
 		
 		return $this->status;
+	}
+	
+	public function getCategory() {
+		if (!$this->categoryID)
+			return null;
+		
+		if (!$this->category)
+			$this->category = new TodoCategory($this->categoryID);
+		
+		return $this->category;
 	}
 	
 	/**
