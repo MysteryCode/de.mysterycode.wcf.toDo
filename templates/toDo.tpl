@@ -84,8 +84,8 @@
 		<ul class="buttonGroup">{*
 			*}{if $todo->canEdit()}<li><a class="button jsTodoInlineEditor jsOnly"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
 			*}<li class="jsReportTodo jsOnly" data-object-id="{@$todo->id}"><a title="{lang}wcf.moderation.report.reportContent{/lang}" class="button jsTooltip"><span class="icon icon16 icon-warning-sign"></span> <span class="invisible">{lang}wcf.moderation.report.reportContent{/lang}</span></a></li>{*
-			*}{if $todo->canParticipate()}<li class="jsParticipateTodo jsOnly" data-object-id="{@$todo->id}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.participate{/lang}" class="button jsTooltip"><span class="icon icon16 icon-signin"></span> <span class="invisible">{lang}wcf.toDo.task.participate{/lang}</span></a></li>{/if}{*
-			*}{if $todo->canEditStatus() && $todo->status != 3}<li class="jsMarkSolvedTodo jsOnly" data-object-id="{@$todo->id}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.solve{/lang}" class="button jsTooltip"><span class="icon icon16 icon-check"></span> <span class="invisible">{lang}wcf.toDo.task.solve{/lang}</span></a></li>{/if}{*
+			*}{if $todo->canParticipate() && $todo->statusID != 1}<li class="jsParticipateTodo jsOnly" data-object-id="{@$todo->id}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.participate{/lang}" class="button jsTooltip"><span class="icon icon16 icon-signin"></span> <span class="invisible">{lang}wcf.toDo.task.participate{/lang}</span></a></li>{/if}{*
+			*}{if $todo->canEditStatus() && $todo->statusID != 1}<li class="jsMarkSolvedTodo jsOnly" data-object-id="{@$todo->id}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.solve{/lang}" class="button jsTooltip"><span class="icon icon16 icon-check"></span> <span class="invisible">{lang}wcf.toDo.task.solve{/lang}</span></a></li>{/if}{*
 			*}{event name='buttons'}{*
 		*}</ul>
 	</nav>
@@ -123,22 +123,11 @@
 					{/if}
 				</dd>
 			{/if}
-			{if $__wcf->getSession()->getPermission('user.toDo.status.canView')}
+			{if $__wcf->getSession()->getPermission('user.toDo.status.canView') && $todo->status}
 				<dt>{lang}wcf.toDo.task.status{/lang}</dt>
 				<dd>
-					{if $todo->status == 1}
-						<span class="label badge red unsolvedBadge">{lang}wcf.toDo.task.unsolved{/lang}</span>
-					{elseif $todo->status == 2}
-						<span class="label badge yellow workBadge">{lang}wcf.toDo.task.work{/lang}</span>
-					{elseif $todo->status == 3}
-						<span class="label badge green solvedbadge">{lang}wcf.toDo.task.solved{/lang}</span>
-					{elseif $todo->status == 4}
-						<span class="label badge gray canceledBadge">{lang}wcf.toDo.task.canceled{/lang}</span>
-					{elseif $todo->status == 5}
-						<span class="label badge gray pendingBadge">{lang}wcf.toDo.task.preparation{/lang}</span>
-					{elseif $todo->status == 6}
-						<span class="label badge gray pausedBadge">{lang}wcf.toDo.task.paused{/lang}</span>
-					{/if}
+					
+					<span class="label badge {$todo->getStatus()->cssClass}" id="todoStatus{$todo->getStatus()->statusID}">{$todo->getStatus()->getTitle()}</span>
 				</dd>
 			{/if}
 			{if TODO_PROGRESS_ENABLE}
