@@ -1,6 +1,7 @@
 <?php
 
 namespace wcf\form;
+use wcf\data\todo\status\TodoStatusList;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
 use wcf\data\user\User;
