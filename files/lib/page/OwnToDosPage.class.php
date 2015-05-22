@@ -26,24 +26,23 @@ use wcf\util\StringUtil;
  * @package	de.mysterycode.wcf.toDo
  * @category	WCF
  */
-class MyToDosPage extends SortablePage {
+class OwnToDosPage extends SortablePage {
 	/**
-	 *
 	 * @see wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.header.menu.toDo';
 	
 	/**
-	 *
 	 * @see \wcf\page\SortablePage::$defaultSortField
 	 */
 	public $defaultSortField = TODO_DEFAULT_SORT_FIELD;
 	
 	/**
-	 *
 	 * @see \wcf\page\SortablePage::$defaultSortOrder
 	 */
 	public $defaultSortOrder = TODO_DEFAULT_SORT_ORDER;
+	
+	public $templateName = 'toDoList';
 	
 	/**
 	 *
@@ -55,7 +54,6 @@ class MyToDosPage extends SortablePage {
 		'title',
 		'submitTime',
 		'endTime',
-		'submitter',
 		'timestamp',
 		'updatetimestamp',
 		'important',
@@ -88,8 +86,6 @@ class MyToDosPage extends SortablePage {
 	protected function initObjectList() {
 		parent::initObjectList();
 		
-		$this->objectList->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_todo_to_user user_assigns ON (todo_table.todoID = user_assigns.todoID)";
-		
 		$this->objectList->getConditionBuilder()->add("(submitter = ? OR user_assigns.userID = ?)", array(WCF::getUser()->userID, WCF::getUser()->userID));
 	}
 	
@@ -106,8 +102,8 @@ class MyToDosPage extends SortablePage {
 		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoListPage', $this);
 		
 		WCF::getTPL()->assign(array(
-			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.MyToDosPage'),
-			'sidebarName' => 'de.mysterycode.wcf.MyToDosPage',
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.OwnToDosPage'),
+			'sidebarName' => 'de.mysterycode.wcf.OwnToDosPage',
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
 		));
 	}
