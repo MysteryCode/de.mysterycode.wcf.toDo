@@ -2,10 +2,11 @@
 
 namespace wcf\system\cronjob;
 use wcf\data\cronjob\Cronjob;
+use wcf\data\category\CategoryAction;
+use wcf\data\todo\category\ToDoCategoryList;
+use wcf\data\category\CategoryAction;
+use wcf\data\todo\ToDoList;
 use wcf\system\cronjob\AbstractCronjob;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\WCF;
-use wcf\util\StringUtil;
 
 /**
  * Delete unused todo-categories.
@@ -24,39 +25,28 @@ class DeleteUnusedToDoCategoriesCronjob extends AbstractCronjob {
 			return;
 
 		// read used categories
-		$sql = "SELECT category
-			FROM wcf" . WCF_N . "_todo
-			GROUP BY category";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute();
-
-		$test = array();
-
-		while ($row = $statement->fetchArray()) {
-			$test[] = $row['category'];
+		$todoList = new ToDoList();
+		$todoList->readObjects();
+		
+		$usedCategoryIDs = array();
+		foreach ($todoList->getObjects() as $todo) {
+			if (!in_array($todo->categoryID, $usedCategoryIDs) && $todo->categoryID)
+				$usedCategoryIDs[] = $todo->categoryID;
 		}
 
 		// read all categories
-		$sql = "SELECT *
-			FROM wcf" . WCF_N . "_todo_category";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute();
-
+		$categoryList = TodoCategoryList();
+		$categoryList->readObjects();
+		
 		$delete = array();
-		while ($row = $statement->fetchArray()) {
-			// check whether category is used
-			if (!in_array($row['id'], $test)) {
-				$delete[] = $row['id'];
-			}
+		foreach ($categoryList->getObjects() as $category) {
+			if (!in_array($category->categoryID, $usedCategoryIDs))
+				$delete[] = $category->categoryID;
 		}
 
 		if (!empty($delete)) {
-			$conditions = new PreparedStatementConditionBuilder();
-			$conditions->add("id IN (?)", array($delete));
-			$sql = "DELETE FROM wcf" . WCF_N . "_todo_category
-				".$conditions;
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute($conditions->getParameters());
+			$deleteAction = new CategoryAction($delete, 'delete');
+			$deleteAction->executeAction();
 		}
 	}
 }
