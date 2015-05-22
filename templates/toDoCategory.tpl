@@ -140,18 +140,8 @@
 										<h3 class="{if $task->important == 1}importantToDo{/if}">{if $task->canEnter()}{if $task->private}<span class="icon icon16 icon-key"></span> {/if}<a href="{link controller='ToDo' object=$task}{/link}">{$task->title}</a>{else}{$task->title}{/if}</h3>
 										
 										<p class="todoDescription">
-											{if $task->status == 1}
-												<span class="label badge red unsolvedBadge">{lang}wcf.toDo.task.unsolved{/lang}</span>
-											{elseif $task->status == 2}
-												<span class="label badge yellow workBadge">{lang}wcf.toDo.task.work{/lang}</span>
-											{elseif $task->status == 3}
-												<span class="label badge green solvedBadge">{lang}wcf.toDo.task.solved{/lang}</span>
-											{elseif $task->status == 4}
-												<span class="label badge gray canceledBadge">{lang}wcf.toDo.task.canceled{/lang}</span>
-											{elseif $task->status == 5}
-												<span class="label badge gray pendingBadge">{lang}wcf.toDo.task.preparation{/lang}</span>
-											{elseif $task->status == 6}
-												<span class="label badge gray pausedBadge">{lang}wcf.toDo.task.paused{/lang}</span>
+											{if $__wcf->getSession()->getPermission('user.toDo.status.canView') && $todo->status}
+												<span class="label badge {$todo->getStatus()->cssClass}" id="todoStatus{$todo->getStatus()->statusID}">{$todo->getStatus()->getTitle()}</span>
 											{/if}
 										</p>
 										
