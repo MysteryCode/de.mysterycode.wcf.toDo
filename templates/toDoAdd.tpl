@@ -9,7 +9,7 @@
 		//<![CDATA[
 		$(function() {
 			{if $canEditResponsible}
-				new WCF.Search.User('#responsibles', null, false, [ ], true);
+				new WCF.Search.User('#responsibles', null, true, [ ], true);
 			{/if}
 			
 			{include file='__messageQuoteManager' wysiwygSelector='text' supportPaste=true}
