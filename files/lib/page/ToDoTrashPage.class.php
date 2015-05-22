@@ -48,7 +48,7 @@ class ToDoTrashPage extends SortablePage {
 	 * @see \wcf\page\SortablePage::$validSortFields
 	 */
 	public $validSortFields = array(
-		'category',
+		'categoryID',
 		'title',
 		'submitTime',
 		'endTime',

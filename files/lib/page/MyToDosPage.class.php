@@ -51,7 +51,7 @@ class MyToDosPage extends SortablePage {
 	 */
 	public $validSortFields = array(
 		'status',
-		'category',
+		'categoryID',
 		'title',
 		'submitTime',
 		'endTime',

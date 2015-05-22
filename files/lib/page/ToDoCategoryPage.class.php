@@ -51,7 +51,6 @@ class ToDoCategoryPage extends SortablePage {
 	 */
 	public $validSortFields = array(
 		'status',
-		'category',
 		'title',
 		'submitTime',
 		'endTime',
@@ -102,7 +101,7 @@ class ToDoCategoryPage extends SortablePage {
 	protected function initObjectList() {
 		parent::initObjectList();
 		
-		$this->objectList->getConditionBuilder()->add("category = ?", array($this->categoryID));
+		$this->objectList->getConditionBuilder()->add("categoryID = ?", array($this->categoryID));
 	}
 	
 	/**
@@ -112,17 +111,12 @@ class ToDoCategoryPage extends SortablePage {
 	public function readData() {
 		parent::readData();
 		
-		$sql = "SELECT title
-			FROM wcf" . WCF_N . "_todo_category
-			WHERE id = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->categoryID));
-		$category = $statement->fetchArray();
+		$category = new TodoCategory($this->categoryID);
 		
-		if(!$category)
+		if(!$category->categoryID)
 			throw new IllegalLinkException();
 		
-		$this->title = $category['title'];
+		$this->title = $category->getTitle();
 	}
 	
 	/**

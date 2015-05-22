@@ -83,11 +83,8 @@ class ToDoPage extends AbstractPage {
 		
 		WCF::getBreadcrumbs()->add( new Breadcrumb( WCF::getLanguage()->get('wcf.header.menu.toDo'), LinkHandler::getInstance()->getLink('ToDoList', array())));
 		
-		if ($this->todo->categorytitle != '') {
-			WCF::getBreadcrumbs()->add(new Breadcrumb($this->todo->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
-				'id' => $this->todo->category 
-			))));
-		}
+		if ($this->todo->getCategory())
+			WCF::getBreadcrumbs()->add($this->todo->getCategory()->getBreadCrumb());
 	}
 	
 	/**
