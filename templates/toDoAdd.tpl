@@ -84,20 +84,17 @@
 			{/if}
 			
 			{if (TODO_SET_STATUS_ON_CREATE || $action == 'edit') && $canEditStatus}
-				<dl{if $errorField == 'status'} class="formError"{/if}>
-					<dt><label for="status">{lang}wcf.toDo.task.status{/lang}</label></dt>
+				<dl{if $errorField == 'statusID'} class="formError"{/if}>
+					<dt><label for="statusID">{lang}wcf.toDo.task.status{/lang}</label></dt>
 					<dd>
-						<select id="status" name="status" required="required">
-							<option value="" {if $toDoCategory == 0}selected{/if}>{lang}wcf.toDo.status.choose{/lang}</option>
+						<select id="statusID" name="statusID" required="required">
+							<option value="" {if !$statusID}selected{/if}>{lang}wcf.toDo.status.choose{/lang}</option>
 							<option value="" >{lang}wcf.toDo.status.placeholder{/lang}</option>
-							<option value="5" {if $status==5}selected="selected"{/if}>{lang}wcf.toDo.task.preparation{/lang}</option>
-							<option value="1" {if $status==1}selected="selected"{/if}>{lang}wcf.toDo.task.unsolved{/lang}</option>
-							<option value="2" {if $status==2}selected="selected"{/if}>{lang}wcf.toDo.task.work{/lang}</option>
-							<option value="3" {if $status==3}selected="selected"{/if}>{lang}wcf.toDo.task.solved{/lang}</option>
-							<option value="4" {if $status==4}selected="selected"{/if}>{lang}wcf.toDo.task.canceled{/lang}</option>
-							<option value="6" {if $status==6}selected="selected"{/if}>{lang}wcf.toDo.task.paused{/lang}</option>
+							{foreach from=$statusList item=status}
+								<option value="{$status->statusID}" {if $statusID == $status->statusID}selected="selected"{/if}>{$status->getTitle()}</option>
+							{/foreach}
 						</select>
-						{if $errorField == 'status'}
+						{if $errorField == 'statusID'}
 							<small class="innerError">
 								{if $errorType == 'empty'}
 									{lang}wcf.global.form.error.empty{/lang}

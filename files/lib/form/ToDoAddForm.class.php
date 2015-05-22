@@ -63,7 +63,7 @@ class ToDoAddForm extends MessageForm {
 	public $endTime = 0;
 	public $note = '';
 	public $responsibles = '';
-	public $status = 1;
+	public $statusID = 0;
 	public $title = '';
 	public $private = 0;
 	public $important = 0;
@@ -76,6 +76,8 @@ class ToDoAddForm extends MessageForm {
 	public $enableBBCodes = 0;
 	public $canEditStatus = 0;
 	public $canEditResponsible = 0;
+	
+	public $statusList = array();
 	
 	/**
 	 * @see	\wcf\form\IPage::readParameters()
@@ -94,7 +96,7 @@ class ToDoAddForm extends MessageForm {
 		if (isset($_POST['description'])) $this->description = StringUtil::trim($_POST['description']);
 		if (isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d H:i', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
 		if (isset($_POST['note'])) $this->note = StringUtil::trim($_POST['note']);
-		if (isset($_POST['status'])) $this->status = StringUtil::trim($_POST['status']);
+		if (isset($_POST['statusID'])) $this->statusID = StringUtil::trim($_POST['statusID']);
 		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
 		if (isset($_POST['private'])) $this->private = 1;
 		if (isset($_POST['priority'])) $this->important = StringUtil::trim($_POST['priority']);
@@ -134,7 +136,6 @@ class ToDoAddForm extends MessageForm {
 		
 		if (empty($this->progress) && TODO_PROGRESS_ENABLE) {
 			$this->progess = 0;
-// 			throw new UserInputException('progress');
 		}
 		
 		if (($this->progress < 0 || $this->progress > 100) && TODO_PROGRESS_ENABLE) {
@@ -196,6 +197,17 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
+	 * @see wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+		
+		$statusList = new TodoStatusList();
+		$statusList->readObjects();
+		$this->statusList = $statusList->getObjects();
+	}
+	
+	/**
 	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
@@ -209,7 +221,7 @@ class ToDoAddForm extends MessageForm {
 			'title' => $this->title,
 			'description' => $this->description,
 			'note' => $this->note,
-			'status' => $this->status,
+			'statusID' => $this->statusID,
 			'responsibles' => $this->responsibles,
 			'endTime' => $this->endTime,
 			'private' => $this->private,
@@ -224,7 +236,8 @@ class ToDoAddForm extends MessageForm {
 			'canEditStatus' => $this->canEditStatus(),
 			'canEditResponsible' => $this->canEditResponsible(),
 			'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.toDo.attachment.allowedAttachmentExtensions'))),
-			'action' => 'add' 
+			'statusList' => $this->statusList,
+			'action' => 'add'
 		));
 	}
 	

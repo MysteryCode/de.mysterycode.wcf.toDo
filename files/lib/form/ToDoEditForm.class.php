@@ -82,7 +82,7 @@ class ToDoEditForm extends ToDoAddForm {
 		}
 		
 		if ($this->canEditStatus()) {
-			$todoData['data']['status'] = $this->status;
+			$todoData['data']['statusID'] = $this->statusID;
 		}
 		
 		$this->objectAction = new ToDoAction(array($this->todo), 'update', $todoData);
@@ -113,7 +113,7 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->title = $this->todo->title;
 		$this->description = $this->todo->description;
 		$this->note = $this->todo->note;
-		$this->status = $this->todo->status;
+		$this->statusID = $this->todo->statusID;
 		$this->category = $this->todo->category;
 		$this->enableSmilies = $this->todo->enableSmilies;
 		$this->enableHtml = $this->todo->enableHtml;
