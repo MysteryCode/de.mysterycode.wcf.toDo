@@ -15,46 +15,46 @@
 			<!-- user.category -->
 			<option name="user.canViewCategory">
 				<categoryname>user.category</categoryname>
-				<objecttype>de.mysterycode.inventar.category</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 			<option name="user.canEnterCategory">
 				<categoryname>user.category</categoryname>
-				<objecttype>de.mysterycode.inventar.category</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 			<!-- user.todo -->
 			<option name="user.canViewTodos">
 				<categoryname>user.todo</categoryname>
-				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 			<option name="user.canEnterTodos">
 				<categoryname>user.todo</categoryname>
-				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 			
 			<option name="user.canEditOwnTodos">
 				<categoryname>user.todo</categoryname>
-				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 			<option name="user.canDeleteOwnTodos">
 				<categoryname>user.todo</categoryname>
-				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 			
 			<option name="user.canEditStatus">
 				<categoryname>user.todo</categoryname>
-				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 			<option name="user.canEditResponsibles">
 				<categoryname>user.todo</categoryname>
-				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 			<option name="user.canEditReminder">
 				<categoryname>user.todo</categoryname>
-				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 			<option name="user.canEditDate">
 				<categoryname>user.todo</categoryname>
-				<objecttype>de.mysterycode.wcf.todo.todo</objecttype>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 		</options>
 	</import>
