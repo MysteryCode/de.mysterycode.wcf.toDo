@@ -95,8 +95,7 @@ class ToDoListPage extends SortablePage {
 	protected function initObjectList() {
 		parent::initObjectList();
 		
-		$this->objectList->getConditionBuilder()->add("status != ?", array(3));
-		$this->objectList->getConditionBuilder()->add("status != ?", array(4));
+		$this->objectList->getConditionBuilder()->add("statusID != ?", array(1));
 	}
 	
 	/**
