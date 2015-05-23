@@ -22,7 +22,7 @@ class ToDoOutstandingDashboardBox extends AbstractSidebarDashboardBox {
 		parent::init($box, $page);
 		
 		$todoList = new DashboardBoxTodoList(TODO_OUTSTANDING_DASHBOARD_BOX_ITEMS);
-		$todoList->getConditionBuilder()->add('(status = ? OR status = ?)', array(1, 2));
+		$todoList->getConditionBuilder()->add('statusID <> ?', array(1));
 		$todoList->readObjects();
 		
 		if (!WCF::getSession()->getPermission('user.toDo.toDo.canViewList')) {

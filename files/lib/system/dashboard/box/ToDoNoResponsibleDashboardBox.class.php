@@ -23,8 +23,7 @@ class ToDoNoResponsibleDashboardBox extends AbstractSidebarDashboardBox {
 
 		$todoList = new DashboardBoxTodoList(TODO_NORESPONSIBLE_DASHBOARD_BOX_ITEMS);
 		$todoList->getConditionBuilder()->add('(private = ? OR submitter = ?)', array(0, WCF::getUser()->userID));
-		$todoList->getConditionBuilder()->add('status != ?', array(4));
-		$todoList->getConditionBuilder()->add('status != ?', array(3));
+		$todoList->getConditionBuilder()->add('status <> ?', array(1));
 		$todoList->readObjects();
 		
 		if (!WCF::getSession()->getPermission('user.toDo.toDo.canViewList')) {
