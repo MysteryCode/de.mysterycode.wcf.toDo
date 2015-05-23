@@ -349,14 +349,4 @@ xml]]>
 			</option>
 		</options>
 	</import>
-	<delete>
-		<option name="user.toDo.toDo.canEdit" />
-		<option name="user.toDo.toDo.canDelete" />
-		<option name="user.toDo.status.canEdit" />
-		<option name="user.toDo.responsible.canEdit" />
-		<option name="user.toDo.comment.canEdit" />
-		<option name="user.toDo.comment.canDelete" />
-		<option name="user.toDo.comment.canEditResponse" />
-		<option name="user.toDo.comment.canDeleteResponse" />
-	</delete>
 </data>
