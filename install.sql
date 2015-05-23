@@ -45,10 +45,11 @@ CREATE TABLE wcf1_todo_status (
 
 DROP TABLE IF EXISTS wcf1_todo_to_user;
 CREATE TABLE wcf1_todo_to_user (
+	assignID			int(10)		NOT NULL AUTO_INCREMENT,
 	todoID			int(10),
 	userID			int(10),
 	username			varchar(255)	NOT NULL DEFAULT '',
-	PRIMARY KEY (todoID, userID)
+	PRIMARY KEY (assignID)
 );
 
 INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (1, 'abgeschlossen', 99, 'green');
