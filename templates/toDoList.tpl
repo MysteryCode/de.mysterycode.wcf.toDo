@@ -41,7 +41,7 @@
 			new WCF.Todo.Clipboard($updateHandler);
 			WCF.Clipboard.init('wcf\\page\\ToDoListPage', {@$hasMarkedItems}, { });
 			
-			{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}new WCF.Todo.Like({if $__wcf->getUser()->userID && $category->getPermission('canLikeTodo')}1{else}0{/if}, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});{/if}
+			{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}new WCF.Todo.Like(1, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});{/if}
 		});
 		//]]>
 	</script>
@@ -109,7 +109,6 @@
 		<nav>
 			<ul>
 				{content}
-					{if $__wcf->getSession()->getPermission('user.toDo.toDo.canAdd')}<li><a href="{link controller='ToDoAdd'}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
 					{event name='contentNavigationButtonsTop'}
 				{/content}
 			</ul>
@@ -117,94 +116,7 @@
 	{/hascontent}
 </div>
 
-{if $items}
-	<div class="marginTop">
-		<ul class="todoList">
-			<li class="tabularBox tabularBoxTitle todoDepth1">
-				<header>
-					<h2>{lang}wcf.toDo.taskList.tasks{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
-				</header>
-				<ul class="jsClipboardContainer"  data-type="de.mysterycode.wcf.toDo.toDo">
-					{assign var=anchor value=$__wcf->getAnchor('top')}
-					{foreach from=$objects item=task}
-						<li id="todo{$task->todoID}" class="message todoContainer todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject jsTodo{if $task->isDeleted} messageDeleted{/if}" data-todo-id="{@$task->todoID}" data-element-id="{@$task->todoID}"{if $task->canEdit()}
-							data-can-edit="{if $task->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$task->todoID}{/link}"{/if}
-							data-user-id="{@$task->submitter}"
-							{if $task->canEdit()}
-								data-is-disabled="{if $task->isDisabled}1{else}0{/if}" data-is-deleted="{if $task->isDeleted}1{else}0{/if}"
-								data-can-enable="{@$task->canEnable()}" data-can-delete="{@$task->canDelete()}" data-can-delete-completely="{@$task->canDeleteCompletely()}" data-can-restore="{@$task->canRestore()}"
-							{/if}
-							data-object-type="de.mysterycode.wcf.toDo.toDo" data-like-liked="{if $likeData[$task->todoID]|isset}{@$likeData[$task->todoID]->liked}{/if}" data-like-likes="{if $likeData[$task->todoID]|isset}{@$likeData[$task->todoID]->likes}{else}0{/if}" data-like-dislikes="{if $likeData[$task->todoID]|isset}{@$likeData[$task->todoID]->dislikes}{else}0{/if}" data-like-users='{if $likeData[$task->todoID]|isset}{ {implode from=$likeData[$task->todoID]->getUsers() item=likeUser}"{@$likeUser->userID}": { "username": "{$likeUser->username|encodeJSON}" }{/implode} }{else}{ }{/if}'
-							>
-							{if $task->canEdit()}
-								<ul class="messageQuickOptions">
-									<li class="jsOnly"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$task->todoID}" /></li>
-								</ul>
-							{/if}
-							<div class="todo box32">
-								<div>
-									<div class="containerHeadline">
-										<h3 class="{if $task->important == 1}importantToDo{/if}">{if $task->canEnter()}{if $task->private}<span class="icon icon16 icon-key"></span> {/if}<a href="{link controller='ToDo' object=$task}{/link}">{$task->title}</a>{else}{$task->title}{/if}</h3>
-										
-										<p class="todoDescription">
-											{if $__wcf->getSession()->getPermission('user.toDo.status.canView') && $todo->status}
-												<span class="label badge {$todo->getStatus()->cssClass}" id="todoStatus{$todo->getStatus()->statusID}">{$todo->getStatus()->getTitle()}</span>
-											{/if}
-											
-											{if $task->getCategory()}
-												<a href="{$task->getCategory()->getLink()}"><span class="label badge" style="background-color: {$task->getCategory()->color};">{$task->getCategory()->getTitle()}</span></a>
-											{else}
-												<span class="label badge gray">{lang}wcf.toDo.category.notAvailable{/lang}</span>
-											{/if}
-										</p>
-										
-										{if TODO_PROGRESS_ENABLE}
-											<span class="label badge {if $task->progress > 33}{if $task->progress > 66}green{else}yellow{/if}{else}red{/if}">{$task->progress}%</span>
-										{/if}
-										
-										{if $task->isDeleted}
-											<small>
-												{lang}wcf.toDo.deleteNote{/lang}
-											</small>
-										{/if}
-									</div>
-									<div class="todoStats">
-										<dl class="plain statsDataList">
-											<dt>{lang}wcf.toDo.task.submitTime{/lang}</dt>
-											<dd>{@$task->timestamp|time}</dd>
-										</dl>
-										{if $task->endTime>0}
-											<dl class="plain statsDataList">
-												<dt>{lang}wcf.toDo.task.endTime{/lang}</dt>
-												<dd>{@$task->endTime|time}</dd>
-											</dl>
-										{/if}
-									</div>
-									{if $task->getResponsiblePreview() && $__wcf->getSession()->getPermission('user.toDo.responsible.canView')}
-										<aside class="todoResponsible">
-											<div>
-												<div>
-													<small>{lang}wcf.toDo.task.responsibles{/lang}</small>
-													<ul>
-														{foreach from=$task->getResponsiblePreview() item=responsible}
-															<li><a href="{link controller='User' id=$responsible.userID}{/link}" class="userLink" data-user-id="{$responsible.userID}">{$responsible.username}</a></li>
-														{/foreach}
-													</ul>
-												</div>
-											</div>
-										</aside>
-									{/if}
-								</div>
-							</div>
-						</li>
-					{/foreach}
-				</ul>
-			</li>
-		</ul>
-	</div>
-{else}
-	<p class="info">{lang}wcf.toDo.taskList.noTasks{/lang}</p>
-{/if}
+{include file='todoCategoryNodeList'}
 
 <div class="contentNavigation">
 	{@$pagesLinks}
@@ -213,7 +125,6 @@
 		<nav>
 			<ul>
 				{content}
-					{if $__wcf->getSession()->getPermission('user.toDo.toDo.canAdd')}<li><a href="{link controller='ToDoAdd'}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
 					{event name='contentNavigationButtonsBottom'}
 				{/content}
 				

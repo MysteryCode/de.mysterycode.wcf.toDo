@@ -28,6 +28,8 @@ class ToDoList extends DatabaseObjectList {
 		if (!empty($this->sqlSelects))
 			$this->sqlSelects .= ',';
 		
+		$this->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_todo_to_user user_assigns ON (todo_table.todoID = user_assigns.todoID)";
+		
 		// visible status
 		if (!WCF::getSession()->getPermission('mod.toDo.canViewDeleted')) {
 			$this->getConditionBuilder()->add('todo_table.isDeleted = 0');
@@ -35,14 +37,14 @@ class ToDoList extends DatabaseObjectList {
 		}
 		
 		if ($this->sqlOrderBy == 'status ASC' || $this->sqlOrderBy == 'status DESC') {
-			$this->sqlJoins = " LEFT JOIN wcf" . WCF_N . "_todo_status status ON (todo_table.statusID = status.statusID)";
-			$this->sqlOrderBy = ($this->sqlOrderBy == 'status ASC' ? 'status.showOrder ASC' : 'status.showOrder DESC');
+			$this->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_todo_status status ON (todo_table.statusID = status.statusID)";
+			$this->sqlOrderBy .= ($this->sqlOrderBy == 'status ASC' ? 'status.showOrder ASC' : 'status.showOrder DESC');
 		}
 		
 		if (!WCF::getSession()->getPermission('mod.toDo.canEnable'))
 			$this->getConditionBuilder()->add('todo_table.isDisabled = 0');
 		
 		if (!WCF::getSession()->getPermission('user.toDo.toDo.canViewPrivate'))
-			$this->getConditionBuilder()->add("(private = ? or submitter = ? or (SELECT assigns.toDoID FROM wcf" . WCF_N . "_todo_to_user assigns WHERE assigns.toDoID = todo_table.todoID AND assigns.userID = ?) = todo_table.todoID)", array (0, WCF::getUser()->userID, WCF::getUser()->userID));
+			$this->getConditionBuilder()->add("(private = ? or submitter = ? or (SELECT assigns.todoID FROM wcf" . WCF_N . "_todo_to_user assigns WHERE assigns.toDoID = todo_table.todoID AND assigns.userID = ?) = todo_table.todoID)", array (0, WCF::getUser()->userID, WCF::getUser()->userID));
 	}
 }
