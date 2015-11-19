@@ -329,19 +329,19 @@ xml]]>
 			</option>
 			
 			
-			<option name="admin.content.toDo.category.canAdd">
+			<option name="admin.content.toDo.category.canAddCategory">
 				<categoryname>admin.content.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="admin.content.toDo.category.canEdit">
+			<option name="admin.content.toDo.category.canEditCategory">
 				<categoryname>admin.content.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="admin.content.toDo.category.canDelete">
+			<option name="admin.content.toDo.category.canDeleteCategory">
 				<categoryname>admin.content.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
