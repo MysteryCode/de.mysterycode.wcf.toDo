@@ -68,7 +68,7 @@ class TodoCategoryCache extends SingletonFactory {
 	 * @see	\wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
-		$this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.category', 'de.mysterycode.toDo');
+		$this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.category', 'de.mysterycode.wcf.toDo');
 		$this->labelGroups = TodoCategoryLabelGroupCacheBuilder::getInstance()->getData();
 		
 		$this->statObjects = TodoCategoryDataCacheBuilder::getInstance()->getData(array(), 'statObjects');
