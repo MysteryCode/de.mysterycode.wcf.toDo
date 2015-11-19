@@ -7,13 +7,13 @@
 		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.list">
 			<controller><![CDATA[wcf\acp\page\ToDoCategoryListPage]]></controller>
 			<parent>wcf.acp.menu.link.toDoCategory</parent>
-			<permissions>admin.content.toDo.category.canEdit,admin.content.toDo.category.canDelete</permissions>
+			<permissions>admin.content.toDo.category.canEditCategory,admin.content.toDo.category.canDeleteCategory</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.add">
 			<controller><![CDATA[wcf\acp\form\ToDoCategoryAddForm]]></controller>
 			<parent>wcf.acp.menu.link.toDoCategory</parent>
-			<permissions>admin.content.toDo.category.canAdd</permissions>
+			<permissions>admin.content.toDo.category.canAddCategory</permissions>
 			<showorder>2</showorder>
 		</acpmenuitem>
 	</import>
