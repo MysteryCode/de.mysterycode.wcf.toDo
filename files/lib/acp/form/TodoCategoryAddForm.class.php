@@ -22,7 +22,7 @@ class TodoCategoryAddForm extends AbstractCategoryAddForm {
 	/**
 	 * @see	\wcf\acp\page\AbstractCategoryListPage::$objectTypeName
 	 */
-	public $objectTypeName = 'de.mysterycode.toDo';
+	public $objectTypeName = 'de.mysterycode.wcf.toDo';
 	
 	/**
 	 * @see	\wcf\acp\page\AbstractCategoryListPage::$pageTitle
