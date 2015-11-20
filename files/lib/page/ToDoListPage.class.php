@@ -50,7 +50,7 @@ class ToDoListPage extends SortablePage {
 	 * @see \wcf\page\SortablePage::$validSortFields
 	 */
 	public $validSortFields = array(
-		'status',
+		'statusID',
 		'categoryID',
 		'title',
 		'submitTime',
