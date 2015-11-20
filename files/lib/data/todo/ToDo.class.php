@@ -23,6 +23,7 @@ use wcf\system\request\LinkHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
+use wcf\data\category\Category;
 
 /**
  * Represents a todo.
@@ -183,7 +184,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 			return null;
 		
 		if (!$this->category)
-			$this->category = new TodoCategory($this->categoryID);
+			$this->category = new TodoCategory(new Category($this->categoryID));
 		
 		return $this->category;
 	}
