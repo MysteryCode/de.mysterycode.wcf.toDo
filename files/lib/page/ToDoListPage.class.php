@@ -1,6 +1,7 @@
 <?php
 
 namespace wcf\page;
+use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
 use wcf\data\todo\ToDoList;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\data\user\User;
@@ -89,6 +90,12 @@ class ToDoListPage extends SortablePage {
 	public $likeData = array();
 	
 	/**
+	 * category node list
+	 * @var	\wcf\data\todo\category\RestrictedTodoCategoryNodeList
+	 */
+	public $categoryNodeList = null;
+	
+	/**
 	 *
 	 * @see \wcf\page\MultipleLinkPage::initObjectList()
 	 */
@@ -103,6 +110,19 @@ class ToDoListPage extends SortablePage {
 	 */
 	public function readData() {
 		parent::readData();
+		
+		// init category node list
+		$this->categoryNodeList = new RestrictedTodoCategoryNodeList();
+		
+		// users online
+		if (MODULE_USERS_ONLINE) {
+			// init users online list
+			$this->usersOnlineList = new UsersOnlineList();
+			$this->usersOnlineList->readStats();
+			$this->usersOnlineList->checkRecord();
+			$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
+			$this->usersOnlineList->readObjects();
+		}
 		
 		// fetch likes
 		if (MODULE_LIKE) {
@@ -129,7 +149,9 @@ class ToDoListPage extends SortablePage {
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoListPage'),
 			'sidebarName' => 'de.mysterycode.wcf.ToDoListPage',
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
-			'likeData' => $this->likeData
+			'likeData' => $this->likeData,
+			'categoryNodeList' => $this->categoryNodeList,
+			'usersOnlineList' => $this->usersOnlineList
 		));
 	}
 }

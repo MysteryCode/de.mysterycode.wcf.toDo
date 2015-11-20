@@ -99,6 +99,10 @@
 
 {include file='userNotice'}
 
+{if $categoryNodeList|count > 0}
+	{include file='todoCategoryNodeList'}
+{/if}
+
 <div class="contentNavigation">
 	{pages print=true assign=pagesLinks controller='ToDoCategory' id=$id link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	

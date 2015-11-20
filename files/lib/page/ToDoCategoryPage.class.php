@@ -1,6 +1,9 @@
 <?php
 
 namespace wcf\page;
+use wcf\data\category\Category;
+use wcf\data\todo\category\TodoCategory;
+use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
 use wcf\data\todo\ToDo;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\data\user\User;
@@ -85,6 +88,12 @@ class ToDoCategoryPage extends SortablePage {
 	public $categoryID = 0;
 	
 	/**
+	 * category node list
+	 * @var	\wcf\data\todo\category\RestrictedTodoCategoryNodeList
+	 */
+	public $categoryNodeList = null;
+	
+	/**
 	 *
 	 * @see wcf\page\IPage::readParameters()
 	 */
@@ -111,12 +120,25 @@ class ToDoCategoryPage extends SortablePage {
 	public function readData() {
 		parent::readData();
 		
-		$category = new TodoCategory($this->categoryID);
+		$category = new TodoCategory(new Category($this->categoryID));
 		
 		if(!$category->categoryID)
 			throw new IllegalLinkException();
 		
 		$this->title = $category->getTitle();
+		
+		// init category node list
+		$this->categoryNodeList = new RestrictedTodoCategoryNodeList($this->categoryID);
+		
+		// users online
+		if (MODULE_USERS_ONLINE) {
+			// init users online list
+			$this->usersOnlineList = new UsersOnlineList();
+			$this->usersOnlineList->readStats();
+			$this->usersOnlineList->checkRecord();
+			$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
+			$this->usersOnlineList->readObjects();
+		}
 	}
 	
 	/**
@@ -136,6 +158,8 @@ class ToDoCategoryPage extends SortablePage {
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoCategoryPage'),
 			'sidebarName' => 'de.mysterycode.wcf.ToDoCategoryPage',
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
+			'categoryNodeList' => $this->categoryNodeList,
+			'usersOnlineList' => $this->usersOnlineList
 		));
 	}
 }
