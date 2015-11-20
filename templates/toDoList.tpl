@@ -118,6 +118,10 @@
 
 {include file='todoCategoryNodeList'}
 
+{if $items}
+	{include file='todoListContainer' todoList=$objects todoListItems=$items}
+{/if}
+
 <div class="contentNavigation">
 	{@$pagesLinks}
 	
