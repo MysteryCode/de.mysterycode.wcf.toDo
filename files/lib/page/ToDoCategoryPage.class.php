@@ -53,7 +53,7 @@ class ToDoCategoryPage extends SortablePage {
 	 * @see \wcf\page\SortablePage::$validSortFields
 	 */
 	public $validSortFields = array(
-		'status',
+		'statusID',
 		'title',
 		'submitTime',
 		'endTime',
@@ -86,6 +86,8 @@ class ToDoCategoryPage extends SortablePage {
 	public $enableTracking = true;
 	
 	public $categoryID = 0;
+	
+	public $category = null;
 	
 	/**
 	 * category node list
@@ -120,12 +122,12 @@ class ToDoCategoryPage extends SortablePage {
 	public function readData() {
 		parent::readData();
 		
-		$category = new TodoCategory(new Category($this->categoryID));
+		$this->category = new TodoCategory(new Category($this->categoryID));
 		
-		if(!$category->categoryID)
+		if(!$this->category->categoryID)
 			throw new IllegalLinkException();
 		
-		$this->title = $category->getTitle();
+		$this->title = $this->category->getTitle();
 		
 		// init category node list
 		$this->categoryNodeList = new RestrictedTodoCategoryNodeList($this->categoryID);
@@ -159,7 +161,8 @@ class ToDoCategoryPage extends SortablePage {
 			'sidebarName' => 'de.mysterycode.wcf.ToDoCategoryPage',
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
 			'categoryNodeList' => $this->categoryNodeList,
-			'usersOnlineList' => $this->usersOnlineList
+			'usersOnlineList' => $this->usersOnlineList,
+			'category' => $this->category
 		));
 	}
 }
