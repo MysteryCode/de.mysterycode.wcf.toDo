@@ -3,12 +3,12 @@
 		<ul class="todoList">
 			<li class="tabularBox tabularBoxTitle todoDepth1">
 				<header>
-					<h2>{lang}wcf.toDo.todoList.todos{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
+					<h2>{lang}wcf.toDo.taskList.tasks{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
 				</header>
 				<ul class="jsClipboardContainer"  data-type="de.mysterycode.wcf.toDo.toDo">
 					{assign var=anchor value=$__wcf->getAnchor('top')}
 					{foreach from=$todoList item=todo}
-						<li id="todo{$todo->todoID}" class="message todoContainer todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject jsTodo{if $todo->isDeleted} messageDeleted{/if}" data-todo-id="{@$todo->todoID}" data-element-id="{@$todo->todoID}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$todo->todoID}{/link}"{/if}  data-user-id="{@$todo->submitter}"
+						<li id="todo{$todo->todoID}" class="message todoContainer todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject jsTodo{if $todo->isDeleted} messageDeleted{/if}" data-todo-id="{@$todo->todoID}" data-element-id="{@$todo->todoID}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$todo->todoID}{/link}"{/if}  data-user-id="{@$todo->userID}"
 							{if $todo->canEdit()}
 								data-is-disabled="{if $todo->isDisabled}1{else}0{/if}" data-is-deleted="{if $todo->isDeleted}1{else}0{/if}"
 								data-can-enable="{@$todo->canEnable()}" data-can-delete="{@$todo->canDelete()}" data-can-delete-completely="{@$todo->canDeleteCompletely()}" data-can-restore="{@$todo->canRestore()}"
@@ -51,7 +51,7 @@
 											</dl>
 										{/if}
 									</div>
-									{if $todo->getResponsiblePreview() && $__wcf->getSession()->getPermission('user.toDo.responsible.canView')}
+									{if $todo->getResponsiblePreview()}
 										<aside class="todoResponsible">
 											<div>
 												<div>
