@@ -72,7 +72,7 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 	 * @see wcf\data\ILinkableObject::getLink()
 	 */
 	public function getLink() {
-		return LinkHandler::getInstance()->getLink('Category', array(
+		return LinkHandler::getInstance()->getLink('TodoCategory', array(
 			'object' => $this
 		));
 	}
