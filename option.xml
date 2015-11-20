@@ -75,11 +75,11 @@
 			<option name="todo_default_sort_field">
 				<categoryname>toDo.sort</categoryname>
 				<optiontype>select</optiontype>
-				<defaultvalue>status</defaultvalue>
+				<defaultvalue>statusID</defaultvalue>
 				<selectoptions><![CDATA[title:wcf.toDo.task.title
 category:wcf.toDo.category
 endTime:wcf.toDo.task.endTime
-status:wcf.toDo.task.status
+statusID:wcf.toDo.task.status
 submitter:wcf.toDo.task.submitter
 timestamp:wcf.toDo.task.submitTime
 updatetimestamp:wcf.toDo.task.updatetimestamp
