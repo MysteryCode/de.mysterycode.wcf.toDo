@@ -2,7 +2,7 @@
 
 namespace wcf\form;
 use wcf\data\category\CategoryAction;
-use wcf\data\todo\category\TodoCategoryList;
+use wcf\data\todo\category\RestrictedTodoCategoryNodeTree;
 use wcf\data\todo\status\TodoStatusList;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
@@ -26,6 +26,10 @@ use wcf\util\ArrayUtil;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\util\UserUtil;
+use wcf\system\category\CategoryHandler;
+use wcf\system\exception\SystemException;
+use wcf\data\todo\category\TodoCategory;
+use wcf\data\category\Category;
 
 /**
  * Shows the toDoAdd form.
@@ -53,14 +57,8 @@ class ToDoAddForm extends MessageForm {
 	public $attachmentObjectType = 'de.mysterycode.wcf.toDo.toDo';
 	
 	public $enableComments = 1;
-	public $disableToDo = false;
 	
-	/**
-	 * @see \wcf\form\MessageForm::$enableMultilingualism
-	 */
-	public $enableMultilingualism = true;
 	public $neededModules = array('TODOLIST');
-	public $neededPermissions = array('user.toDo.toDo.canAdd');
 	
 	public $description = '';
 	public $endTime = 0;
@@ -78,18 +76,21 @@ class ToDoAddForm extends MessageForm {
 	public $enableSmilies = 0;
 	public $enableHtml = 0;
 	public $enableBBCodes = 0;
-	public $canEditStatus = 0;
-	public $canEditResponsible = 0;
 
 	public $statusList = array();
-	public $categoryList = array();
 	
 	/**
 	 * @see	\wcf\form\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
+		
 		MessageQuoteManager::getInstance()->readParameters();
+		
+		if (isset($_REQUEST['id'])) $this->categoryID = intval($_REQUEST['id']);
+		$this->category = new TodoCategory(new Category($this->categoryID));
+		if (!$this->category->categoryID)
+			throw new IllegalLinkException();
 	}
 	
 	/**
@@ -131,12 +132,8 @@ class ToDoAddForm extends MessageForm {
 			throw new UserInputException('description');
 		}
 		
-		if (empty($this->status) && TODO_SET_STATUS_ON_CREATE && $this->canEditStatus()) {
-			throw new UserInputException('status');
-		}
-		
-		if (empty($this->categoryID) && empty($this->newCategory) && TODO_CATEGORY_ENABLE) {
-			throw new UserInputException('categoryID');
+		if (empty($this->statusID) && TODO_SET_STATUS_ON_CREATE) {
+			throw new UserInputException('statusID');
 		}
 		
 		if (empty($this->progress) && TODO_PROGRESS_ENABLE) {
@@ -177,25 +174,20 @@ class ToDoAddForm extends MessageForm {
 			$todoData['data']['isDisabled'] = 1;
 		}
 		
-		if ($this->canEditStatus()) {
-			$todoData['data']['status'] = $this->status;
-		}
+		$todoData['data']['statusID'] = $this->statusID;
 		
 		$this->objectAction = new ToDoAction(array(), 'create', $todoData);
 		$resultValues = $this->objectAction->executeAction();
 		
-		if ($this->canEditResponsible()) {
-			$this->updateResponsibles($resultValues['returnValues']->todoID, $this->responsibles);
-		}
+		$this->updateResponsibles($resultValues['returnValues']->todoID, $this->responsibles);
 		
 		MessageQuoteManager::getInstance()->saved();
 		
 		$this->saved();
 		
 		if ($resultValues['returnValues']->isDisabled && !WCF::getSession()->getPermission('mod.toDo.canEnable')) {
-			HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('ToDoCategory', array('application' => 'wcf', 'id' => $this->categoryID)), WCF::getLanguage()->get('wcf.toDo.moderation.redirect'), 30);
-		}
-		else {
+			HeaderUtil::delayedRedirect($this->category->getLink(), WCF::getLanguage()->get('wcf.toDo.moderation.redirect'), 30);
+		} else {
 			HeaderUtil::redirect($resultValues['returnValues']->getLink());
 		}
 		exit;
@@ -211,9 +203,11 @@ class ToDoAddForm extends MessageForm {
 		$statusList->readObjects();
 		$this->statusList = $statusList->getObjects();
 		
-		$categoryList = new TodoCategoryList();
-		$categoryList->readObjects();
-		$this->categoryList = $categoryList->getObjects();
+		$categoryNodeTree = new RestrictedTodoCategoryNodeTree();
+		
+// 		$categoryList = new TodoCategoryList();
+// 		$categoryList->readObjects();
+		$this->categoryList = $categoryNodeTree->getIterator();
 	}
 	
 	/**
@@ -243,8 +237,6 @@ class ToDoAddForm extends MessageForm {
 			'enableHtml' => $this->enableHtml,
 			'enableBBCodes' => $this->enableBBCodes,
 			'remembertime' => $this->remembertime,
-			'canEditStatus' => $this->canEditStatus(),
-			'canEditResponsible' => $this->canEditResponsible(),
 			'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.toDo.attachment.allowedAttachmentExtensions'))),
 			'statusList' => $this->statusList,
 			'action' => 'add'
@@ -288,46 +280,5 @@ class ToDoAddForm extends MessageForm {
 		
 		if (!empty($userIDs))
 			UserNotificationHandler::getInstance()->fireEvent('assign', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todoID)), $userIDs);
-	}
-	
-	public function createCategory($title) {
-		$objectType = CategoryHandler::getInstance()->getObjectTypeByName('de.mysterycode.toDo');
-		if ($objectType === null) {
-			throw new SystemException("Unknown category object type with name 'de.mysterycode.toDo'");
-		}
-		
-		$categoryAction = new CategoryAction(array(), 'create', array(
-			'data' => array(
-				'additionalData' => serialize(array('color' => 'blue')),
-				'description' => '',
-				'isDisabled' => 0,
-				'objectTypeID' => $objectType->objectTypeID,
-				'parentCategoryID' => null,
-				'showOrder' => null,
-				'title' => $title
-			)
-		));
-		$categoryAction->executeAction();
-		$returnValues = $categoryAction->getReturnValues();
-		
-		return $returnValues['returnValues']->categoryID;
-	}
-	
-	public function canEditStatus() {
-		if (WCF::getSession()->getPermission('user.toDo.status.canEditOwn'))
-			return true;
-		if (WCF::getSession()->getPermission('mod.toDo.status.canEdit'))
-			return true;
-		
-		return false;
-	}
-	
-	public function canEditResponsible() {
-		if (WCF::getSession()->getPermission('user.toDo.responsible.canEditOwn'))
-			return true;
-		if (WCF::getSession()->getPermission('mod.toDo.responsible.canEdit'))
-			return true;
-		
-		return false;
 	}
 }
