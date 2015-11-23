@@ -1,3 +1,5 @@
+{if !$showCategory|isset}{assign var='showCategory' value=false}{/if}
+
 {if $todoListItems}
 	<div class="marginTop">
 		<ul class="todoList">
@@ -21,7 +23,12 @@
 							<div class="todo box32">
 								<div>
 									<div class="containerHeadline">
-										<h3 class="{if $todo->important == 1}importantToDo{/if}">{if $todo->canEnter()}{if $todo->private}<span class="icon icon16 icon-key"></span> {/if}<a href="{link controller='ToDo' object=$todo}{/link}">{$todo->title}</a>{else}{$todo->title}{/if}</h3>
+										<h3 class="{if $todo->important == 1}importantToDo{/if}">
+											{if $showCategory}
+												<span class="label badge {$todo->getCategory()->cssClass}">{$todo->getCategory()->getTitle()}</span>
+											{/if}
+											{if $todo->canEnter()}{if $todo->private}<span class="icon icon16 icon-key"></span> {/if}<a href="{link controller='ToDo' object=$todo}{/link}">{$todo->title}</a>{else}{$todo->title}{/if}
+										</h3>
 										
 										<p class="todoDescription">
 											{if $__wcf->getSession()->getPermission('user.toDo.status.canView') && $todo->status}
