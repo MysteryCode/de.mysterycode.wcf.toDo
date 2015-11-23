@@ -1,9 +1,8 @@
 <?php
 
 namespace wcf\data\todo\category;
-use wcf\data\category\CategoryNodeTree;
 use wcf\data\category\CategoryNode;
-
+use wcf\data\category\CategoryNodeTree;
 
 /**
  * Represents a tree of category nodes.

@@ -1,8 +1,10 @@
 <?php
 
 namespace wcf\form;
+use wcf\data\category\Category;
 use wcf\data\category\CategoryAction;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeTree;
+use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\status\TodoStatusList;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
@@ -28,8 +30,6 @@ use wcf\util\StringUtil;
 use wcf\util\UserUtil;
 use wcf\system\category\CategoryHandler;
 use wcf\system\exception\SystemException;
-use wcf\data\todo\category\TodoCategory;
-use wcf\data\category\Category;
 
 /**
  * Shows the toDoAdd form.

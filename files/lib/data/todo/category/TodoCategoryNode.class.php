@@ -2,8 +2,8 @@
 
 namespace wcf\data\todo\category;
 use wcf\data\category\CategoryNode;
-use wcf\system\WCF;
 use wcf\system\language\LanguageFactory;
+use wcf\system\WCF;
 
 /**
  * Represents a category node.

@@ -1,10 +1,9 @@
 <?php
 
 namespace wcf\system\cronjob;
+use wcf\data\category\CategoryAction;
 use wcf\data\cronjob\Cronjob;
-use wcf\data\category\CategoryAction;
 use wcf\data\todo\category\ToDoCategoryList;
-use wcf\data\category\CategoryAction;
 use wcf\data\todo\ToDoList;
 use wcf\system\cronjob\AbstractCronjob;
 

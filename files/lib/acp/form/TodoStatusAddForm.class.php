@@ -1,6 +1,7 @@
 <?php
 
 namespace wcf\acp\form;
+use wcf\data\package\PackageCache;
 use wcf\data\todo\status\TodoStatusAction;
 use wcf\data\todo\status\TodoStatusEditor;
 use wcf\form\AbstractForm;
@@ -8,7 +9,6 @@ use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
-use wcf\data\package\PackageCache;
 
 /**
  * Shows the field add form.

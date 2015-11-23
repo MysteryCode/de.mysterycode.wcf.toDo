@@ -2,8 +2,8 @@
 
 namespace wcf\page;
 use wcf\data\category\Category;
-use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
+use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\ToDo;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\data\user\User;

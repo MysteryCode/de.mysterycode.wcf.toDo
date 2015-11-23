@@ -3,6 +3,7 @@
 namespace wcf\data\todo;
 use wcf\data\attachment\Attachment;
 use wcf\data\attachment\GroupedAttachmentList;
+use wcf\data\category\Category;
 use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\status\TodoStatus;
 use wcf\data\user\User;
@@ -23,7 +24,6 @@ use wcf\system\request\LinkHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
-use wcf\data\category\Category;
 
 /**
  * Represents a todo.

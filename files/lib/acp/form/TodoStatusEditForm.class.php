@@ -1,13 +1,13 @@
 <?php
 
 namespace wcf\acp\form;
+use wcf\data\todo\status\TodoStatus;
+use wcf\data\todo\status\TodoStatusAction;
 use wcf\data\todo\status\TodoStatusCache;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
-use wcf\data\todo\status\TodoStatus;
-use wcf\data\todo\status\TodoStatusAction;
 
 /**
  * Shows the field edit form.
