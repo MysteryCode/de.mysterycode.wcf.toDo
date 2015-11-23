@@ -347,6 +347,25 @@ xml]]>
 				<usersonly>1</usersonly>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
+			
+			<option name="admin.content.toDo.status.canAdd">
+				<categoryname>admin.content.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.toDo.status.canEdit">
+				<categoryname>admin.content.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.toDo.status.canDelete">
+				<categoryname>admin.content.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
 		</options>
 	</import>
 </data>

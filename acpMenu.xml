@@ -16,5 +16,21 @@
 			<permissions>admin.content.toDo.category.canAddCategory</permissions>
 			<showorder>2</showorder>
 		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.todoStatus">
+			<parent>wcf.acp.menu.link.community</parent>
+		</acpmenuitem>
+		<acpmenuitem name="wcf.acp.menu.link.todoStatus.list">
+			<controller><![CDATA[wcf\acp\page\TodoStatusListPage]]></controller>
+			<parent>wcf.acp.menu.link.todoStatus</parent>
+			<permissions>admin.content.toDo.status.canEdit,admin.content.toDo.status.canDelete</permissions>
+			<showorder>1</showorder>
+		</acpmenuitem>
+		<acpmenuitem name="wcf.acp.menu.link.todoStatus.add">
+			<controller><![CDATA[wcf\acp\form\TodoStatusAddForm]]></controller>
+			<parent>wcf.acp.menu.link.todoStatus</parent>
+			<permissions>admin.content.toDo.status.canAdd</permissions>
+			<showorder>2</showorder>
+		</acpmenuitem>
 	</import>
 </data>
