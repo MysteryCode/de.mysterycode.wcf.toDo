@@ -15,7 +15,9 @@ use wcf\form\AbstractForm;
 use wcf\form\MessageForm;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
+use wcf\system\category\CategoryHandler;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\LanguageFactory;
 use wcf\system\message\quote\MessageQuoteManager;
@@ -28,8 +30,6 @@ use wcf\util\ArrayUtil;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\util\UserUtil;
-use wcf\system\category\CategoryHandler;
-use wcf\system\exception\SystemException;
 
 /**
  * Shows the toDoAdd form.
