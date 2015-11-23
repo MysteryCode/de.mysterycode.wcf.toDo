@@ -7,7 +7,7 @@
 	
 	{capture assign='canonicalURLParameters'}sortField={@$sortField}&sortOrder={@$sortOrder}{/capture}
 	
-	<link rel="canonical" href="{link controller='ToDoList'}{/link}" />
+	<link rel="canonical" href="{link controller='MyToDos'}{/link}" />
 	
 	<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Moderation{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 	<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Todo{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
@@ -39,7 +39,7 @@
 			});
 			
 			new WCF.Todo.Clipboard($updateHandler);
-			WCF.Clipboard.init('wcf\\page\\ToDoListPage', {@$hasMarkedItems}, { });
+			WCF.Clipboard.init('wcf\\page\\MyToDosPage', {@$hasMarkedItems}, { });
 		});
 		//]]>
 	</script>
@@ -101,13 +101,12 @@
 {include file='userNotice'}
 
 <div class="contentNavigation">
-	{pages print=true assign=pagesLinks controller='ToDoList' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+	{pages print=true assign=pagesLinks controller='MyToDos' link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	
 	{hascontent}
 		<nav>
 			<ul>
 				{content}
-					{if $__wcf->getSession()->getPermission('user.toDo.toDo.canAdd')}<li><a href="{link controller='ToDoAdd'}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
 					{event name='contentNavigationButtonsTop'}
 				{/content}
 			</ul>
@@ -115,100 +114,7 @@
 	{/hascontent}
 </div>
 
-{if $items}
-	<div class="marginTop">
-		<ul class="todoList">
-			<li class="tabularBox tabularBoxTitle todoDepth1">
-				<header>
-					<h2>{lang}wcf.toDo.taskList.tasks{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
-				</header>
-				<ul class="jsClipboardContainer"  data-type="de.mysterycode.wcf.toDo.toDo">
-					{assign var=anchor value=$__wcf->getAnchor('top')}
-					{foreach from=$objects item=task}
-						<li id="todo{$task->todoID}" class="message todoContainer todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject jsTodo{if $task->isDeleted} messageDeleted{/if}" data-todo-id="{@$task->todoID}" data-element-id="{@$task->todoID}"{if $task->canEdit()} data-can-edit="{if $task->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$task->todoID}{/link}"{/if}  data-user-id="{@$task->submitter}"
-							{if $task->canEdit()}
-								data-is-disabled="{if $task->isDisabled}1{else}0{/if}" data-is-deleted="{if $task->isDeleted}1{else}0{/if}"
-								data-can-enable="{@$task->canEnable()}" data-can-delete="{@$task->canDelete()}" data-can-delete-completely="{@$task->canDeleteCompletely()}" data-can-restore="{@$task->canRestore()}"
-							{/if}>
-							{if $task->canEdit()}
-								<ul class="messageQuickOptions">
-									<li class="jsOnly"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$task->todoID}" /></li>
-								</ul>
-							{/if}
-							<div class="todo box32">
-								<div>
-									<div class="containerHeadline">
-										<h3 class="{if $task->important == 1}importantToDo{/if}">{if $task->canEnter()}{if $task->private}<span class="icon icon16 icon-key"></span> {/if}<a href="{link controller='ToDo' object=$task}{/link}">{$task->title}</a>{else}{$task->title}{/if}</h3>
-										
-										<p class="todoDescription">
-											{if $task->status == 1}
-												<span class="label badge red unsolvedBadge">{lang}wcf.toDo.task.unsolved{/lang}</span>
-											{elseif $task->status == 2}
-												<span class="label badge yellow workBadge">{lang}wcf.toDo.task.work{/lang}</span>
-											{elseif $task->status == 3}
-												<span class="label badge green solvedBadge">{lang}wcf.toDo.task.solved{/lang}</span>
-											{elseif $task->status == 4}
-												<span class="label badge gray canceledBadge">{lang}wcf.toDo.task.canceled{/lang}</span>
-											{elseif $task->status == 5}
-												<span class="label badge gray pendingBadge">{lang}wcf.toDo.task.preparation{/lang}</span>
-											{elseif $task->status == 6}
-												<span class="label badge gray pausedBadge">{lang}wcf.toDo.task.paused{/lang}</span>
-											{/if}
-											
-											{if $task->getCategory()}
-												<a href="{$task->getCategory()->getLink()}"><span class="label badge" style="background-color: {$task->getCategory()->color};">{$task->getCategory()->getTitle()}</span></a>
-											{else}
-												<span class="label badge gray">{lang}wcf.toDo.category.notAvailable{/lang}</span>
-											{/if}
-										</p>
-										
-										{if TODO_PROGRESS_ENABLE}
-											<span class="label badge {if $task->progress > 33}{if $task->progress > 66}green{else}yellow{/if}{else}red{/if}">{$task->progress}%</span>
-										{/if}
-										
-										{if $task->isDeleted}
-											<small>
-												{lang}wcf.toDo.deleteNote{/lang}
-											</small>
-										{/if}
-									</div>
-									<div class="todoStats">
-										<dl class="plain statsDataList">
-											<dt>{lang}wcf.toDo.task.submitTime{/lang}</dt>
-											<dd>{@$task->timestamp|time}</dd>
-										</dl>
-										{if $task->endTime>0}
-											<dl class="plain statsDataList">
-												<dt>{lang}wcf.toDo.task.endTime{/lang}</dt>
-												<dd>{@$task->endTime|time}</dd>
-											</dl>
-										{/if}
-									</div>
-									{if $task->getResponsiblePreview() && $__wcf->getSession()->getPermission('user.toDo.responsible.canView')}
-										<aside class="todoResponsible">
-											<div>
-												<div>
-													<small>{lang}wcf.toDo.task.responsibles{/lang}</small>
-													<ul>
-														{foreach from=$task->getResponsiblePreview() item=responsible}
-															<li><a href="{link controller='User' id=$responsible.userID}{/link}" class="userLink" data-user-id="{$responsible.userID}">{$responsible.username}</a></li>
-														{/foreach}
-													</ul>
-												</div>
-											</div>
-										</aside>
-									{/if}
-								</div>
-							</div>
-						</li>
-					{/foreach}
-				</ul>
-			</li>
-		</ul>
-	</div>
-{else}
-	<p class="info">{lang}wcf.toDo.taskList.noTasks{/lang}</p>
-{/if}
+{include file='todoListContainer' todoList=$objects todoListItems=$items}
 
 <div class="contentNavigation">
 	{@$pagesLinks}
@@ -217,7 +123,6 @@
 		<nav>
 			<ul>
 				{content}
-					{if $__wcf->getSession()->getPermission('user.toDo.toDo.canAdd')}<li><a href="{link controller='ToDoAdd'}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
 					{event name='contentNavigationButtonsBottom'}
 				{/content}
 				
