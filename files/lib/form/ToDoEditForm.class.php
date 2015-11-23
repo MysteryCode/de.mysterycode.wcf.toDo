@@ -47,7 +47,7 @@ class ToDoEditForm extends ToDoAddForm {
 		
 		if (isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
 		$this->todo = new ToDo($this->todoID);
-		if (!$this->todo->id)
+		if (!$this->todo->todoID)
 			throw new IllegalLinkException();
 		
 		$this->attachmentObjectID = $this->todoID;
