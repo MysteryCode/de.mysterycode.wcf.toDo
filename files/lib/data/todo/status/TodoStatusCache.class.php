@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\data\todo\status;
-use wcf\data\todo\status\Status;
+use wcf\data\todo\status\TodoStatus;
 use wcf\system\cache\builder\TodoStatusCacheBuilder;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\language\LanguageFactory;
@@ -19,7 +19,7 @@ use wcf\system\WCF;
  * @contact	de.mysterycode.inventar
  * @category 	MCPS
  */
-class ContactCache extends SingletonFactory {
+class TodoStatusCache extends SingletonFactory {
 	/**
 	 * cached status
 	 * @var	array<\wcf\data\todo\status\TodoStatus>
@@ -30,7 +30,7 @@ class ContactCache extends SingletonFactory {
 	 * @see	\wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
-		$this->cachedStatus = ContactCacheBuilder::getInstance()->getData(array(), 'status');
+		$this->cachedStatus = TodoStatusCacheBuilder::getInstance()->getData(array(), 'status');
 	}
 	
 	/**
@@ -45,6 +45,10 @@ class ContactCache extends SingletonFactory {
 		}
 		
 		return $this->cachedStatus[$statusID];
+	}
+	
+	public function getStatusList() {
+		return $this->cachedStatus;
 	}
 	
 	/**

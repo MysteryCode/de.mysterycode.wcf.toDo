@@ -27,7 +27,7 @@ class TodoStatusCacheBuilder extends AbstractCacheBuilder {
 		);
 		
 		$statusList = new TodoStatusList();
-		$statusList->sqlOrderBy = 'status.statusID ASC';
+		$statusList->sqlOrderBy = 'todo_status.statusID ASC';
 		$statusList->readObjects();
 		$data['status'] = $statusList->getObjects();
 		

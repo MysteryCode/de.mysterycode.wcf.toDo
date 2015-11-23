@@ -1,6 +1,7 @@
 <?php
 
 namespace wcf\data\todo\status;
+use wcf\system\cache\builder\TodoStatusCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 
