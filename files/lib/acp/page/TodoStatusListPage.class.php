@@ -16,7 +16,7 @@ class TodoStatusListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.toDoStatus.list';
+	public $activeMenuItem = 'wcf.acp.menu.link.todoStatus.list';
 	
 	/**
 	 * @see	\wcf\page\SortablePage::$defaultSortField
