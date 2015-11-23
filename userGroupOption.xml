@@ -37,7 +37,10 @@
 				<parent>mod.toDo</parent>
 			</category>
 			
-			<category name="admin.content.toDo">
+			<category name="admin.content.toDo.category">
+				<parent>admin.content</parent>
+			</category>
+			<category name="admin.content.toDo.status">
 				<parent>admin.content</parent>
 			</category>
 		</categories>
@@ -330,38 +333,38 @@ xml]]>
 			
 			
 			<option name="admin.content.toDo.category.canAddCategory">
-				<categoryname>admin.content.toDo</categoryname>
+				<categoryname>admin.content.toDo.category</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="admin.content.toDo.category.canEditCategory">
-				<categoryname>admin.content.toDo</categoryname>
+				<categoryname>admin.content.toDo.category</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="admin.content.toDo.category.canDeleteCategory">
-				<categoryname>admin.content.toDo</categoryname>
+				<categoryname>admin.content.toDo.category</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			
 			<option name="admin.content.toDo.status.canAdd">
-				<categoryname>admin.content.toDo</categoryname>
+				<categoryname>admin.content.toDo.status</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="admin.content.toDo.status.canEdit">
-				<categoryname>admin.content.toDo</categoryname>
+				<categoryname>admin.content.toDo.status</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="admin.content.toDo.status.canDelete">
-				<categoryname>admin.content.toDo</categoryname>
+				<categoryname>admin.content.toDo.status</categoryname>
 				<optiontype>boolean</optiontype>
 				<usersonly>1</usersonly>
 				<admindefaultvalue>1</admindefaultvalue>
