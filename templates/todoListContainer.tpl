@@ -31,7 +31,7 @@
 										</h3>
 										
 										<p class="todoDescription">
-											{if $__wcf->getSession()->getPermission('user.toDo.status.canView') && $todo->status}
+											{if $__wcf->getSession()->getPermission('user.toDo.status.canView') && $todo->statusID}
 												<span class="label badge {$todo->getStatus()->cssClass}" id="todoStatus{$todo->getStatus()->statusID}">{$todo->getStatus()->getTitle()}</span>
 											{/if}
 										</p>
