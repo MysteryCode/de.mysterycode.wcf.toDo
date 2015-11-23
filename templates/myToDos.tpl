@@ -114,7 +114,7 @@
 	{/hascontent}
 </div>
 
-{include file='todoListContainer' todoList=$objects todoListItems=$items}
+{include file='todoListContainer' todoList=$objects todoListItems=$items showCategory=true}
 
 <div class="contentNavigation">
 	{@$pagesLinks}
