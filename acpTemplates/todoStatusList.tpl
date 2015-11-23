@@ -53,13 +53,13 @@
 				{foreach from=$objects item=status}
 					<tr class="jsStatusRow">
 						<td class="columnIcon">
-							<a href="{link controller='TodoStatusEdit' object=$status}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
+							<a href="{link controller='TodoStatusEdit' id=$status->statusID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$status->statusID}" data-confirm-message="{lang}wcf.acp.todo.status.delete.sure{/lang}"></span>
 							
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID columnStatusID">{@$status->statusID}</td>
-						<td class="columnTitle"><a href="{link controller='TodoStatusEdit' object=$status}{/link}">{$status->subject}</a></p></td>
+						<td class="columnTitle"><a href="{link controller='TodoStatusEdit' id=$status->statusID}{/link}">{$status->getTitle()}</a></p></td>
 						<td class="columnDigits columnShowOrder">{#$status->showOrder}</td>
 						
 						{event name='columns'}
