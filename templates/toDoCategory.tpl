@@ -110,7 +110,7 @@
 		<nav>
 			<ul>
 				{content}
-					{if $category->canAddTodo()}<li><a href="{link controller='ToDoAdd'}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
+					{if $category->canAddTodo()}<li><a href="{link controller='ToDoAdd' id=$category->categoryID}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
 					{event name='contentNavigationButtonsTop'}
 				{/content}
 			</ul>
@@ -127,7 +127,7 @@
 		<nav>
 			<ul>
 				{content}
-					{if $category->canAddTodo()}<li><a href="{link controller='ToDoAdd'}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
+					{if $category->canAddTodo() && $items}<li><a href="{link controller='ToDoAdd' id=$category->categoryID}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
 					{event name='contentNavigationButtonsBottom'}
 				{/content}
 				
