@@ -2,6 +2,7 @@
 
 namespace wcf\data\todo\status;
 use wcf\data\DatabaseObjectEditor;
+use wcf\data\IEditableCachedObject;
 
 /**
  * Provides functions to edit todo status.
@@ -12,9 +13,16 @@ use wcf\data\DatabaseObjectEditor;
  * @package	de.mysterycode.wcf.toDo
  * @category	WCF
  */
-class TodoStatusEditor extends DatabaseObjectEditor {
+class TodoStatusEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\todo\status\TodoStatus';
+	
+	/**
+	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 */
+	public static function resetCache() {
+		TodoStatusCacheBuilder::getInstance()->reset();
+	}
 }
