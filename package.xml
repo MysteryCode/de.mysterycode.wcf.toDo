@@ -68,7 +68,13 @@
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 		
-		<!-- SQL -->
+		<!-- add new SQL -->
+		<instruction type="sql">update.sql</instruction>
+		
+		<!-- update script -->
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo_1.2.0.php</instruction>
+		
+		<!-- remove old SQL -->
 		<instruction type="sql">update.sql</instruction>
 		
 		<!-- default XMLs -->
