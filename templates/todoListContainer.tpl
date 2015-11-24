@@ -49,12 +49,12 @@
 									</div>
 									<div class="todoStats">
 										<dl class="plain statsDataList">
-											<dt>{lang}wcf.toDo.todo.submitTime{/lang}</dt>
+											<dt>{lang}wcf.toDo.task.submitTime{/lang}</dt>
 											<dd>{@$todo->timestamp|time}</dd>
 										</dl>
 										{if $todo->endTime>0}
 											<dl class="plain statsDataList">
-												<dt>{lang}wcf.toDo.todo.endTime{/lang}</dt>
+												<dt>{lang}wcf.toDo.task.endTime{/lang}</dt>
 												<dd>{@$todo->endTime|time}</dd>
 											</dl>
 										{/if}
@@ -63,7 +63,7 @@
 										<aside class="todoResponsible">
 											<div>
 												<div>
-													<small>{lang}wcf.toDo.todo.responsibles{/lang}</small>
+													<small>{lang}wcf.toDo.task.responsibles{/lang}</small>
 													<ul>
 														{foreach from=$todo->getResponsiblePreview() item=responsible}
 															<li><a href="{link controller='User' id=$responsible.userID}{/link}" class="userLink" data-user-id="{$responsible.userID}">{$responsible.username}</a></li>
