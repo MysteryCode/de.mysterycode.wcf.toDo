@@ -52,7 +52,9 @@
 				$('.sidebar').addClass('{if $todo->isDeleted}deleted{else}disabled{/if}');
 			{/if}
 			
-			{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}new WCF.Todo.Like({if $__wcf->getUser()->userID && $todo->getCategory()->getPermission('canLikeTodo')}1{else}0{/if}, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});{/if}
+			{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}
+				new WCF.Todo.Like.Detail({if $__wcf->getUser()->userID && $todo->getCategory()->getPermission('user.canLikeTodo')}1{else}0{/if}, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});
+			{/if}
 			
 			{event name='javascriptInit'}
 		});
@@ -74,10 +76,23 @@
 
 {include file='header' sidebarOrientation='right'}
 
-<header class="boxHeadline todo jsTodo" data-todo-id="{@$todo->todoID}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$todo->todoID}{/link}"{/if} data-user-id="{$__wcf->user->userID}"
+<header class="boxHeadline todo jsTodo"
+	data-todo-id="{@$todo->todoID}"{if $todo->canEdit()}
+	data-can-edit="{if $todo->canEdit()}1{else}0{/if}"
+	data-edit-url="{link controller='ToDoEdit' id=$todo->todoID}{/link}"{/if}
+	data-user-id="{$todo->userID}"
+	data-object-type="de.mysterycode.wcf.toDo.toDo"
+	data-like-liked="{if $todoLikeData !== null}{@$todoLikeData->liked}{/if}"
+	data-like-likes="{if $todoLikeData !== null}{@$todoLikeData->likes}{else}0{/if}"
+	data-like-dislikes="{if $todoLikeData !== null}{@$todoLikeData->dislikes}{else}0{/if}"
+	data-like-users='{if $todoLikeData !== null}{ {implode from=$todoLikeData->getUsers() item=likeUser}"{@$likeUser->userID}": { "username": "{$likeUser->username|encodeJSON}" }{/implode} }{else}{ }{/if}'
 	{if $todo->canEdit()}
-		data-is-disabled="{if $todo->isDisabled}1{else}0{/if}" data-is-deleted="{if $todo->isDeleted}1{else}0{/if}"
-		data-can-enable="{@$todo->canEnable()}" data-can-delete="{@$todo->canDelete()}" data-can-delete-completely="{@$todo->canDeleteCompletely()}" data-can-restore="{@$todo->canRestore()}"
+		data-is-disabled="{if $todo->isDisabled}1{else}0{/if}"
+		data-is-deleted="{if $todo->isDeleted}1{else}0{/if}"
+		data-can-enable="{@$todo->canEnable()}"
+		data-can-delete="{@$todo->canDelete()}"
+		data-can-delete-completely="{@$todo->canDeleteCompletely()}"
+		data-can-restore="{@$todo->canRestore()}"
 	{/if}>
 	
 	<h1>{lang}wcf.toDo.task.detail{/lang}</h1>

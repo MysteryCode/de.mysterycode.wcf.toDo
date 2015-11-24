@@ -11,6 +11,7 @@ use wcf\system\comment\CommentHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\like\LikeHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
@@ -50,6 +51,12 @@ class ToDoPage extends AbstractPage {
 	public $commentManager = null;
 	public $commentList = null;
 	public $objectType = 0;
+
+	/**
+	 * like data
+	 * @var	array<\wcf\data\like\object\LikeObject>
+	 */
+	public $likeData = null;
 	
 	/**
 	 *
@@ -81,6 +88,12 @@ class ToDoPage extends AbstractPage {
 		$this->commentManager = $objectType->getProcessor();
 		$this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->objectTypeID, $this->todoID);
 		
+		if (MODULE_LIKE) {
+			$objectType = LikeHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo');
+			LikeHandler::getInstance()->loadLikeObjects($objectType, array($this->todo->todoID));
+			$this->likeData = LikeHandler::getInstance()->getLikeObject($objectType, $this->todo->todoID);
+		}
+		
 		WCF::getBreadcrumbs()->add( new Breadcrumb( WCF::getLanguage()->get('wcf.header.menu.toDo'), LinkHandler::getInstance()->getLink('ToDoList', array())));
 		
 		if ($this->todo->getCategory())
@@ -110,8 +123,26 @@ class ToDoPage extends AbstractPage {
 			'todo' => $this->todo,
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoPage'),
 			'sidebarName' => 'de.mysterycode.wcf.ToDoPage',
-			'attachmentList' => $this->todo->getAttachments()
+			'attachmentList' => $this->todo->getAttachments(),
+			'todoLikeData' => $this->likeData,
 		));
+	}
+	
+	/**
+	 * @see	\wcf\page\ITrackablePage::getParentObjectType()
+	 */
+	public function getParentObjectType() {
+		return 'de.mysterycode.wcf.toDo';
+	}
+	
+	/**
+	 * @see	\wcf\page\ITrackablePage::getParentObjectID()
+	 */
+	public function getParentObjectID() {
+		if ($this->todo)
+			return $this->todo->categoryID;
+		
+		return 0;
 	}
 	
 	/**
@@ -125,6 +156,9 @@ class ToDoPage extends AbstractPage {
 	 * @see	\wcf\page\ITrackablePage::getObjectID()
 	 */
 	public function getObjectID() {
-		return $this->todoID;
+		if ($this->todo)
+			return $this->todoID;
+		
+		return 0;
 	}
 }

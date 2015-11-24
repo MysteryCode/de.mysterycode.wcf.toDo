@@ -154,6 +154,39 @@ WCF.Todo.Like = WCF.Like.extend({
 });
 
 /**
+ * Like support for todos on detail page
+ * 
+ * @see	WCF.Todo.Like
+ */
+WCF.Todo.Like.Detail = WCF.Todo.Like.extend({
+	/**
+	 * @see	WCF.Like._getContainers()
+	 */
+	_getContainers: function() {
+		return $('.boxHeadline');
+	},
+
+	/**
+	 * @see	WCF.Like._buildWidget()
+	 */
+	_buildWidget: function(containerID, likeButton, dislikeButton, badge, summary) {
+		var $widgetContainer = this._getWidgetContainer(containerID);
+		if (this._canLike) {
+			var $smallButtons = this._containers[containerID].find('.buttonGroup');
+			likeButton.insertBefore($smallButtons.find('.jsReportTodo'));
+			dislikeButton.insertBefore($smallButtons.find('.jsReportTodo'));
+			dislikeButton.find('a').addClass('button');
+			likeButton.find('a').addClass('button');
+		}
+
+		if (summary) {
+			summary.insertAfter(this._containers[containerID].find('p'));
+		}
+		this._containers[containerID].find('h1').append(' ').append(badge);
+	}
+});
+
+/**
  * Provides a generic update handler for todos.
  */
 WCF.Todo.UpdateHandler = Class.extend({
