@@ -40,6 +40,7 @@ CREATE TABLE wcf1_todo_status (
 	description		text,
 	showOrder		int(10)		NOT NULL	DEFAULT 0,
 	cssClass			varchar(255)	NOT NULL	DEFAULT '',
+	locked			tinyint(1)	NOT NULL	DEFAULT 0,
 	PRIMARY KEY (statusID)
 );
 
@@ -52,7 +53,7 @@ CREATE TABLE wcf1_todo_to_user (
 	PRIMARY KEY (assignID)
 );
 
-INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (1, 'abgeschlossen', 99, 'green');
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (1, 'abgeschlossen', 99, 'green', 1);
 
 ALTER TABLE wcf1_user ADD todos int(10) NOT NULL DEFAULT 0;
 
