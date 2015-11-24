@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com/XSD/language.xsd" languagecode="de">
+	<category name="wcf.acl.option">
+		<item name="wcf.acl.option.category.de.mysterycode.wcf.toDo.category.user.category"><![CDATA[Kategorie]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canViewCategory"><![CDATA[Kann Kategorie sehen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEnterCategory"><![CDATA[Kann Kategorie betreten]]></item>
+		
+		<item name="wcf.acl.option.category.de.mysterycode.wcf.toDo.category.user.todo"><![CDATA[ToDos]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canViewTodos"><![CDATA[Kann ToDos sehen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEnterTodos"><![CDATA[Kann ToDos aufrufen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditOwnTodos"><![CDATA[Kann eigene ToDos bearbeiten]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canDeleteOwnTodos"><![CDATA[Kann eigene ToDos löschen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditStatus"><![CDATA[Kann den Status bearbeiten]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditResponsibles"><![CDATA[Kann die Verantwortlichen bearbeiten]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditReminder"><![CDATA[Kann den Erinnerungszeitpunkt bearbeiten]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditDate"><![CDATA[Kann das Fälligkeitsdatum bearbeiten]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canAddTodo"><![CDATA[Kann ToDos erstellen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canLikeTodo"><![CDATA[Kann die Likefunktion benutzen]]></item>
+	</category>
 	
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.category.user.toDo"><![CDATA[ToDo-Liste]]></item>
@@ -64,16 +81,25 @@
 		<item name="wcf.acp.group.option.category.mod.toDo.responsible"><![CDATA[Zuweisungen]]></item>
 		<item name="wcf.acp.group.option.mod.toDo.responsible.canEdit"><![CDATA[Kann Zuweisungen bearbeiten]]></item>
 		
-		<item name="wcf.acp.group.option.category.admin.content.toDo"><![CDATA[ToDo-Kategorien]]></item>
+		<item name="wcf.acp.group.option.category.admin.content.toDo.category"><![CDATA[ToDo-Kategorien]]></item>
 		<item name="wcf.acp.group.option.admin.content.toDo.category.canAdd"><![CDATA[Kann ToDo-Kategorien hinzufügen]]></item>
 		<item name="wcf.acp.group.option.admin.content.toDo.category.canEdit"><![CDATA[Kann ToDo-Kategorien bearbeiten]]></item>
 		<item name="wcf.acp.group.option.admin.content.toDo.category.canDelete"><![CDATA[Kann ToDo-Kategorien löschen]]></item>
+		
+		<item name="wcf.acp.group.option.category.admin.content.toDo.status"><![CDATA[ToDo-Status]]></item>
+		<item name="wcf.acp.group.option.admin.content.toDo.status.canAdd"><![CDATA[Kann Status hinzufügen]]></item>
+		<item name="wcf.acp.group.option.admin.content.toDo.status.canEdit"><![CDATA[Kann Status bearbeiten]]></item>
+		<item name="wcf.acp.group.option.admin.content.toDo.status.canDelete"><![CDATA[Kann Status löschen]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.toDoCategory"><![CDATA[ToDo-Kategorien]]></item>
 		<item name="wcf.acp.menu.link.toDoCategory.add"><![CDATA[Kategorie hinzufügen]]></item>
 		<item name="wcf.acp.menu.link.toDoCategory.list"><![CDATA[Kategorien auflisten]]></item>
+		
+		<item name="wcf.acp.menu.link.todoStatus"><![CDATA[ToDo-Status]]></item>
+		<item name="wcf.acp.menu.link.todoStatus.add"><![CDATA[Status hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.todoStatus.list"><![CDATA[Status auflisten]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">
@@ -126,6 +152,14 @@
 		<item name="wcf.acp.todo.category.color"><![CDATA[Label-Farbe]]></item>
 		<item name="wcf.acp.todo.category.preview"><![CDATA[Vorschau]]></item>
 		<item name="wcf.acp.todo.category.noItems"><![CDATA[Es sind noch keine ToDo-Kategorien vorhanden.]]></item>
+		
+		<item name="wcf.acp.todo.status.subject"><![CDATA[Bezeichnung]]></item>
+		<item name="wcf.acp.todo.status.showOrder"><![CDATA[Anzeigereihenfolge]]></item>
+		<item name="wcf.acp.todo.status.description"><![CDATA[Erklärung (optional)]]></item>
+		<item name="wcf.acp.todo.status.cssClass"><![CDATA[CSS-Klasse]]></item>
+		<item name="wcf.acp.todo.status.button.choose"><![CDATA[Status wählen]]></item>
+		<item name="wcf.acp.todo.status.add"><![CDATA[Status hinzufügen]]></item>
+		<item name="wcf.acp.todo.status.edit"><![CDATA[Status bearbeiten]]></item>
 	</category>
 	
 	<category name="wcf.clipboard">
@@ -186,9 +220,10 @@
 		<item name="wcf.toDo.task.status"><![CDATA[Status]]></item>
 		<item name="wcf.toDo.task.responsible"><![CDATA[Verantwortlich]]></item>
 		<item name="wcf.toDo.task.responsibles"><![CDATA[Verantwortliche:]]></item>
-		<item name="wcf.toDo.task.submitTime"><![CDATA[Erstellungsdatum]]></item>
+		<item name="wcf.toDo.task.responsibles.description"><![CDATA[Geben Sie hier die Benutzernamen der Benutzer ein, die für dieses ToDo verantwortlich sein sollen. Diese erhalten je nach Konfiguration die Erlaubnis das ToDo zu sehen und zu bearbeiten.]]></item>
+		<item name="wcf.toDo.task.submitTime"><![CDATA[Erstellt]]></item>
 		<item name="wcf.toDo.task.submitter"><![CDATA[Ersteller]]></item>
-		<item name="wcf.toDo.task.endTime"><![CDATA[Fälligkeitsdatum]]></item>
+		<item name="wcf.toDo.task.endTime"><![CDATA[Deadline]]></item>
 		<item name="wcf.toDo.task.delete"><![CDATA[ToDo löschen]]></item>
 		<item name="wcf.toDo.task.edit"><![CDATA[ToDo bearbeiten]]></item>
 		<item name="wcf.toDo.task.add"><![CDATA[ToDo hinzufügen]]></item>
@@ -202,6 +237,7 @@
 		<item name="wcf.toDo.task.paused"><![CDATA[Pausiert]]></item>
 		<item name="wcf.toDo.task.preparation"><![CDATA[In Vorbereitung]]></item>
 		<item name="wcf.toDo.task.private"><![CDATA[Als privat markieren]]></item>
+		<item name="wcf.toDo.task.private.description"><![CDATA[Wenn Sie das ToDo als privat markieren, kann es nur vom Ersteller, den unten definierten verantwortlichen Benutzern sowie ggf. berechtigten Gruppen eingesehen werden.]]></item>
 		<item name="wcf.toDo.task.important"><![CDATA[Als wichtig markieren]]></item>
 		<item name="wcf.toDo.task.priority"><![CDATA[Priorität]]></item>
 		<item name="wcf.toDo.task.priority.normal"><![CDATA[normal]]></item>
