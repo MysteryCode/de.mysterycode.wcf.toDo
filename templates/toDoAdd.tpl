@@ -110,14 +110,14 @@
 			{/if}
 			
 			<dl{if $errorField == 'endTime'} class="formError"{/if}>
-				<dt><label for="endTime">{lang}wcf.toDo.task.endTime{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></label></dt>
+				<dt><label for="endTime">{lang}wcf.toDo.task.endTime{/lang}</label></dt>
 				<dd>
 					<input type="datetime" id="endTime" name="endTime" value="{if $endTime > 0}{$endTime}{/if}" />
 				</dd>
 			</dl>
 			
 			<dl{if $errorField == 'remembertime'} class="formError"{/if}>
-				<dt><label for="remembertime">{lang}wcf.toDo.task.remembertime{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></label></dt>
+				<dt><label for="remembertime">{lang}wcf.toDo.task.remembertime{/lang}</label></dt>
 				<dd>
 					<input type="date" id="remembertime" name="remembertime" value="{if $remembertime > 0}{$remembertime}{/if}" />
 				</dd>
@@ -146,7 +146,7 @@
 		</fieldset>
 		
 		<fieldset>
-			<legend>{lang}wcf.toDo.task.responsible{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></legend>
+			<legend>{lang}wcf.toDo.task.responsible{/lang}</legend>
 			
 			<dl{if $errorField == 'responsibles'} class="formError"{/if}>
 				<dt><label for="responsibles">{lang}wcf.toDo.task.responsible{/lang}</label></dt>
@@ -183,7 +183,7 @@
 	
 	<div class="container containerPadding marginTop">
 		<fieldset>
-			<legend>{lang}wcf.toDo.task.note{/lang} <small>{lang}wcf.toDo.task.optional{/lang}</small></legend>
+			<legend>{lang}wcf.toDo.task.note{/lang}</legend>
 			
 			<textarea id="note" name="note" rows="10" cols="20">{$note}</textarea>
 			{if $errorField == 'note'}
