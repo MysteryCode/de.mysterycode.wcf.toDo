@@ -11,7 +11,7 @@
 	
 	<requiredpackages>
 		<requiredpackage minversion="2.1.0"><![CDATA[com.woltlab.wcf]]></requiredpackage>
-		<requiredpackage minversion="1.1.1"><![CDATA[de.codequake.wcf.acp.index.news]]></requiredpackage>
+		<requiredpackage minversion="1.1.1" file="requirements/de.codequake.wcf.acp.index.news.tar"><![CDATA[de.codequake.wcf.acp.index.news]]></requiredpackage>
 	</requiredpackages>
 	
 	<excludedpackages>
