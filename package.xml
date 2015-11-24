@@ -69,13 +69,13 @@
 		<instruction type="template">templates.tar</instruction>
 		
 		<!-- add new SQL -->
-		<instruction type="sql">update.sql</instruction>
+		<instruction type="sql">update_pre.sql</instruction>
 		
 		<!-- update script -->
 		<instruction type="script">acp/update_de.mysterycode.wcf.todo_1.2.0.php</instruction>
 		
 		<!-- remove old SQL -->
-		<instruction type="sql">update.sql</instruction>
+		<instruction type="sql">update_post.sql</instruction>
 		
 		<!-- default XMLs -->
     		<instruction type="pageMenu">pageMenu.xml</instruction>
