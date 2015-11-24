@@ -7,7 +7,9 @@ ALTER TABLE wcf1_todo CHANGE endTime endTime int(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_todo CHANGE updatetimestamp updatetimestamp int(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_todo CHANGE remembertime remembertime int(10) NOT NULL DEFAULT 0;
 
-ALTER TABLE wcf1_todo_to_user ADD assignID int(10) NOT NULL AUTO_INCREMENT;
+ALTER TABLE wcf1_todo_to_user DROP PRIMARY KEY;
+
+ALTER TABLE wcf1_todo_to_user ADD assignID int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 ALTER TABLE wcf1_todo_to_user CHANGE toDoID todoID int(10);
 ALTER TABLE wcf1_todo_to_user CHANGE userID userID int(10);
 
