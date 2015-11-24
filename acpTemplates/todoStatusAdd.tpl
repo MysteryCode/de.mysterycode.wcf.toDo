@@ -15,7 +15,7 @@
 		<ul>
 			{if $action == 'edit' && $availableStatus|count > 1}
 				<li class="dropdown">
-					<a class="button dropdownToggle"><span class="icon icon16 icon-sort"></span> <span>{lang}inventar.acp.field.button.choose{/lang}</span></a>
+					<a class="button dropdownToggle"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.acp.todo.status.button.choose{/lang}</span></a>
 					<div class="dropdownMenu">
 						<ul class="scrollableDropdownMenu">
 							{foreach from=$availableStatus item='item'}
