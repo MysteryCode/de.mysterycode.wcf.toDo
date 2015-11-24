@@ -35,6 +35,10 @@
 				<categoryname>user.todo</categoryname>
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
+			<option name="user.canLikeTodo">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
 			
 			<option name="user.canEditOwnTodos">
 				<categoryname>user.todo</categoryname>
