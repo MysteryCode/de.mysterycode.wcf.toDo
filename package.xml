@@ -38,7 +38,7 @@
 		<instruction type="template">templates.tar</instruction>
 		
 		<!-- SQL -->
-		<instruction type="sql">update.sql</instruction>
+		<instruction type="sql">install.sql</instruction>
 		
 		<!-- script -->
 		<instruction type="script">acp/install_de.mysterycode.wcf.todo_1.2.0.php</instruction>
