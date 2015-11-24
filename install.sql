@@ -53,7 +53,12 @@ CREATE TABLE wcf1_todo_to_user (
 	PRIMARY KEY (assignID)
 );
 
-INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (1, 'abgeschlossen', 99, 'green', 1);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (1, 'abgeschlossen/solved', 99, 'green', 1);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (2, 'offen/unsolved', 2, 'green', 0);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (3, 'in Arbeit/in progress',3, 'green', 0);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (4, 'verworfen/canceled', 98, 'green', 0);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (5, 'in Vorbereitung/in preparation', 1, 'green', 0);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (6, 'paused', 4, 'green', 0);
 
 ALTER TABLE wcf1_user ADD todos int(10) NOT NULL DEFAULT 0;
 
