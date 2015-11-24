@@ -28,12 +28,12 @@ CREATE TABLE wcf1_todo_status (
 );
 
 
-INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (1, 'abgeschlossen/solved', 99, 'green', 1);
-INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (2, 'offen/unsolved', 2, 'green', 0);
-INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (3, 'in Arbeit/in progress',3, 'green', 0);
-INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (4, 'verworfen/canceled', 98, 'green', 0);
-INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (5, 'in Vorbereitung/in preparation', 1, 'green', 0);
-INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass) VALUES (6, 'pausiert/paused', 4, 'green', 0);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass, locked) VALUES (1, 'abgeschlossen/solved', 99, 'green', 1);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass, locked) VALUES (2, 'offen/unsolved', 2, 'green', 0);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass, locked) VALUES (3, 'in Arbeit/in progress',3, 'green', 0);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass, locked) VALUES (4, 'verworfen/canceled', 98, 'green', 0);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass, locked) VALUES (5, 'in Vorbereitung/in preparation', 1, 'green', 0);
+INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass, locked) VALUES (6, 'pausiert/paused', 4, 'green', 0);
 
 ALTER TABLE wcf1_todo ADD FOREIGN KEY (statusID) REFERENCES wcf1_todo_status (statusID) ON DELETE SET NULL;
 ALTER TABLE wcf1_todo ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
