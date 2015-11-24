@@ -23,5 +23,29 @@
 			<listenerclassname>wcf\system\event\listener\ToDoUserActionRenameListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
+		
+		<!-- category action -->
+		<eventlistener>
+			<eventclassname>wcf\data\category\CategoryAction</eventclassname>
+			<eventname>initializeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\TodoCategoryActionListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\data\category\CategoryAction</eventclassname>
+			<eventname>initializeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\TodoCategoryActionListener</listenerclassname>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\data\category\CategoryAction</eventclassname>
+			<eventname>finalizeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\TodoCategoryActionListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\data\category\CategoryAction</eventclassname>
+			<eventname>finalizeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\TodoCategoryActionListener</listenerclassname>
+		</eventlistener>
 	</import>
 </data>
