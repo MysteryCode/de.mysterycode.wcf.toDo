@@ -74,7 +74,7 @@ class ToDoCategoryPage extends SortablePage {
 	 *
 	 * @see \wcf\page\MultipleLinkPage::$objectListClassName
 	 */
-	public $objectListClassName = 'wcf\data\todo\ToDoList';
+	public $objectListClassName = 'wcf\data\todo\ViewableToDoList';
 	
 	public $neededPermissions = array('user.toDo.toDo.canViewList');
 	

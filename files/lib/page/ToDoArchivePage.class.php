@@ -69,7 +69,7 @@ class ToDoArchivePage extends SortablePage {
 	 *
 	 * @see \wcf\page\MultipleLinkPage::$objectListClassName
 	 */
-	public $objectListClassName = 'wcf\data\todo\ToDoList';
+	public $objectListClassName = 'wcf\data\todo\ViewableToDoList';
 	
 	public $neededModules = array('TODOLIST');
 	
