@@ -137,6 +137,7 @@
 				<dt><label for="private">{lang}wcf.toDo.task.private{/lang}</label></dt>
 				<dd>
 					<input type="checkbox" id="private" name="private" {if $private == '1'}checked{/if} />
+					<p><small>{lang}wcf.toDo.task.private.description{/lang}</small></p>
 				</dd>
 			</dl>
 			
