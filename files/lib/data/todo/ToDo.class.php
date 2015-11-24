@@ -67,7 +67,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 			FROM		wcf" . WCF_N . "_todo_to_user
 			WHERE		todoID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->id));
+		$statement->execute(array($this->todoID));
 		
 		while ($row = $statement->fetchArray()) {
 			$userIDs[] = $row['userID'];
@@ -146,7 +146,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 			FROM		wcf" . WCF_N . "_todo_to_user
 			WHERE		todoID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql, 5);
-		$statement->execute(array($this->id));
+		$statement->execute(array($this->todoID));
 		
 		while ($row = $statement->fetchArray()) {
 			$users[] = $row;
@@ -156,7 +156,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function getFormattedDescription() {
-		AttachmentBBCode::setObjectID($this->id);
+		AttachmentBBCode::setObjectID($this->todoID);
 		
 		// parse and return message
 		MessageParser::getInstance()->setOutputType('text/html');
@@ -206,7 +206,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	 * @see	\wcf\data\IMessage::getFormattedMessage()
 	 */
 	public function getFormattedMessage() {
-		AttachmentBBCode::setObjectID($this->id);
+		AttachmentBBCode::setObjectID($this->todoID);
 		
 		// parse and return message
 		MessageParser::getInstance()->setOutputType('text/html');
@@ -270,7 +270,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	public function getAttachments() {
 		if (MODULE_ATTACHMENT == 1 && $this->attachments) {
 			$attachmentList = new GroupedAttachmentList('de.mysterycode.wcf.toDo.toDo');
-			$attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', array($this->id));
+			$attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', array($this->todoID));
 			$attachmentList->readObjects();
 			$attachmentList->setPermissions(array(
 				'canDownload' => WCF::getSession()->getPermission('user.toDo.attachment.canDownloadAttachments'),
