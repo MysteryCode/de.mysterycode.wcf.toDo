@@ -40,9 +40,6 @@
 		<!-- SQL -->
 		<instruction type="sql">install.sql</instruction>
 		
-		<!-- script -->
-		<instruction type="script">acp/install_de.mysterycode.wcf.todo_1.2.0.php</instruction>
-		
 		<!-- XMLs -->
     		<instruction type="pageMenu">pageMenu.xml</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
@@ -57,6 +54,9 @@
 		<instruction type="acpTemplate">acpTemplates.tar</instruction>
 		<instruction type="clipboardAction">clipboardAction.xml</instruction>
 		<instruction type="cronjob">cronjob.xml</instruction>
+		
+		<!-- script -->
+		<instruction type="script">acp/install_de.mysterycode.wcf.todo_1.2.0.php</instruction>
 		
 		<!-- language -->
 		<instruction type="language">language/*.xml</instruction>
