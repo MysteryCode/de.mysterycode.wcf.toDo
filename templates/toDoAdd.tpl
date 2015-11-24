@@ -147,12 +147,8 @@
 		<fieldset>
 			<legend>{lang}wcf.toDo.task.responsible{/lang}</legend>
 			
-			<dl{if $errorField == 'responsibles'} class="formError"{/if}>
-				<dt><label for="responsibles">{lang}wcf.toDo.task.responsible{/lang}</label></dt>
-				<dd>
-					<textarea id="responsibles" name="responsibles" class="long" cols="40" rows="4">{$responsibles}</textarea>
-				</dd>
-			</dl>
+			<textarea id="responsibles" name="responsibles" class="long" cols="40" rows="4">{$responsibles}</textarea>
+			<small>{lang}wcf.toDo.task.responsibles.description{/lang}</small>
 		</fieldset>
 	</div>
 	
