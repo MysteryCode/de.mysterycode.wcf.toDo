@@ -142,7 +142,6 @@
 			</dl>
 			
 			{event name='additionalFields'}
-		
 		</fieldset>
 		
 		<fieldset>
