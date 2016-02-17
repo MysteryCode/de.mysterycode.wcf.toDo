@@ -1064,7 +1064,7 @@ WCF.Todo.Participate = Class.extend({
 		
 		$html = WCF.Language.get('wcf.toDo.task.participate.shure')
 				+ '<div class="formSubmit">'
-				+	'<button class="jsSubmitParticipate buttonPrimary" accesskey="s">' + WCF.Language.get('wcf.global.button.submit') + '</button>'
+				+	'<button class="jsSubmitParticipate buttonPrimary" accesskey="s" autofocus>' + WCF.Language.get('wcf.global.button.submit') + '</button>'
 				+ '</div>';
 		
 		this._dialog.html($html).wcfDialog({
@@ -1224,7 +1224,7 @@ WCF.Todo.MarkSolved = Class.extend({
 		
 		$html = WCF.Language.get('wcf.toDo.task.solve.shure')
 				+ '<div class="formSubmit">'
-				+	'<button class="jsSubmitMarkSolved buttonPrimary" accesskey="s">' + WCF.Language.get('wcf.global.button.submit') + '</button>'
+				+	'<button class="jsSubmitMarkSolved buttonPrimary" accesskey="s" autofocus>' + WCF.Language.get('wcf.global.button.submit') + '</button>'
 				+ '</div>';
 		
 		this._dialog.html($html).wcfDialog({
