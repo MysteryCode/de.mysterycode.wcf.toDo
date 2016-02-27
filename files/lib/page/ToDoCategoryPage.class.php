@@ -29,62 +29,7 @@ use wcf\util\StringUtil;
  * @package	de.mysterycode.wcf.toDo
  * @category	WCF
  */
-class ToDoCategoryPage extends SortablePage {
-	/**
-	 *
-	 * @see wcf\page\AbstractPage::$activeMenuItem
-	 */
-	public $activeMenuItem = 'wcf.header.menu.toDo';
-	
-	/**
-	 *
-	 * @see \wcf\page\SortablePage::$defaultSortField
-	 */
-	public $defaultSortField = TODO_DEFAULT_SORT_FIELD;
-	
-	/**
-	 *
-	 * @see \wcf\page\SortablePage::$defaultSortOrder
-	 */
-	public $defaultSortOrder = TODO_DEFAULT_SORT_ORDER;
-	
-	/**
-	 *
-	 * @see \wcf\page\SortablePage::$validSortFields
-	 */
-	public $validSortFields = array(
-		'statusID',
-		'title',
-		'submitTime',
-		'endTime',
-		'submitter',
-		'timestamp',
-		'updatetimestamp',
-		'important',
-		'remembertime' 
-	);
-	
-	/**
-	 *
-	 * @see \wcf\page\MultipleLinkPage::$itemsPerPage
-	 */
-	public $itemsPerPage = TODO_TODOS_PER_PAGE;
-	
-	/**
-	 *
-	 * @see \wcf\page\MultipleLinkPage::$objectListClassName
-	 */
-	public $objectListClassName = 'wcf\data\todo\ViewableToDoList';
-	
-	public $neededPermissions = array('user.toDo.toDo.canViewList');
-	
-	public $neededModules = array('TODOLIST');
-	
-	/**
-	 * @see	\wcf\page\AbstractPage::$enableTracking
-	 */
-	public $enableTracking = true;
-	
+class ToDoCategoryPage extends AbstractToDoListPage {
 	public $categoryID = 0;
 	
 	public $category = null;
@@ -96,7 +41,6 @@ class ToDoCategoryPage extends SortablePage {
 	public $categoryNodeList = null;
 	
 	/**
-	 *
 	 * @see wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -106,7 +50,6 @@ class ToDoCategoryPage extends SortablePage {
 	}
 	
 	/**
-	 *
 	 * @see \wcf\page\MultipleLinkPage::initObjectList()
 	 */
 	protected function initObjectList() {
@@ -116,7 +59,6 @@ class ToDoCategoryPage extends SortablePage {
 	}
 	
 	/**
-	 *
 	 * @see wcf\page\IPage::readData()
 	 */
 	public function readData() {
@@ -131,20 +73,9 @@ class ToDoCategoryPage extends SortablePage {
 		
 		// init category node list
 		$this->categoryNodeList = new RestrictedTodoCategoryNodeList($this->categoryID);
-		
-		// users online
-		if (MODULE_USERS_ONLINE) {
-			// init users online list
-			$this->usersOnlineList = new UsersOnlineList();
-			$this->usersOnlineList->readStats();
-			$this->usersOnlineList->checkRecord();
-			$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
-			$this->usersOnlineList->readObjects();
-		}
 	}
 	
 	/**
-	 *
 	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
@@ -160,8 +91,6 @@ class ToDoCategoryPage extends SortablePage {
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoCategoryPage'),
 			'sidebarName' => 'de.mysterycode.wcf.ToDoCategoryPage',
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
-			'categoryNodeList' => $this->categoryNodeList,
-			'usersOnlineList' => $this->usersOnlineList,
 			'category' => $this->category
 		));
 	}
