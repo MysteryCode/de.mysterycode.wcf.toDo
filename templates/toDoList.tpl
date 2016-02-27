@@ -41,6 +41,8 @@
 			new WCF.Todo.Clipboard($updateHandler);
 			WCF.Clipboard.init('wcf\\page\\ToDoListPage', {@$hasMarkedItems}, { });
 			
+			new WCF.Search.User('#responsibleFilter', null, true, [ ], true);
+			
 			{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}new WCF.Todo.Like(1, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});{/if}
 		});
 		//]]>
@@ -78,6 +80,17 @@
 							<option value="ASC"{if $sortOrder == 'ASC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.ascending{/lang}</option>
 							<option value="DESC"{if $sortOrder == 'DESC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.descending{/lang}</option>
 						</select>
+					</dd>
+				</dl>
+			</fieldset>
+			
+			<fieldset>
+				<legend><label for="responsibleFilter">{lang}wcf.toDo.filter.responsible{/lang}</label></legend>
+				
+				<dl>
+					<dt></dt>
+					<dd>
+						<input type="text" name="responsibleFilter" id="responsibleFilter" value="{$responsibleFilter}" class="long" placeholder="{lang}wcf.toDo.filter.responsible.placeholder{/lang}" />
 					</dd>
 				</dl>
 			</fieldset>
