@@ -100,14 +100,22 @@ abstract class AbstractToDoListPage extends SortablePage {
 	public $statusFilter = null;
 	
 	/**
+	 * @see \wcf\page\SortablePage::readParameters()
+	 */
+	public function readParameters() {
+		parent::readParameters();
+		
+		$this->responsibleFilter = StringUtil::trim($_POST['responsibleFilter']);
+		$this->statusFilter = StringUtil::trim($_POST['statusFilter']);
+	}
+	
+	/**
 	 * @see \wcf\page\MultipleLinkPage::initObjectList()
 	 */
 	protected function initObjectList() {
 		parent::initObjectList();
 		
-		if (!empty($_POST['responsibleFilter'])) {
-			$this->responsibleFilter = StringUtil::trim($_POST['responsibleFilter']);
-
+		if (!empty($this->responsibleFilter)) {
 			$username = UserProfile::getUserProfileByUsername($this->responsibleFilter);
 			if (empty($username)) {
 				$group = new UserGroupSearchAction(array(), 'getSearchResultList', array('data' => array('searchString' => $this->responsibleFilter)));
@@ -123,8 +131,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 			}
 		}
 		
-		if (!empty($_POST['statusFilter'])) {
-			$this->statusFilter = StringUtil::trim($_POST['statusFilter']);
+		if (!empty($this->statusFilter)) {
 			$this->objectList->getConditionBuilder()->add('status = ?', array($this->statusFilter));
 		}
 	}
