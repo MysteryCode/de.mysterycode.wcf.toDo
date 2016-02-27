@@ -21,6 +21,7 @@
 				<categoryname>user.category</categoryname>
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
+			
 			<!-- user.todo -->
 			<option name="user.canViewTodos">
 				<categoryname>user.todo</categoryname>
@@ -54,6 +55,22 @@
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 			<option name="user.canEditResponsibles">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canViewResponsibles">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canViewDeadline">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canEditDeadline">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canViewReminder">
 				<categoryname>user.todo</categoryname>
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
