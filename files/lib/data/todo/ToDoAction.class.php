@@ -29,6 +29,10 @@ use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
+use wcf\data\user\group\UserGroupList;
+use wcf\data\user\group\UserGroup;
+use wcf\data\user\UserList;
+use wcf\util\ArrayUtil;
 
 /**
  * Executes todo-related actions.
@@ -476,45 +480,134 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Handles the responsible users of a todo
-	 * 
-	 * 
 	 */
 	public function updateResponsibles() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		$skipDelete = false;
+		
+		if (!(isset($this->parameters['search']) && $this->parameters['search'] !== null))
+			return;
+		
+		if (isset($this->parameters['skipDelete']) && $this->parameters['skipDelete'] !== false)
+			$skipDelete = true;
+		
 		foreach ($this->objects as $todo) {
-			// get responsibles
-			$responsibleList = UserProfile::getUserProfilesByUsername(ArrayUtil::trim(explode(',', $this->parameters['userIDs'])));
+			if ($todo === null)
+				continue;
 			
-			$userIDs = array();
-			$checkArray = array();
+			$existingResponsibles = $todo->getResponsibleIDs();
+			
+			$responsibleList = UserProfile::getUserProfilesByUsername(ArrayUtil::trim(explode(',', $this->parameters['search'])));
+			$responsibleList = array_unique($responsibleList);
+			
+			$userIDs = $checkArray = array();
 			foreach ($responsibleList as $user) {
-				if ($user && !in_array($user->userID, $todo->getResponsibleIDs())) {
-					// add new users to list
+				$checkArray[] = $user->userID;
+				
+				if (!in_array($user->userID, $existingResponsibles)) {
 					$userIDs[] = $user->userID;
 					$sql = "INSERT INTO wcf" . WCF_N . "_todo_to_user
-						(toDoID, userID, username)
+						(todoID, userID, username)
 						VAlUES(?, ?, ?);";
 					$statement = WCF::getDB()->prepareStatement($sql);
-					$statement->execute(array($todoID, $user->userID, $user->username));
-			
+					$statement->execute(array($todo->todoID, $user->userID, $user->username));
 				}
-				// not obsolete users
-				$checkArray[] = $user->userID;
 			}
 			
-			// delete obsolete users from list
-			foreach ($todo->getResponsibleIDs() as $responsible) {
-				if (!in_array($responsible, $checkArray)) {
-					$sql = "DELETE FROM wcf" . WCF_N . "_todo_to_user
-						WHERE toDoID = ?
+			if (!$skipDelete) {
+				foreach ($existingResponsibles as $responsible) {
+					if (!in_array($responsible, $checkArray)) {
+						$sql = "DELETE FROM wcf" . WCF_N . "_todo_to_user
+							WHERE todoID = ?
 							AND userID = ?";
-					$statement = WCF::getDB()->prepareStatement($sql);
-					$statement->execute(array($todoID, $responsible));
+						$statement = WCF::getDB()->prepareStatement($sql);
+						$statement->execute(array($todo->todoID, $responsible));
+					}
 				}
 			}
 			
-			// fire notification for new assigned users
 			if (!empty($userIDs))
-				UserNotificationHandler::getInstance()->fireEvent('assign', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todoID)), $userIDs);
+				UserNotificationHandler::getInstance()->fireEvent('assign', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->todoID)), $userIDs);
+		}
+	}
+	
+	/**
+	 * Handles the responsible groups of a todo
+	 */
+	public function updateResponsibleGroups() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		$skipDelete = false;
+		
+		if (!(isset($this->parameters['search']) && $this->parameters['search'] !== null))
+			return;
+		
+		if (isset($this->parameters['skipDelete']) && $this->parameters['skipDelete'] !== false)
+			$skipDelete = true;
+		
+		$search = ArrayUtil::trim(explode(',', $this->parameters['search']));
+		
+		foreach ($this->objects as $todo) {
+			if ($todo === null)
+				continue;
+			
+			$existingResponsibleGroups = $todo->getResponsibleGroupIDs();
+			
+			$accessibleGroups = UserGroup::getAccessibleGroups();
+			$responsibleGroupList = $checkArray = array();
+			foreach ($search as $searchItem) {
+				foreach ($accessibleGroups as $group) {
+					$groupName = $group->getName();
+					if ($groupName == $searchItem) {
+						$checkArray[] = $group->groupID;
+						
+						if (!in_array($group->groupID, $existingResponsibleGroups)) {
+							$responsibleGroupList[] = $group->groupID;
+							
+							$sql = "INSERT INTO wcf" . WCF_N . "_todo_to_group
+								(todoID, groupID, groupname)
+								VAlUES(?, ?, ?);";
+							$statement = WCF::getDB()->prepareStatement($sql);
+							$statement->execute(array($todo->todoID, $group->groupID, $groupName));
+						}
+					}
+				}
+			}
+			
+			if (!$skipDelete) {
+				foreach ($existingResponsibleGroups as $responsible) {
+					if (!in_array($responsible, $checkArray)) {
+						$sql = "DELETE FROM wcf" . WCF_N . "_todo_to_group
+							WHERE todoID = ?
+							AND groupID = ?";
+						$statement = WCF::getDB()->prepareStatement($sql);
+						$statement->execute(array($todo->todoID, $responsible));
+					}
+				}
+			}
+			
+			$conditions = new PreparedStatementConditionBuilder();
+			$conditions->add("groupID IN (?)", array($responsibleGroupList));
+			$sql = "SELECT	userID
+				FROM	wcf".WCF_N."_user_to_group
+				".$conditions;
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute($conditions->getParameters());
+			
+			$assignedUsers = $todo->getResponsibleIDs();
+			$userIDs = array();
+			while ($row = $statement->fetchArray()) {
+				if (empty($assignedUsers) || !in_array($row['userID'], $assignedUsers))
+					$userIDs[] = $row['userID'];
+			}
+			
+			if (!empty($userIDs))
+				UserNotificationHandler::getInstance()->fireEvent('assign', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->todoID)), $userIDs);
 		}
 	}
 	

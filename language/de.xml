@@ -219,6 +219,8 @@
 		<item name="wcf.toDo.task.optional"><![CDATA[(optional)]]></item>
 		<item name="wcf.toDo.task.status"><![CDATA[Status]]></item>
 		<item name="wcf.toDo.task.responsible"><![CDATA[Verantwortlich]]></item>
+		<item name="wcf.toDo.task.responsible.users"><![CDATA[Zugewiesene Benutzer]]></item>
+		<item name="wcf.toDo.task.responsible.groups"><![CDATA[Zugewiesene Benutzergruppen]]></item>
 		<item name="wcf.toDo.task.responsibles"><![CDATA[Verantwortliche:]]></item>
 		<item name="wcf.toDo.task.responsibles.description"><![CDATA[Geben Sie hier die Benutzernamen der Benutzer ein, die für dieses ToDo verantwortlich sein sollen. Diese erhalten je nach Konfiguration die Erlaubnis das ToDo zu sehen und zu bearbeiten.]]></item>
 		<item name="wcf.toDo.task.submitTime"><![CDATA[Erstellt]]></item>

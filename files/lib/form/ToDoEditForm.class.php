@@ -22,6 +22,7 @@ use wcf\util\DateUtil;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 use wcf\util\UserUtil;
+use wcf\system\message\quote\MessageQuoteManager;
 
 /**
  * Shows the toDoEdit form.
@@ -43,7 +44,9 @@ class ToDoEditForm extends ToDoAddForm {
 	 * @see wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
-		parent::readParameters();
+		MessageForm::readParameters();
+		
+		MessageQuoteManager::getInstance()->readParameters();
 		
 		if (isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
 		$this->todo = new ToDo($this->todoID);
@@ -89,7 +92,11 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->objectAction->executeAction();
 		
 		if ($this->canEditResponsible()) {
-			$this->updateResponsibles($this->todo->todoID, $this->responsibles, $this->todo->getResponsibleIDs());
+			$responsibleUserAction = new ToDoAction(array($this->todo->todoID), 'updateResponsibles', array('search' => $this->responsibles));
+			$responsibleUserAction->executeAction();
+			
+			$responsibleGroupAction = new ToDoAction(array($this->todo->todoID), 'updateResponsibleGroups', array('search' => $this->responsibleGroups));
+			$responsibleGroupAction->executeAction();
 		}
 		
 		$this->saved();
@@ -106,6 +113,7 @@ class ToDoEditForm extends ToDoAddForm {
 		parent::readData();
 		
 		$this->responsibles = $this->todo->getFormattedResponsibles();
+		$this->responsibleGroups = $this->todo->getFormattedResponsibleGroups();
 		
 		if (!$this->todo->canEdit() && !$this->canEditStatus() && !$this->canEditResponsible())
 			throw new PermissionDeniedException();
@@ -122,6 +130,7 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->progress = $this->todo->progress;
 		$this->important = $this->todo->important;
 		$this->private = $this->todo->private;
+		$this->responsibles = $this->todo->responsibleGroups;
 		$this->canEditStatus = $this->canEditStatus();
 		$this->canEditResponsible = $this->canEditResponsible();
 		

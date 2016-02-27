@@ -64,6 +64,7 @@ class ToDoAddForm extends MessageForm {
 	public $endTime = 0;
 	public $note = '';
 	public $responsibles = '';
+	public $responsibleGroups = '';
 	public $statusID = 0;
 	public $title = '';
 	public $private = 0;
@@ -114,6 +115,7 @@ class ToDoAddForm extends MessageForm {
 		if (isset($_POST['enableHtml']) && WCF::getSession()->getPermission('user.toDo.canUseHtml')) $this->enableHtml = 1;
 		if (isset($_POST['enableBBCodes'])) $this->enableBBCodes = 1;
 		if (isset($_POST['responsibles'])) $this->responsibles = StringUtil::trim($_POST['responsibles']);
+		if (isset($_POST['responsibleGroups'])) $this->responsibleGroups = StringUtil::trim($_POST['responsibleGroups']);
 		
 		if ($this->newCategory != '' && TODO_CATEGORY_ENABLE) $this->categoryID = $this->createCategory( StringUtil::trim($this->newCategory));
 		
@@ -178,8 +180,16 @@ class ToDoAddForm extends MessageForm {
 		
 		$this->objectAction = new ToDoAction(array(), 'create', $todoData);
 		$resultValues = $this->objectAction->executeAction();
+
+		if (!empty($this->responsibles)) {
+			$responsibleUserAction = new ToDoAction(array($resultValues['returnValues']->todoID), 'updateResponsibles', array('search' => $this->responsibles));
+			$responsibleUserAction->executeAction();
+		}
 		
-		$this->updateResponsibles($resultValues['returnValues']->todoID, $this->responsibles);
+		if (!empty($this->responsibleGroups)) {
+			$responsibleGroupAction = new ToDoAction(array($resultValues['returnValues']->todoID), 'updateResponsibleGroups', array('search' => $this->responsibleGroups));
+			$responsibleGroupAction->executeAction();
+		}
 		
 		MessageQuoteManager::getInstance()->saved();
 		
@@ -226,6 +236,7 @@ class ToDoAddForm extends MessageForm {
 			'note' => $this->note,
 			'statusID' => $this->statusID,
 			'responsibles' => $this->responsibles,
+			'responsibleGroups' => $this->responsibleGroups,
 			'endTime' => $this->endTime,
 			'private' => $this->private,
 			'important' => $this->important,

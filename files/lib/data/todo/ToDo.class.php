@@ -24,6 +24,7 @@ use wcf\system\request\LinkHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
+use wcf\data\user\group\UserGroup;
 
 /**
  * Represents a todo.
@@ -76,6 +77,21 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 		return $userIDs;
 	}
 	
+	public function getResponsibleGroupIDs() {
+		$userIDs = array();
+		$sql = "SELECT		*
+			FROM		wcf" . WCF_N . "_todo_to_group
+			WHERE		todoID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($this->todoID));
+		
+		while ($row = $statement->fetchArray()) {
+			$userIDs[] = $row['groupID'];
+		}
+		
+		return $userIDs;
+	}
+	
 	/**
 	 * Returns a list of todos.
 	 *
@@ -121,6 +137,17 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 		return substr($string, 0, -2);
 	}
 	
+	public function getFormattedResponsibleGroups() {
+		$string = '';
+		foreach ($this->getResponsibleGroupIDs() as $groupID) {
+			$group = new UserGroup($groupID);
+			if ($group->getName() != '') {
+				$string .= $group->getName() . ', ';
+			}
+		}
+		return substr($string, 0, -2);
+	}
+	
 	public function getHtmlFormattedResponsibles() {
 		$string = '';
 		foreach ($this->getResponsibleIDs() as $responsible) {
@@ -132,12 +159,24 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 		return substr($string, 0, -2);
 	}
 	
+	public function getHtmlFormattedResponsibleGroups() {
+		return $this->getFormattedResponsibleGroups();
+	}
+	
 	public function getResponsibles() {
 		$responsibleList = array();
 		foreach ($this->getResponsibleIDs() as $responsible) {
 			$responsibleList[] = new User($responsible);
 		}
 		return $responsibleList;
+	}
+	
+	public function getResponsibleGroups() {
+		$responsibleGroupList = array();
+		foreach ($this->getResponsibleGroupIDs() as $groupID) {
+			$responsibleGroupList[] = new UserGroup($groupID);
+		}
+		return $responsibleGroupList;
 	}
 	
 	public function getResponsiblePreview() {
@@ -383,6 +422,14 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 			return true;
 		
 		return false;
+	}
+	
+	public function canViewResponsibleUsers() {
+		return true;
+	}
+	
+	public function canViewResponsibleGroups() {
+		return true;
 	}
 	
 	public function canModerate() {

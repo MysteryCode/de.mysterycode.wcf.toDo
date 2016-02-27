@@ -53,6 +53,15 @@ CREATE TABLE wcf1_todo_to_user (
 	PRIMARY KEY (assignID)
 );
 
+DROP TABLE IF EXISTS wcf1_todo_to_group;
+CREATE TABLE wcf1_todo_to_group (
+	assignID			int(10)		NOT NULL AUTO_INCREMENT,
+	todoID			int(10),
+	groupID			int(10),
+	groupname		varchar(255)	NOT NULL DEFAULT '',
+	PRIMARY KEY (assignID)
+);
+
 INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass, locked) VALUES (1, 'abgeschlossen/solved', 99, 'green', 1);
 INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass, locked) VALUES (2, 'offen/unsolved', 2, 'red', 0);
 INSERT INTO wcf1_todo_status (statusID, subject, showOrder, cssClass, locked) VALUES (3, 'in Arbeit/in progress',3, 'yellow', 0);
@@ -67,5 +76,8 @@ ALTER TABLE wcf1_todo ADD FOREIGN KEY (deletedByID) REFERENCES wcf1_user (userID
 ALTER TABLE wcf1_todo ADD FOREIGN KEY (statusID) REFERENCES wcf1_todo_status (statusID) ON DELETE SET NULL;
 ALTER TABLE wcf1_todo ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
 
-ALTER TABLE wcf1_todo_to_user ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE wcf1_todo_to_user ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE wcf1_todo_to_user ADD FOREIGN KEY (todoID) REFERENCES wcf1_todo (todoID) ON DELETE CASCADE;
+
+ALTER TABLE wcf1_todo_to_group ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
+ALTER TABLE wcf1_todo_to_group ADD FOREIGN KEY (todoID) REFERENCES wcf1_todo (todoID) ON DELETE CASCADE;

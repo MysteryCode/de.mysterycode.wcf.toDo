@@ -177,12 +177,22 @@
 			{/if}
 			<dt>{lang}wcf.toDo.task.submitter{/lang}</dt>
 			<dd>{if $todo->submitter != 0 && $submitterusername != ''}<a href="{link controller='User' id=$todo->submitter}{/link}" class="userLink" data-user-id="{$todo->submitter}">{$submitterusername}</a>{else}{lang}wcf.user.guest{/lang}{/if}</dd>
-			{if $todo->getResponsibles() && $__wcf->getSession()->getPermission('user.toDo.responsible.canView')}
-				<dt>{lang}wcf.toDo.task.responsible{/lang}</dt>
+			{if $todo->getResponsibles() && $todo->canViewResponsibleUsers()}
+				<dt>{lang}wcf.toDo.task.responsible.users{/lang}</dt>
 				<dd>
 					<ul>
 						{foreach from=$todo->getResponsibles() item=responsible}
 							<li><a href="{link controller='User' object=$responsible}{/link}" class="userLink" data-user-id="{$responsible->userID}">{$responsible->username}</a></li>
+						{/foreach}
+					</ul>
+				</dd>
+			{/if}
+			{if $todo->getResponsibleGroups() && $todo->canViewResponsibleGroups()}
+				<dt>{lang}wcf.toDo.task.responsible.groups{/lang}</dt>
+				<dd>
+					<ul>
+						{foreach from=$todo->getResponsibleGroups() item=responsible}
+							<li>{@'%s'|str_replace:$responsible->getName():$responsible->userOnlineMarking}</li>
 						{/foreach}
 					</ul>
 				</dd>
