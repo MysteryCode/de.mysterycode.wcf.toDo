@@ -1,6 +1,9 @@
 <?php
 
 namespace wcf\page;
+use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\dashboard\DashboardHandler;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
 /**
