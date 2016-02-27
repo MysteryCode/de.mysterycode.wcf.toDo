@@ -116,8 +116,10 @@ abstract class AbstractToDoListPage extends SortablePage {
 		parent::initObjectList();
 		
 		if (!empty($this->responsibleFilter)) {
-			$username = UserProfile::getUserProfileByUsername($this->responsibleFilter);
-			if (empty($username)) {
+			$user = UserProfile::getUserProfileByUsername($this->responsibleFilter);
+			if (!empty($user)) {
+				$this->objectList->getConditionBuilder()->add('todo_table.todoID IN (SELECT todo_user.todoID FROM wcf' . WCF_N . '_todo_to_user todo_user WHERE todo_user.userID = ?)', array($user->userID));
+			} else {
 				$group = new UserGroupSearchAction(array(), 'getSearchResultList', array('data' => array('searchString' => $this->responsibleFilter)));
 				$group = $group->executeAction();
 				$group = reset($group['returnValues']);
@@ -125,9 +127,6 @@ abstract class AbstractToDoListPage extends SortablePage {
 				if (!empty($group)) {
 					$this->objectList->getConditionBuilder()->add('todo_table.todoID IN (SELECT todo_group.todoID FROM wcf' . WCF_N . '_todo_to_group todo_group WHERE todo_group.groupID = ?)', array(intval($group['objectID'])));
 				}
-			} else {
-				$this->objectList->sqlSelects .= ', todo_user.userID as assignedUser';
-				$this->objectList->sqlJoins .= ' INNER JOIN wcf' . WCF_N . '_todo_to_user todo_user ON (todo_user.todoID = todo_table.todoID)';
 			}
 		}
 		
