@@ -86,7 +86,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	 * @var	\wcf\data\todo\category\RestrictedTodoCategoryNodeList
 	 */
 	public $categoryNodeList = null;
-	
+
 	/**
 	 * filter for username or groupname
 	 * @var string
@@ -94,12 +94,16 @@ abstract class AbstractToDoListPage extends SortablePage {
 	public $responsibleFilter = '';
 	
 	/**
+	 * filter for status
+	 * @var string
+	 */
+	public $statusFilter = null;
+	
+	/**
 	 * @see \wcf\page\MultipleLinkPage::initObjectList()
 	 */
 	protected function initObjectList() {
 		parent::initObjectList();
-		
-// 		$this->objectList->getConditionBuilder()->add("statusID != ?", array(1));
 		
 		if (!empty($_POST['responsibleFilter'])) {
 			$this->responsibleFilter = StringUtil::trim($_POST['responsibleFilter']);
@@ -117,6 +121,11 @@ abstract class AbstractToDoListPage extends SortablePage {
 				$this->objectList->sqlSelects .= ', todo_user.userID as assignedUser';
 				$this->objectList->sqlJoins .= ' INNER JOIN wcf' . WCF_N . '_todo_to_user todo_user ON (todo_user.todoID = todo_table.todoID)';
 			}
+		}
+		
+		if (!empty($_POST['statusFilter'])) {
+			$this->statusFilter = StringUtil::trim($_POST['statusFilter']);
+			$this->objectList->getConditionBuilder()->add('status = ?', array($this->statusFilter));
 		}
 	}
 	
@@ -161,7 +170,8 @@ abstract class AbstractToDoListPage extends SortablePage {
 			'likeData' => $this->likeData,
 			'categoryNodeList' => $this->categoryNodeList,
 			'usersOnlineList' => $this->usersOnlineList,
-			'responsibleFilter' => $this->responsibleFilter
+			'responsibleFilter' => $this->responsibleFilter,
+			'statusFilter', $this->statusFilter
 		));
 	}
 }
