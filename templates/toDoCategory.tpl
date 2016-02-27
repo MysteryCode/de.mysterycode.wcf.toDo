@@ -38,6 +38,8 @@
 				canRestoreTodo: {if $__wcf->getSession()->getPermission('mod.toDo.canRestore')}1{else}0{/if}
 			});
 			
+			new WCF.Search.User('#responsibleFilter', null, true, [ ], true);
+			
 			new WCF.Todo.Clipboard($updateHandler);
 			WCF.Clipboard.init('wcf\\page\\ToDoCategoryPage', {@$hasMarkedItems}, { });
 		});
@@ -75,6 +77,17 @@
 							<option value="ASC"{if $sortOrder == 'ASC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.ascending{/lang}</option>
 							<option value="DESC"{if $sortOrder == 'DESC'} selected="selected"{/if}>{lang}wcf.global.sortOrder.descending{/lang}</option>
 						</select>
+					</dd>
+				</dl>
+			</fieldset>
+			
+			<fieldset>
+				<legend><label for="responsibleFilter">{lang}wcf.toDo.filter.responsible{/lang}</label></legend>
+				
+				<dl>
+					<dt></dt>
+					<dd>
+						<input type="text" name="responsibleFilter" id="responsibleFilter" value="{$responsibleFilter}" class="long" placeholder="{lang}wcf.toDo.filter.responsible.placeholder{/lang}" />
 					</dd>
 				</dl>
 			</fieldset>
