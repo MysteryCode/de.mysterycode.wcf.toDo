@@ -224,9 +224,10 @@
 		<item name="wcf.toDo.task.status"><![CDATA[Status]]></item>
 		<item name="wcf.toDo.task.responsible"><![CDATA[Verantwortlich]]></item>
 		<item name="wcf.toDo.task.responsible.users"><![CDATA[Zugewiesene Benutzer]]></item>
+		<item name="wcf.toDo.task.responsible.users.description"><![CDATA[Geben Sie hier die Benutzer, die für dieses ToDo verantwortlich sein sollen. Diese erhalten je nach Konfiguration die Erlaubnis das ToDo zu sehen und zu bearbeiten.]]></item>
 		<item name="wcf.toDo.task.responsible.groups"><![CDATA[Zugewiesene Benutzergruppen]]></item>
+		<item name="wcf.toDo.task.responsible.groups.description"><![CDATA[Geben Sie hier die Benutzergruppen an, die für dieses ToDo verantwortlich sein sollen. Diese erhalten je nach Konfiguration die Erlaubnis das ToDo zu sehen und zu bearbeiten.]]></item>
 		<item name="wcf.toDo.task.responsibles"><![CDATA[Verantwortliche:]]></item>
-		<item name="wcf.toDo.task.responsibles.description"><![CDATA[Geben Sie hier die Benutzernamen der Benutzer ein, die für dieses ToDo verantwortlich sein sollen. Diese erhalten je nach Konfiguration die Erlaubnis das ToDo zu sehen und zu bearbeiten.]]></item>
 		<item name="wcf.toDo.task.submitTime"><![CDATA[Erstellt]]></item>
 		<item name="wcf.toDo.task.submitter"><![CDATA[Ersteller]]></item>
 		<item name="wcf.toDo.task.endTime"><![CDATA[Deadline]]></item>
@@ -341,6 +342,9 @@
 		<item name="wcf.toDo.status.placeholder"><![CDATA[--------------------]]></item>
 		
 		<item name="wcf.toDo.goToTodo"><![CDATA[ToDo öffnen]]></item>
+		
+		<item name="wcf.toDo.filter.responsible"><![CDATA[Nach Zuweisungen filtern]]></item>
+		<item name="wcf.toDo.filter.responsible.placeholder"><![CDATA[Benutzername oder -gruppe]]></item>
 	</category>
 	
 	<category name="wcf.user">
