@@ -73,7 +73,6 @@ class ToDoEditForm extends ToDoAddForm {
 					'endTime' => $this->endTime,
 					'private' => $this->private,
 					'important' => $this->important,
-					'categoryID' => $this->categoryID,
 					'progress' => $this->progress,
 					'enableSmilies' => $this->enableSmilies,
 					'enableHtml' => $this->enableHtml,
@@ -91,7 +90,8 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->objectAction = new ToDoAction(array($this->todo), 'update', $todoData);
 		$this->objectAction->executeAction();
 		
-		if ($this->canEditResponsible()) {
+		if ($this->todo->canEditResponsible()) {
+			exit;
 			$responsibleUserAction = new ToDoAction(array($this->todo->todoID), 'updateResponsibles', array('search' => $this->responsibles));
 			$responsibleUserAction->executeAction();
 			
@@ -115,7 +115,7 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->responsibles = $this->todo->getFormattedResponsibles();
 		$this->responsibleGroups = $this->todo->getFormattedResponsibleGroups();
 		
-		if (!$this->todo->canEdit() && !$this->canEditStatus() && !$this->canEditResponsible())
+		if (!$this->todo->canEdit())
 			throw new PermissionDeniedException();
 		
 		$this->title = $this->todo->title;
@@ -130,7 +130,6 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->progress = $this->todo->progress;
 		$this->important = $this->todo->important;
 		$this->private = $this->todo->private;
-		$this->responsibles = $this->todo->responsibleGroups;
 		$this->canEditStatus = $this->canEditStatus();
 		$this->canEditResponsible = $this->canEditResponsible();
 		

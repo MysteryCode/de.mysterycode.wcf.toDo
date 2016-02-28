@@ -381,7 +381,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	public function canEdit() {
 		if ($this->getCategory()->getPermission('mod.canEdit'))
 			return true;
-		if ($this->getCategory()->getPermission('user.canEditOwn') && $this->submitter == WCF::getUser()->userID)
+		if ($this->getCategory()->getPermission('user.canEditOwnTodos') && $this->submitter == WCF::getUser()->userID)
 			return true;
 		if ($this->getCategory()->getPermission('user.canEditAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
 			return true;
@@ -392,7 +392,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	public function canDelete() {
 		if ($this->getCategory()->getPermission('mod.canDelete'))
 			return true;
-		if ($this->getCategory()->getPermission('user.canDeleteOwn') && $this->submitter == WCF::getUser()->userID)
+		if ($this->getCategory()->getPermission('user.canDeleteOwnTodos') && $this->submitter == WCF::getUser()->userID)
 			return true;
 		if ($this->getCategory()->getPermission('user.canDeleteAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
 			return true;

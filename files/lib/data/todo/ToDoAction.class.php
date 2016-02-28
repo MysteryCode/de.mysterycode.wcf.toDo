@@ -1,15 +1,15 @@
 <?php
 
 namespace wcf\data\todo;
-use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\todo\assigned\group\AssignedGroupAction;
+use wcf\data\todo\assigned\user\AssignedUserAction;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoEditor;
 use wcf\data\todo\ToDoList;
-use wcf\data\user\notification\event\UserNotificationEventList;
-use wcf\data\user\notification\UserNotificationList;
+use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
-use wcf\data\user\UserEditor;
-use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\user\UserProfile;
 use wcf\system\attachment\AttachmentHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\comment\CommentHandler;
@@ -18,21 +18,15 @@ use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
-use wcf\system\language\LanguageFactory;
-use wcf\system\like\LikeHandler;
 use wcf\system\moderation\queue\ModerationQueueActivationManager;
 use wcf\system\request\LinkHandler;
-use wcf\system\search\SearchIndexManager;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\user\activity\point\UserActivityPointHandler;
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;
-use wcf\util\StringUtil;
-use wcf\data\user\group\UserGroupList;
-use wcf\data\user\group\UserGroup;
-use wcf\data\user\UserList;
 use wcf\util\ArrayUtil;
+use wcf\util\StringUtil;
 
 /**
  * Executes todo-related actions.
@@ -498,7 +492,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 			if ($todo === null)
 				continue;
 			
-			$existingResponsibles = $todo->getResponsibleIDs();
+			$existingResponsibles = $todo->getResponsibleIDs() ?: array();
 			
 			$responsibleList = UserProfile::getUserProfilesByUsername(ArrayUtil::trim(explode(',', $this->parameters['search'])));
 			$responsibleList = array_unique($responsibleList);
@@ -509,22 +503,17 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 				
 				if (!in_array($user->userID, $existingResponsibles)) {
 					$userIDs[] = $user->userID;
-					$sql = "INSERT INTO wcf" . WCF_N . "_todo_to_user
-						(todoID, userID, username)
-						VAlUES(?, ?, ?);";
-					$statement = WCF::getDB()->prepareStatement($sql);
-					$statement->execute(array($todo->todoID, $user->userID, $user->username));
+					
+					$assignAction = new AssignedUserAction(array(), 'create', array('data' => array('todoID' => $todo->todoID, 'userID' => $user->userID, 'username' => $user->username)));
+					$assignAction->executeAction();
 				}
 			}
 			
 			if (!$skipDelete) {
 				foreach ($existingResponsibles as $responsible) {
 					if (!in_array($responsible, $checkArray)) {
-						$sql = "DELETE FROM wcf" . WCF_N . "_todo_to_user
-							WHERE todoID = ?
-							AND userID = ?";
-						$statement = WCF::getDB()->prepareStatement($sql);
-						$statement->execute(array($todo->todoID, $responsible));
+						$assignAction = new AssignedUserAction(array($todo), 'deleteByTodo', array('userID' => $responsible));
+						$assignAction->executeAction();
 					}
 				}
 			}
@@ -556,7 +545,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 			if ($todo === null)
 				continue;
 			
-			$existingResponsibleGroups = $todo->getResponsibleGroupIDs();
+			$existingResponsibleGroups = $todo->getResponsibleGroupIDs() ?: array();
 			
 			$accessibleGroups = UserGroup::getAccessibleGroups();
 			$responsibleGroupList = $checkArray = array();
@@ -569,11 +558,8 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 						if (!in_array($group->groupID, $existingResponsibleGroups)) {
 							$responsibleGroupList[] = $group->groupID;
 							
-							$sql = "INSERT INTO wcf" . WCF_N . "_todo_to_group
-								(todoID, groupID, groupname)
-								VAlUES(?, ?, ?);";
-							$statement = WCF::getDB()->prepareStatement($sql);
-							$statement->execute(array($todo->todoID, $group->groupID, $groupName));
+							$assignAction = new AssignedGroupAction(array(), 'create', array('data' => array('todoID' => $todo->todoID, 'groupID' => $group->groupID, 'groupname' => $group->getName())));
+							$assignAction->executeAction();
 						}
 					}
 				}
@@ -582,11 +568,8 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 			if (!$skipDelete) {
 				foreach ($existingResponsibleGroups as $responsible) {
 					if (!in_array($responsible, $checkArray)) {
-						$sql = "DELETE FROM wcf" . WCF_N . "_todo_to_group
-							WHERE todoID = ?
-							AND groupID = ?";
-						$statement = WCF::getDB()->prepareStatement($sql);
-						$statement->execute(array($todo->todoID, $responsible));
+						$assignAction = new AssignedGroupAction(array($todo), 'deleteByTodo', array('groupID' => $responsible));
+						$assignAction->executeAction();
 					}
 				}
 			}
