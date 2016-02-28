@@ -154,24 +154,26 @@
 			{event name='additionalFields'}
 		</fieldset>
 		
-		<fieldset>
-			<legend>{lang}wcf.toDo.task.responsible{/lang}</legend>
-			
-			<dl{if $errorField == 'responsibles'} class="formError"{/if}>
-				<dt><label for="responsibles">{lang}wcf.toDo.task.responsible.users{/lang}</label></dt>
-				<dd>
-					<textarea id="responsibles" name="responsibles" class="long" cols="40" rows="4">{$responsibles}</textarea>
-					<small>{lang}wcf.toDo.task.responsibles.description{/lang}</small>
-				</dd>
-			</dl>
-			<dl{if $errorField == 'responsibleGroups'} class="formError"{/if}>
-				<dt><label for="responsibleGroups">{lang}wcf.toDo.task.responsible.groups{/lang}</label></dt>
-				<dd>
-					<textarea id="responsibleGroups" name="responsibleGroups" class="long" cols="40" rows="4">{$responsibleGroups}</textarea>
-					<small>{lang}wcf.toDo.task.responsibleGroups.description{/lang}</small>
-				</dd>
-			</dl>
-		</fieldset>
+		{if $category->canEditResponsibles()}
+			<fieldset>
+				<legend>{lang}wcf.toDo.task.responsible{/lang}</legend>
+				
+				<dl{if $errorField == 'responsibles'} class="formError"{/if}>
+					<dt><label for="responsibles">{lang}wcf.toDo.task.responsible.users{/lang}</label></dt>
+					<dd>
+						<textarea id="responsibles" name="responsibles" class="long" cols="40" rows="4">{$responsibles}</textarea>
+						<small>{lang}wcf.toDo.task.responsibles.description{/lang}</small>
+					</dd>
+				</dl>
+				<dl{if $errorField == 'responsibleGroups'} class="formError"{/if}>
+					<dt><label for="responsibleGroups">{lang}wcf.toDo.task.responsible.groups{/lang}</label></dt>
+					<dd>
+						<textarea id="responsibleGroups" name="responsibleGroups" class="long" cols="40" rows="4">{$responsibleGroups}</textarea>
+						<small>{lang}wcf.toDo.task.responsibleGroups.description{/lang}</small>
+					</dd>
+				</dl>
+			</fieldset>
+		{/if}
 	</div>
 	
 	<div class="container containerPadding marginTop">
