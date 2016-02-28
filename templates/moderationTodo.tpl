@@ -5,7 +5,7 @@
 				<header class="messageHeader">
 					<div class="box32">
 						<a href="{link controller='ToDo' object=$todo}{/link}" class="framed jsTooltip" title="{lang}wcf.toDo.goToTodo{/lang}">
-							<span class="framed icon icon-tasks"></span>
+							<span class="framed icon icon32 icon-tasks"></span>
 						</a>
 
 						<div class="messageHeadline">
