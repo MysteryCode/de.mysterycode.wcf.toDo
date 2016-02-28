@@ -439,9 +439,10 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function canParticipate() {
+		$responsibleIDs = $this->getResponsibleIDs();
 		if (WCF::getUser()->userID == 0)
 			return false;
-		if (!empty($this->getResponsibleIDs()) && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if (!empty($this->getResponsibleIDs()) && !empty($responsibleIDs) && in_array(WCF::getUser()->userID, $responsibleIDs))
 			return false;
 		if ($this->getCategory()->getPermission('user.responsible.canParticipate'))
 			return true;
