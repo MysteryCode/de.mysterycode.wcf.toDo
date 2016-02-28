@@ -1,8 +1,8 @@
 <?php
 use wcf\data\category\CategoryAction;
 use wcf\data\todo\category\TodoCategoryEditor;
-use wcf\data\todo\ToDoList;
 use wcf\data\todo\ToDoEditor;
+use wcf\data\todo\ToDoList;
 use wcf\system\category\CategoryHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;

@@ -3,26 +3,14 @@
 namespace wcf\form;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
-use wcf\data\todo\ToDoCache;
-use wcf\data\user\User;
-use wcf\data\user\UserProfile;
-use wcf\data\ILinkableObject;
-use wcf\form\AbstractForm;
 use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
-use wcf\system\exception\UserInputException;
-use wcf\system\language\LanguageFactory;
+use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\request\LinkHandler;
-use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
-use wcf\util\ArrayUtil;
 use wcf\util\DateUtil;
 use wcf\util\HeaderUtil;
-use wcf\util\StringUtil;
-use wcf\util\UserUtil;
-use wcf\system\message\quote\MessageQuoteManager;
 
 /**
  * Shows the toDoEdit form.

@@ -1,8 +1,8 @@
 <?php
 
 namespace wcf\data\todo\assigned\user;
-use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\todo\assigned\AssignedCache;
+use wcf\data\AbstractDatabaseObjectAction;
 
 /**
  * Executes todo status related actions.

@@ -20,15 +20,6 @@ use wcf\system\WCF;
  */
 class MyToDosPage extends AbstractToDoListPage {
 	/**
-	 * @see \wcf\page\MultipleLinkPage::initObjectList()
-	 */
-	protected function initObjectList() {
-		parent::initObjectList();
-		
-		//$this->objectList->getConditionBuilder()->add("(submitter = ? OR user_assigns.userID = ?)", array(WCF::getUser()->userID, WCF::getUser()->userID));
-	}
-	
-	/**
 	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
