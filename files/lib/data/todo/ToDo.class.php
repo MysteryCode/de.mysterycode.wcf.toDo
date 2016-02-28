@@ -415,9 +415,10 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function canEditStatus() {
+		$responsibleIDs = $this->getResponsibleIDs();
 		if ($this->getCategory()->getPermission('user.status.canEditOwn') && $this->submitter == WCF::getUser()->userID)
 			return true;
-		if ($this->getCategory()->getPermission('user.status.canEditAssigned') && !empty($this->getResponsibleIDs()) && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if ($this->getCategory()->getPermission('user.status.canEditAssigned') && !empty($responsibleIDs) && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
 			return true;
 		if ($this->getCategory()->getPermission('mod.status.canEdit'))
 			return true;
@@ -426,9 +427,10 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function canEditResponsible() {
+		$responsibleIDs = $this->getResponsibleIDs();
 		if ($this->getCategory()->getPermission('user.responsible.canEditOwn') && $this->submitter == WCF::getUser()->userID)
 			return true;
-		if ($this->getCategory()->getPermission('user.responsible.canEditAssigned') && !empty($this->getResponsibleIDs()) && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if ($this->getCategory()->getPermission('user.responsible.canEditAssigned') && !empty($responsibleIDs) && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
 			return true;
 		if ($this->getCategory()->getPermission('mod.responsible.canEdit'))
 			return true;
