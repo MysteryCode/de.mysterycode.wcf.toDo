@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\system\cache\builder;
-use wcf\data\todo\TodoList;
+use wcf\data\todo\ToDoList;
 use wcf\system\cache\builder\AbstractCacheBuilder;
 
 /**
@@ -22,7 +22,7 @@ class TodoCacheBuilder extends AbstractCacheBuilder {
 			'todos' => array()
 		);
 		
-		$statusList = new TodoList();
+		$statusList = new ToDoList();
 		$statusList->sqlOrderBy = 'todo_table.todoID ASC';
 		$statusList->readObjects();
 		$data['todos'] = $statusList->getObjects();
