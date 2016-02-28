@@ -4,11 +4,9 @@ namespace wcf\system\comment\manager;
 use wcf\data\comment\response\CommentResponse;
 use wcf\data\comment\Comment;
 use wcf\data\todo\ToDo;
-use wcf\system\comment\manager\AbstractCommentManager;
-use wcf\system\request\LinkHandler;
-use wcf\system\WCF;
-use wcf\util\StringUtil;
 use wcf\data\todo\ToDoCache;
+use wcf\system\comment\manager\AbstractCommentManager;
+use wcf\system\WCF;
 
 /**
  * Shows the todo comment manager.
