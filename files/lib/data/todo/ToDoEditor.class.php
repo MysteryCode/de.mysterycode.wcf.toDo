@@ -3,6 +3,7 @@
 namespace wcf\data\todo;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
+use wcf\system\cache\builder\AssignCacheBuilder;
 use wcf\system\cache\builder\TodoCacheBuilder;
 use wcf\system\WCF;
 
@@ -43,5 +44,6 @@ class ToDoEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 */
 	public static function resetCache() {
 		TodoCacheBuilder::getInstance()->reset();
+		AssignCacheBuilder::getInstance()->reset();
 	}
 }
