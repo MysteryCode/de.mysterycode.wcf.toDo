@@ -390,7 +390,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	
 	public function canEdit() {
 		$responsibleUsers = $this->getResponsibleIDs();
-		$responsibleGroups = $this->getResponsibleGroupIDs();
+		$responsibleGroups = $this->getResponsibleGroupIDs() ?: array();
 		$groupAssigned = false;
 		foreach (WCF::getUser()->getGroupIDs() as $groupID) {
 			if (in_array($groupID, $responsibleGroups)) {
@@ -498,18 +498,6 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function canModerate() {
-		$validPermissions = array(
-			'mod.canEditTodos',
-			'mod.canDeleteTodos',
-			'mod.canEnableTodos'
-		);
-		
-		foreach ($validPermissions as $permission) {
-			if ($this->getCategory()->getPermissions($permission)) {
-				return true;
-			}
-		}
-		
-		return false;
+		return $this->getCategory()->isModerator();
 	}
 }

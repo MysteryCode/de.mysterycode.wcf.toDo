@@ -119,8 +119,12 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 		// use global permission
 		if ($permission == 'user.canEditStatus') {
 			return WCF::getSession()->getPermission('mod.toDo.status.canEdit');
+		} else if ($permission == 'user.canAddTodo') {
+			return WCF::getSession()->getPermission('user.toDo.toDo.canAdd');
+		} else if ($permission == 'user.canAddTodoWithoutModeration') {
+			return WCF::getSession()->getPermission('user.toDo.toDo.canAddWithoutModeration');
 		} else if ($permission == 'user.canEditResponsibles') {
-			return WCF::getSession()->getPermission('mod.toDo.status.canEdit');
+			return $this->getPermission('user.canEditTodos');
 		} else if ($permission == 'user.canViewResponsibles') {
 			return WCF::getSession()->getPermission('user.toDo.responsible.canView');
 		} else if ($permission == 'user.canParticipate') {
@@ -132,7 +136,7 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 		} else if (in_array($permission, array('user.canViewDeadline', 'user.canEditDeadline', 'user.canViewReminder', 'user.canEditReminder', 'user.canEditPriority'))) {
 			return true;
 		} else {
-			$globalPermission = str_replace(array('user.', 'mod.'), array('user.wcf.todo.', 'mod.wcf.todo.'), $permission);
+			$globalPermission = str_replace(array('user.', 'mod.'), array('user.toDo.toDo.', 'mod.toDo.'), $permission);
 			$globalPermission = str_replace('Todos', '', $globalPermission);
 			return WCF::getSession()->getPermission($globalPermission);
 		}
@@ -257,6 +261,10 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 	}
 	
 	public function canEditStatus() {
+		return $this->getPermission('user.canEditStatus');
+	}
+	
+	public function canEditResponsibles() {
 		return $this->getPermission('user.canEditStatus');
 	}
 	

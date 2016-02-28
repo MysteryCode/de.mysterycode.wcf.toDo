@@ -82,7 +82,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::getContainerID()
 	 */
 	public function getContainerID($objectID) {
-		return $this->getTodo($objectID)->getCategory();
+		return $this->getTodo($objectID)->getCategory()->categoryID;
 	}
 
 	/**
