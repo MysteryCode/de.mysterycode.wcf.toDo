@@ -68,7 +68,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	
 	public $neededModules = array('TODOLIST');
 	
-	public $neededPermissions = array('user.toDo.toDo.canViewList');
+	public $neededPermissions = array('user.toDo.toDo.canView');
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$enableTracking
