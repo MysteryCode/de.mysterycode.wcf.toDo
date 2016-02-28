@@ -17,6 +17,7 @@ use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
+use wcf\data\todo\ToDoCache;
 
 /**
  * Shows the toDo detail page.
@@ -76,7 +77,10 @@ class ToDoPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 		
-		$this->todo = new ToDo($this->todoID);
+		$this->todo = ToDoCache::getInstance()->getTodo($this->todoID);
+		
+		if (empty($this->todo))
+			$this->todo = new ToDo($this->todoID);
 		
 		if($this->todo === null || !$this->todo->todoID)
 			throw new IllegalLinkException();
@@ -110,7 +114,7 @@ class ToDoPage extends AbstractPage {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		$submitter = new User($this->todo->submitter);
+		$submitter = $this->todo->getUser();
 		
 		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoPage', $this);
 		

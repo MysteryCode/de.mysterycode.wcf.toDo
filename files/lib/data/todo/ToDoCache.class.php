@@ -69,10 +69,10 @@ class ToDoCache extends SingletonFactory {
 	 * @return \wcf\data\todo\ToDo
 	 */
 	public function getTodo($todoID) {
-		if (! isset($this->cachedTodos[$todoID]))
+		if (! isset($this->cachedTodos['todos'][$todoID]))
 			return null;
 		
-		return $this->cachedTodos[$todoID];
+		return $this->cachedTodos['todos'][$todoID];
 	}
 
 	/**

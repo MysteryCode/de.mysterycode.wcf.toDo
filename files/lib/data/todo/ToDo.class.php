@@ -4,15 +4,16 @@ namespace wcf\data\todo;
 use wcf\data\attachment\Attachment;
 use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
+use wcf\data\DatabaseObject;
+use wcf\data\IMessage;
 use wcf\data\todo\assigned\AssignedCache;
 use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\category\TodoCategoryCache;
 use wcf\data\todo\status\TodoStatus;
 use wcf\data\todo\status\TodoStatusCache;
 use wcf\data\user\group\UserGroup;
+use wcf\data\user\TodoUserCache;
 use wcf\data\user\User;
-use wcf\data\DatabaseObject;
-use wcf\data\IMessage;
 use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -129,7 +130,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	public function getFormattedResponsibles() {
 		$string = '';
 		foreach ($this->getResponsibleIDs() as $responsible) {
-			$user = new User($responsible);
+			$user = TodoUserCache::getInstance()->getUser($responsible);
 			if ($user->username != '') {
 				$string .= $user->username . ', ';
 			}
@@ -151,7 +152,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	public function getHtmlFormattedResponsibles() {
 		$string = '';
 		foreach ($this->getResponsibleIDs() as $responsible) {
-			$user = new User($responsible);
+			$user = TodoUserCache::getInstance()->getUser($responsible);
 			if ($user) {
 				$string .= '<a href="' . LinkHandler::getInstance()->getLink('User', array('application' => 'wcf', 'object' => $user)) . '" class="userlink" data-user-id="' . $user->userID . '">' . StringUtil::encodeHTML($user->username) . '</a>, ';
 			}
@@ -170,7 +171,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 		
 		$responsibleList = array();
 		foreach ($responsibleIDs as $responsible) {
-			$responsibleList[] = new User($responsible);
+			$responsibleList[] = TodoUserCache::getInstance()->getUser($responsible);
 		}
 		return $responsibleList;
 	}
@@ -181,9 +182,19 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 			return array();
 		
 		$responsibleGroupList = array();
+		$groupCache = UserGroupCacheBuilder::getInstance()->getData();
+		$groupCacheSort = array();
+		
+		foreach ($groupCache['groups'] as $group)
+			$groupCacheSort[$group->groupID] = $group;
+		
 		foreach ($groupIDs as $groupID) {
-			$responsibleGroupList[] = new UserGroup($groupID);
+			if (!empty($groupCacheSort[$groupID]))
+				$responsibleGroupList[] = $groupCacheSort[$groupID];
+			else
+				$responsibleGroupList[] = new UserGroup($groupID);
 		}
+		
 		return $responsibleGroupList;
 	}
 	
@@ -314,7 +325,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	 * @see	\wcf\data\IUserContent::getUsername()
 	 */
 	public function getUsername() {
-		return $this->getUser()->username;
+		return $this->username;
 	}
 	
 	/**
@@ -346,7 +357,13 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function getUser() {
-		return new User($this->submitter);
+		if (empty($this->user))
+			$this->user = TodoUserCache::getInstance()->getUser($this->submitter);
+		
+		if (empty($this->user))
+			$this->user = new User($this->submitter);
+		
+		return $this->user;
 	}
 	
 	public function getLink() {
