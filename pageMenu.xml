@@ -4,25 +4,28 @@
 		<pagemenuitem name="wcf.header.menu.toDo">
 			<controller><![CDATA[wcf\page\ToDoListPage]]></controller>
 			<position>header</position>
-			<permissions>user.toDo.toDo.canViewList</permissions>
+			<permissions>user.toDo.toDo.canView</permissions>
 			<options>toDoList</options>
 		</pagemenuitem>
 		<pagemenuitem name="wcf.header.menu.toDo.trash">
 			<controller><![CDATA[wcf\page\ToDoTrashPage]]></controller>
 			<position>header</position>
-			<permissions>user.toDo.toDo.canViewList</permissions>
+			<permissions>user.toDo.toDo.canView</permissions>
 			<parent>wcf.header.menu.toDo</parent>
+			<options>toDoList</options>
 		</pagemenuitem>
 		<pagemenuitem name="wcf.header.menu.toDo.archive">
 			<controller><![CDATA[wcf\page\ToDoArchivePage]]></controller>
 			<position>header</position>
-			<permissions>user.toDo.toDo.canViewList</permissions>
+			<permissions>user.toDo.toDo.canView</permissions>
 			<parent>wcf.header.menu.toDo</parent>
+			<options>toDoList</options>
 		</pagemenuitem>
 		<pagemenuitem name="wcf.header.menu.toDo.own">
 			<controller><![CDATA[wcf\page\MyToDosPage]]></controller>
 			<position>header</position>
 			<parent>wcf.header.menu.toDo</parent>
+			<options>toDoList</options>
 		</pagemenuitem>
 	</import>
 </data>
