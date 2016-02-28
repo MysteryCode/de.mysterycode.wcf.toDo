@@ -41,20 +41,14 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 			$todoIDs[] = $queue->objectID;
 		}
 		
-		$conditionBuilder = new PreparedStatementConditionBuilder();
-		$conditionBuilder->add('todoID IN (?)', array(
-			$todoIDs
-		));
-		
-		$sql = "SELECT	todoID
-			FROM	wcf" . WCF_N . "_todo
-			" . $conditionBuilder;
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditionBuilder->getParameters());
+		$todoList = new ToDoList();
+		$todoList->getConditionBuilder()->add('todo_table.todoID IN (?)', array($todoIDs));
+		$todoList->readObjects();
+		$todoList = $todoList->getObjects();
 		
 		$todos = array();
-		while ($row = $statement->fetchArray()) {
-			$todos[$row['todoID']] = new ToDo($row['todoID']);
+		foreach ($todoList as $todo) {
+			$todos[$todo->todoID] = $todo;
 		}
 		
 		$orphanedQueueIDs = $assignments = array();
@@ -123,7 +117,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		}
 		
 		$todoList = new ToDoList();
-		$todoList->sqlSelects .= ", user_avatar.*, user_table.*";
+		$todoList->sqlSelects .= "user_avatar.*, user_table.*";
 		$todoList->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_user user_table ON (user_table.userID = todo_table.submitter)";
 		$todoList->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
 		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", array(
