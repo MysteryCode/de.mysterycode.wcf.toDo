@@ -78,7 +78,7 @@
 				<categoryname>user.todo</categoryname>
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
-			<option name="user.canEditDate">
+			<option name="user.canEditPriority">
 				<categoryname>user.todo</categoryname>
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>

@@ -455,31 +455,31 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function canViewResponsibleUsers() {
-		return true;
+		return $this->getCategory()->canViewResponsibleUsers();
 	}
 	
 	public function canViewResponsibleGroups() {
-		return true;
+		return $this->getCategory()->canViewResponsibleGroups();
 	}
 	
 	public function canViewReminder() {
-		return true;
+		return $this->getCategory()->canViewReminder();
 	}
 	
 	public function canEditReminder() {
-		return true;
+		return $this->getCategory()->canEditReminder();
 	}
 	
 	public function canViewDeadline() {
-		return true;
+		return $this->getCategory()->canViewDeadline();
 	}
 	
 	public function canEditDeadline() {
-		return true;
+		return $this->getCategory()->canEditDeadline();
 	}
 	
 	public function canEditPriority() {
-		return true;
+		return $this->getCategory()->canEditPriority();
 	}
 	
 	public function canModerate() {

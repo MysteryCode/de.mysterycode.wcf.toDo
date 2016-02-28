@@ -13,9 +13,13 @@
 		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditStatus"><![CDATA[Kann den Status bearbeiten]]></item>
 		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditResponsibles"><![CDATA[Kann die Verantwortlichen bearbeiten]]></item>
 		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditReminder"><![CDATA[Kann den Erinnerungszeitpunkt bearbeiten]]></item>
-		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditDate"><![CDATA[Kann das Fälligkeitsdatum bearbeiten]]></item>
 		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canAddTodo"><![CDATA[Kann ToDos erstellen]]></item>
 		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canLikeTodo"><![CDATA[Kann die Likefunktion benutzen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canViewDeadline"><![CDATA[Kann Deadline sehen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditDeadline"><![CDATA[Kann Deadline bearbeiten]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canViewReminder"><![CDATA[Kann Erinnerung sehen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canViewResponsibles"><![CDATA[Kann Zuweisungen sehen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditPriority"><![CDATA[Kann Priorität ändern]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">

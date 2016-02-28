@@ -259,7 +259,6 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 	}
 	
 	public function canEditPriority() {
-		return true;
-// 		return $this->getPermission('user.canEditPriority');
+		return $this->getPermission('user.canEditPriority');
 	}
 }
