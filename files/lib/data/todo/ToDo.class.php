@@ -164,11 +164,12 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function getResponsibles() {
-		if (empty($this->getResponsibleIDs()))
+		$responsibleIDs = $this->getResponsibleIDs();
+		if (empty($responsibleIDs))
 			return array();
 		
 		$responsibleList = array();
-		foreach ($this->getResponsibleIDs() as $responsible) {
+		foreach ($responsibleIDs as $responsible) {
 			$responsibleList[] = new User($responsible);
 		}
 		return $responsibleList;
