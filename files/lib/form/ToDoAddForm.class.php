@@ -134,7 +134,7 @@ class ToDoAddForm extends MessageForm {
 			throw new UserInputException('description');
 		}
 		
-		if (empty($this->statusID) && TODO_SET_STATUS_ON_CREATE) {
+		if (empty($this->statusID) && TODO_SET_STATUS_ON_CREATE && $this->category->canEditStatus()) {
 			throw new UserInputException('statusID');
 		}
 		
@@ -176,7 +176,8 @@ class ToDoAddForm extends MessageForm {
 			$todoData['data']['isDisabled'] = 1;
 		}
 		
-		$todoData['data']['statusID'] = $this->statusID;
+		if (!empty($this->statusID))
+			$todoData['data']['statusID'] = $this->statusID;
 		
 		$this->objectAction = new ToDoAction(array(), 'create', $todoData);
 		$resultValues = $this->objectAction->executeAction();
