@@ -82,25 +82,27 @@
 				</dd>
 			</dl>
 			
-			<dl{if $errorField == 'statusID'} class="formError"{/if}>
-				<dt><label for="statusID">{lang}wcf.toDo.task.status{/lang}</label></dt>
-				<dd>
-					<select id="statusID" name="statusID" required="required">
-						<option value="" {if !$statusID}selected{/if}>{lang}wcf.toDo.status.choose{/lang}</option>
-						<option value="" >{lang}wcf.toDo.status.placeholder{/lang}</option>
-						{foreach from=$statusList item=status}
-							<option value="{$status->statusID}" {if $statusID == $status->statusID}selected="selected"{/if}>{$status->getTitle()}</option>
-						{/foreach}
-					</select>
-					{if $errorField == 'statusID'}
-						<small class="innerError">
-							{if $errorType == 'empty'}
-								{lang}wcf.global.form.error.empty{/lang}
-							{/if}
-						</small>
-					{/if}
-				</dd>
-			</dl>
+			{if $category->canEditStatus()}
+				<dl{if $errorField == 'statusID'} class="formError"{/if}>
+					<dt><label for="statusID">{lang}wcf.toDo.task.status{/lang}</label></dt>
+					<dd>
+						<select id="statusID" name="statusID" required="required">
+							<option value="" {if !$statusID}selected{/if}>{lang}wcf.toDo.status.choose{/lang}</option>
+							<option value="" >{lang}wcf.toDo.status.placeholder{/lang}</option>
+							{foreach from=$statusList item=status}
+								<option value="{$status->statusID}" {if $statusID == $status->statusID}selected="selected"{/if}>{$status->getTitle()}</option>
+							{/foreach}
+						</select>
+						{if $errorField == 'statusID'}
+							<small class="innerError">
+								{if $errorType == 'empty'}
+									{lang}wcf.global.form.error.empty{/lang}
+								{/if}
+							</small>
+						{/if}
+					</dd>
+				</dl>
+			{/if}
 			
 			{if TODO_PROGRESS_ENABLE}
 				<dl{if $errorField == 'progress'} class="formError"{/if}>
@@ -111,29 +113,35 @@
 				</dl>
 			{/if}
 			
-			<dl{if $errorField == 'endTime'} class="formError"{/if}>
-				<dt><label for="endTime">{lang}wcf.toDo.task.endTime{/lang}</label></dt>
-				<dd>
-					<input type="datetime" id="endTime" name="endTime" value="{if $endTime > 0}{$endTime}{/if}" />
-				</dd>
-			</dl>
+			{if $category->canEditDeadline()}
+				<dl{if $errorField == 'endTime'} class="formError"{/if}>
+					<dt><label for="endTime">{lang}wcf.toDo.task.endTime{/lang}</label></dt>
+					<dd>
+						<input type="datetime" id="endTime" name="endTime" value="{if $endTime > 0}{$endTime}{/if}" />
+					</dd>
+				</dl>
+			{/if}
 			
-			<dl{if $errorField == 'remembertime'} class="formError"{/if}>
-				<dt><label for="remembertime">{lang}wcf.toDo.task.remembertime{/lang}</label></dt>
-				<dd>
-					<input type="date" id="remembertime" name="remembertime" value="{if $remembertime > 0}{$remembertime}{/if}" />
-				</dd>
-			</dl>
+			{if $category->canEditReminder()}
+				<dl{if $errorField == 'remembertime'} class="formError"{/if}>
+					<dt><label for="remembertime">{lang}wcf.toDo.task.remembertime{/lang}</label></dt>
+					<dd>
+						<input type="date" id="remembertime" name="remembertime" value="{if $remembertime > 0}{$remembertime}{/if}" />
+					</dd>
+				</dl>
+			{/if}
 			
-			<dl{if $errorField == 'priority'} class="formError"{/if}>
-				<dt><label for="priority">{lang}wcf.toDo.task.important{/lang}</label></dt>
-				<dd id="prioPicker">
-					<span data-prio="3" class="badge label grey"{if $important == 3} style="font-weight: bolder;"{/if}>{lang}wcf.toDo.task.priority.low{/lang}</span>
-					<span data-prio="2" class="badge label blue"{if $important == 2} style="font-weight: bolder;"{/if}>{lang}wcf.toDo.task.priority.normal{/lang}</span>
-					<span data-prio="1" class="badge label red"{if $important == 1} style="font-weight: bolder;"{/if}>{lang}wcf.toDo.task.priority.high{/lang}</span> 
-					<input type="hidden" id="priority" name="priority" value="{$important}" />
-				</dd>
-			</dl>
+			{if $category->canEditPriority()}
+				<dl{if $errorField == 'priority'} class="formError"{/if}>
+					<dt><label for="priority">{lang}wcf.toDo.task.important{/lang}</label></dt>
+					<dd id="prioPicker">
+						<span data-prio="3" class="badge label grey"{if $important == 3} style="font-weight: bolder;"{/if}>{lang}wcf.toDo.task.priority.low{/lang}</span>
+						<span data-prio="2" class="badge label blue"{if $important == 2} style="font-weight: bolder;"{/if}>{lang}wcf.toDo.task.priority.normal{/lang}</span>
+						<span data-prio="1" class="badge label red"{if $important == 1} style="font-weight: bolder;"{/if}>{lang}wcf.toDo.task.priority.high{/lang}</span> 
+						<input type="hidden" id="priority" name="priority" value="{$important}" />
+					</dd>
+				</dl>
+			{/if}
 			
 			<dl{if $errorField == 'private'} class="formError"{/if}>
 				<dt><label for="private">{lang}wcf.toDo.task.private{/lang}</label></dt>

@@ -28,8 +28,6 @@ class ToDoList extends DatabaseObjectList {
 		if (!empty($this->sqlSelects))
 			$this->sqlSelects .= ',';
 		
-		$this->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_todo_to_user user_assigns ON (todo_table.todoID = user_assigns.todoID)";
-		
 		// visible status
 		if (!WCF::getSession()->getPermission('mod.toDo.canViewDeleted')) {
 			$this->getConditionBuilder()->add('todo_table.isDeleted = 0');

@@ -25,6 +25,11 @@ use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 use wcf\data\user\group\UserGroup;
+use wcf\data\todo\category\TodoCategoryCache;
+use wcf\system\cache\builder\CategoryCacheBuilder;
+use wcf\data\todo\status\TodoStatusCache;
+use wcf\data\todo\assigned\AssignedCache;
+use wcf\system\cache\builder\UserGroupCacheBuilder;
 
 /**
  * Represents a todo.
@@ -47,13 +52,20 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	 * @see \wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'todoID';
-	
+
 	/**
-	 * list of responsible ids
+	 * list of responsible user ids
 	 *
 	 * @var array<integer>
 	 */
 	protected $responsibleIDs = null;
+	
+	/**
+	 * list of responsible group ids
+	 *
+	 * @var array<integer>
+	 */
+	protected $responsibleGroupIDs = null;
 	
 	public $status = null;
 	public $category = null;
@@ -63,33 +75,29 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	public $enableBBCodes = true;
 	
 	public function getResponsibleIDs() {
-		$userIDs = array();
-		$sql = "SELECT		*
-			FROM		wcf" . WCF_N . "_todo_to_user
-			WHERE		todoID = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->todoID));
-		
-		while ($row = $statement->fetchArray()) {
-			$userIDs[] = $row['userID'];
+		if (empty($this->responsibleIDs)) {
+			$responsibleArray = AssignedCache::getInstance()->getUsersByTodo($this->todoID);
+			
+			if (!empty($responsibleArray)) {
+				foreach ($responsibleArray as $user)
+					$this->responsibleIDs[] = $user->userID;
+			}
 		}
 		
-		return $userIDs;
+		return $this->responsibleIDs;
 	}
 	
 	public function getResponsibleGroupIDs() {
-		$userIDs = array();
-		$sql = "SELECT		*
-			FROM		wcf" . WCF_N . "_todo_to_group
-			WHERE		todoID = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->todoID));
-		
-		while ($row = $statement->fetchArray()) {
-			$userIDs[] = $row['groupID'];
+		if (empty($this->responsibleGroupIDs)) {
+			$responsibleArray = AssignedCache::getInstance()->getGroupsByTodo($this->todoID);
+			
+			if (!empty($responsibleArray)) {
+				foreach ($responsibleArray as $group)
+					$this->responsibleGroupIDs[] = $group->groupID;
+			}
 		}
 		
-		return $userIDs;
+		return $this->responsibleGroupIDs;
 	}
 	
 	/**
@@ -164,6 +172,9 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function getResponsibles() {
+		if (empty($this->getResponsibleIDs()))
+			return array();
+		
 		$responsibleList = array();
 		foreach ($this->getResponsibleIDs() as $responsible) {
 			$responsibleList[] = new User($responsible);
@@ -172,26 +183,39 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function getResponsibleGroups() {
+		$groupIDs = $this->getResponsibleGroupIDs();
+		if (empty($groupIDs))
+			return array();
+		
 		$responsibleGroupList = array();
-		foreach ($this->getResponsibleGroupIDs() as $groupID) {
+		foreach ($groupIDs as $groupID) {
 			$responsibleGroupList[] = new UserGroup($groupID);
 		}
 		return $responsibleGroupList;
 	}
 	
 	public function getResponsiblePreview() {
-		$users = array();
-		$sql = "SELECT		*
-			FROM		wcf" . WCF_N . "_todo_to_user
-			WHERE		todoID = ?";
-		$statement = WCF::getDB()->prepareStatement($sql, 5);
-		$statement->execute(array($this->todoID));
+		$groups = AssignedCache::getInstance()->getGroupsByTodo($this->todoID);
+		$users = AssignedCache::getInstance()->getUsersByTodo($this->todoID);
+		$preview = array();
 		
-		while ($row = $statement->fetchArray()) {
-			$users[] = $row;
+		$groups = array_slice($groups, 0, 5);
+		$groupCache = UserGroupCacheBuilder::getInstance()->getData();
+		$groupCacheSort = array();
+		
+		foreach ($groupCache['groups'] as $group)
+			$groupCacheSort[$group->groupID] = $group;
+		
+		foreach ($groups as $group) {
+			$preview[] = str_replace('%s', $groupCacheSort[$group->groupID]->getName(), $groupCacheSort[$group->groupID]->userOnlineMarking);
 		}
-	
-		return $users;
+		
+		$users = array_slice($users, 0, 5 - count($groups));
+		foreach ($users as $user) {
+			$preview[] = "<a href=\"{link controller='User' id=" . $user->userID . "}{/link}\" class=\"userLink\" data-user-id=\"" . $user->userID . "}\">" . $user->username . "</a>";
+		}
+		
+		return $preview;
 	}
 	
 	public function getFormattedDescription() {
@@ -212,17 +236,23 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 		if (!$this->statusID)
 			return null;
 		
-		if (!$this->status)
+		if (empty($this->status))
+			$this->status = TodoStatusCache::getInstance()->getStatus($this->statusID);
+		
+		if (empty($this->status))
 			$this->status = new TodoStatus($this->statusID);
 		
 		return $this->status;
 	}
 	
 	public function getCategory() {
-		if (!$this->categoryID)
+		if (empty($this->categoryID))
 			return null;
 		
-		if (!$this->category)
+		if (empty($this->category))
+			$this->category = TodoCategoryCache::getInstance()->getCategory($this->categoryID);
+		
+		if (empty($this->category))
 			$this->category = new TodoCategory(new Category($this->categoryID));
 		
 		return $this->category;
@@ -338,7 +368,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 			return false;
 		if ($this->isDeleted && !$this->canModerate())
 			return false;
-		if ($this->private == 0 && WCF::getSession()->getPermission('user.toDo.toDo.canViewDetail'))
+		if ($this->private == 0 && $this->getCategory()->canEnterTodos())
 			return true;
 		if ($this->private == 1 && $this->submitter == WCF::getUser()->userID)
 			return true;
@@ -349,65 +379,65 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function canEdit() {
-		if (WCF::getSession()->getPermission('mod.toDo.canEdit'))
+		if ($this->getCategory()->getPermission('mod.canEdit'))
 			return true;
-		if (WCF::getSession()->getPermission('user.toDo.toDo.canEditOwn') && $this->submitter == WCF::getUser()->userID)
+		if ($this->getCategory()->getPermission('user.canEditOwn') && $this->submitter == WCF::getUser()->userID)
 			return true;
-		if (WCF::getSession()->getPermission('user.toDo.toDo.canEditAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if ($this->getCategory()->getPermission('user.canEditAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
 			return true;
 		
 		return false;
 	}
 	
 	public function canDelete() {
-		if (WCF::getSession()->getPermission('mod.toDo.canDelete'))
+		if ($this->getCategory()->getPermission('mod.canDelete'))
 			return true;
-		if (WCF::getSession()->getPermission('user.toDo.toDo.canDeleteOwn') && $this->submitter == WCF::getUser()->userID)
+		if ($this->getCategory()->getPermission('user.canDeleteOwn') && $this->submitter == WCF::getUser()->userID)
 			return true;
-		if (WCF::getSession()->getPermission('user.toDo.toDo.canDeleteAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if ($this->getCategory()->getPermission('user.canDeleteAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
 			return true;
 		
 		return false;
 	}
 	
 	public function canEnable() {
-		if (WCF::getSession()->getPermission('mod.toDo.canEnable'))
+		if ($this->getCategory()->getPermission('mod.canEnable'))
 			return true;
 	
 		return false;
 	}
 	
 	public function canDeleteCompletely() {
-		if (WCF::getSession()->getPermission('mod.toDo.canDelete'))
+		if ($this->getCategory()->getPermission('mod.canDelete'))
 			return true;
 	
 		return false;
 	}
 	
 	public function canRestore() {
-		if (WCF::getSession()->getPermission('mod.toDo.canRestore'))
+		if ($this->getCategory()->getPermission('mod.canRestore'))
 			return true;
 	
 		return false;
 	}
 	
 	public function canEditStatus() {
-		if (WCF::getSession()->getPermission('user.toDo.status.canEditOwn') && $this->submitter == WCF::getUser()->userID)
+		if ($this->getCategory()->getPermission('user.status.canEditOwn') && $this->submitter == WCF::getUser()->userID)
 			return true;
-		if (WCF::getSession()->getPermission('user.toDo.status.canEditAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if ($this->getCategory()->getPermission('user.status.canEditAssigned') && !empty($this->getResponsibleIDs()) && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
 			return true;
-		if (WCF::getSession()->getPermission('mod.toDo.status.canEdit'))
+		if ($this->getCategory()->getPermission('mod.status.canEdit'))
 			return true;
 		
 		return false;
 	}
 	
 	public function canEditResponsible() {
-		if (WCF::getSession()->getPermission('user.toDo.responsible.canEditOwn') && $this->submitter == WCF::getUser()->userID)
+		if ($this->getCategory()->getPermission('user.responsible.canEditOwn') && $this->submitter == WCF::getUser()->userID)
 			return true;
-		if (WCF::getSession()->getPermission('user.toDo.responsible.canEditAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if ($this->getCategory()->getPermission('user.responsible.canEditAssigned') && !empty($this->getResponsibleIDs()) && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
 			return true;
-		if (WCF::getSession()->getPermission('mod.toDo.responsible.canEdit'))
+		if ($this->getCategory()->getPermission('mod.responsible.canEdit'))
 			return true;
 		
 		return false;
@@ -416,9 +446,9 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	public function canParticipate() {
 		if (WCF::getUser()->userID == 0)
 			return false;
-		if (in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if (!empty($this->getResponsibleIDs()) && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
 			return false;
-		if (WCF::getSession()->getPermission('user.toDo.responsible.canParticipate'))
+		if ($this->getCategory()->getPermission('user.responsible.canParticipate'))
 			return true;
 		
 		return false;
@@ -429,6 +459,26 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function canViewResponsibleGroups() {
+		return true;
+	}
+	
+	public function canViewReminder() {
+		return true;
+	}
+	
+	public function canEditReminder() {
+		return true;
+	}
+	
+	public function canViewDeadline() {
+		return true;
+	}
+	
+	public function canEditDeadline() {
+		return true;
+	}
+	
+	public function canEditPriority() {
 		return true;
 	}
 	

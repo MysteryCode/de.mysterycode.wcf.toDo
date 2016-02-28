@@ -140,7 +140,7 @@
 					{/if}
 				</dd>
 			{/if}
-			{if $__wcf->getSession()->getPermission('user.toDo.status.canView') && $todo->status}
+			{if $todo->status}
 				<dt>{lang}wcf.toDo.task.status{/lang}</dt>
 				<dd>
 					<span class="label badge {$todo->getStatus()->cssClass}" id="todoStatus{$todo->getStatus()->statusID}">{$todo->getStatus()->getTitle()}</span>
@@ -167,11 +167,11 @@
 				<dt>{lang}wcf.toDo.task.submitTime{/lang}</dt>
 				<dd>{@$todo->timestamp|time}</dd>
 			{/if}
-			{if $todo->endTime > 0}
+			{if $todo->canViewDeadline() && $todo->endTime > 0}
 				<dt>{lang}wcf.toDo.task.endTime{/lang}</dt>
 				<dd>{@$todo->endTime|time}</dd>
 			{/if}
-			{if $todo->remembertime > 0}
+			{if $todo->canViewReminder() && $todo->remembertime > 0}
 				<dt>{lang}wcf.toDo.task.remembertime{/lang}</dt>
 				<dd>{@$todo->remembertime|date}</dd>
 			{/if}

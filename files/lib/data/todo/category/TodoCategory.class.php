@@ -221,4 +221,45 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 			self::inheritPermissions($categoryID, $permissions);
 		}
 	}
+	
+	public function canViewTodos() {
+		$this->getPermission('user.canViewTodos');
+	}
+	
+	public function canEnterTodos() {
+		return $this->getPermission('user.canEnterTodos');
+	}
+	
+	public function canEditStatus() {
+		return $this->getPermission('user.canEditStatus');
+	}
+	
+	public function canViewResponsibleUsers() {
+		return $this->getPermission('user.canViewResponsibles');
+	}
+	
+	public function canViewResponsibleGroups() {
+		return $this->getPermission('user.canViewResponsibles');
+	}
+	
+	public function canViewReminder() {
+		return $this->getPermission('user.canViewReminder');
+	}
+	
+	public function canEditReminder() {
+		return $this->getPermission('user.canEnterReminder');
+	}
+	
+	public function canViewDeadline() {
+		return $this->getPermission('user.canViewDeadline');
+	}
+	
+	public function canEditDeadline() {
+		return $this->getPermission('user.canEditDeadline');
+	}
+	
+	public function canEditPriority() {
+		return true;
+// 		return $this->getPermission('user.canEditPriority');
+	}
 }

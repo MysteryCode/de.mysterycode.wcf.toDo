@@ -84,7 +84,7 @@ class TodoCategoryCache extends SingletonFactory {
 		if ($this->categories === null) {
 			$this->categories = array();
 			
-			$categories = CategoryHandler::getInstance()->getCategories('de.mysterycode.toDo');
+			$categories = CategoryHandler::getInstance()->getCategories('de.mysterycode.wcf.toDo');
 			foreach ($categories as $categoryID => $category) {
 				$this->categories[$categoryID] = new TodoCategory($category);
 			}
