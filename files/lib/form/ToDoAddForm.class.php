@@ -172,7 +172,7 @@ class ToDoAddForm extends MessageForm {
 			'attachmentHandler' => $this->attachmentHandler
 		);
 		
-		if (!WCF::getSession()->getPermission('user.toDo.toDo.canAddWithoutModeration')) {
+		if (!$this->category->getPermission('user.canAddTodoWithoutModeration')) {
 			$todoData['data']['isDisabled'] = 1;
 		}
 		
@@ -195,7 +195,7 @@ class ToDoAddForm extends MessageForm {
 		
 		$this->saved();
 		
-		if ($resultValues['returnValues']->isDisabled && !WCF::getSession()->getPermission('mod.toDo.canEnable')) {
+		if ($resultValues['returnValues']->isDisabled && !$this->category->getPermission('mod.canEnableTodos')) {
 			HeaderUtil::delayedRedirect($this->category->getLink(), WCF::getLanguage()->get('wcf.toDo.moderation.redirect'), 30);
 		} else {
 			HeaderUtil::redirect($resultValues['returnValues']->getLink());

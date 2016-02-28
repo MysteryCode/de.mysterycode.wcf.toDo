@@ -389,67 +389,69 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function canEdit() {
-		if ($this->getCategory()->getPermission('mod.canEdit'))
+		$responsibleUsers = $this->getResponsibleIDs();
+		$responsibleGroups = $this->getResponsibleGroupIDs();
+		$groupAssigned = false;
+		foreach (WCF::getUser()->getGroupIDs() as $groupID) {
+			if (in_array($groupID, $responsibleGroups)) {
+				$groupAssigned = true;
+				break;
+			}
+		}
+		
+		if ($this->getCategory()->getPermission('mod.canEditTodos'))
 			return true;
 		if ($this->getCategory()->getPermission('user.canEditOwnTodos') && $this->submitter == WCF::getUser()->userID)
 			return true;
-		if ($this->getCategory()->getPermission('user.canEditAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if ($this->getCategory()->getPermission('user.canEditAssignedTodos') && in_array(WCF::getUser()->userID, $responsibleUsers))
+			return true;
+		if ($this->getCategory()->getPermission('user.canEditAssignedTodos') && $groupAssigned)
 			return true;
 		
 		return false;
 	}
 	
 	public function canDelete() {
-		if ($this->getCategory()->getPermission('mod.canDelete'))
+		if ($this->getCategory()->getPermission('mod.canDeleteTodos'))
 			return true;
 		if ($this->getCategory()->getPermission('user.canDeleteOwnTodos') && $this->submitter == WCF::getUser()->userID)
 			return true;
-		if ($this->getCategory()->getPermission('user.canDeleteAssigned') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if ($this->getCategory()->getPermission('user.canDeleteAssignedTodos') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
 			return true;
 		
 		return false;
 	}
 	
 	public function canEnable() {
-		if ($this->getCategory()->getPermission('mod.canEnable'))
+		if ($this->getCategory()->getPermission('mod.canEnableTodos'))
 			return true;
 	
 		return false;
 	}
 	
 	public function canDeleteCompletely() {
-		if ($this->getCategory()->getPermission('mod.canDelete'))
+		if ($this->getCategory()->getPermission('mod.canDeleteTodos'))
 			return true;
 	
 		return false;
 	}
 	
 	public function canRestore() {
-		if ($this->getCategory()->getPermission('mod.canRestore'))
+		if ($this->getCategory()->getPermission('mod.canRestoreTodos'))
 			return true;
 	
 		return false;
 	}
 	
 	public function canEditStatus() {
-		$responsibleIDs = $this->getResponsibleIDs();
-		if ($this->getCategory()->getPermission('user.status.canEditOwn') && $this->submitter == WCF::getUser()->userID)
-			return true;
-		if ($this->getCategory()->getPermission('user.status.canEditAssigned') && !empty($responsibleIDs) && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
-			return true;
-		if ($this->getCategory()->getPermission('mod.status.canEdit'))
+		if ($this->getCategory()->getPermission('user.canEditStatus') && $this->canEdit())
 			return true;
 		
 		return false;
 	}
 	
 	public function canEditResponsible() {
-		$responsibleIDs = $this->getResponsibleIDs();
-		if ($this->getCategory()->getPermission('user.responsible.canEditOwn') && $this->submitter == WCF::getUser()->userID)
-			return true;
-		if ($this->getCategory()->getPermission('user.responsible.canEditAssigned') && !empty($responsibleIDs) && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
-			return true;
-		if ($this->getCategory()->getPermission('mod.responsible.canEdit'))
+		if ($this->getCategory()->getPermission('user.canEditResonsibles') && $this->canEdit())
 			return true;
 		
 		return false;
@@ -461,7 +463,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 			return false;
 		if (!empty($responsibleIDs) && in_array(WCF::getUser()->userID, $responsibleIDs))
 			return false;
-		if ($this->getCategory()->getPermission('user.responsible.canParticipate'))
+		if ($this->getCategory()->getPermission('user.canParticipate'))
 			return true;
 		
 		return false;
@@ -497,13 +499,13 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	
 	public function canModerate() {
 		$validPermissions = array(
-			'mod.toDo.canEdit',
-			'mod.toDo.canDelete',
-			'mod.toDo.canEnable'
+			'mod.canEditTodos',
+			'mod.canDeleteTodos',
+			'mod.canEnableTodos'
 		);
 		
 		foreach ($validPermissions as $permission) {
-			if (WCF::getSession()->getPermission($permission)) {
+			if ($this->getCategory()->getPermissions($permission)) {
 				return true;
 			}
 		}

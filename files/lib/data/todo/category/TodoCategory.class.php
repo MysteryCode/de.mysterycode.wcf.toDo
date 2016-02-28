@@ -46,6 +46,15 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 	}
 	
 	/**
+	 * Returns true if the active user has the permission to add new todos to this category without moderation.
+	 *
+	 * @return	boolean
+	 */
+	public function canAddTodoWithoutModeration() {
+		return $this->getPermission('user.canAddTodoWithoutModeration');
+	}
+	
+	/**
 	 * @see	\wcf\system\breadcrumb\IBreadcrumbProvider::getBreadcrumb()
 	 */
 	public function getBreadcrumb() {
@@ -108,8 +117,21 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 		}
 		
 		// use global permission
-		$globalPermission = str_replace(array('user.', 'mod.'), array('user.wcf.todo.', 'mod.wcf.todo.'), $permission);
-		return WCF::getSession()->getPermission($globalPermission);
+		if ($permission == 'user.canEditStatus') {
+			return WCF::getSession()->getPermission('mod.toDo.status.canEdit');
+		} else if ($permission == 'user.canEditResponsibles') {
+			return WCF::getSession()->getPermission('mod.toDo.status.canEdit');
+		} else if ($permission == 'user.canViewResponsibles') {
+			return WCF::getSession()->getPermission('user.toDo.responsible.canView');
+		} else if ($permission == 'user.canParticipate') {
+			return WCF::getSession()->getPermission('user.toDo.responsible.canParticipate');
+		} else if (in_array($permission, array('user.canViewDeadline', 'user.canEditDeadline', 'user.canViewReminder', 'user.canEditReminder', 'user.canEditPriority'))) {
+			return true;
+		} else {
+			$globalPermission = str_replace(array('user.', 'mod.'), array('user.wcf.todo.', 'mod.wcf.todo.'), $permission);
+			$globalPermission = str_replace('Todos', '', $globalPermission);
+			return WCF::getSession()->getPermission($globalPermission);
+		}
 	}
 	
 	/**
@@ -146,10 +168,10 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 	 */
 	public function isModerator() {
 		$validPermissions = array(
-			'mod.canEditTodo',
-			'mod.canDeleteTodo',
-			'mod.canEnableTodo',
-			'mod.canMoveTodo'
+			'mod.canEditTodos',
+			'mod.canDeleteTodos',
+			'mod.canEnableTodos',
+			'mod.canMoveTodos'
 		);
 		
 		foreach ($validPermissions as $permission) {

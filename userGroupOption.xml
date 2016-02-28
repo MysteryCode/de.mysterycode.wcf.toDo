@@ -46,13 +46,13 @@
 		</categories>
 		
 		<options>
-			<option name="user.toDo.toDo.canViewList">
+			<option name="user.toDo.toDo.canView">
 				<categoryname>user.toDo.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<userdefaultvalue>1</userdefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="user.toDo.toDo.canViewDetail">
+			<option name="user.toDo.toDo.canEnter">
 				<categoryname>user.toDo.toDo</categoryname>
 				<optiontype>boolean</optiontype>
 				<userdefaultvalue>1</userdefaultvalue>

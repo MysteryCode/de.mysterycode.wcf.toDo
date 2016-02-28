@@ -9,6 +9,9 @@
 			<category name="user.todo">
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</category>
+			<category name="mod.todo">
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</category>
 		</categories>
 		
 		<options>
@@ -36,6 +39,10 @@
 				<categoryname>user.todo</categoryname>
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
+			<option name="user.canAddTodoWithoutModeration">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
 			<option name="user.canLikeTodo">
 				<categoryname>user.todo</categoryname>
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
@@ -45,7 +52,15 @@
 				<categoryname>user.todo</categoryname>
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
+			<option name="user.canEditAssignedTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
 			<option name="user.canDeleteOwnTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canDeleteAssignedTodos">
 				<categoryname>user.todo</categoryname>
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
@@ -80,6 +95,28 @@
 			</option>
 			<option name="user.canEditPriority">
 				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canParticipate">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			
+			<!-- mod.todo -->
+			<option name="mod.canEditTodos">
+				<categoryname>mod.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="mod.canDeleteTodos">
+				<categoryname>mod.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="mod.canEnableTodos">
+				<categoryname>mod.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="mod.canRestoreTodos">
+				<categoryname>mod.todo</categoryname>
 				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
 			</option>
 		</options>
