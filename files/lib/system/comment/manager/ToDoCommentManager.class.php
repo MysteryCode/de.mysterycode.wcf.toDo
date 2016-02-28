@@ -8,6 +8,7 @@ use wcf\system\comment\manager\AbstractCommentManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
+use wcf\data\todo\ToDoCache;
 
 /**
  * Shows the todo comment manager.
@@ -93,7 +94,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 	 * @param array $todoID        	
 	 */
 	protected function setCurrentToDo($todoID) {
-		$this->currentToDo = new ToDo($todoID);
+		$this->currentToDo = ToDoCache::getInstance()->getTodo($todoID);
+		
+		if (empty($this->currentToDo))
+			$this->currentToDo = new ToDo($todoID);
 	}
 	
 	/**
