@@ -72,7 +72,7 @@
 			<classname>wcf\system\user\notification\object\type\ToDoUserNotificationObjectType</classname>
 			<category>de.mysterycode.wcf.toDo</category>
 		</type>
-		
+
 		<type>
 			<name>de.mysterycode.wcf.toDo.toDoComment.notification</name>
 			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
@@ -164,7 +164,7 @@
 			<controller>wcf\form\ToDoEditForm</controller>
 			<languagevariable>wcf.user.usersOnline.location.ToDoEditForm</languagevariable>
 		</type>
-		<!--Dashboard-->
+		<!--Dashboard -->
 		<type>
 			<name>de.mysterycode.wcf.ToDoListPage</name>
 			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
@@ -201,6 +201,11 @@
 			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
 			<classname><![CDATA[wcf\system\worker\ToDoCategoryRebuildDataWorker]]></classname>
 			<nicevalue>250</nicevalue>
+		</type>
+		<!-- message object -->
+		<type>
+			<name>de.mysterycode.wcf.toDo</name>
+			<definitionname>com.woltlab.wcf.message</definitionname>
 		</type>
 	</import>
 </data>

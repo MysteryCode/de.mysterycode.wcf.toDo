@@ -16,6 +16,7 @@ use wcf\system\request\LinkHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
+use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 
 /**
  * Shows the toDo detail page.
@@ -87,6 +88,8 @@ class ToDoPage extends AbstractPage {
 		$objectType = CommentHandler::getInstance()->getObjectType($this->objectTypeID);
 		$this->commentManager = $objectType->getProcessor();
 		$this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->objectTypeID, $this->todoID);
+		
+		MessageEmbeddedObjectManager::getInstance()->setActiveMessage('de.mysterycode.wcf.toDo', $this->todoID);
 		
 		if (MODULE_LIKE) {
 			$objectType = LikeHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo');

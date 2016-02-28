@@ -1,6 +1,7 @@
 <?php
 
 namespace wcf\data\todo;
+use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\todo\assigned\group\AssignedGroupAction;
 use wcf\data\todo\assigned\user\AssignedUserAction;
 use wcf\data\todo\ToDo;
@@ -9,7 +10,6 @@ use wcf\data\todo\ToDoList;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
-use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\attachment\AttachmentHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\comment\CommentHandler;
@@ -18,6 +18,7 @@ use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
+use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\moderation\queue\ModerationQueueActivationManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\activity\event\UserActivityEventHandler;
@@ -65,6 +66,13 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		// update attachments
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 			$this->parameters['attachmentHandler']->updateObjectID($todo->todoID);
+		}
+		
+		if (MessageEmbeddedObjectManager::getInstance()->registerObjects('de.mysterycode.wcf.toDo', $todo->todoID, $todo->description)) {
+			$todoEditor = new ToDoEditor($todo);
+			$todoEditor->update(array(
+				'hasEmbeddedObjects' => 1
+			));
 		}
 		
 		if (!$todo->isDisabled) {
@@ -126,6 +134,16 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 					} else {
 						UserNotificationHandler::getInstance()->fireEvent('edit', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->todoID)), $users);
 					}
+				}
+			}
+		}
+		
+		if (isset($this->parameters['data']['description'])) {
+			foreach ($this->objects as $object) {
+				if ($object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects('de.mysterycode.wcf.toDo', $object->todoID, $this->parameters['data']['description'])) {
+					$object->update(array(
+						'hasEmbeddedObjects' => ($object->hasEmbeddedObjects ? 0 : 1)
+					));
 				}
 			}
 		}
@@ -324,6 +342,8 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		CommentHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo.toDo', $todoIDs);
 		
 		AttachmentHandler::removeAttachments('de.mysterycode.wcf.toDo.toDo', $todoIDs);
+		
+		MessageEmbeddedObjectManager::getInstance()->removeObjects('de.mysterycode.wcf.toDo', $todoIDs);
 		
 		foreach ($this->objects as $todo) {
 			$todo->delete();
