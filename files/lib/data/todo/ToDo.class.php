@@ -382,30 +382,35 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 			return true;
 		if ($this->private == 1 && $this->submitter == WCF::getUser()->userID)
 			return true;
-		if (in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if ($this->isResponsible())
 			return true;
 		
 		return false;
 	}
 	
 	public function canEdit() {
-		$responsibleUsers = $this->getResponsibleIDs();
-		$responsibleGroups = $this->getResponsibleGroupIDs() ?: array();
-		$groupAssigned = false;
-		foreach (WCF::getUser()->getGroupIDs() as $groupID) {
-			if (in_array($groupID, $responsibleGroups)) {
-				$groupAssigned = true;
-				break;
-			}
-		}
+		
 		
 		if ($this->getCategory()->getPermission('mod.canEditTodos'))
 			return true;
 		if ($this->getCategory()->getPermission('user.canEditOwnTodos') && $this->submitter == WCF::getUser()->userID)
 			return true;
-		if ($this->getCategory()->getPermission('user.canEditAssignedTodos') && in_array(WCF::getUser()->userID, $responsibleUsers))
+		if ($this->getCategory()->getPermission('user.canEditAssignedTodos') && $this->isResponsible())
 			return true;
-		if ($this->getCategory()->getPermission('user.canEditAssignedTodos') && $groupAssigned)
+		
+		return false;
+	}
+	
+	public function isResponsible() {
+		$responsibleUsers = $this->getResponsibleIDs() ?: array();
+		$responsibleGroups = $this->getResponsibleGroupIDs() ?: array();
+		$groupAssigned = false;
+		foreach (WCF::getUser()->getGroupIDs() as $groupID) {
+			if (in_array($groupID, $responsibleGroups))
+				return true;
+		}
+		
+		if (in_array(WCF::getUser()->userID, $responsibleUsers))
 			return true;
 		
 		return false;
@@ -416,7 +421,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 			return true;
 		if ($this->getCategory()->getPermission('user.canDeleteOwnTodos') && $this->submitter == WCF::getUser()->userID)
 			return true;
-		if ($this->getCategory()->getPermission('user.canDeleteAssignedTodos') && in_array(WCF::getUser()->userID, $this->getResponsibleIDs()))
+		if ($this->getCategory()->getPermission('user.canDeleteAssignedTodos') && $this->isResponsible())
 			return true;
 		
 		return false;

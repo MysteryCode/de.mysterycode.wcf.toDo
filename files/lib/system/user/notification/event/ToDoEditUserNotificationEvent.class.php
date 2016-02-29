@@ -39,4 +39,25 @@ class ToDoEditUserNotificationEvent extends AbstractUserNotificationEvent {
 			'object' => $this->userNotificationObject->object
 		));
 	}
+	
+	/**
+	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::checkAccess()
+	 */
+	public function checkAccess() {
+		if (empty($this->userNotificationObject->object))
+			$returnValue = false;
+		
+		$returnValue = $this->userNotificationObject->object->canEnter();
+		if (!$this->userNotificationObject->object->canEnter()) {
+// 			// remove subscription
+// 			UserObjectWatchHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo', array($this->userNotificationObject->todoID), array(WCF::getUser()->userID));
+			
+// 			// reset user storage
+// 			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'wcfUnreadWatchedTodos');
+			
+			$returnValue = false;
+		}
+		
+		return $returnValue;
+	}
 }

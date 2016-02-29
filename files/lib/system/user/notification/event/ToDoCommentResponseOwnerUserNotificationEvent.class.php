@@ -54,4 +54,28 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 			'object' => $todo
 		), '#comments');
 	}
+	
+	/**
+	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::checkAccess()
+	 */
+	public function checkAccess() {
+		$comment = new Comment($this->userNotificationObject->commentID);
+		$todo = new ToDo($comment->objectID);
+		
+		if (empty($todo))
+			$returnValue = false;
+		
+		$returnValue = $todo->canEnter();
+		if (!$todo->canEnter()) {
+// 			// remove subscription
+// 			UserObjectWatchHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo', array($todo->todoID), array(WCF::getUser()->userID));
+			
+// 			// reset user storage
+// 			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'wcfUnreadWatchedTodos');
+			
+			$returnValue = false;
+		}
+		
+		return $returnValue;
+	}
 }
