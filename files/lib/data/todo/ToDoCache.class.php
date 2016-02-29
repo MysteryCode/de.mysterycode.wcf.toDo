@@ -80,8 +80,8 @@ class ToDoCache extends SingletonFactory {
 	 *
 	 * @return array<\wcf\data\todo\ToDo>
 	 */
-	public function getTodoss() {
-		return $this->cachedTodos;
+	public function getTodos() {
+		return $this->cachedTodos['todos'];
 	}
 
 	/**

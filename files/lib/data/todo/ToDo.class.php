@@ -373,6 +373,28 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 		));
 	}
 	
+	/**
+	 * Returns a list of the ids of accessible todos.
+	 * 
+	 * @param	array		$permissions		filters boards by given permissions
+	 * @return	array<integer>
+	 */
+	public static function getAccessibleTodoIDs($permissions = array('canView', 'canEnter')) {
+		$todoIDs = array();
+		foreach (ToDoCache::getInstance()->getTodos() as $todo) {
+			$result = true;
+			foreach ($permissions as $permission) {
+				$result = $result && $todo->$permission();
+			}
+			
+			if ($result) {
+				$todoIDs[] = $todo->todoID;
+			}
+		}
+		
+		return $todoIDs;
+	}
+	
 	public function canEnter() {
 		if ($this->isDisabled && !$this->canModerate())
 			return false;
@@ -389,8 +411,6 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function canEdit() {
-		
-		
 		if ($this->getCategory()->getPermission('mod.canEditTodos'))
 			return true;
 		if ($this->getCategory()->getPermission('user.canEditOwnTodos') && $this->submitter == WCF::getUser()->userID)
@@ -472,6 +492,10 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 			return true;
 		
 		return false;
+	}
+	
+	public function canView() {
+		return $this->canEnter() || ($this->getCategory()->canViewTodos() && $this->private == 0);
 	}
 	
 	public function canViewResponsibleUsers() {

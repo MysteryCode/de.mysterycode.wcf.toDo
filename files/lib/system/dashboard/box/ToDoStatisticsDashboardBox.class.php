@@ -21,7 +21,7 @@ class ToDoStatisticsDashboardBox extends AbstractSidebarDashboardBox {
 	public function init(DashboardBox $box, IPage $page) {
 		parent::init($box, $page);
 		
-		if (WCF::getSession()->getPermission('user.toDo.toDo.canViewList')) {
+		if (WCF::getSession()->getPermission('user.toDo.toDo.canView')) {
 			// read stats some time
 		}
 		WCF::getTPL()->assign(array(

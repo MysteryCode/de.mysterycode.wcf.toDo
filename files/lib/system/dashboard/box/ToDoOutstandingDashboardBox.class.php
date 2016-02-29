@@ -3,7 +3,7 @@
 namespace wcf\system\dashboard\box;
 use wcf\data\dashboard\box\DashboardBox;
 use wcf\data\todo\DashboardBoxTodoList;
-use wcf\data\user\User;
+use wcf\data\todo\ToDo;
 use wcf\page\IPage;
 use wcf\system\dashboard\box\AbstractSidebarDashboardBox;
 use wcf\system\WCF;
@@ -21,17 +21,20 @@ class ToDoOutstandingDashboardBox extends AbstractSidebarDashboardBox {
 	public function init(DashboardBox $box, IPage $page) {
 		parent::init($box, $page);
 		
-		$todoList = new DashboardBoxTodoList(TODO_OUTSTANDING_DASHBOARD_BOX_ITEMS);
-		$todoList->getConditionBuilder()->add('statusID <> ?', array(1));
-		$todoList->readObjects();
+		$accessibleTodoIDs = ToDo::getAccessibleTodoIDs();
 		
-		if (!WCF::getSession()->getPermission('user.toDo.toDo.canViewList')) {
+		if (!empty($accessibleTodoIDs)) {
+			$todoList = new DashboardBoxTodoList(TODO_OUTSTANDING_DASHBOARD_BOX_ITEMS);
+			$todoList->getConditionBuilder()->add('todo_table.statusID <> ?', array(1));
+			$todoList->getConditionBuilder()->add('todo_table.todoID IN (?)', array($accessibleTodoIDs));
+			$todoList->readObjects();
+			
 			WCF::getTPL()->assign(array(
-				'todoList' => array()
+				'todoList' => $todoList->getObjects()
 			));
 		} else {
 			WCF::getTPL()->assign(array(
-				'todoList' => $todoList->getObjects()
+					'todoList' => array()
 			));
 		}
 	}
