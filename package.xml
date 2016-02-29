@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="de.mysterycode.wcf.toDo" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
+<!DOCTYPE xml>
+<package name="de.mysterycode.wcf.toDo" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/package.xsd">
 	<packageinformation>
 		<packagename><![CDATA[ToDo-List]]></packagename>
 		<packagename language="de"><![CDATA[ToDo-Liste]]></packagename>
