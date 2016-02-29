@@ -3,18 +3,12 @@
 namespace wcf\system\cronjob;
 use wcf\data\cronjob\Cronjob;
 use wcf\data\todo\ToDo;
+use wcf\data\todo\ToDoAction;
 use wcf\data\todo\ToDoList;
-use wcf\data\user\notification\event\UserNotificationEventList;
-use wcf\data\user\notification\UserNotificationList;
-use wcf\data\user\UserEditor;
-use wcf\data\user\UserList;
-use wcf\data\user\UserProfile;
 use wcf\system\cronjob\AbstractCronjob;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;
-use wcf\util\StringUtil;
 
 /**
  * Creates notifications to remind of todos.
@@ -33,7 +27,7 @@ class ToDoReminderCronjob extends AbstractCronjob {
 		$todoList = new ToDoList();
 		$todoList->getConditionBuilder()->add('todo_table.remembertime > ?', array(0));
 		$todoList->getConditionBuilder()->add('todo_table.remembertime <= ?', array($check));
-		$todoList->getConditionBuilder()->add('todo_table.status IN (?)', array(array(1, 2, 5)));
+		$todoList->getConditionBuilder()->add('todo_table.statusID IN (?)', array(array(1, 2, 5)));
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
@@ -44,14 +38,8 @@ class ToDoReminderCronjob extends AbstractCronjob {
 		}
 		
 		if (!empty($todoIDs)) {
-			$conditions = new PreparedStatementConditionBuilder();
-			$conditions->add("todoID IN (?)", array($todoIDs));
-			
-			$sql = "UPDATE wcf" . WCF_N . "_todo
-				SET remembertime = ?
-				".$conditions;
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute($conditions->getParameters());
+			$todoAction = new ToDoAction(array($todoIDs), 'update', array('data' => array('remembertime' => 0)));
+			$todoAction->executeAction();
 		}
 	}
 }
