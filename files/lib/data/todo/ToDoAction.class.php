@@ -76,7 +76,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		}
 		
 		if (!$todo->isDisabled) {
-			$todoAction = new ToDoAction(array($todo), 'publish');
+			$todoAction = new self(array($todo), 'publish');
 			$todoAction->executeAction();
 		} else {
 			ModerationQueueActivationManager::getInstance()->addModeratedContent('de.mysterycode.wcf.toDo.toDo', $todo->todoID);
@@ -189,7 +189,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 			$this->addToDoData($todo->getDecoratedObject(), 'isDisabled', 0);
 		}
 		
-		$todoAction = new ToDoAction($this->objects, 'publish');
+		$todoAction = new self($this->objects, 'publish');
 		$todoAction->executeAction();
 		
 		$this->removeModeratedContent($todoIDs);
@@ -722,7 +722,7 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		$user = new User($this->parameters['userID']);
 		$object = new ToDo($this->parameters['objectID']);
 		
-		$todoAction = new ToDoAction(array($object), 'update', array('data' => array('status' => $this->parameters['status'])));
+		$todoAction = new self(array($object), 'update', array('data' => array('statusID' => $this->parameters['status'])));
 		$todoAction->executeAction();
 		
 		return array('success' => 1);
