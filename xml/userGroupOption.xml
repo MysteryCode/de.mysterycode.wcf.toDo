@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/userGroupOption.xsd">
+	<import>
+		<categories>
+			<category name="user.toDo">
+				<parent>user</parent>
+			</category>
+			<category name="user.toDo.toDo">
+				<parent>user.toDo</parent>
+			</category>
+			<category name="user.toDo.status">
+				<parent>user.toDo</parent>
+			</category>
+			<category name="user.toDo.responsible">
+				<parent>user.toDo</parent>
+			</category>
+			<category name="user.toDo.comment">
+				<parent>user.toDo</parent>
+			</category>
+			<category name="user.toDo.warning">
+				<parent>user.toDo</parent>
+			</category>
+			<category name="user.toDo.attachment">
+				<parent>user.toDo</parent>
+			</category>
+			
+			<category name="mod.toDo">
+				<parent>mod</parent>
+			</category>
+			<category name="mod.toDo.comment">
+				<parent>mod.toDo</parent>
+			</category>
+			<category name="mod.toDo.status">
+				<parent>mod.toDo</parent>
+			</category>
+			<category name="mod.toDo.responsible">
+				<parent>mod.toDo</parent>
+			</category>
+			
+			<category name="admin.content.toDo.category">
+				<parent>admin.content</parent>
+			</category>
+			<category name="admin.content.toDo.status">
+				<parent>admin.content</parent>
+			</category>
+		</categories>
+		
+		<options>
+			<option name="user.toDo.toDo.canView">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canEnter">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canAdd">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canAddWithoutModeration">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canEditOwn">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canEditAssigned">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canDeleteOwn">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canDeleteAssigned">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canUseHtml">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canAddCategory">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.toDo.canViewPrivate">
+				<categoryname>user.toDo.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			
+			<option name="user.toDo.status.canView">
+				<categoryname>user.toDo.status</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.status.canEditOwn">
+				<categoryname>user.toDo.status</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.status.canEditAssigned">
+				<categoryname>user.toDo.status</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="user.toDo.responsible.canView">
+				<categoryname>user.toDo.responsible</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.responsible.canEditOwn">
+				<categoryname>user.toDo.responsible</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.responsible.canEditAssigned">
+				<categoryname>user.toDo.responsible</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.responsible.canParticipate">
+				<categoryname>user.toDo.responsible</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="user.toDo.comment.canAdd">
+				<categoryname>user.toDo.comment</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.comment.canEditOwn">
+				<categoryname>user.toDo.comment</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.comment.canDeleteOwn">
+				<categoryname>user.toDo.comment</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="user.toDo.warning.canSee">
+				<categoryname>user.toDo.warning</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.warning.canHide">
+				<categoryname>user.toDo.warning</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="user.toDo.attachment.canUploadAttachment">
+				<categoryname>user.toDo.attachment</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<enableoptions>user.toDo.attachment.image.allowedExtensions,user.toDo.attachment.attachmentMaxSize,user.toDo.attachment.allowedAttachmentExtensions,user.toDo.attachment.maxAttachmentCount</enableoptions>
+				<options>module_attachment</options>
+			</option>
+			<option name="user.toDo.attachment.attachmentMaxSize">
+				<categoryname>user.toDo.attachment</categoryname>
+				<optiontype>fileSize</optiontype>
+				<defaultvalue>1000000</defaultvalue>
+				<options>module_attachment</options>
+				<minvalue>10000</minvalue>
+			</option>
+			<option name="user.toDo.attachment.allowedAttachmentExtensions">
+				<categoryname>user.toDo.attachment</categoryname>
+				<optiontype>textarea</optiontype>
+				<defaultvalue>
+		<![CDATA[gif
+jpg
+jpeg
+png
+bmp
+zip
+txt
+pdf
+xml]]>
+				</defaultvalue>
+				<options>module_attachment</options>
+				<wildcard><![CDATA[*]]></wildcard>
+			</option>
+			<option name="user.toDo.attachment.canDownloadAttachments">
+				<categoryname>user.toDo.attachment</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.attachment.canViewAttachmentPreview">
+				<categoryname>user.toDo.attachment</categoryname>
+				<optiontype>boolean</optiontype>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.toDo.attachment.maxAttachmentCount">
+				<categoryname>user.toDo.attachment</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>10</defaultvalue>
+			</option>
+			
+			
+			<option name="mod.toDo.canEdit">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.canDelete">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.canViewDeleted">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.canRestore">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.canDeleteCompletely">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.canEnable">
+				<categoryname>mod.toDo</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="mod.toDo.comment.canEdit">
+				<categoryname>mod.toDo.comment</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.comment.canDelete">
+				<categoryname>mod.toDo.comment</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="mod.toDo.comment.canModerate">
+				<categoryname>mod.toDo.comment</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="mod.toDo.status.canEdit">
+				<categoryname>mod.toDo.status</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="mod.toDo.responsible.canEdit">
+				<categoryname>mod.toDo.responsible</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			
+			<option name="admin.content.toDo.category.canAddCategory">
+				<categoryname>admin.content.toDo.category</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.toDo.category.canEditCategory">
+				<categoryname>admin.content.toDo.category</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.toDo.category.canDeleteCategory">
+				<categoryname>admin.content.toDo.category</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="admin.content.toDo.status.canAdd">
+				<categoryname>admin.content.toDo.status</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.toDo.status.canEdit">
+				<categoryname>admin.content.toDo.status</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.toDo.status.canDelete">
+				<categoryname>admin.content.toDo.status</categoryname>
+				<optiontype>boolean</optiontype>
+				<usersonly>1</usersonly>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+		</options>
+	</import>
+</data>

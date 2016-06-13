@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/aclOption.xsd">
+	<import>
+		<categories>
+			<!-- user -->
+			<category name="user.category">
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</category>
+			<category name="user.todo">
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</category>
+			<category name="mod.todo">
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</category>
+		</categories>
+		
+		<options>
+			<!-- user.category -->
+			<option name="user.canViewCategory">
+				<categoryname>user.category</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canEnterCategory">
+				<categoryname>user.category</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			
+			<!-- user.todo -->
+			<option name="user.canViewTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canEnterTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			
+			<option name="user.canAddTodo">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canAddTodoWithoutModeration">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canLikeTodo">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			
+			<option name="user.canEditOwnTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canEditAssignedTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canDeleteOwnTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canDeleteAssignedTodos">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			
+			<option name="user.canEditStatus">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canEditResponsibles">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canViewResponsibles">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canViewDeadline">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canEditDeadline">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canViewReminder">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canEditReminder">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canEditPriority">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="user.canParticipate">
+				<categoryname>user.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			
+			<!-- mod.todo -->
+			<option name="mod.canEditTodos">
+				<categoryname>mod.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="mod.canDeleteTodos">
+				<categoryname>mod.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="mod.canEnableTodos">
+				<categoryname>mod.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+			<option name="mod.canRestoreTodos">
+				<categoryname>mod.todo</categoryname>
+				<objecttype>de.mysterycode.wcf.toDo.category</objecttype>
+			</option>
+		</options>
+	</import>
+</data>

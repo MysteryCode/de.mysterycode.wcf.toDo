@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/clipboardAction.xsd">
+	<import>
+		<action name="trash">
+			<actionclassname><![CDATA[wcf\system\clipboard\action\ToDoClipboardAction]]></actionclassname>
+			<showorder>6</showorder>
+			<pages>
+				<page><![CDATA[wcf\page\ToDoListPage]]></page>
+				<page><![CDATA[wcf\page\ToDoCategoryPage]]></page>
+				<page><![CDATA[wcf\page\ToDoArchivePage]]></page>
+				<page><![CDATA[wcf\page\ToDoTrashPage]]></page>
+				<page><![CDATA[wcf\page\ToDoPage]]></page>
+				<page><![CDATA[wcf\page\DeletedContentListPage]]></page>
+			</pages>
+		</action>
+		<action name="delete">
+			<actionclassname><![CDATA[wcf\system\clipboard\action\ToDoClipboardAction]]></actionclassname>
+			<showorder>7</showorder>
+			<pages>
+				<page><![CDATA[wcf\page\ToDoListPage]]></page>
+				<page><![CDATA[wcf\page\ToDoCategoryPage]]></page>
+				<page><![CDATA[wcf\page\ToDoArchivePage]]></page>
+				<page><![CDATA[wcf\page\ToDoTrashPage]]></page>
+				<page><![CDATA[wcf\page\ToDoPage]]></page>
+				<page><![CDATA[wcf\page\DeletedContentListPage]]></page>
+			</pages>
+		</action>
+		<action name="restore">
+			<actionclassname><![CDATA[wcf\system\clipboard\action\ToDoClipboardAction]]></actionclassname>
+			<showorder>8</showorder>
+			<pages>
+				<page><![CDATA[wcf\page\ToDoListPage]]></page>
+				<page><![CDATA[wcf\page\ToDoCategoryPage]]></page>
+				<page><![CDATA[wcf\page\ToDoArchivePage]]></page>
+				<page><![CDATA[wcf\page\ToDoTrashPage]]></page>
+				<page><![CDATA[wcf\page\ToDoPage]]></page>
+				<page><![CDATA[wcf\page\DeletedContentListPage]]></page>
+			</pages>
+		</action>
+		<action name="enable">
+			<actionclassname><![CDATA[wcf\system\clipboard\action\ToDoClipboardAction]]></actionclassname>
+			<showorder>9</showorder>
+			<pages>
+				<page><![CDATA[wcf\page\ToDoListPage]]></page>
+				<page><![CDATA[wcf\page\ToDoCategoryPage]]></page>
+				<page><![CDATA[wcf\page\ToDoArchivePage]]></page>
+				<page><![CDATA[wcf\page\ToDoTrashPage]]></page>
+				<page><![CDATA[wcf\page\ToDoPage]]></page>
+			</pages>
+		</action>
+		<action name="disable">
+			<actionclassname><![CDATA[wcf\system\clipboard\action\ToDoClipboardAction]]></actionclassname>
+			<showorder>10</showorder>
+			<pages>
+				<page><![CDATA[wcf\page\ToDoListPage]]></page>
+				<page><![CDATA[wcf\page\ToDoCategoryPage]]></page>
+				<page><![CDATA[wcf\page\ToDoArchivePage]]></page>
+				<page><![CDATA[wcf\page\ToDoTrashPage]]></page>
+				<page><![CDATA[wcf\page\ToDoPage]]></page>
+			</pages>
+		</action>
+	</import>
+</data>

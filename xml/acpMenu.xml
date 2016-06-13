@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/acpMenu.xsd">
+	<import>
+		<acpmenuitem name="wcf.acp.menu.link.toDoCategory">
+			<parent>wcf.acp.menu.link.community</parent>
+		</acpmenuitem>
+		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.list">
+			<controller><![CDATA[wcf\acp\page\ToDoCategoryListPage]]></controller>
+			<parent>wcf.acp.menu.link.toDoCategory</parent>
+			<permissions>admin.content.toDo.category.canEditCategory,admin.content.toDo.category.canDeleteCategory</permissions>
+			<showorder>1</showorder>
+		</acpmenuitem>
+		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.add">
+			<controller><![CDATA[wcf\acp\form\ToDoCategoryAddForm]]></controller>
+			<parent>wcf.acp.menu.link.toDoCategory</parent>
+			<permissions>admin.content.toDo.category.canAddCategory</permissions>
+			<showorder>2</showorder>
+		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.todoStatus">
+			<parent>wcf.acp.menu.link.community</parent>
+		</acpmenuitem>
+		<acpmenuitem name="wcf.acp.menu.link.todoStatus.list">
+			<controller><![CDATA[wcf\acp\page\TodoStatusListPage]]></controller>
+			<parent>wcf.acp.menu.link.todoStatus</parent>
+			<permissions>admin.content.toDo.status.canEdit,admin.content.toDo.status.canDelete</permissions>
+			<showorder>1</showorder>
+		</acpmenuitem>
+		<acpmenuitem name="wcf.acp.menu.link.todoStatus.add">
+			<controller><![CDATA[wcf\acp\form\TodoStatusAddForm]]></controller>
+			<parent>wcf.acp.menu.link.todoStatus</parent>
+			<permissions>admin.content.toDo.status.canAdd</permissions>
+			<showorder>2</showorder>
+		</acpmenuitem>
+	</import>
+</data>

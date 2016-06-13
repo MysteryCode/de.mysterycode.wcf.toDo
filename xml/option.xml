@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/option.xsd">
+	<import>
+		<categories>
+			<category name="toDo" />
+			<category name="toDo.general">
+				<parent>toDo</parent>
+			</category>
+			<category name="toDo.sort">
+				<parent>toDo</parent>
+			</category>
+			<category name="toDo.warning">
+				<parent>toDo</parent>
+			</category>
+			
+			<category name="dashboard.sidebar.wcf.todo.noresponsible">
+				<parent>dashboard.sidebar</parent>
+			</category>
+			<category name="dashboard.sidebar.wcf.todo.outstanding">
+				<parent>dashboard.sidebar</parent>
+			</category>
+			
+			<category name="dashboard.content.wcf.todo.latest">
+				<parent>dashboard.content</parent>
+			</category>
+		</categories>
+		<options>
+			<option name="toDoList">
+				<categoryname>module.user</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			
+			<option name="todo_set_status_on_create">
+				<categoryname>toDo.general</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="todo_comments_enable">
+				<categoryname>toDo.general</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="todo_category_enable">
+				<categoryname>toDo.general</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="todo_progress_enable">
+				<categoryname>toDo.general</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			
+			<option name="todo_todos_per_page">
+				<categoryname>toDo.sort</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>25</defaultvalue>
+			</option>
+			<option name="todo_default_sort_field">
+				<categoryname>toDo.sort</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue>statusID</defaultvalue>
+				<selectoptions><![CDATA[title:wcf.toDo.task.title
+category:wcf.toDo.category
+endTime:wcf.toDo.task.endTime
+statusID:wcf.toDo.task.status
+submitter:wcf.toDo.task.submitter
+timestamp:wcf.toDo.task.submitTime
+updatetimestamp:wcf.toDo.task.updatetimestamp
+important:wcf.toDo.task.priority
+remembertime:wcf.toDo.task.remembertime]]></selectoptions>
+			</option>
+			<option name="todo_default_sort_order">
+				<categoryname>toDo.sort</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue>ASC</defaultvalue>
+				<selectoptions><![CDATA[ASC:wcf.global.sortOrder.ascending
+DESC:wcf.global.sortOrder.descending]]></selectoptions>
+			</option>
+			
+			<option name="todo_unsolved_warning">
+				<categoryname>toDo.warning</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="todo_unsolved_warning_time">
+				<categoryname>toDo.warning</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>14</defaultvalue>
+			</option>
+			<option name="todo_unsolved_warning_hide_duration">
+				<categoryname>toDo.warning</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>168</defaultvalue>
+			</option>
+			<option name="todo_overdue_warning">
+				<categoryname>toDo.warning</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="todo_overdue_warning_hide_duration">
+				<categoryname>toDo.warning</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>48</defaultvalue>
+			</option>
+			
+			<option name="todo_noresponsible_dashboard_box_items">
+				<categoryname>dashboard.sidebar.wcf.todo.noresponsible</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>5</defaultvalue>
+			</option>
+			<option name="todo_outstanding_dashboard_box_items">
+				<categoryname>dashboard.sidebar.wcf.todo.outstanding</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>5</defaultvalue>
+			</option>
+			
+			<option name="todo_latest_dashboard_box_items">
+				<categoryname>dashboard.content.wcf.todo.latest</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>5</defaultvalue>
+			</option>
+		</options>
+	</import>
+</data>
