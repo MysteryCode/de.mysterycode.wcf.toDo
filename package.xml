@@ -52,7 +52,6 @@
 		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="acpTemplate">xml/acpTemplates.tar</instruction>
 		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		
