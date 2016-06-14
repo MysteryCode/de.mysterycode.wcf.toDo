@@ -177,3 +177,53 @@
         background-color: @wcfDisabledBackgroundColor;
     }
 }
+
+.todoCategoryList {
+	.todoDepth2 {
+		&.todoCategoryContainer > .todoCategory {
+			padding-left: 43px;
+		}
+		
+		&.todoCategory > header {
+			padding-left: 43px;
+		}
+	}
+	.todoCategory {
+		.todoDepth2 {
+			&.todoCategoryContainer > .todoCategory {
+				padding-left: @wcfGapSmall;
+			}
+		}
+	}
+	.todoCategoryContainer {
+		position: relative;
+	}
+
+	.todoDepth1 {
+		margin-top: @wcfGapMedium;
+	}
+
+	.todoCategory {
+		min-height: 44px;
+		padding: @wcfGapSmall;
+		padding-right: 51%;
+		
+		.transition(background, .1s);
+		
+		&:hover {
+			background-color: @wcfContainerHoverBackgroundColor;
+		}
+	}
+	
+	.todoCategoryNode1 {
+		background-color: @wcfContainerBackgroundColor;
+	}
+
+	.todoCategoryNode2 {
+		background-color: @wcfContainerAccentBackgroundColor;
+	}
+	
+	.todoCategory > div > .containerHeadline > h3 {
+		font-weight: normal;
+	}
+}
