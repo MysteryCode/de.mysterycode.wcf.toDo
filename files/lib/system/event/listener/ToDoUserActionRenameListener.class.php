@@ -2,7 +2,6 @@
 
 namespace wcf\system\event\listener;
 use wcf\system\event\listener\IParameterizedEventListener;
-use wcf\system\todo\ToDoHandler;
 use wcf\system\WCF;
 
 /**
