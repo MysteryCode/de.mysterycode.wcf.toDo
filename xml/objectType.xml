@@ -120,6 +120,12 @@
 			<definitionname>com.woltlab.wcf.deletedContent</definitionname>
 			<classname>wcf\system\moderation\DeletedToDoProvider</classname>
 		</type>
+		<!-- quotes -->
+		<type>
+			<name>de.mysterycode.wcf.toDo</name>
+			<definitionname>com.woltlab.wcf.message.quote</definitionname>
+			<classname>wcf\system\message\quote\TodoMessageQuoteHandler</classname>
+		</type>
 		<!-- user online locations -->
 		<type>
 			<name>de.mysterycode.wcf.ToDoListPage</name>

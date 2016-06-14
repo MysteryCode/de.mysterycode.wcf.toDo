@@ -41,12 +41,17 @@ use wcf\util\StringUtil;
  * @package	de.mysterycode.wcf.toDo
  * @category	WCF
  */
-class ToDoAction extends AbstractDatabaseObjectAction implements IMessageInlineEditorAction, IMessageQuoteAction {
+class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardAction, IMessageInlineEditorAction, IMessageQuoteAction {
 	/**
 	 *
 	 * @see \wcf\data\AbstractDatabaseObjectAction::$className
 	 */
 	protected $className = 'wcf\data\todo\ToDoEditor';
+	
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
+	 */
+	protected $allowGuestAccess = array('getPreview', 'saveFullQuote', 'saveQuote');
 	
 	/**
 	 * list of todo data
@@ -62,6 +67,14 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IMessageInlineE
 	public function create() {
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 			$data['attachments'] = count($this->parameters['attachmentHandler']);
+		}
+		
+		if (LOG_IP_ADDRESS) {
+			if (!isset($this->parameters['data']['ipAddress']))
+				$this->parameters['data']['ipAddress'] = WCF::getSession()->ipAddress;
+		} else {
+			if (isset($this->parameters['data']['ipAddress']))
+				unset($this->parameters['data']['ipAddress']);
 		}
 		
 		$todo = parent::create();
