@@ -529,4 +529,8 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	public function canModerate() {
 		return $this->getCategory()->isModerator();
 	}
+	
+	public function canEditProgress() {
+		return $this->canEdit() || $this->canModerate();
+	}
 }

@@ -1266,6 +1266,152 @@ WCF.Todo.QuoteHandler = WCF.Message.Quote.Handler.extend({
 	}
 });
 
+WCF.Todo.UpdateProgress = Class.extend({
+	/**
+	 * callback object
+	 * @var	object
+	 */
+	_callback: null,
+
+	/**
+	 * dialog overlay
+	 * @var	jQuery
+	 */
+	_dialog: null,
+
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+
+	/**
+	 * action class name
+	 * @var	string
+	 */
+	_className: 'wcf\\data\\todo\\ToDoAction',
+
+	/**
+	 * prefix of the language items
+	 * @var	string
+	 */
+	_languageItemPrefix: 'wcf.toDo',
+	
+	_didInit: false,
+	
+	_objectID: 0,
+
+	/**
+	 * Initializes INVENTAR.Download.Generator on first use.
+	 */
+	init: function(objectID) {
+		this._dialog = $('<div />').hide().appendTo(document.body);
+		this._proxy = new WCF.Action.Proxy();
+		this._objectID = objectID;
+		
+		if (!this._didInit) {
+			this._init();
+		}
+		
+		this._didInit = true;
+	},
+	
+	_init: function() {
+		$('#updateProgress').click($.proxy(this.prepare, this));
+	},
+
+	/**
+	 * Prepares
+	 */
+	prepare: function(event) {
+		// prepare request
+		this._proxy.setOption('data', {
+			actionName: 'prepareProgressUpdate',
+			className: this._className,
+			objectIDs: [ this._objectID ]
+		});
+		this._proxy.setOption('success', $.proxy(this._success, this));
+
+		// send request
+		this._proxy.sendRequest();
+	},
+
+	/**
+	 * Handles the successful preparation of the editing.
+	 *
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		this._dialog.data('objectID', data.objectIDs[0]).html(data.returnValues.template);
+		this._dialog.wcfDialog({
+			title: WCF.Language.get('wcf.toDo.task.progress.update')
+		});
+
+		// listen for submit event
+		this._dialog.find('.formSubmit > input[type=submit]').click($.proxy(this._submit, this));
+	},
+
+	/**
+	 * Submit new progress status
+	 *
+	 * @param	object		event
+	 */
+	_submit: function(event) {
+		var $parameters = this._getParameters();
+		if (Object.keys($parameters).length) {
+			// prepare request
+			this._proxy.setOption('data', {
+				actionName: 'progressUpdate',
+				className: this._className,
+				objectIDs: [ this._objectID ],
+				parameters: $parameters
+			});
+			this._proxy.setOption('success', $.proxy(function(data) {
+				this._callback(data);
+			}, this));
+
+			// send request
+			this._proxy.sendRequest();
+
+			// close dialog
+			this._dialog.wcfDialog('close');
+		}
+	},
+	
+	_callback: function(data) {
+		$('.progressbar_inner').width('calc(100% - ' + data.returnValues.progress + '% + 2px)');
+	},
+	
+	/**
+	 * Validates the form and returns the parameters to save.
+	 *
+	 * @return	object
+	 */
+	_getParameters: function() {
+		return {
+			progress: $('#progress').val()
+		};
+	},
+
+	/**
+	 * Shows an inline error.
+	 *
+	 * @param	string		selector
+	 * @param	string		errorField
+	 * @param	string		errorType
+	 */
+	_showInlineError: function(selector, errorField, errorType) {
+		var languageVariable = this._languageItemPrefix+'.'+errorField+'.error.'+errorType;
+		if (errorType == 'empty') {
+			languageVariable = 'wcf.global.form.error.empty';
+		}
+
+		$(selector).parent().append($('<small class="innerError">'+WCF.Language.get(languageVariable)+'</small>'));
+	}
+});
+
 WCF.Todo.Search = {};
 
 /**
