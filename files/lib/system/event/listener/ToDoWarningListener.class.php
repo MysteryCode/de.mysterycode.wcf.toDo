@@ -2,7 +2,6 @@
 
 namespace wcf\system\event\listener;
 use wcf\system\event\listener\IParameterizedEventListener;
-use wcf\system\todo\ToDoHandler;
 use wcf\system\WCF;
 
 /**
@@ -17,6 +16,7 @@ use wcf\system\WCF;
 class ToDoWarningListener implements IParameterizedEventListener {
 	public $unsolved = 0;
 	public $overdue = 0;
+	public $waiting = 0;
 	
 	/**
 	 * @see \wcf\system\event\listener\IParameterizedEventListener::execute()
@@ -25,11 +25,13 @@ class ToDoWarningListener implements IParameterizedEventListener {
 		if (WCF::getUser()->userID != 0) {
 			$this->unsolved = 0;//ToDoHandler::getInstance()->getUnsolovedTodoCount(WCF::getUser()->userID);
 			$this->overdue = 0;//ToDoHandler::getInstance()->getOverdueTodoCount(WCF::getUser()->userID);
+			$this->waiting = 0;//ToDoHandler::getInstance()->getOverdueTodoCount(WCF::getUser()->userID);
 		}
 		
 		WCF::getTPL()->assign(array(
 			'unsolvedToDoCount' => $this->unsolved,
-			'overdueToDoCount' => $this->overdue
+			'overdueToDoCount' => $this->overdue,
+			'waitingToDoCount' => $this->waiting
 		));
 	}
 }

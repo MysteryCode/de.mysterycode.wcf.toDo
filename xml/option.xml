@@ -105,6 +105,16 @@ DESC:wcf.global.sortOrder.descending]]></selectoptions>
 				<optiontype>integer</optiontype>
 				<defaultvalue>48</defaultvalue>
 			</option>
+			<option name="todo_waiting_warning">
+				<categoryname>toDo.warning</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="todo_waiting_warning_hide_duration">
+				<categoryname>toDo.warning</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>48</defaultvalue>
+			</option>
 			
 			<option name="todo_noresponsible_dashboard_box_items">
 				<categoryname>dashboard.sidebar.wcf.todo.noresponsible</categoryname>
