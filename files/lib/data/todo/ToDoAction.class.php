@@ -1,6 +1,9 @@
 <?php
 
 namespace wcf\data\todo;
+use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\IMessageInlineEditorAction;
+use wcf\data\IMessageQuoteAction;
 use wcf\data\todo\assigned\group\AssignedGroupAction;
 use wcf\data\todo\assigned\user\AssignedUserAction;
 use wcf\data\todo\ToDo;
@@ -9,7 +12,6 @@ use wcf\data\todo\ToDoList;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
-use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\attachment\AttachmentHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\comment\CommentHandler;
@@ -19,6 +21,7 @@ use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
+use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\moderation\queue\ModerationQueueActivationManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\activity\event\UserActivityEventHandler;
@@ -38,7 +41,7 @@ use wcf\util\StringUtil;
  * @package	de.mysterycode.wcf.toDo
  * @category	WCF
  */
-class ToDoAction extends AbstractDatabaseObjectAction {
+class ToDoAction extends AbstractDatabaseObjectAction implements IMessageInlineEditorAction, IMessageQuoteAction {
 	/**
 	 *
 	 * @see \wcf\data\AbstractDatabaseObjectAction::$className
@@ -81,6 +84,12 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		} else {
 			ModerationQueueActivationManager::getInstance()->addModeratedContent('de.mysterycode.wcf.toDo.toDo', $todo->todoID);
 		}
+		
+		// clear quotes
+		if (isset($this->parameters['removeQuoteIDs']) && !empty($this->parameters['removeQuoteIDs'])) {
+			MessageQuoteManager::getInstance()->markQuotesForRemoval($this->parameters['removeQuoteIDs']);
+		}
+		MessageQuoteManager::getInstance()->removeMarkedQuotes();
 		
 		return $todo;
 	}
@@ -726,5 +735,84 @@ class ToDoAction extends AbstractDatabaseObjectAction {
 		$todoAction->executeAction();
 		
 		return array('success' => 1);
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessageQuoteAction::validateSaveFullQuote()
+	 */
+	public function validateSaveFullQuote() {
+		$this->todo = $this->getSingleObject();
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessageQuoteAction::saveFullQuote()
+	 */
+	public function saveFullQuote() {
+		$quoteID = MessageQuoteManager::getInstance()->addQuote(
+			'de.mysterycode.wcf.toDo',
+			null,
+			$this->todo->todoID,
+			$this->todo->getExcerpt(),
+			$this->todo->getMessage()
+			);
+		
+		if ($quoteID === false) {
+			$removeQuoteID = MessageQuoteManager::getInstance()->getQuoteID('de.mysterycode.wcf.toDo', $this->todo->todoID, $this->todo->getExcerpt(), $this->todo->getMessage());
+			MessageQuoteManager::getInstance()->removeQuote($removeQuoteID);
+		}
+		
+		$returnValues = array(
+			'count' => MessageQuoteManager::getInstance()->countQuotes(),
+			'fullQuoteMessageIDs' => MessageQuoteManager::getInstance()->getFullQuoteObjectIDs(array('de.mysterycode.wcf.toDo'))
+		);
+		
+		if ($quoteID) {
+			$returnValues['renderedQuote'] = MessageQuoteManager::getInstance()->getQuoteComponents($quoteID);
+		}
+		
+		return $returnValues;
+	}/**
+	 * @see	\wcf\data\IMessageQuoteAction::validateSaveQuote()
+	 */
+	public function validateSaveQuote() {
+		$this->readString('message');
+		$this->readBoolean('renderQuote', true);
+		$this->todo = $this->getSingleObject();
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessageQuoteAction::saveQuote()
+	 */
+	public function saveQuote() {
+		$quoteID = MessageQuoteManager::getInstance()->addQuote('de.mysterycode.wcf.toDo', null, $this->todo->todoID, $this->parameters['message'], false);
+		
+		$returnValues = array(
+			'count' => MessageQuoteManager::getInstance()->countQuotes(),
+			'fullQuoteMessageIDs' => MessageQuoteManager::getInstance()->getFullQuoteObjectIDs(array('de.mysterycode.wcf.toDo'))
+		);
+		
+		if ($this->parameters['renderQuote']) {
+			$returnValues['renderedQuote'] = MessageQuoteManager::getInstance()->getQuoteComponents($quoteID);
+		}
+		
+		return $returnValues;
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessageQuoteAction::validateGetRenderedQuotes()
+	 */
+	public function validateGetRenderedQuotes() {
+		$this->readInteger('parentObjectID');
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessageQuoteAction::getRenderedQuotes()
+	 */
+	public function getRenderedQuotes() {
+		$quotes = MessageQuoteManager::getInstance()->getQuotesByParentObjectID('de.mysterycode.wcf.toDo', $this->todo->todoID);
+		
+		return array(
+			'template' => implode("\n\n", $quotes)
+		);
 	}
 }

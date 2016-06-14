@@ -1249,6 +1249,23 @@ WCF.Todo.MarkSolved = Class.extend({
 	}
 });
 
+WCF.Todo.QuoteHandler = WCF.Message.Quote.Handler.extend({
+	/**
+	 * @see	WCF.Message.QuoteManager.init()
+	 */
+	init: function(quoteManager) {
+		this._super(
+			quoteManager,
+			'wcf\\data\\todo\ToDoAction',
+			'de.mysterycode.wcf.toDo',
+			'.message',
+			'.messageBody',
+			'.messageBody > div > div.messageText',
+			true
+		);
+	}
+});
+
 WCF.Todo.Search = {};
 
 /**
