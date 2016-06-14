@@ -171,7 +171,7 @@
 			<controller>wcf\form\ToDoEditForm</controller>
 			<languagevariable>wcf.user.usersOnline.location.ToDoEditForm</languagevariable>
 		</type>
-		<!--Dashboard -->
+		<!-- dashboard -->
 		<type>
 			<name>de.mysterycode.wcf.ToDoListPage</name>
 			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
@@ -213,6 +213,12 @@
 		<type>
 			<name>de.mysterycode.wcf.toDo</name>
 			<definitionname>com.woltlab.wcf.message</definitionname>
+		</type>
+		<!-- edit history -->
+		<type>
+			<name>de.mysterycode.wcf.toDo</name>
+			<definitionname>com.woltlab.wcf.edit.historySavingObject</definitionname>
+			<classname>wcf\data\todo\HistorySavingToDoProvider</classname>
 		</type>
 	</import>
 </data>
