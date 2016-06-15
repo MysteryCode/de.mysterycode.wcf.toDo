@@ -1,8 +1,8 @@
 <?php
 
 namespace wcf\system\label\object\type;
-use wcf\data\category\AbstractCategoryNodeList;
 use wcf\data\todo\category\TodoCategoryEditor;
+use wcf\data\todo\category\TodoCategoryNodeTree;
 use wcf\system\label\object\type\AbstractLabelObjectTypeHandler;
 use wcf\system\label\object\type\LabelObjectType;
 use wcf\system\label\object\type\LabelObjectTypeContainer;
@@ -21,7 +21,7 @@ class TodoCategoryLabelObjectTypeHandler extends AbstractLabelObjectTypeHandler 
 	 * category node list
 	 * @var	\wcf\data\category\AbstractCategoryNodeList
 	 */
-	public $categoryNodeList = null;
+	public $categoryNodeTree = null;
 	
 	/**
 	 * object type id
@@ -33,8 +33,7 @@ class TodoCategoryLabelObjectTypeHandler extends AbstractLabelObjectTypeHandler 
 	 * @see	\wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
-		$this->categoryNodeList = new AbstractCategoryNodeList();
-		$this->categoryNodeList->readNodeTree();
+		$this->categoryNodeTree = new TodoCategoryNodeTree();
 	}
 	
 	/**
@@ -46,7 +45,7 @@ class TodoCategoryLabelObjectTypeHandler extends AbstractLabelObjectTypeHandler 
 		// build label object type container
 		$this->container = new LabelObjectTypeContainer($this->objectTypeID);
 		
-		foreach ($this->categoryNodeList->getNodeList() as $node) {
+		foreach ($this->categoryNodeTree->getIterator() as $node) {
 			$objectType = new LabelObjectType($node->getCategory()->getTitle(), $node->getCategory()->categoryID, ($node->getDepth() - 1), $node->getCategory()->isCategory());
 			$this->container->add($objectType);
 		}
