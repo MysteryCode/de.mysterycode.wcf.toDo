@@ -28,7 +28,9 @@
 				'wcf.toDo.task.participate.shure': '{lang}wcf.toDo.task.participate.shure{/lang}',
 				'wcf.toDo.task.solve': '{lang}wcf.toDo.task.solve{/lang}',
 				'wcf.toDo.task.solve.success': '{lang}wcf.toDo.task.solve.success{/lang}',
-				'wcf.toDo.task.solve.shure': '{lang}wcf.toDo.task.solve.shure{/lang}'
+				'wcf.toDo.task.solve.shure': '{lang}wcf.toDo.task.solve.shure{/lang}',
+				'wcf.toDo.task.progress.percent': '{lang}wcf.toDo.task.progress.percent{/lang}',
+				'wcf.toDo.task.progress.update': '{lang}wcf.toDo.task.progress.update{/lang}'
 				
 			});
 			
@@ -47,6 +49,7 @@
 			
 			new WCF.Todo.Participate('.jsParticipateTodo');
 			new WCF.Todo.MarkSolved('.jsMarkSolvedTodo');
+			new WCF.Todo.UpdateProgress({$todo->todoID});
 			
 			{if $todo->isDisabled || $todo->isDeleted}
 				$('.sidebar').addClass('{if $todo->isDeleted}deleted{else}disabled{/if}');

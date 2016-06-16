@@ -1317,7 +1317,7 @@ WCF.Todo.UpdateProgress = Class.extend({
 	},
 	
 	_init: function() {
-		$('#updateProgress').click($.proxy(this.prepare, this));
+		$('.updateProgress').click($.proxy(this.prepare, this));
 	},
 
 	/**
@@ -1382,6 +1382,7 @@ WCF.Todo.UpdateProgress = Class.extend({
 	
 	_callback: function(data) {
 		$('.progressbar_inner').width('calc(100% - ' + data.returnValues.progress + '% + 2px)');
+		$('.progressbar_text').html(data.returnValues.progress + WCF.Language.get('wcf.toDo.task.progress.percent'))
 	},
 	
 	/**

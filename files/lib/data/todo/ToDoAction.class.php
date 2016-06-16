@@ -2,6 +2,7 @@
 
 namespace wcf\data\todo;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\IClipboardAction;
 use wcf\data\IMessageInlineEditorAction;
 use wcf\data\IMessageQuoteAction;
 use wcf\data\todo\assigned\group\AssignedGroupAction;
@@ -13,6 +14,7 @@ use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\system\attachment\AttachmentHandler;
+use wcf\system\bbcode\BBCodeHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\comment\CommentHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -21,6 +23,7 @@ use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
+use wcf\system\message\MessageFormSettingsHandler;
 use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\moderation\queue\ModerationQueueActivationManager;
 use wcf\system\request\LinkHandler;
@@ -30,6 +33,7 @@ use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
+use wcf\util\MessageUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -826,6 +830,138 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		return array(
 			'template' => implode("\n\n", $quotes)
+		);
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessageInlineEditorAction::validateBeginEdit()
+	 */
+	public function validateBeginEdit() {
+		$this->parameters['objectID'] = (isset($this->parameters['objectID'])) ? intval($this->parameters['objectID']) : 0;
+		if (!$this->parameters['objectID']) {
+			throw new UserInputException('objectID');
+		} else {
+			$this->todo = new ToDo($this->parameters['objectID']);
+			if (!$this->todo->todoID)
+				throw new UserInputException('objectID');
+			if (!$this->todo->canEdit())
+				throw new PermissionDeniedException();
+		}
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessageInlineEditorAction::beginEdit()
+	 */
+	public function beginEdit() {
+		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
+		
+		WCF::getTPL()->assign(array(
+			'enableBBCodes' => $this->todo->enableBBCodes,
+			'enableSmilies' => $this->todo->enableSmilies,
+			'enableHtml' => $this->todo->enableHtml,
+			'todo' => $this->todo,
+			'wysiwygSelector' => 'editor'.$this->todo->todoID
+		));
+		
+		return array(
+			'actionName' => 'beginEdit',
+			'template' => WCF::getTPL()->fetch('todoInlineEditor')
+		);
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessageInlineEditorAction::validateSave()
+	 */
+	public function validateSave() {
+		if (!isset($this->parameters['data']) || !isset($this->parameters['data']['message']))
+			throw new UserInputException('message');
+		
+		if (empty($this->parameters['data']['message']))
+			throw new UserInputException('message', WCF::getLanguage()->get('wcf.global.form.error.empty'));
+		
+		$this->validateBeginEdit();
+		
+		$this->parameters = array_merge($this->parameters, MessageFormSettingsHandler::getSettings($this->parameters, $this->todo));
+		$parameters['removeQuoteIDs'] = (isset($parameters['removeQuoteIDs']) && is_array($parameters['removeQuoteIDs'])) ? ArrayUtil::trim($parameters['removeQuoteIDs']) : array();
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessageInlineEditorAction::save()
+	 */
+	public function save() {
+		$todoData = array(
+			'enableBBCodes' => $this->parameters['enableBBCodes'],
+			'enableSmilies' => $this->parameters['enableSmilies'],
+			'enableHtml' => $this->todo->enableHtml,
+			'message' => MessageUtil::stripCrap($this->parameters['data']['message'])
+		);
+		
+		if ($this->parameters['preParse']) {
+			$todoData['message'] = PreParser::getInstance()->parse($todoData['message'], explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
+		}
+		
+		$todoAction = new self(array($this->todo), 'update', array('data' => $todoData));
+		$todoAction->executeAction();
+		
+		if (isset($this->parameters['removeQuoteIDs']) && !empty($this->parameters['removeQuoteIDs']))
+			MessageQuoteManager::getInstance()->markQuotesForRemoval($this->parameters['removeQuoteIDs']);
+		MessageQuoteManager::getInstance()->removeMarkedQuotes();
+		
+		$todo = new ToDo($this->todo->todoID);
+		
+		MessageEmbeddedObjectManager::getInstance()->loadObjects('de.mysterycode.wcf.toDo', array($todo->todoID));
+		
+		$data = array(
+			'actionName' => 'save',
+			'message' => $todo->getFormattedMessage()
+		);
+		
+		return $data;
+	}
+	
+	public function validatePrepareProgressUpdate() {
+		$todoID = reset($this->objectIDs);
+		
+		if (empty($todoID))
+			throw new UserInputException('objectID');
+		
+		$this->todo = new ToDo($todoID);
+		
+		if (!$this->todo->canEdit())
+			throw new PermissionDeniedException();
+	}
+	
+	public function prepareProgressUpdate() {
+		$todoID = reset($this->objectIDs);
+		$this->todo = new ToDo($todoID);
+		
+		// return template
+		return array(
+			'template' => WCF::getTPL()->fetch('updateProgress', 'wcf', array(
+				'todo' => $this->todo
+			))
+		);
+	}
+	
+	public function validateProgressUpdate() {
+		$this->validatePrepareProgressUpdate();
+		
+		if (!isset($this->parameters['progress']))
+			throw new UserInputException('progress');
+		
+		if ($this->parameters['progress'] < 0 || $this->parameters['progress'] > 100)
+			throw new UserInputException('progress', 'invalid');
+	}
+	
+	public function progressUpdate() {
+		$todoID = reset($this->objectIDs);
+		$this->todo = new ToDo($todoID);
+		
+		$todoAction = new self(array($this->todo), 'update', array('data' => array('progress' => intval($this->parameters['progress']))));
+		$todoAction->executeAction();
+		
+		return array (
+			'progress' => $this->parameters['progress']
 		);
 	}
 }
