@@ -6,8 +6,9 @@
 		<packagename language="de"><![CDATA[ToDo-Liste]]></packagename>
 		<packagedescription><![CDATA[Gives the possibility to manage ToDos in several custom categories on your website]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
-		<version>1.2.0 Beta 1</version>
-		<date>2016-02-28</date>
+		<version>1.2.0 Beta 2</version>
+		<date>2016-06-17</date>
+		<packageurl>https://www.mysterycode.de/index.php?page/products/todo/</packageurl>
 	</packageinformation>
 	
 	<requiredpackages>
@@ -29,7 +30,7 @@
 	
 	<authorinformation>
 		<author><![CDATA[Florian Gail]]></author>
-		<authorurl><![CDATA[http://www.mysterycode.de]]></authorurl>
+		<authorurl><![CDATA[https://www.mysterycode.de]]></authorurl>
 	</authorinformation>
 	
 	<instructions type="install">
@@ -57,6 +58,29 @@
 		
 		<!-- script -->
 		<instruction type="script">acp/install_de.mysterycode.wcf.todo_1.2.0.php</instruction>
+		
+		<!-- language -->
+		<instruction type="language">language/*.xml</instruction>
+	</instructions>
+	
+	<instructions type="update" fromversion="1.2.0 Beta 1">
+		<!-- files -->
+		<instruction type="acpTemplate">acpTemplates.tar</instruction>
+		<instruction type="file">files.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+		
+		<!-- XMLs -->
+    	<instruction type="pageMenu">xml/pageMenu.xml</instruction>
+		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="templateListener">xml/templateListener.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+		<instruction type="eventListener">xml/eventListener.xml</instruction>
+		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
+		<instruction type="aclOption">xml/aclOption.xml</instruction>
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		
 		<!-- language -->
 		<instruction type="language">language/*.xml</instruction>
