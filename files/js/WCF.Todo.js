@@ -1302,7 +1302,7 @@ WCF.Todo.UpdateProgress = Class.extend({
 	_objectID: 0,
 
 	/**
-	 * Initializes INVENTAR.Download.Generator on first use.
+	 * Initializes WCF.Todo.UpdateProgress on first use.
 	 */
 	init: function(objectID) {
 		this._dialog = $('<div />').hide().appendTo(document.body);
