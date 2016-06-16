@@ -24,6 +24,9 @@
 								<div>
 									<div class="containerHeadline">
 										<h3 class="{if $todo->important == 1}importantToDo{/if}">
+											{if TODO_PROGRESS_ENABLE}
+												<span class="todoProgress label badge {if $todo->progress > 33}{if $todo->progress > 66}green{else}yellow{/if}{else}red{/if}">{$todo->progress}%</span>
+											{/if}
 											{if $showCategory}
 												<span class="label badge {$todo->getCategory()->cssClass}">{$todo->getCategory()->getTitle()}</span>
 											{/if}
@@ -36,10 +39,6 @@
 												<span class="label badge {$todo->getStatus()->cssClass}" id="todoStatus{$todo->getStatus()->statusID}">{$todo->getStatus()->getTitle()}</span>
 											{/if}
 										</p>
-										
-										{if TODO_PROGRESS_ENABLE}
-											<span class="label badge {if $todo->progress > 33}{if $todo->progress > 66}green{else}yellow{/if}{else}red{/if}">{$todo->progress}%</span>
-										{/if}
 										
 										{if $todo->isDeleted}
 											<small>
