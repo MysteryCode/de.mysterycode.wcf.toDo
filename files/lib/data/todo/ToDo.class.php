@@ -51,7 +51,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	 *
 	 * @var array<integer>
 	 */
-	protected $responsibleIDs = null;
+	protected $responsibleIDs = array();
 	
 	/**
 	 * list of responsible group ids
