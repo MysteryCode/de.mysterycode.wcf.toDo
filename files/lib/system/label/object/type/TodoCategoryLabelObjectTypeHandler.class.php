@@ -46,7 +46,7 @@ class TodoCategoryLabelObjectTypeHandler extends AbstractLabelObjectTypeHandler 
 		$this->container = new LabelObjectTypeContainer($this->objectTypeID);
 		
 		foreach ($this->categoryNodeTree->getIterator() as $node) {
-			$objectType = new LabelObjectType($node->getCategory()->getTitle(), $node->getCategory()->categoryID, ($node->getDepth() - 1), $node->getCategory()->isCategory());
+			$objectType = new LabelObjectType($node->getTitle(), $node->categoryID, ($node->getDepth() - 1));
 			$this->container->add($objectType);
 		}
 	}
