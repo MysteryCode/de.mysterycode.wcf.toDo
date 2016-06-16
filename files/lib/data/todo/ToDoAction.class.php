@@ -788,7 +788,9 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 		
 		return $returnValues;
-	}/**
+	}
+	
+	/**
 	 * @see	\wcf\data\IMessageQuoteAction::validateSaveQuote()
 	 */
 	public function validateSaveQuote() {
