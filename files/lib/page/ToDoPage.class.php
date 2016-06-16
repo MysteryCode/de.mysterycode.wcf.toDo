@@ -12,6 +12,7 @@ use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\like\LikeHandler;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
+use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
@@ -65,6 +66,8 @@ class ToDoPage extends AbstractPage {
 		parent::readParameters();
 		
 		if(isset($_REQUEST['id'])) $this->todoID = intval($_REQUEST['id']);
+		
+		MessageQuoteManager::getInstance()->readParameters();
 	}
 	
 	/**
@@ -114,6 +117,7 @@ class ToDoPage extends AbstractPage {
 		$submitter = $this->todo->getUser();
 		
 		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoPage', $this);
+		MessageQuoteManager::getInstance()->assignVariables();
 		
 		WCF::getTPL()->assign(array(
 			'submitterusername' => $submitter->username,

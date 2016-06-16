@@ -53,12 +53,24 @@
 										</dl>
 										<dl class="plain statsDataList">
 											<dt>{lang}wcf.toDo.task.submitTime{/lang}</dt>
-											<dd>{@$todo->timestamp|time}</dd>
+											<dd>
+												{if $todo->timestamp < TIME_NOW - (24*60*60)}
+													{@$todo->timestamp|date}
+												{else}
+													{@$todo->timestamp|time}
+												{/if}
+											</dd>
 										</dl>
 										{if $todo->canViewDeadline() && $todo->endTime>0}
 											<dl class="plain statsDataList">
 												<dt>{lang}wcf.toDo.task.endTime{/lang}</dt>
-												<dd>{@$todo->endTime|time}</dd>
+												<dd>
+													{if $todo->endTime > TIME_NOW + (48*60*60)}
+														{@$todo->endTime|date}
+													{else}
+														{@$todo->endTime|time}
+													{/if}
+												</dd>
 											</dl>
 										{/if}
 									</div>

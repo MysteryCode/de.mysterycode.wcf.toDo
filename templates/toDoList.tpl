@@ -9,7 +9,6 @@
 	
 	<link rel="canonical" href="{link controller='ToDoList'}{/link}" />
 	
-	<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Moderation{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 	<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Todo{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 
 	<script data-relocate="true">
@@ -151,6 +150,29 @@
 	
 	<nav class="jsClipboardEditor" data-types="[ 'de.mysterycode.wcf.toDo.toDo' ]"></nav>
 </div>
+
+{hascontent}
+	<div class="container marginTop">
+		<ul class="containerList infoBoxList">
+			{content}
+				{if TODO_ENABLE_STATS}
+					<li class="box32 statsInfoBox">
+						<span class="icon icon32 icon-bar-chart"></span>
+						
+						<div>
+							<div class="containerHeadline">
+								<h3>{lang}wcf.toDo.stats{/lang}</h3>
+								<p>{lang}wcf.toDo.stats.detail{/lang}</p>
+							</div>
+						</div>
+					</li>
+				{/if}
+				
+				{event name='infoBoxes'}
+			{/content}
+		</ul>
+	</div>
+{/hascontent}
 
 {include file='footer'}
 

@@ -1256,12 +1256,12 @@ WCF.Todo.QuoteHandler = WCF.Message.Quote.Handler.extend({
 	init: function(quoteManager) {
 		this._super(
 			quoteManager,
-			'wcf\\data\\todo\ToDoAction',
+			'wcf\\data\\todo\\ToDoAction',
 			'de.mysterycode.wcf.toDo',
-			'.message',
-			'.messageBody',
-			'.messageBody > div > div.messageText',
-			true
+			'.todoQuoteContainer',
+			'.todoDescription',
+			'.todoDescription > fieldset > div',
+			false
 		);
 	}
 });
@@ -1382,7 +1382,7 @@ WCF.Todo.UpdateProgress = Class.extend({
 	
 	_callback: function(data) {
 		$('.progressbar_inner').width('calc(100% - ' + data.returnValues.progress + '% + 2px)');
-		$('.progressbar_text').html(data.returnValues.progress + WCF.Language.get('wcf.toDo.task.progress.percent'))
+		$('.progressbar_text').html(data.returnValues.progress + ' ' + WCF.Language.get('wcf.toDo.task.progress.percent'))
 	},
 	
 	/**

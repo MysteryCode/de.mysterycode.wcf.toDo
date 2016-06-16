@@ -11,7 +11,7 @@ class TodoMessageQuoteHandler extends AbstractMessageQuoteHandler {
 	 */
 	protected function getMessages(array $data) {
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add("todo.todoID IN (?)", array(array_keys($data)));
+		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", array(array_keys($data)));
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
