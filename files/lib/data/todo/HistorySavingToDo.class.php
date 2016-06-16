@@ -1,9 +1,9 @@
 <?php
 namespace wcf\data\todo;
-use wcf\data\DatabaseObject;
-use wcf\data\DatabaseObjectDecorator;
 use wcf\data\edit\history\entry\EditHistoryEntry;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\DatabaseObject;
+use wcf\data\DatabaseObjectDecorator;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\edit\IHistorySavingObject;
 use wcf\system\WCF;

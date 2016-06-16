@@ -1,10 +1,6 @@
 <?php
 
 namespace wcf\data\todo;
-use wcf\data\AbstractDatabaseObjectAction;
-use wcf\data\IClipboardAction;
-use wcf\data\IMessageInlineEditorAction;
-use wcf\data\IMessageQuoteAction;
 use wcf\data\todo\assigned\group\AssignedGroupAction;
 use wcf\data\todo\assigned\user\AssignedUserAction;
 use wcf\data\todo\ToDo;
@@ -13,6 +9,10 @@ use wcf\data\todo\ToDoList;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
+use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\IClipboardAction;
+use wcf\data\IMessageInlineEditorAction;
+use wcf\data\IMessageQuoteAction;
 use wcf\system\attachment\AttachmentHandler;
 use wcf\system\bbcode\BBCodeHandler;
 use wcf\system\clipboard\ClipboardHandler;
@@ -23,8 +23,8 @@ use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
-use wcf\system\message\MessageFormSettingsHandler;
 use wcf\system\message\quote\MessageQuoteManager;
+use wcf\system\message\MessageFormSettingsHandler;
 use wcf\system\moderation\queue\ModerationQueueActivationManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\activity\event\UserActivityEventHandler;
