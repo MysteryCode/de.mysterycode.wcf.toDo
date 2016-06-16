@@ -1,47 +1,55 @@
-.importantToDo, .importantToDo a {
-    color: #ff0000;
+.importantToDo , .importantToDo a {
+	color: #ff0000;
 }
+
 // list pages
 .todoList {
-    > li {
-		//margin:6px;
+	> li {
 		border-top-left-radius: @wcfContainerBorderRadius;
 		border-top-right-radius: @wcfContainerBorderRadius;
 	}
-    .todoDepth1 {
-        margin-top: @wcfGapMedium;
-    }
-    .todoDepth2 {
+
+	.todoDepth1 {
+		margin-top: @wcfGapMedium;
+	}
+
+	.todoDepth2 {
 		&.todoContainer > .todo {
-			//padding-left: 43px;
 		}
 	}
-    > li.tabularBox {
-        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
-    }
-    .todo {
-        min-height: 44px;
+
+	> li.tabularBox {
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+	}
+
+	.todo {
+		min-height: 44px;
 		padding: @wcfGapSmall;
 		padding-right: 51%;
-		.transition(background, .1s);
+		.transition (background , .1s);
 		&.box32 > *:not(:first-child) {
-		    margin:0;
+			margin: 0;
 		}
+
 		> div {
 			float: none;
 		}
+
 		&:hover {
 			background-color: @wcfContainerHoverBackgroundColor;
 		}
-    }
-    .todoDepth2 {
+	}
+
+	.todoDepth2 {
 		&.todoContainer > .todoNode1 {
 			padding-left: 43px;
 		}
+
 		&.todoDepth1 > header {
 			padding-left: 43px;
 		}
 	}
+
 	.todoStats {
 		left: 49%;
 		margin-top: -@wcfGapSmall;
@@ -53,6 +61,7 @@
 				line-height: @wcfBaseLineHeight;
 				width: 48%;
 			}
+
 			> dd {
 				font-weight: normal;
 				font-size: @wcfSmallFontSize;
@@ -60,35 +69,42 @@
 			}
 		}
 	}
-    .todoContainer {
-        position: relative;
-        border: 0;
-        border-radius: 0;
-        &:last-child {
-            border-bottom-left-radius: @wcfContainerBorderRadius;
-            border-bottom-right-radius: @wcfContainerBorderRadius;
-            .todo {
-                border-bottom-left-radius: @wcfContainerBorderRadius;
-                border-bottom-right-radius: @wcfContainerBorderRadius;
-            }
-        }
-        &:not(:last-child) {
-            border-bottom: 1px solid @wcfContainerBorderColor;
-        }
-        > ul.messageQuickOptions {
-            float: right;
-        }
-    }
-    .todoNode1 {
+
+	.todoContainer {
+		position: relative;
+		border: 0;
+		border-radius: 0;
+		&:last-child {
+			border-bottom-left-radius: @wcfContainerBorderRadius;
+			border-bottom-right-radius: @wcfContainerBorderRadius;
+			.todo {
+				border-bottom-left-radius: @wcfContainerBorderRadius;
+				border-bottom-right-radius: @wcfContainerBorderRadius;
+			}
+		}
+
+		&:not(:last-child) {
+			border-bottom: 1px solid @wcfContainerBorderColor;
+		}
+
+		> ul.messageQuickOptions {
+			float: right;
+		}
+	}
+
+	.todoNode1 {
 		background-color: @wcfContainerBackgroundColor;
 	}
+
 	.todoNode2 {
 		background-color: @wcfContainerAccentBackgroundColor;
 	}
+
 	.todo > div > .containerHeadline > h3 {
 		font-weight: normal;
 	}
-    .todoResponsible {
+
+	.todoResponsible {
 		left: 66%;
 		margin-top: -@wcfGapSmall;
 		position: absolute;
@@ -103,10 +119,11 @@
 				word-wrap: normal;
 				list-style: none;
 				> li {
-                    display: inline;
-                    padding-right: @wcfGapTiny;
+					display: inline;
+					padding-right: @wcfGapTiny;
 				}
 			}
+
 			> small {
 				display: block;
 				overflow: hidden;
@@ -120,62 +137,69 @@
 		}
 	}
 }
+
 // seperator description <=> attachments
 .todoContainer > .attachmentFileList > fieldset > legend {
-     border-top: 1px solid @wcfContainerBorderColor;
+	border-top: 1px solid @wcfContainerBorderColor;
 }
+
 // moderation buttons
 .boxHeadline.todo {
-    position: relative;
-    > nav.buttonGroupNavigation {
-        position: absolute;
-        right: 4px;
-        top: 0px;
-    }
+	position: relative;
+	> nav.buttonGroupNavigation {
+		position: absolute;
+		right: 4px;
+		top: 0px;
+	}
 }
-// prioPicker
+
 #prioPicker > span {
-    cursor: pointer;
+	cursor: pointer;
 }
+
 // detail page
 .todoContainer {
-    .progressbar_main {
-        position: relative;
-        border: 1px solid #AAAAAA;
-        color: #222222;
-        border-radius: 4px;
-        overflow: hidden;
-        text-align: left;
-        display:inline-block;
-        height: 25px;
-        width: calc(100% - 2px);
-        background-image: -moz-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
-        background-image: -webkit-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
-        background-image: -ms-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
-        background-image: -o-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
-        .progressbar_inner {
-            background-color: @wcfContainerBackgroundColor;
-            height: 26px;
-            margin-top: -1px;
-            margin-left: -1px;
-            float: right;
-        }
-        .progressbar_text {
-            vertical-align: middle;
-            padding-left: 3px;
-        }
-    }
-    #toDoCommentList {
-        & > li {
-            padding: 7px 0;
-        }
-    }
-    &.todoDeleted {
-        background-color: @wcfDeletedBackgroundColor;
-    }
-    &.todoDisabled {
-        background-color: @wcfDisabledBackgroundColor;
-    }
+	.progressbar_main {
+		position: relative;
+		border: 1px solid #AAAAAA;
+		color: #222222;
+		border-radius: 4px;
+		overflow: hidden;
+		text-align: left;
+		display: inline-block;
+		height: 25px;
+		width: calc(100% - 2px);
+		background-image: -moz-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
+		background-image: -webkit-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
+		background-image: -ms-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
+		background-image: -o-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
+		.progressbar_inner {
+			background-color: @wcfContainerBackgroundColor;
+			height: 26px;
+			margin-top: -1px;
+			margin-left: -1px;
+			float: right;
+		}
+
+		.progressbar_text {
+			vertical-align: middle;
+			padding-left: 3px;
+		}
+	}
+
+	#toDoCommentList {
+		& > li {
+			padding: 7px 0;
+		}
+	}
+
+	&.todoDeleted {
+		background-color: @wcfDeletedBackgroundColor;
+	}
+
+	&.todoDisabled {
+		background-color: @wcfDisabledBackgroundColor;
+	}
 }
 
 .todoCategoryList {
@@ -183,11 +207,12 @@
 		&.todoCategoryContainer > .todoCategory {
 			padding-left: 43px;
 		}
-		
+
 		&.todoCategory > header {
 			padding-left: 43px;
 		}
 	}
+
 	.todoCategory {
 		.todoDepth2 {
 			&.todoCategoryContainer > .todoCategory {
@@ -195,6 +220,7 @@
 			}
 		}
 	}
+
 	.todoCategoryContainer {
 		position: relative;
 	}
@@ -207,14 +233,12 @@
 		min-height: 44px;
 		padding: @wcfGapSmall;
 		padding-right: 51%;
-		
-		.transition(background, .1s);
-		
+		.transition (background , .1s);
 		&:hover {
 			background-color: @wcfContainerHoverBackgroundColor;
 		}
 	}
-	
+
 	.todoCategoryNode1 {
 		background-color: @wcfContainerBackgroundColor;
 	}
@@ -222,7 +246,7 @@
 	.todoCategoryNode2 {
 		background-color: @wcfContainerAccentBackgroundColor;
 	}
-	
+
 	.todoCategory > div > .containerHeadline > h3 {
 		font-weight: normal;
 	}
@@ -231,3 +255,4 @@
 .todoProgress {
 	float: right;
 }
+
