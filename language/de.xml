@@ -20,6 +20,15 @@
 		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canViewReminder"><![CDATA[Kann Erinnerung sehen]]></item>
 		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canViewResponsibles"><![CDATA[Kann Zuweisungen sehen]]></item>
 		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditPriority"><![CDATA[Kann Priorität ändern]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canAddTodoWithoutModeration"><![CDATA[Kann ToDo ohne Moderation erstellen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canEditAssignedTodos"><![CDATA[Kann zugeordnete ToDos ändern]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canDeleteAssignedTodos"><![CDATA[Kann zugeordnete ToDos löschen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.user.canParticipate"><![CDATA[Kann ToDos übernehmen]]></item>
+		<item name="wcf.acl.option.category.de.mysterycode.wcf.toDo.category.mod.todo"><![CDATA[ToDo Moderation]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.mod.canEditTodos"><![CDATA[Kann ToDos bearbeiten]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.mod.canDeleteTodos"><![CDATA[Kann ToDos endgültig löschen]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.mod.canEnableTodos"><![CDATA[Kann ToDos freischalten/deaktivieren]]></item>
+		<item name="wcf.acl.option.de.mysterycode.wcf.toDo.category.mod.canRestoreTodos"><![CDATA[Kann ToDos löschen/wiederherstellen]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">
@@ -255,6 +264,7 @@
 		<item name="wcf.toDo.task.privacy.private"><![CDATA[privat]]></item>
 		<item name="wcf.toDo.task.progress"><![CDATA[Fortschritt]]></item>
 		<item name="wcf.toDo.task.progress.percent"><![CDATA[Prozent]]></item>
+		<item name="wcf.toDo.task.progress.update"><![CDATA[Fortschritt aktualisieren]]></item>
 		<item name="wcf.toDo.task.remembertime"><![CDATA[Erinnerung]]></item>
 		<item name="wcf.toDo.task.sort"><![CDATA[Sortierung]]></item>
 		<item name="wcf.toDo.task.unsolved.reminderSingular"><![CDATA[ausstehende Aufgabe in der <a href="{link controller='ToDoList'}{/link}">ToDo-Liste</a>]]></item>
@@ -345,6 +355,9 @@
 		
 		<item name="wcf.toDo.filter.responsible"><![CDATA[Nach Zuweisungen filtern]]></item>
 		<item name="wcf.toDo.filter.responsible.placeholder"><![CDATA[Benutzername oder -gruppe]]></item>
+		
+		<item name="wcf.toDo.stats"><![CDATA[Statistik]]></item>
+		<item name="wcf.toDo.stats.detail"><![CDATA[x ToDos - x ToDos in Arbeit - x ToDos abgeschlossen]]></item>
 	</category>
 	
 	<category name="wcf.user">
