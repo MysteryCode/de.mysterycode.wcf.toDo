@@ -49,6 +49,10 @@
 									</div>
 									<div class="todoStats">
 										<dl class="plain statsDataList">
+											<dt>{lang}wcf.toDo.category{/lang}</dt>
+											<dd>{$todo->getCategory()->getTitle()}</dd>
+										</dl>
+										<dl class="plain statsDataList">
 											<dt>{lang}wcf.toDo.task.submitTime{/lang}</dt>
 											<dd>{@$todo->timestamp|time}</dd>
 										</dl>
