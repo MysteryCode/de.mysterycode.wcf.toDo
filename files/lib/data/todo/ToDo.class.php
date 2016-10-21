@@ -58,7 +58,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	 *
 	 * @var array<integer>
 	 */
-	protected $responsibleGroupIDs = null;
+	protected $responsibleGroupIDs = array();
 	
 	public $status = null;
 	public $category = null;
@@ -140,7 +140,8 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	
 	public function getFormattedResponsibleGroups() {
 		$string = '';
-		foreach ($this->getResponsibleGroupIDs() as $groupID) {
+		$groupIDs = $this->getResponsibleGroupIDs();
+		foreach ($$groupIDs as $groupID) {
 			$group = new UserGroup($groupID);
 			if ($group->getName() != '') {
 				$string .= $group->getName() . ', ';
