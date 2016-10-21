@@ -3,7 +3,6 @@ namespace wcf\system\dashboard\box;
 use wcf\data\dashboard\box\DashboardBox;
 use wcf\data\todo\DashboardBoxTodoList;
 use wcf\page\IPage;
-use wcf\system\dashboard\box\AbstractSidebarDashboardBox;
 use wcf\system\WCF;
 
 /**
@@ -15,7 +14,7 @@ use wcf\system\WCF;
  * @package	de.mysterycode.wcf.toDo
  * @category	WCF
  */
-class LatestToDosDashboardBox extends AbstractSidebarDashboardBox {
+class LatestToDosContentDashboardBox extends AbstractContentDashboardBox {
 	/**
 	 * todo list
 	 * @var	\wcf\data\todo\ToDoList
