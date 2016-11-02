@@ -141,7 +141,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	public function getFormattedResponsibleGroups() {
 		$string = '';
 		$groupIDs = $this->getResponsibleGroupIDs();
-		foreach ($$groupIDs as $groupID) {
+		foreach ($groupIDs as $groupID) {
 			$group = new UserGroup($groupID);
 			if ($group->getName() != '') {
 				$string .= $group->getName() . ', ';
