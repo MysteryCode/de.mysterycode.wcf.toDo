@@ -6,8 +6,8 @@
 		<packagename language="de"><![CDATA[ToDo-Liste]]></packagename>
 		<packagedescription><![CDATA[Gives the possibility to manage ToDos in several custom categories on your website]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
-		<version>1.2.0 Beta 2</version>
-		<date>2016-06-17</date>
+		<version>1.2.0</version>
+		<date>2016-11-08</date>
 		<packageurl>https://www.mysterycode.de/index.php?page/products/todo/</packageurl>
 	</packageinformation>
 	
@@ -19,7 +19,7 @@
 	<excludedpackages>
 		<excludedpackage version="1.0.0 Alpha 1"><![CDATA[de.mysterycode.wcf.toDo.categoryManager]]></excludedpackage>
 		<excludedpackage version="1.0.0 Alpha 1"><![CDATA[de.tehadon.wcf.toDo.dashboardBox.categories]]></excludedpackage>
-		<excludedpackage version="2.2.0 Alpha 1"><![CDATA[com.woltlab.wcf]]></excludedpackage>
+		<excludedpackage version="3.0.0 Alpha 1"><![CDATA[com.woltlab.wcf]]></excludedpackage>
 	</excludedpackages>
 	
 	<authorinformation>
@@ -57,7 +57,7 @@
 		<instruction type="language">language/*.xml</instruction>
 	</instructions>
 	
-	<instructions type="update" fromversion="1.2.0 Beta 1">
+	<instructions type="update" fromversion="1.2.0 Beta 2">
 		<!-- files -->
 		<instruction type="acpTemplate">acpTemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
