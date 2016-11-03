@@ -54,7 +54,7 @@ while ($row = $statement->fetchArray()) {
 	$categoryAction = new CategoryAction(array(), 'create', $categoryData);
 	$resultValues = $categoryAction->executeAction();
 	$matching['categories'][$row['id']] = $resultValues['returnValues']->categoryID;
-	$i++;
+	$i ++;
 }
 
 // update old status into new status system

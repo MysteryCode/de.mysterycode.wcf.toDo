@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/eventListener.xsd">
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/eventListener.xsd">
 	<import>
 		<!-- show hint -->
 		<eventlistener>
@@ -10,7 +11,7 @@
 			<environment>user</environment>
 			<inherit>1</inherit>
 		</eventlistener>
-		
+
 		<!-- renaming users -->
 		<eventlistener>
 			<eventclassname>wcf\data\user\UserAction</eventclassname>
@@ -24,7 +25,7 @@
 			<listenerclassname>wcf\system\event\listener\ToDoUserActionRenameListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
-		
+
 		<!-- category action -->
 		<eventlistener>
 			<eventclassname>wcf\data\category\CategoryAction</eventclassname>

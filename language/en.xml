@@ -332,5 +332,4 @@
 		<item name="wcf.user.notification.de.mysterycode.wcf.toDo.toDo.notification.assign"><![CDATA[Somebody assigned you to a ToDo]]></item>
 		<item name="wcf.user.notification.de.mysterycode.wcf.toDo.toDo.notification.remember"><![CDATA[ToDo-Reminder]]></item>
 	</category>
-	
 </language>

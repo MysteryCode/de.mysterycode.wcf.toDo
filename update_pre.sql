@@ -21,21 +21,21 @@ DELETE FROM wcf1_todo_to_user WHERE todoID NOT IN (SELECT todoID FROM wcf1_todo 
 
 DROP TABLE IF EXISTS wcf1_todo_status;
 CREATE TABLE wcf1_todo_status (
-	statusID			int(10)		NOT NULL AUTO_INCREMENT,
-	subject			varchar(255)	NOT NULL	DEFAULT '',
-	description		text,
-	showOrder		int(10)		NOT NULL	DEFAULT 0,
+	statusID			int(10)			NOT NULL AUTO_INCREMENT,
+	subject				varchar(255)	NOT NULL	DEFAULT '',
+	description			text,
+	showOrder			int(10)			NOT NULL	DEFAULT 0,
 	cssClass			varchar(255)	NOT NULL	DEFAULT '',
-	locked			tinyint(1)	NOT NULL	DEFAULT 0,
+	locked				tinyint(1)		NOT NULL	DEFAULT 0,
 	PRIMARY KEY (statusID)
 );
 
 DROP TABLE IF EXISTS wcf1_todo_to_group;
 CREATE TABLE wcf1_todo_to_group (
-	assignID			int(10)		NOT NULL AUTO_INCREMENT,
+	assignID			int(10)			NOT NULL AUTO_INCREMENT,
 	todoID			int(10),
 	groupID			int(10),
-	groupname		varchar(255)	NOT NULL DEFAULT '',
+	groupname		varchar(255)		NOT NULL DEFAULT '',
 	PRIMARY KEY (assignID)
 );
 
