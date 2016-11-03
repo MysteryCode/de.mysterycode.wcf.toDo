@@ -3,6 +3,9 @@
 namespace wcf\system\user\notification\event;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
+use wcf\system\user\object\watch\UserObjectWatchHandler;
+use wcf\system\user\storage\UserStorageHandler;
+use wcf\system\WCF;
 
 /**
  * Notification when todos are created
@@ -46,14 +49,12 @@ class ToDoCreateUserNotificationEvent extends AbstractUserNotificationEvent {
 			$returnValue = false;
 		
 		$returnValue = $this->userNotificationObject->object->canEnter();
-		if (!$this->userNotificationObject->object->canEnter()) {
-// 			// remove subscription
-// 			UserObjectWatchHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo', array($this->userNotificationObject->todoID), array(WCF::getUser()->userID));
+		if (!$returnValue) {
+			// remove subscription
+			UserObjectWatchHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo', array($this->userNotificationObject->todoID), array(WCF::getUser()->userID));
 			
-// 			// reset user storage
-// 			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'wcfUnreadWatchedTodos');
-			
-			$returnValue = false;
+			// reset user storage
+			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'wcfUnreadWatchedTodos');
 		}
 		
 		return $returnValue;
