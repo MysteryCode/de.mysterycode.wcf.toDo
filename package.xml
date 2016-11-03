@@ -86,23 +86,18 @@
 		<instruction type="language">language/*.xml</instruction>
 	</instructions>
 	
-	<!-- <instructions type="update" fromversion="1.1.5">
-		files
+	<instructions type="update" fromversion="1.1.5">
 		<instruction type="acpTemplate">acpTemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 		
-		add new SQL
 		<instruction type="sql">update_pre.sql</instruction>
 		
-		update script
 		<instruction type="script">acp/update_de.mysterycode.wcf.todo_1.2.0.php</instruction>
 		
-		remove old SQL
 		<instruction type="sql">update_post.sql</instruction>
 		
-		default XMLs
-    	<instruction type="pageMenu">pageMenu.xml</instruction>
+		<instruction type="pageMenu">pageMenu.xml</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
 		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
 		<instruction type="option">option.xml</instruction>
@@ -115,10 +110,8 @@
 		<instruction type="acpTemplate">acpTemplates.tar</instruction>
 		<instruction type="clipboardAction">clipboardAction.xml</instruction>
 		
-		special update XMLs
 		<instruction type="cronjob">cronjob_update.xml</instruction>
 		
-		language
 		<instruction type="language">language/*.xml</instruction>
-	</instructions> -->
+	</instructions>
 </package>
