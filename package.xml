@@ -22,12 +22,6 @@
 		<excludedpackage version="2.2.0 Alpha 1"><![CDATA[com.woltlab.wcf]]></excludedpackage>
 	</excludedpackages>
 	
-	<!--
-	<optionalpackages>
-		<optionalpackage file="optionals/de.tehadon.wcf.toDo.userPanel.tar"><![CDATA[de.tehadon.wcf.toDo.userPanel]]></optionalpackage>
-	</optionalpackages>
-	-->
-	
 	<authorinformation>
 		<author><![CDATA[Florian Gail]]></author>
 		<authorurl><![CDATA[https://www.mysterycode.de]]></authorurl>
