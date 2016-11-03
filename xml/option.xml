@@ -42,11 +42,6 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<option name="todo_category_enable">
-				<categoryname>toDo.general</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-			</option>
 			<option name="todo_progress_enable">
 				<categoryname>toDo.general</categoryname>
 				<optiontype>boolean</optiontype>
@@ -139,4 +134,10 @@ DESC:wcf.global.sortOrder.descending]]></selectoptions>
 			</option>
 		</options>
 	</import>
+	<delete>
+		<option name="todo_category_enable" />
+		<option name="todo_description_html_enable" />
+		<option name="todo_note_html_enable" />
+		<option name="todo_delete_obsolete_categories" />
+	</delete>
 </data>

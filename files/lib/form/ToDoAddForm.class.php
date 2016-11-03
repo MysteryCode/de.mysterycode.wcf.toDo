@@ -117,8 +117,6 @@ class ToDoAddForm extends MessageForm {
 		if (isset($_POST['responsibles'])) $this->responsibles = StringUtil::trim($_POST['responsibles']);
 		if (isset($_POST['responsibleGroups'])) $this->responsibleGroups = StringUtil::trim($_POST['responsibleGroups']);
 		
-		if ($this->newCategory != '' && TODO_CATEGORY_ENABLE) $this->categoryID = $this->createCategory( StringUtil::trim($this->newCategory));
-		
 		MessageQuoteManager::getInstance()->readFormParameters();
 	}
 	

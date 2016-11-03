@@ -138,22 +138,23 @@
 			<dl>
 				<dt>{lang}wcf.toDo.task.title{/lang}</dt>
 				<dd>{$todo->title}</dd>
-				{if TODO_CATEGORY_ENABLE}
-					<dt>{lang}wcf.toDo.category{/lang}</dt>
-					<dd>
-						{if $todo->getCategory()}
-							<a href="{$todo->getCategory()->getLink()}"><span class="label badge" style="background-color: {$todo->getCategory()->color};">{$todo->getCategory()->getTitle()}</span></a>
-						{else}
-							<span class="label badge gray">{lang}wcf.toDo.category.notAvailable{/lang}</span>
-						{/if}
-					</dd>
-				{/if}
+				
+				<dt>{lang}wcf.toDo.category{/lang}</dt>
+				<dd>
+					{if $todo->getCategory()}
+						<a href="{$todo->getCategory()->getLink()}"><span class="label badge" style="background-color: {$todo->getCategory()->color};">{$todo->getCategory()->getTitle()}</span></a>
+					{else}
+						<span class="label badge gray">{lang}wcf.toDo.category.notAvailable{/lang}</span>
+					{/if}
+				</dd>
+				
 				{if $todo->status}
 					<dt>{lang}wcf.toDo.task.status{/lang}</dt>
 					<dd>
 						<span class="label badge {$todo->getStatus()->cssClass}" id="todoStatus{$todo->getStatus()->statusID}">{$todo->getStatus()->getTitle()}</span>
 					</dd>
 				{/if}
+				
 				{if TODO_PROGRESS_ENABLE}
 					<dt>{lang}wcf.toDo.task.progress{/lang}</dt>
 					<dd>
@@ -163,28 +164,35 @@
 						</div>
 					</dd>
 				{/if}
+				
 				<dt>{lang}wcf.toDo.task.priority{/lang}</dt>
 				<dd>
 					{if $todo->important == 3}<span class="label badge grey">{lang}wcf.toDo.task.priority.low{/lang}</span>{/if}
 					{if $todo->important == 2 || $todo->important == 0}<span class="label badge blue">{lang}wcf.toDo.task.priority.normal{/lang}</span>{/if}
 					{if $todo->important == 1}<span class="label badge red">{lang}wcf.toDo.task.priority.high{/lang}</span>{/if}
 				</dd>
+				
 				<dt>{lang}wcf.toDo.task.privacy{/lang}</dt>
 				<dd><span class="icon icon-{if $todo->private == 0}un{/if}lock"></span></dd>
+				
 				{if $todo->timestamp > 0}
 					<dt>{lang}wcf.toDo.task.submitTime{/lang}</dt>
 					<dd>{@$todo->timestamp|time}</dd>
 				{/if}
+				
 				{if $todo->canViewDeadline() && $todo->endTime > 0}
 					<dt>{lang}wcf.toDo.task.endTime{/lang}</dt>
 					<dd>{@$todo->endTime|time}</dd>
 				{/if}
+				
 				{if $todo->canViewReminder() && $todo->remembertime > 0}
 					<dt>{lang}wcf.toDo.task.remembertime{/lang}</dt>
 					0<dd>{@$todo->remembertime|date}</dd>
 				{/if}
+				
 				<dt>{lang}wcf.toDo.task.submitter{/lang}</dt>
 				<dd>{if $todo->submitter != 0 && $submitterusername != ''}<a href="{link controller='User' id=$todo->submitter}{/link}" class="userLink" data-user-id="{$todo->submitter}">{$submitterusername}</a>{else}{lang}wcf.user.guest{/lang}{/if}</dd>
+				
 				{if $todo->getResponsibles() && $todo->canViewResponsibleUsers()}
 					<dt>{lang}wcf.toDo.task.responsible.users{/lang}</dt>
 					<dd>
@@ -195,6 +203,7 @@
 						</ul>
 					</dd>
 				{/if}
+				
 				{if $todo->getResponsibleGroups() && $todo->canViewResponsibleGroups()}
 					<dt>{lang}wcf.toDo.task.responsible.groups{/lang}</dt>
 					<dd>

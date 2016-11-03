@@ -13,6 +13,7 @@ $package = $this->installation->getPackage();
 $matching = array();
 
 // update old category system into WCF's categories
+CategoryHandler::getInstance()->reloadCache();
 $catObjectType = CategoryHandler::getInstance()->getObjectTypeByName('de.mysterycode.wcf.toDo');
 $sql = "SELECT	*
 	FROM	wcf" . WCF_N . "_todo_category";
@@ -20,6 +21,23 @@ $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute();
 $i = 1;
 $matching['categories'] = array();
+
+// default category
+$categoryData = array(
+	'data' => array(
+		'additionalData' => serialize(array()),
+		'description' => null,
+		'isDisabled' => 0,
+		'objectTypeID' => $catObjectType->objectTypeID,
+		'parentCategoryID' => 0,
+		'showOrder' => $i,
+		'title' => 'Default Category'
+	)
+);
+$categoryAction = new CategoryAction(array(), 'create', $categoryData);
+$resultValues = $categoryAction->executeAction();
+$matching['categories'][null] = $resultValues['returnValues']->categoryID;
+
 while ($row = $statement->fetchArray()) {
 	$categoryData = array(
 		'data' => array(
@@ -46,7 +64,8 @@ $matching['status'] = array(
 	3 => 1,
 	4 => 4,
 	5 => 5,
-	6 => 6
+	6 => 6,
+	null => null
 );
 
 // update todo data

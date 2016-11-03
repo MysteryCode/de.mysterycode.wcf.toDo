@@ -85,10 +85,8 @@
 		<item name="wcf.acp.option.todo_description_html_enable"><![CDATA[Enable HTML in descriptions]]></item>
 		<item name="wcf.acp.option.todo_note_html_enable"><![CDATA[Enable HTML in notes]]></item>
 		<item name="wcf.acp.option.todo_comments_enable"><![CDATA[Enable comments]]></item>
-		<item name="wcf.acp.option.todo_category_enable"><![CDATA[Enable categories]]></item>
 		<item name="wcf.acp.option.todo_progress_enable"><![CDATA[Enable progressbar]]></item>
 		<item name="wcf.acp.option.todo_mobile_optimization_enable"><![CDATA[Enable mobile optimized layout]]></item>
-		<item name="wcf.acp.option.todo_delete_obsolete_categories"><![CDATA[Delete unused categories automatically]]></item>
 		
 		<item name="wcf.acp.option.category.toDo.sort"><![CDATA[Sort]]></item>
 		<item name="wcf.acp.option.todo_todos_per_page"><![CDATA[ToDos Per Page]]></item>

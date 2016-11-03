@@ -498,39 +498,39 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	public function canView() {
-		return $this->canEnter() || ($this->getCategory()->canViewTodos() && $this->private == 0);
+		return $this->canEnter() || ($this->categoryID !== null && $this->getCategory()->canViewTodos() && $this->private == 0);
 	}
 	
 	public function canViewResponsibleUsers() {
-		return $this->getCategory()->canViewResponsibleUsers();
+		return $this->categoryID !== null && $this->getCategory()->canViewResponsibleUsers();
 	}
 	
 	public function canViewResponsibleGroups() {
-		return $this->getCategory()->canViewResponsibleGroups();
+		return $this->categoryID !== null && $this->getCategory()->canViewResponsibleGroups();
 	}
 	
 	public function canViewReminder() {
-		return $this->getCategory()->canViewReminder();
+		return $this->categoryID !== null && $this->getCategory()->canViewReminder();
 	}
 	
 	public function canEditReminder() {
-		return $this->getCategory()->canEditReminder();
+		return $this->categoryID !== null && $this->getCategory()->canEditReminder();
 	}
 	
 	public function canViewDeadline() {
-		return $this->getCategory()->canViewDeadline();
+		return $this->categoryID !== null && $this->getCategory()->canViewDeadline();
 	}
 	
 	public function canEditDeadline() {
-		return $this->getCategory()->canEditDeadline();
+		return $this->categoryID !== null && $this->getCategory()->canEditDeadline();
 	}
 	
 	public function canEditPriority() {
-		return $this->getCategory()->canEditPriority();
+		return $this->categoryID !== null && $this->getCategory()->canEditPriority();
 	}
 	
 	public function canModerate() {
-		return $this->getCategory()->isModerator();
+		return $this->categoryID !== null && $this->getCategory()->isModerator();
 	}
 	
 	public function canEditProgress() {
