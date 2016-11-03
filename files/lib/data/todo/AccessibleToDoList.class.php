@@ -2,9 +2,6 @@
 
 namespace wcf\data\todo;
 use wcf\data\todo\category\TodoCategory;
-use wcf\data\todo\category\TodoCategoryCache;
-use wcf\system\language\LanguageFactory;
-use wcf\system\WCF;
 
 /**
  * Represents a list of accessible todos.

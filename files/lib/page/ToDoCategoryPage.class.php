@@ -5,20 +5,13 @@ use wcf\data\category\Category;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
 use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\ToDo;
-use wcf\data\user\online\UsersOnlineList;
-use wcf\data\user\User;
-use wcf\data\ILinkableObject;
-use wcf\page\SortablePage;
 use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
-use wcf\util\StringUtil;
 
 /**
  * Shows the todo category page.

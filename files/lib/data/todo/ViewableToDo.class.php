@@ -1,12 +1,10 @@
 <?php
 
 namespace wcf\data\todo;
-use wcf\data\todo\category\TodoCategoryCache;
 use wcf\data\label\Label;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\data\DatabaseObjectDecorator;
-use wcf\system\language\LanguageFactory;
 use wcf\system\visitTracker\VisitTracker;
 use wcf\system\WCF;
 

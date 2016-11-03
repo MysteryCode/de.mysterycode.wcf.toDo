@@ -2,7 +2,6 @@
 
 namespace wcf\data\todo\category;
 use wcf\data\category\CategoryNode;
-use wcf\system\language\LanguageFactory;
 use wcf\system\WCF;
 
 /**

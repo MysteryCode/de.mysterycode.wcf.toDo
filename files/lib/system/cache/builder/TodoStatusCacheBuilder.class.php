@@ -2,10 +2,7 @@
 
 namespace wcf\system\cache\builder;
 use wcf\data\todo\status\TodoStatusList;
-use wcf\data\object\type\ObjectTypeCache;
-use wcf\system\acl\ACLHandler;
 use wcf\system\cache\builder\AbstractCacheBuilder;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
 
 /**

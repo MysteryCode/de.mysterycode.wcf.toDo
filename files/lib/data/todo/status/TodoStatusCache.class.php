@@ -3,12 +3,7 @@
 namespace wcf\data\todo\status;
 use wcf\data\todo\status\TodoStatus;
 use wcf\system\cache\builder\TodoStatusCacheBuilder;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\language\LanguageFactory;
-use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
-use wcf\system\visitTracker\VisitTracker;
 use wcf\system\SingletonFactory;
-use wcf\system\WCF;
 
 /**
  * 

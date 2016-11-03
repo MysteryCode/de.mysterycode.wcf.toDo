@@ -2,9 +2,7 @@
 
 namespace wcf\system\todo;
 use wcf\data\todo\ToDo;
-use wcf\data\todo\ToDoList;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 

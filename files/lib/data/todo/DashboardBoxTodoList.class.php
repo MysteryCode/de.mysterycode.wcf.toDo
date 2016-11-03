@@ -1,9 +1,6 @@
 <?php
 
 namespace wcf\data\todo;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\language\LanguageFactory;
-use wcf\system\WCF;
 
 /**
  * Represents a list of todos for the dashboard box.

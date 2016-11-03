@@ -5,10 +5,9 @@ use wcf\data\category\AbstractDecoratedCategory;
 use wcf\data\ILinkableObject;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
-use wcf\system\todo\category\TodoCategoryPermissionHandler;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
-use wcf\system\style\StyleHandler;
+use wcf\system\todo\category\TodoCategoryPermissionHandler;
 use wcf\system\WCF;
 
 /**
