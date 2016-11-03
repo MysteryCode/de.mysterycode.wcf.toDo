@@ -8,6 +8,14 @@ use wcf\data\todo\ToDoList;
 use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\WCF;
 
+/**
+ * 
+ * 
+ * @author		Florian Gail
+ * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ */
 class TodoCategoryActionListener implements IParameterizedEventListener {
 
 	/**

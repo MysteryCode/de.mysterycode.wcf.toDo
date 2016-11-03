@@ -7,11 +7,10 @@ use wcf\data\AbstractDatabaseObjectAction;
 /**
  * Executes todo status related actions.
  *
- * @author	Florian Gail
- * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
- * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @author		Florian Gail
+ * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
- * @category	WCF
  */
 class AssignedUserAction extends AbstractDatabaseObjectAction {
 	/**

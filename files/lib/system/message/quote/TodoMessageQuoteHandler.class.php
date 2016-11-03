@@ -5,6 +5,14 @@ use wcf\system\message\quote\AbstractMessageQuoteHandler;
 use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\message\quote\QuotedMessage;
 
+/**
+ * 
+ * 
+ * @author		Florian Gail
+ * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ */
 class TodoMessageQuoteHandler extends AbstractMessageQuoteHandler {
 	/**
 	 * @see	\wcf\system\message\quote\AbstractMessageQuoteHandler::getMessages()

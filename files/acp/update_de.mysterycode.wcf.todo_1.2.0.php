@@ -7,6 +7,12 @@ use wcf\system\category\CategoryHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
+/**
+ * @author		Florian Gail
+ * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
+ * @package	de.mysterycode.wcf.toDo
+ */
 $package = $this->installation->getPackage();
 
 // matching save

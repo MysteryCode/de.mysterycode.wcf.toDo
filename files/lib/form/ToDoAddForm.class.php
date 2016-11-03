@@ -2,7 +2,6 @@
 
 namespace wcf\form;
 use wcf\data\category\Category;
-use wcf\data\category\CategoryAction;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeTree;
 use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\status\TodoStatusList;
@@ -10,35 +9,26 @@ use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
-use wcf\data\ILinkableObject;
-use wcf\form\AbstractForm;
 use wcf\form\MessageForm;
 use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\breadcrumb\IBreadcrumbProvider;
-use wcf\system\category\CategoryHandler;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
-use wcf\system\language\LanguageFactory;
 use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
-use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
-use wcf\util\UserUtil;
 
 /**
  * Shows the toDoAdd form.
  *
- * @author	Florian Gail
- * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
- * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @author		Florian Gail
+ * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
- * @category	WCF
  */
 class ToDoAddForm extends MessageForm {
 	/**

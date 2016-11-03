@@ -13,11 +13,10 @@ use wcf\util\StringUtil;
 /**
  * Shows the field add form.
  *
- * @author	Florian Gail
- * @copyright	2014-2015 Florian Gail <http://www.mysterycode.de/>
- * @license	Kostenpflichtige Produkte <http://downloads.mysterycode.de/index.php/License/4-Kostenpflichtige-Produkte/>
- * @package	de.mysterycode.wcf.inventar
- * @category	INVENTAR
+ * @author		Florian Gail
+ * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
+ * @package	de.mysterycode.wcf.toDo
  */
 class TodoStatusAddForm extends AbstractForm {
 	/**

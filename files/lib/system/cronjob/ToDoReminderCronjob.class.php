@@ -13,11 +13,10 @@ use wcf\system\WCF;
 /**
  * Creates notifications to remind of todos.
  *
- * @author	Florian Gail
- * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
- * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @author		Florian Gail
+ * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
- * @category	WCF
  */
 class ToDoReminderCronjob extends AbstractCronjob {
 	public function execute(Cronjob $cronjob) {
