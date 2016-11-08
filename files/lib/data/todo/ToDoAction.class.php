@@ -15,6 +15,7 @@ use wcf\data\IMessageInlineEditorAction;
 use wcf\data\IMessageQuoteAction;
 use wcf\system\attachment\AttachmentHandler;
 use wcf\system\bbcode\BBCodeHandler;
+use wcf\system\cache\builder\AssignCacheBuilder;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\comment\CommentHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -566,6 +567,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if (!empty($userIDs))
 				UserNotificationHandler::getInstance()->fireEvent('assign', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->todoID)), $userIDs);
 		}
+		
+		AssignCacheBuilder::getInstance()->reset();
 	}
 	
 	/**
@@ -637,6 +640,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if (!empty($userIDs))
 				UserNotificationHandler::getInstance()->fireEvent('assign', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todo->todoID)), $userIDs);
 		}
+		
+		AssignCacheBuilder::getInstance()->reset();
 	}
 	
 	/**

@@ -78,7 +78,6 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->objectAction->executeAction();
 		
 		if ($this->todo->canEditResponsible()) {
-			exit;
 			$responsibleUserAction = new ToDoAction(array($this->todo->todoID), 'updateResponsibles', array('search' => $this->responsibles));
 			$responsibleUserAction->executeAction();
 			
@@ -99,38 +98,42 @@ class ToDoEditForm extends ToDoAddForm {
 	public function readData() {
 		parent::readData();
 		
-		$this->responsibles = $this->todo->getFormattedResponsibles();
-		$this->responsibleGroups = $this->todo->getFormattedResponsibleGroups();
-		
-		if (!$this->todo->canEdit())
-			throw new PermissionDeniedException();
-		
-		$this->title = $this->todo->title;
-		$this->description = $this->todo->description;
-		$this->note = $this->todo->note;
-		$this->statusID = $this->todo->statusID;
-		$this->categoryID = $this->todo->categoryID;
-		$this->category = $this->todo->getCategory();
-		$this->enableSmilies = $this->todo->enableSmilies;
-		$this->enableHtml = $this->todo->enableHtml;
-		$this->enableBBCodes = $this->todo->enableBBCodes;
-		$this->progress = $this->todo->progress;
-		$this->important = $this->todo->important;
-		$this->private = $this->todo->private;
-		$this->canEditStatus = $this->canEditStatus();
-		$this->canEditResponsible = $this->canEditResponsible();
-		
-		if ($this->todo->endTime > 0) {
-			$this->endTime = DateUtil::getDateTimeByTimestamp($this->todo->endTime);
-			$this->endTime->setTimezone(WCF::getUser()->getTimeZone());
-			$this->endTime = $this->endTime->format('c');
+		if (!empty($_POST)) {
+			$this->responsibles = $this->todo->getFormattedResponsibles();
+			$this->responsibleGroups = $this->todo->getFormattedResponsibleGroups();
+			
+			if (!$this->todo->canEdit())
+				throw new PermissionDeniedException();
+			
+			$this->title = $this->todo->title;
+			$this->description = $this->todo->description;
+			$this->note = $this->todo->note;
+			$this->statusID = $this->todo->statusID;
+			$this->categoryID = $this->todo->categoryID;
+			$this->category = $this->todo->getCategory();
+			$this->enableSmilies = $this->todo->enableSmilies;
+			$this->enableHtml = $this->todo->enableHtml;
+			$this->enableBBCodes = $this->todo->enableBBCodes;
+			$this->progress = $this->todo->progress;
+			$this->important = $this->todo->important;
+			$this->private = $this->todo->private;
+			$this->canEditStatus = $this->canEditStatus();
+			$this->canEditResponsible = $this->canEditResponsible();
+			
+			if ($this->todo->endTime > 0)
+				$this->endTime = DateUtil::getDateTimeByTimestamp($this->todo->endTime);
+			
+			if ($this->todo->remembertime > 0)
+				$this->remembertime = DateUtil::getDateTimeByTimestamp($this->todo->remembertime);
+		} else {
+			$this->endTime = DateUtil::getDateTimeByTimestamp($this->endTime);
+			$this->remembertime = DateUtil::getDateTimeByTimestamp($this->remembertime);
 		}
 		
-		if ($this->todo->remembertime > 0) {
-			$this->remembertime = DateUtil::getDateTimeByTimestamp($this->todo->remembertime);
-			$this->remembertime->setTimezone(WCF::getUser()->getTimeZone());
-			$this->remembertime = $this->remembertime->format('Y-m-d');
-		}
+		$this->endTime->setTimezone(WCF::getUser()->getTimeZone());
+		$this->endTime = $this->endTime->format('c');
+		$this->remembertime->setTimezone(WCF::getUser()->getTimeZone());
+		$this->remembertime = $this->remembertime->format('Y-m-d');
 	}
 	
 	/**
