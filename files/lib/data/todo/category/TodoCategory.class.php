@@ -131,6 +131,8 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 			return WCF::getSession()->getPermission('user.toDo.toDo.canView');
 		} else if ($permission == 'user.canEnterCategory') {
 			return WCF::getSession()->getPermission('user.toDo.toDo.canView');
+		} else if ($permission == 'user.canLikeTodo') {
+			return WCF::getSession()->getPermission('user.like.canLike');
 		} else if (in_array($permission, array('user.canViewDeadline', 'user.canEditDeadline', 'user.canViewReminder', 'user.canEditReminder', 'user.canEditPriority'))) {
 			return true;
 		} else {
