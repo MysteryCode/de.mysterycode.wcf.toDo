@@ -1428,7 +1428,7 @@ WCF.Todo.MarkSolved = Class
 					parameters : {
 						userID : this._userID,
 						objectID : this._objectID,
-						status : 3
+						status : 1
 					}
 				});
 				this._proxy.sendRequest();
