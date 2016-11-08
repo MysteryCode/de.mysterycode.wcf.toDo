@@ -718,6 +718,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->parameters['objectID'], $user->userID, $user->username));
 		
+		AssignCacheBuilder::getInstance()->reset();
+		
 		return array('submitted' => 1);
 	}
 	
