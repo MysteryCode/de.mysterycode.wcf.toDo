@@ -355,7 +355,7 @@
 		<item name="wcf.toDo.filter.responsible.placeholder"><![CDATA[Username oder -group]]></item>
 		
 		<item name="wcf.toDo.stats"><![CDATA[Stats]]></item>
-		<item name="wcf.toDo.stats.detail"><![CDATA[{$stats.total} ToDos - {$stats.inProgress} ToDos in progress - {$stats.finished} ToDos finished]]></item>
+		<item name="wcf.toDo.stats.detail"><![CDATA[{$stats.total} ToDo{if $stats.total != 1}s{/if} - {$stats.inProgress} ToDo{if $stats.inProgress != 1}s{/if} in progress - {$stats.finished} ToDo{if $stats.finished != 1}s{/if} finished]]></item>
 	</category>
 	
 	<category name="wcf.user">
