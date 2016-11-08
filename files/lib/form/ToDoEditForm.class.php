@@ -98,6 +98,9 @@ class ToDoEditForm extends ToDoAddForm {
 	public function readData() {
 		parent::readData();
 		
+		$this->category = $this->todo->getCategory();
+		$this->categoryID = $this->category->categoryID;
+		
 		if (!empty($_POST)) {
 			$this->responsibles = $this->todo->getFormattedResponsibles();
 			$this->responsibleGroups = $this->todo->getFormattedResponsibleGroups();

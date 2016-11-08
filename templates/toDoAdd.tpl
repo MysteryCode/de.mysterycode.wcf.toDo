@@ -82,7 +82,7 @@
 				</dd>
 			</dl>
 			
-			{if $category->canEditStatus()}
+			{if ($action == 'add' && $category->canEditStatus()) || ($action == 'edit' && $todo->canEditStatus())}
 				<dl{if $errorField == 'statusID'} class="formError"{/if}>
 					<dt><label for="statusID">{lang}wcf.toDo.task.status{/lang}</label></dt>
 					<dd>
@@ -113,7 +113,7 @@
 				</dl>
 			{/if}
 			
-			{if $category->canEditDeadline()}
+			{if ($action == 'add' && $category->canEditDeadline()) || ($action == 'edit' && $todo->canEditDeadline())}
 				<dl{if $errorField == 'endTime'} class="formError"{/if}>
 					<dt><label for="endTime">{lang}wcf.toDo.task.endTime{/lang}</label></dt>
 					<dd>
@@ -122,7 +122,7 @@
 				</dl>
 			{/if}
 			
-			{if $category->canEditReminder()}
+			{if ($action == 'add' && $category->canEditReminder()) || ($action == 'edit' && $todo->canEditReminder())}
 				<dl{if $errorField == 'remembertime'} class="formError"{/if}>
 					<dt><label for="remembertime">{lang}wcf.toDo.task.remembertime{/lang}</label></dt>
 					<dd>
@@ -131,7 +131,7 @@
 				</dl>
 			{/if}
 			
-			{if $category->canEditPriority()}
+			{if ($action == 'add' && $category->canEditPriority()) || ($action == 'edit' && $todo->canEditPriority())}
 				<dl{if $errorField == 'priority'} class="formError"{/if}>
 					<dt><label for="priority">{lang}wcf.toDo.task.important{/lang}</label></dt>
 					<dd id="prioPicker">
@@ -154,7 +154,7 @@
 			{event name='additionalFields'}
 		</fieldset>
 		
-		{if $category->canEditResponsibles()}
+		{if ($action == 'add' && $category->canEditResponsibles()) || ($action == 'edit' && $todo->canEditResponsibles())}
 			<fieldset>
 				<legend>{lang}wcf.toDo.task.responsible{/lang}</legend>
 				
