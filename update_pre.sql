@@ -2,7 +2,7 @@ ALTER TABLE wcf1_todo ADD statusID int(10);
 ALTER TABLE wcf1_todo ADD categoryID int(10);
 ALTER TABLE wcf1_todo ADD hasEmbeddedObjects tinyint(1) NOT NULL DEFAULT 0;
 
-ALTER TABLE wcf1_todo CHANGE id todoID int(10);
+ALTER TABLE wcf1_todo CHANGE id todoID int(10) AUTO_INCREMENT;
 ALTER TABLE wcf1_todo CHANGE timestamp timestamp int(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_todo CHANGE endTime endTime int(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_todo CHANGE updatetimestamp updatetimestamp int(10) NOT NULL DEFAULT 0;
