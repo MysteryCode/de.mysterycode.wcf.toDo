@@ -477,7 +477,14 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 		return false;
 	}
 	
+	/**
+	 * @deprecated
+	 */
 	public function canEditResponsible() {
+		return $this->canEditResponsibles();
+	}
+	
+	public function canEditResponsibles() {
 		if ($this->getCategory()->getPermission('user.canEditResonsibles') && $this->canEdit())
 			return true;
 		
