@@ -96,6 +96,23 @@ abstract class AbstractToDoListPage extends SortablePage {
 	public $statusFilter = null;
 	
 	/**
+	 * amount of all todos
+	 * @var integer
+	 */
+	public $todoCount = 0;
+	
+	/**
+	 * amount of todos in progress
+	 */
+	public $inProgressCount = 0;
+	
+	/**
+	 * amount of finished todos
+	 * @var integer
+	 */
+	public $finishedCount = 0;
+	
+	/**
 	 * @see \wcf\page\SortablePage::readParameters()
 	 */
 	public function readParameters() {
@@ -160,6 +177,28 @@ abstract class AbstractToDoListPage extends SortablePage {
 			LikeHandler::getInstance()->loadLikeObjects($objectType, $todoIDs);
 			$this->likeData = LikeHandler::getInstance()->getLikeObjects($objectType);
 		}
+		
+		$sql = "SELECT
+			(
+				SELECT COUNT(todoID)
+				FROM wcf1_todo
+			) AS todos,
+			(
+				SELECT COUNT(todoID)
+				FROM wcf1_todo
+				WHERE statusID <> 1
+			) AS todosInProgress,
+			(
+				SELECT COUNT(todoID)
+				FROM wcf1_todo
+				WHERE statusID = 1
+			) AS todosFinished";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute();
+		$row = $statement->fetchSingleRow();
+		$this->todoCount = (empty($row['todos']) ? 0 : $row['todos']);
+		$this->inProgressCount = (empty($row['todosInProgress']) ? 0 : $row['todosInProgress']);
+		$this->finishedCount = (empty($row['todosFinished']) ? 0 : $row['todosFinished']);
 	}
 	
 	/**
@@ -173,7 +212,13 @@ abstract class AbstractToDoListPage extends SortablePage {
 			'categoryNodeList' => $this->categoryNodeList,
 			'usersOnlineList' => $this->usersOnlineList,
 			'responsibleFilter' => $this->responsibleFilter,
-			'statusFilter', $this->statusFilter
+			'statusFilter', $this->statusFilter,
+			
+			'stats' => array(
+				'total' => $this->todoCount,
+				'inProgress' => $this->inProgressCount,
+				'finished' => $this->finishedCount
+			)
 		));
 	}
 }

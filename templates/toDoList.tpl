@@ -155,7 +155,7 @@
 	<div class="container marginTop">
 		<ul class="containerList infoBoxList">
 			{content}
-				{if TODO_ENABLE_STATS}
+				{if TODO_ENABLE_STATS && !$stats|empty}
 					<li class="box32 statsInfoBox">
 						<span class="icon icon32 icon-bar-chart"></span>
 						
