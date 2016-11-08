@@ -15,8 +15,6 @@ CREATE TABLE wcf1_todo (
 	categoryID			int(10),
 	updatetimestamp		int(10)			NOT NULL DEFAULT 0,
 	progress			int(3)			NOT NULL DEFAULT 0,
-	html_description	int(1)			NOT NULL DEFAULT 0,
-	html_notes			int(1)			NOT NULL DEFAULT 0,
 	remembertime		int(10)			NOT NULL DEFAULT 0,
 	enableSmilies		tinyint(1)		NOT NULL DEFAULT 1,
 	enableHtml			tinyint(1)		NOT NULL DEFAULT 0,

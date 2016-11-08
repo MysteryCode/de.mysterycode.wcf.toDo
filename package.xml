@@ -65,6 +65,9 @@
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 
+		<!-- SQL -->
+		<instruction type="sql">update_12beta2.sql</instruction>
+
 		<!-- XMLs -->
 		<instruction type="pageMenu">xml/pageMenu.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
