@@ -101,7 +101,7 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->category = $this->todo->getCategory();
 		$this->categoryID = $this->category->categoryID;
 		
-		if (!empty($_POST)) {
+		if (empty($_POST)) {
 			$this->responsibles = $this->todo->getFormattedResponsibles();
 			$this->responsibleGroups = $this->todo->getFormattedResponsibleGroups();
 			
@@ -133,10 +133,14 @@ class ToDoEditForm extends ToDoAddForm {
 			$this->remembertime = DateUtil::getDateTimeByTimestamp($this->remembertime);
 		}
 		
-		$this->endTime->setTimezone(WCF::getUser()->getTimeZone());
-		$this->endTime = $this->endTime->format('c');
-		$this->remembertime->setTimezone(WCF::getUser()->getTimeZone());
-		$this->remembertime = $this->remembertime->format('Y-m-d');
+		if (!empty($this->endTime)) {
+			$this->endTime->setTimezone(WCF::getUser()->getTimeZone());
+			$this->endTime = $this->endTime->format('c');
+		}
+		if (!empty($this->remembertime)) {
+			$this->remembertime->setTimezone(WCF::getUser()->getTimeZone());
+			$this->remembertime = $this->remembertime->format('Y-m-d');
+		}
 	}
 	
 	/**
