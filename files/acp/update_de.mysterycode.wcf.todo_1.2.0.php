@@ -6,6 +6,7 @@ use wcf\data\todo\ToDoList;
 use wcf\system\category\CategoryHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
+use wcf\data\todo\ToDoAction;
 
 /**
  * @author		Florian Gail
@@ -79,11 +80,11 @@ $todoList = new ToDoList();
 $todoList->readObjects();
 $todos = $todoList->getObjects();
 foreach ($todos as $todo) {
-	$todoEditor = new ToDoEditor($todo);
-	$todoEditor->update(array(
-		'statusID' => $matching['status'][$todo->status],
-		'categoryID' => $matching['categories'][$todo->category]
-	));
+	$todoAction = new ToDoAction(array($todo), 'update', array('data' => array(
+		'statusID' => $matching['status'][$todo->__get('status')],
+		'categoryID' => $matching['categories'][$todo->__get('category')]
+	)));
+	$todoAction->executeAction();
 }
 
 // reset cache
