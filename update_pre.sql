@@ -1,7 +1,7 @@
 ALTER TABLE wcf1_todo ADD statusID int(10);
 ALTER TABLE wcf1_todo ADD categoryID int(10);
 ALTER TABLE wcf1_todo ADD hasEmbeddedObjects tinyint(1) NOT NULL DEFAULT 
-ALTER TABLE wcf1_todo ADD ipAddress varchar(39) NOT NULL DEFAULT 0;
+ALTER TABLE wcf1_todo ADD ipAddress varchar(39) NOT NULL DEFAULT '';
 
 ALTER TABLE wcf1_todo CHANGE id todoID int(10) AUTO_INCREMENT;
 ALTER TABLE wcf1_todo CHANGE timestamp timestamp int(10) NOT NULL DEFAULT 0;
@@ -9,9 +9,9 @@ ALTER TABLE wcf1_todo CHANGE endTime endTime int(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_todo CHANGE updatetimestamp updatetimestamp int(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_todo CHANGE remembertime remembertime int(10) NOT NULL DEFAULT 0;
 
-ALTER TABLE wcf1_todo CHANGE title title tinytext NOT NULL DEFAULT '';
-ALTER TABLE wcf1_todo CHANGE description description text NOT NULL DEFAULT '';
-ALTER TABLE wcf1_todo CHANGE note note text NOT NULL DEFAULT '';
+ALTER TABLE wcf1_todo CHANGE title title varchar(255) NOT NULL DEFAULT '';
+ALTER TABLE wcf1_todo CHANGE description description text;
+ALTER TABLE wcf1_todo CHANGE note note text;
 
 ALTER TABLE wcf1_todo_to_user DROP PRIMARY KEY;
 

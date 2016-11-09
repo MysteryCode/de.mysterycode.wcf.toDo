@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS wcf1_todo;
 CREATE TABLE wcf1_todo (
 	todoID				int(10)			NOT NULL AUTO_INCREMENT,
-	title				tinytext		NOT NULL DEFAULT '',
-	description			text			NOT NULL DEFAULT '',
-	note				text			NOT NULL DEFAULT '',
+	title				varchar(255)	NOT NULL DEFAULT '',
+	description			text,
+	note				text,
 	statusID			int(10),
 	submitter			int(10),
 	username			varchar(255)	NOT NULL DEFAULT '',
@@ -29,7 +29,7 @@ CREATE TABLE wcf1_todo (
 	cumulativeLikes		mediumint(7)	NOT NULL DEFAULT 0,
 	attachments			mediumint(7)	NOT NULL DEFAULT 0,
 	hasEmbeddedObjects	tinyint(1)		NOT NULL DEFAULT 0,
-	ipAddress			varchar(39)		NOT NULL DEFAULT 0,
+	ipAddress			varchar(39)		NOT NULL DEFAULT '',
 	PRIMARY KEY (todoID)
 );
 
