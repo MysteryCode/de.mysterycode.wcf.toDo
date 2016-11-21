@@ -20,15 +20,19 @@ class ToDoHandler extends SingletonFactory {
 	 * @var	array<integer>
 	 */
 	protected $unsolvedTodoCount = array();
-	
+
 	/**
 	 * number of overdue todos
 	 * @var	array<integer>
 	 */
 	protected $overdueTodoCount = array();
+	/**
+	 * number of waiting todos
+	 * @var	array<integer>
+	 */
+	protected $waitingTodoCount = array();
 	
 	public function getUnsolovedTodoCount($userID = null) {
-		return 0;
 		if ($userID === null) $userID = WCF::getUser()->userID;
 		
 		if (!isset($this->unsolvedTodoCount[$userID])) {
@@ -41,7 +45,7 @@ class ToDoHandler extends SingletonFactory {
 			//if ($data[$userID] === null) {
 				$conditionBuilder = new PreparedStatementConditionBuilder();
 				$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
-				$conditionBuilder->add('todo.status = ?', array(1));
+				$conditionBuilder->add('todo.statusID = ?', array(2));
 				$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
 				$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
 				
@@ -65,7 +69,6 @@ class ToDoHandler extends SingletonFactory {
 	}
 	
 	public function getOverdueTodoCount($userID = null) {
-		return 0;
 		if ($userID === null) $userID = WCF::getUser()->userID;
 	
 		if (!isset($this->overdueTodoCount[$userID])) {
@@ -78,8 +81,8 @@ class ToDoHandler extends SingletonFactory {
 			//if ($data[$userID] === null) {
 				$conditionBuilder = new PreparedStatementConditionBuilder();
 				$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
-				$conditionBuilder->add('todo.status <> ?', array(3));
-				$conditionBuilder->add('todo.status <> ?', array(4));
+				$conditionBuilder->add('todo.statusID <> ?', array(1));
+				$conditionBuilder->add('todo.statusID <> ?', array(4));
 				$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
 				$conditionBuilder->add('todo.endTime <> ?', array(0));
 				$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
@@ -101,5 +104,42 @@ class ToDoHandler extends SingletonFactory {
 		}
 	
 		return $this->overdueTodoCount[$userID];
+	}
+	
+	public function getWaitingTodoCount($userID = null) {
+		if ($userID === null) $userID = WCF::getUser()->userID;
+	
+		if (!isset($this->waitingTodoCount[$userID])) {
+			$this->waitingTodoCount[$userID] = 0;
+				
+			//UserStorageHandler::getInstance()->loadStorage(array($userID));
+				
+			//$data = UserStorageHandler::getInstance()->getStorage(array($userID), 'overdueTodoCount');
+				
+			//if ($data[$userID] === null) {
+				$conditionBuilder = new PreparedStatementConditionBuilder();
+				$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
+				$conditionBuilder->add('todo.statusID = ?', array(5));
+				$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
+				$conditionBuilder->add('todo.endTime <> ?', array(0));
+				$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
+	
+				$sql = "SELECT	COUNT(*) AS count
+					FROM	wcf".WCF_N."_todo_to_user todo_to_user,
+						wcf".WCF_N."_todo todo
+					".$conditionBuilder->__toString();
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute($conditionBuilder->getParameters());
+				$row = $statement->fetchArray();
+				$this->waitingTodoCount[$userID] = $row['count'];
+	
+				//UserStorageHandler::getInstance()->update($userID, 'overdueTodoCount', serialize($this->overdueTodoCount[$userID]));
+			//}
+			//else {
+				//$this->overdueTodoCount[$userID] = unserialize($data[$userID]);
+			//}
+		}
+	
+		return $this->waitingTodoCount[$userID];
 	}
 }
