@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\system\user\online\location;
-use wcf\data\todo\ToDoList;
+use wcf\data\todo\ToDoCache;
 use wcf\data\user\online\UserOnline;
 use wcf\system\user\online\location\IUserOnlineLocation;
 use wcf\system\WCF;
@@ -16,63 +16,24 @@ use wcf\system\WCF;
  */
 class ToDoLocation implements IUserOnlineLocation {
 	/**
-	 * todo ids
-	 *
-	 * @var array<integer>
-	 */
-	protected $todoIDs = array();
-	protected $todos = null;
-
-	/**
-	 *
 	 * @see \wcf\system\user\online\location\IUserOnlineLocation::cache()
 	 */
 	public function cache(UserOnline $user) {
-		if ($user->objectID) {
-			$this->todoIDs[] = $user->objectID;
-		}
+		// lazy method
 	}
 
 	/**
-	 *
 	 * @see \wcf\system\user\online\location\IUserOnlineLocation::get()
 	 */
 	public function get(UserOnline $user, $languageVariable = '') {
-		if ($this->todos === null) {
-			$this->readToDos();
+		$todo = ToDoCache::getInstance()->getTodo($user->objectID);
+		
+		if ($todo !== null && ($todo->canEnter() | $todo->canView())) {
+			return WCF::getLanguage()->getDynamicVariable($languageVariable, array(
+				'todo' => $this->todos[$user->objectID]
+			));
 		}
 		
-		if (!isset($this->todos[$user->objectID])) {
-			return '';
-		}
-		
-		if (!$this->todos[$user->objectID]->canEnter()) {
-			return '';
-		}
-		
-		return WCF::getLanguage()->getDynamicVariable($languageVariable, array(
-			'todo' => $this->todos[$user->objectID]
-		));
-	}
-
-	/**
-	 * Loads the toDos.
-	 */
-	protected function readToDos() {
-		$this->todos = array();
-		
-		if (empty($this->todoIDs)) {
-			return;
-		}
-		
-		$this->todoIDs = array_unique($this->todoIDs);
-		
-		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add('todo_table.todoID IN (?)', array(
-			$this->todoIDs
-		));
-		$todoList->readObjects();
-		
-		$this->todos = $todoList->getObjects();
+		return '';
 	}
 }
