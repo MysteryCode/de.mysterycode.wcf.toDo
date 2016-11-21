@@ -153,6 +153,8 @@
 	<category name="wcf.acp.rebuildData">
 		<item name="wcf.acp.rebuildData.de.mysterycode.wcf.toDo.toDo"><![CDATA[Rebuild ToDos]]></item>
 		<item name="wcf.acp.rebuildData.de.mysterycode.wcf.toDo.toDo.description"><![CDATA[Rebuilds counters and ToDos]]></item>
+		<item name="wcf.acp.rebuildData.de.mysterycode.wcf.toDo.category"><![CDATA[Rebuild ToDo-Categories]]></item>
+		<item name="wcf.acp.rebuildData.de.mysterycode.wcf.toDo.category.description"><![CDATA[Rebuilds the stats of ToDp-Categories]]></item>
 	</category>
 	
 	<category name="wcf.acp.todo">
