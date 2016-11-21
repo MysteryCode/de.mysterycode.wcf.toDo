@@ -37,7 +37,7 @@ class ToDoReminderCronjob extends AbstractCronjob {
 		}
 		
 		if (!empty($todoIDs)) {
-			$todoAction = new ToDoAction(array($todoIDs), 'update', array('data' => array('remembertime' => 0)));
+			$todoAction = new ToDoAction($todoIDs, 'update', array('data' => array('remembertime' => 0)));
 			$todoAction->executeAction();
 		}
 	}
