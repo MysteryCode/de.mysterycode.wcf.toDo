@@ -2,10 +2,12 @@
 
 namespace wcf\system\todo;
 use wcf\data\todo\ToDo;
+use wcf\system\cache\builder\TodoGeneralStatsCacheBuilder;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\event\EventHandler;
 use wcf\system\SingletonFactory;
-use wcf\system\WCF;
 use wcf\system\user\storage\UserStorageHandler;
+use wcf\system\WCF;
 
 /**
  * Handles todo data.
@@ -32,6 +34,8 @@ class ToDoHandler extends SingletonFactory {
 	 * @var	array<integer>
 	 */
 	protected $waitingTodoCount = 0;
+	
+	protected $stats = array();
 	
 	public function getUnsolvedTodoCount($userID = null) {
 		if ($userID === null) $userID = WCF::getUser()->userID;
@@ -164,5 +168,25 @@ class ToDoHandler extends SingletonFactory {
 		}
 	
 		return $this->waitingTodoCount;
+	}
+	
+	public function setStat($stats = array()) {
+		$this->stats = array_merge($this->stats, $stats);
+	}
+	
+	public function readTodoStats() {
+		$this->stats = TodoGeneralStatsCacheBuilder::getInstance()->getData();
+		
+		EventHandler::getInstance()->fireAction($this, 'readTodoStats');
+	}
+	
+	public function getStats($identifier = '') {
+		if (empty($this->stats))
+			$this->readTodoStats();
+		
+		if (empty($this->stats[$identifier]))
+			return 0;
+		else
+			return $this->stats[$identifier];
 	}
 }

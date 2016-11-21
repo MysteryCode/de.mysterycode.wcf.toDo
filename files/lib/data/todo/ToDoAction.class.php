@@ -47,7 +47,6 @@ use wcf\util\StringUtil;
  */
 class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardAction, IMessageInlineEditorAction, IMessageQuoteAction {
 	/**
-	 *
 	 * @see \wcf\data\AbstractDatabaseObjectAction::$className
 	 */
 	protected $className = 'wcf\data\todo\ToDoEditor';

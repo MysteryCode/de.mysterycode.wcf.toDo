@@ -9,6 +9,7 @@ use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\page\SortablePage;
 use wcf\system\like\LikeHandler;
+use wcf\system\todo\ToDoHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -181,27 +182,9 @@ abstract class AbstractToDoListPage extends SortablePage {
 			$this->likeData = LikeHandler::getInstance()->getLikeObjects($objectType);
 		}
 		
-		$sql = "SELECT
-			(
-				SELECT COUNT(todoID)
-				FROM wcf1_todo
-			) AS todos,
-			(
-				SELECT COUNT(todoID)
-				FROM wcf1_todo
-				WHERE statusID <> 1
-			) AS todosInProgress,
-			(
-				SELECT COUNT(todoID)
-				FROM wcf1_todo
-				WHERE statusID = 1
-			) AS todosFinished";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute();
-		$row = $statement->fetchSingleRow();
-		$this->todoCount = (empty($row['todos']) ? 0 : $row['todos']);
-		$this->inProgressCount = (empty($row['todosInProgress']) ? 0 : $row['todosInProgress']);
-		$this->finishedCount = (empty($row['todosFinished']) ? 0 : $row['todosFinished']);
+		$this->todoCount = ToDoHandler::getInstance()->getStats('todos');
+		$this->inProgressCount = ToDoHandler::getInstance()->getStats('todosInProgress');
+		$this->finishedCount = ToDoHandler::getInstance()->getStats('todosFinished');
 	}
 	
 	/**
