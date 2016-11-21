@@ -50,4 +50,13 @@
 			<listenerclassname>wcf\system\event\listener\TodoCategoryActionListener</listenerclassname>
 		</eventlistener>
 	</import>
+	<delete>
+		<eventlistener>
+			<eventclassname>wcf\page\AbstractPage</eventclassname>
+			<eventname>assignVariables</eventname>
+			<listenerclassname>wcf\system\event\listener\ToDoNotificationListener</listenerclassname>
+			<environment>user</environment>
+			<inherit>1</inherit>
+		</eventlistener>
+	</delete>
 </data>
