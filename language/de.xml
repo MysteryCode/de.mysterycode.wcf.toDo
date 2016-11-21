@@ -37,6 +37,8 @@
 		<item name="wcf.acp.group.option.category.user.toDo.toDo"><![CDATA[ToDos]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canViewList"><![CDATA[Kann Liste sehen]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canViewDetail"><![CDATA[Kann Details sehen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canView"><![CDATA[Kann ToDos sehen]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canEnter"><![CDATA[Kann ToDos öffnen]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canAdd"><![CDATA[Kann ToDos erstellen]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canEditOwn"><![CDATA[Kann eigene ToDos bearbeiten]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canEditAssigned"><![CDATA[Kann zugewiesene ToDos bearbeiten]]></item>

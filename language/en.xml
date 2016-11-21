@@ -37,6 +37,8 @@
 		<item name="wcf.acp.group.option.category.user.toDo.toDo"><![CDATA[ToDos]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canViewList"><![CDATA[Can see list]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canViewDetail"><![CDATA[Can see details]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canView"><![CDATA[Can view ToDos]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canEnter"><![CDATA[Can enter ToDos]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canAdd"><![CDATA[Cann add ToDos]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canEditOwn"><![CDATA[Can edit own ToDos]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canEditAssigned"><![CDATA[Can edit assigned ToDos]]></item>
@@ -126,6 +128,7 @@
 		<item name="wcf.acp.option.todo_comments_enable"><![CDATA[Enable comments]]></item>
 		<item name="wcf.acp.option.todo_progress_enable"><![CDATA[Enable progressbar]]></item>
 		<item name="wcf.acp.option.todo_mobile_optimization_enable"><![CDATA[Enable mobile optimized layout]]></item>
+		<item name="wcf.acp.option.todo_enable_stats"><![CDATA[Show ToDo-Stats on overview]]></item>
 		
 		<item name="wcf.acp.option.category.toDo.sort"><![CDATA[Sort]]></item>
 		<item name="wcf.acp.option.todo_todos_per_page"><![CDATA[ToDos Per Page]]></item>
@@ -146,6 +149,8 @@
 		
 		<item name="wcf.acp.option.category.dashboard.sidebar.wcf.todo.noresponsible"><![CDATA[ToDos without responsibles]]></item>
 		<item name="wcf.acp.option.todo_noresponsible_dashboard_box_items"><![CDATA[Number of ToDos]]></item>
+		<item name="wcf.acp.option.todo_waiting_warning"><![CDATA[Enable hiding warnings]]></item>
+		<item name="wcf.acp.option.todo_waiting_warning_hide_duration"><![CDATA[Duration until reappearance]]></item>
 		<item name="wcf.acp.option.category.dashboard.sidebar.wcf.todo.outstanding"><![CDATA[Unsolved ToDos]]></item>
 		<item name="wcf.acp.option.todo_outstanding_dashboard_box_items"><![CDATA[Number of ToDos]]></item>
 	</category>
