@@ -281,7 +281,7 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 	}
 	
 	public function canEditReminder() {
-		return $this->getPermission('user.canEnterReminder');
+		return $this->getPermission('user.canEditReminder');
 	}
 	
 	public function canViewDeadline() {
