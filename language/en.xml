@@ -39,15 +39,15 @@
 		<item name="wcf.acp.group.option.user.toDo.toDo.canViewDetail"><![CDATA[Can see details]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canView"><![CDATA[Can view ToDos]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canEnter"><![CDATA[Can enter ToDos]]></item>
-		<item name="wcf.acp.group.option.user.toDo.toDo.canAdd"><![CDATA[Cann add ToDos]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canAdd"><![CDATA[Can add ToDos]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canEditOwn"><![CDATA[Can edit own ToDos]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canEditAssigned"><![CDATA[Can edit assigned ToDos]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canDeleteOwn"><![CDATA[Can delete own ToDos]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canDeleteAssigned"><![CDATA[Can delete assigned ToDos]]></item>
 		<item name="wcf.acp.group.option.user.toDo.toDo.canUseHtml"><![CDATA[Can use HTML in description and notes]]></item>
-		<item name="wcf.acp.group.option.user.toDo.toDo.canAddWithoutModeration"><![CDATA[Cann add ToDos without moderation]]></item>
-		<item name="wcf.acp.group.option.user.toDo.toDo.canAddCategory"><![CDATA[Cann create new category]]></item>
-		<item name="wcf.acp.group.option.user.toDo.toDo.canViewPrivate"><![CDATA[Cann see every private ToDo]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canAddWithoutModeration"><![CDATA[Can add ToDos without moderation]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canAddCategory"><![CDATA[Can create new category]]></item>
+		<item name="wcf.acp.group.option.user.toDo.toDo.canViewPrivate"><![CDATA[Can see every private ToDo]]></item>
 		
 		<item name="wcf.acp.group.option.category.user.toDo.status"><![CDATA[Status]]></item>
 		<item name="wcf.acp.group.option.user.toDo.status.canView"><![CDATA[Can see Status]]></item>
