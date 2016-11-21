@@ -187,7 +187,7 @@
 				
 				{if $todo->canViewReminder() && $todo->remembertime > 0}
 					<dt>{lang}wcf.toDo.task.remembertime{/lang}</dt>
-					0<dd>{@$todo->remembertime|date}</dd>
+					<dd>{@$todo->remembertime|date}</dd>
 				{/if}
 				
 				<dt>{lang}wcf.toDo.task.submitter{/lang}</dt>
