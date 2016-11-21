@@ -53,7 +53,7 @@
 					{/if}
 				</dd>
 			</dl>
-			{include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
+			{include file='multipleLanguageInputJavascript' elementIdentifier='subject' forceSelection=false}
 			
 			<dl{if $errorField == 'description'} class="formError"{/if}>
 				<dt><label for="description">{lang}wcf.acp.todo.status.description{/lang}</label></dt>
