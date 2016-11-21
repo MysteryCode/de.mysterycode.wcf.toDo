@@ -24,7 +24,7 @@ class DeletedToDoProvider implements IDeletedContentProvider {
 	 * @see	\wcf\system\moderation\IDeletedContentProvider::getTemplateName()
 	 */
 	public function getTemplateName() {
-		return 'deletedTodoList';
+		return 'deletedToDoList';
 	}
 	
 	/**
