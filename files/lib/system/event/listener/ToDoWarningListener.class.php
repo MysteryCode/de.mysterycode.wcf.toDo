@@ -22,9 +22,9 @@ class ToDoWarningListener implements IParameterizedEventListener {
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		if (WCF::getUser()->userID != 0) {
-			$this->unsolved = 0;//ToDoHandler::getInstance()->getUnsolovedTodoCount(WCF::getUser()->userID);
-			$this->overdue = 0;//ToDoHandler::getInstance()->getOverdueTodoCount(WCF::getUser()->userID);
-			$this->waiting = 0;//ToDoHandler::getInstance()->getOverdueTodoCount(WCF::getUser()->userID);
+			$this->unsolved = ToDoHandler::getInstance()->getUnsolovedTodoCount(WCF::getUser()->userID);
+			$this->overdue = ToDoHandler::getInstance()->getOverdueTodoCount(WCF::getUser()->userID);
+			$this->waiting = ToDoHandler::getInstance()->getOverdueTodoCount(WCF::getUser()->userID);
 		}
 		
 		WCF::getTPL()->assign(array(
