@@ -622,19 +622,21 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				}
 			}
 			
-			$conditions = new PreparedStatementConditionBuilder();
-			$conditions->add("groupID IN (?)", array($responsibleGroupList));
-			$sql = "SELECT	userID
-				FROM	wcf".WCF_N."_user_to_group
-				".$conditions;
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute($conditions->getParameters());
-			
-			$assignedUsers = $todo->getResponsibleIDs();
-			$userIDs = array();
-			while ($row = $statement->fetchArray()) {
-				if (empty($assignedUsers) || !in_array($row['userID'], $assignedUsers))
-					$userIDs[] = $row['userID'];
+			if (!empty($responsibleGroupList)) {
+				$conditions = new PreparedStatementConditionBuilder();
+				$conditions->add("groupID IN (?)", array($responsibleGroupList));
+				$sql = "SELECT	userID
+					FROM	wcf".WCF_N."_user_to_group
+					".$conditions;
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute($conditions->getParameters());
+				
+				$assignedUsers = $todo->getResponsibleIDs();
+				$userIDs = array();
+				while ($row = $statement->fetchArray()) {
+					if (empty($assignedUsers) || !in_array($row['userID'], $assignedUsers))
+						$userIDs[] = $row['userID'];
+				}
 			}
 			
 			if (!empty($userIDs))
