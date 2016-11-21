@@ -28,6 +28,7 @@ class ToDoHandler extends SingletonFactory {
 	protected $overdueTodoCount = array();
 	
 	public function getUnsolovedTodoCount($userID = null) {
+		return 0;
 		if ($userID === null) $userID = WCF::getUser()->userID;
 		
 		if (!isset($this->unsolvedTodoCount[$userID])) {
@@ -64,6 +65,7 @@ class ToDoHandler extends SingletonFactory {
 	}
 	
 	public function getOverdueTodoCount($userID = null) {
+		return 0;
 		if ($userID === null) $userID = WCF::getUser()->userID;
 	
 		if (!isset($this->overdueTodoCount[$userID])) {
