@@ -2,6 +2,7 @@
 
 namespace wcf\system\cache\builder;
 use wcf\system\cache\builder\AbstractCacheBuilder;
+use wcf\system\WCF;
 
 /**
  *
