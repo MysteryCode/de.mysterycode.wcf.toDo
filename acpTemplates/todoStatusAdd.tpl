@@ -53,12 +53,12 @@
 					{/if}
 				</dd>
 			</dl>
-			{include file='multipleLanguageInputJavascript' elementIdentifier='subject' forceSelection=false}
+			{include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
 			
 			<dl{if $errorField == 'description'} class="formError"{/if}>
 				<dt><label for="description">{lang}wcf.acp.todo.status.description{/lang}</label></dt>
 				<dd>
-					<textarea id="description" name="subject" class="long">{$i18nPlainValues['description']}</textarea>
+					<textarea id="description" name="description" class="long">{$i18nPlainValues['description']}</textarea>
 					{if $errorField == 'description'}
 						<small class="innerError">
 							{if $errorType == 'empty' || $errorType == 'multilingual'}
