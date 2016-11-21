@@ -118,6 +118,9 @@ abstract class AbstractToDoListPage extends SortablePage {
 	public function readParameters() {
 		parent::readParameters();
 		
+		if ($this->sortField == 'status')
+			$this->sortField = 'statusID';
+		
 		if (!empty($_POST['responsibleFilter'])) $this->responsibleFilter = StringUtil::trim($_POST['responsibleFilter']);
 		if (!empty($_POST['statusFilter'])) $this->statusFilter = StringUtil::trim($_POST['statusFilter']);
 	}
