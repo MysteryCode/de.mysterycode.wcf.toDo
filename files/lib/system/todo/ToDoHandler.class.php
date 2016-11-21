@@ -5,6 +5,7 @@ use wcf\data\todo\ToDo;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
+use wcf\system\user\storage\UserStorageHandler;
 
 /**
  * Handles todo data.
@@ -19,127 +20,149 @@ class ToDoHandler extends SingletonFactory {
 	 * number of unsolved todos
 	 * @var	array<integer>
 	 */
-	protected $unsolvedTodoCount = array();
+	protected $unsolvedTodoCount = 0;
 
 	/**
 	 * number of overdue todos
 	 * @var	array<integer>
 	 */
-	protected $overdueTodoCount = array();
+	protected $overdueTodoCount = 0;
 	/**
 	 * number of waiting todos
 	 * @var	array<integer>
 	 */
-	protected $waitingTodoCount = array();
+	protected $waitingTodoCount = 0;
 	
-	public function getUnsolovedTodoCount($userID = null) {
+	public function getUnsolvedTodoCount($userID = null) {
 		if ($userID === null) $userID = WCF::getUser()->userID;
 		
-		if (!isset($this->unsolvedTodoCount[$userID])) {
-			$this->unsolvedTodoCount[$userID] = 0;
+		if ($userID) {
+			// fetch user storage
+			UserStorageHandler::getInstance()->loadStorage(array(WCF::getUser()->userID));
 			
-			//UserStorageHandler::getInstance()->loadStorage(array($userID));
+			// get package ids from user storage
+			$data = UserStorageHandler::getInstance()->getStorage(array(WCF::getUser()->userID), 'unsolvedTodoCount');
 			
-			//$data = UserStorageHandler::getInstance()->getStorage(array($userID), 'unsolvedTodoCount');
-			
-			//if ($data[$userID] === null) {
-				$conditionBuilder = new PreparedStatementConditionBuilder();
-				$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
-				$conditionBuilder->add('todo.statusID = ?', array(2));
-				$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
-				$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
+			if ($data[WCF::getUser()->userID] === null) {
+				$todoIDs = ToDo::getAccessibleTodoIDs();
 				
-				$sql = "SELECT	COUNT(*) AS count
-					FROM	wcf".WCF_N."_todo_to_user todo_to_user,
-						wcf".WCF_N."_todo todo
-					".$conditionBuilder->__toString();
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute($conditionBuilder->getParameters());
-				$row = $statement->fetchArray();
-				$this->unsolvedTodoCount[$userID] = $row['count'];
-				
-				//UserStorageHandler::getInstance()->update($userID, 'unsolvedTodoCount', serialize($this->unsolvedTodoCount[$userID]));
-			//}
-			//else {
-				//$this->unsolvedTodoCount[$userID] = unserialize($data[$userID]);
-			//}
+				if (!empty($todoIDs)) {
+					$conditionBuilder = new PreparedStatementConditionBuilder();
+					$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
+					$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
+					$conditionBuilder->add('todo.todoID IN (?)', array($todoIDs));
+					
+					$conditionBuilder->add('todo.statusID = ?', array(2));
+					$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
+					
+					$sql = "SELECT	COUNT(*) AS count
+							FROM	wcf".WCF_N."_todo_to_user todo_to_user,
+								wcf".WCF_N."_todo todo
+							".$conditionBuilder;
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute($conditionBuilder->getParameters());
+					$row = $statement->fetchArray();
+					$this->unsolvedTodoCount = $row['count'];
+				}
+					
+				// update user storage
+				UserStorageHandler::getInstance()->update(WCF::getUser()->userID, 'unsolvedTodoCount', $this->unsolvedTodoCount);
+			} else {
+				// read notifications from cache
+				$this->unsolvedTodoCount = $data[WCF::getUser()->userID];
+			}
 		}
 		
-		return $this->unsolvedTodoCount[$userID];
+		return $this->unsolvedTodoCount;
 	}
 	
 	public function getOverdueTodoCount($userID = null) {
 		if ($userID === null) $userID = WCF::getUser()->userID;
-	
-		if (!isset($this->overdueTodoCount[$userID])) {
-			$this->overdueTodoCount[$userID] = 0;
+		
+		if ($userID) {
+			// fetch user storage
+			UserStorageHandler::getInstance()->loadStorage(array(WCF::getUser()->userID));
 				
-			//UserStorageHandler::getInstance()->loadStorage(array($userID));
+			// get package ids from user storage
+			$data = UserStorageHandler::getInstance()->getStorage(array(WCF::getUser()->userID), 'overdueTodoCount');
 				
-			//$data = UserStorageHandler::getInstance()->getStorage(array($userID), 'overdueTodoCount');
-				
-			//if ($data[$userID] === null) {
-				$conditionBuilder = new PreparedStatementConditionBuilder();
-				$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
-				$conditionBuilder->add('todo.statusID <> ?', array(1));
-				$conditionBuilder->add('todo.statusID <> ?', array(4));
-				$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
-				$conditionBuilder->add('todo.endTime <> ?', array(0));
-				$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
-	
-				$sql = "SELECT	COUNT(*) AS count
-					FROM	wcf".WCF_N."_todo_to_user todo_to_user,
-						wcf".WCF_N."_todo todo
-					".$conditionBuilder->__toString();
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute($conditionBuilder->getParameters());
-				$row = $statement->fetchArray();
-				$this->overdueTodoCount[$userID] = $row['count'];
-	
-				//UserStorageHandler::getInstance()->update($userID, 'overdueTodoCount', serialize($this->overdueTodoCount[$userID]));
-			//}
-			//else {
-				//$this->overdueTodoCount[$userID] = unserialize($data[$userID]);
-			//}
+			if ($data[WCF::getUser()->userID] === null) {
+				$todoIDs = ToDo::getAccessibleTodoIDs();
+		
+				if (!empty($todoIDs)) {
+					$conditionBuilder = new PreparedStatementConditionBuilder();
+					$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
+					$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
+					$conditionBuilder->add('todo.todoID IN (?)', array($todoIDs));
+					
+					$conditionBuilder->add('todo.statusID <> ?', array(1));
+					$conditionBuilder->add('todo.statusID <> ?', array(4));
+					$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
+					$conditionBuilder->add('todo.endTime <> ?', array(0));
+						
+					$sql = "SELECT	COUNT(*) AS count
+							FROM	wcf".WCF_N."_todo_to_user todo_to_user,
+								wcf".WCF_N."_todo todo
+							".$conditionBuilder;
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute($conditionBuilder->getParameters());
+					$row = $statement->fetchArray();
+					$this->overdueTodoCount = $row['count'];
+				}
+					
+				// update user storage
+				UserStorageHandler::getInstance()->update(WCF::getUser()->userID, 'overdueTodoCount', $this->overdueTodoCount);
+			} else {
+				// read notifications from cache
+				$this->overdueTodoCount = $data[WCF::getUser()->userID];
+			}
 		}
+		
 	
-		return $this->overdueTodoCount[$userID];
+		return $this->overdueTodoCount;
 	}
 	
 	public function getWaitingTodoCount($userID = null) {
 		if ($userID === null) $userID = WCF::getUser()->userID;
-	
-		if (!isset($this->waitingTodoCount[$userID])) {
-			$this->waitingTodoCount[$userID] = 0;
-				
-			//UserStorageHandler::getInstance()->loadStorage(array($userID));
-				
-			//$data = UserStorageHandler::getInstance()->getStorage(array($userID), 'overdueTodoCount');
-				
-			//if ($data[$userID] === null) {
-				$conditionBuilder = new PreparedStatementConditionBuilder();
-				$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
-				$conditionBuilder->add('todo.statusID = ?', array(5));
-				$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
-				$conditionBuilder->add('todo.endTime <> ?', array(0));
-				$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
-	
-				$sql = "SELECT	COUNT(*) AS count
-					FROM	wcf".WCF_N."_todo_to_user todo_to_user,
-						wcf".WCF_N."_todo todo
-					".$conditionBuilder->__toString();
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute($conditionBuilder->getParameters());
-				$row = $statement->fetchArray();
-				$this->waitingTodoCount[$userID] = $row['count'];
-	
-				//UserStorageHandler::getInstance()->update($userID, 'overdueTodoCount', serialize($this->overdueTodoCount[$userID]));
-			//}
-			//else {
-				//$this->overdueTodoCount[$userID] = unserialize($data[$userID]);
-			//}
+		
+		if ($userID) {
+			// fetch user storage
+			UserStorageHandler::getInstance()->loadStorage(array(WCF::getUser()->userID));
+		
+			// get package ids from user storage
+			$data = UserStorageHandler::getInstance()->getStorage(array(WCF::getUser()->userID), 'waitingTodoCount');
+		
+			if ($data[WCF::getUser()->userID] === null) {
+				$todoIDs = ToDo::getAccessibleTodoIDs();
+		
+				if (!empty($todoIDs)) {
+					$conditionBuilder = new PreparedStatementConditionBuilder();
+					$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
+					$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
+					$conditionBuilder->add('todo.todoID IN (?)', array($todoIDs));
+					
+					$conditionBuilder->add('todo.statusID = ?', array(5));
+					$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
+					$conditionBuilder->add('todo.endTime <> ?', array(0));
+		
+					$sql = "SELECT	COUNT(*) AS count
+							FROM	wcf".WCF_N."_todo_to_user todo_to_user,
+								wcf".WCF_N."_todo todo
+							".$conditionBuilder;
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute($conditionBuilder->getParameters());
+					$row = $statement->fetchArray();
+					$this->waitingTodoCount = $row['count'];
+				}
+					
+				// update user storage
+				UserStorageHandler::getInstance()->update(WCF::getUser()->userID, 'waitingTodoCount', $this->waitingTodoCount);
+			} else {
+				// read notifications from cache
+				$this->waitingTodoCount = $data[WCF::getUser()->userID];
+			}
 		}
 	
-		return $this->waitingTodoCount[$userID];
+		return $this->waitingTodoCount;
 	}
 }
