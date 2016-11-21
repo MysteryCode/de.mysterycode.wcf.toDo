@@ -146,6 +146,7 @@
 		<item name="wcf.acp.option.todo_overdue_warning_hide_duration.description"><![CDATA[Type in the amount of hours to hide the warning.]]></item>
 		<item name="wcf.acp.option.todo_waiting_warning"><![CDATA[Waiting ToDos]]></item>
 		<item name="wcf.acp.option.todo_waiting_warning_hide_duration"><![CDATA[Duration of hide]]></item>
+		<item name="wcf.acp.option.todo_waiting_warning_hide_duration.description"><![CDATA[Type in the amount of hours to hide the warning.]]></item>
 		
 		<item name="wcf.acp.option.toDoList"><![CDATA[ToDo-List]]></item>
 		
