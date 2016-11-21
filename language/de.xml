@@ -126,6 +126,7 @@
 		<item name="wcf.acp.option.todo_comments_enable"><![CDATA[Kommentare aktivieren]]></item>
 		<item name="wcf.acp.option.todo_progress_enable"><![CDATA[Fortschrittsanzeige aktivieren]]></item>
 		<item name="wcf.acp.option.todo_mobile_optimization_enable"><![CDATA[Für Mobilgeräte optimiertes Layout aktivieren]]></item>
+		<item name="wcf.acp.option.todo_enable_stats"><![CDATA[ToDo-Statistik auf Übersichtsseite anzeigen]]></item>
 		
 		<item name="wcf.acp.option.category.toDo.sort"><![CDATA[Sortierung]]></item>
 		<item name="wcf.acp.option.todo_todos_per_page"><![CDATA[ToDos pro Seite]]></item>
@@ -146,6 +147,8 @@
 		
 		<item name="wcf.acp.option.category.dashboard.sidebar.wcf.todo.noresponsible"><![CDATA[ToDos ohne Verantwortliche]]></item>
 		<item name="wcf.acp.option.todo_noresponsible_dashboard_box_items"><![CDATA[Anzahl an ToDos]]></item>
+		<item name="wcf.acp.option.todo_waiting_warning"><![CDATA[Warnungen ausblendbar]]></item>
+		<item name="wcf.acp.option.todo_waiting_warning_hide_duration"><![CDATA[Dauer bis zur erneuten Warnung]]></item>
 		<item name="wcf.acp.option.category.dashboard.sidebar.wcf.todo.outstanding"><![CDATA[Ausstehende ToDos]]></item>
 		<item name="wcf.acp.option.todo_outstanding_dashboard_box_items"><![CDATA[Anzahl an ToDos]]></item>
 	</category>
