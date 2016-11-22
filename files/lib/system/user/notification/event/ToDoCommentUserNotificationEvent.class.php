@@ -15,12 +15,41 @@ use wcf\system\user\notification\event\AbstractUserNotificationEvent;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
+	/**
+	 * @inheritdoc
+	 */
+	protected $stackable = true;
+	
 	public function getTitle() {
+		$count = count($this->getAuthors());
+		
+		// this notification was triggered by multiple users
+		if ($count > 1) {
+			return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.title.stacked', array(
+				'count' => $count,
+				'timesTriggered' => $this->notification->timesTriggered
+			));
+		}
+		
 		return $this->getLanguage()->get('wcf.toDo.comment.notification.title');
 	}
 	
 	public function getMessage() {
 		$todo = new ToDo($this->userNotificationObject->objectID);
+		
+		$authors = array_values($this->getAuthors());
+		$count = count($authors);
+		
+		// this notification was triggered by multiple users
+		if ($count > 1) {
+			return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.message.stacked', array(
+				'todo' => $todo,
+				'author' => $this->author,
+				'authors' => $authors,
+				'count' => $count,
+				'others' => $count - 1
+			));
+		}
 		
 		return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.message', array(
 			'todo' => $todo,
