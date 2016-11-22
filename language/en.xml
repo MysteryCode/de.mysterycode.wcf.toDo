@@ -291,26 +291,26 @@
 		<item name="wcf.toDo.comment.response"><![CDATA[New reply (ToDo)]]></item>
 		<item name="wcf.toDo.comment.notification.title"><![CDATA[New comment (ToDo)]]></item>
 		<item name="wcf.toDo.comment.notification.title.stacked"><![CDATA[{#$timesTriggered} new comments (ToDo)]]></item>
-		<item name="wcf.toDo.comment.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} commented on your ToDo “{$todo->title}“.]]></item>
-		<item name="wcf.toDo.comment.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} commented on your ToDo “{$todo->title}“.]]></item>
+		<item name="wcf.toDo.comment.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} commented on your ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a>.]]></item>
+		<item name="wcf.toDo.comment.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} commented on your ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a>.]]></item>
 		<item name="wcf.toDo.comment.notification.mail"><![CDATA[{@$author->username} commented on your ToDo "{$todo->title}":
 {link controller='ToDo' object=$todo encode=false forceFrontend=true}#comments{/link}]]></item>
 		<item name="wcf.toDo.commentResponse.notification.title"><![CDATA[New reply (ToDo)]]></item>
 		<item name="wcf.toDo.commentResponse.notification.title.stacked"><![CDATA[{#$timesTriggered} new replies (ToDo)]]></item>
-		<item name="wcf.toDo.commentResponse.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on the ToDo “{$todo->title}“.]]></item>
-		<item name="wcf.toDo.commentResponse.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} replied to your comment on the ToDo “{$todo->title}“.]]></item>
+		<item name="wcf.toDo.commentResponse.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on the ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a>.]]></item>
+		<item name="wcf.toDo.commentResponse.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} replied to your comment on the ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a>.]]></item>
 		<item name="wcf.toDo.commentResponse.notification.mail"><![CDATA[{@$author->username} replied to your comment on the ToDo "{$todo->title}":
 {link controller='ToDo' object=$todo encode=false forceFrontend=true}#comments{/link}]]></item>
 		<item name="wcf.toDo.commentResponseOwner.notification.title"><![CDATA[New reply (ToDo)]]></item>
 		<item name="wcf.toDo.commentResponseOwner.notification.title.stacked"><![CDATA[{#$timesTriggered} new replies (ToDo)]]></item>
-		<item name="wcf.toDo.commentResponseOwner.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to a comment by “{$commentAuthor->username}“ on the ToDo “{$todo->title}“.]]></item>
-		<item name="wcf.toDo.commentResponseOwner.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} replied to a comment by “{$commentAuthor->username}“ on the ToDo “{$todo->title}“.]]></item>
+		<item name="wcf.toDo.commentResponseOwner.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to a comment by “{$commentAuthor->username}“ on the ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a>.]]></item>
+		<item name="wcf.toDo.commentResponseOwner.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} replied to a comment by “{$commentAuthor->username}“ on the ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a>.]]></item>
 		<item name="wcf.toDo.commentResponseOwner.notification.mail"><![CDATA[{@$author->username} replied to a comment by "{@$commentAuthor->username}" on the ToDo "{$todo->title}":
 {link controller='ToDo' object=$todo encode=false forceFrontend=true}#comments{/link}]]></item>
 		<item name="wcf.toDo.comments.noEntries"><![CDATA[No comments available.]]></item>
 		
 		<item name="wcf.toDo.unsolved.notification.title"><![CDATA[Reminder: Unsolved ToDo]]></item>
-		<item name="wcf.toDo.unsolved.notification.message"><![CDATA[You didn't solve the ToDo “{$todo->title}“.]]></item>
+		<item name="wcf.toDo.unsolved.notification.message"><![CDATA[You didn't solve the ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a>.]]></item>
 		<item name="wcf.toDo.unsolved.notification.mail"><![CDATA[The ToDo "{$todo->title}" is still not marked as solved.]]></item>
 		
 		<item name="wcf.toDo.category"><![CDATA[Category]]></item>
@@ -345,19 +345,19 @@
 		<item name="wcf.toDo.moderation.redirect"><![CDATA[Your ToDo requires manual approval and will not be displayed until then.]]></item>
 		
 		<item name="wcf.toDo.notification.remember.title"><![CDATA[ToDo-Reminder]]></item>
-		<item name="wcf.toDo.notification.remember.message"><![CDATA[Reminder: ToDo “{$todo->title}“]]></item>
+		<item name="wcf.toDo.notification.remember.message"><![CDATA[Reminder: ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a>]]></item>
 		<item name="wcf.toDo.notification.remember.mail"><![CDATA[Reminder: ToDo “{$todo->title}“]]></item>
 		<item name="wcf.toDo.notification.create.title"><![CDATA[ToDo-Creation]]></item>
-		<item name="wcf.toDo.notification.create.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} created the ToDo “{$todo->title}“.]]></item>
+		<item name="wcf.toDo.notification.create.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} created the ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a>.]]></item>
 		<item name="wcf.toDo.notification.create.mail"><![CDATA[Created ToDo “{$todo->title}“.]]></item>
 		<item name="wcf.toDo.notification.edit.title"><![CDATA[ToDo-Update]]></item>
-		<item name="wcf.toDo.notification.edit.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} updated the ToDo “{$todo->title}“.]]></item>
+		<item name="wcf.toDo.notification.edit.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} updated the ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a>.]]></item>
 		<item name="wcf.toDo.notification.edit.mail"><![CDATA[Has updated the ToDo “{$todo->title}“.]]></item>
 		<item name="wcf.toDo.notification.editstatus.title"><![CDATA[ToDo-Status-Update]]></item>
-		<item name="wcf.toDo.notification.editstatus.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} updated the status of the ToDo “{$todo->title}“.]]></item>
+		<item name="wcf.toDo.notification.editstatus.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} updated the status of the ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a>.]]></item>
 		<item name="wcf.toDo.notification.editstatus.mail"><![CDATA[Has updated the status of the ToDo “{$todo->title}“.]]></item>
 		<item name="wcf.toDo.notification.assign.title"><![CDATA[ToDo-Assignment]]></item>
-		<item name="wcf.toDo.notification.assign.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} assigned the ToDo “{$todo->title}“ to you.]]></item>
+		<item name="wcf.toDo.notification.assign.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} assigned the ToDo <a href="{$todo->getLink()}">“{$todo->title}“</a> to you.]]></item>
 		<item name="wcf.toDo.notification.assign.mail"><![CDATA[Has assigned the ToDo “{$todo->title}“ to you.]]></item>
 		
 		<item name="wcf.toDo.status.choose"><![CDATA[Please choose...]]></item>
