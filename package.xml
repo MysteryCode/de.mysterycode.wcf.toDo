@@ -8,8 +8,8 @@
 		<packagename language="de"><![CDATA[ToDo-Liste]]></packagename>
 		<packagedescription><![CDATA[Gives the possibility to manage ToDos in several custom categories on your website]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
-		<version>1.2.1</version>
-		<date>2016-11-21</date>
+		<version>1.2.2</version>
+		<date>2016-11-22</date>
 		<packageurl>https://www.mysterycode.de/index.php?page/products/todo/</packageurl>
 	</packageinformation>
 
@@ -58,105 +58,15 @@
 		<instruction type="language">language/*.xml</instruction>
 	</instructions>
 
-	<instructions type="update" fromversion="1.2.0 Beta 2">
+	<instructions type="update" fromversion="1.2.1">
 		<!-- files -->
 		<instruction type="acpTemplate">acpTemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 
-		<!-- SQL -->
-		<instruction type="sql">update_12beta2.sql</instruction>
-
-		<!-- XMLs -->
-		<instruction type="pageMenu">xml/pageMenu.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 
 		<!-- language -->
-		<instruction type="language">language/*.xml</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.2.0 RC 1">
-		<!-- files -->
-		<instruction type="acpTemplate">acpTemplates.tar</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-
-		<!-- XMLs -->
-		<instruction type="pageMenu">xml/pageMenu.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
-
-		<!-- language -->
-		<instruction type="language">language/*.xml</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.2.0">
-		<!-- files -->
-		<instruction type="acpTemplate">acpTemplates.tar</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-
-		<!-- XMLs -->
-		<instruction type="pageMenu">xml/pageMenu.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
-
-		<!-- language -->
-		<instruction type="language">language/*.xml</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.1.5">
-		<instruction type="acpTemplate">acpTemplates.tar</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-
-		<instruction type="script">acp/update_de.mysterycode.wcf.todo_1.2.0_fix2.php</instruction>
-		<instruction type="sql">update_pre.sql</instruction>
-
-		<!-- XMLs -->
-		<instruction type="pageMenu">xml/pageMenu.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
-
-		<instruction type="script">acp/update_de.mysterycode.wcf.todo_1.2.0.php</instruction>
-
-		<instruction type="sql">update_post.sql</instruction>
-
-		<instruction type="cronjob">xml/cronjob_update.xml</instruction>
-
 		<instruction type="language">language/*.xml</instruction>
 	</instructions>
 </package>
