@@ -348,16 +348,16 @@
 		<item name="wcf.toDo.notification.remember.message"><![CDATA[Erinnerung: ToDo „{$todo->title}“]]></item>
 		<item name="wcf.toDo.notification.remember.mail"><![CDATA[Erinnerung: ToDo „{$todo->title}“]]></item>
 		<item name="wcf.toDo.notification.create.title"><![CDATA[ToDo-Erstellung]]></item>
-		<item name="wcf.toDo.notification.create.message"><![CDATA[Hat das ToDo „{$todo->title}“ erstellt.]]></item>
+		<item name="wcf.toDo.notification.create.message"><![CDATA[{if !$author->userID}Ein Gast{else}{@$author->getAnchorTag()}{/if} hat das ToDo „{$todo->title}“ erstellt.]]></item>
 		<item name="wcf.toDo.notification.create.mail"><![CDATA[Hat das ToDo „{$todo->title}“ erstellt.]]></item>
 		<item name="wcf.toDo.notification.edit.title"><![CDATA[ToDo-Bearbeitung]]></item>
-		<item name="wcf.toDo.notification.edit.message"><![CDATA[Hat das ToDo „{$todo->title}“ bearbeitet.]]></item>
+		<item name="wcf.toDo.notification.edit.message"><![CDATA[{if !$author->userID}Ein Gast{else}{@$author->getAnchorTag()}{/if} hat das ToDo „{$todo->title}“ bearbeitet.]]></item>
 		<item name="wcf.toDo.notification.edit.mail"><![CDATA[Hat das ToDo „{$todo->title}“ bearbeitet.]]></item>
 		<item name="wcf.toDo.notification.editstatus.title"><![CDATA[ToDo-Status-Update]]></item>
-		<item name="wcf.toDo.notification.editstatus.message"><![CDATA[Hat den Status des ToDos „{$todo->title}“ aktualisiert.]]></item>
+		<item name="wcf.toDo.notification.editstatus.message"><![CDATA[{if !$author->userID}Ein Gast{else}{@$author->getAnchorTag()}{/if} hat den Status des ToDos „{$todo->title}“ aktualisiert.]]></item>
 		<item name="wcf.toDo.notification.editstatus.mail"><![CDATA[Hat den Status des ToDos „{$todo->title}“ aktualisiert.]]></item>
 		<item name="wcf.toDo.notification.assign.title"><![CDATA[ToDo-Zuweisung]]></item>
-		<item name="wcf.toDo.notification.assign.message"><![CDATA[Hat Ihnen das ToDo „{$todo->title}“ zugewiesen.]]></item>
+		<item name="wcf.toDo.notification.assign.message"><![CDATA[{if !$author->userID}Ein Gast{else}{@$author->getAnchorTag()}{/if} hat Ihnen das ToDo „{$todo->title}“ zugewiesen.]]></item>
 		<item name="wcf.toDo.notification.assign.mail"><![CDATA[Hat Ihnen das ToDo „{$todo->title}“ zugewiesen.]]></item>
 		
 		<item name="wcf.toDo.status.choose"><![CDATA[Bitte wählen...]]></item>

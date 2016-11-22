@@ -348,16 +348,16 @@
 		<item name="wcf.toDo.notification.remember.message"><![CDATA[Reminder: ToDo “{$todo->title}“]]></item>
 		<item name="wcf.toDo.notification.remember.mail"><![CDATA[Reminder: ToDo “{$todo->title}“]]></item>
 		<item name="wcf.toDo.notification.create.title"><![CDATA[ToDo-Creation]]></item>
-		<item name="wcf.toDo.notification.create.message"><![CDATA[Created the ToDo “{$todo->title}“.]]></item>
+		<item name="wcf.toDo.notification.create.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} created the ToDo “{$todo->title}“.]]></item>
 		<item name="wcf.toDo.notification.create.mail"><![CDATA[Created ToDo “{$todo->title}“.]]></item>
 		<item name="wcf.toDo.notification.edit.title"><![CDATA[ToDo-Update]]></item>
-		<item name="wcf.toDo.notification.edit.message"><![CDATA[Has updated the ToDo “{$todo->title}“.]]></item>
+		<item name="wcf.toDo.notification.edit.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} updated the ToDo “{$todo->title}“.]]></item>
 		<item name="wcf.toDo.notification.edit.mail"><![CDATA[Has updated the ToDo “{$todo->title}“.]]></item>
 		<item name="wcf.toDo.notification.editstatus.title"><![CDATA[ToDo-Status-Update]]></item>
-		<item name="wcf.toDo.notification.editstatus.message"><![CDATA[Has updated the status of the ToDo “{$todo->title}“.]]></item>
+		<item name="wcf.toDo.notification.editstatus.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} updated the status of the ToDo “{$todo->title}“.]]></item>
 		<item name="wcf.toDo.notification.editstatus.mail"><![CDATA[Has updated the status of the ToDo “{$todo->title}“.]]></item>
 		<item name="wcf.toDo.notification.assign.title"><![CDATA[ToDo-Assignment]]></item>
-		<item name="wcf.toDo.notification.assign.message"><![CDATA[Has assigned the ToDo “{$todo->title}“ to you.]]></item>
+		<item name="wcf.toDo.notification.assign.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} assigned the ToDo “{$todo->title}“ to you.]]></item>
 		<item name="wcf.toDo.notification.assign.mail"><![CDATA[Has assigned the ToDo “{$todo->title}“ to you.]]></item>
 		
 		<item name="wcf.toDo.status.choose"><![CDATA[Please choose...]]></item>
