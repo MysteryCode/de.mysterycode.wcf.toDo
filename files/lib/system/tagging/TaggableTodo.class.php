@@ -13,7 +13,7 @@ use wcf\system\tagging\AbstractTaggable;
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
-class TaggableToDo extends AbstractTaggable {
+class TaggableTodo extends AbstractTaggable {
 	/**
 	 * @see	\wcf\system\tagging\ITaggable::getObjectList()
 	 */
