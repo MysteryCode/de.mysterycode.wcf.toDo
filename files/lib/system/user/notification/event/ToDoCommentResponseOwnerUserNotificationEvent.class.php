@@ -38,6 +38,7 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 	public function getMessage() {
 		$comment = new Comment($this->userNotificationObject->commentID);
 		$todo = new ToDo($comment->objectID);
+		$commentAuthor = new User($comment->userID);
 		
 		$authors = array_values($this->getAuthors());
 		$count = count($authors);
