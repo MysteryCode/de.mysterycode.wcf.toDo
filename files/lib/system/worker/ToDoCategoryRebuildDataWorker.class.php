@@ -16,7 +16,7 @@ class ToDoCategoryRebuildDataWorker extends AbstractRebuildDataWorker {
 	/**
 	 * @see	\wcf\system\worker\AbstractRebuildDataWorker::$objectListClassName
 	 */
-	protected $objectListClassName = 'wcf\data\todo\TodoCategoryList';
+	protected $objectListClassName = 'wcf\data\todo\category\TodoCategoryList';
 	
 	/**
 	 * @see	\wcf\system\worker\AbstractWorker::$limit
