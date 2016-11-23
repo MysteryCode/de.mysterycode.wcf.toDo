@@ -5,8 +5,8 @@ use wcf\data\todo\ToDo;
 use wcf\system\cache\builder\TodoGeneralStatsCacheBuilder;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\event\EventHandler;
-use wcf\system\SingletonFactory;
 use wcf\system\user\storage\UserStorageHandler;
+use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
 /**
@@ -122,7 +122,6 @@ class ToDoHandler extends SingletonFactory {
 			}
 		}
 		
-	
 		return $this->overdueTodoCount;
 	}
 	

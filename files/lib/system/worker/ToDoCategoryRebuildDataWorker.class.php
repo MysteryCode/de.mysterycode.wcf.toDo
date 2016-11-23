@@ -1,8 +1,8 @@
 <?php
 
 namespace wcf\system\worker;
-use wcf\system\WCF;
 use wcf\system\worker\AbstractRebuildDataWorker;
+use wcf\system\WCF;
 
 /**
  * Implements the todo rebuild data worker
