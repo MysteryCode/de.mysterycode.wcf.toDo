@@ -33,9 +33,9 @@ class ToDoList extends DatabaseObjectList {
 			$this->loadDeleteNote = false;
 		}
 		
-		if ($this->sqlOrderBy == 'status ASC' || $this->sqlOrderBy == 'status DESC') {
+		if ($this->sqlOrderBy == 'statusID ASC' || $this->sqlOrderBy == 'statusID DESC') {
 			$this->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_todo_status status ON (todo_table.statusID = status.statusID)";
-			$this->sqlOrderBy .= ($this->sqlOrderBy == 'status ASC' ? 'status.showOrder ASC' : 'status.showOrder DESC');
+			$this->sqlOrderBy .= ($this->sqlOrderBy == 'statusID ASC' ? 'status.showOrder ASC' : 'status.showOrder DESC');
 		}
 		
 		if (!WCF::getSession()->getPermission('mod.toDo.canEnable'))
