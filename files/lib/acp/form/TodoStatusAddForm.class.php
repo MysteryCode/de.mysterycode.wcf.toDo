@@ -72,7 +72,7 @@ class TodoStatusAddForm extends AbstractForm {
 		I18nHandler::getInstance()->readValues();
 
 		if (I18nHandler::getInstance()->isPlainValue('subject')) $this->subject = I18nHandler::getInstance()->getValue('subject');
-		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = I18nHandler::getInstance()->getValue('description');
+		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = (I18nHandler::getInstance()->getValue('description') ? I18nHandler::getInstance()->getValue('description') : '');
 		if (isset($_POST['cssClass'])) $this->cssClass = StringUtil::trim($_POST['cssClass']);
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 	}
@@ -93,13 +93,15 @@ class TodoStatusAddForm extends AbstractForm {
 			}
 		}
 		
-		// description
-		if (!I18nHandler::getInstance()->validateValue('description')) {
-			if (I18nHandler::getInstance()->isPlainValue('description')) {
-				throw new UserInputException('description');
-			}
-			else {
-				throw new UserInputException('description', 'multilingual');
+		if (!empty($this->description)) {
+			// description
+			if (!I18nHandler::getInstance()->validateValue('description')) {
+				if (I18nHandler::getInstance()->isPlainValue('description')) {
+					throw new UserInputException('description');
+				}
+				else {
+					throw new UserInputException('description', 'multilingual');
+				}
 			}
 		}
 	}
