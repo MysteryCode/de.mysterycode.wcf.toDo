@@ -56,25 +56,17 @@
 		<instruction type="language">language/*.xml</instruction>
 	</instructions>
 
-	<instructions type="update" fromversion="1.2.1">
+	<instructions type="update" fromversion="1.2.2">
 		<!-- files -->
 		<instruction type="acpTemplate">acpTemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 
+		<!-- XMLs -->
 		<instruction type="eventListener">xml/eventListener.xml</instruction>
 
-		<!-- language -->
-		<instruction type="language">language/*.xml</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.2.1 pl 1">
-		<!-- files -->
-		<instruction type="acpTemplate">acpTemplates.tar</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
+		<!-- SQL -->
+		<instruction type="sql">update.sql</instruction>
 
 		<!-- language -->
 		<instruction type="language">language/*.xml</instruction>
