@@ -2,10 +2,14 @@
 	{assign var=anchor value=$__wcf->getAnchor('top')}
 	{foreach from=$objects item='todo'}
 		<li id="todo{@$todo->todoID}" class="marginTop">
-			<article class="wcfTodo message messageSidebarOrientationLeft dividers{if $todo->isDeleted} messageDeleted{/if}{if $todo->isDisabled} messageDisabled{/if} jsClipboardObject" data-todo-id="{@$todo->todoID}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$todo->todoID}{/link}"{/if}  data-user-id="{@$todo->submitter}"
+			<article class="wcfTodo message messageSidebarOrientationLeft todo jsTodo dividers{if $todo->isDeleted} messageDeleted{/if}{if $todo->isDisabled} messageDisabled{/if} jsClipboardObject" data-todo-id="{@$todo->todoID}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$todo->todoID}{/link}"{/if} data-user-id="{@$todo->submitter}"
 				{if $todo->canEdit()}
-					data-is-disabled="{if $todo->isDisabled}1{else}0{/if}" data-is-deleted="{if $todo->isDeleted}1{else}0{/if}"
-					data-can-enable="{@$todo->canEnable()}" data-can-delete="{@$todo->canDelete()}" data-can-delete-completely="{@$todo->canDeleteCompletely()}" data-can-restore="{@$todo->canRestore()}"
+					data-is-disabled="{if $todo->isDisabled}1{else}0{/if}"
+					data-is-deleted="{if $todo->isDeleted}1{else}0{/if}"
+					data-can-enable="{@$todo->canEnable()}"
+					data-can-delete="{@$todo->canDelete()}"
+					data-can-delete-completely="{@$todo->canDeleteCompletely()}"
+					data-can-restore="{@$todo->canRestore()}"
 				{/if}>
 				<div>
 					<aside class="messageSidebar">
