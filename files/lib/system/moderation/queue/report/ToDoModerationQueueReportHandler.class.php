@@ -2,7 +2,6 @@
 
 namespace wcf\system\moderation\queue\report;
 use wcf\data\moderation\queue\ViewableModerationQueue;
-use wcf\data\todo\ToDo;
 use wcf\system\moderation\queue\report\IModerationQueueReportHandler;
 use wcf\system\moderation\queue\AbstractToDoModerationQueueHandler;
 use wcf\system\WCF;
@@ -46,7 +45,7 @@ class ToDoModerationQueueReportHandler extends AbstractToDoModerationQueueHandle
 	 */
 	public function getReportedContent(ViewableModerationQueue $queue) {
 		WCF::getTPL()->assign(array(
-			'todo' => new ToDo($queue->getAffectedObject())
+			'todo' => $queue->getAffectedObject()
 		));
 		
 		return WCF::getTPL()->fetch('moderationTodo', 'wcf');
