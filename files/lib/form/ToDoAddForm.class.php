@@ -203,9 +203,6 @@ class ToDoAddForm extends MessageForm {
 		$this->statusList = $statusList->getObjects();
 		
 		$categoryNodeTree = new RestrictedTodoCategoryNodeTree();
-		
-// 		$categoryList = new TodoCategoryList();
-// 		$categoryList->readObjects();
 		$this->categoryList = $categoryNodeTree->getIterator();
 	}
 	

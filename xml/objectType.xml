@@ -204,12 +204,6 @@
 			<classname><![CDATA[wcf\system\worker\ToDoRebuildDataWorker]]></classname>
 			<nicevalue>240</nicevalue>
 		</type>
-		<type>
-			<name>de.mysterycode.wcf.toDo.category</name>
-			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
-			<classname><![CDATA[wcf\system\worker\ToDoCategoryRebuildDataWorker]]></classname>
-			<nicevalue>250</nicevalue>
-		</type>
 		<!-- message object -->
 		<type>
 			<name>de.mysterycode.wcf.toDo</name>
@@ -228,4 +222,10 @@
 			<classname>wcf\system\user\object\watch\TodoUserObjectWatch</classname>
 		</type>
 	</import>
+	<delete>
+		<type>
+			<name>de.mysterycode.wcf.toDo.category</name>
+			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
+		</type>
+	</delete>
 </data>
