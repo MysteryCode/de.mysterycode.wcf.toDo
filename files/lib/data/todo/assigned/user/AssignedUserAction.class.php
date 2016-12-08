@@ -1,9 +1,8 @@
 <?php
 
 namespace wcf\data\todo\assigned\user;
-use wcf\data\todo\assigned\AssignedCache;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\data\todo\ToDoList;
+use wcf\data\todo\assigned\AssignedCache;
 use wcf\system\exception\UserInputException;
 
 /**
