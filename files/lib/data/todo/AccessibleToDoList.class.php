@@ -22,12 +22,13 @@ class AccessibleToDoList extends ViewableToDoList {
 		$categoryIDs = TodoCategory::getAccessibleCategoryIDs();
 		
 		if (!empty($categoryIDs)) {
-			$this->getConditionBuilder()->add("todo.categoryID IN (?)", array($categoryIDs));
+			$this->getConditionBuilder()->add("todo_table.categoryID IN (?)", array($categoryIDs));
 		} else {
 			$this->getConditionBuilder()->add("1=0");
 		}
 		
 		// add default conditions
-		$this->getConditionBuilder()->add("todo.isDeleted = 0 AND todo.isDisabled = 0");
+		$this->getConditionBuilder()->add("todo_table.isDeleted = 0");
+		$this->getConditionBuilder()->add("todo_table.isDisabled = 0");
 	}
 }

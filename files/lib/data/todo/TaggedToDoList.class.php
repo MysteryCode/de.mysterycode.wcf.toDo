@@ -20,7 +20,7 @@ class TaggedToDoList extends AccessibleToDoList {
 		parent::__construct();
 		
 		$this->getConditionBuilder()->add('tag_to_object.objectTypeID = ? AND tag_to_object.languageID = ? AND tag_to_object.tagID = ?', array(TagEngine::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo'), $tag->languageID, $tag->tagID));
-		$this->getConditionBuilder()->add('todo.todoID = tag_to_object.objectID');
+		$this->getConditionBuilder()->add('todo_table.todoID = tag_to_object.objectID');
 	}
 	
 	/**
@@ -29,7 +29,7 @@ class TaggedToDoList extends AccessibleToDoList {
 	public function countObjects() {
 		$sql = "SELECT	COUNT(*) AS count
 			FROM	wcf".WCF_N."_tag_to_object tag_to_object,
-				wcf".WCF_N."_todo todo
+				".$this->getDatabaseTableName()." ".$this->getDatabaseTableAlias()."
 			".$this->sqlConditionJoins."
 			".$this->getConditionBuilder();
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -46,7 +46,7 @@ class TaggedToDoList extends AccessibleToDoList {
 		$this->objectIDs = array();
 		$sql = "SELECT	tag_to_object.objectID
 			FROM	wcf".WCF_N."_tag_to_object tag_to_object,
-				wcf".WCF_N."_todo todo
+				".$this->getDatabaseTableName()." ".$this->getDatabaseTableAlias()."
 				".$this->sqlConditionJoins."
 				".$this->getConditionBuilder()."
 				".(!empty($this->sqlOrderBy) ? "ORDER BY ".$this->sqlOrderBy : '');
