@@ -80,7 +80,7 @@ class ToDoCreateUserNotificationEvent extends AbstractUserNotificationEvent {
 		$returnValue = $this->userNotificationObject->object->canEnter();
 		if (!$returnValue) {
 			// remove subscription
-			UserObjectWatchHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo', array($this->userNotificationObject->todoID), array(WCF::getUser()->userID));
+			UserObjectWatchHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo', array($this->userNotificationObject->object->todoID), array(WCF::getUser()->userID));
 			
 			// reset user storage
 			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'wcfUnreadWatchedTodos');
