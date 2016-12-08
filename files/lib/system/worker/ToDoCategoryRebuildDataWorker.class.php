@@ -29,8 +29,8 @@ class ToDoCategoryRebuildDataWorker extends AbstractRebuildDataWorker {
 	public function execute() {
 		parent::execute();
 		
-		// TODO: reset category stats
-		// empty for the moment
-		// we'll work on this when we introduce category stats
+		foreach ($this->objectList as $category) {
+			// empty
+		}
 	}
 }
