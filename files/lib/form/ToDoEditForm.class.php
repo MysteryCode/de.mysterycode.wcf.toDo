@@ -77,7 +77,7 @@ class ToDoEditForm extends ToDoAddForm {
 		$this->objectAction = new ToDoAction(array($this->todo), 'update', $todoData);
 		$this->objectAction->executeAction();
 		
-		if ($this->todo->canEditResponsible()) {
+		if ($this->todo->canEditResponsibles()) {
 			$responsibleUserAction = new ToDoAction(array($this->todo->todoID), 'updateResponsibles', array('search' => $this->responsibles));
 			$responsibleUserAction->executeAction();
 			

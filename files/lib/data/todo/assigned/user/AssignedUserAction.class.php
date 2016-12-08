@@ -3,6 +3,8 @@
 namespace wcf\data\todo\assigned\user;
 use wcf\data\todo\assigned\AssignedCache;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\todo\ToDoList;
+use wcf\system\exception\UserInputException;
 
 /**
  * Executes todo status related actions.
@@ -24,8 +26,13 @@ class AssignedUserAction extends AbstractDatabaseObjectAction {
 		else
 			$userID = 0;
 		
-		foreach ($objects as $todo) {
-			$assigns = AssignedCache::getUsersByTodo($todo->todoID);
+		if (empty($this->parameters['todoIDs'])) {
+			throw new UserInputException('todoIDs');
+		}
+		
+		$todoIDs = $this->parameters['todoIDs'];
+		foreach ($todoIDs as $todoID) {
+			$assigns = AssignedCache::getUsersByTodo($todoID);
 			
 			$deleteIDs = array();
 			if (!empty($assigns)) {

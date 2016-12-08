@@ -557,7 +557,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if (!$skipDelete) {
 				foreach ($existingResponsibles as $responsible) {
 					if (!in_array($responsible, $checkArray)) {
-						$assignAction = new AssignedUserAction(array($todo), 'deleteByTodo', array('userID' => $responsible));
+						$assignAction = new AssignedUserAction(array(), 'deleteByTodo', array('userID' => $responsible, 'todoIDs' => array($todo->todoID)));
 						$assignAction->executeAction();
 					}
 				}
@@ -615,7 +615,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if (!$skipDelete) {
 				foreach ($existingResponsibleGroups as $responsible) {
 					if (!in_array($responsible, $checkArray)) {
-						$assignAction = new AssignedGroupAction(array($todo), 'deleteByTodo', array('groupID' => $responsible));
+						$assignAction = new AssignedGroupAction(array(), 'deleteByTodo', array('groupID' => $responsible, 'todoIDs' => array($todo->todoID)));
 						$assignAction->executeAction();
 					}
 				}
