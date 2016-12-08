@@ -3,6 +3,7 @@
 namespace wcf\data\todo\assigned\group;
 use wcf\data\todo\assigned\AssignedCache;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\exception\UserInputException;
 
 /**
  * Executes todo status related actions.
