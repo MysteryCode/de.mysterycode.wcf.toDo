@@ -29,14 +29,14 @@ class ToDoUserNotificationObject extends DatabaseObjectDecorator implements IUse
 	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getTitle()
 	 */
 	public function getTitle() {
-		return '';
+		return $this->getDecoratedObject()->getLink();
 	}
 	
 	/**
 	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getURL()
 	 */
 	public function getURL() {
-		return '';
+		return $this->getDecoratedObject()->getLink();
 	}
 	
 	/**
