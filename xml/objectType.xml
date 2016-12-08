@@ -221,5 +221,11 @@
 			<definitionname>com.woltlab.wcf.edit.historySavingObject</definitionname>
 			<classname>wcf\data\todo\HistorySavingToDoProvider</classname>
 		</type>
+		<!-- object watch -->
+		<type>
+			<name>de.mysterycode.wcf.toDo</name>
+			<definitionname>com.woltlab.wcf.user.objectWatch</definitionname>
+			<classname>wcf\system\user\object\watch\TodoUserObjectWatch</classname>
+		</type>
 	</import>
 </data>
