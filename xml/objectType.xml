@@ -223,7 +223,7 @@
 		</type>
 	</import>
 	<delete>
-		<type>
+		<type name="de.mysterycode.wcf.toDo.category">
 			<name>de.mysterycode.wcf.toDo.category</name>
 			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
 		</type>
