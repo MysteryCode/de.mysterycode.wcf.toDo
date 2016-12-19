@@ -106,6 +106,10 @@
 		<item name="wcf.acp.group.option.admin.content.toDo.status.canEdit"><![CDATA[Can edit status]]></item>
 		<item name="wcf.acp.group.option.admin.content.toDo.status.canDelete"><![CDATA[Can delete status]]></item>
 	</category>
+
+	<category name="wcf.acp.label">
+		<item name="wcf.acp.label.container.de.mysterycode.wcf.toDo.category">ToDo-Liste</item>
+	</category>
 	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.toDoCategory"><![CDATA[ToDo-Categories]]></item>
