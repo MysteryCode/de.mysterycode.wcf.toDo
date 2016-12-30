@@ -15,6 +15,9 @@ use wcf\system\WCF;
 class TaggedToDoList extends AccessibleToDoList {
 	/**
 	 * Creates a object.
+	 *
+	 * @param Tag $tag
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function __construct(Tag $tag) {
 		parent::__construct();

@@ -2,7 +2,7 @@
 
 namespace wcf\system\label\object;
 use wcf\data\todo\category\TodoCategoryCache;
-use wcf\system\label\object\AbstractLabelObjectHandler;
+
 use wcf\system\label\LabelHandler;
 
 /**
@@ -24,11 +24,12 @@ class TodoLabelObjectHandler extends AbstractLabelObjectHandler {
 	 * @inheritDoc
 	 */
 	protected $objectType = 'de.mysterycode.wcf.toDo.toDo';
-	
+
 	/**
 	 * Sets current category id and loads associated label groups.
-	 * 
-	 * @param	integer		$categoryID
+	 *
+	 * @param    integer $categoryID
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function setCategoryID($categoryID) {
 		$this->categoryID = $categoryID;

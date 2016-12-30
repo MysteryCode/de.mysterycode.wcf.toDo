@@ -7,13 +7,13 @@ use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\status\TodoStatusList;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
-use wcf\data\user\User;
+
 use wcf\data\user\UserProfile;
-use wcf\form\MessageForm;
+
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\message\quote\MessageQuoteManager;
-use wcf\system\request\LinkHandler;
+
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;

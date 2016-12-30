@@ -3,16 +3,14 @@
 namespace wcf\page;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoCache;
-use wcf\data\user\online\UsersOnlineList;
-use wcf\data\user\User;
+
 use wcf\system\comment\CommentHandler;
-use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\like\LikeHandler;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\message\quote\MessageQuoteManager;
-use wcf\system\request\LinkHandler;
+
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
@@ -108,8 +106,7 @@ class ToDoPage extends AbstractPage {
 		parent::assignVariables();
 		
 		$submitter = $this->todo->getUser();
-		
-		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoPage', $this);
+
 		MessageQuoteManager::getInstance()->assignVariables();
 		
 		WCF::getTPL()->assign(array(

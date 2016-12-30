@@ -1,10 +1,9 @@
 <?php
 
 namespace wcf\system\user\notification\event;
-use wcf\data\comment\Comment;
+
 use wcf\data\todo\ToDo;
 use wcf\system\request\LinkHandler;
-use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 
 /**
  * Shows the todo comment user notification event.
@@ -19,7 +18,10 @@ class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 	 * @inheritdoc
 	 */
 	protected $stackable = true;
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getTitle() {
 		$count = count($this->getAuthors());
 		
@@ -33,7 +35,10 @@ class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 		
 		return $this->getLanguage()->get('wcf.toDo.comment.notification.title');
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getMessage() {
 		$todo = new ToDo($this->userNotificationObject->objectID);
 		
@@ -56,7 +61,10 @@ class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 			'author' => $this->author 
 		));
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getEmailMessage($notificationType = 'instant') {
 		$todo = new ToDo($this->userNotificationObject->objectID);
 		
@@ -65,7 +73,10 @@ class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 			'author' => $this->author 
 		));
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getLink() {
 		$todo = new ToDo($this->userNotificationObject->objectID);
 		

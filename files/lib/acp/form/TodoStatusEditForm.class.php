@@ -31,7 +31,7 @@ class TodoStatusEditForm extends TodoStatusAddForm {
 	
 	/**
 	 * status object
-	 * @var	\inventar\data\field\Field
+	 * @var	\wcf\data\todo\status\TodoStatus
 	 */
 	public $status = null;
 	

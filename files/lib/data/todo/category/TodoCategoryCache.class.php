@@ -2,7 +2,7 @@
 
 namespace wcf\data\todo\category;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\data\todo\ToDo;
+
 use wcf\data\user\online\UsersOnlineList;
 use wcf\system\cache\builder\TodoCategoryDataCacheBuilder;
 use wcf\system\cache\builder\TodoCategoryLabelGroupCacheBuilder;
@@ -73,11 +73,12 @@ class TodoCategoryCache extends SingletonFactory {
 		$this->statObjects = TodoCategoryDataCacheBuilder::getInstance()->getData(array(), 'statObjects');
 		$this->lastTodoIDs = TodoCategoryDataCacheBuilder::getInstance()->getData(array(), 'lastTodoIDs');
 	}
-	
+
 	/**
 	 * Returns a list of category objects.
 	 *
-	 * @return	array<\wcf\data\todo\category\TodoCategory>
+	 * @return array <\wcf\data\todo\category\TodoCategory>
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function getCategories() {
 		if ($this->categories === null) {
@@ -123,21 +124,24 @@ class TodoCategoryCache extends SingletonFactory {
 		
 		return null;
 	}
-	
+
 	/**
 	 * Returns a list of child objects of the category with the given id.
 	 *
-	 * @param	integer		$parentID
-	 * @return	array<\wcf\data\todo\category\TodoCategory>
+	 * @param    integer $parentID
+	 * @return array <\wcf\data\todo\category\TodoCategory>
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function getChildCategories($parentID = 0) {
 		return CategoryHandler::getInstance()->getChildCategories($parentID, $this->objectType->objectTypeID);
 	}
-	
+
 	/**
 	 * Returns a list of child ids of the category with the given id.
 	 *
-	 * @return	array<integer>
+	 * @param int $parentID
+	 * @return integer[]
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function getChildCategoryIDs($parentID = 0) {
 		$childCategories = $this->getChildCategories($parentID);

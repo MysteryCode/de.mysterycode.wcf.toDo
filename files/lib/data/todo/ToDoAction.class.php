@@ -3,9 +3,7 @@
 namespace wcf\data\todo;
 use wcf\data\todo\assigned\group\AssignedGroupAction;
 use wcf\data\todo\assigned\user\AssignedUserAction;
-use wcf\data\todo\ToDo;
-use wcf\data\todo\ToDoEditor;
-use wcf\data\todo\ToDoList;
+
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
@@ -25,7 +23,6 @@ use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\message\quote\MessageQuoteManager;
-use wcf\system\message\MessageFormSettingsHandler;
 use wcf\system\moderation\queue\ModerationQueueActivationManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\activity\event\UserActivityEventHandler;
@@ -192,11 +189,12 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			}
 		}
 	}
-	
+
 	/**
 	 * Enables given todos.
 	 *
-	 * @return array<array>
+	 * @return array <array>
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function enable() {
 		if (empty($this->objects)) {
@@ -240,11 +238,12 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			}
 		}
 	}
-	
+
 	/**
 	 * Disables given todos.
 	 *
-	 * @return array<array>
+	 * @return array <array>
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function disable() {
 		if (empty($this->objects)) {
@@ -337,11 +336,12 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			}
 		}
 	}
-	
+
 	/**
 	 * Deletes given todos.
 	 *
-	 * @return array<array>
+	 * @return array <array>
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function delete() {
 		if (empty($this->objects)) {
@@ -480,30 +480,33 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			'todoData' => $this->todoData 
 		);
 	}
-	
+
 	/**
 	 * Removes moderated content todos for the todos with the given todo ids.
 	 *
-	 * @param array<integer> $todoIDs        	
+	 * @param array $todoIDs <integer> $todoIDs
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	protected function removeModeratedContent(array $todoIDs) {
 		ModerationQueueActivationManager::getInstance()->removeModeratedContent('de.mysterycode.wcf.toDo.toDo', $todoIDs);
 	}
-	
+
 	/**
 	 * Removes user activity events for the todos with the given todo ids.
 	 *
-	 * @param array<integer> $todoIDs        	
+	 * @param array $todoIDs <integer> $todoIDs
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	protected function removeActivityEvents(array $todoIDs) {
 		UserActivityEventHandler::getInstance()->removeEvents('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todoIDs);
 		UserActivityPointHandler::getInstance()->removeEvents('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $todoIDs);
 	}
-	
+
 	/**
 	 * Unmarks the todos with the given todo ids.
 	 *
-	 * @param array<integer> $todoIDs        	
+	 * @param array $todoIDs <integer> $todoIDs
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	protected function unmarkToDos(array $todoIDs = array()) {
 		if (empty($todoIDs)) {
@@ -886,8 +889,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			throw new UserInputException('message', WCF::getLanguage()->get('wcf.global.form.error.empty'));
 		
 		$this->validateBeginEdit();
-		
-		$this->parameters = array_merge($this->parameters, MessageFormSettingsHandler::getSettings($this->parameters, $this->todo));
+
 		$parameters['removeQuoteIDs'] = (isset($parameters['removeQuoteIDs']) && is_array($parameters['removeQuoteIDs'])) ? ArrayUtil::trim($parameters['removeQuoteIDs']) : array();
 	}
 	
@@ -898,10 +900,6 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$todoData = array(
 			'message' => MessageUtil::stripCrap($this->parameters['data']['message'])
 		);
-		
-		if ($this->parameters['preParse']) {
-			$todoData['message'] = PreParser::getInstance()->parse($todoData['message'], explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
-		}
 		
 		$todoAction = new self(array($this->todo), 'update', array('data' => $todoData));
 		$todoAction->executeAction();

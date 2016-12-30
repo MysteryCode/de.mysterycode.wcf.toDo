@@ -534,11 +534,9 @@ WCF.Todo.InlineEditor = WCF.InlineEditor
 						return false;
 					}
 
-					if (!this._updateHandler.getValue($todoID, 'isDisabled')) {
-						return false;
-					}
+					return this._updateHandler.getValue($todoID, 'isDisabled');
 
-					return true;
+
 					break;
 
 				case 'disable':
@@ -550,11 +548,9 @@ WCF.Todo.InlineEditor = WCF.InlineEditor
 						return false;
 					}
 
-					if (this._updateHandler.getValue($todoID, 'isDisabled')) {
-						return false;
-					}
+					return !this._updateHandler.getValue($todoID, 'isDisabled');
 
-					return true;
+
 					break;
 
 				// isDeleted
@@ -563,11 +559,9 @@ WCF.Todo.InlineEditor = WCF.InlineEditor
 						return false;
 					}
 
-					if (this._updateHandler.getValue($todoID, 'isDeleted')) {
-						return false
-					}
+					return !this._updateHandler.getValue($todoID, 'isDeleted');
 
-					return true;
+
 					break;
 
 				case 'delete':
@@ -575,11 +569,9 @@ WCF.Todo.InlineEditor = WCF.InlineEditor
 						return false;
 					}
 
-					if (!this._updateHandler.getValue($todoID, 'isDeleted')) {
-						return false;
-					}
+					return this._updateHandler.getValue($todoID, 'isDeleted');
 
-					return true;
+
 					break;
 
 				case 'restore':
@@ -587,11 +579,9 @@ WCF.Todo.InlineEditor = WCF.InlineEditor
 						return false;
 					}
 
-					if (!this._updateHandler.getValue($todoID, 'isDeleted')) {
-						return false;
-					}
+					return this._updateHandler.getValue($todoID, 'isDeleted');
 
-					return true;
+
 					break;
 
 				// edit todo

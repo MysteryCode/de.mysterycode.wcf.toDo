@@ -5,7 +5,7 @@ use wcf\data\comment\response\CommentResponse;
 use wcf\data\comment\Comment;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoCache;
-use wcf\system\comment\manager\AbstractCommentManager;
+
 use wcf\system\WCF;
 
 /**
@@ -84,11 +84,12 @@ class ToDoCommentManager extends AbstractCommentManager {
 		
 		return WCF::getSession()->getPermission('mod.toDo.comment.canModerate');
 	}
-	
+
 	/**
 	 * Sets the current entry.
 	 *
-	 * @param array $todoID        	
+	 * @param array $todoID
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	protected function setCurrentToDo($todoID) {
 		$this->currentToDo = ToDoCache::getInstance()->getTodo($todoID);
@@ -183,7 +184,10 @@ class ToDoCommentManager extends AbstractCommentManager {
 		
 		return WCF::getLanguage()->getDynamicVariable('wcf.toDo.comment');
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function updateCounter($objectID, $value) {
 
 	}

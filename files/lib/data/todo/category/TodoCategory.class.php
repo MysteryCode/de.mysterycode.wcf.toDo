@@ -2,8 +2,9 @@
 
 namespace wcf\data\todo\category;
 use wcf\data\category\AbstractDecoratedCategory;
-use wcf\data\ILinkableObject;
+
 use wcf\data\ITitledLinkObject;
+use wcf\data\user\User;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\todo\category\TodoCategoryPermissionHandler;
@@ -57,11 +58,12 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	public function getTitle() {
 		return WCF::getLanguage()->get($this->title);
 	}
-	
+
 	/**
 	 * Returns the stat object of this category.
 	 *
-	 * @return	\wcf\data\todo\category\stat\CategoryStat
+	 * @return TodoCategoryStat
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function getStatObject() {
 		return TodoCategoryCache::getInstance()->getStatObject($this->categoryID);
@@ -75,25 +77,28 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 			'object' => $this
 		));
 	}
-	
+
 	/**
 	 * Returns the last todo of this category.
 	 *
-	 * @param	integer		$languageID
-	 * @return	\wcf\data\todo\ToDo
+	 * @param    integer $languageID
+	 * @return \wcf\data\todo\ToDo
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function getLastTodo($languageID = null) {
 		return TodoCategoryCache::getInstance()->getLastTodo($this->categoryID);
 	}
-	
+
 	/**
 	 * Returns true if the active user has the given permission within this category.
-	 * Uses the global permissions if no category-specific permission is set.
+	 * Uses the gloqqbal permissions if no category-specific permission is set.
 	 *
-	 * @param	string		$permission
-	 * @return	boolean
+	 * @param    string $permission
+	 * @param User      $user
+	 * @return bool
+	 * @throws \wcf\system\exception\SystemException
 	 */
-	public function getPermission($permission = 'user.canViewCategory') {
+	public function getPermission($permission = 'user.canViewCategory', User $user = null) {
 		// load cache if necessary
 		if ($this->permissions === null) {
 			$this->permissions = TodoCategoryPermissionHandler::getInstance()->getPermissions($this->getDecoratedObject());
@@ -191,12 +196,13 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	public function canEditTodos() {
 		return $this->getPermission('mod.canEditTodo');
 	}
-	
+
 	/**
 	 * Returns a list of of accessible categories for the active user.
 	 *
-	 * @param	array		$permissions
-	 * @return	array
+	 * @param    array $permissions
+	 * @return array
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public static function getAccessibleCategoryIDs(array $permissions = array('user.canViewCategory', 'user.canEnterCategory')) {
 		$categoryIDs = array();
@@ -216,12 +222,13 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 		
 		return $categoryIDs;
 	}
-	
+
 	/**
 	 * Inherits the category permissions.
 	 *
-	 * @param	integer		$parentID
-	 * @param	array		$permissions
+	 * @param    integer $parentID
+	 * @param    array   $permissions
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public static function inheritPermissions($parentID = 0, &$permissions) {
 		foreach (TodoCategoryCache::getInstance()->getChildCategories($parentID) as $categoryID => $category) {

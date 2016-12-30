@@ -4,11 +4,10 @@ namespace wcf\page;
 use wcf\data\category\Category;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
 use wcf\data\todo\category\TodoCategory;
-use wcf\data\todo\ToDo;
+
 use wcf\system\clipboard\ClipboardHandler;
-use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\request\LinkHandler;
+
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 

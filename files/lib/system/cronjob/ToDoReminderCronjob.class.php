@@ -2,13 +2,12 @@
 
 namespace wcf\system\cronjob;
 use wcf\data\cronjob\Cronjob;
-use wcf\data\todo\ToDo;
+
 use wcf\data\todo\ToDoAction;
 use wcf\data\todo\ToDoList;
-use wcf\system\cronjob\AbstractCronjob;
+
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
-use wcf\system\WCF;
 
 /**
  * Creates notifications to remind of todos.
@@ -19,6 +18,9 @@ use wcf\system\WCF;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoReminderCronjob extends AbstractCronjob {
+	/**
+	 * {@inheritDoc}
+	 */
 	public function execute(Cronjob $cronjob) {
 		$check = TIME_NOW;
 		$todoIDs = array();

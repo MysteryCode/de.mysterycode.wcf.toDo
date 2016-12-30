@@ -6,7 +6,7 @@ use wcf\data\todo\ToDoAction;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\message\quote\MessageQuoteManager;
-use wcf\system\request\LinkHandler;
+
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 use wcf\util\HeaderUtil;

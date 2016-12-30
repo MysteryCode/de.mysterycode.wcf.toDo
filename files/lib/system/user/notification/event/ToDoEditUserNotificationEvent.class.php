@@ -2,7 +2,10 @@
 
 namespace wcf\system\user\notification\event;
 use wcf\system\request\LinkHandler;
-use wcf\system\user\notification\event\AbstractUserNotificationEvent;
+
+use wcf\system\user\object\watch\UserObjectWatchHandler;
+use wcf\system\user\storage\UserStorageHandler;
+use wcf\system\WCF;
 
 /**
  * Notification when a todo has been edited
@@ -13,24 +16,36 @@ use wcf\system\user\notification\event\AbstractUserNotificationEvent;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoEditUserNotificationEvent extends AbstractUserNotificationEvent {
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getTitle() {
 		return $this->getLanguage()->get('wcf.toDo.notification.edit.title');
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getMessage() {
 		return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.edit.message', array(
 			'todo' => $this->userNotificationObject->object,
 			'author' => $this->author 
 		));
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getEmailMessage($notificationType = 'instant') {
 		return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.edit.mail', array(
 			'todo' => $this->userNotificationObject->object,
 			'author' => $this->author 
 		));
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getLink() {
 		return LinkHandler::getInstance()->getLink('ToDo', array(
 			'application' => 'wcf',

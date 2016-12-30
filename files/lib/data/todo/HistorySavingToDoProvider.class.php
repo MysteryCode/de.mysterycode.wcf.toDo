@@ -27,6 +27,8 @@ class HistorySavingToDoProvider extends ToDoProvider implements IHistorySavingOb
 		
 		if (!$object->canEdit())
 			throw new PermissionDeniedException();
+
+		return true;
 	}
 	
 	/**

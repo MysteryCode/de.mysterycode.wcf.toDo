@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\data\todo\status;
-use wcf\data\todo\status\TodoStatus;
+
 use wcf\system\cache\builder\TodoStatusCacheBuilder;
 use wcf\system\SingletonFactory;
 

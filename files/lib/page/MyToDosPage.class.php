@@ -1,10 +1,9 @@
 <?php
 
 namespace wcf\page;
-use wcf\data\todo\ToDo;
+
 use wcf\system\clipboard\ClipboardHandler;
-use wcf\system\dashboard\DashboardHandler;
-use wcf\system\request\LinkHandler;
+
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 

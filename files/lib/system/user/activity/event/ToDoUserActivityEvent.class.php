@@ -2,7 +2,7 @@
 
 namespace wcf\system\user\activity\event;
 use wcf\data\todo\ToDoList;
-use wcf\system\user\activity\event\IUserActivityEvent;
+
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
@@ -21,6 +21,9 @@ class ToDoUserActivityEvent extends SingletonFactory implements IUserActivityEve
 	 */
 	protected $languageVariable = 'wcf.user.profile.recentActivity.todo';
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function prepare(array $events) {
 		$objectIDs = array();
 		foreach ($events as $event) {

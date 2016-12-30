@@ -2,7 +2,6 @@
 
 namespace wcf\page;
 use wcf\system\clipboard\ClipboardHandler;
-use wcf\system\dashboard\DashboardHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
@@ -29,10 +28,6 @@ class ToDoTrashPage extends AbstractToDoListPage {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		
-		// load same boxes as @ ToDoArchivePage
-		// dont want to add a new sidebarName.. lazy..
-		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoArchivePage', $this);
 		
 		WCF::getTPL()->assign(array(
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),

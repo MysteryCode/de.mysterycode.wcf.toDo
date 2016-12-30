@@ -1,6 +1,6 @@
 <?php
 namespace wcf\acp\page;
-use wcf\acp\page\AbstractCategoryListPage;
+
 
 /**
  * Shows the todo category list page.

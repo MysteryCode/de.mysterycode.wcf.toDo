@@ -22,12 +22,14 @@ class ToDoEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * @inheritDoc
 	 */
 	protected static $baseClass = 'wcf\data\todo\ToDo';
-	
+
 	/**
 	 * Updates the todo counter of the given users.
 	 *
 	 * @param array $users
 	 *        => todo counter increase/decrease
+	 * @throws \wcf\system\database\exception\DatabaseQueryException
+	 * @throws \wcf\system\database\exception\DatabaseQueryExecutionException
 	 */
 	public static function updateUserToDoCounter(array $users) {
 		$sql = "UPDATE	wcf" . WCF_N . "_user

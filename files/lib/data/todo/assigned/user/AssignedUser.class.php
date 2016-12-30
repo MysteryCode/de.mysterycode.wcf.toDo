@@ -2,7 +2,6 @@
 
 namespace wcf\data\todo\assigned\user;
 use wcf\data\DatabaseObject;
-use wcf\system\WCF;
 
 /**
  * Represents a todo status.

@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\system\user\notification\object\type;
-use wcf\system\user\notification\object\type\AbstractUserNotificationObjectType;
+
 
 /**
  * Shows the todo comment response user notification objecttype.

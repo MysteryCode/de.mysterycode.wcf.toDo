@@ -4,7 +4,7 @@ namespace wcf\system\worker;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\user\activity\point\UserActivityPointHandler;
-use wcf\system\worker\AbstractRebuildDataWorker;
+
 use wcf\system\WCF;
 
 /**

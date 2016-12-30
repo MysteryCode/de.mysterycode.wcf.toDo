@@ -5,7 +5,6 @@ use wcf\data\comment\Comment;
 use wcf\data\todo\ToDo;
 use wcf\data\user\User;
 use wcf\system\request\LinkHandler;
-use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 
 /**
  * Shows the todo comment response owner user notification event.
@@ -20,7 +19,10 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 	 * @inheritdoc
 	 */
 	protected $stackable = true;
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getTitle() {
 		$count = count($this->getAuthors());
 		
@@ -34,7 +36,10 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 		
 		return $this->getLanguage()->get('wcf.toDo.commentResponseOwner.notification.title');
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getMessage() {
 		$comment = new Comment($this->userNotificationObject->commentID);
 		$todo = new ToDo($comment->objectID);
@@ -61,7 +66,10 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 			'commentAuthor' => $commentAuthor
 		));
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getEmailMessage($notificationType = 'instant') {
 		$comment = new Comment($this->userNotificationObject->commentID);
 		$todo = new ToDo($comment->objectID);
@@ -73,7 +81,10 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 			'commentAuthor' => $commentAuthor 
 		));
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getLink() {
 		$comment = new Comment($this->userNotificationObject->commentID);
 		$todo = new ToDo($comment->objectID);

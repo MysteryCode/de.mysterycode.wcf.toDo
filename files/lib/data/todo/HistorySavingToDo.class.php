@@ -146,4 +146,11 @@ class HistorySavingToDo extends DatabaseObjectDecorator implements IHistorySavin
 	public function getMessage() {
 		return $this->getDecoratedObject()->getMessage();
 	}
+
+	/**
+	 * Sets the page location data.
+	 */
+	public function setLocation() {
+		// TODO: Implement setLocation() method.
+	}
 }

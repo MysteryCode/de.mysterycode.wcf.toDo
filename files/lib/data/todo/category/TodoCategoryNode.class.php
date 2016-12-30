@@ -72,7 +72,8 @@ class TodoCategoryNode extends CategoryNode {
 	/**
 	 * Returns the users online list.
 	 *
-	 * @return	array<\wcf\data\user\User>
+	 * @return array <\wcf\data\user\User>
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function getUsersOnline() {
 		return TodoCategoryCache::getInstance()->getUsersOnline($this->categoryID);
@@ -81,7 +82,8 @@ class TodoCategoryNode extends CategoryNode {
 	/**
 	 * Returns the last todo of this category.
 	 *
-	 * @return	\wcf\data\todo\ToDo
+	 * @return \wcf\data\todo\ToDo
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function getLastTodo() {
 		if (!$this->lastTodoLoaded) {

@@ -2,7 +2,7 @@
 
 namespace wcf\system\user\notification\event;
 use wcf\system\request\LinkHandler;
-use wcf\system\user\notification\event\AbstractUserNotificationEvent;
+
 use wcf\system\user\object\watch\UserObjectWatchHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
@@ -20,7 +20,10 @@ class ToDoCreateUserNotificationEvent extends AbstractUserNotificationEvent {
 	 * @inheritdoc
 	 */
 	protected $stackable = true;
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getTitle() {
 		$count = count($this->getAuthors());
 		
@@ -34,7 +37,10 @@ class ToDoCreateUserNotificationEvent extends AbstractUserNotificationEvent {
 		
 		return $this->getLanguage()->get('wcf.toDo.notification.create.title');
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getMessage() {
 		$authors = array_values($this->getAuthors());
 		$count = count($authors);
@@ -55,14 +61,20 @@ class ToDoCreateUserNotificationEvent extends AbstractUserNotificationEvent {
 				'author' => $this->author
 		));
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getEmailMessage($notificationType = 'instant') {
 		return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.create.mail', array(
 			'todo' => $this->userNotificationObject->object,
 			'author' => $this->author 
 		));
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getLink() {
 		return LinkHandler::getInstance()->getLink('ToDo', array(
 			'application' => 'wcf',

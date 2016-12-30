@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\system\event\listener;
-use wcf\system\event\listener\IParameterizedEventListener;
+
 use wcf\system\WCF;
 
 /**

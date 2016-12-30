@@ -2,7 +2,6 @@
 
 namespace wcf\system\todo\category;
 use wcf\system\category\AbstractCategoryType;
-use wcf\system\WCF;
 
 /**
  * Category implementation.

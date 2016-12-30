@@ -52,11 +52,12 @@ class ViewableToDo extends DatabaseObjectDecorator {
 		
 		return $this->userProfile;
 	}
-	
+
 	/**
 	 * Returns the effective visit time.
-	 * 
-	 * @return	integer
+	 *
+	 * @return int
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function getVisitTime() {
 		if ($this->effectiveVisitTime === null) {
@@ -90,7 +91,7 @@ class ViewableToDo extends DatabaseObjectDecorator {
 	 * Returns the viewable todo object with the given todo id.
 	 * 
 	 * @param	integer		$todoID
-	 * @return	\wcf\data\todo\ViewableToDoList
+	 * @return ViewableToDo|null
 	 */
 	public static function getToDo($todoID) {
 		$list = new ViewableToDoList();
@@ -133,6 +134,8 @@ class ViewableToDo extends DatabaseObjectDecorator {
 		
 		foreach ($this->labels as $label)
 			return $label;
+
+		return null;
 	}
 	
 	/**

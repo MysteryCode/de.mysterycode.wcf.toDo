@@ -330,19 +330,23 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 		
 		return $this->user;
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getLink() {
 		return LinkHandler::getInstance()->getLink('ToDo', array(
 			'application' => 'wcf',
 			'object' => $this
 		));
 	}
-	
+
 	/**
 	 * Returns a list of the ids of accessible todos.
-	 * 
-	 * @param	array		$permissions		filters boards by given permissions
-	 * @return	array<integer>
+	 *
+	 * @param    array $permissions filters boards by given permissions
+	 * @return array <integer>
+	 * @throws \wcf\system\exception\SystemException
 	 */
 	public static function getAccessibleTodoIDs($permissions = array('canView', 'canEnter')) {
 		$todoIDs = array();

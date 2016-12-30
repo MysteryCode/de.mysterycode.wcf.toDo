@@ -2,7 +2,6 @@
 
 namespace wcf\page;
 use wcf\system\clipboard\ClipboardHandler;
-use wcf\system\dashboard\DashboardHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
@@ -29,8 +28,6 @@ class ToDoArchivePage extends AbstractToDoListPage {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		
-		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoArchivePage', $this);
 		
 		WCF::getTPL()->assign(array(
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoTrashPage'),

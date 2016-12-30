@@ -3,7 +3,6 @@
 namespace wcf\data\user;
 use wcf\system\cache\builder\TodoUserCacheBuilder;
 use wcf\system\SingletonFactory;
-use wcf\system\WCF;
 
 /**
  * 

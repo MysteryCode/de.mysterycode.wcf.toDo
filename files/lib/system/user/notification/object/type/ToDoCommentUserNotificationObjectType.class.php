@@ -1,8 +1,8 @@
 <?php
 
 namespace wcf\system\user\notification\object\type;
-use wcf\system\user\notification\object\type\AbstractUserNotificationObjectType;
-use wcf\system\user\notification\object\type\ICommentUserNotificationObjectType;
+
+
 use wcf\system\WCF;
 
 /**
@@ -18,6 +18,9 @@ class ToDoCommentUserNotificationObjectType extends AbstractUserNotificationObje
 	protected static $objectClassName = 'wcf\data\comment\Comment';
 	protected static $objectListClassName = 'wcf\data\comment\CommentList';
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getOwnerID($objectID) {
 		$sql = "SELECT *
 			FROM wcf" . WCF_N . "_comment comment

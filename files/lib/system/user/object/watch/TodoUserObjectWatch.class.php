@@ -4,7 +4,8 @@ namespace wcf\system\user\object\watch;
 use wcf\data\object\type\AbstractObjectTypeProcessor;
 use wcf\data\todo\ToDo;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\user\object\watch\IUserObjectWatch;
+use wcf\system\exception\PermissionDeniedException;
+
 use wcf\system\user\storage\UserStorageHandler;
 
 /**
@@ -21,11 +22,12 @@ class TodoUserObjectWatch extends AbstractObjectTypeProcessor implements IUserOb
 	 */
 	public function validateObjectID($objectID) {
 		$todo = new ToDo($objectID);
-		if (!$todo->todoID)
+		if ($todo === null || !$todo->todoID)
 			throw new IllegalLinkException();
 		
 		// check permission
-		$todo->getCategory()->checkPermission();
+		if (!$todo->getCategory()->getPermissions())
+			throw new PermissionDeniedException();
 	}
 	
 	/**

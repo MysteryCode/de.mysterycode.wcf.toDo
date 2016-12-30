@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\data\todo;
-use wcf\data\DatabaseObjectList;
+
 use wcf\system\clipboard\ClipboardHandler;
 
 /**
@@ -24,7 +24,10 @@ class DeletedToDoList extends ToDoList {
 	 * @inheritDoc
 	 */
 	public $className = 'wcf\data\todo\ToDo';
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function __construct() {
 		parent::__construct();
 		

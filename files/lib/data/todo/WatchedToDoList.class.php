@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\data\todo;
-use wcf\data\toco\category\TodoCategory;
+use wcf\data\todo\category\TodoCategory;
 use wcf\system\user\object\watch\UserObjectWatchHandler;
 use wcf\system\WCF;
 
