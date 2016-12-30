@@ -14,7 +14,7 @@ use wcf\system\cache\builder\CategoryACLOptionCacheBuilder;
  */
 class TodoCategoryACLOptionCacheBuilder extends CategoryACLOptionCacheBuilder {
 	/**
-	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
+	 * @inheritDoc
 	 */
 	public function rebuild(array $parameters) {
 		$data = parent::rebuild($parameters);

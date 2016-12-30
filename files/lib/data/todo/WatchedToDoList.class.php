@@ -37,7 +37,7 @@ class WatchedToDoList extends ViewableToDoList {
 	}
 	
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::countObjects()
+	 * @inheritDoc
 	 */
 	public function countObjects() {
 		$sql = "SELECT	COUNT(*) AS count
@@ -52,7 +52,7 @@ class WatchedToDoList extends ViewableToDoList {
 	}
 	
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::countObjects()
+	 * @inheritDoc
 	 */
 	public function readObjectIDs() {
 		$this->objectIDs = array();

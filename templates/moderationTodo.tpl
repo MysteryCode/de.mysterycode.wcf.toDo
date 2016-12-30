@@ -20,7 +20,7 @@
 							<h1><a href="{link controller='ToDo' object=$todo}{/link}">{$todo->title}</a></h1>
 							<p>
 								<span class="username">{if $todo->getUser()->userID}<a href="{link controller='User' object=$todo->getUser()}{/link}">{$todo->getUser()->username}</a>{else}{$todo->getUser()->username}{/if}</span>
-								{@$todo->timestamp|time}
+								{@$todo->time|time}
 							</p>
 						</div>
 					</div>

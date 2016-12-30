@@ -8,17 +8,17 @@
 		<packagename language="de"><![CDATA[ToDo-Liste]]></packagename>
 		<packagedescription><![CDATA[Gives the possibility to manage ToDos in several custom categories on your website]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
-		<version>1.2.4</version>
+		<version>2.0.0 Alpha 1</version>
 		<date>2016-12-19</date>
 		<packageurl>https://www.mysterycode.de/index.php?page/products/todo/</packageurl>
 	</packageinformation>
 
 	<requiredpackages>
-		<requiredpackage minversion="2.1.0"><![CDATA[com.woltlab.wcf]]></requiredpackage>
+		<requiredpackage minversion="3.0.0 RC 1"><![CDATA[com.woltlab.wcf]]></requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
-		<excludedpackage version="3.0.0 Alpha 1"><![CDATA[com.woltlab.wcf]]></excludedpackage>
+		<excludedpackage version="3.1.0 Alpha 1"><![CDATA[com.woltlab.wcf]]></excludedpackage>
 	</excludedpackages>
 
 	<authorinformation>
@@ -28,12 +28,12 @@
 
 	<instructions type="install">
 		<!-- files -->
-		<instruction type="acpTemplate">acpTemplates.tar</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
+		<instruction type="acpTemplate" />
+		<instruction type="file" />
+		<instruction type="template" />
 
 		<!-- SQL -->
-		<instruction type="sql">install.sql</instruction>
+		<instruction type="sql" />
 
 		<!-- XMLs -->
 		<instruction type="pageMenu">xml/pageMenu.xml</instruction>
@@ -53,24 +53,6 @@
 		<instruction type="script">acp/install_de.mysterycode.wcf.todo_1.2.0.php</instruction>
 
 		<!-- language -->
-		<instruction type="language">language/*.xml</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.2.3">
-		<!-- files -->
-		<instruction type="acpTemplate">acpTemplates.tar</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-
-		<!-- XMLs -->
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-
-		<!-- SQL -->
-		<instruction type="sql">update.sql</instruction>
-
-		<!-- language -->
-		<instruction type="language">language/*.xml</instruction>
+		<instruction type="language" />
 	</instructions>
 </package>

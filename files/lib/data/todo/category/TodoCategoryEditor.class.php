@@ -19,7 +19,7 @@ use wcf\system\WCF;
  */
 class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject {
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = 'wcf\data\todo\category\TodoCategory';
 	
@@ -30,7 +30,7 @@ class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject
 	 */
 	public function setLastTodo(ToDo $todo) {
 		$currentLastTodo = $this->getDecoratedObject()->getLastTodo($todo->languageID);
-		if ($currentLastTodo != null && $todo->timestamp <= $currentLastTodo->time) {
+		if ($currentLastTodo != null && $todo->time <= $currentLastTodo->time) {
 			return;
 		}
 		
@@ -61,7 +61,7 @@ class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject
 			WHERE 		categoryID = ?
 					AND isDeleted = ?
 					AND isDisabled = ?
-			ORDER BY 	timestamp DESC";
+			ORDER BY 	time DESC";
 		$statement = WCF::getDB()->prepareStatement($sql, 1);
 		$statement->execute(array($this->categoryID, 0, 0));
 		
@@ -76,7 +76,7 @@ class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject
 	}
 	
 	/**
-	 * @see	\wcf\data\category\CategoryEditor::resetCache()
+	 * @inheritDoc
 	 */
 	public static function resetCache() {
 		static::resetDataCache();

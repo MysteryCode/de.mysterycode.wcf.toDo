@@ -16,7 +16,7 @@ use wcf\system\WCF;
  */
 class TodoCategoryLabelGroupCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
+	 * @inheritDoc
 	 */
 	protected function rebuild(array $parameters) {
 		// get object type

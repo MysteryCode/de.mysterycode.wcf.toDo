@@ -19,7 +19,7 @@ use wcf\system\WCF;
  */
 class TodoStatusEditForm extends TodoStatusAddForm {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.todoStatus';
 	
@@ -36,7 +36,7 @@ class TodoStatusEditForm extends TodoStatusAddForm {
 	public $status = null;
 	
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -49,7 +49,7 @@ class TodoStatusEditForm extends TodoStatusAddForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @inheritDoc
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -89,7 +89,7 @@ class TodoStatusEditForm extends TodoStatusAddForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -103,7 +103,7 @@ class TodoStatusEditForm extends TodoStatusAddForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

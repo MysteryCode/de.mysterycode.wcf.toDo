@@ -20,7 +20,7 @@ class TodoUserCache extends SingletonFactory {
 	protected $users = array();
 	
 	/**
-	 * @see	\wcf\system\SingletonFactory::init()
+	 * @inheritDoc
 	 */
 	protected function init() {
 		$this->users = TodoUserCacheBuilder::getInstance()->getData(array(), 'users');

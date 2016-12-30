@@ -15,14 +15,14 @@ use wcf\system\tagging\AbstractTaggable;
  */
 class TaggableTodo extends AbstractTaggable {
 	/**
-	 * @see	\wcf\system\tagging\ITaggable::getObjectList()
+	 * @inheritDoc
 	 */
 	public function getObjectList(Tag $tag) {
 		return new TaggedToDoList($tag);
 	}
 	
 	/**
-	 * @see	\wcf\system\tagging\ITaggable::getTemplateName()
+	 * @inheritDoc
 	 */
 	public function getTemplateName() {
 		return 'searchResultToDoList';

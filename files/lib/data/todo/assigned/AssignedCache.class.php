@@ -30,7 +30,7 @@ class AssignedCache extends SingletonFactory {
 	protected $todos = array();
 	
 	/**
-	 * @see	\wcf\system\SingletonFactory::init()
+	 * @inheritDoc
 	 */
 	protected function init() {
 		$this->users = AssignCacheBuilder::getInstance()->getData(array(), 'users');

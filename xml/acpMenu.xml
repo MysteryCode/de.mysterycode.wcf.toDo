@@ -3,8 +3,8 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/acpMenu.xsd">
 	<import>
-		<acpmenuitem name="wcf.acp.menu.link.toDoCategory">
-			<parent>wcf.acp.menu.link.community</parent>
+		<acpmenuitem name="wcf.acp.menu.link.application.todo">
+			<parent>wcf.acp.menu.link.application</parent>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.list">
 			<controller><![CDATA[wcf\acp\page\ToDoCategoryListPage]]></controller>
@@ -14,25 +14,27 @@
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.add">
 			<controller><![CDATA[wcf\acp\form\ToDoCategoryAddForm]]></controller>
-			<parent>wcf.acp.menu.link.toDoCategory</parent>
+			<parent>wcf.acp.menu.link.toDoCategory.list</parent>
 			<permissions>admin.content.toDo.category.canAddCategory</permissions>
-			<showorder>2</showorder>
-		</acpmenuitem>
-
-		<acpmenuitem name="wcf.acp.menu.link.todoStatus">
-			<parent>wcf.acp.menu.link.community</parent>
+			<showorder>1</showorder>
+			<icon>fa-plus</icon>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.todoStatus.list">
 			<controller><![CDATA[wcf\acp\page\TodoStatusListPage]]></controller>
 			<parent>wcf.acp.menu.link.todoStatus</parent>
 			<permissions>admin.content.toDo.status.canEdit,admin.content.toDo.status.canDelete</permissions>
-			<showorder>1</showorder>
+			<showorder>2</showorder>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.todoStatus.add">
 			<controller><![CDATA[wcf\acp\form\TodoStatusAddForm]]></controller>
-			<parent>wcf.acp.menu.link.todoStatus</parent>
+			<parent>wcf.acp.menu.link.todoStatus.list</parent>
 			<permissions>admin.content.toDo.status.canAdd</permissions>
-			<showorder>2</showorder>
+			<showorder>1</showorder>
+			<icon>fa-plus</icon>
 		</acpmenuitem>
 	</import>
+	<delete>
+		<acpmenuitem name="wcf.acp.menu.link.toDoCategory" />
+		<acpmenuitem name="wcf.acp.menu.link.todoStatus" />
+	</delete>
 </data>

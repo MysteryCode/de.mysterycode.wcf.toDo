@@ -13,12 +13,12 @@ use wcf\system\exception\UserInputException;
  */
 class UserGroupSearchAction extends UserGroupAction implements ISearchAction {
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
+	 * @inheritDoc
 	 */
 	protected $allowGuestAccess = array('getSearchResultList');
 	
 	/**
-	 * @see	\wcf\data\ISearchAction::validateGetSearchResultList()
+	 * @inheritDoc
 	 */
 	public function validateGetSearchResultList() {
 		$this->readString('searchString', false, 'data');
@@ -29,7 +29,7 @@ class UserGroupSearchAction extends UserGroupAction implements ISearchAction {
 	}
 	
 	/**
-	 * @see	\wcf\data\ISearchAction::getSearchResultList()
+	 * @inheritDoc
 	 */
 	public function getSearchResultList() {
 		$searchString = $this->parameters['data']['searchString'];

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/page.xsd">
+	<import>
+		<page identifier="de.mysterycode.mcps.ServerList">
+			<controller>mcps\page\ServerListPage</controller>
+			<pageType>system</pageType>
+			<options>mcps_server, mcps_frontend_enable</options>
+
+			<name language="de">Paketserver</name>
+			<name language="en">Updateserver</name>
+
+			<content language="de">
+				<title>Paketserver</title>
+			</content>
+			<content language="en">
+				<title>Updateserver</title>
+			</content>
+		</page>
+		<page identifier="de.mysterycode.mcps.Server">
+			<controller>mcps\page\ServerPage</controller>
+			<pageType>system</pageType>
+			<options>mcps_server</options>
+			<requireObjectID>1</requireObjectID>
+			<parent>de.mysterycode.mcps.ServerList</parent>
+			<handler>mcps\system\page\handler\ServerPageHandler</handler>
+
+			<name language="de">Server</name>
+			<name language="en">Server</name>
+		</page>
+		<page identifier="de.mysterycode.mcps.Package">
+			<controller>mcps\page\PackagePage</controller>
+			<pageType>system</pageType>
+			<options>mcps_server, mcps_frontend_enable</options>
+			<requireObjectID>1</requireObjectID>
+			<parent>de.mysterycode.mcps.ServerList</parent>
+			<handler>mcps\system\page\handler\PackagePageHandler</handler>
+
+			<name language="de">Paket</name>
+			<name language="en">Package</name>
+		</page>
+		<page identifier="de.mysterycode.mcps.PackageFile">
+			<controller>mcps\page\PackageFilePage</controller>
+			<pageType>system</pageType>
+			<options>mcps_server</options>
+			<requireObjectID>1</requireObjectID>
+			<parent>de.mysterycode.mcps.ServerList</parent>
+			<handler>mcps\system\page\handler\PackageFilePageHandler</handler>
+
+			<name language="de">Version</name>
+			<name language="en">Version</name>
+		</page>
+		<page identifier="de.mysterycode.mcps.Updates">
+			<controller>mcps\page\UpdatesPage</controller>
+			<pageType>system</pageType>
+			<options>mcps_server, mcps_frontend_enable</options>
+			<parent>de.mysterycode.mcps.ServerList</parent>
+
+			<name language="de">Updates</name>
+			<name language="en">Updates</name>
+
+			<content language="de">
+				<title>Updates</title>
+			</content>
+			<content language="en">
+				<title>Updates</title>
+			</content>
+		</page>
+	</import>
+</data>

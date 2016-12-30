@@ -19,7 +19,7 @@ use wcf\system\WCF;
 class TodoCategoryActionListener implements IParameterizedEventListener {
 
 	/**
-	 * @see	\wcf\system\event\listener\IParameterizedEventListener::execute()
+	 * @inheritDoc
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		$actionName = $eventObj->getActionName();

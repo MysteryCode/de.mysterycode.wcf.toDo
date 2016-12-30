@@ -14,7 +14,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  */
 class TodoCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
+	 * @inheritDoc
 	 */
 	protected function rebuild(array $parameters) {
 		$data = array(

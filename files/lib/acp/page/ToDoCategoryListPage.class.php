@@ -12,17 +12,17 @@ use wcf\acp\page\AbstractCategoryListPage;
  */
 class ToDoCategoryListPage extends AbstractCategoryListPage {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.toDoCategory.list';
 	
 	/**
-	 * @see	\wcf\acp\page\AbstractCategoryListPage::$objectTypeName
+	 * @inheritDoc
 	 */
 	public $objectTypeName = 'de.mysterycode.wcf.toDo';
 	
 	/**
-	 * @see	\wcf\acp\page\AbstractCategoryListPage::$pageTitle
+	 * @inheritDoc
 	 */
 	public $pageTitle = 'wcf.acp.todo.category.list';
 }

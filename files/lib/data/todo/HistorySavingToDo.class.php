@@ -4,7 +4,6 @@ use wcf\data\edit\history\entry\EditHistoryEntry;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\DatabaseObject;
 use wcf\data\DatabaseObjectDecorator;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\edit\IHistorySavingObject;
 use wcf\system\WCF;
 
@@ -18,7 +17,7 @@ use wcf\system\WCF;
  */
 class HistorySavingToDo extends DatabaseObjectDecorator implements IHistorySavingObject {
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = 'wcf\data\todo\ToDo';
 	
@@ -49,7 +48,7 @@ class HistorySavingToDo extends DatabaseObjectDecorator implements IHistorySavin
 	/**
 	 * Fetches the information of the latest edit.
 	 * 
-	 * @see	\wcf\data\DatabaseObjectDecorator::__construct()
+	 * @inheritDoc
 	 */
 	public function __construct(DatabaseObject $object) {
 		parent::__construct($object);
@@ -86,42 +85,42 @@ class HistorySavingToDo extends DatabaseObjectDecorator implements IHistorySavin
 	}
 	
 	/**
-	 * @see	\wcf\data\ITitledObject::getTitle()
+	 * @inheritDoc
 	 */
 	public function getTitle() {
 		return $this->getDecoratedObject()->getTitle();
 	}
 	
 	/**
-	 * @see	\wcf\data\ILinkableObject::getLink()
+	 * @inheritDoc
 	 */
 	public function getLink() {
 		return $this->getDecoratedObject()->getLink();
 	}
 	
 	/**
-	 * @see	\wcf\data\IUserContent::getUsername()
+	 * @inheritDoc
 	 */
 	public function getUsername() {
 		return $this->username;
 	}
 	
 	/**
-	 * @see	\wcf\data\IUserContent::getUserID()
+	 * @inheritDoc
 	 */
 	public function getUserID() {
 		return $this->userID;
 	}
 	
 	/**
-	 * @see	\wcf\data\IUserContent::getTime()
+	 * @inheritDoc
 	 */
 	public function getTime() {
 		return $this->time;
 	}
 	
 	/**
-	 * @see	\wcf\system\edit\IHistorySavingObject::revertVersion()
+	 * @inheritDoc
 	 */
 	public function revertVersion(EditHistoryEntry $edit) {
 		$todoAction = new ToDoAction(array($this->getDecoratedObject()), 'update', array(
@@ -135,22 +134,14 @@ class HistorySavingToDo extends DatabaseObjectDecorator implements IHistorySavin
 	}
 	
 	/**
-	 * @see	\wcf\system\edit\IHistorySavingObject::addBreadcrumbs()
-	 */
-	public function addBreadcrumbs() {
-		// add breadcrumbs
-		WCF::getBreadcrumbs()->add(new Breadcrumb($this->getTitle(), $this->getLink()));
-	}
-	
-	/**
-	 * @see	\wcf\system\edit\IHistorySavingObject::getEditReason()
+	 * @inheritDoc
 	 */
 	public function getEditReason() {
 		return $this->reason;
 	}
 	
 	/**
-	 * @see	\wcf\system\edit\IHistorySavingObject::getMessage()
+	 * @inheritDoc
 	 */
 	public function getMessage() {
 		return $this->getDecoratedObject()->getMessage();

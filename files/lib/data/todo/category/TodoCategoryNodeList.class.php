@@ -12,7 +12,7 @@ namespace wcf\data\todo\category;
  */
 class TodoCategoryNodeList extends TodoCategoryNodeTree {
 	/**
-	 * @see	\wcf\data\category\CategoryNodeTree::getIterator()
+	 * @inheritDoc
 	 */
 	public function getIterator() {
 		$iterator = parent::getIterator();

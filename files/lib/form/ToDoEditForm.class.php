@@ -3,7 +3,6 @@
 namespace wcf\form;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\message\quote\MessageQuoteManager;
@@ -28,7 +27,7 @@ class ToDoEditForm extends ToDoAddForm {
 	
 	/**
 	 *
-	 * @see wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		MessageForm::readParameters();
@@ -45,7 +44,7 @@ class ToDoEditForm extends ToDoAddForm {
 	
 	/**
 	 *
-	 * @see wcf\form\IForm::save()
+	 * @inheritDoc
 	 */
 	public function save() {
 		$todoData = array('data' => array());
@@ -61,9 +60,6 @@ class ToDoEditForm extends ToDoAddForm {
 					'private' => $this->private,
 					'important' => $this->important,
 					'progress' => $this->progress,
-					'enableSmilies' => $this->enableSmilies,
-					'enableHtml' => $this->enableHtml,
-					'enableBBCodes' => $this->enableBBCodes,
 					'remembertime' => $this->remembertime
 				),
 				'attachmentHandler' => $this->attachmentHandler
@@ -93,7 +89,7 @@ class ToDoEditForm extends ToDoAddForm {
 	
 	/**
 	 *
-	 * @see wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -114,9 +110,6 @@ class ToDoEditForm extends ToDoAddForm {
 			$this->statusID = $this->todo->statusID;
 			$this->categoryID = $this->todo->categoryID;
 			$this->category = $this->todo->getCategory();
-			$this->enableSmilies = $this->todo->enableSmilies;
-			$this->enableHtml = $this->todo->enableHtml;
-			$this->enableBBCodes = $this->todo->enableBBCodes;
 			$this->progress = $this->todo->progress;
 			$this->important = $this->todo->important;
 			$this->private = $this->todo->private;
@@ -145,20 +138,11 @@ class ToDoEditForm extends ToDoAddForm {
 	
 	/**
 	 *
-	 * @see wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		
-		if ($this->todo->categorytitle != '') {
-			WCF::getBreadcrumbs()->add(new Breadcrumb($this->todo->categorytitle, LinkHandler::getInstance()->getLink('ToDoCategory', array(
-				'id' => $this->todo->category
-			))));
-		}
-		WCF::getBreadcrumbs()->add(new Breadcrumb($this->title, LinkHandler::getInstance()->getLink('ToDo', array(
-			'id' => $this->todoID 
-		))));
-		
+
 		WCF::getTPL()->assign( array(
 			'id' => $this->todoID,
 			'todo' => $this->todo,

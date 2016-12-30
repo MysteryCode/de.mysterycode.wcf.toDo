@@ -17,7 +17,7 @@ use wcf\system\user\storage\UserStorageHandler;
  */
 class TodoUserObjectWatch extends AbstractObjectTypeProcessor implements IUserObjectWatch {
 	/**
-	 * @see	\wcf\system\user\object\watch\IUserObjectWatch::validateObjectID()
+	 * @inheritDoc
 	 */
 	public function validateObjectID($objectID) {
 		$todo = new ToDo($objectID);
@@ -29,7 +29,7 @@ class TodoUserObjectWatch extends AbstractObjectTypeProcessor implements IUserOb
 	}
 	
 	/**
-	 * @see	\wcf\system\user\object\watch\IUserObjectWatch::resetUserStorage()
+	 * @inheritDoc
 	 */
 	public function resetUserStorage(array $userIDs) {
 		UserStorageHandler::getInstance()->reset($userIDs, 'wcfUnreadWatchedTodos');

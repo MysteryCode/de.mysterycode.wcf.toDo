@@ -14,12 +14,12 @@ use wcf\system\WCF;
  */
 class TodoStatus extends DatabaseObject {
 	/**
-	 * @see \wcf\data\DatabaseObject::$databaseTableName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableName = 'todo_status';
 	
 	/**
-	 * @see \wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableIndexName = 'statusID';
 	

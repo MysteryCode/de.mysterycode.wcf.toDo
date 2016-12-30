@@ -15,12 +15,12 @@ use wcf\data\IEditableCachedObject;
  */
 class TodoStatusEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = 'wcf\data\todo\status\TodoStatus';
 	
 	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * @inheritDoc
 	 */
 	public static function resetCache() {
 		TodoStatusCacheBuilder::getInstance()->reset();

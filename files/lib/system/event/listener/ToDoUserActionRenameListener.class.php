@@ -14,7 +14,7 @@ use wcf\system\WCF;
  */
 class ToDoUserActionRenameListener implements IParameterizedEventListener {
 	/**
-	 * @see \wcf\system\event\listener\IParameterizedEventListener::execute()
+	 * @inheritDoc
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		// get userID

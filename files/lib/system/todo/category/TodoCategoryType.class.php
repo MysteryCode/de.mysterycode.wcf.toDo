@@ -14,27 +14,27 @@ use wcf\system\WCF;
  */
 class TodoCategoryType extends AbstractCategoryType {
 	/**
-	 * @see	\wcf\system\category\AbstractCategoryType::$forceDescription
+	 * @inheritDoc
 	 */
 	protected $forceDescription = false;
 	
 	/**
-	 * @see	\wcf\system\category\AbstractCategoryType::$langVarPrefix
+	 * @inheritDoc
 	 */
 	protected $langVarPrefix = 'wcf.toDo.acp.category';
 	
 	/**
-	 * @see	\wcf\system\category\AbstractCategoryType::$permissionPrefix
+	 * @inheritDoc
 	 */
 	protected $permissionPrefix = 'admin.content.toDo.category';
 	
 	/**
-	 * @see	\wcf\system\category\AbstractCategoryType::$objectTypes
+	 * @inheritDoc
 	 */
 	protected $objectTypes = array('com.woltlab.wcf.acl' => 'de.mysterycode.wcf.toDo.category');
 	
 	/**
-	 * @see	\wcf\system\category\ICategoryType::getApplication()
+	 * @inheritDoc
 	 */
 	public function getApplication() {
 		return 'wcf';

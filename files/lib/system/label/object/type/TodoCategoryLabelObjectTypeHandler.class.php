@@ -29,14 +29,14 @@ class TodoCategoryLabelObjectTypeHandler extends AbstractLabelObjectTypeHandler 
 	public $objectTypeID = 0;
 	
 	/**
-	 * @see	\wcf\system\SingletonFactory::init()
+	 * @inheritDoc
 	 */
 	protected function init() {
 		$this->categoryNodeTree = new TodoCategoryNodeTree();
 	}
 	
 	/**
-	 * @see	\wcf\system\label\object\type\AbstractLabelObjectTypeHandler::setObjectTypeID()
+	 * @inheritDoc
 	 */
 	public function setObjectTypeID($objectTypeID) {
 		parent::setObjectTypeID($objectTypeID);
@@ -51,7 +51,7 @@ class TodoCategoryLabelObjectTypeHandler extends AbstractLabelObjectTypeHandler 
 	}
 	
 	/**
-	 * @see	\wcf\system\label\object\type\ILabelObjectTypeHandler::save()
+	 * @inheritDoc
 	 */
 	public function save() {
 		TodoCategoryEditor::resetCache();

@@ -19,17 +19,17 @@ use wcf\system\WCF;
  */
 class ToDoModerationQueueActivationHandler extends AbstractToDoModerationQueueHandler implements IModerationQueueActivationHandler {
 	/**
-	 * @see	\wcf\system\moderation\queue\AbstractModerationQueueHandler::$definitionName
+	 * @inheritDoc
 	 */
 	protected $definitionName = 'com.woltlab.wcf.moderation.activation';
 	
 	/**
-	 * @see	\wcf\system\moderation\queue\AbstractModerationQueueHandler::$objectType
+	 * @inheritDoc
 	 */
 	protected $objectType = 'de.mysterycode.wcf.toDo.toDo';
 	
 	/**
-	 * @see	\wcf\system\moderation\queue\activation\IModerationQueueActivationHandler::enableContent()
+	 * @inheritDoc
 	 */
 	public function enableContent(ModerationQueue $queue) {
 		if ($this->isValid($queue->objectID) && $this->getTodo($queue->objectID)->isDisabled) {
@@ -39,7 +39,7 @@ class ToDoModerationQueueActivationHandler extends AbstractToDoModerationQueueHa
 	}
 	
 	/**
-	 * @see	\wcf\system\moderation\queue\activation\IModerationQueueActivationHandler::getDisabledContent()
+	 * @inheritDoc
 	 */
 	public function getDisabledContent(ViewableModerationQueue $queue) {
 		$todo = $queue->getAffectedObject();

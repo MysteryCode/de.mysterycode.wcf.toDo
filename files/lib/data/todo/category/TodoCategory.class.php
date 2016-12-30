@@ -3,8 +3,7 @@
 namespace wcf\data\todo\category;
 use wcf\data\category\AbstractDecoratedCategory;
 use wcf\data\ILinkableObject;
-use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\breadcrumb\IBreadcrumbProvider;
+use wcf\data\ITitledLinkObject;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\todo\category\TodoCategoryPermissionHandler;
@@ -18,7 +17,7 @@ use wcf\system\WCF;
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
-class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvider, IRouteController, ILinkableObject {
+class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObject, IRouteController {
 	/**
 	 * acl permissions for the active user of this category
 	 * @var	array<boolean>
@@ -53,14 +52,7 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 	}
 	
 	/**
-	 * @see	\wcf\system\breadcrumb\IBreadcrumbProvider::getBreadcrumb()
-	 */
-	public function getBreadcrumb() {
-		return new Breadcrumb($this->getTitle(), $this->getLink());
-	}
-	
-	/**
-	 * @see	\wcf\system\request\IRouteController::getTitle()
+	 * @inheritDoc
 	 */
 	public function getTitle() {
 		return WCF::getLanguage()->get($this->title);
@@ -76,7 +68,7 @@ class TodoCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
 	}
 	
 	/**
-	 * @see wcf\data\ILinkableObject::getLink()
+	 * @inheritDoc
 	 */
 	public function getLink() {
 		return LinkHandler::getInstance()->getLink('TodoCategory', array(

@@ -47,12 +47,12 @@ use wcf\util\StringUtil;
  */
 class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardAction, IMessageInlineEditorAction, IMessageQuoteAction {
 	/**
-	 * @see \wcf\data\AbstractDatabaseObjectAction::$className
+	 * @inheritDoc
 	 */
 	protected $className = 'wcf\data\todo\ToDoEditor';
 	
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
+	 * @inheritDoc
 	 */
 	protected $allowGuestAccess = array('getPreview', 'saveFullQuote', 'saveQuote');
 	
@@ -65,7 +65,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	
 	/**
 	 *
-	 * @see wcf\data\AbstractDatabaseObjectAction::create()
+	 * @inheritDoc
 	 */
 	public function create() {
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
@@ -118,7 +118,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		foreach ($this->objects as $todo) {
 			if ($todo->submitter) {
-				UserActivityEventHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->todoID, WCF::getLanguage()->languageID, $todo->submitter, $todo->timestamp);
+				UserActivityEventHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->todoID, WCF::getLanguage()->languageID, $todo->submitter, $todo->time);
 				UserActivityPointHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $todo->todoID, $todo->submitter);
 				ToDoEditor::updateUserToDoCounter(array($todo->submitter => 1));
 			}
@@ -136,7 +136,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	
 	/**
 	 *
-	 * @see \wcf\data\AbstractDatabaseObjectAction::update()
+	 * @inheritDoc
 	 */
 	public function update() {
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
@@ -762,14 +762,14 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessageQuoteAction::validateSaveFullQuote()
+	 * @inheritDoc
 	 */
 	public function validateSaveFullQuote() {
 		$this->todo = $this->getSingleObject();
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessageQuoteAction::saveFullQuote()
+	 * @inheritDoc
 	 */
 	public function saveFullQuote() {
 		$quoteID = MessageQuoteManager::getInstance()->addQuote(
@@ -798,7 +798,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessageQuoteAction::validateSaveQuote()
+	 * @inheritDoc
 	 */
 	public function validateSaveQuote() {
 		$this->readString('message');
@@ -807,7 +807,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessageQuoteAction::saveQuote()
+	 * @inheritDoc
 	 */
 	public function saveQuote() {
 		$quoteID = MessageQuoteManager::getInstance()->addQuote('de.mysterycode.wcf.toDo', null, $this->todo->todoID, $this->parameters['message'], false);
@@ -825,14 +825,14 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessageQuoteAction::validateGetRenderedQuotes()
+	 * @inheritDoc
 	 */
 	public function validateGetRenderedQuotes() {
 		$this->readInteger('parentObjectID');
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessageQuoteAction::getRenderedQuotes()
+	 * @inheritDoc
 	 */
 	public function getRenderedQuotes() {
 		$quotes = MessageQuoteManager::getInstance()->getQuotesByParentObjectID('de.mysterycode.wcf.toDo', $this->todo->todoID);
@@ -843,7 +843,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessageInlineEditorAction::validateBeginEdit()
+	 * @inheritDoc
 	 */
 	public function validateBeginEdit() {
 		$this->parameters['objectID'] = (isset($this->parameters['objectID'])) ? intval($this->parameters['objectID']) : 0;
@@ -859,15 +859,12 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessageInlineEditorAction::beginEdit()
+	 * @inheritDoc
 	 */
 	public function beginEdit() {
 		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
 		
 		WCF::getTPL()->assign(array(
-			'enableBBCodes' => $this->todo->enableBBCodes,
-			'enableSmilies' => $this->todo->enableSmilies,
-			'enableHtml' => $this->todo->enableHtml,
 			'todo' => $this->todo,
 			'wysiwygSelector' => 'editor'.$this->todo->todoID
 		));
@@ -879,7 +876,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessageInlineEditorAction::validateSave()
+	 * @inheritDoc
 	 */
 	public function validateSave() {
 		if (!isset($this->parameters['data']) || !isset($this->parameters['data']['message']))
@@ -895,13 +892,10 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessageInlineEditorAction::save()
+	 * @inheritDoc
 	 */
 	public function save() {
 		$todoData = array(
-			'enableBBCodes' => $this->parameters['enableBBCodes'],
-			'enableSmilies' => $this->parameters['enableSmilies'],
-			'enableHtml' => $this->todo->enableHtml,
 			'message' => MessageUtil::stripCrap($this->parameters['data']['message'])
 		);
 		

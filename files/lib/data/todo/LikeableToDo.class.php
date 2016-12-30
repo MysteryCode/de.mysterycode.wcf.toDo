@@ -14,40 +14,40 @@ use wcf\data\todo\ToDoEditor;
  */
 class LikeableToDo extends AbstractLikeObject {
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = 'wcf\data\todo\ToDo';
 	
 	/**
-	 * @see	\wcf\data\like\object\ITitle::getTitle()
+	 * @inheritDoc
 	 */
 	public function getTitle() {
 		return $this->title;
 	}
 	
 	/**
-	 * @see	\wcf\data\like\object\ILikeObject::getURL()
+	 * @inheritDoc
 	 */
 	public function getURL() {
 		return $this->getLink();
 	}
 	
 	/**
-	 * @see	\wcf\data\like\object\ILikeObject::getUserID()
+	 * @inheritDoc
 	 */
 	public function getUserID() {
 		return $this->submitter;
 	}
 	
 	/**
-	 * @see	\wcf\data\like\object\ILikeObject::getObjectID()
+	 * @inheritDoc
 	 */
 	public function getObjectID() {
 		return $this->todoID;
 	}
 	
 	/**
-	 * @see	\wcf\data\like\object\ILikeObject::updateLikeCounter()
+	 * @inheritDoc
 	 */
 	public function updateLikeCounter($cumulativeLikes) {
 		$todoEditor = new ToDoEditor($this->getDecoratedObject());

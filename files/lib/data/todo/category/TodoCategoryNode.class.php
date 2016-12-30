@@ -14,7 +14,7 @@ use wcf\system\WCF;
  */
 class TodoCategoryNode extends CategoryNode {
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = 'wcf\data\todo\category\TodoCategory';
 

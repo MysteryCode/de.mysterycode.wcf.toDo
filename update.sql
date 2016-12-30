@@ -1,1 +1,1 @@
-ALTER TABLE wcf1_todo CHANGE hasEmbeddedObjects hasEmbeddedObjects tinyint(1) NOT NULL DEFAULT 0;
+ALTER TABLE wcf1_todo CHANGE timestamp time INT(10) NOT NULL DEFAULT 0;

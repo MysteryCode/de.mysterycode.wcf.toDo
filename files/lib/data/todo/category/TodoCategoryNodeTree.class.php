@@ -14,14 +14,14 @@ use wcf\data\category\CategoryNodeTree;
  */
 class TodoCategoryNodeTree extends CategoryNodeTree {
 	/**
-	 * @see	\wcf\data\category\CategoryNodeTree::$nodeClassName
+	 * @inheritDoc
 	 */
 	protected $nodeClassName = 'wcf\data\todo\category\TodoCategoryNode';
 
 	/**
 	 * Creates a new instance of CategoryNodeTree.
 	 *
-	 * @see		wcf\data\category\CategoryNode::__construct()
+	 * @inheritDoc
 	 * @param	integer			$parentCategoryID
 	 * @param	boolean			$includeDisabledCategories
 	 * @param	array<integer>		$excludedCategoryIDs
@@ -31,7 +31,7 @@ class TodoCategoryNodeTree extends CategoryNodeTree {
 	}
 
 	/**
-	 * @see	\wcf\data\category\CategoryNodeTree::buildTreeLevel()
+	 * @inheritDoc
 	 */
 	protected function buildTreeLevel(CategoryNode $parentNode, $depth = 0) {
 		if ($this->maxDepth != -1 && $depth < 0) {

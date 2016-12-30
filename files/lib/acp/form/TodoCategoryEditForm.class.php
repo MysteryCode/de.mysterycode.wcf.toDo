@@ -14,17 +14,17 @@ use wcf\data\todo\category\TodoCategory;
  */
 class TodoCategoryEditForm extends AbstractCategoryEditForm {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.toDoCategory';
 	
 	/**
-	 * @see	\wcf\acp\page\AbstractCategoryListPage::$objectTypeName
+	 * @inheritDoc
 	 */
 	public $objectTypeName = 'de.mysterycode.wcf.toDo';
 	
 	/**
-	 * @see	\wcf\acp\page\AbstractCategoryListPage::$pageTitle
+	 * @inheritDoc
 	 */
 	public $pageTitle = 'wcf.acp.todo.category.edit';
 }

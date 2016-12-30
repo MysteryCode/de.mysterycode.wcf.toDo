@@ -19,7 +19,7 @@ use wcf\system\WCF;
  */
 abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueueHandler {
 	/**
-	 * @see	\wcf\system\moderation\queue\AbstractModerationQueueHandler::$className
+	 * @inheritDoc
 	 */
 	protected $className = 'wcf\data\todo\ToDo';
 	
@@ -30,7 +30,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	protected static $todos = array();
 
 	/**
-	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::assignQueues()
+	 * @inheritDoc
 	 */
 	public function assignQueues(array $queues) {
 		$todoIDs = array();
@@ -70,14 +70,14 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	}
 
 	/**
-	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::getContainerID()
+	 * @inheritDoc
 	 */
 	public function getContainerID($objectID) {
 		return $this->getTodo($objectID)->getCategory()->categoryID;
 	}
 
 	/**
-	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::isValid()
+	 * @inheritDoc
 	 */
 	public function isValid($objectID) {
 		if ($this->getTodo($objectID) === null) {
@@ -105,7 +105,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	}
 
 	/**
-	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::populate()
+	 * @inheritDoc
 	 */
 	public function populate(array $queues) {
 		$todos = $objectIDs = array();
@@ -134,7 +134,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	}
 
 	/**
-	 * @see	\wcf\system\moderation\queue\IModerationQueueHandler::removeContent()
+	 * @inheritDoc
 	 */
 	public function removeContent(ModerationQueue $queue, $message) {
 		if ($this->isValid($queue->objectID) && ! $this->getTodo($queue->objectID)->isDeleted) {

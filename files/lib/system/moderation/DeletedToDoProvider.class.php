@@ -14,21 +14,21 @@ use wcf\system\moderation\IDeletedContentProvider;
  */
 class DeletedToDoProvider implements IDeletedContentProvider {
 	/**
-	 * @see	\wcf\system\moderation\IDeletedContentProvider::getObjectList()
+	 * @inheritDoc
 	 */
 	public function getObjectList() {
 		return new DeletedToDoList();
 	}
 	
 	/**
-	 * @see	\wcf\system\moderation\IDeletedContentProvider::getTemplateName()
+	 * @inheritDoc
 	 */
 	public function getTemplateName() {
 		return 'deletedToDoList';
 	}
 	
 	/**
-	 * @see	\wcf\system\moderation\IDeletedContentProvider::getApplication()
+	 * @inheritDoc
 	 */
 	public function getApplication() {
 		return 'wcf';

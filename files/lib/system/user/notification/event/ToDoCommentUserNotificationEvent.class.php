@@ -76,7 +76,7 @@ class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 	}
 	
 	/**
-	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::checkAccess()
+	 * @inheritDoc
 	 */
 	public function checkAccess() {
 		$todo = new ToDo($this->userNotificationObject->objectID);

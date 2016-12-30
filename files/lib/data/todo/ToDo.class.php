@@ -1,14 +1,15 @@
 <?php
 
 namespace wcf\data\todo;
-use wcf\data\attachment\Attachment;
 use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
+use wcf\data\ITitledLinkObject;
 use wcf\data\todo\assigned\AssignedCache;
 use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\category\TodoCategoryCache;
 use wcf\data\todo\status\TodoStatus;
 use wcf\data\todo\status\TodoStatusCache;
+use wcf\data\TUserContent;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\TodoUserCache;
 use wcf\data\user\User;
@@ -16,8 +17,6 @@ use wcf\data\DatabaseObject;
 use wcf\data\IMessage;
 use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
-use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
@@ -32,16 +31,18 @@ use wcf\util\StringUtil;
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
-class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteController, IMessage {
+class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController, IMessage {
+	use TUserContent;
+
 	/**
 	 *
-	 * @see \wcf\data\DatabaseObject::$databaseTableName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableName = 'todo';
 	
 	/**
 	 *
-	 * @see \wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableIndexName = 'todoID';
 
@@ -61,10 +62,6 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	
 	public $status = null;
 	public $category = null;
-	
-	public $enableSmilies = true;
-	public $enableHtml = false;
-	public $enableBBCodes = true;
 	
 	public function getResponsibleIDs() {
 		if (empty($this->responsibleIDs)) {
@@ -108,7 +105,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	
 	/**
 	 *
-	 * @see \wcf\data\IStorableObject::getDatabaseTableAlias()
+	 * @inheritDoc
 	 */
 	public static function getDatabaseTableAlias() {
 		return 'todo_table';
@@ -116,7 +113,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	
 	/**
 	 *
-	 * @see \wcf\system\request\IRouteController::getTitle()
+	 * @inheritDoc
 	 */
 	public function getTitle() {
 		return $this->title;
@@ -263,20 +260,7 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	/**
-	 * @see	\wcf\system\breadcrumb\IBreadcrumbProvider::getBreadcrumb()
-	 */
-	public function getBreadcrumb() {
-		return new Breadcrumb($this->getTitle(), $this->getLink());
-	}
-	
-	public function getBreadcrumbs() {
-		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.header.menu.toDo'), LinkHandler::getInstance()->getLink('ToDoList', array())));
-		if ($this->getCategory())
-			WCF::getBreadcrumbs()->add($this->getCategory()->getBreadCrumb());
-	}
-	
-	/**
-	 * @see	\wcf\data\IMessage::getFormattedMessage()
+	 * @inheritDoc
 	 */
 	public function getFormattedMessage() {
 		AttachmentBBCode::setObjectID($this->todoID);
@@ -287,57 +271,38 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::getMessage()
+	 * @inheritDoc
 	 */
 	public function getMessage() {
 		return $this->description;
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::isVisible()
+	 * @inheritDoc
 	 */
 	public function isVisible() {
 		return $this->canEnter();
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::__toString()
+	 * @inheritDoc
 	 */
 	public function __toString() {
 		return $this->getFormattedMessage();
 	}
 	
 	/**
-	 * @see	\wcf\data\IUserContent::getTime()
-	 */
-	public function getTime() {
-		return $this->timestamp;
-	}
-	
-	/**
-	 * @see	\wcf\data\IUserContent::getUserID()
+	 * @inheritDoc
 	 */
 	public function getUserID() {
 		return $this->submitter;
 	}
 	
 	/**
-	 * @see	\wcf\data\IUserContent::getUsername()
-	 */
-	public function getUsername() {
-		return $this->username;
-	}
-	
-	/**
-	 * @see	\wcf\data\IMessage::getExcerpt()
+	 * @inheritDoc
 	 */
 	public function getExcerpt($maxLength = 255) {
-		$text = $this->getFormattedMessage();
-		return StringUtil::truncateHTML($text, 255);
-// 		if (strlen($text) > 255)
-// 			return nl2br(mb_substr(StringUtil::stripHTML($text), 0, 255)).' ...';
-// 		else
-// 			return nl2br(StringUtil::stripHTML($text));
+		return StringUtil::truncateHTML($this->getFormattedMessage(), 255);
 	}
 	
 	public function getAttachments() {

@@ -15,7 +15,7 @@ use wcf\system\exception\UserInputException;
  */
 class AssignedGroupAction extends AbstractDatabaseObjectAction {
 	/**
-	 * @see \wcf\data\AbstractDatabaseObjectAction::$className
+	 * @inheritDoc
 	 */
 	protected $className = 'wcf\data\todo\assigned\group\AssignedGroupEditor';
 	

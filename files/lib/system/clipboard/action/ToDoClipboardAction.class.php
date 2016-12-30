@@ -15,17 +15,17 @@ use wcf\system\WCF;
  */
 class ToDoClipboardAction extends AbstractClipboardAction {
 	/**
-	 * @see	\wcf\system\clipboard\action\AbstractClipboardAction::$actionClassActions
+	 * @inheritDoc
 	 */
 	protected $actionClassActions = array('enable', 'disable', 'delete', 'restore');
 
 	/**
-	 * @see	\wcf\system\clipboard\action\AbstractClipboardAction::$supportedActions
+	 * @inheritDoc
 	 */
 	protected $supportedActions = array('enable', 'disable', 'trash', 'delete', 'restore');
 
 	/**
-	 * @see	\wcf\system\clipboard\action\IClipboardAction::execute()
+	 * @inheritDoc
 	 */
 	public function execute(array $objects, ClipboardAction $action) {
 		$item = parent::execute($objects, $action);
@@ -52,14 +52,14 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	}
 
 	/**
-	 * @see	\wcf\system\clipboard\action\IClipboardAction::getClassName()
+	 * @inheritDoc
 	 */
 	public function getClassName() {
 		return 'wcf\data\todo\ToDoAction';
 	}
 
 	/**
-	 * @see	\wcf\system\clipboard\action\IClipboardAction::getTypeName()
+	 * @inheritDoc
 	 */
 	public function getTypeName() {
 		return 'de.mysterycode.wcf.toDo.toDo';

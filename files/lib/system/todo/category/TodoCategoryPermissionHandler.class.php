@@ -14,7 +14,7 @@ use wcf\system\category\CategoryPermissionHandler as WCFCategoryPermissionHandle
  */
 class TodoCategoryPermissionHandler extends WCFCategoryPermissionHandler {
 	/**
-	 * @see	\wcf\system\SingletonFactory::init()
+	 * @inheritDoc
 	 */
 	protected function init() {
 		$this->categoryPermissions = TodoCategoryACLOptionCacheBuilder::getInstance()->getData();

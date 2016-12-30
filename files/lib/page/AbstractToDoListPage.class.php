@@ -23,22 +23,22 @@ use wcf\util\StringUtil;
  */
 abstract class AbstractToDoListPage extends SortablePage {
 	/**
-	 * @see wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'wcf.header.menu.toDo';
 	
 	/**
-	 * @see \wcf\page\SortablePage::$defaultSortField
+	 * @inheritDoc
 	 */
 	public $defaultSortField = TODO_DEFAULT_SORT_FIELD;
 	
 	/**
-	 * @see \wcf\page\SortablePage::$defaultSortOrder
+	 * @inheritDoc
 	 */
 	public $defaultSortOrder = TODO_DEFAULT_SORT_ORDER;
 	
 	/**
-	 * @see \wcf\page\SortablePage::$validSortFields
+	 * @inheritDoc
 	 */
 	public $validSortFields = array(
 		'statusID',
@@ -47,19 +47,19 @@ abstract class AbstractToDoListPage extends SortablePage {
 		'submitTime',
 		'endTime',
 		'submitter',
-		'timestamp',
+		'time',
 		'updatetimestamp',
 		'important',
 		'remembertime' 
 	);
 	
 	/**
-	 * @see \wcf\page\MultipleLinkPage::$itemsPerPage
+	 * @inheritDoc
 	 */
 	public $itemsPerPage = TODO_TODOS_PER_PAGE;
 	
 	/**
-	 * @see \wcf\page\MultipleLinkPage::$objectListClassName
+	 * @inheritDoc
 	 */
 	public $objectListClassName = 'wcf\data\todo\ViewableToDoList';
 	
@@ -68,7 +68,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	public $neededPermissions = array('user.toDo.toDo.canView');
 	
 	/**
-	 * @see	\wcf\page\AbstractPage::$enableTracking
+	 * @inheritDoc
 	 */
 	public $enableTracking = true;
 	
@@ -114,7 +114,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	public $finishedCount = 0;
 	
 	/**
-	 * @see \wcf\page\SortablePage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -124,7 +124,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	}
 	
 	/**
-	 * @see \wcf\page\SortablePage::validateSortField()
+	 * @inheritDoc
 	 */
 	public function validateSortField() {
 		parent::validateSortField();
@@ -134,7 +134,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	}
 	
 	/**
-	 * @see \wcf\page\MultipleLinkPage::initObjectList()
+	 * @inheritDoc
 	 */
 	protected function initObjectList() {
 		parent::initObjectList();
@@ -160,7 +160,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -195,7 +195,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

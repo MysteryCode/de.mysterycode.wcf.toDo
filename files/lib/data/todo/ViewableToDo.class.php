@@ -18,7 +18,7 @@ use wcf\system\WCF;
  */
 class ViewableToDo extends DatabaseObjectDecorator {
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = 'wcf\data\todo\ToDo';
 	
@@ -145,7 +145,7 @@ class ViewableToDo extends DatabaseObjectDecorator {
 	}
 	
 	/**
-	 * @see	\wcf\data\todo\ToDo::isSubscribed()
+	 * @inheritDoc
 	 */
 	public function isSubscribed() {
 		return ($this->watchID ? 1 : 0);

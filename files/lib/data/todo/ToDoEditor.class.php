@@ -19,7 +19,7 @@ use wcf\system\WCF;
  */
 class ToDoEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = 'wcf\data\todo\ToDo';
 	
@@ -41,7 +41,7 @@ class ToDoEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	}
 	
 	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * @inheritDoc
 	 */
 	public static function resetCache() {
 		TodoCacheBuilder::getInstance()->reset();

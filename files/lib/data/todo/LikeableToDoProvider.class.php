@@ -15,22 +15,22 @@ use wcf\data\object\type\AbstractObjectTypeProvider;
  */
 class LikeableToDoProvider extends AbstractObjectTypeProvider implements ILikeObjectTypeProvider {
 	/**
-	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$className
+	 * @inheritDoc
 	 */
 	public $className = 'wcf\data\todo\ToDo';
 	
 	/**
-	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$decoratorClassName
+	 * @inheritDoc
 	 */
 	public $decoratorClassName = 'wcf\data\todo\LikeableToDo';
 	
 	/**
-	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$listClassName
+	 * @inheritDoc
 	 */
 	public $listClassName = 'wcf\data\todo\ToDoList';
 	
 	/**
-	 * @see	\wcf\data\like\ILikeObjectTypeProvider::checkPermissions()
+	 * @inheritDoc
 	 */
 	public function checkPermissions(ILikeObject $object) {
 		return $object->canEnter();

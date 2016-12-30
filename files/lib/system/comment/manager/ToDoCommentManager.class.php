@@ -20,7 +20,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	protected $currentToDo = null;
 	
 	/**
-	 * @see \wcf\system\comment\manager\ICommentManager::canAdd()
+	 * @inheritDoc
 	 */
 	public function canAdd($objectID) {
 		if (!$this->isAccessible($objectID)) {
@@ -35,7 +35,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @see \wcf\system\comment\manager\ICommentManager::canEditComment()
+	 * @inheritDoc
 	 */
 	public function canEditComment(Comment $comment) {
 		$this->setCurrentToDo($comment->objectID);
@@ -44,7 +44,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @see \wcf\system\comment\manager\ICommentManager::canEditResponse()
+	 * @inheritDoc
 	 */
 	public function canEditResponse(CommentResponse $response) {
 		$this->setCurrentToDo($response->getComment()->objectID);
@@ -53,7 +53,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @see \wcf\system\comment\manager\ICommentManager::canDeleteComment()
+	 * @inheritDoc
 	 */
 	public function canDeleteComment(Comment $comment) {
 		$this->setCurrentToDo($comment->objectID);
@@ -62,7 +62,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @see \wcf\system\comment\manager\ICommentManager::canDeleteResponse()
+	 * @inheritDoc
 	 */
 	public function canDeleteResponse(CommentResponse $response) {
 		$this->setCurrentToDo($response->getComment()->objectID);
@@ -71,7 +71,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @see \wcf\system\comment\manager\ICommentManager::canModerate()
+	 * @inheritDoc
 	 */
 	public function canModerate($objectTypeID, $objectID) {
 		if (!$this->isAccessible($objectID)) {
@@ -98,7 +98,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @see \wcf\system\comment\manager\ICommentManager::isAccessible()
+	 * @inheritDoc
 	 */
 	public function isAccessible($objectID, $validateWritePermission = false) {
 		$this->setCurrentToDo($objectID);
@@ -118,7 +118,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @see \wcf\system\comment\manager\ICommentManager::canEdit()
+	 * @inheritDoc
 	 */
 	protected function canEdit($isOwner) {
 		return $this->canModify($isOwner, 'mod.toDo.comment.canEdit');
@@ -126,7 +126,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	
 	/**
 	 *
-	 * @see \wcf\system\comment\manager\ICommentManager::canDelete()
+	 * @inheritDoc
 	 */
 	protected function canDelete($isOwner) {
 		return $this->canModify($isOwner, 'mod.toDo.comment.canDelete');
@@ -166,7 +166,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @see \wcf\system\comment\manager\ICommentManager::getLink()
+	 * @inheritDoc
 	 */
 	public function getLink($objectTypeID, $objectID) {
 		$todo = new ToDo($objectID);
@@ -174,7 +174,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @see \wcf\system\comment\manager\ICommentManager::getTitle()
+	 * @inheritDoc
 	 */
 	public function getTitle($objectTypeID, $objectID, $isResponse = false) {
 		if ($isResponse) {

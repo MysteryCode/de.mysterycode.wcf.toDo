@@ -64,7 +64,7 @@ class TodoCategoryCache extends SingletonFactory {
 	protected $lastTodos = null;
 	
 	/**
-	 * @see	\wcf\system\SingletonFactory::init()
+	 * @inheritDoc
 	 */
 	protected function init() {
 		$this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.category', 'de.mysterycode.wcf.toDo');
@@ -250,10 +250,10 @@ class TodoCategoryCache extends SingletonFactory {
 			
 			// read data
 			$sql = "SELECT		todo.id, todo.categoryID,
-						todo.title, todo.timestamp, todo.submitter, todo.username,
+						todo.title, todo.time, todo.submitter, todo.username,
 				FROM		wcf".WCF_N."_todo todo
 				".$conditionBuilder."
-				ORDER BY	todo.timestamp DESC";
+				ORDER BY	todo.time DESC";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute($conditionBuilder->getParameters());
 			while ($row = $statement->fetchArray()) {

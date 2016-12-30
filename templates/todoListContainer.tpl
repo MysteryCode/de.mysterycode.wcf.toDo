@@ -54,10 +54,10 @@
 										<dl class="plain statsDataList">
 											<dt>{lang}wcf.toDo.task.submitTime{/lang}</dt>
 											<dd>
-												{if $todo->timestamp < TIME_NOW - (24*60*60)}
-													{@$todo->timestamp|date}
+												{if $todo->time < TIME_NOW - (24*60*60)}
+													{@$todo->time|date}
 												{else}
-													{@$todo->timestamp|time}
+													{@$todo->time|time}
 												{/if}
 											</dd>
 										</dl>

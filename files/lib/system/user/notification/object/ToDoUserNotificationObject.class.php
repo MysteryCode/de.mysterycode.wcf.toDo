@@ -14,33 +14,33 @@ use wcf\system\user\notification\object\IUserNotificationObject;
  */
 class ToDoUserNotificationObject extends DatabaseObjectDecorator implements IUserNotificationObject {
 	/**
-	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = 'wcf\data\todo\ToDo';
 	
 	/**
-	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getObjectID()
+	 * @inheritDoc
 	 */
 	public function getObjectID() {
 		return $this->todoID;
 	}
 	
 	/**
-	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getTitle()
+	 * @inheritDoc
 	 */
 	public function getTitle() {
 		return $this->getDecoratedObject()->getLink();
 	}
 	
 	/**
-	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getURL()
+	 * @inheritDoc
 	 */
 	public function getURL() {
 		return $this->getDecoratedObject()->getLink();
 	}
 	
 	/**
-	 * @see \wcf\system\user\notification\object\IUserNotificationObject::getAuthorID()
+	 * @inheritDoc
 	 */
 	public function getAuthorID() {
 		return $this->submitter;

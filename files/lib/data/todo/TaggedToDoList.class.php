@@ -24,7 +24,7 @@ class TaggedToDoList extends AccessibleToDoList {
 	}
 	
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::countObjects()
+	 * @inheritDoc
 	 */
 	public function countObjects() {
 		$sql = "SELECT	COUNT(*) AS count
@@ -40,7 +40,7 @@ class TaggedToDoList extends AccessibleToDoList {
 	}
 	
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::readObjectIDs()
+	 * @inheritDoc
 	 */
 	public function readObjectIDs() {
 		$this->objectIDs = array();

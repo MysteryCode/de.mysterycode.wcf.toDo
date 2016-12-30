@@ -14,12 +14,12 @@ use wcf\system\WCF;
  */
 class ToDoList extends DatabaseObjectList {
 	/**
-	 * @see \wcf\data\DatabaseObjectList::$className
+	 * @inheritDoc
 	 */
 	public $className = 'wcf\data\todo\ToDo';
 	
 	/**
-	 * @see \wcf\data\DatabaseObjectList::__construct()
+	 * @inheritDoc
 	 */
 	public function __construct() {
 		parent::__construct ();

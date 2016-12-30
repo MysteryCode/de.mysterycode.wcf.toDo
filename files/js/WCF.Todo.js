@@ -14,7 +14,7 @@ WCF.Todo = {};
 /**
  * Loads todo previews.
  * 
- * @see WCF.Popover
+ * @inheritDoc
  */
 WCF.Todo.Preview = WCF.Popover.extend({
 	/**
@@ -32,7 +32,7 @@ WCF.Todo.Preview = WCF.Popover.extend({
 	_todoProfile : {},
 
 	/**
-	 * @see WCF.Popover.init()
+	 * @inheritDoc
 	 */
 	init : function() {
 		this._super('.todoLink');
@@ -43,7 +43,7 @@ WCF.Todo.Preview = WCF.Popover.extend({
 	},
 
 	/**
-	 * @see WCF.Popover._loadContent()
+	 * @inheritDoc
 	 */
 	_loadContent : function() {
 		var $element = $('#' + this._activeElementID);
@@ -88,32 +88,32 @@ WCF.Todo.Preview = WCF.Popover.extend({
 /**
  * Like support for todos
  * 
- * @see WCF.Like
+ * @inheritDoc
  */
 WCF.Todo.Like = WCF.Like.extend({
 	/**
-	 * @see WCF.Like._getContainers()
+	 * @inheritDoc
 	 */
 	_getContainers : function() {
 		return $('article.message:not(.messageCollapsed)');
 	},
 
 	/**
-	 * @see WCF.Like._getObjectID()
+	 * @inheritDoc
 	 */
 	_getObjectID : function(containerID) {
 		return this._containers[containerID].data('todoID');
 	},
 
 	/**
-	 * @see WCF.Like._getWidgetContainer()
+	 * @inheritDoc
 	 */
 	_getWidgetContainer : function(containerID) {
 		return this._containers[containerID].find('.messageHeader');
 	},
 
 	/**
-	 * @see WCF.Like._buildWidget()
+	 * @inheritDoc
 	 */
 	_buildWidget : function(containerID, likeButton, dislikeButton, badge,
 			summary) {
@@ -157,7 +157,7 @@ WCF.Todo.Like = WCF.Like.extend({
 	},
 
 	/**
-	 * @see WCF.Like._addWidget()
+	 * @inheritDoc
 	 */
 	_addWidget : function(containerID, widget) {
 	}
@@ -166,18 +166,18 @@ WCF.Todo.Like = WCF.Like.extend({
 /**
  * Like support for todos on detail page
  * 
- * @see WCF.Todo.Like
+ * @inheritDoc
  */
 WCF.Todo.Like.Detail = WCF.Todo.Like.extend({
 	/**
-	 * @see WCF.Like._getContainers()
+	 * @inheritDoc
 	 */
 	_getContainers : function() {
 		return $('.boxHeadline');
 	},
 
 	/**
-	 * @see WCF.Like._buildWidget()
+	 * @inheritDoc
 	 */
 	_buildWidget : function(containerID, likeButton, dislikeButton, badge,
 			summary) {
@@ -423,7 +423,7 @@ WCF.Todo.InlineEditor = WCF.InlineEditor
 			_updateHandler : null,
 
 			/**
-			 * @see WCF.InlineEditor._setOptions()
+			 * @inheritDoc
 			 */
 			_setOptions : function() {
 				this._environment = 'todo';
@@ -473,14 +473,14 @@ WCF.Todo.InlineEditor = WCF.InlineEditor
 			},
 
 			/**
-			 * @see WCF.InlineEditor._getTriggerElement()
+			 * @inheritDoc
 			 */
 			_getTriggerElement : function(element) {
 				return element.find('.jsTodoInlineEditor');
 			},
 
 			/**
-			 * @see WCF.InlineEditor._show()
+			 * @inheritDoc
 			 */
 			_show : function(event) {
 				var $elementID = $(event.currentTarget).data('elementID');
@@ -518,7 +518,7 @@ WCF.Todo.InlineEditor = WCF.InlineEditor
 			},
 
 			/**
-			 * @see WCF.InlineEditor._validate()
+			 * @inheritDoc
 			 */
 			_validate : function(elementID, optionName) {
 				var $todoID = $('#' + elementID).data('todoID');
@@ -604,7 +604,7 @@ WCF.Todo.InlineEditor = WCF.InlineEditor
 			},
 
 			/**
-			 * @see WCF.InlineEditor._execute()
+			 * @inheritDoc
 			 */
 			_execute : function(elementID, optionName) {
 				// abort if option is invalid or not accessible
@@ -727,7 +727,7 @@ WCF.Todo.InlineEditor = WCF.InlineEditor
 			},
 
 			/**
-			 * @see WCF.InlineEditor._updateState()
+			 * @inheritDoc
 			 */
 			_updateState : function() {
 				this._notification.show();
@@ -807,11 +807,11 @@ WCF.Todo.InlineEditor = WCF.InlineEditor
 /**
  * Todo update handler for todo list page.
  * 
- * @see WCF.Todo.UpdateHandler
+ * @inheritDoc
  */
 WCF.Todo.UpdateHandler.List = WCF.Todo.UpdateHandler.extend({
 	/**
-	 * @see WCF.Todo.UpdateHandler._enable()
+	 * @inheritDoc
 	 */
 	_enable : function(todoID) {
 		this._super(todoID);
@@ -819,7 +819,7 @@ WCF.Todo.UpdateHandler.List = WCF.Todo.UpdateHandler.extend({
 	},
 
 	/**
-	 * @see WCF.Todo.UpdateHandler._disable()
+	 * @inheritDoc
 	 */
 	_disable : function(todoID) {
 		this._super(todoID);
@@ -828,7 +828,7 @@ WCF.Todo.UpdateHandler.List = WCF.Todo.UpdateHandler.extend({
 	},
 
 	/**
-	 * @see WCF.Todo.UpdateHandler._trash()
+	 * @inheritDoc
 	 */
 	_trash : function(todoID) {
 		this._super(todoID);
@@ -837,7 +837,7 @@ WCF.Todo.UpdateHandler.List = WCF.Todo.UpdateHandler.extend({
 	},
 
 	/**
-	 * @see WCF.Todo.UpdateHandler._delete()
+	 * @inheritDoc
 	 */
 	_delete : function(todoID, categoryLink) {
 		this._todos[todoID].remove();
@@ -847,7 +847,7 @@ WCF.Todo.UpdateHandler.List = WCF.Todo.UpdateHandler.extend({
 	},
 
 	/**
-	 * @see WCF.Todo.UpdateHandler._deleteNote()
+	 * @inheritDoc
 	 */
 	_deleteNote : function(todoID, reason) {
 		$('<p class="todoDeleteNote messageFooterNote">' + reason + '</p>')
@@ -855,7 +855,7 @@ WCF.Todo.UpdateHandler.List = WCF.Todo.UpdateHandler.extend({
 	},
 
 	/**
-	 * @see WCF.Todo.UpdateHandler._restore()
+	 * @inheritDoc
 	 */
 	_restore : function(todoID) {
 		this._super(todoID);
@@ -868,11 +868,11 @@ WCF.Todo.UpdateHandler.List = WCF.Todo.UpdateHandler.extend({
 /**
  * Todo update handler for todo page.
  * 
- * @see WCF.Todo.UpdateHandler
+ * @inheritDoc
  */
 WCF.Todo.UpdateHandler.Todo = WCF.Todo.UpdateHandler.extend({
 	/**
-	 * @see WCF.Todo.UpdateHandler._enable()
+	 * @inheritDoc
 	 */
 	_enable : function(todoID) {
 		this._super(todoID);
@@ -883,7 +883,7 @@ WCF.Todo.UpdateHandler.Todo = WCF.Todo.UpdateHandler.extend({
 	},
 
 	/**
-	 * @see WCF.Todo.UpdateHandler._disable()
+	 * @inheritDoc
 	 */
 	_disable : function(todoID) {
 		this._super(todoID);
@@ -892,7 +892,7 @@ WCF.Todo.UpdateHandler.Todo = WCF.Todo.UpdateHandler.extend({
 	},
 
 	/**
-	 * @see WCF.Todo.UpdateHandler._trash()
+	 * @inheritDoc
 	 */
 	_trash : function(todoID) {
 		this._super(todoID);
@@ -901,14 +901,14 @@ WCF.Todo.UpdateHandler.Todo = WCF.Todo.UpdateHandler.extend({
 	},
 
 	/**
-	 * @see WCF.Todo.UpdateHandler._delete()
+	 * @inheritDoc
 	 */
 	_delete : function(todoID, categoryLink) {
 		window.location = categoryLink;
 	},
 
 	/**
-	 * @see WCF.Todo.UpdateHandler._deleteNote()
+	 * @inheritDoc
 	 */
 	_deleteNote : function(todoID, reason) {
 		$(
@@ -917,7 +917,7 @@ WCF.Todo.UpdateHandler.Todo = WCF.Todo.UpdateHandler.extend({
 	},
 
 	/**
-	 * @see WCF.Todo.UpdateHandler._restore()
+	 * @inheritDoc
 	 */
 	_restore : function(todoID) {
 		this._super(todoID);
@@ -1438,7 +1438,7 @@ WCF.Todo.MarkSolved = Class
 WCF.Todo.QuoteHandler = WCF.Message.Quote.Handler
 		.extend({
 			/**
-			 * @see WCF.Message.QuoteManager.init()
+			 * @inheritDoc
 			 */
 			init : function(quoteManager) {
 				this._super(quoteManager, 'wcf\\data\\todo\\ToDoAction',
@@ -1620,17 +1620,17 @@ WCF.Todo.Search = {};
 /**
  * Provides quick search for user groups only.
  * 
- * @see WCF.Search.Base and WCF.Search.User
+ * @inheritDoc
  */
 WCF.Todo.Search.User = WCF.Search.Base
 		.extend({
 			/**
-			 * @see WCF.Search.Base._className
+			 * @inheritDoc
 			 */
 			_className : 'wcf\\data\\user\\group\\UserGroupSearchAction',
 
 			/**
-			 * @see WCF.Search.Base.init()
+			 * @inheritDoc
 			 */
 			init : function(searchInput, callback, excludedSearchValues,
 					commaSeperated) {
@@ -1639,7 +1639,7 @@ WCF.Todo.Search.User = WCF.Search.Base
 			},
 
 			/**
-			 * @see WCF.Search.Base._createListItem()
+			 * @inheritDoc
 			 */
 			_createListItem : function(item) {
 				var $listItem = this._super(item);

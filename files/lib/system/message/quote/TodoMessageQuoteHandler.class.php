@@ -15,7 +15,7 @@ use wcf\system\message\quote\QuotedMessage;
  */
 class TodoMessageQuoteHandler extends AbstractMessageQuoteHandler {
 	/**
-	 * @see	\wcf\system\message\quote\AbstractMessageQuoteHandler::getMessages()
+	 * @inheritDoc
 	 */
 	protected function getMessages(array $data) {
 		$todoList = new ToDoList();

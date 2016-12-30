@@ -15,12 +15,12 @@ use wcf\system\cache\builder\AssignCacheBuilder;
  */
 class AssignedUserEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = 'wcf\data\todo\assigned\user\AssignedUser';
 	
 	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * @inheritDoc
 	 */
 	public static function resetCache() {
 		AssignCacheBuilder::getInstance()->reset(array('user'));

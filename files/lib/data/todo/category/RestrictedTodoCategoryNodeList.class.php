@@ -13,7 +13,7 @@ use wcf\data\category\CategoryNode;
  */
 class RestrictedTodoCategoryNodeList extends TodoCategoryNodeList {
 	/**
-	 * @see	\wcf\data\category\CategoryNodeTree::isIncluded()
+	 * @inheritDoc
 	 */
 	protected function isIncluded(CategoryNode $categoryNode) {
 		return (parent::isIncluded($categoryNode) && $categoryNode->getPermission());

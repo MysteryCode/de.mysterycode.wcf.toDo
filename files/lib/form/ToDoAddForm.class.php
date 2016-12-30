@@ -10,7 +10,6 @@ use wcf\data\todo\ToDoAction;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\form\MessageForm;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\message\quote\MessageQuoteManager;
@@ -32,17 +31,17 @@ use wcf\util\StringUtil;
  */
 class ToDoAddForm extends MessageForm {
 	/**
-	 * @see wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'wcf.header.menu.toDo';
 	
 	/**
-	 * @see	\wcf\page\AbstractPage::$enableTracking
+	 * @inheritDoc
 	 */
 	public $enableTracking = true;
 	
 	/**
-	 * @see	\wcf\form\MessageForm::$attachmentObjectType
+	 * @inheritDoc
 	 */
 	public $attachmentObjectType = 'de.mysterycode.wcf.toDo.toDo';
 	
@@ -64,14 +63,11 @@ class ToDoAddForm extends MessageForm {
 	public $newCategory = '';
 	public $progress = 0;
 	public $remembertime = 0;
-	public $enableSmilies = 0;
-	public $enableHtml = 0;
-	public $enableBBCodes = 0;
 
 	public $statusList = array();
 	
 	/**
-	 * @see	\wcf\form\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -85,7 +81,7 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::readFormParameters()
+	 * @inheritDoc
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -101,9 +97,6 @@ class ToDoAddForm extends MessageForm {
 		if (isset($_POST['newCategory'])) $this->newCategory = StringUtil::trim($_POST['newCategory']);
 		if (isset($_POST['progress'])) $this->progress = StringUtil::trim($_POST['progress']);
 		if (isset($_POST['remembertime']) && $_POST['remembertime'] > 0 && $_POST['remembertime'] != '') $this->remembertime = \DateTime::createFromFormat('Y-m-d', $_POST['remembertime'], WCF::getUser()->getTimeZone())->getTimestamp();
-		if (isset($_POST['enableSmilies'])) $this->enableSmilies = 1;
-		if (isset($_POST['enableHtml']) && WCF::getSession()->getPermission('user.toDo.canUseHtml')) $this->enableHtml = 1;
-		if (isset($_POST['enableBBCodes'])) $this->enableBBCodes = 1;
 		if (isset($_POST['responsibles'])) $this->responsibles = StringUtil::trim($_POST['responsibles']);
 		if (isset($_POST['responsibleGroups'])) $this->responsibleGroups = StringUtil::trim($_POST['responsibleGroups']);
 		
@@ -111,7 +104,7 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::validate()
+	 * @inheritDoc
 	 */
 	public function validate() {
 		if (empty($this->title)) {
@@ -136,7 +129,7 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @inheritDoc
 	 */
 	public function save() {
 		$todoData = array(
@@ -146,16 +139,13 @@ class ToDoAddForm extends MessageForm {
 				'note' => $this->note,
 				'submitter' => WCF::getUser()->userID,
 				'username' => WCF::getUser()->username,
-				'timestamp' => TIME_NOW,
+				'time' => TIME_NOW,
 				'endTime' => $this->endTime,
 				'private' => $this->private,
 				'important' => $this->important,
 				'categoryID' => $this->categoryID ?: null,
 				'progress' => $this->progress,
-				'remembertime' => $this->remembertime,
-				'enableSmilies' => $this->enableSmilies,
-				'enableHtml' => $this->enableHtml,
-				'enableBBCodes' => $this->enableBBCodes
+				'remembertime' => $this->remembertime
 			),
 			'attachmentHandler' => $this->attachmentHandler
 		);
@@ -193,7 +183,7 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -207,13 +197,11 @@ class ToDoAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		
-		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.header.menu.toDo'), LinkHandler::getInstance()->getLink('ToDoList', array())));
-		
+
 		MessageQuoteManager::getInstance()->assignVariables();
 		
 		WCF::getTPL()->assign( array(
@@ -230,9 +218,6 @@ class ToDoAddForm extends MessageForm {
 			'category' => $this->category,
 			'categoryList' => $this->categoryList,
 			'progress' => $this->progress,
-			'enableSmilies' => $this->enableSmilies,
-			'enableHtml' => $this->enableHtml,
-			'enableBBCodes' => $this->enableBBCodes,
 			'remembertime' => $this->remembertime,
 			'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.toDo.attachment.allowedAttachmentExtensions'))),
 			'statusList' => $this->statusList,

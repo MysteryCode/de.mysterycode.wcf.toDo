@@ -15,12 +15,12 @@ use wcf\system\cache\builder\AssignCacheBuilder;
  */
 class AssignedGroupEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = 'wcf\data\todo\assigned\group\AssignedGroup';
 	
 	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * @inheritDoc
 	 */
 	public static function resetCache() {
 		AssignCacheBuilder::getInstance()->reset(array('group'));

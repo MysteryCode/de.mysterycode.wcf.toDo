@@ -68,7 +68,7 @@ category:wcf.toDo.category
 endTime:wcf.toDo.task.endTime
 statusID:wcf.toDo.task.status
 submitter:wcf.toDo.task.submitter
-timestamp:wcf.toDo.task.submitTime
+time:wcf.toDo.task.submitTime
 updatetimestamp:wcf.toDo.task.updatetimestamp
 important:wcf.toDo.task.priority
 remembertime:wcf.toDo.task.remembertime]]></selectoptions>

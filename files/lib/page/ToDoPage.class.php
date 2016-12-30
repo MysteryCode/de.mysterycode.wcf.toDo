@@ -5,7 +5,6 @@ use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoCache;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\data\user\User;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\comment\CommentHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
@@ -28,7 +27,7 @@ use wcf\system\WCF;
 class ToDoPage extends AbstractPage {
 	/**
 	 *
-	 * @see wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'wcf.header.menu.toDo';
 	
@@ -41,7 +40,7 @@ class ToDoPage extends AbstractPage {
 	public $neededModules = array('TODOLIST');
 	
 	/**
-	 * @see	\wcf\page\AbstractPage::$enableTracking
+	 * @inheritDoc
 	 */
 	public $enableTracking = true;
 	
@@ -59,7 +58,7 @@ class ToDoPage extends AbstractPage {
 	
 	/**
 	 *
-	 * @see wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -71,7 +70,7 @@ class ToDoPage extends AbstractPage {
 	
 	/**
 	 *
-	 * @see wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -99,16 +98,11 @@ class ToDoPage extends AbstractPage {
 			LikeHandler::getInstance()->loadLikeObjects($objectType, array($this->todo->todoID));
 			$this->likeData = LikeHandler::getInstance()->getLikeObject($objectType, $this->todo->todoID);
 		}
-		
-		WCF::getBreadcrumbs()->add( new Breadcrumb( WCF::getLanguage()->get('wcf.header.menu.toDo'), LinkHandler::getInstance()->getLink('ToDoList', array())));
-		
-		if ($this->todo->getCategory())
-			WCF::getBreadcrumbs()->add($this->todo->getCategory()->getBreadCrumb());
 	}
 	
 	/**
 	 *
-	 * @see wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -136,14 +130,14 @@ class ToDoPage extends AbstractPage {
 	}
 	
 	/**
-	 * @see	\wcf\page\ITrackablePage::getParentObjectType()
+	 * @inheritDoc
 	 */
 	public function getParentObjectType() {
 		return 'de.mysterycode.wcf.toDo';
 	}
 	
 	/**
-	 * @see	\wcf\page\ITrackablePage::getParentObjectID()
+	 * @inheritDoc
 	 */
 	public function getParentObjectID() {
 		if ($this->todo)
@@ -153,14 +147,14 @@ class ToDoPage extends AbstractPage {
 	}
 	
 	/**
-	 * @see	\wcf\page\ITrackablePage::getObjectType()
+	 * @inheritDoc
 	 */
 	public function getObjectType() {
 		return 'de.mysterycode.wcf.toDo.toDo';
 	}
 	
 	/**
-	 * @see	\wcf\page\ITrackablePage::getObjectID()
+	 * @inheritDoc
 	 */
 	public function getObjectID() {
 		if ($this->todo)

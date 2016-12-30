@@ -12,12 +12,12 @@ use wcf\data\object\type\AbstractObjectTypeProvider;
  */
 class ToDoProvider extends AbstractObjectTypeProvider {
 	/**
-	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$className
+	 * @inheritDoc
 	 */
 	public $className = 'wcf\data\todo\ToDo';
 	
 	/**
-	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$listClassName
+	 * @inheritDoc
 	 */
 	public $listClassName = 'wcf\data\todo\ToDoList';
 }

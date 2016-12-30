@@ -39,7 +39,7 @@
 									<h1><a href="{$todo->getLink()}">{$todo->title}</a></h1>
 
 									<p>
-										{if $todo->submitter}<a href="{link controller='User' id=$todo->submitter title=$todo->getUser()->username}{/link}" class="userLink" data-user-id="{@$todo->submitter}">{$todo->getUser()->username}</a>{else}{$todo->getUser()->username}{/if} - {@$todo->timestamp|time}
+										{if $todo->submitter}<a href="{link controller='User' id=$todo->submitter title=$todo->getUser()->username}{/link}" class="userLink" data-user-id="{@$todo->submitter}">{$todo->getUser()->username}</a>{else}{$todo->getUser()->username}{/if} - {@$todo->time|time}
 										{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike') && ($todo->likes || $todo->dislikes)}<span class="likesBadge badge jsTooltip {if $todo->cumulativeLikes > 0}green{elseif $todo->cumulativeLikes < 0}red{/if}" title="{lang likes=$todo->likes dislikes=$todo->dislikes}wcf.like.tooltip{/lang}">{if $todo->cumulativeLikes > 0}+{elseif $todo->cumulativeLikes == 0}&plusmn;{/if}{#$todo->cumulativeLikes}</span>{/if}
 									</p>
 								</div>

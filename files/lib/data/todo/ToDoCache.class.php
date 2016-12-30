@@ -32,7 +32,7 @@ class ToDoCache extends SingletonFactory {
 
 	/**
 	 *
-	 * @see \wcf\system\SingletonFactory::init()
+	 * @inheritDoc
 	 */
 	protected function init() {
 		$this->cachedTodos = TodoCacheBuilder::getInstance()->getData();

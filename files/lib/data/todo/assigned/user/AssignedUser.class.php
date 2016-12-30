@@ -14,12 +14,12 @@ use wcf\system\WCF;
  */
 class AssignedUser extends DatabaseObject {
 	/**
-	 * @see \wcf\data\DatabaseObject::$databaseTableName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableName = 'todo_to_user';
 	
 	/**
-	 * @see \wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableIndexName = 'assignID';
 }

@@ -4,6 +4,54 @@
 	xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/eventListener.xsd">
 	<import>
 		<!-- show hint -->
+		<eventlistener name="showWarning">
+			<eventclassname>wcf\page\AbstractPage</eventclassname>
+			<eventname>assignVariables</eventname>
+			<listenerclassname>wcf\system\event\listener\ToDoWarningListener</listenerclassname>
+			<environment>user</environment>
+			<inherit>1</inherit>
+		</eventlistener>
+
+		<!-- renaming users -->
+		<eventlistener name="renameUser">
+			<eventclassname>wcf\data\user\UserAction</eventclassname>
+			<eventname>rename</eventname>
+			<listenerclassname>wcf\system\event\listener\ToDoUserActionRenameListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
+		<eventlistener name="renameAdmin">
+			<eventclassname>wcf\data\user\UserAction</eventclassname>
+			<eventname>rename</eventname>
+			<listenerclassname>wcf\system\event\listener\ToDoUserActionRenameListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+
+		<!-- category action -->
+		<eventlistener name="categoryAdminActionInit">
+			<eventclassname>wcf\data\category\CategoryAction</eventclassname>
+			<eventname>initializeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\TodoCategoryActionListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		<eventlistener name="categoryUserActionInit">
+			<eventclassname>wcf\data\category\CategoryAction</eventclassname>
+			<eventname>initializeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\TodoCategoryActionListener</listenerclassname>
+		</eventlistener>
+		<eventlistener name="categoryAdminActionFinalize">
+			<eventclassname>wcf\data\category\CategoryAction</eventclassname>
+			<eventname>finalizeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\TodoCategoryActionListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		<eventlistener name="categoryUserActionFinalize">
+			<eventclassname>wcf\data\category\CategoryAction</eventclassname>
+			<eventname>finalizeAction</eventname>
+			<listenerclassname>wcf\system\event\listener\TodoCategoryActionListener</listenerclassname>
+		</eventlistener>
+	</import>
+	<delete>
+		<!-- show hint -->
 		<eventlistener>
 			<eventclassname>wcf\page\AbstractPage</eventclassname>
 			<eventname>assignVariables</eventname>
@@ -48,15 +96,6 @@
 			<eventclassname>wcf\data\category\CategoryAction</eventclassname>
 			<eventname>finalizeAction</eventname>
 			<listenerclassname>wcf\system\event\listener\TodoCategoryActionListener</listenerclassname>
-		</eventlistener>
-	</import>
-	<delete>
-		<eventlistener>
-			<eventclassname>wcf\page\AbstractPage</eventclassname>
-			<eventname>assignVariables</eventname>
-			<listenerclassname>wcf\system\event\listener\ToDoNotificationListener</listenerclassname>
-			<environment>user</environment>
-			<inherit>1</inherit>
 		</eventlistener>
 	</delete>
 </data>

@@ -15,13 +15,13 @@ use wcf\system\clipboard\ClipboardHandler;
 class DeletedToDoList extends ToDoList {
 
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::$sqlOrderBy
+	 * @inheritDoc
 	 */
-	public $sqlOrderBy = 'todo_table.timestamp DESC';
+	public $sqlOrderBy = 'todo_table.time DESC';
 	
 	/**
 	 *
-	 * @see \wcf\data\DatabaseObjectList::$className
+	 * @inheritDoc
 	 */
 	public $className = 'wcf\data\todo\ToDo';
 	

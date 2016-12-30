@@ -13,7 +13,7 @@ use wcf\data\DatabaseObjectList;
  */
 class AssignedUserList extends DatabaseObjectList {
 	/**
-	 * @see \wcf\data\DatabaseObjectList::$className
+	 * @inheritDoc
 	 */
 	public $className = 'wcf\data\todo\assigned\user\AssignedUser';
 }

@@ -16,7 +16,7 @@ use wcf\system\WCF;
  */
 class ToDoArchivePage extends AbstractToDoListPage {
 	/**
-	 * @see \wcf\page\MultipleLinkPage::initObjectList()
+	 * @inheritDoc
 	 */
 	protected function initObjectList() {
 		parent::initObjectList ();
@@ -25,7 +25,7 @@ class ToDoArchivePage extends AbstractToDoListPage {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

@@ -19,7 +19,7 @@ class ToDoWarningListener implements IParameterizedEventListener {
 	public $waiting = 0;
 	
 	/**
-	 * @see \wcf\system\event\listener\IParameterizedEventListener::execute()
+	 * @inheritDoc
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		if (WCF::getUser()->userID != 0) {

@@ -16,17 +16,17 @@ use wcf\system\WCF;
  */
 class ToDoModerationQueueReportHandler extends AbstractToDoModerationQueueHandler implements IModerationQueueReportHandler {
 	/**
-	 * @see	\wcf\system\moderation\queue\AbstractModerationQueueHandler::$definitionName
+	 * @inheritDoc
 	 */
 	protected $definitionName = 'com.woltlab.wcf.moderation.report';
 	
 	/**
-	 * @see	\wcf\system\moderation\queue\AbstractModerationQueueHandler::$objectType
+	 * @inheritDoc
 	 */
 	protected $objectType = 'de.mysterycode.wcf.toDo.toDo';
 	
 	/**
-	 * @see	\wcf\system\moderation\queue\report\IModerationQueueReportHandler::canReport()
+	 * @inheritDoc
 	 */
 	public function canReport($objectID) {
 		if (!$this->isValid($objectID)) {
@@ -41,7 +41,7 @@ class ToDoModerationQueueReportHandler extends AbstractToDoModerationQueueHandle
 	}
 	
 	/**
-	 * @see	\wcf\system\moderation\queue\report\IModerationQueueReportHandler::getReportedContent()
+	 * @inheritDoc
 	 */
 	public function getReportedContent(ViewableModerationQueue $queue) {
 		WCF::getTPL()->assign(array(
@@ -52,7 +52,7 @@ class ToDoModerationQueueReportHandler extends AbstractToDoModerationQueueHandle
 	}
 	
 	/**
-	 * @see	\wcf\system\moderation\queue\report\IModerationQueueReportHandler::getReportedObject()
+	 * @inheritDoc
 	 */
 	public function getReportedObject($objectID) {
 		if ($this->isValid($objectID)) {

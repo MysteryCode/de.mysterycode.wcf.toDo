@@ -14,12 +14,12 @@ use wcf\system\exception\PermissionDeniedException;
  */
 class HistorySavingToDoProvider extends ToDoProvider implements IHistorySavingObjectTypeProvider {
 	/**
-	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$decoratorClassName
+	 * @inheritDoc
 	 */
 	public $decoratorClassName = 'wcf\data\todo\HistorySavingToDo';
 	
 	/**
-	 * @see	\wcf\system\edit\IHistorySavingObjectTypeProvider::checkPermissions()
+	 * @inheritDoc
 	 */
 	public function checkPermissions(IHistorySavingObject $object) {
 		if (!($object instanceof HistorySavingToDo))
@@ -30,7 +30,7 @@ class HistorySavingToDoProvider extends ToDoProvider implements IHistorySavingOb
 	}
 	
 	/**
-	 * @see	\wcf\system\edit\IHistorySavingObjectTypeProvider::getActivePageMenuItem()
+	 * @inheritDoc
 	 */
 	public function getActivePageMenuItem() {
 		return 'wcf.header.menu.toDo';

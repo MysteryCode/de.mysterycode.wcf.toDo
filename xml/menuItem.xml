@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/menuItem.xsd">
+	<import>
+		<item identifier="mcps.header.menu.updateserver">
+			<menu>com.woltlab.wcf.MainMenu</menu>
+			<page>de.mysterycode.mcps.ServerList</page>
+			<title language="de">Paketserver</title>
+			<title language="en">Updateserver</title>
+		</item>
+		<item identifier="mcps.header.menu.updateserver.updates">
+			<page>de.mysterycode.mcps.Updates</page>
+			<parent>mcps.header.menu.updateserver</parent>
+			<title language="de">Updates</title>
+			<title language="en">Updates</title>
+		</item>
+	</import>
+</data>

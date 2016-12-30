@@ -2,7 +2,6 @@
 
 namespace wcf\page;
 use wcf\data\todo\ToDo;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\request\LinkHandler;
@@ -19,16 +18,11 @@ use wcf\system\WCF;
  */
 class MyToDosPage extends AbstractToDoListPage {
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		
-		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.toDo.taskList'), LinkHandler::getInstance()->getLink('ToDoList', array())));
-		
-		// do not want to create a new objecttype
-		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoListPage', $this);
-		
+
 		WCF::getTPL()->assign(array(
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.MyToDosPage'),
 			'sidebarName' => 'de.mysterycode.wcf.MyToDosPage',

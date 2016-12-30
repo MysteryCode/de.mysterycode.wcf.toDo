@@ -39,7 +39,7 @@ class ToDoEditUserNotificationEvent extends AbstractUserNotificationEvent {
 	}
 	
 	/**
-	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::checkAccess()
+	 * @inheritDoc
 	 */
 	public function checkAccess() {
 		if (empty($this->userNotificationObject->object) || !$this->userNotificationObject->getObjectID())

@@ -175,9 +175,9 @@
 				<dt>{lang}wcf.toDo.task.privacy{/lang}</dt>
 				<dd><span class="icon icon-{if $todo->private == 0}un{/if}lock"></span></dd>
 				
-				{if $todo->timestamp > 0}
+				{if $todo->time > 0}
 					<dt>{lang}wcf.toDo.task.submitTime{/lang}</dt>
-					<dd>{@$todo->timestamp|time}</dd>
+					<dd>{@$todo->time|time}</dd>
 				{/if}
 				
 				{if $todo->canViewDeadline() && $todo->endTime > 0}

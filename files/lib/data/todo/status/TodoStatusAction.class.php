@@ -14,12 +14,12 @@ use wcf\system\exception\PermissionDeniedException;
  */
 class TodoStatusAction extends AbstractDatabaseObjectAction {
 	/**
-	 * @see \wcf\data\AbstractDatabaseObjectAction::$className
+	 * @inheritDoc
 	 */
 	protected $className = 'wcf\data\todo\status\TodoStatusEditor';
 	
 	/**
-	 * @see \wcf\data\AbstractDatabaseObjectAction::delete()
+	 * @inheritDoc
 	 */
 	public function delete() {
 		if ($this->locked)

@@ -5,7 +5,6 @@ use wcf\data\category\Category;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
 use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\ToDo;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
@@ -33,7 +32,7 @@ class ToDoCategoryPage extends AbstractToDoListPage {
 	public $categoryNodeList = null;
 	
 	/**
-	 * @see wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -42,7 +41,7 @@ class ToDoCategoryPage extends AbstractToDoListPage {
 	}
 	
 	/**
-	 * @see \wcf\page\MultipleLinkPage::initObjectList()
+	 * @inheritDoc
 	 */
 	protected function initObjectList() {
 		parent::initObjectList();
@@ -51,7 +50,7 @@ class ToDoCategoryPage extends AbstractToDoListPage {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -68,15 +67,11 @@ class ToDoCategoryPage extends AbstractToDoListPage {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		
-		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('wcf.toDo.taskList'), LinkHandler::getInstance()->getLink('ToDoList', array())));
-		
-		DashboardHandler::getInstance()->loadBoxes('de.mysterycode.wcf.ToDoListPage', $this);
-		
+
 		WCF::getTPL()->assign( array(
 			'id' => $this->categoryID,
 			'title' => $this->title,

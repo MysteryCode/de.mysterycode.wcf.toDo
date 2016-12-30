@@ -21,7 +21,7 @@ class TodoLabelObjectHandler extends AbstractLabelObjectHandler {
 	protected $categoryID = 0;
 	
 	/**
-	 * @see	\wcf\system\label\object\AbstractLabelObjectHandler::$objectType
+	 * @inheritDoc
 	 */
 	protected $objectType = 'de.mysterycode.wcf.toDo.toDo';
 	

@@ -18,12 +18,12 @@ use wcf\system\WCF;
  */
 class ViewableToDoList extends ToDoList {
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::$sqlOrderBy
+	 * @inheritDoc
 	 */
 	public $sqlOrderBy = 'todo_table.time DESC';
 	
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::$decoratorClassName
+	 * @inheritDoc
 	 */
 	public $decoratorClassName = 'wcf\data\todo\ViewableToDo';
 	
@@ -75,7 +75,7 @@ class ViewableToDoList extends ToDoList {
 	}
 	
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::readObjects()
+	 * @inheritDoc
 	 */
 	public function readObjects() {
 		if ($this->objectIDs === null)
