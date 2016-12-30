@@ -3,7 +3,6 @@
 namespace wcf\data\todo;
 use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
-use wcf\data\ITitledLinkObject;
 use wcf\data\todo\assigned\AssignedCache;
 use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\category\TodoCategoryCache;
@@ -14,6 +13,7 @@ use wcf\data\user\TodoUserCache;
 use wcf\data\user\User;
 use wcf\data\DatabaseObject;
 use wcf\data\IMessage;
+use wcf\data\ITitledLinkObject;
 use wcf\data\TUserContent;
 use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
