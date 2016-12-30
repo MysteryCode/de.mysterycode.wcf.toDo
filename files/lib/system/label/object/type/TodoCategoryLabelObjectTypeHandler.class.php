@@ -3,9 +3,6 @@
 namespace wcf\system\label\object\type;
 use wcf\data\todo\category\TodoCategoryEditor;
 use wcf\data\todo\category\TodoCategoryNodeTree;
-use wcf\system\label\object\type\AbstractLabelObjectTypeHandler;
-use wcf\system\label\object\type\LabelObjectType;
-use wcf\system\label\object\type\LabelObjectTypeContainer;
 
 /**
  * Object type handler for categories.

@@ -5,9 +5,6 @@ use wcf\data\moderation\queue\ModerationQueue;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
 use wcf\data\todo\ToDoList;
-use wcf\system\moderation\queue\AbstractModerationQueueHandler;
-use wcf\system\moderation\queue\ModerationQueueManager;
-use wcf\system\WCF;
 
 /**
  * Provides functions for the moderation of todos

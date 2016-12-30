@@ -1,9 +1,6 @@
 <?php
 namespace wcf\system\message\quote;
 use wcf\data\todo\ToDoList;
-use wcf\system\message\quote\AbstractMessageQuoteHandler;
-use wcf\system\message\quote\MessageQuoteManager;
-use wcf\system\message\quote\QuotedMessage;
 
 /**
  * 

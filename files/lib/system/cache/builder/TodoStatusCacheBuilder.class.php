@@ -2,8 +2,6 @@
 
 namespace wcf\system\cache\builder;
 use wcf\data\todo\status\TodoStatusList;
-use wcf\system\cache\builder\AbstractCacheBuilder;
-use wcf\system\WCF;
 
 /**
  *

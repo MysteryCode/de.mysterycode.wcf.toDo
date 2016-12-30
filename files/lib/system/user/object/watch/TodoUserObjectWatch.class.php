@@ -4,7 +4,7 @@ namespace wcf\system\user\object\watch;
 use wcf\data\object\type\AbstractObjectTypeProcessor;
 use wcf\data\todo\ToDo;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\user\object\watch\IUserObjectWatch;
+
 use wcf\system\user\storage\UserStorageHandler;
 
 /**

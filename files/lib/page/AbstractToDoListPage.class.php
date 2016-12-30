@@ -2,12 +2,12 @@
 
 namespace wcf\page;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
-use wcf\data\todo\ToDoList;
+
 use wcf\data\user\group\UserGroupSearchAction;
 use wcf\data\user\online\UsersOnlineList;
-use wcf\data\user\User;
+
 use wcf\data\user\UserProfile;
-use wcf\page\SortablePage;
+
 use wcf\system\like\LikeHandler;
 use wcf\system\todo\ToDoHandler;
 use wcf\system\WCF;

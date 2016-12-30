@@ -2,7 +2,6 @@
 
 namespace wcf\system\moderation;
 use wcf\data\todo\DeletedToDoList;
-use wcf\system\moderation\IDeletedContentProvider;
 
 /**
  * Provides a list of trahed todos

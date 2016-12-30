@@ -2,7 +2,6 @@
 
 namespace wcf\system\user\notification\object;
 use wcf\data\DatabaseObjectDecorator;
-use wcf\system\user\notification\object\IUserNotificationObject;
 
 /**
  * Represents the todo user notification object.

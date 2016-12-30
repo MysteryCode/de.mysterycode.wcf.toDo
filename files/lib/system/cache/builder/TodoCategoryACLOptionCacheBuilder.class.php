@@ -2,7 +2,6 @@
 
 namespace wcf\system\cache\builder;
 use wcf\data\todo\category\TodoCategory;
-use wcf\system\cache\builder\CategoryACLOptionCacheBuilder;
 
 /**
  * Caches the acl options of categories.

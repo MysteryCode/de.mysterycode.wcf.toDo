@@ -3,7 +3,6 @@
 namespace wcf\data\todo\assigned;
 use wcf\system\cache\builder\AssignCacheBuilder;
 use wcf\system\SingletonFactory;
-use wcf\system\WCF;
 
 /**
  * 

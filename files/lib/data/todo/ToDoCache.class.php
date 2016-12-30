@@ -1,11 +1,10 @@
 <?php
 
 namespace wcf\data\todo;
-use wcf\data\todo\ToDo;
+
 use wcf\system\cache\builder\TodoCacheBuilder;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\system\SingletonFactory;
-use wcf\system\WCF;
 
 /**
  * 

@@ -5,7 +5,6 @@ use wcf\data\comment\Comment;
 use wcf\data\todo\ToDo;
 use wcf\data\user\User;
 use wcf\system\request\LinkHandler;
-use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 
 /**
  * Shows the todo comment response owner user notification event.

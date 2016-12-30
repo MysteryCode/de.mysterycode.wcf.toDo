@@ -4,7 +4,6 @@ namespace wcf\system\user\notification\event;
 use wcf\data\comment\Comment;
 use wcf\data\todo\ToDo;
 use wcf\system\request\LinkHandler;
-use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 
 /**
  * Shows the todo comment response user notification event.

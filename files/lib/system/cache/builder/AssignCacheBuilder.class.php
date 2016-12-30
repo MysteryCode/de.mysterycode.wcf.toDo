@@ -4,8 +4,6 @@ namespace wcf\system\cache\builder;
 use wcf\data\todo\assigned\group\AssignedGroupList;
 use wcf\data\todo\assigned\user\AssignedUserList;
 use wcf\data\todo\ToDoList;
-use wcf\system\cache\builder\AbstractCacheBuilder;
-use wcf\system\WCF;
 
 /**
  *

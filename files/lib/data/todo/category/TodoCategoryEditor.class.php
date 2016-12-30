@@ -44,7 +44,7 @@ class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject
 					(categoryID, todoID)
 			VALUES		(?, ?)";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->categoryID, $todo>id));
+		$statement->execute(array($this->categoryID, $todo->todoID));
 	}
 	
 	/**

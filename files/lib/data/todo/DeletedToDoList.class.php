@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\data\todo;
-use wcf\data\DatabaseObjectList;
+
 use wcf\system\clipboard\ClipboardHandler;
 
 /**

@@ -3,7 +3,6 @@
 namespace wcf\system\tagging;
 use wcf\data\tag\Tag;
 use wcf\data\todo\TaggedToDoList;
-use wcf\system\tagging\AbstractTaggable;
 
 /**
  * Implementation of ITaggable for todo tagging.

@@ -1,8 +1,8 @@
 <?php
 namespace wcf\system\attachment;
 
-use wcf\data\todo\ToDo;
-use wcf\system\attachment\AbstractAttachmentObjectType;
+
+
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 

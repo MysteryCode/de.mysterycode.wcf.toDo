@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\page;
-use wcf\data\todo\ToDo;
+
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\dashboard\DashboardHandler;

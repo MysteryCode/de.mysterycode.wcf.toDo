@@ -1,7 +1,7 @@
 <?php
 
 namespace wcf\data\todo;
-use wcf\data\attachment\Attachment;
+
 use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
 use wcf\data\todo\assigned\AssignedCache;

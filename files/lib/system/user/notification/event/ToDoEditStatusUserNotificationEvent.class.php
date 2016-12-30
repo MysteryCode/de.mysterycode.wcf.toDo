@@ -2,7 +2,6 @@
 
 namespace wcf\system\user\notification\event;
 use wcf\system\request\LinkHandler;
-use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 
 /**
  * Notification when the status of a todo has been updated

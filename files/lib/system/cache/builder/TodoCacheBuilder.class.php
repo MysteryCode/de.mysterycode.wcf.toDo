@@ -2,7 +2,6 @@
 
 namespace wcf\system\cache\builder;
 use wcf\data\todo\ToDoList;
-use wcf\system\cache\builder\AbstractCacheBuilder;
 
 /**
  *

@@ -3,7 +3,7 @@
 namespace wcf\system\user\online\location;
 use wcf\data\todo\ToDoCache;
 use wcf\data\user\online\UserOnline;
-use wcf\system\user\online\location\IUserOnlineLocation;
+
 use wcf\system\WCF;
 
 /**

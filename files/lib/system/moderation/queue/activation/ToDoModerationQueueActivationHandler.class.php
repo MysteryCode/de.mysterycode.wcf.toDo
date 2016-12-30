@@ -3,9 +3,9 @@
 namespace wcf\system\moderation\queue\activation;
 use wcf\data\moderation\queue\ModerationQueue;
 use wcf\data\moderation\queue\ViewableModerationQueue;
-use wcf\data\todo\ToDo;
+
 use wcf\data\todo\ToDoAction;
-use wcf\system\moderation\queue\activation\IModerationQueueActivationHandler;
+
 use wcf\system\moderation\queue\AbstractToDoModerationQueueHandler;
 use wcf\system\WCF;
 

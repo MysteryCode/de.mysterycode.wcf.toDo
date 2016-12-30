@@ -3,8 +3,7 @@
 namespace wcf\page;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoCache;
-use wcf\data\user\online\UsersOnlineList;
-use wcf\data\user\User;
+
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\comment\CommentHandler;
 use wcf\system\dashboard\DashboardHandler;

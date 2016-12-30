@@ -1,9 +1,8 @@
 <?php
 
 namespace wcf\system\user\notification\event;
-use wcf\data\todo\ToDo;
+
 use wcf\system\request\LinkHandler;
-use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 
 /**
  * Notification to remind of todos

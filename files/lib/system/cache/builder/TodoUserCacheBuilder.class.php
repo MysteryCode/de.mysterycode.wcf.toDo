@@ -2,8 +2,6 @@
 
 namespace wcf\system\cache\builder;
 use wcf\data\user\UserList;
-use wcf\system\cache\builder\AbstractCacheBuilder;
-use wcf\system\WCF;
 
 /**
  *

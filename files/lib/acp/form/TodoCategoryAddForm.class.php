@@ -1,8 +1,7 @@
 <?php
 
 namespace wcf\acp\form;
-use wcf\acp\form\AbstractCategoryAddForm;
-use wcf\data\todo\category\TodoCategory;
+
 
 /**
  * Shows the todo category add form.

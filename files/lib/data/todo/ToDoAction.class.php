@@ -3,9 +3,7 @@
 namespace wcf\data\todo;
 use wcf\data\todo\assigned\group\AssignedGroupAction;
 use wcf\data\todo\assigned\user\AssignedUserAction;
-use wcf\data\todo\ToDo;
-use wcf\data\todo\ToDoEditor;
-use wcf\data\todo\ToDoList;
+
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;

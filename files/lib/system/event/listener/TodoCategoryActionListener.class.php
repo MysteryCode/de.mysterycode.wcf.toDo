@@ -5,8 +5,6 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\todo\category\TodoCategoryEditor;
 use wcf\data\todo\ToDoAction;
 use wcf\data\todo\ToDoList;
-use wcf\system\event\listener\IParameterizedEventListener;
-use wcf\system\WCF;
 
 /**
  * 
