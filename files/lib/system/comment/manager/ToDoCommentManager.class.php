@@ -88,7 +88,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	/**
 	 * Sets the current entry.
 	 *
-	 * @param array $todoID
+	 * @param integer $todoID
 	 * @throws \wcf\system\exception\SystemException
 	 */
 	protected function setCurrentToDo($todoID) {

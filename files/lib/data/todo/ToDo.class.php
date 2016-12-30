@@ -1,6 +1,7 @@
 <?php
 
 namespace wcf\data\todo;
+
 use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
 use wcf\data\todo\assigned\AssignedCache;
@@ -62,7 +63,7 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	
 	public $status = null;
 	public $category = null;
-	
+
 	public function getResponsibleIDs() {
 		if (empty($this->responsibleIDs)) {
 			$responsibleArray = AssignedCache::getInstance()->getUsersByTodo($this->todoID);

@@ -1,19 +1,17 @@
 <?php
 
 namespace wcf\form;
+
 use wcf\data\category\Category;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeTree;
 use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\status\TodoStatusList;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
-
 use wcf\data\user\UserProfile;
-
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\message\quote\MessageQuoteManager;
-
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\WCF;

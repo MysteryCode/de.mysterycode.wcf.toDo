@@ -3,7 +3,6 @@
 namespace wcf\page;
 
 use wcf\system\clipboard\ClipboardHandler;
-
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
@@ -33,8 +32,6 @@ class OwnToDosPage extends AbstractToDoListPage {
 		parent::assignVariables();
 
 		WCF::getTPL()->assign(array(
-			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.OwnToDosPage'),
-			'sidebarName' => 'de.mysterycode.wcf.OwnToDosPage',
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
 		));
 	}

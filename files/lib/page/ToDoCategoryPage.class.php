@@ -4,10 +4,8 @@ namespace wcf\page;
 use wcf\data\category\Category;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
 use wcf\data\todo\category\TodoCategory;
-
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\IllegalLinkException;
-
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
@@ -74,8 +72,6 @@ class ToDoCategoryPage extends AbstractToDoListPage {
 		WCF::getTPL()->assign( array(
 			'id' => $this->categoryID,
 			'title' => $this->title,
-			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoCategoryPage'),
-			'sidebarName' => 'de.mysterycode.wcf.ToDoCategoryPage',
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
 			'category' => $this->category
 		));

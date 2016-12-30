@@ -3,7 +3,6 @@
 namespace wcf\page;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoCache;
-
 use wcf\system\comment\CommentHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -119,8 +118,6 @@ class ToDoPage extends AbstractPage {
 			'commentsPerPage' => $this->commentManager->getCommentsPerPage(),
 			'likeData' => (MODULE_LIKE ? $this->commentList->getLikeData() : array()),
 			'todo' => $this->todo,
-			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoPage'),
-			'sidebarName' => 'de.mysterycode.wcf.ToDoPage',
 			'attachmentList' => $this->todo->getAttachments(),
 			'todoLikeData' => $this->likeData,
 		));

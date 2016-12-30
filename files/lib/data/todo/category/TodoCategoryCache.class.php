@@ -264,8 +264,8 @@ class TodoCategoryCache extends SingletonFactory {
 				$todo = new Todo(null, $row);
 				
 				// add labels
-				if (isset($assignedLabels[$todo->id])) {
-					foreach ($assignedLabels[$todo->id] as $label) {
+				if (isset($assignedLabels[$todo->todoID])) {
+					foreach ($assignedLabels[$todo->todoID] as $label) {
 						$todo->addLabel($label);
 					}
 				}
