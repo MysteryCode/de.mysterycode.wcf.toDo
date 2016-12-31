@@ -2,9 +2,8 @@
 
 namespace wcf\data\todo\category;
 use wcf\data\category\AbstractDecoratedCategory;
-
-use wcf\data\ITitledLinkObject;
 use wcf\data\user\User;
+use wcf\data\ITitledLinkObject;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\todo\category\TodoCategoryPermissionHandler;

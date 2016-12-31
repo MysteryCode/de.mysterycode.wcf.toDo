@@ -2,7 +2,6 @@
 
 namespace wcf\page;
 use wcf\system\clipboard\ClipboardHandler;
-use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
 /**
@@ -30,9 +29,7 @@ class ToDoTrashPage extends AbstractToDoListPage {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
-			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
-			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.mysterycode.wcf.ToDoTrashPage'),
-			'sidebarName' => 'de.mysterycode.wcf.ToDoArchivePage'
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo'))
 		));
 	}
 }

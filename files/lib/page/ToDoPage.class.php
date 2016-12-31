@@ -9,8 +9,6 @@ use wcf\system\exception\PermissionDeniedException;
 use wcf\system\like\LikeHandler;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\message\quote\MessageQuoteManager;
-
-use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
 /**

@@ -6,7 +6,6 @@ use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
 use wcf\data\todo\category\TodoCategory;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
 /**
