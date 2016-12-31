@@ -2,10 +2,8 @@
 
 namespace wcf\system\cronjob;
 use wcf\data\cronjob\Cronjob;
-
 use wcf\data\todo\ToDoAction;
 use wcf\data\todo\ToDoList;
-
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 

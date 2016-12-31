@@ -2,7 +2,6 @@
 
 namespace wcf\system\user\notification\event;
 use wcf\system\request\LinkHandler;
-
 use wcf\system\user\object\watch\UserObjectWatchHandler;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
