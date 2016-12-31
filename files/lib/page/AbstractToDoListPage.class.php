@@ -128,9 +128,12 @@ abstract class AbstractToDoListPage extends SortablePage {
 	 */
 	public function validateSortField() {
 		parent::validateSortField();
-		
+
 		if ($this->sortField == 'status')
 			$this->sortField = 'statusID';
+
+		if ($this->sortField == 'category')
+			$this->sortField = 'categoryID';
 	}
 	
 	/**
