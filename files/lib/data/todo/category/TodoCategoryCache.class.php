@@ -2,7 +2,6 @@
 
 namespace wcf\data\todo\category;
 use wcf\data\object\type\ObjectTypeCache;
-
 use wcf\data\user\online\UsersOnlineList;
 use wcf\system\cache\builder\TodoCategoryDataCacheBuilder;
 use wcf\system\cache\builder\TodoCategoryLabelGroupCacheBuilder;

@@ -4,7 +4,6 @@ namespace wcf\page;
 use wcf\data\category\Category;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
 use wcf\data\todo\category\TodoCategory;
-
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\dashboard\DashboardHandler;

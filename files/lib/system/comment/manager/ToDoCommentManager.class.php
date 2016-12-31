@@ -5,7 +5,6 @@ use wcf\data\comment\response\CommentResponse;
 use wcf\data\comment\Comment;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoCache;
-
 use wcf\system\WCF;
 
 /**

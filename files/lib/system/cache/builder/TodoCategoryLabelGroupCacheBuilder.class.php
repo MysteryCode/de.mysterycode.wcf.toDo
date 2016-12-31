@@ -2,7 +2,6 @@
 
 namespace wcf\system\cache\builder;
 use wcf\data\object\type\ObjectTypeCache;
-
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
 

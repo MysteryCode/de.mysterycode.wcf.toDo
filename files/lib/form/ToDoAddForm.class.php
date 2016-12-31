@@ -7,9 +7,7 @@ use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\status\TodoStatusList;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
-
 use wcf\data\user\UserProfile;
-
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;

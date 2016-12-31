@@ -2,7 +2,6 @@
 
 namespace wcf\system\label\object;
 use wcf\data\todo\category\TodoCategoryCache;
-
 use wcf\system\label\LabelHandler;
 
 /**
