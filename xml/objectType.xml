@@ -14,15 +14,6 @@
 			<name>de.mysterycode.wcf.toDo.category</name>
 			<definitionname>com.woltlab.wcf.acl</definitionname>
 		</type>
-		<!-- collapsible content -->
-		<type>
-			<name>de.mysterycode.wcf.toDo</name>
-			<definitionname>com.woltlab.wcf.collapsibleContent</definitionname>
-		</type>
-		<type>
-			<name>de.mysterycode.wcf.toDo</name>
-			<definitionname>com.woltlab.wcf.collapsibleContent</definitionname>
-		</type>
 		<!-- visit tracker -->
 		<type>
 			<name>de.mysterycode.wcf.toDo.category</name>
@@ -126,76 +117,6 @@
 			<name>de.mysterycode.wcf.toDo</name>
 			<definitionname>com.woltlab.wcf.message.quote</definitionname>
 			<classname>wcf\system\message\quote\TodoMessageQuoteHandler</classname>
-		</type>
-		<!-- user online locations -->
-		<type>
-			<name>de.mysterycode.wcf.ToDoListPage</name>
-			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
-			<controller>wcf\page\ToDoListPage</controller>
-			<languagevariable>wcf.user.usersOnline.location.ToDoListPage</languagevariable>
-		</type>
-		<type>
-			<name>de.mysterycode.wcf.ToDoCategoryPage</name>
-			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
-			<controller>wcf\page\ToDoCategoryPage</controller>
-			<languagevariable>wcf.user.usersOnline.location.ToDoCategoryPage</languagevariable>
-		</type>
-		<type>
-			<name>de.mysterycode.wcf.ToDoTrashPage</name>
-			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
-			<controller>wcf\page\ToDoTrashPage</controller>
-			<languagevariable>wcf.user.usersOnline.location.ToDoTrashPage</languagevariable>
-		</type>
-		<type>
-			<name>de.mysterycode.wcf.ToDoArchivePage</name>
-			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
-			<controller>wcf\page\ToDoArchivePage</controller>
-			<languagevariable>wcf.user.usersOnline.location.ToDoArchivePage</languagevariable>
-		</type>
-		<type>
-			<name>de.mysterycode.wcf.ToDoPage</name>
-			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
-			<classname>wcf\system\user\online\location\ToDoLocation</classname>
-			<controller>wcf\page\ToDoPage</controller>
-			<languagevariable>wcf.user.usersOnline.location.ToDoPage</languagevariable>
-		</type>
-		<type>
-			<name>de.mysterycode.wcf.ToDoAddForm</name>
-			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
-			<controller>wcf\form\ToDoAddForm</controller>
-			<languagevariable>wcf.user.usersOnline.location.ToDoAddForm</languagevariable>
-		</type>
-		<type>
-			<name>de.mysterycode.wcf.ToDoEditForm</name>
-			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
-			<classname>wcf\system\user\online\location\ToDoLocation</classname>
-			<controller>wcf\form\ToDoEditForm</controller>
-			<languagevariable>wcf.user.usersOnline.location.ToDoEditForm</languagevariable>
-		</type>
-		<!-- dashboard -->
-		<type>
-			<name>de.mysterycode.wcf.ToDoListPage</name>
-			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
-			<allowcontent>0</allowcontent>
-			<allowsidebar>1</allowsidebar>
-		</type>
-		<type>
-			<name>de.mysterycode.wcf.ToDoPage</name>
-			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
-			<allowcontent>0</allowcontent>
-			<allowsidebar>1</allowsidebar>
-		</type>
-		<type>
-			<name>de.mysterycode.wcf.ToDoCategoryPage</name>
-			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
-			<allowcontent>0</allowcontent>
-			<allowsidebar>1</allowsidebar>
-		</type>
-		<type>
-			<name>de.mysterycode.wcf.ToDoArchivePage</name>
-			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
-			<allowcontent>0</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<!-- rebuild data workers -->
 		<type>

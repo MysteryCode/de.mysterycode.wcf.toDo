@@ -5,12 +5,12 @@
 // list pages
 .todoList {
 	> li {
-		border-top-left-radius: @wcfContainerBorderRadius;
-		border-top-right-radius: @wcfContainerBorderRadius;
+		//border-top-left-radius: @wcfContainerBorderRadius;
+		//border-top-right-radius: @wcfContainerBorderRadius;
 	}
 
 	.todoDepth1 {
-		margin-top: @wcfGapMedium;
+		margin-top: 8px; //TODO: check
 	}
 
 	.todoDepth2 {
@@ -24,9 +24,9 @@
 
 	.todo {
 		min-height: 44px;
-		padding: @wcfGapSmall;
+		padding: 4px; //TODO: check
 		padding-right: 51%;
-		.transition (background , .1s);
+		@include transition(background , .1s);
 		&.box32 > *:not(:first-child) {
 			margin: 0;
 		}
@@ -36,7 +36,7 @@
 		}
 
 		&:hover {
-			background-color: @wcfContainerHoverBackgroundColor;
+			//background-color: @wcfContainerHoverBackgroundColor;
 		}
 	}
 
@@ -52,19 +52,19 @@
 
 	.todoStats {
 		left: 49%;
-		margin-top: -@wcfGapSmall;
+		margin-top: -4px; //TODO: check
 		position: absolute;
-		top: @wcfGapMedium;
+		top: 8px; //TODO: check
 		width: 16%;
 		> dl {
 			> dt {
-				line-height: @wcfBaseLineHeight;
+				//line-height: @wcfBaseLineHeight;
 				width: 48%;
 			}
 
 			> dd {
 				font-weight: normal;
-				font-size: @wcfSmallFontSize;
+				//font-size: @wcfSmallFontSize;
 				width: 50%;
 			}
 		}
@@ -75,16 +75,16 @@
 		border: 0;
 		border-radius: 0;
 		&:last-child {
-			border-bottom-left-radius: @wcfContainerBorderRadius;
-			border-bottom-right-radius: @wcfContainerBorderRadius;
+			//border-bottom-left-radius: @wcfContainerBorderRadius;
+			//border-bottom-right-radius: @wcfContainerBorderRadius;
 			.todo {
-				border-bottom-left-radius: @wcfContainerBorderRadius;
-				border-bottom-right-radius: @wcfContainerBorderRadius;
+				//border-bottom-left-radius: @wcfContainerBorderRadius;
+				//border-bottom-right-radius: @wcfContainerBorderRadius;
 			}
 		}
 
 		&:not(:last-child) {
-			border-bottom: 1px solid @wcfContainerBorderColor;
+			//border-bottom: 1px solid @wcfContainerBorderColor;
 		}
 
 		> ul.messageQuickOptions {
@@ -93,11 +93,11 @@
 	}
 
 	.todoNode1 {
-		background-color: @wcfContainerBackgroundColor;
+		//background-color: @wcfContainerBackgroundColor;
 	}
 
 	.todoNode2 {
-		background-color: @wcfContainerAccentBackgroundColor;
+		//background-color: @wcfContainerAccentBackgroundColor;
 	}
 
 	.todo > div > .containerHeadline > h3 {
@@ -106,9 +106,9 @@
 
 	.todoResponsible {
 		left: 66%;
-		margin-top: -@wcfGapSmall;
+		margin-top: -4px; //TODO: check
 		position: absolute;
-		top: @wcfGapMedium;
+		top: 8px; //TODO: check
 		width: 32%;
 		> div > div {
 			> ul {
@@ -120,7 +120,7 @@
 				list-style: none;
 				> li {
 					display: inline;
-					padding-right: @wcfGapTiny;
+					//padding-right: @wcfGapTiny;
 				}
 			}
 
@@ -131,7 +131,7 @@
 				white-space: nowrap;
 				word-wrap: normal;
 				time {
-					color: @wcfDimmedColor;
+					//color: @wcfDimmedColor;
 				}
 			}
 		}
@@ -140,7 +140,7 @@
 
 // seperator description <=> attachments
 .todoContainer > .attachmentFileList > fieldset > legend {
-	border-top: 1px solid @wcfContainerBorderColor;
+	//border-top: 1px solid @wcfContainerBorderColor;
 }
 
 // moderation buttons
@@ -174,7 +174,7 @@
 		background-image: -ms-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
 		background-image: -o-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
 		.progressbar_inner {
-			background-color: @wcfContainerBackgroundColor;
+			//background-color: @wcfContainerBackgroundColor;
 			height: 26px;
 			margin-top: -1px;
 			margin-left: -1px;
@@ -192,14 +192,6 @@
 			padding: 7px 0;
 		}
 	}
-
-	&.todoDeleted {
-		background-color: @wcfDeletedBackgroundColor;
-	}
-
-	&.todoDisabled {
-		background-color: @wcfDisabledBackgroundColor;
-	}
 }
 
 .todoCategoryList {
@@ -216,7 +208,7 @@
 	.todoCategory {
 		.todoDepth2 {
 			&.todoCategoryContainer > .todoCategory {
-				padding-left: @wcfGapSmall;
+				padding-left: 4px; //TODO: check
 			}
 		}
 	}
@@ -226,26 +218,26 @@
 	}
 
 	.todoDepth1 {
-		margin-top: @wcfGapMedium;
+		margin-top: 8px; //TODO: check
 	}
 
 	.todoCategory {
 		min-height: 44px;
-		padding: @wcfGapSmall;
+		padding: 4px; //TODO: check
 		padding-right: 51%;
 		border-radius: 6px;
-		.transition (background , .1s);
+		@include transition(background , .1s);
 		&:hover {
-			background-color: @wcfContainerHoverBackgroundColor;
+			//background-color: @wcfContainerHoverBackgroundColor;
 		}
 	}
 
 	.todoCategoryNode1 {
-		background-color: @wcfContainerBackgroundColor;
+		//background-color: @wcfContainerBackgroundColor;
 	}
 
 	.todoCategoryNode2 {
-		background-color: @wcfContainerAccentBackgroundColor;
+		//background-color: @wcfContainerAccentBackgroundColor;
 	}
 
 	.todoCategory > div > .containerHeadline > h3 {
