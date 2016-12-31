@@ -1,5 +1,5 @@
-ToDo-List -- ToDo-Liste
-=======================
+ToDo-List -- ToDo-Liste 1.2
+===========================
 Identifier: de.mysterycode.wcf.toDo
 
 Status
@@ -8,4 +8,4 @@ Status
 
 License
 ----------------
-All files are licensed under: Kostenlose Plugins http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/
+All files are licensed under: [Kostenlose Plugins](https://downloads.mysterycode.de/license/6-kostenlose-plugins/)
