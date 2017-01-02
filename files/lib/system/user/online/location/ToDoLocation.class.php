@@ -29,7 +29,7 @@ class ToDoLocation implements IUserOnlineLocation {
 		
 		if ($todo !== null && ($todo->canEnter() | $todo->canView())) {
 			return WCF::getLanguage()->getDynamicVariable($languageVariable, array(
-				'todo' => $this->todos[$user->objectID]
+				'todo' => $todo
 			));
 		}
 		
