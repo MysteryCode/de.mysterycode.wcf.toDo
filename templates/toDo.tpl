@@ -159,7 +159,7 @@
 					<dt>{lang}wcf.toDo.task.progress{/lang}</dt>
 					<dd>
 						<div class="progressbar_main">
-							<div class="progressbar_inner" style="width:calc(100% - {$todo->progress}% + 2px);"></div>
+							<div class="progressbar_inner" style="width:{if $todo->progress == 100}0%{else}calc(100% - {$todo->progress}% + 2px){/if};"></div>
 							<span class="progressbar_text">{$todo->progress} {lang}wcf.toDo.task.progress.percent{/lang}</span>
 						</div>
 					</dd>
