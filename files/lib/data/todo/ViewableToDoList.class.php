@@ -25,7 +25,7 @@ class ViewableToDoList extends ToDoList {
 	/**
 	 * @inheritDoc
 	 */
-	public $decoratorClassName = ViewableToDo::class;
+	public $baseClassName = ViewableToDo::class;
 	
 	/**
 	 * Creates a new ViewableToDoList object.
