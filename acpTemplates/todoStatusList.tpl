@@ -29,7 +29,7 @@
 	
 	<nav>
 		<ul>
-			<li><a href="{link controller='TodoStatusAdd'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.todo.status.add{/lang}</span></a></li>
+			<li><a href="{link controller='TodoStatusAdd'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.acp.todo.status.add{/lang}</span></a></li>
 			
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -53,8 +53,8 @@
 				{foreach from=$objects item=status}
 					<tr class="jsStatusRow">
 						<td class="columnIcon">
-							<a href="{link controller='TodoStatusEdit' id=$status->statusID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
-							{if !$status->locked}<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$status->statusID}" data-confirm-message="{lang}wcf.acp.todo.status.delete.sure{/lang}"></span>{/if}
+							<a href="{link controller='TodoStatusEdit' id=$status->statusID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
+							{if !$status->locked}<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$status->statusID}" data-confirm-message="{lang}wcf.acp.todo.status.delete.sure{/lang}"></span>{/if}
 							
 							{event name='rowButtons'}
 						</td>
@@ -74,7 +74,7 @@
 
 		<nav>
 			<ul>
-				<li><a href="{link controller='TodoStatusAdd'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.todo.status.add{/lang}</span></a></li>
+				<li><a href="{link controller='TodoStatusAdd'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.acp.todo.status.add{/lang}</span></a></li>
 				
 				{event name='contentNavigationButtonsBottom'}
 			</ul>

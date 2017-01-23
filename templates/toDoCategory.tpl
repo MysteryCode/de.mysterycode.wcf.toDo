@@ -5,7 +5,7 @@
 
 {if $category->canAddTodo()}
 	{capture assign='contentHeaderNavigation'}
-		<li><a href="{link controller='ToDoAdd' id=$category->categoryID}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>
+		<li><a href="{link controller='ToDoAdd' id=$category->categoryID}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 fa-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>
 	{/capture}
 {/if}
 
@@ -45,7 +45,7 @@
 		<nav class="contentFooterNavigation">
 			<ul>
 				{content}
-					{if $category->canAddTodo() && $items}<li><a href="{link controller='ToDoAdd' id=$category->categoryID}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 icon-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
+					{if $category->canAddTodo() && $items}<li><a href="{link controller='ToDoAdd' id=$category->categoryID}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 fa-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
 					{event name='contentFooterNavigation'}
 				{/content}
 			</ul>

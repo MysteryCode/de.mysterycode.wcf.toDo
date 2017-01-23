@@ -30,7 +30,7 @@
 											{if $showCategory}
 												<a href="{$todo->getCategory()->getLink()}"><span class="label badge {$todo->getCategory()->cssClass}">{$todo->getCategory()->getTitle()}</span></a>
 											{/if}
-											{if $todo->canEnter()}{if $todo->private}<span class="icon icon16 icon-key"></span> {/if}<a href="{link controller='ToDo' object=$todo}{/link}">{$todo->title}</a>{else}{$todo->title}{/if}
+											{if $todo->canEnter()}{if $todo->private}<span class="icon icon16 fa-key"></span> {/if}<a href="{link controller='ToDo' object=$todo}{/link}">{$todo->title}</a>{else}{$todo->title}{/if}
 											{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike') && ($todo->likes || $todo->dislikes)}<span class="likesBadge badge jsTooltip {if $todo->cumulativeLikes > 0}green{elseif $todo->cumulativeLikes < 0}red{/if}" title="{lang likes=$todo->likes dislikes=$todo->dislikes}wcf.like.tooltip{/lang}">{if $todo->cumulativeLikes > 0}+{elseif $todo->cumulativeLikes == 0}&plusmn;{/if}{#$todo->cumulativeLikes}</span>{/if}
 										</h3>
 										

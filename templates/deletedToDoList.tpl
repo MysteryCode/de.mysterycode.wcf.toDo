@@ -20,7 +20,7 @@
 
 									<div class="wcfTodoThumbnail">
 										<a href="{$todo->getLink()}" class="framed">
-											<span class="icon icon-picture"></span>
+											<span class="icon fa-picture"></span>
 										</a>
 									</div>
 								</fieldset>
@@ -71,9 +71,9 @@
 								<footer class="messageOptions">
 									<nav class="jsMobileNavigation buttonGroupNavigation">
 										<ul class="smallButtons buttonGroup">{*
-											*}<li><a href="{$todo->getLink()}" title="{lang}wcf.toDo.goToTodo{/lang}" class="button"><span class="icon icon16 icon-arrow-right"></span> <span>{lang}wcf.toDo.goToTodo{/lang}</span></a></li>{*
-											*}{if $todo->canEdit()}<li><a href="{link controller='ToDoEdit' object=$todo}{/link}" title="{lang}wcf.toDo.task.edit{/lang}" class="button jsTodoInlineEditor"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
-											*}<li class="toTopLink"><a href="{@$anchor}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 icon-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>{*
+											*}<li><a href="{$todo->getLink()}" title="{lang}wcf.toDo.goToTodo{/lang}" class="button"><span class="icon icon16 fa-arrow-right"></span> <span>{lang}wcf.toDo.goToTodo{/lang}</span></a></li>{*
+											*}{if $todo->canEdit()}<li><a href="{link controller='ToDoEdit' object=$todo}{/link}" title="{lang}wcf.toDo.task.edit{/lang}" class="button jsTodoInlineEditor"><span class="icon icon16 fa-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
+											*}<li class="toTopLink"><a href="{@$anchor}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 fa-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>{*
 											*}{event name='messageOptions'}{*
 										*}</ul>
 									</nav>

@@ -4,7 +4,7 @@
 			{foreach from=$categoryNodeList item='categoryNode'}
 				<li data-category-id="{@$categoryNode->categoryID}" class="todoCategoryContainer todoDepth1 tabularBox todoLastBoxElement">
 					<div class="{cycle name=categoryNodeAlternate values='todoCategoryNode1,de.mysterycode.wcf.toDo todoCategoryNode2'} todoCategory box32">
-						<span class="icon icon32 icon-folder-open"></span>
+						<span class="icon icon32 fa-folder-open"></span>
 						
 						<div>
 							<div class="containerHeadline">
@@ -16,7 +16,7 @@
 								<ul class="todoSubCategories">
 									{foreach from=$categoryNode->getSubCategories() item=subCategoryNode}
 										<li class="box16">
-											<span class="icon icon16 icon-folder-open"></span>
+											<span class="icon icon16 fa-folder-open"></span>
 											<div>
 												<a href="{link controller='TodoCategory' object=$subCategoryNode}{/link}">{$subCategoryNode->title|language}</a>
 											</div>
