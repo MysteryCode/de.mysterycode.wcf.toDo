@@ -8,13 +8,13 @@
 		</acpmenuitem>
 
 		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.list">
-			<controller><![CDATA[wcf\acp\page\ToDoCategoryListPage]]></controller>
+			<controller><![CDATA[wcf\acp\page\TodoCategoryListPage]]></controller>
 			<parent>wcf.acp.menu.link.application.todo</parent>
 			<permissions>admin.content.toDo.category.canEditCategory,admin.content.toDo.category.canDeleteCategory</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.add">
-			<controller><![CDATA[wcf\acp\form\ToDoCategoryAddForm]]></controller>
+			<controller><![CDATA[wcf\acp\form\TodoCategoryAddForm]]></controller>
 			<parent>wcf.acp.menu.link.toDoCategory.list</parent>
 			<permissions>admin.content.toDo.category.canAddCategory</permissions>
 			<showorder>1</showorder>
