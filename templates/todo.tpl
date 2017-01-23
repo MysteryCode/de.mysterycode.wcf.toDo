@@ -76,7 +76,7 @@
 			{/if}
 
 			<dt>{lang}wcf.toDo.task.submitter{/lang}</dt>
-			<dd>{if $todo->submitter != 0 && $submitterusername != ''}<a href="{link controller='User' id=$todo->submitter}{/link}" class="userLink" data-user-id="{$todo->submitter}">{$submitterusername}</a>{else}{lang}wcf.user.guest{/lang}{/if}</dd>
+			<dd>{if $todo->submitter != 0 && $todo->username != ''}<a href="{link controller='User' id=$todo->submitter}{/link}" class="userLink" data-user-id="{$todo->submitter}">{$todo->username}</a>{else}{lang}wcf.user.guest{/lang}{/if}</dd>
 
 			{if $todo->getResponsibles() && $todo->canViewResponsibleUsers()}
 				<dt>{lang}wcf.toDo.task.responsible.users{/lang}</dt>
