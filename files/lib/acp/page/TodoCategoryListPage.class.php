@@ -10,7 +10,7 @@ namespace wcf\acp\page;
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
-class ToDoCategoryListPage extends AbstractCategoryListPage {
+class TodoCategoryListPage extends AbstractCategoryListPage {
 	/**
 	 * @inheritDoc
 	 */

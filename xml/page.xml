@@ -65,7 +65,7 @@
 			</content>
 		</page>
 		<page identifier="de.mysterycode.wcf.todo.ToDoCategory">
-			<controller>wcf\page\ToDoCategoryPage</controller>
+			<controller>wcf\page\TodoCategoryPage</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
 			<requireObjectID>1</requireObjectID>
