@@ -996,7 +996,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		// return template
 		return [
-			'template' => WCF::getTPL()->fetch('updateProgress', 'wcf', [
+			'template' => WCF::getTPL()->fetch('todoUpdateProgress', 'wcf', [
 				'todo' => $this->todo
 			])
 		];

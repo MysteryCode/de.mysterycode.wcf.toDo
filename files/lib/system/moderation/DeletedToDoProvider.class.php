@@ -23,7 +23,7 @@ class DeletedToDoProvider implements IDeletedContentProvider {
 	 * @inheritDoc
 	 */
 	public function getTemplateName() {
-		return 'deletedToDoList';
+		return 'deletedTodoList';
 	}
 	
 	/**

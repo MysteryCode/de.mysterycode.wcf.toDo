@@ -31,7 +31,7 @@ use wcf\util\StringUtil;
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
-class ToDoAddForm extends MessageForm {
+class TodoAddForm extends MessageForm {
 	/**
 	 * @inheritDoc
 	 */

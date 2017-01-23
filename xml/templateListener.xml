@@ -7,13 +7,13 @@
 			<environment>user</environment>
 			<templatename>userNotice</templatename>
 			<eventname>userNotice</eventname>
-			<templatecode><![CDATA[{include file='__toDoWarning'}]]></templatecode>
+			<templatecode><![CDATA[{include file='__todoWarning'}]]></templatecode>
 		</templatelistener>
 		<templatelistener name="todoCopyright">
 			<environment>user</environment>
 			<templatename>pageFooterCopyright</templatename>
 			<eventname>copyright</eventname>
-			<templatecode><![CDATA[{if $templateName == 'toDo' || $templateName == 'toDoAdd' || $templateName == 'toDoCategory' || $templateName == 'toDoList' || $templateName == 'myToDos' || $templateName == 'toDoTrash' || $templateName == 'toDoArchive'}<address class="copyright marginTop">{lang}wcf.toDo.copyright{/lang}</address>{/if}]]></templatecode>
+			<templatecode><![CDATA[{if $templateName == 'todo' || $templateName == 'todoAdd' || $templateName == 'todoCategory' || $templateName == 'todoList' || $templateName == 'myTodos' || $templateName == 'todoTrash' || $templateName == 'todoArchive'}<div class="copyright">{lang}wcf.toDo.copyright{/lang}</div>{/if}]]></templatecode>
 		</templatelistener>
 	</import>
 </data>

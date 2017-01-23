@@ -19,7 +19,7 @@ use wcf\system\WCF;
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
-class ToDoPage extends AbstractPage {
+class TodoPage extends AbstractPage {
 	public $neededModules = ['TODOLIST'];
 	
 	/**

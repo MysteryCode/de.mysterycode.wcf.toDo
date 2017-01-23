@@ -2,7 +2,7 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/page.xsd">
 	<import>
 		<page identifier="de.mysterycode.wcf.todo.ToDoList">
-			<controller>wcf\page\ToDoListPage</controller>
+			<controller>wcf\page\TodoListPage</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
 
@@ -17,7 +17,7 @@
 			</content>
 		</page>
 		<page identifier="de.mysterycode.wcf.todo.MyToDos">
-			<controller>wcf\page\MyToDosPage</controller>
+			<controller>wcf\page\MyTodosPage</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
 			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
@@ -33,7 +33,7 @@
 			</content>
 		</page>
 		<page identifier="de.mysterycode.wcf.todo.ToDoArchive">
-			<controller>wcf\page\ToDoArchivePage</controller>
+			<controller>wcf\page\TodoArchivePage</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
 			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
@@ -49,7 +49,7 @@
 			</content>
 		</page>
 		<page identifier="de.mysterycode.wcf.todo.ToDoTrash">
-			<controller>wcf\page\ToDoTrashPage</controller>
+			<controller>wcf\page\TodoTrashPage</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
 			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
@@ -76,7 +76,7 @@
 			<name language="en">ToDo-Category</name>
 		</page>
 		<page identifier="de.mysterycode.wcf.todo.ToDo">
-			<controller>wcf\page\ToDoPage</controller>
+			<controller>wcf\page\TodoPage</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
 			<requireObjectID>1</requireObjectID>
@@ -87,7 +87,7 @@
 			<name language="en">ToDo</name>
 		</page>
 		<page identifier="de.mysterycode.wcf.todo.ToDoAdd">
-			<controller>wcf\form\ToDoAddForm</controller>
+			<controller>wcf\form\TodoAddForm</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
 			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
@@ -103,7 +103,7 @@
 			</content>
 		</page>
 		<page identifier="de.mysterycode.wcf.todo.ToDoEdit">
-			<controller>wcf\form\ToDoEditForm</controller>
+			<controller>wcf\form\TodoEditForm</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
 			<parent>de.mysterycode.wcf.todo.ToDo</parent>

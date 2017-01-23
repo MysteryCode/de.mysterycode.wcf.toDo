@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
-class ToDoListPage extends AbstractToDoListPage {
+class TodoListPage extends AbstractTodoListPage {
 	/**
 	 * @inheritDoc
 	 */

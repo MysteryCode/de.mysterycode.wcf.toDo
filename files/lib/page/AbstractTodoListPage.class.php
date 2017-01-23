@@ -18,7 +18,7 @@ use wcf\util\StringUtil;
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
-abstract class AbstractToDoListPage extends SortablePage {
+abstract class AbstractTodoListPage extends SortablePage {
 	/**
 	 * @inheritDoc
 	 */

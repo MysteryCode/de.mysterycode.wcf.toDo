@@ -18,7 +18,7 @@ use wcf\util\HeaderUtil;
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
-class ToDoEditForm extends ToDoAddForm {
+class TodoEditForm extends TodoAddForm {
 	/**
 	 * @inheritDoc
 	 */
