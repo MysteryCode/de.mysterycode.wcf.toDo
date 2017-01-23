@@ -26,10 +26,6 @@ class ToDoCommentManager extends AbstractCommentManager {
 			return false;
 		}
 		
-		if (!WCF::getUser()->userID) {
-			return false;
-		}
-		
 		return WCF::getSession()->getPermission('user.toDo.comment.canAdd');
 	}
 	

@@ -20,7 +20,7 @@ class AssignedUserAction extends AbstractDatabaseObjectAction {
 	protected $className = 'wcf\data\todo\assigned\user\AssignedUserEditor';
 	
 	public function deleteByTodo() {
-		if (!(isset($this->parameters['userID']) && $this->parameters['userID'] !== null))
+		if (!empty($this->parameters['userID']))
 			$userID = $this->parameters['userID'];
 		else
 			$userID = 0;
@@ -32,12 +32,11 @@ class AssignedUserAction extends AbstractDatabaseObjectAction {
 		$todoIDs = $this->parameters['todoIDs'];
 		foreach ($todoIDs as $todoID) {
 			$assigns = AssignedCache::getInstance()->getUsersByTodo($todoID);
-			
+
 			$deleteIDs = array();
-			if (!empty($assigns)) {
-				foreach ($assigns as $assign) {
-					if ($userID == $assign->userID)
-						$deleteIDs[] = $assign['assignID'];
+			foreach ($assigns as $assign) {
+				if ($userID == $assign->userID) {
+					$deleteIDs[] = $assign->assignID;
 				}
 			}
 			

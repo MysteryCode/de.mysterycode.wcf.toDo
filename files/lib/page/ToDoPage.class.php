@@ -41,6 +41,10 @@ class ToDoPage extends AbstractPage {
 	
 	public $todoID = 0;
 	public $todo = null;
+
+	/**
+	 * @var \wcf\system\comment\manager\ToDoCommentManager
+	 */
 	public $commentManager = null;
 	public $commentList = null;
 	public $objectType = 0;
