@@ -20,7 +20,7 @@ class AssignedGroupAction extends AbstractDatabaseObjectAction {
 	protected $className = 'wcf\data\todo\assigned\group\AssignedGroupEditor';
 	
 	public function deleteByTodo() {
-		if (!(isset($this->parameters['groupID']) && $this->parameters['groupID'] !== null))
+		if (!empty($this->parameters['groupID']))
 			$groupID = $this->parameters['groupID'];
 		else
 			$groupID = 0;
