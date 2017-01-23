@@ -26,8 +26,6 @@
 	</div>
 {/hascontent}
 
-{include file='header'}
-
 {if $categoryNodeList|count > 0}
 	{include file='todoCategoryNodeList'}
 {/if}
