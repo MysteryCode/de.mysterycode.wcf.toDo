@@ -21,11 +21,11 @@ class ViewableToDoList extends ToDoList {
 	 * @inheritDoc
 	 */
 	public $sqlOrderBy = 'todo_table.time DESC';
-	
+
 	/**
 	 * @inheritDoc
 	 */
-	public $baseClassName = ViewableToDo::class;
+	public $decoratorClassName = ViewableToDo::class;
 	
 	/**
 	 * Creates a new ViewableToDoList object.
