@@ -47,7 +47,7 @@
 		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="page">xml/page.xml</instruction>
-		<instruction type="menuIte">xml/menuItem.xml</instruction>
+		<instruction type="menuItem">xml/menuItem.xml</instruction>
 
 		<!-- language -->
 		<instruction type="language" />
