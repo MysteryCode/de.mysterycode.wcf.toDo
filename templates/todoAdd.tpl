@@ -86,9 +86,10 @@
 		{/if}
 
 		<dl{if $errorField == 'private'} class="formError"{/if}>
-			<dt><label for="private">{lang}wcf.toDo.task.private{/lang}</label></dt>
+			<dt></dt>
 			<dd>
 				<input type="checkbox" id="private" name="private" {if $private == '1'}checked{/if} />
+				<label for="private">{lang}wcf.toDo.task.private{/lang}</label>
 				<p><small>{lang}wcf.toDo.task.private.description{/lang}</small></p>
 			</dd>
 		</dl>
