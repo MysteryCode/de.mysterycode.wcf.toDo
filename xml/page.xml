@@ -1,68 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/page.xsd">
 	<import>
-		<page identifier="de.mysterycode.mcps.ServerList">
-			<controller>mcps\page\ServerListPage</controller>
+		<page identifier="de.mysterycode.wcf.todo.ToDoList">
+			<controller>wcf\page\ToDoListPage</controller>
 			<pageType>system</pageType>
-			<options>mcps_server, mcps_frontend_enable</options>
+			<options>todolist</options>
 
-			<name language="de">Paketserver</name>
-			<name language="en">Updateserver</name>
+			<name language="de">ToDo-Liste</name>
+			<name language="en">ToDo-List</name>
 
 			<content language="de">
-				<title>Paketserver</title>
+				<title>ToDo-Liste</title>
 			</content>
 			<content language="en">
-				<title>Updateserver</title>
+				<title>ToDo-List</title>
 			</content>
 		</page>
-		<page identifier="de.mysterycode.mcps.Server">
-			<controller>mcps\page\ServerPage</controller>
+		<page identifier="de.mysterycode.wcf.todo.MyToDos">
+			<controller>wcf\page\MyToDosPage</controller>
 			<pageType>system</pageType>
-			<options>mcps_server</options>
-			<requireObjectID>1</requireObjectID>
-			<parent>de.mysterycode.mcps.ServerList</parent>
-			<handler>mcps\system\page\handler\ServerPageHandler</handler>
+			<options>todolist</options>
+			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
 
-			<name language="de">Server</name>
-			<name language="en">Server</name>
-		</page>
-		<page identifier="de.mysterycode.mcps.Package">
-			<controller>mcps\page\PackagePage</controller>
-			<pageType>system</pageType>
-			<options>mcps_server, mcps_frontend_enable</options>
-			<requireObjectID>1</requireObjectID>
-			<parent>de.mysterycode.mcps.ServerList</parent>
-			<handler>mcps\system\page\handler\PackagePageHandler</handler>
-
-			<name language="de">Paket</name>
-			<name language="en">Package</name>
-		</page>
-		<page identifier="de.mysterycode.mcps.PackageFile">
-			<controller>mcps\page\PackageFilePage</controller>
-			<pageType>system</pageType>
-			<options>mcps_server</options>
-			<requireObjectID>1</requireObjectID>
-			<parent>de.mysterycode.mcps.ServerList</parent>
-			<handler>mcps\system\page\handler\PackageFilePageHandler</handler>
-
-			<name language="de">Version</name>
-			<name language="en">Version</name>
-		</page>
-		<page identifier="de.mysterycode.mcps.Updates">
-			<controller>mcps\page\UpdatesPage</controller>
-			<pageType>system</pageType>
-			<options>mcps_server, mcps_frontend_enable</options>
-			<parent>de.mysterycode.mcps.ServerList</parent>
-
-			<name language="de">Updates</name>
-			<name language="en">Updates</name>
+			<name language="de">Meine ToDos</name>
+			<name language="en">My ToDos</name>
 
 			<content language="de">
-				<title>Updates</title>
+				<title>Meine ToDos</title>
 			</content>
 			<content language="en">
-				<title>Updates</title>
+				<title>My ToDos</title>
+			</content>
+		</page>
+		<page identifier="de.mysterycode.wcf.todo.ToDoArchive">
+			<controller>wcf\page\ToDoArchivePage</controller>
+			<pageType>system</pageType>
+			<options>todolist</options>
+			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
+
+			<name language="de">Archiv</name>
+			<name language="en">Archive</name>
+
+			<content language="de">
+				<title>Archiv</title>
+			</content>
+			<content language="en">
+				<title>Archive</title>
+			</content>
+		</page>
+		<page identifier="de.mysterycode.wcf.todo.ToDoTrash">
+			<controller>wcf\page\ToDoTrashPage</controller>
+			<pageType>system</pageType>
+			<options>todolist</options>
+			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
+
+			<name language="de">Papierkorb</name>
+			<name language="en">Trash</name>
+
+			<content language="de">
+				<title>Papierkorb</title>
+			</content>
+			<content language="en">
+				<title>Trash</title>
+			</content>
+		</page>
+		<page identifier="de.mysterycode.wcf.todo.ToDoCategory">
+			<controller>wcf\page\ToDoCategoryPage</controller>
+			<pageType>system</pageType>
+			<options>todolist</options>
+			<requireObjectID>1</requireObjectID>
+			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
+			<handler>wcf\system\page\handler\ToDoCategoryPageHandler</handler>
+
+			<name language="de">ToDo-Kategorie</name>
+			<name language="en">ToDo-Category</name>
+		</page>
+		<page identifier="de.mysterycode.wcf.todo.ToDo">
+			<controller>wcf\page\ToDoPage</controller>
+			<pageType>system</pageType>
+			<options>todolist</options>
+			<requireObjectID>1</requireObjectID>
+			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
+			<handler>wcf\system\page\handler\ToDoPageHandler</handler>
+
+			<name language="de">ToDo</name>
+			<name language="en">ToDo</name>
+		</page>
+		<page identifier="de.mysterycode.wcf.todo.ToDoAdd">
+			<controller>wcf\form\ToDoAddForm</controller>
+			<pageType>system</pageType>
+			<options>todolist</options>
+			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
+
+			<name language="de">ToDo hinzufügen</name>
+			<name language="en">Add ToDo</name>
+
+			<content language="de">
+				<title>ToDo hinzufügen</title>
+			</content>
+			<content language="en">
+				<title>Add ToDo</title>
+			</content>
+		</page>
+		<page identifier="de.mysterycode.wcf.todo.ToDoEdit">
+			<controller>wcf\form\ToDoEditForm</controller>
+			<pageType>system</pageType>
+			<options>todolist</options>
+			<parent>de.mysterycode.wcf.todo.ToDo</parent>
+			<requireObjectID>1</requireObjectID>
+
+			<name language="de">ToDo bearbeiten</name>
+			<name language="en">Edit ToDo</name>
+
+			<content language="de">
+				<title>ToDo bearbeiten</title>
+			</content>
+			<content language="en">
+				<title>Edit ToDo</title>
 			</content>
 		</page>
 	</import>

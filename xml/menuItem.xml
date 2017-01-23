@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/menuItem.xsd">
 	<import>
-		<item identifier="mcps.header.menu.updateserver">
+		<item identifier="de.mysterycode.wcf.todo.ToDoList">
 			<menu>com.woltlab.wcf.MainMenu</menu>
-			<page>de.mysterycode.mcps.ServerList</page>
-			<title language="de">Paketserver</title>
-			<title language="en">Updateserver</title>
+			<page>de.mysterycode.wcf.todo.ToDoList</page>
+			<title language="de">ToDo-Liste</title>
+			<title language="en">ToDo-List</title>
 		</item>
-		<item identifier="mcps.header.menu.updateserver.updates">
-			<page>de.mysterycode.mcps.Updates</page>
-			<parent>mcps.header.menu.updateserver</parent>
-			<title language="de">Updates</title>
-			<title language="en">Updates</title>
+		<item identifier="de.mysterycode.wcf.todo.ToDoArchive">
+			<page>de.mysterycode.wcf.todo.ToDoArchive</page>
+			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
+			<title language="de">Archiv</title>
+			<title language="en">Archive</title>
+		</item>
+		<item identifier="de.mysterycode.wcf.todo.ToDoTrash">
+			<page>de.mysterycode.wcf.todo.ToDoTrash</page>
+			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
+			<title language="de">Papierkorb</title>
+			<title language="en">Trash</title>
+		</item>
+		<item identifier="de.mysterycode.wcf.todo.MyToDos">
+			<page>de.mysterycode.wcf.todo.MyToDos</page>
+			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
+			<title language="de">Meine ToDos</title>
+			<title language="en">My ToDos</title>
 		</item>
 	</import>
 </data>
