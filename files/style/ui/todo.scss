@@ -16,6 +16,7 @@
 		display: flex;
 		padding: 10px 5px;
 		width: 100%;
+		flex-wrap: wrap;
 
 		> div:first-of-type {
 			overflow: hidden;
@@ -67,6 +68,17 @@
 					width: calc(50% - 5px);
 					font-size: 12px;
 				}
+
+				@include screen-sm-down {
+					flex-direction: row;
+
+					dt, dd {
+						text-align: left;
+						margin-left: 0;
+						color: $wcfContentText;
+						@include wcfFontDefault();
+					}
+				}
 			}
 
 			@include screen-md-up {
@@ -75,7 +87,8 @@
 			}
 
 			@include screen-sm-down {
-				display: none;
+				margin-top: 5px;
+				flex: 0 0 100%;
 			}
 		}
 
@@ -89,6 +102,7 @@
 			}
 
 			@include screen-sm-down {
+				margin-top: 5px;
 				flex: 0 0 100%;
 			}
 		}
