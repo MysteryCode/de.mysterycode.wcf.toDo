@@ -87,13 +87,11 @@
 	{/foreach}
 </ul>
 
-<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Moderation{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Todo{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 
 <script data-relocate="true">
-	//<![CDATA[
-	$(function() {
-		WCF.Language.addObject({
+	require(['Language'], function (Language) {
+		Language.addObject({
 			'wcf.todo.confirmDelete': '{lang}wcf.toDo.confirmDelete{/lang}',
 			'wcf.todo.confirmTrash': '{lang}wcf.toDo.confirmTrash{/lang}',
 			'wcf.todo.confirmTrash.reason': '{lang}wcf.toDo.confirmTrash.reason{/lang}',
@@ -118,5 +116,4 @@
 		new WCF.Todo.Clipboard($updateHandler);
 		WCF.Clipboard.init('wcf\\page\\DeletedContentListPage', {@$objects->getMarkedItems()}, { });
 	});
-	//]]>
 </script>
