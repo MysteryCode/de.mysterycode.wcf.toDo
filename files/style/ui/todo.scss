@@ -107,11 +107,20 @@
 #prioPicker {
 	.active {
 		text-decoration: underline;
+		padding-right: 35px;
+
+		&::after {
+			content: $fa-var-check;
+			display: inline-block;
+			font-family: FontAwesome;
+			position: absolute;
+			margin-left: 5px;
+		}
 	}
 
 	span[data-prio="3"] {
 		background-color: rgb(128, 128, 128);
-		color: #000;
+		color: #fff;
 	}
 	span[data-prio="2"] {
 		background-color: rgb(0, 128, 255);

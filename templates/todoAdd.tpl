@@ -78,7 +78,7 @@
 				<dt><label for="priority">{lang}wcf.toDo.task.important{/lang}</label></dt>
 				<dd id="prioPicker">
 					<span data-prio="3" class="button{if $important == 3} active{/if}">{lang}wcf.toDo.task.priority.low{/lang}</span>
-					<span data-prio="2" class="button{if $important == 2} active{/if}">{lang}wcf.toDo.task.priority.normal{/lang}</span>
+					<span data-prio="2" class="button{if $important == 2 || !$important} active{/if}">{lang}wcf.toDo.task.priority.normal{/lang}</span>
 					<span data-prio="1" class="button{if $important == 1} active{/if}">{lang}wcf.toDo.task.priority.high{/lang}</span>
 					<input type="hidden" id="priority" name="priority" value="{$important}" />
 				</dd>
