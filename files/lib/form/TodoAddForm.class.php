@@ -159,7 +159,7 @@ class TodoAddForm extends MessageForm {
 		parent::readFormParameters();
 		
 		if (isset($_POST['description'])) $this->text = StringUtil::trim($_POST['description']);
-		if (isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d H:i', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
+		if (isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
 		if (isset($_POST['note'])) $this->note = StringUtil::trim($_POST['note']);
 		if (isset($_POST['statusID'])) $this->statusID = StringUtil::trim($_POST['statusID']);
 		if (isset($_POST['title'])) $this->subject = StringUtil::trim($_POST['title']);
