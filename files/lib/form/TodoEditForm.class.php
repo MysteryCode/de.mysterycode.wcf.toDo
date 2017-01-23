@@ -39,7 +39,7 @@ class TodoEditForm extends TodoAddForm {
 	/**
 	 * @inheritDoc
 	 */
-	public $action = 'add';
+	public $action = 'edit';
 
 	/**
 	 * user can edit status
