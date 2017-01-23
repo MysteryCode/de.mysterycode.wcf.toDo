@@ -6,6 +6,7 @@ use wcf\data\IEditableCachedObject;
 use wcf\system\cache\builder\AssignCacheBuilder;
 use wcf\system\cache\builder\TodoCacheBuilder;
 use wcf\system\cache\builder\TodoGeneralStatsCacheBuilder;
+use wcf\system\cache\builder\TodoUserCacheBuilder;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
@@ -47,6 +48,7 @@ class ToDoEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		TodoCacheBuilder::getInstance()->reset();
 		TodoGeneralStatsCacheBuilder::getInstance()->reset();
 		AssignCacheBuilder::getInstance()->reset();
+		TodoUserCacheBuilder::getInstance()->reset();
 		
 		UserStorageHandler::getInstance()->resetAll('unsolvedTodoCount');
 		UserStorageHandler::getInstance()->resetAll('overdueTodoCount');
