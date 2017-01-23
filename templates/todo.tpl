@@ -81,7 +81,7 @@
 			{if $todo->getResponsibles() && $todo->canViewResponsibleUsers()}
 				<dt>{lang}wcf.toDo.task.responsible.users{/lang}</dt>
 				<dd>
-					<ul>
+					<ul class="inlineList commaSeparated">
 						{foreach from=$todo->getResponsibles() item=responsible}
 							<li><a href="{link controller='User' object=$responsible}{/link}" class="userLink" data-user-id="{$responsible->userID}">{$responsible->username}</a></li>
 						{/foreach}
@@ -92,7 +92,7 @@
 			{if $todo->getResponsibleGroups() && $todo->canViewResponsibleGroups()}
 				<dt>{lang}wcf.toDo.task.responsible.groups{/lang}</dt>
 				<dd>
-					<ul>
+					<ul class="inlineList commaSeparated">
 						{foreach from=$todo->getResponsibleGroups() item=responsible}
 							<li>{@'%s'|str_replace:$responsible->getName():$responsible->userOnlineMarking}</li>
 						{/foreach}

@@ -162,6 +162,22 @@
 		}
 	}
 
+	@include screen-md-up {
+		dl {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+
+			dt {
+				flex: 0 0 200px;
+			}
+			dd {
+				flex: 0 0 auto;
+				width: calc(100% - 205px);
+			}
+		}
+	}
+
 	#toDoCommentList {
 		& > li {
 			padding: 7px 0;

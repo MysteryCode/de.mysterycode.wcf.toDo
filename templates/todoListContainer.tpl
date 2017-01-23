@@ -79,7 +79,7 @@
 							<aside class="todoResponsible">
 								<div>
 									<small>{lang}wcf.toDo.task.responsibles{/lang}</small>
-									<ul>
+									<ul class="inlineList commaSeparated">
 										{foreach from=$todo->getResponsiblePreview() item=responsible}
 											<li>{@$responsible}</li>
 										{/foreach}
