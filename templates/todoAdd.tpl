@@ -77,9 +77,9 @@
 			<dl{if $errorField == 'priority'} class="formError"{/if}>
 				<dt><label for="priority">{lang}wcf.toDo.task.important{/lang}</label></dt>
 				<dd id="prioPicker">
-					<span data-prio="3" class="badge label grey"{if $important == 3} style="font-weight: bolder;"{/if}>{lang}wcf.toDo.task.priority.low{/lang}</span>
-					<span data-prio="2" class="badge label blue"{if $important == 2} style="font-weight: bolder;"{/if}>{lang}wcf.toDo.task.priority.normal{/lang}</span>
-					<span data-prio="1" class="badge label red"{if $important == 1} style="font-weight: bolder;"{/if}>{lang}wcf.toDo.task.priority.high{/lang}</span>
+					<span data-prio="3" class="button{if $important == 3} active{/if}">{lang}wcf.toDo.task.priority.low{/lang}</span>
+					<span data-prio="2" class="button{if $important == 2} active{/if}">{lang}wcf.toDo.task.priority.normal{/lang}</span>
+					<span data-prio="1" class="button{if $important == 1} active{/if}">{lang}wcf.toDo.task.priority.high{/lang}</span>
 					<input type="hidden" id="priority" name="priority" value="{$important}" />
 				</dd>
 			</dl>
@@ -182,8 +182,8 @@
 		WCF.System.Dependency.Manager.register('CKEditor', function() { new WCF.Message.UserMention('text'); });
 
 		$('#prioPicker span').on('click', function(event) {
-			$(event.currentTarget).parent().children().css("font-weight","normal").css('text-decoration', 'none');
-			$(event.currentTarget).css("font-weight","bolder").css('text-decoration', 'underline');
+			$(event.currentTarget).parent().children().removeClass('active');
+			$(event.currentTarget).addClass('active');
 			$('#priority').val(WCF.String.escapeHTML($(event.currentTarget).data('prio')));
 		});
 	});
