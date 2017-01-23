@@ -34,10 +34,9 @@ class AssignedGroupAction extends AbstractDatabaseObjectAction {
 			$assigns = AssignedCache::getInstance()->getGroupsByTodo($todoID);
 			
 			$deleteIDs = array();
-			if (!empty($assigns)) {
-				foreach ($assigns as $assign) {
-					if ($groupID == $assign->groupID)
-						$deleteIDs[] = $assign['assignID'];
+			foreach ($assigns as $assign) {
+				if ($groupID == $assign->groupID) {
+					$deleteIDs[] = $assign->assignID;
 				}
 			}
 			

@@ -32,12 +32,11 @@ class AssignedUserAction extends AbstractDatabaseObjectAction {
 		$todoIDs = $this->parameters['todoIDs'];
 		foreach ($todoIDs as $todoID) {
 			$assigns = AssignedCache::getInstance()->getUsersByTodo($todoID);
-			
+
 			$deleteIDs = array();
-			if (!empty($assigns)) {
-				foreach ($assigns as $assign) {
-					if ($userID == $assign->userID)
-						$deleteIDs[] = $assign['assignID'];
+			foreach ($assigns as $assign) {
+				if ($userID == $assign->userID) {
+					$deleteIDs[] = $assign->assignID;
 				}
 			}
 			
