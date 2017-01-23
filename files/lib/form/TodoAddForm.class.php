@@ -45,7 +45,7 @@ class TodoAddForm extends MessageForm {
 	/**
 	 * @inheritDoc
 	 */
-	public $messageNotesObjectType = 'de.mysterycode.wcf.toDo.notess';
+	public $messageNotesObjectType = 'de.mysterycode.wcf.toDo.notes';
 	
 	public $enableComments = 1;
 	
