@@ -1,8 +1,8 @@
 <?php
 
 namespace wcf\system\user\notification\object;
-use wcf\data\DatabaseObjectDecorator;
 use wcf\data\todo\ToDo;
+use wcf\data\DatabaseObjectDecorator;
 
 /**
  * Represents the todo user notification object.
