@@ -2,6 +2,7 @@
 
 namespace wcf\system\clipboard\action;
 use wcf\data\clipboard\action\ClipboardAction;
+use wcf\data\todo\ToDoAction;
 use wcf\system\WCF;
 
 /**
@@ -54,7 +55,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	 * @inheritDoc
 	 */
 	public function getClassName() {
-		return 'wcf\data\todo\ToDoAction';
+		return ToDoAction::class;
 	}
 
 	/**
@@ -72,6 +73,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	public function validateEnable() {
 		$todoIDs = [];
 
+		/** @var \wcf\data\todo\ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if ($todo->isDisabled && !$todo->isDeleted && $todo->canEnable()) {
 				$todoIDs[] = $todo->todoID;
@@ -89,6 +91,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	public function validateDisable() {
 		$todoIDs = [];
 
+		/** @var \wcf\data\todo\ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if (!$todo->isDisabled && !$todo->isDeleted && $todo->canEnable()) {
 				$todoIDs[] = $todo->todoID;
@@ -106,6 +109,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	public function validateTrash() {
 		$todoIDs = [];
 
+		/** @var \wcf\data\todo\ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if (!$todo->isDeleted && $todo->canDelete()) {
 				$todoIDs[] = $todo->todoID;
@@ -123,6 +127,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	public function validateDelete() {
 		$todoIDs = [];
 
+		/** @var \wcf\data\todo\ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if ($todo->isDeleted && $todo->canDeleteCompletely()) {
 				$todoIDs[] = $todo->todoID;
@@ -140,6 +145,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	public function validateRestore() {
 		$todoIDs = [];
 
+		/** @var \wcf\data\todo\ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if ($todo->isDeleted && $todo->canRestore()) {
 				$todoIDs[] = $todo->todoID;

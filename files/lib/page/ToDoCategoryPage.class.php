@@ -17,8 +17,15 @@ use wcf\system\WCF;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoCategoryPage extends AbstractToDoListPage {
+	/**
+	 * category id
+	 * @var integer
+	 */
 	public $categoryID = 0;
-	
+
+	/**
+	 * @var \wcf\data\todo\category\TodoCategory
+	 */
 	public $category = null;
 	
 	/**
@@ -56,8 +63,6 @@ class ToDoCategoryPage extends AbstractToDoListPage {
 		if(!$this->category->categoryID)
 			throw new IllegalLinkException();
 		
-		$this->title = $this->category->getTitle();
-		
 		// init category node list
 		$this->categoryNodeList = new RestrictedTodoCategoryNodeList($this->categoryID);
 	}
@@ -70,7 +75,7 @@ class ToDoCategoryPage extends AbstractToDoListPage {
 
 		WCF::getTPL()->assign( [
 			'id' => $this->categoryID,
-			'title' => $this->title,
+			'title' => $this->category->getTitle(),
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
 			'category' => $this->category
 		]);

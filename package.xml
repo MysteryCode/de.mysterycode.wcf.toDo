@@ -14,7 +14,7 @@
 	</packageinformation>
 
 	<requiredpackages>
-		<requiredpackage minversion="3.0.0 RC 1"><![CDATA[com.woltlab.wcf]]></requiredpackage>
+		<requiredpackage minversion="3.0.0"><![CDATA[com.woltlab.wcf]]></requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
@@ -48,9 +48,6 @@
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="page">xml/page.xml</instruction>
 		<instruction type="menuIte">xml/menuItem.xml</instruction>
-
-		<!-- script -->
-		<instruction type="script">acp/install_de.mysterycode.wcf.todo_1.2.0.php</instruction>
 
 		<!-- language -->
 		<instruction type="language" />

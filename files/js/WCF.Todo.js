@@ -1219,13 +1219,13 @@ WCF.Todo.Participate = Class
 					}
 				}
 
-				$html = WCF.Language.get('wcf.toDo.task.participate.shure')
+				var html = WCF.Language.get('wcf.toDo.task.participate.shure')
 						+ '<div class="formSubmit">'
 						+ '<button class="jsSubmitParticipate buttonPrimary" accesskey="s" autofocus>'
 						+ WCF.Language.get('wcf.global.button.submit')
 						+ '</button>' + '</div>';
 
-				this._dialog.html($html).wcfDialog({
+				this._dialog.html(html).wcfDialog({
 					title : WCF.Language.get('wcf.toDo.task.participate')
 				}).wcfDialog('render');
 			},
@@ -1397,13 +1397,13 @@ WCF.Todo.MarkSolved = Class
 					}
 				}
 
-				$html = WCF.Language.get('wcf.toDo.task.solve.shure')
+				var html = WCF.Language.get('wcf.toDo.task.solve.shure')
 						+ '<div class="formSubmit">'
 						+ '<button class="jsSubmitMarkSolved buttonPrimary" accesskey="s" autofocus>'
 						+ WCF.Language.get('wcf.global.button.submit')
 						+ '</button>' + '</div>';
 
-				this._dialog.html($html).wcfDialog({
+				this._dialog.html(html).wcfDialog({
 					title : WCF.Language.get('wcf.toDo.task.solve')
 				}).wcfDialog('render');
 			},

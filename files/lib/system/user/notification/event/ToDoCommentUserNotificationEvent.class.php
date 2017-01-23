@@ -93,7 +93,7 @@ class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 		$todo = new ToDo($this->userNotificationObject->objectID);
 		
 		if (empty($todo))
-			$returnValue = false;
+			return false;
 		
 		$returnValue = $todo->canEnter();
 		if (!$todo->canEnter()) {

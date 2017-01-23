@@ -17,7 +17,7 @@ class AssignedUserEditor extends DatabaseObjectEditor implements IEditableCached
 	/**
 	 * @inheritDoc
 	 */
-	protected static $baseClass = 'wcf\data\todo\assigned\user\AssignedUser';
+	protected static $baseClass = AssignedUser::class;
 	
 	/**
 	 * @inheritDoc

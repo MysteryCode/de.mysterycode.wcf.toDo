@@ -45,11 +45,6 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	/**
 	 * @inheritDoc
 	 */
-	protected $className = 'wcf\data\todo\ToDoEditor';
-	
-	/**
-	 * @inheritDoc
-	 */
 	protected $allowGuestAccess = ['getPreview', 'saveFullQuote', 'saveQuote'];
 	
 	/**
@@ -58,6 +53,11 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @var array<array>
 	 */
 	public $todoData = [];
+
+	/**
+	 * @var ToDo
+	 */
+	protected $todo = null;
 	
 	/**
 	 *
@@ -89,7 +89,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				unset($this->parameters['data']['ipAddress']);
 			}
 		}
-		
+
+		/** @var ToDo $todo */
 		$todo = parent::create();
 		
 		// update attachments
@@ -136,7 +137,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function publish() {
 		$this->loadTodos();
-		
+
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if ($todo->submitter) {
 				UserActivityEventHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->todoID, WCF::getLanguage()->languageID, $todo->submitter, $todo->time);
@@ -175,9 +177,9 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		if (isset($this->parameters['data'])) {
 			$todoIDs = [];
+			/** @var ToDoEditor|ToDo $todo */
 			foreach ($this->objects as $todo) {
 				$todoIDs[] = $todo->todoID;
-				$users = [];
 				if (WCF::getUser()->userID != $todo->submitter) {
 					$users = array_diff(array_unique($todo->getResponsibleIDs()), [WCF::getUser()->userID]);
 				} else {
@@ -195,6 +197,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		// update embedded objects
 		if (!empty($this->parameters['htmlInputProcessor'])) {
+			/** @var ToDoEditor|ToDo $object */
 			foreach ($this->getObjects() as $object) {
 				$this->parameters['htmlInputProcessor']->setObjectID($object->todoID);
 				if ($object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects($this->parameters['htmlInputProcessor'])) {
@@ -203,6 +206,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			}
 		}
 		if (!empty($this->parameters['notesHtmlInputProcessor'])) {
+			/** @var ToDoEditor|ToDo $object */
 			foreach ($this->getObjects() as $object) {
 				$this->parameters['notesHtmlInputProcessor']->setObjectID($object->todoID);
 				if ($object->notesHasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects($this->parameters['notesHtmlInputProcessor'])) {
@@ -219,7 +223,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateEnable() {
 		$this->loadTodos();
-		
+
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if (!$todo->isDisabled || $todo->isDeleted) {
 				throw new UserInputException('objectIDs');
@@ -244,6 +249,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		// update todos
 		$todoIDs = [];
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			$todo->update([
 				'isDisabled' => 0
@@ -268,7 +274,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateDisable() {
 		$this->loadTodos();
-		
+
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if ($todo->isDisabled || $todo->isDeleted) {
 				throw new UserInputException( 'objectIDs' );
@@ -292,6 +299,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 		
 		$todoIDs = [];
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			$todo->update([
 				'isDisabled' => 1
@@ -315,7 +323,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateTrash() {
 		$this->loadTodos();
-		
+
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if ($todo->isDeleted) {
 				throw new UserInputException('objectIDs');
@@ -340,6 +349,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$deleteReason = (isset($this->parameters['data']['reason']) ? StringUtil::trim($this->parameters['data']['reason']) : '');
 		
 		$todoIDs = [];
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			$todo->update([
 				'isDeleted' => 1,
@@ -366,7 +376,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateDelete() {
 		$this->loadTodos();
-		
+
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if (!$todo->isDeleted) {
 				throw new UserInputException('objectIDs');
@@ -390,6 +401,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 		
 		$todoIDs = $userCounters = [];
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			$todoIDs[] = $todo->todoID;
 			
@@ -410,7 +422,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		AttachmentHandler::removeAttachments('de.mysterycode.wcf.toDo.toDo', $todoIDs);
 		
 		MessageEmbeddedObjectManager::getInstance()->removeObjects('de.mysterycode.wcf.toDo', $todoIDs);
-		
+
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			$todo->delete();
 			$this->addToDoData($todo->getDecoratedObject(), 'deleted', LinkHandler::getInstance()->getLink('ToDoList', []));
@@ -426,7 +439,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateRestore() {
 		$this->loadTodos();
-		
+
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if (!$todo->isDeleted) {
 				throw new UserInputException('objectIDs');
@@ -449,6 +463,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 		
 		$todoIDs = [];
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			$todo->update([
 				'isDeleted' => 0,
@@ -551,6 +566,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	protected function unmarkToDos(array $todoIDs = []) {
 		if (empty($todoIDs)) {
+			/** @var ToDoEditor|ToDo $todo */
 			foreach ($this->objects as $todo) {
 				$todoIDs[] = $todo->todoID;
 			}
@@ -576,7 +592,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		if (isset($this->parameters['skipDelete']) && $this->parameters['skipDelete'] !== false)
 			$skipDelete = true;
-		
+
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if ($todo === null)
 				continue;
@@ -631,7 +648,8 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$skipDelete = true;
 		
 		$search = ArrayUtil::trim(explode(',', $this->parameters['search']));
-		
+
+		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if ($todo === null)
 				continue;
@@ -795,8 +813,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$this->readInteger('objectID');
 		$this->readInteger('userID');
 		$this->readInteger('status');
-		
-		$user = new User($this->parameters['userID']);
+
 		$object = new ToDo($this->parameters['objectID']);
 		
 		$todoAction = new self([$object], 'update', ['data' => ['statusID' => $this->parameters['status']]]);
@@ -906,7 +923,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @inheritDoc
 	 */
 	public function beginEdit() {
-		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
+		BBCodeHandler::getInstance()->setDisallowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.disallowedBBCodes')));
 		
 		WCF::getTPL()->assign([
 			'todo' => $this->todo,

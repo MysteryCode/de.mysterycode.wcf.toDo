@@ -17,8 +17,9 @@ use wcf\data\IMessage;
 use wcf\data\ITitledLinkObject;
 use wcf\data\TUserContent;
 use wcf\system\bbcode\AttachmentBBCode;
-use wcf\system\bbcode\MessageParser;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
+use wcf\system\html\output\HtmlOutputProcessor;
+use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -31,18 +32,45 @@ use wcf\util\StringUtil;
  * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
+ *
+ * @property-read integer todoID ID of this todo-object
+ * @property-read string  title subject of the todo
+ * @property-read string  description description/content of the todo
+ * @property-read string  note notes for this todo
+ * @property-read integer statusID id of the status of this todo
+ * @property-read integer submitter userid of the user who submitted this todo
+ * @property-read string  username username of the user who submitted this todo
+ * @property-read integer time timestamp the todo has been created
+ * @property-read integer endTime timestamp until the todo has to be solved
+ * @property-read boolean private 1 if this todo should be hidden from others, 0 if it's public
+ * @property-read integer comments count of comments
+ * @property-read integer important 1 if this todos prio is important, 0 if it's medium and -1 id it's low
+ * @property-read integer categoryID id of the category this todo is located in
+ * @property-read integer updatetimestamp timestamp of the latest update of the todo
+ * @property-read integer progress progress (percent) as positive integer
+ * @property-read integer remembertime a notification should be created at this time to remember the user of it's not done
+ * @property-read boolean enableComments enable the comment feature for this todo
+ * @property-read boolean isDisabled 1 if the todo is disabled, 0 otherwise
+ * @property-read boolean isDeleted 1 if the todo is trashed, 0 otherwise
+ * @property-read integer deleteTime timestamp the todo has been trashed
+ * @property-read integer deletedByID userid of the user who trashed the todo
+ * @property-read string  deletedBy username of the user who trashed the todo
+ * @property-read string  deleteReason reason the todo got trashed for
+ * @property-read integer cumulativeLikes cumulative count of likes
+ * @property-read integer attachments count of attachments within this todo
+ * @property-read boolean hasEmbeddedObjects decription field has embedded objects if set to 1
+ * @property-read boolean notesHasEmbeddedObjects notes field has embedded objects of set to 1
+ * @property-read string  ipAddress ipaddress of the user who submitted the todo
  */
 class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController, IMessage {
 	use TUserContent;
 
 	/**
-	 *
 	 * @inheritDoc
 	 */
 	protected static $databaseTableName = 'todo';
 	
 	/**
-	 *
 	 * @inheritDoc
 	 */
 	protected static $databaseTableIndexName = 'todoID';
@@ -60,9 +88,27 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	 * @var array<integer>
 	 */
 	protected $responsibleGroupIDs = [];
-	
+
+	/**
+	 * true if embedded object have been loaded already
+	 * @var boolean
+	 */
+	public $embeddedObjectsLoaded = false;
+
+	/**
+	 * @var \wcf\data\todo\status\TodoStatus
+	 */
 	public $status = null;
+
+	/**
+	 * @var \wcf\data\todo\category\TodoCategory
+	 */
 	public $category = null;
+
+	/**
+	 * @var \wcf\data\user\User
+	 */
+	public $user = null;
 
 	public function getResponsibleIDs() {
 		if (empty($this->responsibleIDs)) {
@@ -118,10 +164,6 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	 */
 	public function getTitle() {
 		return $this->title;
-	}
-	
-	public function getDescription() {
-		return $this->description;
 	}
 	
 	public function getFormattedResponsibles() {
@@ -220,20 +262,6 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 		return $preview;
 	}
 	
-	public function getFormattedDescription() {
-		AttachmentBBCode::setObjectID($this->todoID);
-		
-		// parse and return message
-		MessageParser::getInstance()->setOutputType('text/html');
-		return MessageParser::getInstance()->parse($this->description, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
-	}
-	
-	public function getFormattedNote() {
-		// parse and return message
-		MessageParser::getInstance()->setOutputType('text/html');
-		return MessageParser::getInstance()->parse($this->note, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
-	}
-	
 	public function getStatus() {
 		if (!$this->statusID)
 			return null;
@@ -259,23 +287,72 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 		
 		return $this->category;
 	}
-	
-	/**
-	 * @inheritDoc
-	 */
-	public function getFormattedMessage() {
-		AttachmentBBCode::setObjectID($this->todoID);
-		
-		// parse and return message
-		MessageParser::getInstance()->setOutputType('text/html');
-		return MessageParser::getInstance()->parse($this->getMessage(), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
-	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public function getMessage() {
 		return $this->description;
+	}
+	
+	/**
+	 * @inheritDoc
+	 */
+	public function getFormattedMessage() {
+		$this->loadEmbeddedObjects();
+
+		$processor = new HtmlOutputProcessor();
+		$processor->process($this->description, 'de.mysterycode.wcf.toDo', $this->todoID);
+
+		return $processor->getHtml();
+	}
+
+	/**
+	 * @see ToDo::getFormattedMessage()
+	 * @deprecated use ToDo::getFormattedMessage()
+	 */
+	public function getFormattedDescription() {
+		return $this->getFormattedMessage();
+	}
+
+	public function getFormattedNote() {
+		$this->loadEmbeddedObjects();
+
+		$processor = new HtmlOutputProcessor();
+		$processor->process($this->note, 'de.mysterycode.wcf.toDo.notes', $this->todoID);
+
+		return $processor->getHtml();
+	}
+
+	/**
+	 * Returns a simplified version of the formatted message.
+	 *
+	 * @return	string
+	 */
+	public function getSimplifiedFormattedMessage() {
+		$processor = new HtmlOutputProcessor();
+		$processor->setOutputType('text/simplified-html');
+		$processor->process($this->description, 'de.mysterycode.wcf.toDo', $this->todoID);
+
+		return $processor->getHtml();
+	}
+
+	/**
+	 * @see ToDo::getSimplifiedFormattedMessage()
+	 */
+	public function getSimplifiedFormattedNotes() {
+		$processor = new HtmlOutputProcessor();
+		$processor->setOutputType('text/simplified-html');
+		$processor->process($this->note, 'de.mysterycode.wcf.toDo.notes', $this->todoID);
+
+		return $processor->getHtml();
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getExcerpt($maxLength = 255) {
+		return StringUtil::truncateHTML($this->getSimplifiedFormattedMessage(), $maxLength);
 	}
 	
 	/**
@@ -297,29 +374,6 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	 */
 	public function getUserID() {
 		return $this->submitter;
-	}
-	
-	/**
-	 * @inheritDoc
-	 */
-	public function getExcerpt($maxLength = 255) {
-		return StringUtil::truncateHTML($this->getFormattedMessage(), 255);
-	}
-	
-	public function getAttachments() {
-		if (MODULE_ATTACHMENT == 1 && $this->attachments) {
-			$attachmentList = new GroupedAttachmentList('de.mysterycode.wcf.toDo.toDo');
-			$attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', [$this->todoID]);
-			$attachmentList->readObjects();
-			$attachmentList->setPermissions([
-				'canDownload' => WCF::getSession()->getPermission('user.toDo.attachment.canDownloadAttachments'),
-				'canViewPreview' => WCF::getSession()->getPermission('user.toDo.attachment.canDownloadAttachments')
-			]);
-			
-			AttachmentBBCode::setAttachmentList($attachmentList);
-			return $attachmentList;
-		}
-		return null;
 	}
 	
 	public function getUser() {
@@ -396,7 +450,6 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	public function isResponsible() {
 		$responsibleUsers = $this->getResponsibleIDs() ?: [];
 		$responsibleGroups = $this->getResponsibleGroupIDs() ?: [];
-		$groupAssigned = false;
 		foreach (WCF::getUser()->getGroupIDs() as $groupID) {
 			if (in_array($groupID, $responsibleGroups))
 				return true;
@@ -448,7 +501,7 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	}
 	
 	/**
-	 * @deprecated
+	 * @deprecated use ToDo::canEditResponsibles()
 	 */
 	public function canEditResponsible() {
 		return $this->canEditResponsibles();
@@ -511,5 +564,41 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	
 	public function canEditProgress() {
 		return $this->canEdit() || $this->canModerate();
+	}
+
+	/**
+	 * Returns and assigns embedded attachments.
+	 *
+	 * @return	GroupedAttachmentList
+	 */
+	public function getAttachments() {
+		if (MODULE_ATTACHMENT == 1 && $this->attachments) {
+			$attachmentList = new GroupedAttachmentList('de.mysterycode.wcf.toDo.toDo');
+			$attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', [$this->todoID]);
+			$attachmentList->readObjects();
+			$attachmentList->setPermissions([
+				'canDownload' => $this->isVisible(),
+				'canViewPreview' => $this->isVisible()
+			]);
+
+			/** @noinspection PhpDeprecationInspection */
+			// set embedded attachments
+			AttachmentBBCode::setAttachmentList($attachmentList);
+
+			return $attachmentList;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Loads the embedded objects.
+	 */
+	public function loadEmbeddedObjects() {
+		if (($this->hasEmbeddedObjects || $this->notesHasEmbeddedObjects) && !$this->embeddedObjectsLoaded) {
+			MessageEmbeddedObjectManager::getInstance()->loadObjects('de.mysterycode.wcf.toDo', [$this->todoID]);
+			MessageEmbeddedObjectManager::getInstance()->loadObjects('de.mysterycode.wcf.toDo.notes', [$this->todoID]);
+			$this->embeddedObjectsLoaded = true;
+		}
 	}
 }

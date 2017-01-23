@@ -16,7 +16,7 @@ class TodoCategoryNodeTree extends CategoryNodeTree {
 	/**
 	 * @inheritDoc
 	 */
-	protected $nodeClassName = 'wcf\data\todo\category\TodoCategoryNode';
+	protected $nodeClassName = TodoCategoryNode::class;
 
 	/**
 	 * Creates a new instance of CategoryNodeTree.

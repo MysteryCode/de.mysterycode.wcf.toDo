@@ -17,7 +17,7 @@ class TodoStatusEditor extends DatabaseObjectEditor implements IEditableCachedOb
 	/**
 	 * @inheritDoc
 	 */
-	protected static $baseClass = 'wcf\data\todo\status\TodoStatus';
+	protected static $baseClass = TodoStatus::class;
 	
 	/**
 	 * @inheritDoc

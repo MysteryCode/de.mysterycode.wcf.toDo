@@ -3,6 +3,9 @@
 namespace wcf\system\user\notification\object\type;
 
 
+use wcf\data\comment\Comment;
+use wcf\data\comment\CommentList;
+use wcf\system\user\notification\object\CommentUserNotificationObject;
 use wcf\system\WCF;
 
 /**
@@ -14,9 +17,9 @@ use wcf\system\WCF;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoCommentUserNotificationObjectType extends AbstractUserNotificationObjectType implements ICommentUserNotificationObjectType {
-	protected static $decoratorClassName = 'wcf\system\user\notification\object\CommentUserNotificationObject';
-	protected static $objectClassName = 'wcf\data\comment\Comment';
-	protected static $objectListClassName = 'wcf\data\comment\CommentList';
+	protected static $decoratorClassName = CommentUserNotificationObject::class;
+	protected static $objectClassName = Comment::class;
+	protected static $objectListClassName = CommentList::class;
 
 	/**
 	 * {@inheritDoc}

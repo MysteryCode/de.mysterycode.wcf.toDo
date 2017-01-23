@@ -5,6 +5,7 @@ namespace wcf\form;
 use wcf\data\category\Category;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeTree;
 use wcf\data\todo\category\TodoCategory;
+use wcf\data\todo\status\TodoStatus;
 use wcf\data\todo\status\TodoStatusList;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
@@ -34,16 +35,6 @@ class ToDoAddForm extends MessageForm {
 	/**
 	 * @inheritDoc
 	 */
-	public $activeMenuItem = 'wcf.header.menu.toDo';
-	
-	/**
-	 * @inheritDoc
-	 */
-	public $enableTracking = true;
-	
-	/**
-	 * @inheritDoc
-	 */
 	public $attachmentObjectType = 'de.mysterycode.wcf.toDo.toDo';
 
 	/**
@@ -59,24 +50,81 @@ class ToDoAddForm extends MessageForm {
 	public $enableComments = 1;
 	
 	public $neededModules = ['TODOLIST'];
-	
+
+	/**
+	 * timestamp the todo until has to be solved
+	 * @var integer
+	 */
 	public $endTime = 0;
+
+	/**
+	 * notes text
+	 * @var string
+	 */
 	public $note = '';
+
+	/**
+	 * responsible users as a string
+	 * @var string
+	 */
 	public $responsibles = '';
+
+	/**
+	 * responsible groups as a string
+	 * @var string
+	 */
 	public $responsibleGroups = '';
+
+	/**
+	 * id of the status
+	 * @var integer
+	 */
 	public $statusID = 0;
+
+	/**
+	 * 1: todo is private
+	 * 0: todo is public
+	 * @var boolean
+	 */
 	public $private = 0;
+
+	/**
+	 * represents the todo's prio
+	 * 1: important
+	 * 0: medium
+	 * -1: low
+	 * @var integer
+	 */
 	public $important = 0;
+
+	/**
+	 * id of the todo's category
+	 * @var integer
+	 */
 	public $categoryID = 0;
+
+	/**
+	 * @var TodoCategory
+	 */
 	public $category = null;
-	public $newCategory = '';
+
+	/**
+	 * @var integer
+	 */
 	public $progress = 0;
+
+	/**
+	 * @var integer
+	 */
 	public $remembertime = 0;
 
+	/**
+	 * @var TodoStatus[]
+	 */
 	public $statusList = [];
 
 	/**
-	 * @var inheritDoc
+	 * @inheritDoc
 	 */
 	public $action = 'add';
 
@@ -84,6 +132,11 @@ class ToDoAddForm extends MessageForm {
 	 * @var HtmlInputProcessor
 	 */
 	public $notesHtmlInputProcessor;
+
+	/**
+	 * @var \RecursiveIterator
+	 */
+	public $categoryList = null;
 	
 	/**
 	 * @inheritDoc
@@ -113,7 +166,6 @@ class ToDoAddForm extends MessageForm {
 		if (isset($_POST['private'])) $this->private = 1;
 		if (isset($_POST['priority'])) $this->important = StringUtil::trim($_POST['priority']);
 		if (isset($_POST['categoryID'])) $this->categoryID = StringUtil::trim($_POST['categoryID']);
-		if (isset($_POST['newCategory'])) $this->newCategory = StringUtil::trim($_POST['newCategory']);
 		if (isset($_POST['progress'])) $this->progress = StringUtil::trim($_POST['progress']);
 		if (isset($_POST['remembertime']) && $_POST['remembertime'] > 0 && $_POST['remembertime'] != '') $this->remembertime = \DateTime::createFromFormat('Y-m-d', $_POST['remembertime'], WCF::getUser()->getTimeZone())->getTimestamp();
 		if (isset($_POST['responsibles'])) $this->responsibles = StringUtil::trim($_POST['responsibles']);
@@ -143,7 +195,7 @@ class ToDoAddForm extends MessageForm {
 		}
 		
 		if (empty($this->progress) && TODO_PROGRESS_ENABLE) {
-			$this->progess = 0;
+			$this->progress = 0;
 		}
 		
 		if (($this->progress < 0 || $this->progress > 100) && TODO_PROGRESS_ENABLE) {
@@ -234,8 +286,8 @@ class ToDoAddForm extends MessageForm {
 		MessageQuoteManager::getInstance()->assignVariables();
 		
 		WCF::getTPL()->assign( [
-			'title' => $this->title,
-			'description' => $this->description,
+			'title' => $this->subject,
+			'description' => $this->text,
 			'note' => $this->note,
 			'statusID' => $this->statusID,
 			'responsibles' => $this->responsibles,

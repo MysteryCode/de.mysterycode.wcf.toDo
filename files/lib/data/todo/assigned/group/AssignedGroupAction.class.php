@@ -14,11 +14,6 @@ use wcf\system\exception\UserInputException;
  * @package	de.mysterycode.wcf.toDo
  */
 class AssignedGroupAction extends AbstractDatabaseObjectAction {
-	/**
-	 * @inheritDoc
-	 */
-	protected $className = 'wcf\data\todo\assigned\group\AssignedGroupEditor';
-	
 	public function deleteByTodo() {
 		if (!empty($this->parameters['groupID']))
 			$groupID = $this->parameters['groupID'];

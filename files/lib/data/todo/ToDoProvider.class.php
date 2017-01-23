@@ -14,10 +14,10 @@ class ToDoProvider extends AbstractObjectTypeProvider {
 	/**
 	 * @inheritDoc
 	 */
-	public $className = 'wcf\data\todo\ToDo';
+	public $className = ToDo::class;
 	
 	/**
 	 * @inheritDoc
 	 */
-	public $listClassName = 'wcf\data\todo\ToDoList';
+	public $listClassName = ToDoList::class;
 }

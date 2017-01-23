@@ -21,7 +21,7 @@ class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject
 	/**
 	 * @inheritDoc
 	 */
-	protected static $baseClass = 'wcf\data\todo\category\TodoCategory';
+	protected static $baseClass = TodoCategory::class;
 
 	/**
 	 * Sets the given todo as the last todos for this category.
@@ -31,7 +31,7 @@ class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject
 	 * @throws \wcf\system\database\exception\DatabaseQueryExecutionException
 	 */
 	public function setLastTodo(ToDo $todo) {
-		$currentLastTodo = $this->getDecoratedObject()->getLastTodo($todo->languageID);
+		$currentLastTodo = $this->getDecoratedObject()->getLastTodo();
 		if ($currentLastTodo != null && $todo->time <= $currentLastTodo->time) {
 			return;
 		}

@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\message\quote;
+use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoList;
 
 /**
@@ -21,6 +22,7 @@ class TodoMessageQuoteHandler extends AbstractMessageQuoteHandler {
 		$todos = $todoList->getObjects();
 		
 		$todoIDs = [];
+		/** @var \wcf\data\todo\ToDo $todo */
 		foreach ($todos as $todo) {
 			$todoIDs[] = $todo->todoID;
 		}
@@ -28,6 +30,7 @@ class TodoMessageQuoteHandler extends AbstractMessageQuoteHandler {
 		$quotedMessages = [];
 		
 		// create QuotedMessage objects
+		/** @var ToDo $todo */
 		foreach ($todos as $todo) {
 			$message = new QuotedMessage($todo);
 			

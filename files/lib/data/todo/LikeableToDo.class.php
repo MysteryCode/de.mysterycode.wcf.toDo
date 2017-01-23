@@ -10,12 +10,13 @@ use wcf\data\like\object\AbstractLikeObject;
  * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
+ * @see ToDo
  */
 class LikeableToDo extends AbstractLikeObject {
 	/**
 	 * @inheritDoc
 	 */
-	protected static $baseClass = 'wcf\data\todo\ToDo';
+	protected static $baseClass = ToDo::class;
 	
 	/**
 	 * @inheritDoc

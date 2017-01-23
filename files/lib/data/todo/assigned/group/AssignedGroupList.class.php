@@ -11,9 +11,4 @@ use wcf\data\DatabaseObjectList;
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
-class AssignedGroupList extends DatabaseObjectList {
-	/**
-	 * @inheritDoc
-	 */
-	public $className = 'wcf\data\todo\assigned\group\AssignedGroup';
-}
+class AssignedGroupList extends DatabaseObjectList {}

@@ -2,6 +2,9 @@
 
 namespace wcf\system\user\notification\object\type;
 
+use wcf\data\todo\ToDo;
+use wcf\data\todo\ToDoList;
+use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\WCF;
 
 /**
@@ -13,9 +16,9 @@ use wcf\system\WCF;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoUserNotificationObjectType extends AbstractUserNotificationObjectType {
-	protected static $decoratorClassName = 'wcf\system\user\notification\object\ToDoUserNotificationObject';
-	protected static $objectClassName = 'wcf\data\todo\ToDo';
-	protected static $objectListClassName = 'wcf\data\todo\ToDoList';
+	protected static $decoratorClassName = ToDoUserNotificationObject::class;
+	protected static $objectClassName = ToDo::class;
+	protected static $objectListClassName = ToDoList::class;
 
 	public function getOwnerID($objectID) {
 		$sql = "SELECT *

@@ -16,15 +16,14 @@ class TodoStatusAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @inheritDoc
 	 */
-	protected $className = 'wcf\data\todo\status\TodoStatusEditor';
-	
-	/**
-	 * @inheritDoc
-	 */
 	public function delete() {
-		if ($this->locked)
-			throw new PermissionDeniedException();
-		
+		/** @var \wcf\data\todo\status\TodoStatus $status */
+		foreach ($this->objects as $status) {
+			if ($status->locked) {
+				throw new PermissionDeniedException();
+			}
+		}
+
 		parent::delete();
 	}
 }

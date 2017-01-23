@@ -3,7 +3,6 @@
 namespace wcf\system\cache\builder;
 use wcf\data\todo\assigned\group\AssignedGroupList;
 use wcf\data\todo\assigned\user\AssignedUserList;
-use wcf\data\todo\ToDoList;
 
 /**
  *
@@ -24,11 +23,6 @@ class AssignCacheBuilder extends AbstractCacheBuilder {
 			'groups' => []
 		];
 		
-		// todos
-		$todoList = new ToDoList();
-		$todoList->readObjects();
-		$todos = $todoList->readObjects();
-		
 		// users
 		$userList = new AssignedUserList();
 		$userList->readObjects();
@@ -38,12 +32,14 @@ class AssignCacheBuilder extends AbstractCacheBuilder {
 		$groupList = new AssignedGroupList();
 		$groupList->readObjects();
 		$groups = $groupList->getObjects();
-		
+
+		/** @var \wcf\data\todo\assigned\user\AssignedUser $user */
 		foreach ($users as $user) {
 			$data['users'][$user->userID][] = $user;
 			$data['todos'][$user->todoID]['users'][] = $user;
 		}
-		
+
+		/** @var \wcf\data\todo\assigned\group\AssignedGroup $group */
 		foreach ($groups as $group) {
 			$data['groups'][$group->groupID][] = $group;
 			$data['todos'][$group->todoID]['groups'][] = $group;

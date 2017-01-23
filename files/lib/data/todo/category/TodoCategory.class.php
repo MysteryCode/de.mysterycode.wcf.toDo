@@ -61,7 +61,7 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	/**
 	 * Returns the stat object of this category.
 	 *
-	 * @return TodoCategoryStat
+	 * @return \wcf\data\todo\category\stat\TodoCategoryStat|null
 	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function getStatObject() {
@@ -80,11 +80,9 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	/**
 	 * Returns the last todo of this category.
 	 *
-	 * @param    integer $languageID
 	 * @return \wcf\data\todo\ToDo
-	 * @throws \wcf\system\exception\SystemException
 	 */
-	public function getLastTodo($languageID = null) {
+	public function getLastTodo() {
 		return TodoCategoryCache::getInstance()->getLastTodo($this->categoryID);
 	}
 
@@ -94,8 +92,7 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	 *
 	 * @param    string $permission
 	 * @param User      $user
-	 * @return bool
-	 * @throws \wcf\system\exception\SystemException
+	 * @return boolean
 	 */
 	public function getPermission($permission = 'user.canViewCategory', User $user = null) {
 		// load cache if necessary

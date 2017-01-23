@@ -2,8 +2,8 @@
 
 namespace wcf\page;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
+use wcf\data\todo\ViewableToDoList;
 use wcf\data\user\group\UserGroupSearchAction;
-use wcf\data\user\online\UsersOnlineList;
 use wcf\data\user\UserProfile;
 use wcf\system\like\LikeHandler;
 use wcf\system\todo\ToDoHandler;
@@ -19,11 +19,6 @@ use wcf\util\StringUtil;
  * @package	de.mysterycode.wcf.toDo
  */
 abstract class AbstractToDoListPage extends SortablePage {
-	/**
-	 * @inheritDoc
-	 */
-	public $activeMenuItem = 'wcf.header.menu.toDo';
-	
 	/**
 	 * @inheritDoc
 	 */
@@ -58,7 +53,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	/**
 	 * @inheritDoc
 	 */
-	public $objectListClassName = 'wcf\data\todo\ViewableToDoList';
+	public $objectListClassName = ViewableToDoList::class;
 	
 	public $neededModules = ['TODOLIST'];
 	
@@ -167,17 +162,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 		
 		// init category node list
 		$this->categoryNodeList = new RestrictedTodoCategoryNodeList();
-		
-		// users online
-		if (MODULE_USERS_ONLINE) {
-			// init users online list
-			$this->usersOnlineList = new UsersOnlineList();
-			$this->usersOnlineList->readStats();
-			$this->usersOnlineList->checkRecord();
-			$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
-			$this->usersOnlineList->readObjects();
-		}
-		
+
 		// fetch likes
 		if (MODULE_LIKE) {
 			$todoIDs = [];
@@ -203,7 +188,6 @@ abstract class AbstractToDoListPage extends SortablePage {
 		WCF::getTPL()->assign([
 			'likeData' => $this->likeData,
 			'categoryNodeList' => $this->categoryNodeList,
-			'usersOnlineList' => $this->usersOnlineList,
 			'responsibleFilter' => $this->responsibleFilter,
 			'statusFilter', $this->statusFilter,
 			

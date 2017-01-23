@@ -103,7 +103,7 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 		$todo = new ToDo($comment->objectID);
 		
 		if (empty($todo))
-			$returnValue = false;
+			return false;
 		
 		$returnValue = $todo->canEnter();
 		if (!$todo->canEnter()) {

@@ -16,7 +16,7 @@ class HistorySavingToDoProvider extends ToDoProvider implements IHistorySavingOb
 	/**
 	 * @inheritDoc
 	 */
-	public $decoratorClassName = 'wcf\data\todo\HistorySavingToDo';
+	public $decoratorClassName = HistorySavingToDo::class;
 	
 	/**
 	 * @inheritDoc

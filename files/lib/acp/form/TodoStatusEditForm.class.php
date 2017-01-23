@@ -54,7 +54,7 @@ class TodoStatusEditForm extends TodoStatusAddForm {
 	public function save() {
 		AbstractForm::save();
 
-		$this->subject = 'wcf.acp.todo.status.status'.$this->status->fieldID;
+		$this->subject = 'wcf.acp.todo.status.status'.$this->status->statusID;
 		if (I18nHandler::getInstance()->isPlainValue('subject')) {
 			I18nHandler::getInstance()->remove($this->subject);
 			$this->subject = I18nHandler::getInstance()->getValue('subject');
@@ -62,7 +62,7 @@ class TodoStatusEditForm extends TodoStatusAddForm {
 			I18nHandler::getInstance()->save('subject', $this->subject, 'wcf.acp.todo', 1);
 		}
 		
-		$this->description = 'wcf.acp.todo.status.description'.$this->status->fieldID;
+		$this->description = 'wcf.acp.todo.status.description'.$this->status->statusID;
 		if (I18nHandler::getInstance()->isPlainValue('description')) {
 			I18nHandler::getInstance()->remove($this->description);
 			$this->description = I18nHandler::getInstance()->getValue('description');

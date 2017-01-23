@@ -19,15 +19,39 @@ use wcf\util\HeaderUtil;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoEditForm extends ToDoAddForm {
+	/**
+	 * @inheritDoc
+	 */
 	public $neededPermissions = [];
-	
+
+	/**
+	 * todo object
+	 * @var null|ToDo
+	 */
 	public $todo = null;
+
+	/**
+	 * id of the todo
+	 * @var integer
+	 */
 	public $todoID = 0;
 
 	/**
-	 * @var inheritDoc
+	 * @inheritDoc
 	 */
 	public $action = 'add';
+
+	/**
+	 * user can edit status
+	 * @var boolean
+	 */
+	public $canEditStatus = false;
+
+	/**
+	 * user can edit responsibles
+	 * @var boolean
+	 */
+	public $canEditResponsible = false;
 	
 	/**
 	 *
@@ -60,8 +84,8 @@ class ToDoEditForm extends ToDoAddForm {
 		if ($this->todo->canEdit()) {
 			$todoData = [
 				'data' => [
-					'title' => $this->title,
-					'description' => $this->description,
+					'title' => $this->subject,
+					'description' => $this->text,
 					'note' => $this->note,
 					'updatetimestamp' => TIME_NOW,
 					'endTime' => $this->endTime,
@@ -114,8 +138,8 @@ class ToDoEditForm extends ToDoAddForm {
 			if (!$this->todo->canEdit())
 				throw new PermissionDeniedException();
 			
-			$this->title = $this->todo->title;
-			$this->description = $this->todo->description;
+			$this->subject = $this->todo->title;
+			$this->text = $this->todo->description;
 			$this->note = $this->todo->note;
 			$this->statusID = $this->todo->statusID;
 			$this->categoryID = $this->todo->categoryID;

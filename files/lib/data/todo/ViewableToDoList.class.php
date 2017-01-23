@@ -25,7 +25,7 @@ class ViewableToDoList extends ToDoList {
 	/**
 	 * @inheritDoc
 	 */
-	public $decoratorClassName = 'wcf\data\todo\ViewableToDo';
+	public $decoratorClassName = ViewableToDo::class;
 	
 	/**
 	 * Creates a new ViewableToDoList object.
@@ -85,6 +85,7 @@ class ViewableToDoList extends ToDoList {
 		
 		// get assigned labels
 		$todoIDs = [];
+		/** @var \wcf\data\todo\ToDo $todo */
 		foreach ($this->objects as $todo) {
 			if ($todo->hasLabels) {
 				$todoIDs[] = $todo->todoID;

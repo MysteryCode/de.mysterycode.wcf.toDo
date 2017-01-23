@@ -1,7 +1,9 @@
 <?php
 
 namespace wcf\system\user\notification\object\type;
-
+use wcf\data\comment\response\CommentResponse;
+use wcf\data\comment\response\CommentResponseList;
+use wcf\system\user\notification\object\CommentResponseUserNotificationObject;
 
 /**
  * Shows the todo comment response user notification objecttype.
@@ -12,7 +14,7 @@ namespace wcf\system\user\notification\object\type;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoCommentResponseUserNotificationObjectType extends AbstractUserNotificationObjectType {
-	protected static $decoratorClassName = 'wcf\system\user\notification\object\CommentResponseUserNotificationObject';
-	protected static $objectClassName = 'wcf\data\comment\response\CommentResponse';
-	protected static $objectListClassName = 'wcf\data\comment\response\CommentResponseList';
+	protected static $decoratorClassName = CommentResponseUserNotificationObject::class;
+	protected static $objectClassName = CommentResponse::class;
+	protected static $objectListClassName = CommentResponseList::class;
 }

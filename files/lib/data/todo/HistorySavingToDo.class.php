@@ -19,7 +19,7 @@ class HistorySavingToDo extends DatabaseObjectDecorator implements IHistorySavin
 	/**
 	 * @inheritDoc
 	 */
-	protected static $baseClass = 'wcf\data\todo\ToDo';
+	protected static $baseClass = ToDo::class;
 	
 	/**
 	 * userID of the last editor

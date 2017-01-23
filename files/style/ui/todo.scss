@@ -24,8 +24,7 @@
 
 	.todo {
 		min-height: 44px;
-		padding: 4px; //TODO: check
-		padding-right: 51%;
+		padding: 4px 51% 4px 4px;
 		@include transition(background , .1s);
 		&.box32 > *:not(:first-child) {
 			margin: 0;
@@ -223,8 +222,7 @@
 
 	.todoCategory {
 		min-height: 44px;
-		padding: 4px; //TODO: check
-		padding-right: 51%;
+		padding: 4px 51% 4px 4px;
 		border-radius: 6px;
 		@include transition(background , .1s);
 		&:hover {

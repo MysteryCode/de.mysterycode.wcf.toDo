@@ -17,7 +17,7 @@ class AssignedGroupEditor extends DatabaseObjectEditor implements IEditableCache
 	/**
 	 * @inheritDoc
 	 */
-	protected static $baseClass = 'wcf\data\todo\assigned\group\AssignedGroup';
+	protected static $baseClass = AssignedGroup::class;
 	
 	/**
 	 * @inheritDoc

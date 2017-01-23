@@ -16,6 +16,9 @@ use wcf\system\WCF;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoCommentManager extends AbstractCommentManager {
+	/**
+	 * @var null|ToDo
+	 */
 	protected $currentToDo = null;
 	
 	/**

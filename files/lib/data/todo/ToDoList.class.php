@@ -16,11 +16,6 @@ class ToDoList extends DatabaseObjectList {
 	/**
 	 * @inheritDoc
 	 */
-	public $className = 'wcf\data\todo\ToDo';
-	
-	/**
-	 * @inheritDoc
-	 */
 	public function __construct() {
 		parent::__construct ();
 		
@@ -30,7 +25,6 @@ class ToDoList extends DatabaseObjectList {
 		// visible status
 		if (!WCF::getSession()->getPermission('mod.toDo.canViewDeleted')) {
 			$this->getConditionBuilder()->add('todo_table.isDeleted = 0');
-			$this->loadDeleteNote = false;
 		}
 		
 		if ($this->sqlOrderBy == 'statusID ASC' || $this->sqlOrderBy == 'statusID DESC') {

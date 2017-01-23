@@ -18,7 +18,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	/**
 	 * @inheritDoc
 	 */
-	protected $className = 'wcf\data\todo\ToDo';
+	protected $className = ToDo::class;
 	
 	/**
 	 * list of todo objects
@@ -41,6 +41,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		$todoList = $todoList->getObjects();
 		
 		$todos = [];
+		/** @var \wcf\data\todo\ToDo $todo */
 		foreach ($todoList as $todo) {
 			$todos[$todo->todoID] = $todo;
 		}
@@ -105,7 +106,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 * @inheritDoc
 	 */
 	public function populate(array $queues) {
-		$todos = $objectIDs = [];
+		$objectIDs = [];
 		foreach ($queues as $object) {
 			$objectIDs[] = $object->objectID;
 		}

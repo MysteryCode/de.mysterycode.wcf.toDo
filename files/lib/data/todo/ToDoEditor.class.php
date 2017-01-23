@@ -22,7 +22,7 @@ class ToDoEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 * @inheritDoc
 	 */
-	protected static $baseClass = 'wcf\data\todo\ToDo';
+	protected static $baseClass = ToDo::class;
 
 	/**
 	 * Updates the todo counter of the given users.

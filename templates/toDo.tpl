@@ -223,7 +223,7 @@
 			<fieldset>
 				<legend>{lang}wcf.toDo.task.description{/lang}</legend>
 				<div>
-					{@$todo->getFormattedDescription()}
+					{@$todo->getFormattedMessage()}
 				</div>
 			</fieldset>
 			{include file='attachments'}

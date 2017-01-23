@@ -20,10 +20,9 @@ class DeletedToDoList extends ToDoList {
 	public $sqlOrderBy = 'todo_table.time DESC';
 	
 	/**
-	 *
 	 * @inheritDoc
 	 */
-	public $className = 'wcf\data\todo\ToDo';
+	public $className = ToDo::class;
 
 	/**
 	 * {@inheritDoc}

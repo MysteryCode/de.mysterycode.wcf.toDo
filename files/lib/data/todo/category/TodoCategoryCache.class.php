@@ -2,6 +2,7 @@
 
 namespace wcf\data\todo\category;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\todo\ToDo;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\system\cache\builder\TodoCategoryDataCacheBuilder;
 use wcf\system\cache\builder\TodoCategoryLabelGroupCacheBuilder;
@@ -260,7 +261,7 @@ class TodoCategoryCache extends SingletonFactory {
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute($conditionBuilder->getParameters());
 			while ($row = $statement->fetchArray()) {
-				$todo = new Todo(null, $row);
+				$todo = new ToDo(null, $row);
 				
 				// add labels
 				if (isset($assignedLabels[$todo->todoID])) {

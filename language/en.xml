@@ -153,11 +153,6 @@
 		<item name="wcf.acp.option.todo_waiting_warning_hide_duration.description"><![CDATA[Type in the amount of hours to hide the warning.]]></item>
 		
 		<item name="wcf.acp.option.toDoList"><![CDATA[ToDo-List]]></item>
-		
-		<item name="wcf.acp.option.category.dashboard.sidebar.wcf.todo.noresponsible"><![CDATA[ToDos without responsibles]]></item>
-		<item name="wcf.acp.option.todo_noresponsible_dashboard_box_items"><![CDATA[Number of ToDos]]></item>
-		<item name="wcf.acp.option.category.dashboard.sidebar.wcf.todo.outstanding"><![CDATA[Unsolved ToDos]]></item>
-		<item name="wcf.acp.option.todo_outstanding_dashboard_box_items"><![CDATA[Number of ToDos]]></item>
 	</category>
 	
 	<category name="wcf.acp.rebuildData">
@@ -195,19 +190,6 @@
 		<item name="wcf.clipboard.item.de.mysterycode.wcf.toDo.toDo.trash"><![CDATA[Delete ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.mysterycode.wcf.toDo.toDo.trash.confirmMessage"><![CDATA[Do you really want to move {if $count != 1}the marked ToDos{else}this ToDo{/if} to the trash bin?]]></item>
 		<item name="wcf.clipboard.label.de.mysterycode.wcf.toDo.toDo.marked"><![CDATA[{if $count == 1}One ToDo{else}{#$count} ToDos{/if} Marked]]></item>
-	</category>
-	
-	<category name="wcf.dashboard.box">
-		<item name="wcf.dashboard.box.de.mysterycode.wcf.toDo.statistics"><![CDATA[ToDo-Stats]]></item>
-		<item name="wcf.dashboard.box.de.mysterycode.wcf.toDo.outstanding"><![CDATA[Outstanding]]></item>
-		<item name="wcf.dashboard.box.de.mysterycode.wcf.toDo.noresponsible"><![CDATA[No responsible]]></item>
-	</category>
-	
-	<category name="wcf.dashboard.objectType">
-		<item name="wcf.dashboard.objectType.de.mysterycode.wcf.ToDoListPage"><![CDATA[ToDo Overview]]></item>
-		<item name="wcf.dashboard.objectType.de.mysterycode.wcf.ToDoPage"><![CDATA[ToDo Detail]]></item>
-		<item name="wcf.dashboard.objectType.de.mysterycode.wcf.ToDoCategoryPage"><![CDATA[ToDo-Kategorie]]></item>
-		<item name="wcf.dashboard.objectType.de.mysterycode.wcf.ToDoArchivePage"><![CDATA[ToDo-Archiv]]></item>
 	</category>
 	
 	<category name="wcf.header.menu">
@@ -339,12 +321,6 @@
 		
 		<item name="wcf.toDo.private"><![CDATA[This ToDos is marked as private.]]></item>
 		<item name="wcf.toDo.important"><![CDATA[This ToDo is marked as important.]]></item>
-		
-		<item name="wcf.toDo.dashboard.stat.all"><![CDATA[All ToDos]]></item>
-		<item name="wcf.toDo.dashboard.stat.unsolved"><![CDATA[Unsolved ToDos]]></item>
-		<item name="wcf.toDo.dashboard.stat.work"><![CDATA[ToDos in work]]></item>
-		<item name="wcf.toDo.dashboard.stat.solved"><![CDATA[Solved ToDos]]></item>
-		<item name="wcf.toDo.dashboard.stat.canceled"><![CDATA[Canceled ToDos]]></item>
 		
 		<item name="wcf.toDo.moderation.redirect"><![CDATA[Your ToDo requires manual approval and will not be displayed until then.]]></item>
 		

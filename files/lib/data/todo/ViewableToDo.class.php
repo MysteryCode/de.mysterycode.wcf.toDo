@@ -20,7 +20,7 @@ class ViewableToDo extends DatabaseObjectDecorator {
 	/**
 	 * @inheritDoc
 	 */
-	protected static $baseClass = 'wcf\data\todo\ToDo';
+	protected static $baseClass = ToDo::class;
 	
 	/**
 	 * user profile object
@@ -97,10 +97,12 @@ class ViewableToDo extends DatabaseObjectDecorator {
 		$list = new ViewableToDoList();
 		$list->setObjectIDs([$todoID]);
 		$list->readObjects();
+		/** @var ViewableToDo[] $objects */
 		$objects = $list->getObjects();
-		
-		if (isset($objects[$todoID]))
+
+		if (isset($objects[$todoID])) {
 			return $objects[$todoID];
+		}
 		
 		return null;
 	}

@@ -2,6 +2,7 @@
 
 namespace wcf\system\user\notification\object;
 use wcf\data\DatabaseObjectDecorator;
+use wcf\data\todo\ToDo;
 
 /**
  * Represents the todo user notification object.
@@ -15,7 +16,7 @@ class ToDoUserNotificationObject extends DatabaseObjectDecorator implements IUse
 	/**
 	 * @inheritDoc
 	 */
-	protected static $baseClass = 'wcf\data\todo\ToDo';
+	protected static $baseClass = ToDo::class;
 	
 	/**
 	 * @inheritDoc
@@ -42,6 +43,6 @@ class ToDoUserNotificationObject extends DatabaseObjectDecorator implements IUse
 	 * @inheritDoc
 	 */
 	public function getAuthorID() {
-		return $this->submitter;
+		return $this->getDecoratedObject()->submitter;
 	}
 }

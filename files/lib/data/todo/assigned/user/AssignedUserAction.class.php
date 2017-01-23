@@ -14,11 +14,6 @@ use wcf\system\exception\UserInputException;
  * @package	de.mysterycode.wcf.toDo
  */
 class AssignedUserAction extends AbstractDatabaseObjectAction {
-	/**
-	 * @inheritDoc
-	 */
-	protected $className = 'wcf\data\todo\assigned\user\AssignedUserEditor';
-	
 	public function deleteByTodo() {
 		if (!empty($this->parameters['userID']))
 			$userID = $this->parameters['userID'];

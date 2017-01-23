@@ -17,17 +17,17 @@ class LikeableToDoProvider extends AbstractObjectTypeProvider implements ILikeOb
 	/**
 	 * @inheritDoc
 	 */
-	public $className = 'wcf\data\todo\ToDo';
+	public $className = ToDo::class;
 	
 	/**
 	 * @inheritDoc
 	 */
-	public $decoratorClassName = 'wcf\data\todo\LikeableToDo';
+	public $decoratorClassName = LikeableToDo::class;
 	
 	/**
 	 * @inheritDoc
 	 */
-	public $listClassName = 'wcf\data\todo\ToDoList';
+	public $listClassName = ToDoList::class;
 	
 	/**
 	 * @inheritDoc

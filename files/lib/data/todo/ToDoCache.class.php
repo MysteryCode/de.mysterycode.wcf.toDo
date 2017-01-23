@@ -50,7 +50,7 @@ class ToDoCache extends SingletonFactory {
 		]);
 		$usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
 		$usersOnlineList->readObjects();
-		
+
 		foreach ($usersOnlineList as $user) {
 			$todoID = ($user->objectType == 'de.mysterycode.wcf.toDo' ? $user->objectID : $user->parentObjectID);
 			if (! isset($this->usersOnline[$todoID]))

@@ -16,6 +16,6 @@ class RestrictedTodoCategoryNodeList extends TodoCategoryNodeList {
 	 * @inheritDoc
 	 */
 	protected function isIncluded(CategoryNode $categoryNode) {
-		return (parent::isIncluded($categoryNode) && $categoryNode->getPermission());
+		return (parent::isIncluded($categoryNode) && $categoryNode->getPermission('user.canViewCategory'));
 	}
 }

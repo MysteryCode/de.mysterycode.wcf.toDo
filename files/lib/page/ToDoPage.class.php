@@ -20,18 +20,6 @@ use wcf\system\WCF;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoPage extends AbstractPage {
-	/**
-	 *
-	 * @inheritDoc
-	 */
-	public $activeMenuItem = 'wcf.header.menu.toDo';
-	
-	/**
-	 * users online list
-	 * @var	\wcf\data\user\online\UsersOnlineList
-	 */
-	public $usersOnlineList = null;
-	
 	public $neededModules = ['TODOLIST'];
 	
 	/**
@@ -54,6 +42,12 @@ class ToDoPage extends AbstractPage {
 	 * @var	array<\wcf\data\like\object\LikeObject>
 	 */
 	public $likeData = null;
+
+	/**
+	 * comment objecttype's id
+	 * @var integer
+	 */
+	public $objectTypeID = 0;
 	
 	/**
 	 *
@@ -105,14 +99,10 @@ class ToDoPage extends AbstractPage {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		
-		$submitter = $this->todo->getUser();
 
 		MessageQuoteManager::getInstance()->assignVariables();
 		
 		WCF::getTPL()->assign([
-			'submitterusername' => $submitter->username,
-			'responsibles' => $this->todo->getResponsibleIDs(),
 			'commentList' => $this->commentList,
 			'commentObjectTypeID' => $this->objectTypeID,
 			'commentCanAdd' => $this->commentManager->canAdd($this->todoID),
@@ -121,41 +111,7 @@ class ToDoPage extends AbstractPage {
 			'likeData' => (MODULE_LIKE ? $this->commentList->getLikeData() : []),
 			'todo' => $this->todo,
 			'attachmentList' => $this->todo->getAttachments(),
-			'todoLikeData' => $this->likeData,
+			'todoLikeData' => $this->likeData
 		]);
-	}
-	
-	/**
-	 * @inheritDoc
-	 */
-	public function getParentObjectType() {
-		return 'de.mysterycode.wcf.toDo';
-	}
-	
-	/**
-	 * @inheritDoc
-	 */
-	public function getParentObjectID() {
-		if ($this->todo)
-			return $this->todo->categoryID;
-		
-		return 0;
-	}
-	
-	/**
-	 * @inheritDoc
-	 */
-	public function getObjectType() {
-		return 'de.mysterycode.wcf.toDo.toDo';
-	}
-	
-	/**
-	 * @inheritDoc
-	 */
-	public function getObjectID() {
-		if ($this->todo)
-			return $this->todoID;
-		
-		return 0;
 	}
 }

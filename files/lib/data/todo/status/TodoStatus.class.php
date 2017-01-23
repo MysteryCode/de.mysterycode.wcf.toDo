@@ -11,6 +11,13 @@ use wcf\system\WCF;
  * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
+ *
+ * @property-read integer statusID ID of this status-object
+ * @property-read string  subject title of the status
+ * @property-read string  description description of the status
+ * @property-read integer showOrder show order of the category as positive integer
+ * @property-read string  cssClass css classes for appearance
+ * @property-read boolean locked this status can't be deleted
  */
 class TodoStatus extends DatabaseObject {
 	/**

@@ -2,7 +2,6 @@
 
 namespace wcf\data\todo\category;
 use wcf\data\category\CategoryNode;
-use wcf\system\WCF;
 
 /**
  * Represents a category node.
@@ -16,7 +15,7 @@ class TodoCategoryNode extends CategoryNode {
 	/**
 	 * @inheritDoc
 	 */
-	protected static $baseClass = 'wcf\data\todo\category\TodoCategory';
+	protected static $baseClass = TodoCategory::class;
 
 	/**
 	 * depth of this category node
@@ -92,13 +91,10 @@ class TodoCategoryNode extends CategoryNode {
 			if ($this->getPermission('user.canEnterCategory')) {
 				$this->lastTodo = TodoCategoryCache::getInstance()->getLastTodo($this->categoryID);
 
-				$languageIDs = WCF::getUser()->getLanguageIDs();
-				foreach ($languageIDs as $languageID) {
-					$lastTodo = TodoCategoryCache::getInstance()->getLastTodo($this->categoryID, $languageID);
-					if ($lastTodo !== null) {
-						if ($this->lastTodo === null || $lastTodo->time > $this->lastTodo->time) {
-							$this->lastTodo = $lastTodo;
-						}
+				$lastTodo = TodoCategoryCache::getInstance()->getLastTodo($this->categoryID);
+				if ($lastTodo !== null) {
+					if ($this->lastTodo === null || $lastTodo->time > $this->lastTodo->time) {
+						$this->lastTodo = $lastTodo;
 					}
 				}
 

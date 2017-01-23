@@ -1,6 +1,7 @@
 <?php
 
 namespace wcf\acp\page;
+use wcf\data\todo\status\TodoStatusList;
 use wcf\page\SortablePage;
 
 /**
@@ -35,5 +36,5 @@ class TodoStatusListPage extends SortablePage {
 	/**
 	 * @inheritDoc
 	 */
-	public $objectListClassName = 'wcf\data\todo\status\TodoStatusList';
+	public $objectListClassName = TodoStatusList::class;
 }

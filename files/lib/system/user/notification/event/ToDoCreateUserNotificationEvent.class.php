@@ -86,7 +86,7 @@ class ToDoCreateUserNotificationEvent extends AbstractUserNotificationEvent {
 	 */
 	public function checkAccess() {
 		if (empty($this->userNotificationObject->object) || !$this->userNotificationObject->getObjectID())
-			$returnValue = false;
+			return false;
 		
 		$returnValue = $this->userNotificationObject->object->canEnter();
 		if (!$returnValue && $this->userNotificationObject->getObjectID()) {
