@@ -54,7 +54,7 @@
 					<tr class="jsStatusRow">
 						<td class="columnIcon">
 							<a href="{link controller='TodoStatusEdit' id=$status->statusID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
-							{if !$status->locked}<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$status->statusID}" data-confirm-message="{lang}wcf.acp.todo.status.delete.sure{/lang}"></span>{/if}
+							<span class="icon icon16 fa-remove jsTooltip {if !$status->locked}jsDeleteButton pointer{else}disabled{/if}" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$status->statusID}" data-confirm-message="{lang}wcf.acp.todo.status.delete.sure{/lang}"></span>
 							
 							{event name='rowButtons'}
 						</td>
