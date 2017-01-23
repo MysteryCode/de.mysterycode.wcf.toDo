@@ -26,6 +26,7 @@ CREATE TABLE wcf1_todo (
 	cumulativeLikes    MEDIUMINT(7) NOT NULL DEFAULT 0,
 	attachments        MEDIUMINT(7) NOT NULL DEFAULT 0,
 	hasEmbeddedObjects TINYINT(1)   NOT NULL DEFAULT 0,
+	notesHasEmbeddedObjects TINYINT(1)   NOT NULL DEFAULT 0,
 	ipAddress          VARCHAR(39)  NOT NULL DEFAULT '',
 	PRIMARY KEY (todoID)
 );

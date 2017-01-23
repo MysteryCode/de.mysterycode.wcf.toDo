@@ -64,16 +64,30 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @inheritDoc
 	 */
 	public function create() {
+		if (!empty($this->parameters['htmlInputProcessor'])) {
+			/** @noinspection PhpUndefinedMethodInspection */
+			$this->parameters['data']['description'] = $this->parameters['htmlInputProcessor']->getHtml();
+		}
+
+		if (!empty($this->parameters['notesNtmlInputProcessor'])) {
+			/** @noinspection PhpUndefinedMethodInspection */
+			$this->parameters['data']['note'] = $this->parameters['notesHtmlInputProcessor']->getHtml();
+		}
+
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 			$data['attachments'] = count($this->parameters['attachmentHandler']);
 		}
-		
+
 		if (LOG_IP_ADDRESS) {
-			if (!isset($this->parameters['data']['ipAddress']))
+			// add ip address
+			if (!isset($this->parameters['data']['ipAddress'])) {
 				$this->parameters['data']['ipAddress'] = WCF::getSession()->ipAddress;
+			}
 		} else {
-			if (isset($this->parameters['data']['ipAddress']))
+			// do not track ip address
+			if (isset($this->parameters['data']['ipAddress'])) {
 				unset($this->parameters['data']['ipAddress']);
+			}
 		}
 		
 		$todo = parent::create();
@@ -82,12 +96,23 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 			$this->parameters['attachmentHandler']->updateObjectID($todo->todoID);
 		}
-		
-		if (MessageEmbeddedObjectManager::getInstance()->registerObjects('de.mysterycode.wcf.toDo', $todo->todoID, $todo->description)) {
-			$todoEditor = new ToDoEditor($todo);
-			$todoEditor->update([
-				'hasEmbeddedObjects' => 1
-			]);
+
+		// save embedded objects
+		if (!empty($this->parameters['htmlInputProcessor'])) {
+			/** @noinspection PhpUndefinedMethodInspection */
+			$this->parameters['htmlInputProcessor']->setObjectID($todo->todoID);
+			if (MessageEmbeddedObjectManager::getInstance()->registerObjects($this->parameters['htmlInputProcessor'])) {
+				$objectEditor = new ToDoEditor($todo);
+				$objectEditor->update(['hasEmbeddedObjects' => 1]);
+			}
+		}
+		if (!empty($this->parameters['notesHtmlInputProcessor'])) {
+			/** @noinspection PhpUndefinedMethodInspection */
+			$this->parameters['notesHtmlInputProcessor']->setObjectID($todo->todoID);
+			if (MessageEmbeddedObjectManager::getInstance()->registerObjects($this->parameters['notesHtmlInputProcessor'])) {
+				$objectEditor = new ToDoEditor($todo);
+				$objectEditor->update(['notesHasEmbeddedObjects' => 1]);
+			}
 		}
 		
 		if (!$todo->isDisabled) {
@@ -138,6 +163,15 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 			$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
 		}
+
+		if (!empty($this->parameters['htmlInputProcessor'])) {
+			/** @noinspection PhpUndefinedMethodInspection */
+			$this->parameters['data']['description'] = $this->parameters['htmlInputProcessor']->getHtml();
+		}
+		if (!empty($this->parameters['notesHtmlInputProcessor'])) {
+			/** @noinspection PhpUndefinedMethodInspection */
+			$this->parameters['data']['note'] = $this->parameters['notesHtmlInputProcessor']->getHtml();
+		}
 		
 		if (isset($this->parameters['data'])) {
 			$todoIDs = [];
@@ -158,13 +192,21 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				}
 			}
 		}
-		
-		if (isset($this->parameters['data']['description'])) {
-			foreach ($this->objects as $object) {
-				if ($object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects('de.mysterycode.wcf.toDo', $object->todoID, $this->parameters['data']['description'])) {
-					$object->update([
-						'hasEmbeddedObjects' => ($object->hasEmbeddedObjects ? 0 : 1)
-					]);
+
+		// update embedded objects
+		if (!empty($this->parameters['htmlInputProcessor'])) {
+			foreach ($this->getObjects() as $object) {
+				$this->parameters['htmlInputProcessor']->setObjectID($object->todoID);
+				if ($object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects($this->parameters['htmlInputProcessor'])) {
+					$object->update(['hasEmbeddedObjects' => $object->hasEmbeddedObjects ? 0 : 1]);
+				}
+			}
+		}
+		if (!empty($this->parameters['notesHtmlInputProcessor'])) {
+			foreach ($this->getObjects() as $object) {
+				$this->parameters['notesHtmlInputProcessor']->setObjectID($object->todoID);
+				if ($object->notesHasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects($this->parameters['notesHtmlInputProcessor'])) {
+					$object->update(['notesHasEmbeddedObjects' => $object->notesHasEmbeddedObjects ? 0 : 1]);
 				}
 			}
 		}

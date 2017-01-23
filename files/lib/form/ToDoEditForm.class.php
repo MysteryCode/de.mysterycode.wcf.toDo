@@ -23,13 +23,18 @@ class ToDoEditForm extends ToDoAddForm {
 	
 	public $todo = null;
 	public $todoID = 0;
+
+	/**
+	 * @var inheritDoc
+	 */
+	public $action = 'add';
 	
 	/**
 	 *
 	 * @inheritDoc
 	 */
 	public function readParameters() {
-		MessageForm::readParameters();
+		parent::readParameters();
 		
 		MessageQuoteManager::getInstance()->readParameters();
 		
@@ -46,7 +51,11 @@ class ToDoEditForm extends ToDoAddForm {
 	 * @inheritDoc
 	 */
 	public function save() {
+		MessageForm::save();
+
 		$todoData = ['data' => []];
+
+		$this->note = $this->notesHtmlInputProcessor->getHtml();
 		
 		if ($this->todo->canEdit()) {
 			$todoData = [
@@ -61,7 +70,9 @@ class ToDoEditForm extends ToDoAddForm {
 					'progress' => $this->progress,
 					'remembertime' => $this->remembertime
 				],
-				'attachmentHandler' => $this->attachmentHandler
+				'attachmentHandler' => $this->attachmentHandler,
+				'htmlInputProcessor' => $this->htmlInputProcessor,
+				'notesHtmlInputProcessor' => $this->notesHtmlInputProcessor
 			];
 		}
 		
@@ -144,8 +155,7 @@ class ToDoEditForm extends ToDoAddForm {
 
 		WCF::getTPL()->assign( [
 			'id' => $this->todoID,
-			'todo' => $this->todo,
-			'action' => 'edit'
+			'todo' => $this->todo
 		]);
 	}
 	

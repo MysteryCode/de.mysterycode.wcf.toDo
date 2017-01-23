@@ -130,6 +130,10 @@
 			<name>de.mysterycode.wcf.toDo</name>
 			<definitionname>com.woltlab.wcf.message</definitionname>
 		</type>
+		<type>
+			<name>de.mysterycode.wcf.toDo.notes</name>
+			<definitionname>com.woltlab.wcf.message</definitionname>
+		</type>
 		<!-- edit history -->
 		<type>
 			<name>de.mysterycode.wcf.toDo</name>

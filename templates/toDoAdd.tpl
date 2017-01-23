@@ -180,7 +180,7 @@
 		<fieldset>
 			<legend>{lang}wcf.global.description{/lang}</legend>
 			
-			<textarea id="text" name="description" rows="20" cols="40">{$description}</textarea>
+			<textarea id="text" name="description" rows="20" cols="40" data-autosave="de.mysterycode.wcf.toDo.todoAdd{if $todoID|isset}{@$todoID}{/if}.description">{$description}</textarea>
 			{include file='messageFormTabs' wysiwygContainerID='text'}
 			{if $errorField == 'description'}
 				<small class="innerError">
@@ -204,7 +204,7 @@
 		<fieldset>
 			<legend>{lang}wcf.toDo.task.note{/lang}</legend>
 			
-			<textarea id="note" name="note" rows="10" cols="20">{$note}</textarea>
+			<textarea id="note" name="note" rows="10" cols="20" data-autosave="de.mysterycode.wcf.toDo.todoAdd{if $todoID|isset}{@$todoID}{/if}.notes">{$note}</textarea>
 			{if $errorField == 'note'}
 				<small class="innerError">
 					{if $errorType == 'empty'}

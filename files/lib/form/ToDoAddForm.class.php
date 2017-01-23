@@ -9,8 +9,11 @@ use wcf\data\todo\status\TodoStatusList;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
 use wcf\data\user\UserProfile;
+use wcf\system\bbcode\BBCodeHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
+use wcf\system\html\input\HtmlInputProcessor;
+use wcf\system\message\censorship\Censorship;
 use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
@@ -42,18 +45,26 @@ class ToDoAddForm extends MessageForm {
 	 * @inheritDoc
 	 */
 	public $attachmentObjectType = 'de.mysterycode.wcf.toDo.toDo';
+
+	/**
+	 * @inheritDoc
+	 */
+	public $messageObjectType = 'de.mysterycode.wcf.toDo';
+
+	/**
+	 * @inheritDoc
+	 */
+	public $messageNotesObjectType = 'de.mysterycode.wcf.toDo.notess';
 	
 	public $enableComments = 1;
 	
 	public $neededModules = ['TODOLIST'];
 	
-	public $description = '';
 	public $endTime = 0;
 	public $note = '';
 	public $responsibles = '';
 	public $responsibleGroups = '';
 	public $statusID = 0;
-	public $title = '';
 	public $private = 0;
 	public $important = 0;
 	public $categoryID = 0;
@@ -63,6 +74,16 @@ class ToDoAddForm extends MessageForm {
 	public $remembertime = 0;
 
 	public $statusList = [];
+
+	/**
+	 * @var inheritDoc
+	 */
+	public $action = 'add';
+
+	/**
+	 * @var HtmlInputProcessor
+	 */
+	public $notesHtmlInputProcessor;
 	
 	/**
 	 * @inheritDoc
@@ -84,11 +105,11 @@ class ToDoAddForm extends MessageForm {
 	public function readFormParameters() {
 		parent::readFormParameters();
 		
-		if (isset($_POST['description'])) $this->description = StringUtil::trim($_POST['description']);
+		if (isset($_POST['description'])) $this->text = StringUtil::trim($_POST['description']);
 		if (isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d H:i', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
 		if (isset($_POST['note'])) $this->note = StringUtil::trim($_POST['note']);
 		if (isset($_POST['statusID'])) $this->statusID = StringUtil::trim($_POST['statusID']);
-		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
+		if (isset($_POST['title'])) $this->subject = StringUtil::trim($_POST['title']);
 		if (isset($_POST['private'])) $this->private = 1;
 		if (isset($_POST['priority'])) $this->important = StringUtil::trim($_POST['priority']);
 		if (isset($_POST['categoryID'])) $this->categoryID = StringUtil::trim($_POST['categoryID']);
@@ -105,6 +126,10 @@ class ToDoAddForm extends MessageForm {
 	 * @inheritDoc
 	 */
 	public function validate() {
+		parent::validate();
+
+		$this->validateNotes();
+		
 		if (empty($this->title)) {
 			throw new UserInputException('title');
 		}
@@ -130,10 +155,14 @@ class ToDoAddForm extends MessageForm {
 	 * @inheritDoc
 	 */
 	public function save() {
-		$todoData = [
+		parent::save();
+
+		$this->note = $this->notesHtmlInputProcessor->getHtml();
+
+		$todoData = array_merge([
 			'data' => [
-				'title' => $this->title,
-				'description' => $this->description,
+				'title' => $this->subject,
+				'description' => $this->text,
 				'note' => $this->note,
 				'submitter' => WCF::getUser()->userID,
 				'username' => WCF::getUser()->username,
@@ -145,8 +174,10 @@ class ToDoAddForm extends MessageForm {
 				'progress' => $this->progress,
 				'remembertime' => $this->remembertime
 			],
-			'attachmentHandler' => $this->attachmentHandler
-		];
+			'attachmentHandler' => $this->attachmentHandler,
+			'htmlInputProcessor' => $this->htmlInputProcessor,
+			'notesHtmlInputProcessor' => $this->notesHtmlInputProcessor
+		], $this->additionalFields);
 		
 		if (!$this->category->getPermission('user.canAddTodoWithoutModeration')) {
 			$todoData['data']['isDisabled'] = 1;
@@ -218,8 +249,7 @@ class ToDoAddForm extends MessageForm {
 			'progress' => $this->progress,
 			'remembertime' => $this->remembertime,
 			'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.toDo.attachment.allowedAttachmentExtensions'))),
-			'statusList' => $this->statusList,
-			'action' => 'add'
+			'statusList' => $this->statusList
 		]);
 	}
 	
@@ -260,5 +290,42 @@ class ToDoAddForm extends MessageForm {
 		
 		if (!empty($userIDs))
 			UserNotificationHandler::getInstance()->fireEvent('assign', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject(new ToDo($todoID)), $userIDs);
+	}
+
+	/**
+	 * @see MessageForm::validateText()
+	 */
+	protected function validateNotes() {
+		if (empty($this->messageNotesObjectType)) {
+			throw new \RuntimeException("Expected non-empty message object type for '".get_class($this)."'");
+		}
+
+		if ($this->disallowedBBCodesPermission) {
+			BBCodeHandler::getInstance()->setDisallowedBBCodes(explode(',', WCF::getSession()->getPermission($this->disallowedBBCodesPermission)));
+		}
+
+		$this->notesHtmlInputProcessor = new HtmlInputProcessor();
+		$this->notesHtmlInputProcessor->process($this->note, $this->messageNotesObjectType, 0);
+
+		// check text length
+		$message = $this->notesHtmlInputProcessor->getTextContent();
+		if ($this->maxTextLength != 0 && mb_strlen($message) > $this->maxTextLength) {
+			throw new UserInputException('note', 'tooLong');
+		}
+
+		$disallowedBBCodes = $this->notesHtmlInputProcessor->validate();
+		if (!empty($disallowedBBCodes)) {
+			WCF::getTPL()->assign('disallowedBBCodes', $disallowedBBCodes);
+			throw new UserInputException('note', 'disallowedBBCodes');
+		}
+
+		// search for censored words
+		if (ENABLE_CENSORSHIP) {
+			$result = Censorship::getInstance()->test($message);
+			if ($result) {
+				WCF::getTPL()->assign('censoredWords', $result);
+				throw new UserInputException('note', 'censoredWordsFound');
+			}
+		}
 	}
 }

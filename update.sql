@@ -1,1 +1,2 @@
 ALTER TABLE wcf1_todo CHANGE timestamp time INT(10) NOT NULL DEFAULT 0;
+ALTER TABLE wcf1_todo ADD COLUMN notesHasEmbeddedObjects TINYINT(1) NOT NULL DEFAULT 0;
