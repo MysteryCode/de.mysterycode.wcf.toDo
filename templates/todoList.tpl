@@ -4,7 +4,7 @@
 {/capture}
 
 {capture assign='sidebarRight'}
-	<form method="get" action="{link controller='ToDoList'}{/link}">
+	<form method="get" action="{link controller='TodoList'}{/link}">
 		{include file='todoSidebarForm'}
 	</form>
 {/capture}
@@ -13,7 +13,7 @@
 
 {hascontent}
 	<div class="paginationTop">
-		{content}{pages print=true assign=pagesLinks controller='ToDoList' link="pageNo=%d$canonicalURLParameters"}{/content}
+		{content}{pages print=true assign=pagesLinks controller='TodoList' link="pageNo=%d$canonicalURLParameters"}{/content}
 	</div>
 {/hascontent}
 
@@ -60,7 +60,7 @@
 		var $updateHandler = new WCF.Todo.UpdateHandler.List();
 		var $inlineEditor = new WCF.Todo.InlineEditor('.todoContainer');
 		$inlineEditor.setUpdateHandler($updateHandler);
-		$inlineEditor.setEnvironment('list', 0, '{link controller='ToDoList'}{/link}');
+		$inlineEditor.setEnvironment('list', 0, '{link controller='TodoList'}{/link}');
 		$inlineEditor.setPermissions({
 			canEnableTodo: {if $__wcf->getSession()->getPermission('mod.toDo.canEnable')}1{else}0{/if},
 			canDeleteTodo: {if $__wcf->getSession()->getPermission('mod.toDo.canDelete')}1{else}0{/if},
@@ -69,7 +69,7 @@
 		});
 
 		new WCF.Todo.Clipboard($updateHandler);
-		WCF.Clipboard.init('wcf\\page\\ToDoListPage', {@$hasMarkedItems}, { });
+		WCF.Clipboard.init('wcf\\page\\TodoListPage', {@$hasMarkedItems}, { });
 
 		new WCF.Search.User('#responsibleFilter', null, true, [ ], true);
 

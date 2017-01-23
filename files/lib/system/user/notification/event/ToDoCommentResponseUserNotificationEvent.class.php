@@ -83,7 +83,7 @@ class ToDoCommentResponseUserNotificationEvent extends AbstractUserNotificationE
 		$comment = new Comment($this->userNotificationObject->commentID);
 		$todo = new ToDo($comment->objectID);
 		
-		return LinkHandler::getInstance()->getLink('ToDo', [
+		return LinkHandler::getInstance()->getLink('Todo', [
 			'application' => 'wcf',
 			'object' => $todo
 		], '#comments' );

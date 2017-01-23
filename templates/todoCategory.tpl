@@ -5,7 +5,7 @@
 
 {if $category->canAddTodo()}
 	{capture assign='contentHeaderNavigation'}
-		<li><a href="{link controller='ToDoAdd' id=$category->categoryID}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 fa-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>
+		<li><a href="{link controller='TodoAdd' id=$category->categoryID}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 fa-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>
 	{/capture}
 {/if}
 
@@ -13,7 +13,7 @@
 {capture assign='contentTitle'}{$title}{/capture}
 
 {capture assign='sidebarRight'}
-	<form method="get" action="{link controller='ToDoCategory' id=$id}{/link}">
+	<form method="get" action="{link controller='TodoCategory' id=$id}{/link}">
 		{include file='todoSidebarForm'}
 	</form>
 {/capture}
@@ -22,7 +22,7 @@
 
 {hascontent}
 	<div class="paginationTop">
-		{content}{pages print=true assign=pagesLinks controller='ToDoCategory' object=$category link="pageNo=%d$canonicalURLParameters"}{/content}
+		{content}{pages print=true assign=pagesLinks controller='TodoCategory' object=$category link="pageNo=%d$canonicalURLParameters"}{/content}
 	</div>
 {/hascontent}
 
@@ -43,7 +43,7 @@
 		<nav class="contentFooterNavigation">
 			<ul>
 				{content}
-					{if $category->canAddTodo() && $items}<li><a href="{link controller='ToDoAdd' id=$category->categoryID}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 fa-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
+					{if $category->canAddTodo() && $items}<li><a href="{link controller='TodoAdd' id=$category->categoryID}{/link}" title="{lang}wcf.toDo.task.add{/lang}" class="button"><span class="icon icon16 fa-asterisk"></span> <span>{lang}wcf.toDo.task.add{/lang}</span></a></li>{/if}
 					{event name='contentFooterNavigation'}
 				{/content}
 			</ul>
@@ -70,7 +70,7 @@
 		var $updateHandler = new WCF.Todo.UpdateHandler.List();
 		var $inlineEditor = new WCF.Todo.InlineEditor('.todoContainer');
 		$inlineEditor.setUpdateHandler($updateHandler);
-		$inlineEditor.setEnvironment('list', 0, '{link controller='ToDoCategory'}{/link}');
+		$inlineEditor.setEnvironment('list', 0, '{link controller='TodoCategory'}{/link}');
 		$inlineEditor.setPermissions({
 			canEnableTodo: {if $__wcf->getSession()->getPermission('mod.toDo.canEnable')}1{else}0{/if},
 			canDeleteTodo: {if $__wcf->getSession()->getPermission('mod.toDo.canDelete')}1{else}0{/if},
@@ -81,7 +81,7 @@
 		new WCF.Search.User('#responsibleFilter', null, true, [ ], true);
 
 		new WCF.Todo.Clipboard($updateHandler);
-		WCF.Clipboard.init('wcf\\page\\ToDoCategoryPage', {@$hasMarkedItems}, { });
+		WCF.Clipboard.init('wcf\\page\\TodoCategoryPage', {@$hasMarkedItems}, { });
 	});
 	//]]>
 </script>

@@ -2,7 +2,7 @@
 	{assign var=anchor value=$__wcf->getAnchor('top')}
 	{foreach from=$objects item='todo'}
 		<li id="todo{@$todo->todoID}" class="marginTop">
-			<article class="wcfTodo message messageSidebarOrientationLeft todo jsTodo dividers{if $todo->isDeleted} messageDeleted{/if}{if $todo->isDisabled} messageDisabled{/if} jsClipboardObject" data-todo-id="{@$todo->todoID}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$todo->todoID}{/link}"{/if} data-user-id="{@$todo->submitter}"
+			<article class="wcfTodo message messageSidebarOrientationLeft todo jsTodo dividers{if $todo->isDeleted} messageDeleted{/if}{if $todo->isDisabled} messageDisabled{/if} jsClipboardObject" data-todo-id="{@$todo->todoID}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='TodoEdit' id=$todo->todoID}{/link}"{/if} data-user-id="{@$todo->submitter}"
 				{if $todo->canEdit()}
 					data-is-disabled="{if $todo->isDisabled}1{else}0{/if}"
 					data-is-deleted="{if $todo->isDeleted}1{else}0{/if}"
@@ -72,7 +72,7 @@
 									<nav class="jsMobileNavigation buttonGroupNavigation">
 										<ul class="smallButtons buttonGroup">{*
 											*}<li><a href="{$todo->getLink()}" title="{lang}wcf.toDo.goToTodo{/lang}" class="button"><span class="icon icon16 fa-arrow-right"></span> <span>{lang}wcf.toDo.goToTodo{/lang}</span></a></li>{*
-											*}{if $todo->canEdit()}<li><a href="{link controller='ToDoEdit' object=$todo}{/link}" title="{lang}wcf.toDo.task.edit{/lang}" class="button jsTodoInlineEditor"><span class="icon icon16 fa-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
+											*}{if $todo->canEdit()}<li><a href="{link controller='TodoEdit' object=$todo}{/link}" title="{lang}wcf.toDo.task.edit{/lang}" class="button jsTodoInlineEditor"><span class="icon icon16 fa-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
 											*}<li class="toTopLink"><a href="{@$anchor}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 fa-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>{*
 											*}{event name='messageOptions'}{*
 										*}</ul>

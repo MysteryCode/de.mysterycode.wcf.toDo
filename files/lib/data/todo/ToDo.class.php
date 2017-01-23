@@ -390,7 +390,7 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	 * {@inheritDoc}
 	 */
 	public function getLink() {
-		return LinkHandler::getInstance()->getLink('ToDo', [
+		return LinkHandler::getInstance()->getLink('Todo', [
 			'application' => 'wcf',
 			'object' => $this
 		]);

@@ -10,7 +10,7 @@
 				<ul class="jsClipboardContainer"  data-type="de.mysterycode.wcf.toDo.toDo">
 					{assign var=anchor value=$__wcf->getAnchor('top')}
 					{foreach from=$todoList item=todo}
-						<li id="todo{$todo->todoID}" class="message todoContainer todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject jsTodo{if $todo->isDeleted} messageDeleted{/if}{if $todo->isDisabled} messageDisabled{/if}" data-todo-id="{@$todo->todoID}" data-element-id="{@$todo->todoID}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='ToDoEdit' id=$todo->todoID}{/link}"{/if}  data-user-id="{@$todo->userID}"
+						<li id="todo{$todo->todoID}" class="message todoContainer todoDepth2 {cycle values='todoNode1,todoNode2'} jsClipboardObject jsTodo{if $todo->isDeleted} messageDeleted{/if}{if $todo->isDisabled} messageDisabled{/if}" data-todo-id="{@$todo->todoID}" data-element-id="{@$todo->todoID}"{if $todo->canEdit()} data-can-edit="{if $todo->canEdit()}1{else}0{/if}" data-edit-url="{link controller='TodoEdit' id=$todo->todoID}{/link}"{/if}  data-user-id="{@$todo->userID}"
 							{if $todo->canEdit()}
 								data-is-disabled="{if $todo->isDisabled}1{else}0{/if}" data-is-deleted="{if $todo->isDeleted}1{else}0{/if}"
 								data-can-enable="{@$todo->canEnable()}" data-can-delete="{@$todo->canDelete()}" data-can-delete-completely="{@$todo->canDeleteCompletely()}" data-can-restore="{@$todo->canRestore()}"
@@ -30,7 +30,7 @@
 											{if $showCategory}
 												<a href="{$todo->getCategory()->getLink()}"><span class="label badge {$todo->getCategory()->cssClass}">{$todo->getCategory()->getTitle()}</span></a>
 											{/if}
-											{if $todo->canEnter()}{if $todo->private}<span class="icon icon16 fa-key"></span> {/if}<a href="{link controller='ToDo' object=$todo}{/link}">{$todo->title}</a>{else}{$todo->title}{/if}
+											{if $todo->canEnter()}{if $todo->private}<span class="icon icon16 fa-key"></span> {/if}<a href="{$todo->getLink()}">{$todo->title}</a>{else}{$todo->title}{/if}
 											{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike') && ($todo->likes || $todo->dislikes)}<span class="likesBadge badge jsTooltip {if $todo->cumulativeLikes > 0}green{elseif $todo->cumulativeLikes < 0}red{/if}" title="{lang likes=$todo->likes dislikes=$todo->dislikes}wcf.like.tooltip{/lang}">{if $todo->cumulativeLikes > 0}+{elseif $todo->cumulativeLikes == 0}&plusmn;{/if}{#$todo->cumulativeLikes}</span>{/if}
 										</h3>
 										

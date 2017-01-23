@@ -426,7 +426,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			$todo->delete();
-			$this->addToDoData($todo->getDecoratedObject(), 'deleted', LinkHandler::getInstance()->getLink('ToDoList', []));
+			$this->addToDoData($todo->getDecoratedObject(), 'deleted', LinkHandler::getInstance()->getLink('TodoList', []));
 		}
 		
 		$this->unmarkToDos();

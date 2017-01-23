@@ -4,7 +4,7 @@
 
 {include file='header'}
 
-<form id="messageContainer" class="jsFormGuard toDoContainer" method="post" action="{if $action=='edit'}{link controller='ToDoEdit' id=$id}{/link}{else}{link controller='ToDoAdd' id=$categoryID}{/link}{/if}">
+<form id="messageContainer" class="jsFormGuard toDoContainer" method="post" action="{if $action=='edit'}{link controller='TodoEdit' id=$id}{/link}{else}{link controller='TodoAdd' id=$categoryID}{/link}{/if}">
 	{if $action == 'edit'}{assign var='canEdit' value=$todo->canEdit()}{/if}
 
 	<section class="section">

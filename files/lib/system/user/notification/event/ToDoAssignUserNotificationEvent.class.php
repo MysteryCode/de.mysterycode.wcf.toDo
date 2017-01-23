@@ -46,7 +46,7 @@ class ToDoAssignUserNotificationEvent extends AbstractUserNotificationEvent {
 	 * {@inheritDoc}
 	 */
 	public function getLink() {
-		return LinkHandler::getInstance()->getLink('ToDo', [
+		return LinkHandler::getInstance()->getLink('Todo', [
 			'application' => 'wcf',
 			'object' => $this->userNotificationObject->object
 		]);
