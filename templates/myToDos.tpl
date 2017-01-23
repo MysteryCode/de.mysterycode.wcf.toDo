@@ -3,7 +3,7 @@
 	{capture assign='canonicalURLParameters'}sortField={@$sortField}&sortOrder={@$sortOrder}{/capture}
 {/capture}
 
-{capture assign='sidebar'}
+{capture assign='sidebarRight'}
 	<form method="get" action="{link controller='MyToDos'}{/link}">
 		{include file='todoSidebarForm'}
 	</form>
