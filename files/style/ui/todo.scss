@@ -57,6 +57,7 @@
 		}
 		.todoStats {
 			position: relative;
+			z-index: 50;
 
 			dl {
 				dt {
@@ -80,6 +81,7 @@
 
 		.todoResponsible {
 			overflow: hidden;
+			z-index: 100;
 
 			@include screen-md-up {
 				flex: 0 0 26%;
