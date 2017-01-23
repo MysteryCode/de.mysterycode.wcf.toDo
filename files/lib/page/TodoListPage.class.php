@@ -1,7 +1,6 @@
 <?php
 
 namespace wcf\page;
-use wcf\data\todo\ToDo;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\WCF;
 
@@ -14,11 +13,6 @@ use wcf\system\WCF;
  * @package	de.mysterycode.wcf.toDo
  */
 class TodoListPage extends AbstractTodoListPage {
-	/**
-	 * @inheritDoc
-	 */
-	public $className = ToDo::class;
-
 	/**
 	 * @inheritDoc
 	 */

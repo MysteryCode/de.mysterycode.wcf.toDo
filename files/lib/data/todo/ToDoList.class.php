@@ -16,6 +16,11 @@ class ToDoList extends DatabaseObjectList {
 	/**
 	 * @inheritDoc
 	 */
+	public $className = ToDo::class;
+
+	/**
+	 * @inheritDoc
+	 */
 	public function __construct() {
 		parent::__construct ();
 		
