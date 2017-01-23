@@ -16,6 +16,6 @@ try {
 	$statement->execute();
 	$sqlLog = "INSERT INTO wcf" . WCF_N . "_package_installation_sql_log (packageID, sqlTable, sqlColumn) VALUES (?, ?, ?)";
 	$statement = WCF::getDB()->prepareStatement($sqlLog);
-	$statement->execute(array($package->packageID, 'wcf'.WCF_N.'_todo', 'ipAddress'));
+	$statement->execute([$package->packageID, 'wcf'.WCF_N.'_todo', 'ipAddress']);
 }
 catch (\Exception $e) {}

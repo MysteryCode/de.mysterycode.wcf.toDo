@@ -24,15 +24,15 @@ class ToDoUserActivityEvent extends SingletonFactory implements IUserActivityEve
 	 * {@inheritDoc}
 	 */
 	public function prepare(array $events) {
-		$objectIDs = array();
+		$objectIDs = [];
 		foreach ($events as $event) {
 			$objectIDs[] = $event->objectID;
 		}
 		
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", array(
+		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", [
 			$objectIDs
-		));
+		]);
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
@@ -45,9 +45,9 @@ class ToDoUserActivityEvent extends SingletonFactory implements IUserActivityEve
 				}
 				$event->setIsAccessible();
 				
-				$text = WCF::getLanguage()->getDynamicVariable($this->languageVariable, array(
+				$text = WCF::getLanguage()->getDynamicVariable($this->languageVariable, [
 					'todo' => $todo
-				));
+				]);
 				$event->setTitle($text);
 				
 				$event->setDescription($todo->getExcerpt());

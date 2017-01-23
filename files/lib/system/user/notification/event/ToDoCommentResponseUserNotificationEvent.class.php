@@ -27,10 +27,10 @@ class ToDoCommentResponseUserNotificationEvent extends AbstractUserNotificationE
 		
 		// this notification was triggered by multiple users
 		if ($count > 1) {
-			return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponse.notification.titlestacked', array(
+			return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponse.notification.titlestacked', [
 				'count' => $count,
 				'timesTriggered' => $this->notification->timesTriggered
-			));
+			]);
 		}
 		
 		return $this->getLanguage()->get('wcf.toDo.commentResponse.notification.title');
@@ -48,19 +48,19 @@ class ToDoCommentResponseUserNotificationEvent extends AbstractUserNotificationE
 		
 		// this notification was triggered by multiple users
 		if ($count > 1) {
-			return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponse.notification.message.stacked', array(
+			return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponse.notification.message.stacked', [
 				'todo' => $todo,
 				'author' => $this->author,
 				'authors' => $authors,
 				'count' => $count,
 				'others' => $count - 1
-			));
+			]);
 		}
 		
-		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponse.notification.message', array(
+		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponse.notification.message', [
 			'todo' => $todo,
-			'author' => $this->author 
-		));
+			'author' => $this->author
+		]);
 	}
 
 	/**
@@ -70,10 +70,10 @@ class ToDoCommentResponseUserNotificationEvent extends AbstractUserNotificationE
 		$comment = new Comment($this->userNotificationObject->commentID);
 		$todo = new ToDo($comment->objectID);
 		
-		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponse.notification.mail', array(
+		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponse.notification.mail', [
 			'todo' => $todo,
-			'author' => $this->author 
-		));
+			'author' => $this->author
+		]);
 	}
 
 	/**
@@ -83,10 +83,10 @@ class ToDoCommentResponseUserNotificationEvent extends AbstractUserNotificationE
 		$comment = new Comment($this->userNotificationObject->commentID);
 		$todo = new ToDo($comment->objectID);
 		
-		return LinkHandler::getInstance()->getLink('ToDo', array(
+		return LinkHandler::getInstance()->getLink('ToDo', [
 			'application' => 'wcf',
 			'object' => $todo
-		), '#comments' );
+		], '#comments' );
 	}
 	
 	/**

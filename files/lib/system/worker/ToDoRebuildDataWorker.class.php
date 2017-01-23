@@ -51,24 +51,24 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 		
 		// fetch cumulative likes
 		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("objectTypeID = ?", array(
+		$conditions->add("objectTypeID = ?", [
 			ObjectTypeCache::getInstance()->getObjectTypeIDByName('com.woltlab.wcf.like.likeableObject', 'de.mysterycode.wcf.toDo.toDo')
-		));
-		$conditions->add("objectID IN (?)", array(
+		]);
+		$conditions->add("objectID IN (?)", [
 			$this->objectList->getObjectIDs()
-		));
+		]);
 		
 		$sql = "SELECT	objectID, cumulativeLikes
 			FROM	wcf" . WCF_N . "_like_object
 			" . $conditions;
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditions->getParameters());
-		$cumulativeLikes = array();
+		$cumulativeLikes = [];
 		while ($row = $statement->fetchArray()) {
 			$cumulativeLikes[$row['objectID']] = $row['cumulativeLikes'];
 		}
 		
-		$userStats = array();
+		$userStats = [];
 		WCF::getDB()->beginTransaction();
 		foreach ($this->objectList as $todo) {
 			// update activity points

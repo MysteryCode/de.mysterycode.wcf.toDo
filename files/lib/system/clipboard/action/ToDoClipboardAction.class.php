@@ -16,12 +16,12 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	/**
 	 * @inheritDoc
 	 */
-	protected $actionClassActions = array('enable', 'disable', 'delete', 'restore');
+	protected $actionClassActions = ['enable', 'disable', 'delete', 'restore'];
 
 	/**
 	 * @inheritDoc
 	 */
-	protected $supportedActions = array('enable', 'disable', 'trash', 'delete', 'restore');
+	protected $supportedActions = ['enable', 'disable', 'trash', 'delete', 'restore'];
 
 	/**
 	 * @inheritDoc
@@ -35,15 +35,15 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 		// handle actions
 		switch ($action->actionName) {
 			case 'delete':
-				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.mysterycode.wcf.toDo.toDo.delete.confirmMessage', array(
+				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.mysterycode.wcf.toDo.toDo.delete.confirmMessage', [
 					'count' => $item->getCount()
-				)));
+				]));
 				break;
 
 			case 'restore':
-				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.mysterycode.wcf.toDo.toDo.restore.confirmMessage', array(
+				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.mysterycode.wcf.toDo.toDo.restore.confirmMessage', [
 					'count' => $item->getCount()
-				)));
+				]));
 				break;
 		}
 
@@ -70,7 +70,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	 * @return	array<integer>
 	 */
 	public function validateEnable() {
-		$todoIDs = array();
+		$todoIDs = [];
 
 		foreach ($this->objects as $todo) {
 			if ($todo->isDisabled && !$todo->isDeleted && $todo->canEnable()) {
@@ -87,7 +87,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	 * @return	array<integer>
 	 */
 	public function validateDisable() {
-		$todoIDs = array();
+		$todoIDs = [];
 
 		foreach ($this->objects as $todo) {
 			if (!$todo->isDisabled && !$todo->isDeleted && $todo->canEnable()) {
@@ -104,7 +104,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	 * @return	array<integer>
 	 */
 	public function validateTrash() {
-		$todoIDs = array();
+		$todoIDs = [];
 
 		foreach ($this->objects as $todo) {
 			if (!$todo->isDeleted && $todo->canDelete()) {
@@ -121,7 +121,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	 * @return	array<integer>
 	 */
 	public function validateDelete() {
-		$todoIDs = array();
+		$todoIDs = [];
 
 		foreach ($this->objects as $todo) {
 			if ($todo->isDeleted && $todo->canDeleteCompletely()) {
@@ -138,7 +138,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	 * @return	array<integer>
 	 */
 	public function validateRestore() {
-		$todoIDs = array();
+		$todoIDs = [];
 
 		foreach ($this->objects as $todo) {
 			if ($todo->isDeleted && $todo->canRestore()) {

@@ -39,7 +39,7 @@ class ToDoEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		
 		foreach ($users as $userID => $todos) {
-			$statement->execute(array($todos, $userID));
+			$statement->execute([$todos, $userID]);
 		}
 	}
 	

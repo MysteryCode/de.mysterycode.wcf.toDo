@@ -20,7 +20,7 @@ class OwnToDosPage extends AbstractToDoListPage {
 	protected function initObjectList() {
 		parent::initObjectList();
 		
-		$this->objectList->getConditionBuilder()->add("(submitter = ? OR user_assigns.userID = ?)", array(WCF::getUser()->userID, WCF::getUser()->userID));
+		$this->objectList->getConditionBuilder()->add("(submitter = ? OR user_assigns.userID = ?)", [WCF::getUser()->userID, WCF::getUser()->userID]);
 	}
 	
 	/**
@@ -30,8 +30,8 @@ class OwnToDosPage extends AbstractToDoListPage {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
-		));
+		]);
 	}
 }

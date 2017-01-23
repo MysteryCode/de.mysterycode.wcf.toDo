@@ -23,6 +23,6 @@ class AssignedGroupEditor extends DatabaseObjectEditor implements IEditableCache
 	 * @inheritDoc
 	 */
 	public static function resetCache() {
-		AssignCacheBuilder::getInstance()->reset(array('group'));
+		AssignCacheBuilder::getInstance()->reset(['group']);
 	}
 }

@@ -29,9 +29,9 @@ class TodoCategoryActionListener implements IParameterizedEventListener {
 			if ($actionName == 'delete') {
 				foreach ($eventObj->getObjectIDs() as $categoryID) {
 					$todoList = new ToDoList();
-					$todoList->getConditionBuilder()->add('todo_table.categoryID = ?', array(
+					$todoList->getConditionBuilder()->add('todo_table.categoryID = ?', [
 						$categoryID
-					));
+					]);
 					$todoList->readObjects();
 					
 					$todos = $todoList->getObjects();

@@ -35,17 +35,17 @@ class ToDoHandler extends SingletonFactory {
 	 */
 	protected $waitingTodoCount = 0;
 	
-	protected $stats = array();
+	protected $stats = [];
 	
 	public function getUnsolvedTodoCount($userID = null) {
 		if ($userID === null) $userID = WCF::getUser()->userID;
 		
 		if ($userID) {
 			// fetch user storage
-			UserStorageHandler::getInstance()->loadStorage(array(WCF::getUser()->userID));
+			UserStorageHandler::getInstance()->loadStorage([WCF::getUser()->userID]);
 			
 			// get package ids from user storage
-			$data = UserStorageHandler::getInstance()->getStorage(array(WCF::getUser()->userID), 'unsolvedTodoCount');
+			$data = UserStorageHandler::getInstance()->getStorage([WCF::getUser()->userID], 'unsolvedTodoCount');
 			
 			if ($data[WCF::getUser()->userID] === null) {
 				$todoIDs = ToDo::getAccessibleTodoIDs();
@@ -53,11 +53,11 @@ class ToDoHandler extends SingletonFactory {
 				if (!empty($todoIDs)) {
 					$conditionBuilder = new PreparedStatementConditionBuilder();
 					$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
-					$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
-					$conditionBuilder->add('todo.todoID IN (?)', array($todoIDs));
+					$conditionBuilder->add('todo_to_user.userID = ?', [$userID]);
+					$conditionBuilder->add('todo.todoID IN (?)', [$todoIDs]);
 					
-					$conditionBuilder->add('todo.statusID = ?', array(2));
-					$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
+					$conditionBuilder->add('todo.statusID = ?', [2]);
+					$conditionBuilder->add('todo.endTime < ?', [TIME_NOW]);
 					
 					$sql = "SELECT	COUNT(*) AS count
 							FROM	wcf".WCF_N."_todo_to_user todo_to_user,
@@ -85,10 +85,10 @@ class ToDoHandler extends SingletonFactory {
 		
 		if ($userID) {
 			// fetch user storage
-			UserStorageHandler::getInstance()->loadStorage(array(WCF::getUser()->userID));
+			UserStorageHandler::getInstance()->loadStorage([WCF::getUser()->userID]);
 				
 			// get package ids from user storage
-			$data = UserStorageHandler::getInstance()->getStorage(array(WCF::getUser()->userID), 'overdueTodoCount');
+			$data = UserStorageHandler::getInstance()->getStorage([WCF::getUser()->userID], 'overdueTodoCount');
 				
 			if ($data[WCF::getUser()->userID] === null) {
 				$todoIDs = ToDo::getAccessibleTodoIDs();
@@ -96,13 +96,13 @@ class ToDoHandler extends SingletonFactory {
 				if (!empty($todoIDs)) {
 					$conditionBuilder = new PreparedStatementConditionBuilder();
 					$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
-					$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
-					$conditionBuilder->add('todo.todoID IN (?)', array($todoIDs));
+					$conditionBuilder->add('todo_to_user.userID = ?', [$userID]);
+					$conditionBuilder->add('todo.todoID IN (?)', [$todoIDs]);
 					
-					$conditionBuilder->add('todo.statusID <> ?', array(1));
-					$conditionBuilder->add('todo.statusID <> ?', array(4));
-					$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
-					$conditionBuilder->add('todo.endTime <> ?', array(0));
+					$conditionBuilder->add('todo.statusID <> ?', [1]);
+					$conditionBuilder->add('todo.statusID <> ?', [4]);
+					$conditionBuilder->add('todo.endTime < ?', [TIME_NOW]);
+					$conditionBuilder->add('todo.endTime <> ?', [0]);
 						
 					$sql = "SELECT	COUNT(*) AS count
 							FROM	wcf".WCF_N."_todo_to_user todo_to_user,
@@ -130,10 +130,10 @@ class ToDoHandler extends SingletonFactory {
 		
 		if ($userID) {
 			// fetch user storage
-			UserStorageHandler::getInstance()->loadStorage(array(WCF::getUser()->userID));
+			UserStorageHandler::getInstance()->loadStorage([WCF::getUser()->userID]);
 		
 			// get package ids from user storage
-			$data = UserStorageHandler::getInstance()->getStorage(array(WCF::getUser()->userID), 'waitingTodoCount');
+			$data = UserStorageHandler::getInstance()->getStorage([WCF::getUser()->userID], 'waitingTodoCount');
 		
 			if ($data[WCF::getUser()->userID] === null) {
 				$todoIDs = ToDo::getAccessibleTodoIDs();
@@ -141,12 +141,12 @@ class ToDoHandler extends SingletonFactory {
 				if (!empty($todoIDs)) {
 					$conditionBuilder = new PreparedStatementConditionBuilder();
 					$conditionBuilder->add('todo.todoID = todo_to_user.todoID');
-					$conditionBuilder->add('todo_to_user.userID = ?', array($userID));
-					$conditionBuilder->add('todo.todoID IN (?)', array($todoIDs));
+					$conditionBuilder->add('todo_to_user.userID = ?', [$userID]);
+					$conditionBuilder->add('todo.todoID IN (?)', [$todoIDs]);
 					
-					$conditionBuilder->add('todo.statusID = ?', array(5));
-					$conditionBuilder->add('todo.endTime < ?', array(TIME_NOW));
-					$conditionBuilder->add('todo.endTime <> ?', array(0));
+					$conditionBuilder->add('todo.statusID = ?', [5]);
+					$conditionBuilder->add('todo.endTime < ?', [TIME_NOW]);
+					$conditionBuilder->add('todo.endTime <> ?', [0]);
 		
 					$sql = "SELECT	COUNT(*) AS count
 							FROM	wcf".WCF_N."_todo_to_user todo_to_user,
@@ -169,7 +169,7 @@ class ToDoHandler extends SingletonFactory {
 		return $this->waitingTodoCount;
 	}
 	
-	public function setStat($stats = array()) {
+	public function setStat($stats = []) {
 		$this->stats = array_merge($this->stats, $stats);
 	}
 	

@@ -19,7 +19,7 @@ class ToDoArchivePage extends AbstractToDoListPage {
 	protected function initObjectList() {
 		parent::initObjectList ();
 		
-		$this->objectList->getConditionBuilder()->add("statusID = ?", array(1));
+		$this->objectList->getConditionBuilder()->add("statusID = ?", [1]);
 	}
 	
 	/**
@@ -28,8 +28,8 @@ class ToDoArchivePage extends AbstractToDoListPage {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
-		));
+		]);
 	}
 }

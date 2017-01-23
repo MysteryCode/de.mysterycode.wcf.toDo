@@ -19,7 +19,7 @@ use wcf\util\HeaderUtil;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoEditForm extends ToDoAddForm {
-	public $neededPermissions = array();
+	public $neededPermissions = [];
 	
 	public $todo = null;
 	public $todoID = 0;
@@ -46,11 +46,11 @@ class ToDoEditForm extends ToDoAddForm {
 	 * @inheritDoc
 	 */
 	public function save() {
-		$todoData = array('data' => array());
+		$todoData = ['data' => []];
 		
 		if ($this->todo->canEdit()) {
-			$todoData = array(
-				'data' => array(
+			$todoData = [
+				'data' => [
 					'title' => $this->title,
 					'description' => $this->description,
 					'note' => $this->note,
@@ -60,23 +60,23 @@ class ToDoEditForm extends ToDoAddForm {
 					'important' => $this->important,
 					'progress' => $this->progress,
 					'remembertime' => $this->remembertime
-				),
+				],
 				'attachmentHandler' => $this->attachmentHandler
-			);
+			];
 		}
 		
 		if ($this->canEditStatus()) {
 			$todoData['data']['statusID'] = $this->statusID;
 		}
 		
-		$this->objectAction = new ToDoAction(array($this->todo), 'update', $todoData);
+		$this->objectAction = new ToDoAction([$this->todo], 'update', $todoData);
 		$this->objectAction->executeAction();
 		
 		if ($this->todo->canEditResponsibles()) {
-			$responsibleUserAction = new ToDoAction(array($this->todo->todoID), 'updateResponsibles', array('search' => $this->responsibles));
+			$responsibleUserAction = new ToDoAction([$this->todo->todoID], 'updateResponsibles', ['search' => $this->responsibles]);
 			$responsibleUserAction->executeAction();
 			
-			$responsibleGroupAction = new ToDoAction(array($this->todo->todoID), 'updateResponsibleGroups', array('search' => $this->responsibleGroups));
+			$responsibleGroupAction = new ToDoAction([$this->todo->todoID], 'updateResponsibleGroups', ['search' => $this->responsibleGroups]);
 			$responsibleGroupAction->executeAction();
 		}
 		
@@ -142,11 +142,11 @@ class ToDoEditForm extends ToDoAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		WCF::getTPL()->assign( array(
+		WCF::getTPL()->assign( [
 			'id' => $this->todoID,
 			'todo' => $this->todo,
-			'action' => 'edit' 
-		));
+			'action' => 'edit'
+		]);
 	}
 	
 	public function canEditStatus() {

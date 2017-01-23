@@ -16,9 +16,9 @@ class TodoCacheBuilder extends AbstractCacheBuilder {
 	 * @inheritDoc
 	 */
 	protected function rebuild(array $parameters) {
-		$data = array(
-			'todos' => array()
-		);
+		$data = [
+			'todos' => []
+		];
 		
 		$statusList = new ToDoList();
 		$statusList->sqlOrderBy = 'todo_table.todoID ASC';

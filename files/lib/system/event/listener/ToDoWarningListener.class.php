@@ -28,10 +28,10 @@ class ToDoWarningListener implements IParameterizedEventListener {
 			$this->waiting = ToDoHandler::getInstance()->getWaitingTodoCount();
 		}
 		
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'unsolvedToDoCount' => $this->unsolved,
 			'overdueToDoCount' => $this->overdue,
 			'waitingToDoCount' => $this->waiting
-		));
+		]);
 	}
 }

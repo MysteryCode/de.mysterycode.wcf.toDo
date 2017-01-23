@@ -25,12 +25,12 @@ class TodoStatusListPage extends SortablePage {
 	/**
 	 * @inheritDoc
 	 */
-	public $validSortFields = array('subject', 'showOrder');
+	public $validSortFields = ['subject', 'showOrder'];
 	
 	/**
 	 * @inheritDoc
 	 */
-	public $neededPermissions = array('admin.content.toDo.status.canEdit', 'admin.content.toDo.status.canDelete');
+	public $neededPermissions = ['admin.content.toDo.status.canEdit', 'admin.content.toDo.status.canDelete'];
 	
 	/**
 	 * @inheritDoc

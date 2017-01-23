@@ -42,7 +42,7 @@ class ToDoCategoryPage extends AbstractToDoListPage {
 	protected function initObjectList() {
 		parent::initObjectList();
 		
-		$this->objectList->getConditionBuilder()->add("categoryID = ?", array($this->categoryID));
+		$this->objectList->getConditionBuilder()->add("categoryID = ?", [$this->categoryID]);
 	}
 	
 	/**
@@ -68,11 +68,11 @@ class ToDoCategoryPage extends AbstractToDoListPage {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		WCF::getTPL()->assign( array(
+		WCF::getTPL()->assign( [
 			'id' => $this->categoryID,
 			'title' => $this->title,
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
 			'category' => $this->category
-		));
+		]);
 	}
 }

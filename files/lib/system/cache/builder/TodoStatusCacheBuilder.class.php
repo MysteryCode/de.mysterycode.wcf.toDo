@@ -16,9 +16,9 @@ class TodoStatusCacheBuilder extends AbstractCacheBuilder {
 	 * @inheritDoc
 	 */
 	protected function rebuild(array $parameters) {
-		$data = array(
-			'status' => array()
-		);
+		$data = [
+			'status' => []
+		];
 		
 		$statusList = new TodoStatusList();
 		$statusList->sqlOrderBy = 'todo_status.statusID ASC';

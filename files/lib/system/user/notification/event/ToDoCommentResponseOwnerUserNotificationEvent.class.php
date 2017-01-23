@@ -28,10 +28,10 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 		
 		// this notification was triggered by multiple users
 		if ($count > 1) {
-			return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponseOwner.notification.title.stacked', array(
+			return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponseOwner.notification.title.stacked', [
 				'count' => $count,
 				'timesTriggered' => $this->notification->timesTriggered
-			));
+			]);
 		}
 		
 		return $this->getLanguage()->get('wcf.toDo.commentResponseOwner.notification.title');
@@ -50,21 +50,21 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 		
 		// this notification was triggered by multiple users
 		if ($count > 1) {
-			return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponseOwner.notification.message.stacked', array(
+			return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponseOwner.notification.message.stacked', [
 				'todo' => $todo,
 				'author' => $this->author,
 				'authors' => $authors,
 				'count' => $count,
 				'others' => $count - 1,
 				'commentAuthor' => $commentAuthor
-			));
+			]);
 		}
 		
-		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponseOwner.notification.message', array(
+		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponseOwner.notification.message', [
 			'todo' => $todo,
 			'author' => $this->author,
 			'commentAuthor' => $commentAuthor
-		));
+		]);
 	}
 
 	/**
@@ -75,11 +75,11 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 		$todo = new ToDo($comment->objectID);
 		$commentAuthor = new User($comment->userID);
 		
-		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponseOwner.notification.mail', array(
+		return $this->getLanguage()->getDynamicVariable('wcf.toDo.commentResponseOwner.notification.mail', [
 			'todo' => $todo,
 			'author' => $this->author,
-			'commentAuthor' => $commentAuthor 
-		));
+			'commentAuthor' => $commentAuthor
+		]);
 	}
 
 	/**
@@ -89,10 +89,10 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 		$comment = new Comment($this->userNotificationObject->commentID);
 		$todo = new ToDo($comment->objectID);
 		
-		return LinkHandler::getInstance()->getLink('ToDo', array(
+		return LinkHandler::getInstance()->getLink('ToDo', [
 			'application' => 'wcf',
 			'object' => $todo
-		), '#comments');
+		], '#comments');
 	}
 	
 	/**

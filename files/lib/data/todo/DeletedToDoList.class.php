@@ -32,7 +32,7 @@ class DeletedToDoList extends ToDoList {
 		parent::__construct();
 		
 		// get only deleted items
-		$this->getConditionBuilder()->add('todo_table.isDeleted = ?', array(1));
+		$this->getConditionBuilder()->add('todo_table.isDeleted = ?', [1]);
 	}
 	
 	public function getMarkedItems() {

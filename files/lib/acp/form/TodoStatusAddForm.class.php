@@ -27,7 +27,7 @@ class TodoStatusAddForm extends AbstractForm {
 	/**
 	 * @inheritDoc
 	 */
-	public $neededPermissions = array('admin.content.toDo.status.canAdd');
+	public $neededPermissions = ['admin.content.toDo.status.canAdd'];
 
 	/**
 	 * subject
@@ -113,14 +113,14 @@ class TodoStatusAddForm extends AbstractForm {
 		parent::save();
 		
 		// save field
-		$this->objectAction = new TodoStatusAction(array(), 'create', array(
-			'data' => array(
+		$this->objectAction = new TodoStatusAction([], 'create', [
+			'data' => [
 				'subject' => $this->subject,
 				'description' => $this->description,
 				'showOrder' => $this->showOrder,
 				'cssClass' => $this->cssClass
-			)
-		));
+			]
+		]);
 		$this->objectAction->executeAction();
 		
 		if (!I18nHandler::getInstance()->isPlainValue('subject')) {
@@ -130,9 +130,9 @@ class TodoStatusAddForm extends AbstractForm {
 			
 			// update subject
 			$statusEditor = new TodoStatusEditor($returnValues['returnValues']);
-			$statusEditor->update(array(
+			$statusEditor->update([
 				'subject' => 'wcf.acp.todo.status.status'.$statusID
-			));
+			]);
 		}
 		
 		if (!I18nHandler::getInstance()->isPlainValue('description')) {
@@ -142,9 +142,9 @@ class TodoStatusAddForm extends AbstractForm {
 			
 			// update description
 			$statusEditor = new TodoStatusEditor($returnValues['returnValues']);
-			$statusEditor->update(array(
+			$statusEditor->update([
 				'description' => 'wcf.acp.todo.status.description'.$statusID
-			));
+			]);
 		}
 		$this->saved();
 		
@@ -155,9 +155,9 @@ class TodoStatusAddForm extends AbstractForm {
 		I18nHandler::getInstance()->reset();
 		
 		// show success
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'success' => true
-		));
+		]);
 	}
 	
 	/**
@@ -168,12 +168,12 @@ class TodoStatusAddForm extends AbstractForm {
 		
 		I18nHandler::getInstance()->assignVariables();
 		
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'action' => 'add',
 			'subject' => $this->subject,
 			'description' => $this->description,
 			'showOrder' => $this->showOrder,
 			'cssClass' => $this->cssClass
-		));
+		]);
 	}
 }

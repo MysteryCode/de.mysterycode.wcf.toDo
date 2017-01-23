@@ -29,9 +29,9 @@ class WatchedToDoList extends ViewableToDoList {
 			// add conditions
 			$this->sqlConditionJoins = "LEFT JOIN wcf".WCF_N."_todo todo ON (todo.todoID = user_object_watch.objectID)";
 			
-			$this->getConditionBuilder()->add('user_object_watch.objectTypeID = ?', array($objectTypeID));
-			$this->getConditionBuilder()->add('user_object_watch.userID = ?', array(WCF::getUser()->userID));
-			$this->getConditionBuilder()->add('todo.categoryID IN (?)', array($categoryIDs));
+			$this->getConditionBuilder()->add('user_object_watch.objectTypeID = ?', [$objectTypeID]);
+			$this->getConditionBuilder()->add('user_object_watch.userID = ?', [WCF::getUser()->userID]);
+			$this->getConditionBuilder()->add('todo.categoryID IN (?)', [$categoryIDs]);
 			$this->getConditionBuilder()->add('todo.isDeleted = 0 AND todo.isDisabled = 0');
 		}
 	}
@@ -55,7 +55,7 @@ class WatchedToDoList extends ViewableToDoList {
 	 * @inheritDoc
 	 */
 	public function readObjectIDs() {
-		$this->objectIDs = array();
+		$this->objectIDs = [];
 		$sql = "SELECT	user_object_watch.objectID AS objectID
 			FROM	wcf".WCF_N."_user_object_watch user_object_watch
 				".$this->sqlConditionJoins."

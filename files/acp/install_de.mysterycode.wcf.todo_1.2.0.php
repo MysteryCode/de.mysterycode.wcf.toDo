@@ -17,52 +17,52 @@ $sql = "SELECT *
 			AND boxID = (SELECT boxID FROM wcf" . WCF_N . "_dashboard_box WHERE boxName = ?)";
 $statement = WCF::getDB()->prepareStatement($sql);
 
-$statement->execute(array(
+$statement->execute([
 	'de.mysterycode.wcf.ToDoListPage',
 	'com.woltlab.wcf.user.dashboardContainer',
 	'de.mysterycode.wcf.toDo.outstanding'
-));
+]);
 $row = $statement->fetchArray();
 if ($row === false) {
 	// set default values for dashboard boxes
-	DashboardHandler::setDefaultValues('de.mysterycode.wcf.ToDoListPage', array(
+	DashboardHandler::setDefaultValues('de.mysterycode.wcf.ToDoListPage', [
 		'de.mysterycode.wcf.toDo.outstanding' => 1
-	));
+	]);
 }
-$statement->execute(array(
+$statement->execute([
 	'de.mysterycode.wcf.ToDoListPage',
 	'com.woltlab.wcf.user.dashboardContainer',
 	'de.mysterycode.wcf.toDo.statistics'
-));
+]);
 $row = $statement->fetchArray();
 if ($row === false) {
 	// set default values for dashboard boxes
-	DashboardHandler::setDefaultValues('de.mysterycode.wcf.ToDoListPage', array(
+	DashboardHandler::setDefaultValues('de.mysterycode.wcf.ToDoListPage', [
 		'de.mysterycode.wcf.toDo.statistics' => 2
-	));
+	]);
 }
 
-$statement->execute(array(
+$statement->execute([
 	'de.mysterycode.wcf.ToDoCategoryPage',
 	'com.woltlab.wcf.user.dashboardContainer',
 	'de.mysterycode.wcf.toDo.outstanding'
-));
+]);
 $row = $statement->fetchArray();
 if ($row === false) {
 	// set default values for dashboard boxes
-	DashboardHandler::setDefaultValues('de.mysterycode.wcf.ToDoCategoryPage', array(
+	DashboardHandler::setDefaultValues('de.mysterycode.wcf.ToDoCategoryPage', [
 		'de.mysterycode.wcf.toDo.outstanding' => 1
-	));
+	]);
 }
-$statement->execute(array(
+$statement->execute([
 	'de.mysterycode.wcf.ToDoCategoryPage',
 	'com.woltlab.wcf.user.dashboardContainer',
 	'de.mysterycode.wcf.toDo.statistics'
-));
+]);
 $row = $statement->fetchArray();
 if ($row === false) {
 	// set default values for dashboard boxes
-	DashboardHandler::setDefaultValues('de.mysterycode.wcf.ToDoCategoryPage', array(
+	DashboardHandler::setDefaultValues('de.mysterycode.wcf.ToDoCategoryPage', [
 		'de.mysterycode.wcf.toDo.statistics' => 2
-	));
+	]);
 }

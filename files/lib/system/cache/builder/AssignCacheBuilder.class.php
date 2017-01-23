@@ -18,11 +18,11 @@ class AssignCacheBuilder extends AbstractCacheBuilder {
 	 * @inheritDoc
 	 */
 	protected function rebuild(array $parameters) {
-		$data = array(
-			'todos' => array(),
-			'users' => array(),
-			'groups' => array()
-		);
+		$data = [
+			'todos' => [],
+			'users' => [],
+			'groups' => []
+		];
 		
 		// todos
 		$todoList = new ToDoList();

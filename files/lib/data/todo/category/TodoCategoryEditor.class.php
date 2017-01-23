@@ -39,14 +39,14 @@ class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject
 		$sql = "DELETE FROM	wcf".WCF_N."_todo_category_last_todo
 			WHERE		categoryID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->categoryID));
+		$statement->execute([$this->categoryID]);
 		
 		// update new
 		$sql = "INSERT INTO	wcf".WCF_N."_todo_category_last_todo
 					(categoryID, todoID)
 			VALUES		(?, ?)";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->categoryID, $todo->todoID));
+		$statement->execute([$this->categoryID, $todo->todoID]);
 	}
 	
 	/**
@@ -56,7 +56,7 @@ class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject
 		$sql = "DELETE FROM	wcf".WCF_N."_todo_category_last_todo
 			WHERE		categoryID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->categoryID));
+		$statement->execute([$this->categoryID]);
 		
 		$sql = "SELECT		id as todoID
 			FROM 		wcf".WCF_N."_todo
@@ -65,7 +65,7 @@ class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject
 					AND isDisabled = ?
 			ORDER BY 	time DESC";
 		$statement = WCF::getDB()->prepareStatement($sql, 1);
-		$statement->execute(array($this->categoryID, 0, 0));
+		$statement->execute([$this->categoryID, 0, 0]);
 		
 		$row = $statement->fetchArray();
 		if (!empty($row['todoID'])) {
@@ -73,7 +73,7 @@ class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject
 						(categoryID, todoID)
 				VALUES		(?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($this->categoryID, $row['todoID']));
+			$statement->execute([$this->categoryID, $row['todoID']]);
 		}
 	}
 	

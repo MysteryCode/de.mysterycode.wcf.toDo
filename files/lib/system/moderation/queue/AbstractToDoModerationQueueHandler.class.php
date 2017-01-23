@@ -24,28 +24,28 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 * list of todo objects
 	 * @var	array<\wcf\data\todo\ToDo>
 	 */
-	protected static $todos = array();
+	protected static $todos = [];
 
 	/**
 	 * @inheritDoc
 	 */
 	public function assignQueues(array $queues) {
-		$todoIDs = array();
+		$todoIDs = [];
 		foreach ($queues as $queue) {
 			$todoIDs[] = $queue->objectID;
 		}
 		
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add('todo_table.todoID IN (?)', array($todoIDs));
+		$todoList->getConditionBuilder()->add('todo_table.todoID IN (?)', [$todoIDs]);
 		$todoList->readObjects();
 		$todoList = $todoList->getObjects();
 		
-		$todos = array();
+		$todos = [];
 		foreach ($todoList as $todo) {
 			$todos[$todo->todoID] = $todo;
 		}
 		
-		$orphanedQueueIDs = $assignments = array();
+		$orphanedQueueIDs = $assignments = [];
 		foreach ($queues as $queue) {
 			$assignUser = false;
 			
@@ -105,7 +105,7 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 * @inheritDoc
 	 */
 	public function populate(array $queues) {
-		$todos = $objectIDs = array();
+		$todos = $objectIDs = [];
 		foreach ($queues as $object) {
 			$objectIDs[] = $object->objectID;
 		}
@@ -114,9 +114,9 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 		$todoList->sqlSelects .= "user_avatar.*, user_table.*";
 		$todoList->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_user user_table ON (user_table.userID = todo_table.submitter)";
 		$todoList->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_user_avatar user_avatar ON (user_avatar.avatarID = user_table.avatarID)";
-		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", array(
+		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", [
 			$objectIDs
-		));
+		]);
 		$todoList->readObjects();
 		
 		$todos = $todoList->getObjects();
@@ -135,11 +135,11 @@ abstract class AbstractToDoModerationQueueHandler extends AbstractModerationQueu
 	 */
 	public function removeContent(ModerationQueue $queue, $message) {
 		if ($this->isValid($queue->objectID) && ! $this->getTodo($queue->objectID)->isDeleted) {
-			$todoAction = new ToDoAction(array(
+			$todoAction = new ToDoAction([
 				$this->getTodo($queue->objectID)
-			), 'trash', array(
+			], 'trash', [
 				'reason' => $message
-			));
+			]);
 			$todoAction->executeAction();
 		}
 	}

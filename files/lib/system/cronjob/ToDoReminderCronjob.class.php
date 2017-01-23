@@ -21,23 +21,23 @@ class ToDoReminderCronjob extends AbstractCronjob {
 	 */
 	public function execute(Cronjob $cronjob) {
 		$check = TIME_NOW;
-		$todoIDs = array();
+		$todoIDs = [];
 		
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add('todo_table.remembertime > ?', array(0));
-		$todoList->getConditionBuilder()->add('todo_table.remembertime <= ?', array($check));
-		$todoList->getConditionBuilder()->add('todo_table.statusID IN (?)', array(array(1, 2, 5)));
+		$todoList->getConditionBuilder()->add('todo_table.remembertime > ?', [0]);
+		$todoList->getConditionBuilder()->add('todo_table.remembertime <= ?', [$check]);
+		$todoList->getConditionBuilder()->add('todo_table.statusID IN (?)', [[1, 2, 5]]);
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
 		foreach ($todos as $todo) {
-			$users = array_unique(array_merge(array($todo->submitter), $todo->getResponsibleIDs()));
+			$users = array_unique(array_merge([$todo->submitter], $todo->getResponsibleIDs()));
 			UserNotificationHandler::getInstance()->fireEvent('remember', 'de.mysterycode.wcf.toDo.toDo.notification', new ToDoUserNotificationObject($todo), $users);
 			$todoIDs[] = $todo->todoID;
 		}
 		
 		if (!empty($todoIDs)) {
-			$todoAction = new ToDoAction($todoIDs, 'update', array('data' => array('remembertime' => 0)));
+			$todoAction = new ToDoAction($todoIDs, 'update', ['data' => ['remembertime' => 0]]);
 			$todoAction->executeAction();
 		}
 	}

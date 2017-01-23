@@ -32,7 +32,7 @@ class ToDoPage extends AbstractPage {
 	 */
 	public $usersOnlineList = null;
 	
-	public $neededModules = array('TODOLIST');
+	public $neededModules = ['TODOLIST'];
 	
 	/**
 	 * @inheritDoc
@@ -94,7 +94,7 @@ class ToDoPage extends AbstractPage {
 		
 		if (MODULE_LIKE) {
 			$objectType = LikeHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo');
-			LikeHandler::getInstance()->loadLikeObjects($objectType, array($this->todo->todoID));
+			LikeHandler::getInstance()->loadLikeObjects($objectType, [$this->todo->todoID]);
 			$this->likeData = LikeHandler::getInstance()->getLikeObject($objectType, $this->todo->todoID);
 		}
 	}
@@ -110,7 +110,7 @@ class ToDoPage extends AbstractPage {
 
 		MessageQuoteManager::getInstance()->assignVariables();
 		
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'submitterusername' => $submitter->username,
 			'responsibles' => $this->todo->getResponsibleIDs(),
 			'commentList' => $this->commentList,
@@ -118,11 +118,11 @@ class ToDoPage extends AbstractPage {
 			'commentCanAdd' => $this->commentManager->canAdd($this->todoID),
 			'lastCommentTime' => $this->commentList->getMinCommentTime(),
 			'commentsPerPage' => $this->commentManager->getCommentsPerPage(),
-			'likeData' => (MODULE_LIKE ? $this->commentList->getLikeData() : array()),
+			'likeData' => (MODULE_LIKE ? $this->commentList->getLikeData() : []),
 			'todo' => $this->todo,
 			'attachmentList' => $this->todo->getAttachments(),
 			'todoLikeData' => $this->likeData,
-		));
+		]);
 	}
 	
 	/**

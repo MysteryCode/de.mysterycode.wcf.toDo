@@ -50,14 +50,14 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	/**
 	 * @inheritDoc
 	 */
-	protected $allowGuestAccess = array('getPreview', 'saveFullQuote', 'saveQuote');
+	protected $allowGuestAccess = ['getPreview', 'saveFullQuote', 'saveQuote'];
 	
 	/**
 	 * list of todo data
 	 *
 	 * @var array<array>
 	 */
-	public $todoData = array();
+	public $todoData = [];
 	
 	/**
 	 *
@@ -85,13 +85,13 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		if (MessageEmbeddedObjectManager::getInstance()->registerObjects('de.mysterycode.wcf.toDo', $todo->todoID, $todo->description)) {
 			$todoEditor = new ToDoEditor($todo);
-			$todoEditor->update(array(
+			$todoEditor->update([
 				'hasEmbeddedObjects' => 1
-			));
+			]);
 		}
 		
 		if (!$todo->isDisabled) {
-			$todoAction = new self(array($todo), 'publish');
+			$todoAction = new self([$todo], 'publish');
 			$todoAction->executeAction();
 		} else {
 			ModerationQueueActivationManager::getInstance()->addModeratedContent('de.mysterycode.wcf.toDo.toDo', $todo->todoID);
@@ -116,13 +116,13 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if ($todo->submitter) {
 				UserActivityEventHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->todoID, WCF::getLanguage()->languageID, $todo->submitter, $todo->time);
 				UserActivityPointHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $todo->todoID, $todo->submitter);
-				ToDoEditor::updateUserToDoCounter(array($todo->submitter => 1));
+				ToDoEditor::updateUserToDoCounter([$todo->submitter => 1]);
 			}
-			$users = array();
+			$users = [];
 			$sql = "SELECT userID
 				FROM wcf" . WCF_N . "_user";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array());
+			$statement->execute([]);
 			while ($row = $statement->fetchArray()) {
 				$users[] = $row['userID'];
 			}
@@ -140,14 +140,14 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 		
 		if (isset($this->parameters['data'])) {
-			$todoIDs = array();
+			$todoIDs = [];
 			foreach ($this->objects as $todo) {
 				$todoIDs[] = $todo->todoID;
-				$users = array();
+				$users = [];
 				if (WCF::getUser()->userID != $todo->submitter) {
-					$users = array_diff(array_unique($todo->getResponsibleIDs()), array(WCF::getUser()->userID));
+					$users = array_diff(array_unique($todo->getResponsibleIDs()), [WCF::getUser()->userID]);
 				} else {
-					$users = array_diff(array_unique(array_merge(array($todo->submitter), $todo->getResponsibleIDs())), array(WCF::getUser()->userID));
+					$users = array_diff(array_unique(array_merge([$todo->submitter], $todo->getResponsibleIDs())), [WCF::getUser()->userID]);
 				}
 				if (!empty($users)) {
 					if (isset($this->parameters['data']['status']) && !isset($this->parameters['data']['title'])) {
@@ -162,9 +162,9 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		if (isset($this->parameters['data']['description'])) {
 			foreach ($this->objects as $object) {
 				if ($object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects('de.mysterycode.wcf.toDo', $object->todoID, $this->parameters['data']['description'])) {
-					$object->update(array(
+					$object->update([
 						'hasEmbeddedObjects' => ($object->hasEmbeddedObjects ? 0 : 1)
-					));
+					]);
 				}
 			}
 		}
@@ -201,11 +201,11 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 		
 		// update todos
-		$todoIDs = array();
+		$todoIDs = [];
 		foreach ($this->objects as $todo) {
-			$todo->update(array(
-				'isDisabled' => 0 
-			));
+			$todo->update([
+				'isDisabled' => 0
+			]);
 			
 			$todoIDs[] = $todo->todoID;
 			$this->addToDoData($todo->getDecoratedObject(), 'isDisabled', 0);
@@ -249,11 +249,11 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$this->readObjects();
 		}
 		
-		$todoIDs = array();
+		$todoIDs = [];
 		foreach ($this->objects as $todo) {
-			$todo->update(array(
-				'isDisabled' => 1 
-			));
+			$todo->update([
+				'isDisabled' => 1
+			]);
 			
 			$todoIDs[] = $todo->todoID;
 			$this->addToDoData($todo->getDecoratedObject(), 'isDisabled', 1);
@@ -297,21 +297,21 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		$deleteReason = (isset($this->parameters['data']['reason']) ? StringUtil::trim($this->parameters['data']['reason']) : '');
 		
-		$todoIDs = array();
+		$todoIDs = [];
 		foreach ($this->objects as $todo) {
-			$todo->update(array(
+			$todo->update([
 				'isDeleted' => 1,
 				'deleteTime' => TIME_NOW,
 				'deletedByID' => WCF::getUser()->userID,
 				'deletedBy' => WCF::getUser()->username,
-				'deleteReason' => $deleteReason 
-			));
+				'deleteReason' => $deleteReason
+			]);
 			
 			$todoIDs[] = $todo->todoID;
 			$this->addToDoData($todo->getDecoratedObject(), 'isDeleted', 1);
-			$this->addToDoData($todo->getDecoratedObject(), 'deleteNote', WCF::getLanguage()->getDynamicVariable('wcf.todo.deleteNote', array(
-				'todo' => new ToDo($todo->todoID) 
-			)));
+			$this->addToDoData($todo->getDecoratedObject(), 'deleteNote', WCF::getLanguage()->getDynamicVariable('wcf.todo.deleteNote', [
+				'todo' => new ToDo($todo->todoID)
+			]));
 		}
 		
 		$this->unmarkToDos();
@@ -347,7 +347,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$this->readObjects();
 		}
 		
-		$todoIDs = $userCounters = array();
+		$todoIDs = $userCounters = [];
 		foreach ($this->objects as $todo) {
 			$todoIDs[] = $todo->todoID;
 			
@@ -371,7 +371,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		foreach ($this->objects as $todo) {
 			$todo->delete();
-			$this->addToDoData($todo->getDecoratedObject(), 'deleted', LinkHandler::getInstance()->getLink('ToDoList', array()));
+			$this->addToDoData($todo->getDecoratedObject(), 'deleted', LinkHandler::getInstance()->getLink('ToDoList', []));
 		}
 		
 		$this->unmarkToDos();
@@ -406,15 +406,15 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$this->readObjects();
 		}
 		
-		$todoIDs = array();
+		$todoIDs = [];
 		foreach ($this->objects as $todo) {
-			$todo->update(array(
+			$todo->update([
 				'isDeleted' => 0,
 				'deleteTime' => 0,
 				'deletedByID' => null,
 				'deletedBy' => '',
-				'deleteReason' => 0 
-			));
+				'deleteReason' => 0
+			]);
 			
 			$todoIDs[] = $todo->todoID;
 			$this->addToDoData($todo->getDecoratedObject(), 'isDeleted', 0);
@@ -463,7 +463,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	protected function addToDoData(ToDo $todo, $key, $value) {
 		if (!isset($this->todoData[$todo->todoID])) {
-			$this->todoData[$todo->todoID] = array();
+			$this->todoData[$todo->todoID] = [];
 		}
 		
 		$this->todoData[$todo->todoID][$key] = $value;
@@ -475,9 +475,9 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @return array<array>
 	 */
 	protected function getToDoData() {
-		return array(
-			'todoData' => $this->todoData 
-		);
+		return [
+			'todoData' => $this->todoData
+		];
 	}
 
 	/**
@@ -507,7 +507,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @param array $todoIDs <integer> $todoIDs
 	 * @throws \wcf\system\exception\SystemException
 	 */
-	protected function unmarkToDos(array $todoIDs = array()) {
+	protected function unmarkToDos(array $todoIDs = []) {
 		if (empty($todoIDs)) {
 			foreach ($this->objects as $todo) {
 				$todoIDs[] = $todo->todoID;
@@ -539,19 +539,19 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if ($todo === null)
 				continue;
 			
-			$existingResponsibles = $todo->getResponsibleIDs() ?: array();
+			$existingResponsibles = $todo->getResponsibleIDs() ?: [];
 			
 			$responsibleList = UserProfile::getUserProfilesByUsername(ArrayUtil::trim(explode(',', $this->parameters['search'])));
 			$responsibleList = array_unique($responsibleList);
 			
-			$userIDs = $checkArray = array();
+			$userIDs = $checkArray = [];
 			foreach ($responsibleList as $user) {
 				$checkArray[] = $user->userID;
 				
 				if (!in_array($user->userID, $existingResponsibles)) {
 					$userIDs[] = $user->userID;
 					
-					$assignAction = new AssignedUserAction(array(), 'create', array('data' => array('todoID' => $todo->todoID, 'userID' => $user->userID, 'username' => $user->username)));
+					$assignAction = new AssignedUserAction([], 'create', ['data' => ['todoID' => $todo->todoID, 'userID' => $user->userID, 'username' => $user->username]]);
 					$assignAction->executeAction();
 				}
 			}
@@ -559,7 +559,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if (!$skipDelete) {
 				foreach ($existingResponsibles as $responsible) {
 					if (!in_array($responsible, $checkArray)) {
-						$assignAction = new AssignedUserAction(array(), 'deleteByTodo', array('userID' => $responsible, 'todoIDs' => array($todo->todoID)));
+						$assignAction = new AssignedUserAction([], 'deleteByTodo', ['userID' => $responsible, 'todoIDs' => [$todo->todoID]]);
 						$assignAction->executeAction();
 					}
 				}
@@ -594,10 +594,10 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if ($todo === null)
 				continue;
 			
-			$existingResponsibleGroups = $todo->getResponsibleGroupIDs() ?: array();
+			$existingResponsibleGroups = $todo->getResponsibleGroupIDs() ?: [];
 			
 			$accessibleGroups = UserGroup::getAccessibleGroups();
-			$responsibleGroupList = $checkArray = array();
+			$responsibleGroupList = $checkArray = [];
 			foreach ($search as $searchItem) {
 				foreach ($accessibleGroups as $group) {
 					$groupName = $group->getName();
@@ -607,7 +607,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 						if (!in_array($group->groupID, $existingResponsibleGroups)) {
 							$responsibleGroupList[] = $group->groupID;
 							
-							$assignAction = new AssignedGroupAction(array(), 'create', array('data' => array('todoID' => $todo->todoID, 'groupID' => $group->groupID, 'groupname' => $group->getName())));
+							$assignAction = new AssignedGroupAction([], 'create', ['data' => ['todoID' => $todo->todoID, 'groupID' => $group->groupID, 'groupname' => $group->getName()]]);
 							$assignAction->executeAction();
 						}
 					}
@@ -617,7 +617,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if (!$skipDelete) {
 				foreach ($existingResponsibleGroups as $responsible) {
 					if (!in_array($responsible, $checkArray)) {
-						$assignAction = new AssignedGroupAction(array(), 'deleteByTodo', array('groupID' => $responsible, 'todoIDs' => array($todo->todoID)));
+						$assignAction = new AssignedGroupAction([], 'deleteByTodo', ['groupID' => $responsible, 'todoIDs' => [$todo->todoID]]);
 						$assignAction->executeAction();
 					}
 				}
@@ -625,7 +625,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			
 			if (!empty($responsibleGroupList)) {
 				$conditions = new PreparedStatementConditionBuilder();
-				$conditions->add("groupID IN (?)", array($responsibleGroupList));
+				$conditions->add("groupID IN (?)", [$responsibleGroupList]);
 				$sql = "SELECT	userID
 					FROM	wcf".WCF_N."_user_to_group
 					".$conditions;
@@ -633,7 +633,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				$statement->execute($conditions->getParameters());
 				
 				$assignedUsers = $todo->getResponsibleIDs();
-				$userIDs = array();
+				$userIDs = [];
 				while ($row = $statement->fetchArray()) {
 					if (empty($assignedUsers) || !in_array($row['userID'], $assignedUsers))
 						$userIDs[] = $row['userID'];
@@ -665,7 +665,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		if ($todoID) {
 			$todoList = new ToDoList();
-			$todoList->getConditionBuilder()->add("todo_table.id = ?", array($todoID));
+			$todoList->getConditionBuilder()->add("todo_table.id = ?", [$todoID]);
 			$todoList->readObjects();
 			$todoProfiles = $todoList->getObjects();
 			
@@ -678,10 +678,10 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			WCF::getTPL()->assign('unknownTodo', true);
 		}
 		
-		return array(
+		return [
 			'template' => WCF::getTPL()->fetch('toDoPreview'),
 			'todoID' => $todoID
-		);
+		];
 	}
 	
 	/**
@@ -719,11 +719,11 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			(toDoID, userID, username)
 			VAlUES(?, ?, ?);";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->parameters['objectID'], $user->userID, $user->username));
+		$statement->execute([$this->parameters['objectID'], $user->userID, $user->username]);
 		
 		AssignCacheBuilder::getInstance()->reset();
 		
-		return array('submitted' => 1);
+		return ['submitted' => 1];
 	}
 	
 	/**
@@ -757,10 +757,10 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$user = new User($this->parameters['userID']);
 		$object = new ToDo($this->parameters['objectID']);
 		
-		$todoAction = new self(array($object), 'update', array('data' => array('statusID' => $this->parameters['status'])));
+		$todoAction = new self([$object], 'update', ['data' => ['statusID' => $this->parameters['status']]]);
 		$todoAction->executeAction();
 		
-		return array('success' => 1);
+		return ['success' => 1];
 	}
 	
 	/**
@@ -787,10 +787,10 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			MessageQuoteManager::getInstance()->removeQuote($removeQuoteID);
 		}
 		
-		$returnValues = array(
+		$returnValues = [
 			'count' => MessageQuoteManager::getInstance()->countQuotes(),
-			'fullQuoteMessageIDs' => MessageQuoteManager::getInstance()->getFullQuoteObjectIDs(array('de.mysterycode.wcf.toDo'))
-		);
+			'fullQuoteMessageIDs' => MessageQuoteManager::getInstance()->getFullQuoteObjectIDs(['de.mysterycode.wcf.toDo'])
+		];
 		
 		if ($quoteID) {
 			$returnValues['renderedQuote'] = MessageQuoteManager::getInstance()->getQuoteComponents($quoteID);
@@ -814,10 +814,10 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	public function saveQuote() {
 		$quoteID = MessageQuoteManager::getInstance()->addQuote('de.mysterycode.wcf.toDo', null, $this->todo->todoID, $this->parameters['message'], false);
 		
-		$returnValues = array(
+		$returnValues = [
 			'count' => MessageQuoteManager::getInstance()->countQuotes(),
-			'fullQuoteMessageIDs' => MessageQuoteManager::getInstance()->getFullQuoteObjectIDs(array('de.mysterycode.wcf.toDo'))
-		);
+			'fullQuoteMessageIDs' => MessageQuoteManager::getInstance()->getFullQuoteObjectIDs(['de.mysterycode.wcf.toDo'])
+		];
 		
 		if ($this->parameters['renderQuote']) {
 			$returnValues['renderedQuote'] = MessageQuoteManager::getInstance()->getQuoteComponents($quoteID);
@@ -839,9 +839,9 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	public function getRenderedQuotes() {
 		$quotes = MessageQuoteManager::getInstance()->getQuotesByParentObjectID('de.mysterycode.wcf.toDo', $this->todo->todoID);
 		
-		return array(
+		return [
 			'template' => implode("\n\n", $quotes)
-		);
+		];
 	}
 	
 	/**
@@ -866,15 +866,15 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	public function beginEdit() {
 		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
 		
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'todo' => $this->todo,
 			'wysiwygSelector' => 'editor'.$this->todo->todoID
-		));
+		]);
 		
-		return array(
+		return [
 			'actionName' => 'beginEdit',
 			'template' => WCF::getTPL()->fetch('todoInlineEditor')
-		);
+		];
 	}
 	
 	/**
@@ -889,18 +889,18 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		$this->validateBeginEdit();
 
-		$parameters['removeQuoteIDs'] = (isset($parameters['removeQuoteIDs']) && is_array($parameters['removeQuoteIDs'])) ? ArrayUtil::trim($parameters['removeQuoteIDs']) : array();
+		$parameters['removeQuoteIDs'] = (isset($parameters['removeQuoteIDs']) && is_array($parameters['removeQuoteIDs'])) ? ArrayUtil::trim($parameters['removeQuoteIDs']) : [];
 	}
 	
 	/**
 	 * @inheritDoc
 	 */
 	public function save() {
-		$todoData = array(
+		$todoData = [
 			'message' => MessageUtil::stripCrap($this->parameters['data']['message'])
-		);
+		];
 		
-		$todoAction = new self(array($this->todo), 'update', array('data' => $todoData));
+		$todoAction = new self([$this->todo], 'update', ['data' => $todoData]);
 		$todoAction->executeAction();
 		
 		if (isset($this->parameters['removeQuoteIDs']) && !empty($this->parameters['removeQuoteIDs']))
@@ -909,12 +909,12 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		$todo = new ToDo($this->todo->todoID);
 		
-		MessageEmbeddedObjectManager::getInstance()->loadObjects('de.mysterycode.wcf.toDo', array($todo->todoID));
+		MessageEmbeddedObjectManager::getInstance()->loadObjects('de.mysterycode.wcf.toDo', [$todo->todoID]);
 		
-		$data = array(
+		$data = [
 			'actionName' => 'save',
 			'message' => $todo->getFormattedMessage()
-		);
+		];
 		
 		return $data;
 	}
@@ -936,11 +936,11 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$this->todo = new ToDo($todoID);
 		
 		// return template
-		return array(
-			'template' => WCF::getTPL()->fetch('updateProgress', 'wcf', array(
+		return [
+			'template' => WCF::getTPL()->fetch('updateProgress', 'wcf', [
 				'todo' => $this->todo
-			))
-		);
+			])
+		];
 	}
 	
 	public function validateProgressUpdate() {
@@ -957,11 +957,11 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$todoID = reset($this->objectIDs);
 		$this->todo = new ToDo($todoID);
 		
-		$todoAction = new self(array($this->todo), 'update', array('data' => array('progress' => intval($this->parameters['progress']))));
+		$todoAction = new self([$this->todo], 'update', ['data' => ['progress' => intval($this->parameters['progress'])]]);
 		$todoAction->executeAction();
 		
-		return array (
+		return [
 			'progress' => $this->parameters['progress']
-		);
+		];
 	}
 }

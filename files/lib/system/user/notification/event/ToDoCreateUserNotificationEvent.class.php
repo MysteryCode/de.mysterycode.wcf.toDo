@@ -28,10 +28,10 @@ class ToDoCreateUserNotificationEvent extends AbstractUserNotificationEvent {
 		
 		// this notification was triggered by multiple users
 		if ($count > 1) {
-			return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.create.title.stacked', array(
+			return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.create.title.stacked', [
 				'count' => $count,
 				'timesTriggered' => $this->notification->timesTriggered
-			));
+			]);
 		}
 		
 		return $this->getLanguage()->get('wcf.toDo.notification.create.title');
@@ -46,39 +46,39 @@ class ToDoCreateUserNotificationEvent extends AbstractUserNotificationEvent {
 		
 		// this notification was triggered by multiple users
 		if ($count > 1) {
-			return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.create.message.stacked', array(
+			return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.create.message.stacked', [
 				'todo' => $this->userNotificationObject->object,
 				'author' => $this->author,
 				'authors' => $authors,
 				'count' => $count,
 				'others' => $count - 1
-			));
+			]);
 		}
 		
-		return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.create.message', array(
+		return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.create.message', [
 				'todo' => $this->userNotificationObject->object,
 				'author' => $this->author
-		));
+		]);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getEmailMessage($notificationType = 'instant') {
-		return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.create.mail', array(
+		return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.create.mail', [
 			'todo' => $this->userNotificationObject->object,
-			'author' => $this->author 
-		));
+			'author' => $this->author
+		]);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getLink() {
-		return LinkHandler::getInstance()->getLink('ToDo', array(
+		return LinkHandler::getInstance()->getLink('ToDo', [
 			'application' => 'wcf',
 			'object' => $this->userNotificationObject->object
-		));
+		]);
 	}
 	
 	/**
@@ -91,10 +91,10 @@ class ToDoCreateUserNotificationEvent extends AbstractUserNotificationEvent {
 		$returnValue = $this->userNotificationObject->object->canEnter();
 		if (!$returnValue && $this->userNotificationObject->getObjectID()) {
 			// remove subscription
-			UserObjectWatchHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo', array($this->userNotificationObject->getObjectID()), array(WCF::getUser()->userID));
+			UserObjectWatchHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo', [$this->userNotificationObject->getObjectID()], [WCF::getUser()->userID]);
 			
 			// reset user storage
-			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'wcfUnreadWatchedTodos');
+			UserStorageHandler::getInstance()->reset([WCF::getUser()->userID], 'wcfUnreadWatchedTodos');
 		}
 		
 		return $returnValue;

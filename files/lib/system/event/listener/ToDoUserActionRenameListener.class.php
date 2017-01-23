@@ -32,14 +32,14 @@ class ToDoUserActionRenameListener implements IParameterizedEventListener {
 			SET	username = ?
 			WHERE	submitter = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($username, $userID));
+		$statement->execute([$username, $userID]);
 		
 		// responsibles
 		$sql = "UPDATE	wcf".WCF_N."_todo_to_user
 			SET	username = ?
 			WHERE	userID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($username, $userID));
+		$statement->execute([$username, $userID]);
 		
 		WCF::getDB()->commitTransaction();
 	}

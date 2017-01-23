@@ -40,7 +40,7 @@ class TodoCategoryNode extends CategoryNode {
 	 * list of category stats
 	 * @var array
 	 */
-	protected $stats = array();
+	protected $stats = [];
 
 	/**
 	 * Returns a list of sub categories of this category.

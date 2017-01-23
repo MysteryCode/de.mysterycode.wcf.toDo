@@ -23,6 +23,6 @@ class AssignedUserEditor extends DatabaseObjectEditor implements IEditableCached
 	 * @inheritDoc
 	 */
 	public static function resetCache() {
-		AssignCacheBuilder::getInstance()->reset(array('user'));
+		AssignCacheBuilder::getInstance()->reset(['user']);
 	}
 }

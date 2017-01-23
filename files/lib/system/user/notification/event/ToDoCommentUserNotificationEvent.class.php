@@ -27,10 +27,10 @@ class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 		
 		// this notification was triggered by multiple users
 		if ($count > 1) {
-			return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.title.stacked', array(
+			return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.title.stacked', [
 				'count' => $count,
 				'timesTriggered' => $this->notification->timesTriggered
-			));
+			]);
 		}
 		
 		return $this->getLanguage()->get('wcf.toDo.comment.notification.title');
@@ -47,19 +47,19 @@ class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 		
 		// this notification was triggered by multiple users
 		if ($count > 1) {
-			return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.message.stacked', array(
+			return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.message.stacked', [
 				'todo' => $todo,
 				'author' => $this->author,
 				'authors' => $authors,
 				'count' => $count,
 				'others' => $count - 1
-			));
+			]);
 		}
 		
-		return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.message', array(
+		return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.message', [
 			'todo' => $todo,
-			'author' => $this->author 
-		));
+			'author' => $this->author
+		]);
 	}
 
 	/**
@@ -68,10 +68,10 @@ class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 	public function getEmailMessage($notificationType = 'instant') {
 		$todo = new ToDo($this->userNotificationObject->objectID);
 		
-		return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.mail', array(
+		return $this->getLanguage()->getDynamicVariable('wcf.toDo.comment.notification.mail', [
 			'todo' => $todo,
-			'author' => $this->author 
-		));
+			'author' => $this->author
+		]);
 	}
 
 	/**
@@ -80,10 +80,10 @@ class ToDoCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 	public function getLink() {
 		$todo = new ToDo($this->userNotificationObject->objectID);
 		
-		return LinkHandler::getInstance()->getLink('ToDo', array(
+		return LinkHandler::getInstance()->getLink('ToDo', [
 			'application' => 'wcf',
 			'object' => $todo
-		), '#comments');
+		], '#comments');
 	}
 	
 	/**

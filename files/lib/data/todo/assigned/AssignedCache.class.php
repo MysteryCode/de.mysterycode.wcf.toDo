@@ -16,36 +16,36 @@ class AssignedCache extends SingletonFactory {
 	/**
 	 * cached by users
 	 */
-	protected $users = array();
+	protected $users = [];
 	
 	/**
 	 * cached by groups
 	 */
-	protected $groups = array();
+	protected $groups = [];
 	
 	/**
 	 * cached by todos
 	 */
-	protected $todos = array();
+	protected $todos = [];
 	
 	/**
 	 * @inheritDoc
 	 */
 	protected function init() {
-		$this->users = AssignCacheBuilder::getInstance()->getData(array(), 'users');
-		$this->groups = AssignCacheBuilder::getInstance()->getData(array(), 'groups');
-		$this->todos = AssignCacheBuilder::getInstance()->getData(array(), 'todos');
+		$this->users = AssignCacheBuilder::getInstance()->getData([], 'users');
+		$this->groups = AssignCacheBuilder::getInstance()->getData([], 'groups');
+		$this->todos = AssignCacheBuilder::getInstance()->getData([], 'todos');
 	}
 	
 	public function getTodosByUser($userID) {
 		if (!empty($this->users[$userID]))
 			return $this->users[$userID];
 		
-		return array();
+		return [];
 	}
 	
 	public function getTodoIDsByUser($userID) {
-		$todoIDs = array();
+		$todoIDs = [];
 		if (!empty($this->users[$userID])) {
 			foreach ($this->users[$userID] as $todo) {
 				$todoIDs[] = $todo->todoID;
@@ -59,11 +59,11 @@ class AssignedCache extends SingletonFactory {
 		if (!empty($this->groups[$groupID]))
 			return $this->groups[$groupID];
 		
-		return array();
+		return [];
 	}
 	
 	public function getTodoIDsByGroup($groupID) {
-		$todoIDs = array();
+		$todoIDs = [];
 		if (!empty($this->groups[$groupID])) {
 			foreach ($this->groups[$groupID] as $todo) {
 				$todoIDs[] = $todo->todoID;
@@ -77,11 +77,11 @@ class AssignedCache extends SingletonFactory {
 		if (!empty($this->todos[$todoID]['users']))
 			return $this->todos[$todoID]['users'];
 		
-		return array();
+		return [];
 	}
 	
 	public function getUserIDsByTodo($todoID) {
-		$userIDs = array();
+		$userIDs = [];
 		if (!empty($this->todos[$todoID]['users'])) {
 			foreach ($this->todos[$todoID]['users'] as $user) {
 				$userIDs[] = $user->userID;
@@ -95,11 +95,11 @@ class AssignedCache extends SingletonFactory {
 		if (!empty($this->todos[$todoID]['groups']))
 			return $this->todos[$todoID]['groups'];
 		
-		return array();
+		return [];
 	}
 	
 	public function getGroupIDsByTodo($todoID) {
-		$groupIDs = array();
+		$groupIDs = [];
 		if (!empty($this->todos[$todoID]['groups'])) {
 			foreach ($this->todos[$todoID]['groups'] as $group) {
 				$groupIDs[] = $group->groupID;

@@ -30,7 +30,7 @@ class TodoCategoryType extends AbstractCategoryType {
 	/**
 	 * @inheritDoc
 	 */
-	protected $objectTypes = array('com.woltlab.wcf.acl' => 'de.mysterycode.wcf.toDo.category');
+	protected $objectTypes = ['com.woltlab.wcf.acl' => 'de.mysterycode.wcf.toDo.category'];
 	
 	/**
 	 * @inheritDoc

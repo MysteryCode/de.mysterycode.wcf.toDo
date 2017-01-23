@@ -18,13 +18,13 @@ class TodoStatusCache extends SingletonFactory {
 	 * cached status
 	 * @var	array<\wcf\data\todo\status\TodoStatus>
 	 */
-	protected $cachedStatus = array();
+	protected $cachedStatus = [];
 	
 	/**
 	 * @inheritDoc
 	 */
 	protected function init() {
-		$this->cachedStatus = TodoStatusCacheBuilder::getInstance()->getData(array(), 'status');
+		$this->cachedStatus = TodoStatusCacheBuilder::getInstance()->getData([], 'status');
 	}
 	
 	/**

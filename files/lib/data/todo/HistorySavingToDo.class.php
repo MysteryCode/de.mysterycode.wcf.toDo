@@ -61,7 +61,7 @@ class HistorySavingToDo extends DatabaseObjectDecorator implements IHistorySavin
 				AND	action = ?
 			ORDER BY time DESC, logID DESC";
 		$statement = WCF::getDB()->prepareStatement($sql, 1);
-		$statement->execute(array($objectTypeID, $this->getDecoratedObject()->todoID, 'edit'));
+		$statement->execute([$objectTypeID, $this->getDecoratedObject()->todoID, 'edit']);
 		$row = $statement->fetchArray();
 		
 		if ($row) {
@@ -123,13 +123,13 @@ class HistorySavingToDo extends DatabaseObjectDecorator implements IHistorySavin
 	 * @inheritDoc
 	 */
 	public function revertVersion(EditHistoryEntry $edit) {
-		$todoAction = new ToDoAction(array($this->getDecoratedObject()), 'update', array(
+		$todoAction = new ToDoAction([$this->getDecoratedObject()], 'update', [
 			'isEdit' => true,
-			'data' => array(
+			'data' => [
 				'message' => $edit->message,
-				'editReason' => WCF::getLanguage()->getDynamicVariable('wcf.edit.reverted', array('edit' => $edit))
-			)
-		));
+				'editReason' => WCF::getLanguage()->getDynamicVariable('wcf.edit.reverted', ['edit' => $edit])
+			]
+		]);
 		$todoAction->executeAction();
 	}
 	

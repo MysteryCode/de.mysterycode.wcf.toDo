@@ -24,7 +24,7 @@ class TodoCategoryCache extends SingletonFactory {
 	 * cached label groups
 	 * @var	array<array>
 	 */
-	protected $labelGroups = array();
+	protected $labelGroups = [];
 	
 	/**
 	 * list of cached category objects
@@ -42,7 +42,7 @@ class TodoCategoryCache extends SingletonFactory {
 	 * list of cached stat objects
 	 * @var	array<\wcf\data\todo\category\stat\TodoCategoryStat>
 	 */
-	protected $statObjects = array();
+	protected $statObjects = [];
 	
 	/**
 	 * list of users which are online in the categories
@@ -54,7 +54,7 @@ class TodoCategoryCache extends SingletonFactory {
 	 * list of cached last todo ids
 	 * @var	array<integer>
 	 */
-	protected $lastTodoIDs = array();
+	protected $lastTodoIDs = [];
 	
 	/**
 	 * list of cached last todos
@@ -69,8 +69,8 @@ class TodoCategoryCache extends SingletonFactory {
 		$this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.category', 'de.mysterycode.wcf.toDo');
 		$this->labelGroups = TodoCategoryLabelGroupCacheBuilder::getInstance()->getData();
 		
-		$this->statObjects = TodoCategoryDataCacheBuilder::getInstance()->getData(array(), 'statObjects');
-		$this->lastTodoIDs = TodoCategoryDataCacheBuilder::getInstance()->getData(array(), 'lastTodoIDs');
+		$this->statObjects = TodoCategoryDataCacheBuilder::getInstance()->getData([], 'statObjects');
+		$this->lastTodoIDs = TodoCategoryDataCacheBuilder::getInstance()->getData([], 'lastTodoIDs');
 	}
 
 	/**
@@ -81,7 +81,7 @@ class TodoCategoryCache extends SingletonFactory {
 	 */
 	public function getCategories() {
 		if ($this->categories === null) {
-			$this->categories = array();
+			$this->categories = [];
 			
 			$categories = CategoryHandler::getInstance()->getCategories('de.mysterycode.wcf.toDo');
 			foreach ($categories as $categoryID => $category) {
@@ -98,7 +98,7 @@ class TodoCategoryCache extends SingletonFactory {
 	 * @return	array<integer>
 	 */
 	public function getCategoryIDs() {
-		$categoryIDs = array();
+		$categoryIDs = [];
 		
 		$categories = $this->getCategories();
 		foreach ($categories as $category) {
@@ -162,18 +162,18 @@ class TodoCategoryCache extends SingletonFactory {
 			return $this->usersOnline[$categoryID];
 		}
 		
-		return array();
+		return [];
 	}
 	
 	/**
 	 * Reads the users which are online in the categories.
 	 */
 	protected function initUsersOnline() {
-		$this->usersOnline = array();
+		$this->usersOnline = [];
 		
 		// init users online list
 		$usersOnlineList = new UsersOnlineList();
-		$usersOnlineList->getConditionBuilder()->add('(session.objectType = ? OR session.parentObjectType = ?)', array('de.mysterycode.wcf.toDo.category', 'de.mysterycode.wcf.toDo.category'));
+		$usersOnlineList->getConditionBuilder()->add('(session.objectType = ? OR session.parentObjectType = ?)', ['de.mysterycode.wcf.toDo.category', 'de.mysterycode.wcf.toDo.category']);
 		$usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
 		$usersOnlineList->readObjects();
 		
@@ -181,7 +181,7 @@ class TodoCategoryCache extends SingletonFactory {
 		foreach ($usersOnlineList as $user) {
 			$categoryID = ($user->objectType == 'de.mysterycode.wcf.toDo.category' ? $user->objectID : $user->parentObjectID);
 			if (!isset($this->usersOnline[$categoryID])) {
-				$this->usersOnline[$categoryID] = array();
+				$this->usersOnline[$categoryID] = [];
 			}
 			
 			$this->usersOnline[$categoryID][] = $user;
@@ -213,7 +213,7 @@ class TodoCategoryCache extends SingletonFactory {
 			return $this->labelGroups[$categoryID];
 		}
 		
-		return array();
+		return [];
 	}
 	
 	/**
@@ -241,7 +241,7 @@ class TodoCategoryCache extends SingletonFactory {
 	 * Loads the last todos.
 	 */
 	protected function initLastTodos() {
-		$this->lastTodos = array();
+		$this->lastTodos = [];
 		
 		if (!empty($this->lastTodoIDs)) {
 			// get labels
@@ -249,7 +249,7 @@ class TodoCategoryCache extends SingletonFactory {
 			
 			// prepare conditions
 			$conditionBuilder = new PreparedStatementConditionBuilder();
-			$conditionBuilder->add('todo.id IN (?)', array($this->lastTodoIDs));
+			$conditionBuilder->add('todo.id IN (?)', [$this->lastTodoIDs]);
 			
 			// read data
 			$sql = "SELECT		todo.id, todo.categoryID,

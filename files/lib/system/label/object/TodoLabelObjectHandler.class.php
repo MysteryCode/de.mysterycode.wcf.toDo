@@ -35,6 +35,6 @@ class TodoLabelObjectHandler extends AbstractLabelObjectHandler {
 		
 		// load label groups
 		$groupIDs = TodoCategoryCache::getInstance()->getLabelGroups($this->categoryID);
-		$this->labelGroups = (empty($groupIDs)) ? array() : LabelHandler::getInstance()->getLabelGroups($groupIDs);
+		$this->labelGroups = (empty($groupIDs)) ? [] : LabelHandler::getInstance()->getLabelGroups($groupIDs);
 	}
 }

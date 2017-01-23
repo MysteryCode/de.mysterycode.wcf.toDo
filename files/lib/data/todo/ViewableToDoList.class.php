@@ -84,7 +84,7 @@ class ViewableToDoList extends ToDoList {
 		parent::readObjects();
 		
 		// get assigned labels
-		$todoIDs = array();
+		$todoIDs = [];
 		foreach ($this->objects as $todo) {
 			if ($todo->hasLabels) {
 				$todoIDs[] = $todo->todoID;

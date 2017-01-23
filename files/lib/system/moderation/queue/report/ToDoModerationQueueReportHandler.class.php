@@ -43,9 +43,9 @@ class ToDoModerationQueueReportHandler extends AbstractToDoModerationQueueHandle
 	 * @inheritDoc
 	 */
 	public function getReportedContent(ViewableModerationQueue $queue) {
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'todo' => $queue->getAffectedObject()
-		));
+		]);
 		
 		return WCF::getTPL()->fetch('moderationTodo', 'wcf');
 	}

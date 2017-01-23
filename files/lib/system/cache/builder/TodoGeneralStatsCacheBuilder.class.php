@@ -17,7 +17,7 @@ class TodoGeneralStatsCacheBuilder extends AbstractCacheBuilder {
 	 * @inheritDoc
 	 */
 	protected function rebuild(array $parameters) {
-		$data = array();
+		$data = [];
 		
 		$sql = "SELECT
 				(

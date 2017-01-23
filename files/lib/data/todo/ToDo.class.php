@@ -52,14 +52,14 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	 *
 	 * @var array<integer>
 	 */
-	protected $responsibleIDs = array();
+	protected $responsibleIDs = [];
 	
 	/**
 	 * list of responsible group ids
 	 *
 	 * @var array<integer>
 	 */
-	protected $responsibleGroupIDs = array();
+	protected $responsibleGroupIDs = [];
 	
 	public $status = null;
 	public $category = null;
@@ -98,7 +98,7 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	 */
 	public static function getToDos(array $todoIDs) {
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", array($todoIDs));
+		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", [$todoIDs]);
 		$todoList->readObjects();
 		
 		return $todoList->getObjects();
@@ -152,7 +152,7 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 		foreach ($this->getResponsibleIDs() as $responsible) {
 			$user = TodoUserCache::getInstance()->getUser($responsible);
 			if ($user) {
-				$string .= '<a href="' . LinkHandler::getInstance()->getLink('User', array('application' => 'wcf', 'object' => $user)) . '" class="userlink" data-user-id="' . $user->userID . '">' . StringUtil::encodeHTML($user->username) . '</a>, ';
+				$string .= '<a href="' . LinkHandler::getInstance()->getLink('User', ['application' => 'wcf', 'object' => $user]) . '" class="userlink" data-user-id="' . $user->userID . '">' . StringUtil::encodeHTML($user->username) . '</a>, ';
 			}
 		}
 		return substr($string, 0, -2);
@@ -165,9 +165,9 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	public function getResponsibles() {
 		$responsibleIDs = $this->getResponsibleIDs();
 		if (empty($responsibleIDs))
-			return array();
+			return [];
 		
-		$responsibleList = array();
+		$responsibleList = [];
 		foreach ($responsibleIDs as $responsible) {
 			$responsibleList[] = TodoUserCache::getInstance()->getUser($responsible);
 		}
@@ -177,11 +177,11 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	public function getResponsibleGroups() {
 		$groupIDs = $this->getResponsibleGroupIDs();
 		if (empty($groupIDs))
-			return array();
+			return [];
 		
-		$responsibleGroupList = array();
+		$responsibleGroupList = [];
 		$groupCache = UserGroupCacheBuilder::getInstance()->getData();
-		$groupCacheSort = array();
+		$groupCacheSort = [];
 		
 		foreach ($groupCache['groups'] as $group)
 			$groupCacheSort[$group->groupID] = $group;
@@ -199,11 +199,11 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	public function getResponsiblePreview() {
 		$groups = AssignedCache::getInstance()->getGroupsByTodo($this->todoID);
 		$users = AssignedCache::getInstance()->getUsersByTodo($this->todoID);
-		$preview = array();
+		$preview = [];
 		
 		$groups = array_slice($groups, 0, 5);
 		$groupCache = UserGroupCacheBuilder::getInstance()->getData();
-		$groupCacheSort = array();
+		$groupCacheSort = [];
 		
 		foreach ($groupCache['groups'] as $group)
 			$groupCacheSort[$group->groupID] = $group;
@@ -309,12 +309,12 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	public function getAttachments() {
 		if (MODULE_ATTACHMENT == 1 && $this->attachments) {
 			$attachmentList = new GroupedAttachmentList('de.mysterycode.wcf.toDo.toDo');
-			$attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', array($this->todoID));
+			$attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', [$this->todoID]);
 			$attachmentList->readObjects();
-			$attachmentList->setPermissions(array(
+			$attachmentList->setPermissions([
 				'canDownload' => WCF::getSession()->getPermission('user.toDo.attachment.canDownloadAttachments'),
 				'canViewPreview' => WCF::getSession()->getPermission('user.toDo.attachment.canDownloadAttachments')
-			));
+			]);
 			
 			AttachmentBBCode::setAttachmentList($attachmentList);
 			return $attachmentList;
@@ -336,10 +336,10 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	 * {@inheritDoc}
 	 */
 	public function getLink() {
-		return LinkHandler::getInstance()->getLink('ToDo', array(
+		return LinkHandler::getInstance()->getLink('ToDo', [
 			'application' => 'wcf',
 			'object' => $this
-		));
+		]);
 	}
 
 	/**
@@ -349,8 +349,8 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	 * @return array <integer>
 	 * @throws \wcf\system\exception\SystemException
 	 */
-	public static function getAccessibleTodoIDs($permissions = array('canView', 'canEnter')) {
-		$todoIDs = array();
+	public static function getAccessibleTodoIDs($permissions = ['canView', 'canEnter']) {
+		$todoIDs = [];
 		foreach (ToDoCache::getInstance()->getTodos() as $todo) {
 			$result = true;
 			foreach ($permissions as $permission) {
@@ -394,8 +394,8 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 	}
 	
 	public function isResponsible() {
-		$responsibleUsers = $this->getResponsibleIDs() ?: array();
-		$responsibleGroups = $this->getResponsibleGroupIDs() ?: array();
+		$responsibleUsers = $this->getResponsibleIDs() ?: [];
+		$responsibleGroups = $this->getResponsibleGroupIDs() ?: [];
 		$groupAssigned = false;
 		foreach (WCF::getUser()->getGroupIDs() as $groupID) {
 			if (in_array($groupID, $responsibleGroups))

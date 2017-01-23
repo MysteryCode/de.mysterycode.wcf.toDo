@@ -22,9 +22,9 @@ class ToDoUserNotificationObjectType extends AbstractUserNotificationObjectType 
 			FROM wcf" . WCF_N . "_todo todo
 			WHERE todo.todoID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
+		$statement->execute([
 			$objectID
-		));
+		]);
 		$row = $statement->fetchArray();
 		
 		return ($row ? $row['submitter'] : 0);

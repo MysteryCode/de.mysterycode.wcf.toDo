@@ -21,7 +21,7 @@ class TodoCategoryDataCacheBuilder extends AbstractCacheBuilder {
 	 * @inheritDoc
 	 */
 	protected function rebuild(array $parameters) {
-		$data = array('statObjects' => array(), 'lastTodoIDs' => array());
+		$data = ['statObjects' => [], 'lastTodoIDs' => []];
 		
 		//TODO
 		

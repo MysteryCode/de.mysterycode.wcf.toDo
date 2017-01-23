@@ -15,7 +15,7 @@ class UserGroupSearchAction extends UserGroupAction implements ISearchAction {
 	/**
 	 * @inheritDoc
 	 */
-	protected $allowGuestAccess = array('getSearchResultList');
+	protected $allowGuestAccess = ['getSearchResultList'];
 	
 	/**
 	 * @inheritDoc
@@ -33,11 +33,11 @@ class UserGroupSearchAction extends UserGroupAction implements ISearchAction {
 	 */
 	public function getSearchResultList() {
 		$searchString = $this->parameters['data']['searchString'];
-		$excludedSearchValues = array();
+		$excludedSearchValues = [];
 		if (isset($this->parameters['data']['excludedSearchValues'])) {
 			$excludedSearchValues = $this->parameters['data']['excludedSearchValues'];
 		}
-		$list = array();
+		$list = [];
 		
 		$accessibleGroups = UserGroup::getAccessibleGroups();
 		foreach ($accessibleGroups as $group) {
@@ -45,11 +45,11 @@ class UserGroupSearchAction extends UserGroupAction implements ISearchAction {
 			if (!in_array($groupName, $excludedSearchValues)) {
 				$pos = mb_strripos($groupName, $searchString);
 				if ($pos !== false && $pos == 0) {
-					$list[] = array(
+					$list[] = [
 							'label' => $groupName,
 							'objectID' => $group->groupID,
 							'type' => 'group'
-					);
+					];
 				}
 			}
 		}

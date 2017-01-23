@@ -16,16 +16,16 @@ class TodoMessageQuoteHandler extends AbstractMessageQuoteHandler {
 	 */
 	protected function getMessages(array $data) {
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", array(array_keys($data)));
+		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", [array_keys($data)]);
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
-		$todoIDs = array();
+		$todoIDs = [];
 		foreach ($todos as $todo) {
 			$todoIDs[] = $todo->todoID;
 		}
 		
-		$quotedMessages = array();
+		$quotedMessages = [];
 		
 		// create QuotedMessage objects
 		foreach ($todos as $todo) {
@@ -43,7 +43,7 @@ class TodoMessageQuoteHandler extends AbstractMessageQuoteHandler {
 		}
 		
 		if (count($todoIDs) != count($data)) {
-			$orphanedQuoteIDs = array();
+			$orphanedQuoteIDs = [];
 			foreach ($data as $todoID => $quoteIDs) {
 				if (!in_array($todoID, $todoIDs)) {
 					foreach (array_keys($quoteIDs) as $quoteID) {

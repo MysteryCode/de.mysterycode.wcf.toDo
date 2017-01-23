@@ -20,8 +20,8 @@ class MyToDosPage extends AbstractToDoListPage {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo')),
-		));
+		]);
 	}
 }

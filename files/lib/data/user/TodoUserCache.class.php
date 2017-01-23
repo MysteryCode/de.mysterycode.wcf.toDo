@@ -16,13 +16,13 @@ class TodoUserCache extends SingletonFactory {
 	/**
 	 * cached users
 	 */
-	protected $users = array();
+	protected $users = [];
 	
 	/**
 	 * @inheritDoc
 	 */
 	protected function init() {
-		$this->users = TodoUserCacheBuilder::getInstance()->getData(array(), 'users');
+		$this->users = TodoUserCacheBuilder::getInstance()->getData([], 'users');
 	}
 	
 	public function getUser($userID) {

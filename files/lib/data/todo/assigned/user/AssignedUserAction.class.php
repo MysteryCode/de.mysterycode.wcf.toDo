@@ -33,7 +33,7 @@ class AssignedUserAction extends AbstractDatabaseObjectAction {
 		foreach ($todoIDs as $todoID) {
 			$assigns = AssignedCache::getInstance()->getUsersByTodo($todoID);
 
-			$deleteIDs = array();
+			$deleteIDs = [];
 			foreach ($assigns as $assign) {
 				if ($userID == $assign->userID) {
 					$deleteIDs[] = $assign->assignID;

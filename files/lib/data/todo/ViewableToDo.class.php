@@ -32,7 +32,7 @@ class ViewableToDo extends DatabaseObjectDecorator {
 	 * list of assigned labels
 	 * @var	array<\wcf\data\label\Label>
 	 */
-	protected $labels = array();
+	protected $labels = [];
 	
 	/**
 	 * effective visit time
@@ -95,7 +95,7 @@ class ViewableToDo extends DatabaseObjectDecorator {
 	 */
 	public static function getToDo($todoID) {
 		$list = new ViewableToDoList();
-		$list->setObjectIDs(array($todoID));
+		$list->setObjectIDs([$todoID]);
 		$list->readObjects();
 		$objects = $list->getObjects();
 		

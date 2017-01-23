@@ -72,9 +72,9 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	 * @inheritDoc
 	 */
 	public function getLink() {
-		return LinkHandler::getInstance()->getLink('TodoCategory', array(
+		return LinkHandler::getInstance()->getLink('TodoCategory', [
 			'object' => $this
-		));
+		]);
 	}
 
 	/**
@@ -129,10 +129,10 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 			return WCF::getSession()->getPermission('user.toDo.toDo.canView');
 		} else if ($permission == 'user.canLikeTodo') {
 			return WCF::getSession()->getPermission('user.like.canLike');
-		} else if (in_array($permission, array('user.canViewDeadline', 'user.canEditDeadline', 'user.canViewReminder', 'user.canEditReminder', 'user.canEditPriority'))) {
+		} else if (in_array($permission, ['user.canViewDeadline', 'user.canEditDeadline', 'user.canViewReminder', 'user.canEditReminder', 'user.canEditPriority'])) {
 			return true;
 		} else {
-			$globalPermission = str_replace(array('user.', 'mod.'), array('user.toDo.toDo.', 'mod.toDo.'), $permission);
+			$globalPermission = str_replace(['user.', 'mod.'], ['user.toDo.toDo.', 'mod.toDo.'], $permission);
 			$globalPermission = str_replace('Todos', '', $globalPermission);
 			return WCF::getSession()->getPermission($globalPermission);
 		}
@@ -144,7 +144,7 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	 * @param	array		$permissions
 	 * @return	boolean
 	 */
-	public function getPermissions(array $permissions = array('user.canViewCategory', 'user.canEnterCategory')) {
+	public function getPermissions(array $permissions = ['user.canViewCategory', 'user.canEnterCategory']) {
 		$result = true;
 		
 		foreach ($permissions as $permission) {
@@ -161,7 +161,7 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	 * @return	boolean
 	 * @deprecated	use \wcf\data\todo\category\TodoCategory::getPermissions($permissions) instead
 	 */
-	public function checkPermission(array $permissions = array('user.canViewCategory', 'user.canEnterCategory')) {
+	public function checkPermission(array $permissions = ['user.canViewCategory', 'user.canEnterCategory']) {
 		return $this->getPermissions($permissions);
 	}
 	
@@ -171,12 +171,12 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	 * @return	boolean
 	 */
 	public function isModerator() {
-		$validPermissions = array(
+		$validPermissions = [
 			'mod.canEditTodos',
 			'mod.canDeleteTodos',
 			'mod.canEnableTodos',
 			'mod.canMoveTodos'
-		);
+		];
 		
 		foreach ($validPermissions as $permission) {
 			if ($this->getPermission($permission)) {
@@ -203,8 +203,8 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	 * @return array
 	 * @throws \wcf\system\exception\SystemException
 	 */
-	public static function getAccessibleCategoryIDs(array $permissions = array('user.canViewCategory', 'user.canEnterCategory')) {
-		$categoryIDs = array();
+	public static function getAccessibleCategoryIDs(array $permissions = ['user.canViewCategory', 'user.canEnterCategory']) {
+		$categoryIDs = [];
 		
 		// loop through all categories
 		foreach (TodoCategoryCache::getInstance()->getCategories() as $category) {

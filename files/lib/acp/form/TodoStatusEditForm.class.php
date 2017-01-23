@@ -71,21 +71,21 @@ class TodoStatusEditForm extends TodoStatusAddForm {
 		}
 		
 		// update status
-		$this->objectAction = new TodoStatusAction(array($this->statusID), 'update', array(
-			'data' => array(
+		$this->objectAction = new TodoStatusAction([$this->statusID], 'update', [
+			'data' => [
 				'subject' => $this->subject,
 				'description' => $this->description,
 				'cssClass' => $this->cssClass,
 				'showOrder' => $this->showOrder
-			)
-		));
+			]
+		]);
 		$this->objectAction->executeAction();
 		$this->saved();
 		
 		// show success
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'success' => true
-		));
+		]);
 	}
 	
 	/**
@@ -110,11 +110,11 @@ class TodoStatusEditForm extends TodoStatusAddForm {
 		
 		I18nHandler::getInstance()->assignVariables(!empty($_POST));
 		
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'action' => 'edit',
 			'statusID' => $this->statusID,
 			'status' => $this->status,
 			'availableStatus' => TodoStatusCache::getInstance()->getStatusList()
-		));
+		]);
 	}
 }

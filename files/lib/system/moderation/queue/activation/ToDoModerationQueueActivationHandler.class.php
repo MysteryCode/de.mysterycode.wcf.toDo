@@ -31,7 +31,7 @@ class ToDoModerationQueueActivationHandler extends AbstractToDoModerationQueueHa
 	 */
 	public function enableContent(ModerationQueue $queue) {
 		if ($this->isValid($queue->objectID) && $this->getTodo($queue->objectID)->isDisabled) {
-			$todoAction = new ToDoAction(array($this->getTodo($queue->objectID)), 'enable');
+			$todoAction = new ToDoAction([$this->getTodo($queue->objectID)], 'enable');
 			$todoAction->executeAction();
 		}
 	}
@@ -42,7 +42,7 @@ class ToDoModerationQueueActivationHandler extends AbstractToDoModerationQueueHa
 	public function getDisabledContent(ViewableModerationQueue $queue) {
 		$todo = $queue->getAffectedObject();
 		
-		WCF::getTPL()->assign(array('todo' => $todo));
+		WCF::getTPL()->assign(['todo' => $todo]);
 		
 		return WCF::getTPL()->fetch('moderationTodo', 'wcf');
 		

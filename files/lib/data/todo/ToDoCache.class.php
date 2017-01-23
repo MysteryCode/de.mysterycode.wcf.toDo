@@ -20,7 +20,7 @@ class ToDoCache extends SingletonFactory {
 	 *
 	 * @var array<\wcf\data\todo\ToDo>
 	 */
-	protected $cachedTodos = array();
+	protected $cachedTodos = [];
 	
 	/**
 	 * users online
@@ -41,20 +41,20 @@ class ToDoCache extends SingletonFactory {
 	 * Reads the users online.
 	 */
 	protected function initUsersOnline() {
-		$this->usersOnline = array();
+		$this->usersOnline = [];
 		
 		$usersOnlineList = new UsersOnlineList();
-		$usersOnlineList->getConditionBuilder()->add('(session.objectType = ? OR session.parentObjectType = ?)', array(
+		$usersOnlineList->getConditionBuilder()->add('(session.objectType = ? OR session.parentObjectType = ?)', [
 			'de.mysterycode.wcf.toDo',
 			'de.mysterycode.wcf.toDo.category'
-		));
+		]);
 		$usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
 		$usersOnlineList->readObjects();
 		
 		foreach ($usersOnlineList as $user) {
 			$todoID = ($user->objectType == 'de.mysterycode.wcf.toDo' ? $user->objectID : $user->parentObjectID);
 			if (! isset($this->usersOnline[$todoID]))
-				$this->usersOnline[$todoID] = array();
+				$this->usersOnline[$todoID] = [];
 			
 			$this->usersOnline[$todoID][] = $user;
 		}
@@ -94,6 +94,6 @@ class ToDoCache extends SingletonFactory {
 		
 		if (isset($this->usersOnline[$todoID]))
 			return $this->usersOnline[$todoID];
-		return array();
+		return [];
 	}
 }

@@ -26,7 +26,7 @@ class TodoCategoryNodeTree extends CategoryNodeTree {
 	 * @param	boolean			$includeDisabledCategories
 	 * @param	array<integer>		$excludedCategoryIDs
 	 */
-	public function __construct($parentCategoryID = 0, $includeDisabledCategories = false, array $excludedCategoryIDs = array()) {
+	public function __construct($parentCategoryID = 0, $includeDisabledCategories = false, array $excludedCategoryIDs = []) {
 		parent::__construct('de.mysterycode.wcf.toDo', $parentCategoryID, $includeDisabledCategories, $excludedCategoryIDs);
 	}
 

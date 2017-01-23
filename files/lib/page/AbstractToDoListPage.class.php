@@ -37,7 +37,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	/**
 	 * @inheritDoc
 	 */
-	public $validSortFields = array(
+	public $validSortFields = [
 		'statusID',
 		'categoryID',
 		'title',
@@ -47,8 +47,8 @@ abstract class AbstractToDoListPage extends SortablePage {
 		'time',
 		'updatetimestamp',
 		'important',
-		'remembertime' 
-	);
+		'remembertime'
+	];
 	
 	/**
 	 * @inheritDoc
@@ -60,9 +60,9 @@ abstract class AbstractToDoListPage extends SortablePage {
 	 */
 	public $objectListClassName = 'wcf\data\todo\ViewableToDoList';
 	
-	public $neededModules = array('TODOLIST');
+	public $neededModules = ['TODOLIST'];
 	
-	public $neededPermissions = array('user.toDo.toDo.canView');
+	public $neededPermissions = ['user.toDo.toDo.canView'];
 	
 	/**
 	 * @inheritDoc
@@ -73,7 +73,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	 * like data for posts
 	 * @var	array<\wcf\data\like\object\LikeObject>
 	 */
-	public $likeData = array();
+	public $likeData = [];
 	
 	/**
 	 * category node list
@@ -142,20 +142,20 @@ abstract class AbstractToDoListPage extends SortablePage {
 		if (!empty($this->responsibleFilter)) {
 			$user = UserProfile::getUserProfileByUsername($this->responsibleFilter);
 			if (!empty($user)) {
-				$this->objectList->getConditionBuilder()->add('todo_table.todoID IN (SELECT todo_user.todoID FROM wcf' . WCF_N . '_todo_to_user todo_user WHERE todo_user.userID = ?)', array($user->userID));
+				$this->objectList->getConditionBuilder()->add('todo_table.todoID IN (SELECT todo_user.todoID FROM wcf' . WCF_N . '_todo_to_user todo_user WHERE todo_user.userID = ?)', [$user->userID]);
 			} else {
-				$group = new UserGroupSearchAction(array(), 'getSearchResultList', array('data' => array('searchString' => $this->responsibleFilter)));
+				$group = new UserGroupSearchAction([], 'getSearchResultList', ['data' => ['searchString' => $this->responsibleFilter]]);
 				$group = $group->executeAction();
 				$group = reset($group['returnValues']);
 				
 				if (!empty($group)) {
-					$this->objectList->getConditionBuilder()->add('todo_table.todoID IN (SELECT todo_group.todoID FROM wcf' . WCF_N . '_todo_to_group todo_group WHERE todo_group.groupID = ?)', array(intval($group['objectID'])));
+					$this->objectList->getConditionBuilder()->add('todo_table.todoID IN (SELECT todo_group.todoID FROM wcf' . WCF_N . '_todo_to_group todo_group WHERE todo_group.groupID = ?)', [intval($group['objectID'])]);
 				}
 			}
 		}
 		
 		if (!empty($this->statusFilter)) {
-			$this->objectList->getConditionBuilder()->add('statusID = ?', array($this->statusFilter));
+			$this->objectList->getConditionBuilder()->add('statusID = ?', [$this->statusFilter]);
 		}
 	}
 	
@@ -180,7 +180,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 		
 		// fetch likes
 		if (MODULE_LIKE) {
-			$todoIDs = array();
+			$todoIDs = [];
 			foreach ($this->objectList as $todo) {
 				$todoIDs[] = $todo->todoID;
 			}
@@ -200,18 +200,18 @@ abstract class AbstractToDoListPage extends SortablePage {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'likeData' => $this->likeData,
 			'categoryNodeList' => $this->categoryNodeList,
 			'usersOnlineList' => $this->usersOnlineList,
 			'responsibleFilter' => $this->responsibleFilter,
 			'statusFilter', $this->statusFilter,
 			
-			'stats' => array(
+			'stats' => [
 				'total' => $this->todoCount,
 				'inProgress' => $this->inProgressCount,
 				'finished' => $this->finishedCount
-			)
-		));
+			]
+		]);
 	}
 }

@@ -22,7 +22,7 @@ class TaggedToDoList extends AccessibleToDoList {
 	public function __construct(Tag $tag) {
 		parent::__construct();
 		
-		$this->getConditionBuilder()->add('tag_to_object.objectTypeID = ? AND tag_to_object.languageID = ? AND tag_to_object.tagID = ?', array(TagEngine::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo'), $tag->languageID, $tag->tagID));
+		$this->getConditionBuilder()->add('tag_to_object.objectTypeID = ? AND tag_to_object.languageID = ? AND tag_to_object.tagID = ?', [TagEngine::getInstance()->getObjectTypeID('de.mysterycode.wcf.toDo.toDo'), $tag->languageID, $tag->tagID]);
 		$this->getConditionBuilder()->add('todo_table.todoID = tag_to_object.objectID');
 	}
 	
@@ -46,7 +46,7 @@ class TaggedToDoList extends AccessibleToDoList {
 	 * @inheritDoc
 	 */
 	public function readObjectIDs() {
-		$this->objectIDs = array();
+		$this->objectIDs = [];
 		$sql = "SELECT	tag_to_object.objectID
 			FROM	wcf".WCF_N."_tag_to_object tag_to_object,
 				".$this->getDatabaseTableName()." ".$this->getDatabaseTableAlias()."

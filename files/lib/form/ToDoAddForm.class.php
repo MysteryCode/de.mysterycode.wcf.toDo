@@ -45,7 +45,7 @@ class ToDoAddForm extends MessageForm {
 	
 	public $enableComments = 1;
 	
-	public $neededModules = array('TODOLIST');
+	public $neededModules = ['TODOLIST'];
 	
 	public $description = '';
 	public $endTime = 0;
@@ -62,7 +62,7 @@ class ToDoAddForm extends MessageForm {
 	public $progress = 0;
 	public $remembertime = 0;
 
-	public $statusList = array();
+	public $statusList = [];
 	
 	/**
 	 * @inheritDoc
@@ -130,8 +130,8 @@ class ToDoAddForm extends MessageForm {
 	 * @inheritDoc
 	 */
 	public function save() {
-		$todoData = array(
-			'data' => array(
+		$todoData = [
+			'data' => [
 				'title' => $this->title,
 				'description' => $this->description,
 				'note' => $this->note,
@@ -144,9 +144,9 @@ class ToDoAddForm extends MessageForm {
 				'categoryID' => $this->categoryID ?: null,
 				'progress' => $this->progress,
 				'remembertime' => $this->remembertime
-			),
+			],
 			'attachmentHandler' => $this->attachmentHandler
-		);
+		];
 		
 		if (!$this->category->getPermission('user.canAddTodoWithoutModeration')) {
 			$todoData['data']['isDisabled'] = 1;
@@ -155,16 +155,16 @@ class ToDoAddForm extends MessageForm {
 		if (!empty($this->statusID))
 			$todoData['data']['statusID'] = $this->statusID;
 		
-		$this->objectAction = new ToDoAction(array(), 'create', $todoData);
+		$this->objectAction = new ToDoAction([], 'create', $todoData);
 		$resultValues = $this->objectAction->executeAction();
 
 		if (!empty($this->responsibles)) {
-			$responsibleUserAction = new ToDoAction(array($resultValues['returnValues']->todoID), 'updateResponsibles', array('search' => $this->responsibles));
+			$responsibleUserAction = new ToDoAction([$resultValues['returnValues']->todoID], 'updateResponsibles', ['search' => $this->responsibles]);
 			$responsibleUserAction->executeAction();
 		}
 		
 		if (!empty($this->responsibleGroups)) {
-			$responsibleGroupAction = new ToDoAction(array($resultValues['returnValues']->todoID), 'updateResponsibleGroups', array('search' => $this->responsibleGroups));
+			$responsibleGroupAction = new ToDoAction([$resultValues['returnValues']->todoID], 'updateResponsibleGroups', ['search' => $this->responsibleGroups]);
 			$responsibleGroupAction->executeAction();
 		}
 		
@@ -202,7 +202,7 @@ class ToDoAddForm extends MessageForm {
 
 		MessageQuoteManager::getInstance()->assignVariables();
 		
-		WCF::getTPL()->assign( array(
+		WCF::getTPL()->assign( [
 			'title' => $this->title,
 			'description' => $this->description,
 			'note' => $this->note,
@@ -220,10 +220,10 @@ class ToDoAddForm extends MessageForm {
 			'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.toDo.attachment.allowedAttachmentExtensions'))),
 			'statusList' => $this->statusList,
 			'action' => 'add'
-		));
+		]);
 	}
 	
-	public function updateResponsibles($todoID = 0, $search, $existingResponsibles = array()) {
+	public function updateResponsibles($todoID = 0, $search, $existingResponsibles = []) {
 		if ($todoID == 0)
 			return null;
 		
@@ -231,8 +231,8 @@ class ToDoAddForm extends MessageForm {
 		
 		$responsibleList = array_unique($responsibleList);
 		
-		$userIDs = array();
-		$checkArray = array();
+		$userIDs = [];
+		$checkArray = [];
 		foreach ($responsibleList as $user) {
 			if ($user && $user !== null && !in_array($user->userID, $existingResponsibles)) {
 				$userIDs[] = $user->userID;
@@ -240,7 +240,7 @@ class ToDoAddForm extends MessageForm {
 					(toDoID, userID, username)
 					VAlUES(?, ?, ?);";
 				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array($todoID, $user->userID, $user->username));
+				$statement->execute([$todoID, $user->userID, $user->username]);
 				
 				$checkArray[] = $user->userID;
 			}
@@ -253,7 +253,7 @@ class ToDoAddForm extends MessageForm {
 						WHERE toDoID = ?
 							AND userID = ?";
 					$statement = WCF::getDB()->prepareStatement($sql);
-					$statement->execute(array($todoID, $responsible));
+					$statement->execute([$todoID, $responsible]);
 				}
 			}
 		}

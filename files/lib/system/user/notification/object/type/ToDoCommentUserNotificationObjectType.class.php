@@ -28,9 +28,9 @@ class ToDoCommentUserNotificationObjectType extends AbstractUserNotificationObje
 			ON (todo.todoID = comment.objectID)
 			WHERE comment.commentID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
+		$statement->execute([
 			$objectID
-		));
+		]);
 		$row = $statement->fetchArray();
 		
 		return ($row ? $row['submitter'] : 0);

@@ -42,6 +42,6 @@ class ToDoList extends DatabaseObjectList {
 			$this->getConditionBuilder()->add('todo_table.isDisabled = 0');
 		
 		if (!WCF::getSession()->getPermission('user.toDo.toDo.canViewPrivate'))
-			$this->getConditionBuilder()->add("(private = ? or submitter = ? or (SELECT assigns.todoID FROM wcf" . WCF_N . "_todo_to_user assigns WHERE assigns.toDoID = todo_table.todoID AND assigns.userID = ?) = todo_table.todoID)", array (0, WCF::getUser()->userID, WCF::getUser()->userID));
+			$this->getConditionBuilder()->add("(private = ? or submitter = ? or (SELECT assigns.todoID FROM wcf" . WCF_N . "_todo_to_user assigns WHERE assigns.toDoID = todo_table.todoID AND assigns.userID = ?) = todo_table.todoID)", [0, WCF::getUser()->userID, WCF::getUser()->userID]);
 	}
 }

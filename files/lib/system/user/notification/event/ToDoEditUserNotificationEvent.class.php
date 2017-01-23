@@ -26,30 +26,30 @@ class ToDoEditUserNotificationEvent extends AbstractUserNotificationEvent {
 	 * {@inheritDoc}
 	 */
 	public function getMessage() {
-		return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.edit.message', array(
+		return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.edit.message', [
 			'todo' => $this->userNotificationObject->object,
-			'author' => $this->author 
-		));
+			'author' => $this->author
+		]);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getEmailMessage($notificationType = 'instant') {
-		return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.edit.mail', array(
+		return $this->getLanguage()->getDynamicVariable('wcf.toDo.notification.edit.mail', [
 			'todo' => $this->userNotificationObject->object,
-			'author' => $this->author 
-		));
+			'author' => $this->author
+		]);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getLink() {
-		return LinkHandler::getInstance()->getLink('ToDo', array(
+		return LinkHandler::getInstance()->getLink('ToDo', [
 			'application' => 'wcf',
 			'object' => $this->userNotificationObject->object
-		));
+		]);
 	}
 	
 	/**
@@ -62,10 +62,10 @@ class ToDoEditUserNotificationEvent extends AbstractUserNotificationEvent {
 		$returnValue = $this->userNotificationObject->object->canEnter();
 		if (!$returnValue && $this->userNotificationObject->getObjectID()) {
 			// remove subscription
-			UserObjectWatchHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo', array($this->userNotificationObject->getObjectID()), array(WCF::getUser()->userID));
+			UserObjectWatchHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo', [$this->userNotificationObject->getObjectID()], [WCF::getUser()->userID]);
 			
 			// reset user storage
-			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'wcfUnreadWatchedTodos');
+			UserStorageHandler::getInstance()->reset([WCF::getUser()->userID], 'wcfUnreadWatchedTodos');
 		}
 		
 		return $returnValue;

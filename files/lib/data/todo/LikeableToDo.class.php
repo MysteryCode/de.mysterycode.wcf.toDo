@@ -50,8 +50,8 @@ class LikeableToDo extends AbstractLikeObject {
 	 */
 	public function updateLikeCounter($cumulativeLikes) {
 		$todoEditor = new ToDoEditor($this->getDecoratedObject());
-		$todoEditor->update(array(
+		$todoEditor->update([
 			'cumulativeLikes' => $cumulativeLikes
-		));
+		]);
 	}
 }

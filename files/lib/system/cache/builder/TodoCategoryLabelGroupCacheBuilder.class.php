@@ -21,15 +21,15 @@ class TodoCategoryLabelGroupCacheBuilder extends AbstractCacheBuilder {
 		// get object type
 		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.label.objectType', 'de.mysterycode.wcf.toDo.category');
 		if ($objectType === null) {
-			return array();
+			return [];
 		}
 		
 		// prepare conditions
 		$conditionBuilder = new PreparedStatementConditionBuilder();
-		$conditionBuilder->add('objectTypeID = ?', array($objectType->objectTypeID));
+		$conditionBuilder->add('objectTypeID = ?', [$objectType->objectTypeID]);
 		
 		// read label group associations
-		$data = array();
+		$data = [];
 		$sql = "SELECT	groupID, objectID
 			FROM	wcf".WCF_N."_label_group_to_object
 			".$conditionBuilder;
@@ -37,7 +37,7 @@ class TodoCategoryLabelGroupCacheBuilder extends AbstractCacheBuilder {
 		$statement->execute($conditionBuilder->getParameters());
 		while ($row = $statement->fetchArray()) {
 			if (!isset($data[$row['objectID']])) {
-				$data[$row['objectID']] = array();
+				$data[$row['objectID']] = [];
 			}
 			
 			$data[$row['objectID']][] = $row['groupID'];
