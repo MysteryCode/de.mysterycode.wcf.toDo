@@ -112,13 +112,13 @@
 	</category>
 	
 	<category name="wcf.acp.menu">
-		<item name="wcf.acp.menu.link.toDoCategory"><![CDATA[ToDo-Categories]]></item>
+		<item name="wcf.acp.menu.link.application.todo"><![CDATA[ToDo-Liste]]></item>
+
 		<item name="wcf.acp.menu.link.toDoCategory.add"><![CDATA[Add Category]]></item>
-		<item name="wcf.acp.menu.link.toDoCategory.list"><![CDATA[List Categories]]></item>
-		
-		<item name="wcf.acp.menu.link.todoStatus"><![CDATA[ToDo-Status]]></item>
+		<item name="wcf.acp.menu.link.toDoCategory.list"><![CDATA[Categories]]></item>
+
 		<item name="wcf.acp.menu.link.todoStatus.add"><![CDATA[Add Status]]></item>
-		<item name="wcf.acp.menu.link.todoStatus.list"><![CDATA[List Status]]></item>
+		<item name="wcf.acp.menu.link.todoStatus.list"><![CDATA[Status]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">

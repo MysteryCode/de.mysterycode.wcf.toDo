@@ -6,9 +6,10 @@
 		<acpmenuitem name="wcf.acp.menu.link.application.todo">
 			<parent>wcf.acp.menu.link.application</parent>
 		</acpmenuitem>
+
 		<acpmenuitem name="wcf.acp.menu.link.toDoCategory.list">
 			<controller><![CDATA[wcf\acp\page\ToDoCategoryListPage]]></controller>
-			<parent>wcf.acp.menu.link.toDoCategory</parent>
+			<parent>wcf.acp.menu.link.application.todo</parent>
 			<permissions>admin.content.toDo.category.canEditCategory,admin.content.toDo.category.canDeleteCategory</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
@@ -19,9 +20,10 @@
 			<showorder>1</showorder>
 			<icon>fa-plus</icon>
 		</acpmenuitem>
+
 		<acpmenuitem name="wcf.acp.menu.link.todoStatus.list">
 			<controller><![CDATA[wcf\acp\page\TodoStatusListPage]]></controller>
-			<parent>wcf.acp.menu.link.todoStatus</parent>
+			<parent>wcf.acp.menu.link.application.todo</parent>
 			<permissions>admin.content.toDo.status.canEdit,admin.content.toDo.status.canDelete</permissions>
 			<showorder>2</showorder>
 		</acpmenuitem>
