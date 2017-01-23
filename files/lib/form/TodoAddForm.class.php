@@ -182,14 +182,6 @@ class TodoAddForm extends MessageForm {
 
 		$this->validateNotes();
 		
-		if (empty($this->title)) {
-			throw new UserInputException('title');
-		}
-		
-		if (empty($this->description)) {
-			throw new UserInputException('description');
-		}
-		
 		if (empty($this->statusID) && TODO_SET_STATUS_ON_CREATE && $this->category->canEditStatus()) {
 			throw new UserInputException('statusID');
 		}
