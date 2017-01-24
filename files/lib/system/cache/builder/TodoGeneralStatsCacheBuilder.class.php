@@ -22,16 +22,16 @@ class TodoGeneralStatsCacheBuilder extends AbstractCacheBuilder {
 		$sql = "SELECT
 				(
 					SELECT COUNT(todoID)
-					FROM wcf1_todo
+					FROM wcf" . WCF_N . "_todo
 				) AS todos,
 				(
 					SELECT COUNT(todoID)
-					FROM wcf1_todo
+					FROM wcf" . WCF_N . "_todo
 					WHERE statusID <> 1
 				) AS todosInProgress,
 				(
 					SELECT COUNT(todoID)
-					FROM wcf1_todo
+					FROM wcf" . WCF_N . "_todo
 					WHERE statusID = 1
 				) AS todosFinished";
 		$statement = WCF::getDB()->prepareStatement($sql);

@@ -49,7 +49,6 @@
 		<instruction type="page">xml/page.xml</instruction>
 		<instruction type="menuItem">xml/menuItem.xml</instruction>
 
-		<!-- language -->
 		<instruction type="language" />
 	</instructions>
 </package>
