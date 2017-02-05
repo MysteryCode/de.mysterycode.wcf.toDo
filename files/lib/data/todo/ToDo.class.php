@@ -14,6 +14,7 @@ use wcf\data\user\TodoUserCache;
 use wcf\data\user\User;
 use wcf\data\DatabaseObject;
 use wcf\data\IMessage;
+use wcf\data\user\UserProfile;
 use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -215,9 +216,9 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 		}
 		
 		$users = array_slice($users, 0, 5 - count($groups));
-		/** @var \wcf\data\user\User $user */
+		/** @var \wcf\data\todo\assigned\user\AssignedUser $user */
 		foreach ($users as $user) {
-			$preview[] = '<a href="' . $user->getLink() . '" class="userLink" data-user-id="' . $user->userID . '">' . $user->username . '</a>';
+			$preview[] = '<a href="' . LinkHandler::getInstance()->getLink('User', array('id' => $user->username, 'title' => $user->username)) . '" class="userLink" data-user-id="' . $user->userID . '">' . $user->username . '</a>';
 		}
 		
 		return $preview;
