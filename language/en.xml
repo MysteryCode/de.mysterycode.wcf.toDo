@@ -108,7 +108,7 @@
 	</category>
 
 	<category name="wcf.acp.label">
-		<item name="wcf.acp.label.container.de.mysterycode.wcf.toDo.category">ToDo-Liste</item>
+		<item name="wcf.acp.label.container.de.mysterycode.wcf.toDo.category"><![CDATA[ToDo-List]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
