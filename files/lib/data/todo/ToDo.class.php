@@ -20,6 +20,7 @@ use wcf\system\bbcode\MessageParser;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
+use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -227,12 +228,20 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 	public function getFormattedDescription() {
 		AttachmentBBCode::setObjectID($this->todoID);
 		
+		// assign embedded objects
+		MessageEmbeddedObjectManager::getInstance()->setActiveMessage('de.mysterycode.wcf.toDo', $this->todoID);
+		
 		// parse and return message
 		MessageParser::getInstance()->setOutputType('text/html');
 		return MessageParser::getInstance()->parse($this->description, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
 	}
 	
 	public function getFormattedNote() {
+		AttachmentBBCode::setObjectID($this->todoID);
+		
+		// assign embedded objects
+		MessageEmbeddedObjectManager::getInstance()->setActiveMessage('de.mysterycode.wcf.toDo', $this->todoID);
+		
 		// parse and return message
 		MessageParser::getInstance()->setOutputType('text/html');
 		return MessageParser::getInstance()->parse($this->note, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
