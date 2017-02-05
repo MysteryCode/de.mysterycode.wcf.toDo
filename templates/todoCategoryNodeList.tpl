@@ -9,7 +9,7 @@
 						<div>
 							<div class="containerHeadline">
 								<h3><a href="{link controller='TodoCategory' object=$categoryNode}{/link}">{$categoryNode->title|language}</a></h3>
-								<p class="todoCategoryDescription">{if $categoryNode->descriptionUseHtml}{@$categoryNode->description|language}{else}{$categoryNode->description|language|newlineToBreak}{/if}</p>
+								<p class="todoCategoryDescription">{if $categoryNode->descriptionUseHtml}{@$categoryNode->description|language}{else}{@$categoryNode->description|language|newlineToBreak}{/if}</p>
 							</div>
 							
 							{if $categoryNode->getSubCategories()|count}
