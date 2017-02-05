@@ -215,8 +215,9 @@ class ToDo extends DatabaseObject implements IBreadcrumbProvider, IRouteControll
 		}
 		
 		$users = array_slice($users, 0, 5 - count($groups));
+		/** @var \wcf\data\user\User $user */
 		foreach ($users as $user) {
-			$preview[] = "<a href=\"{link controller='User' id=" . $user->userID . "}{/link}\" class=\"userLink\" data-user-id=\"" . $user->userID . "}\">" . $user->username . "</a>";
+			$preview[] = '<a href="' . $user->getLink() . '" class="userLink" data-user-id="' . $user->userID . '">' . $user->username . '</a>';
 		}
 		
 		return $preview;
