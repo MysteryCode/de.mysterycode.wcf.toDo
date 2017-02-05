@@ -222,6 +222,10 @@
 		<item name="wcf.moderation.deletedContent.objectType.de.mysterycode.wcf.toDo.toDo"><![CDATA[ToDos]]></item>
 		<item name="wcf.moderation.type.de.mysterycode.wcf.toDo.toDo"><![CDATA[ToDo]]></item>
 	</category>
+
+	<category name="wcf.tagging">
+		<item name="wcf.tagging.taggedObjects.de.mysterycode.wcf.toDo.toDo"><![CDATA[ToDos]]></item>
+	</category>
 	
 	<category name="wcf.toDo">
 		<item name="wcf.toDo.copyright"><![CDATA[<small><a href="http://www.mysterycode.de/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}><strong>ToDo-Liste</strong>, developed by <strong>MysteryCode</strong></a></small>]]></item>
