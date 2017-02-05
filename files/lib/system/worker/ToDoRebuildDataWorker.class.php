@@ -2,7 +2,9 @@
 
 namespace wcf\system\worker;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\todo\ToDoEditor;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\user\activity\point\UserActivityPointHandler;
 use wcf\system\WCF;
 
@@ -70,13 +72,27 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 		
 		$userStats = array();
 		WCF::getDB()->beginTransaction();
+		/** @var \wcf\data\todo\ToDo $todo */
 		foreach ($this->objectList as $todo) {
+			$data = array();
+			
 			// update activity points
 			if ($todo->submitter) {
 				if (!isset($userStats[$todo->submitter])) {
 					$userStats[$todo->submitter] = 0;
 				}
 				$userStats[$todo->submitter]++;
+			}
+			
+			if (!empty($todo->description)) {
+				if ($todo->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects('de.mysterycode.wcf.toDo', $todo->todoID, $todo->description)) {
+					$data['hasEmbeddedObjects'] = $todo->hasEmbeddedObjects ? 0 : 1;
+				}
+			}
+			
+			if (!empty($data)) {
+				$todoEditor = new ToDoEditor($todo);
+				$todoEditor->update($data);
 			}
 		}
 		WCF::getDB()->commitTransaction();
