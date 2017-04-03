@@ -255,8 +255,9 @@ class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController
 		}
 		
 		$users = array_slice($users, 0, 5 - count($groups));
+		/** @var \wcf\data\todo\assigned\user\AssignedUser $user */
 		foreach ($users as $user) {
-			$preview[] = "<a href=\"{link controller='User' id=" . $user->userID . "}{/link}\" class=\"userLink\" data-user-id=\"" . $user->userID . "}\">" . $user->username . "</a>";
+			$preview[] = '<a href="' . LinkHandler::getInstance()->getLink('User', array('id' => $user->userID, 'title' => $user->username)) . '" class="userLink" data-user-id="' . $user->userID . '">' . $user->username . '</a>';
 		}
 		
 		return $preview;
