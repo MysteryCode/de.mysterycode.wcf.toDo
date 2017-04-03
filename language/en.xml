@@ -210,7 +210,7 @@
 	</category>
 	
 	<category name="wcf.toDo">
-		<item name="wcf.toDo.copyright"><![CDATA[<small><a href="http://www.mysterycode.de/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}><strong>ToDo-Liste</strong>, developed by <strong>MysteryCode</strong></a></small>]]></item>
+		<item name="wcf.toDo.copyright"><![CDATA[<a href="http://www.mysterycode.de/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}><strong>ToDo-Liste</strong>, developed by <strong>MysteryCode</strong></a>]]></item>
 		
 		<item name="wcf.toDo.taskList"><![CDATA[ToDo-List]]></item>
 		<item name="wcf.toDo.taskList.tasks"><![CDATA[Tasks]]></item>
