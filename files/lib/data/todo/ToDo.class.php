@@ -62,6 +62,7 @@ use wcf\util\StringUtil;
  * @property-read boolean notesHasEmbeddedObjects notes field has embedded objects of set to 1
  * @property-read string  ipAddress ipaddress of the user who submitted the todo
  * @property-read boolean hasLabels todo has labels if set to 1
+ * @property-read boolean enableHtml todo has been converted to html or was html already if set to 1
  */
 class ToDo extends DatabaseObject implements ITitledLinkObject, IRouteController, IMessage {
 	use TUserContent;

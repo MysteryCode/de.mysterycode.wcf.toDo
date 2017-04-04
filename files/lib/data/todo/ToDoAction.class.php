@@ -69,6 +69,10 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @inheritDoc
 	 */
 	public function create() {
+		if (!isset($this->parameters['data']['enableHtml'])) {
+			$this->parameters['data']['enableHtml'] = 1;
+		}
+		
 		if (!empty($this->parameters['htmlInputProcessor'])) {
 			/** @noinspection PhpUndefinedMethodInspection */
 			$this->parameters['data']['description'] = $this->parameters['htmlInputProcessor']->getHtml();
@@ -167,6 +171,10 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @inheritDoc
 	 */
 	public function update() {
+		if (!isset($this->parameters['data']['enableHtml'])) {
+			$this->parameters['data']['enableHtml'] = 1;
+		}
+		
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 			$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
 		}

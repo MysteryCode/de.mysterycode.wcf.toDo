@@ -28,7 +28,11 @@ CREATE TABLE wcf1_todo (
 	hasEmbeddedObjects TINYINT(1)   NOT NULL DEFAULT 0,
 	notesHasEmbeddedObjects TINYINT(1)   NOT NULL DEFAULT 0,
 	ipAddress          VARCHAR(39)  NOT NULL DEFAULT '',
+
+	-- 170404
 	hasLabels          TINYINT(1)   NOT NULL DEFAULT 0,
+	enableHtml         TINYINT(1)   NOT NULL DEFAULT 0,
+
 	PRIMARY KEY (todoID)
 );
 
