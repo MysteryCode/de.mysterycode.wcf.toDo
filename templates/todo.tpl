@@ -9,7 +9,6 @@
 		<div class="contentHeaderTitle">
 			<h1 class="contentTitle">{lang}wcf.toDo.task.detail{/lang}</h1>
 			<ul class="inlineList contentHeaderMetaData">
-				{*
 				{if $todo->hasLabels()}
 					<li>
 						<span class="icon icon16 fa-tags"></span>
@@ -20,7 +19,6 @@
 						</ul>
 					</li>
 				{/if}
-				*}
 			</ul>
 		</div>
 

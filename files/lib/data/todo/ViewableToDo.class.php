@@ -15,6 +15,8 @@ use wcf\system\WCF;
  * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
+ *
+ * @mixin       ToDo
  */
 class ViewableToDo extends DatabaseObjectDecorator {
 	/**
@@ -30,7 +32,7 @@ class ViewableToDo extends DatabaseObjectDecorator {
 	
 	/**
 	 * list of assigned labels
-	 * @var	array<\wcf\data\label\Label>
+	 * @var	Label[]
 	 */
 	protected $labels = [];
 	
@@ -109,8 +111,8 @@ class ViewableToDo extends DatabaseObjectDecorator {
 	
 	/**
 	 * Adds a label.
-	 * 
-	 * @param	\wcf\data\label\Label	$label
+	 *
+	 * @param	Label	$label
 	 */
 	public function addLabel(Label $label) {
 		$this->labels[$label->labelID] = $label;
@@ -118,8 +120,8 @@ class ViewableToDo extends DatabaseObjectDecorator {
 	
 	/**
 	 * Returns a list of labels.
-	 * 
-	 * @return	array<\wcf\data\label\Label>
+	 *
+	 * @return	Label[]
 	 */
 	public function getLabels() {
 		return $this->labels;
@@ -127,26 +129,22 @@ class ViewableToDo extends DatabaseObjectDecorator {
 	
 	/**
 	 * Returns the primary (first) label.
-	 * 
-	 * @return	\wcf\data\label\Label
+	 *
+	 * @return	Label|null
 	 */
 	public function getPrimaryLabel() {
-		if (!$this->hasLabels())
-			return null;
+		if (!$this->hasLabels()) return null;
 		
-		foreach ($this->labels as $label)
-			return $label;
-
-		return null;
+		return reset($this->labels);
 	}
 	
 	/**
-	 * Returns true if one or more labels are assigned to this todo.
-	 * 
+	 * Returns true if one or more labels are assigned to this thread.
+	 *
 	 * @return	boolean
 	 */
 	public function hasLabels() {
-		return (count($this->labels)) ? true : false;
+		return count($this->labels) ? true : false;
 	}
 	
 	/**

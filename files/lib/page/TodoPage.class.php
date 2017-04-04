@@ -3,9 +3,11 @@
 namespace wcf\page;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoCache;
+use wcf\data\todo\ViewableToDo;
 use wcf\system\comment\CommentHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\label\object\TodoLabelObjectHandler;
 use wcf\system\like\LikeHandler;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\message\quote\MessageQuoteManager;
@@ -27,7 +29,14 @@ class TodoPage extends AbstractPage {
 	 */
 	public $enableTracking = true;
 	
+	/**
+	 * @var integer
+	 */
 	public $todoID = 0;
+	
+	/**
+	 * @var ViewableToDo
+	 */
 	public $todo = null;
 
 	/**
@@ -70,8 +79,11 @@ class TodoPage extends AbstractPage {
 		
 		$this->todo = ToDoCache::getInstance()->getTodo($this->todoID);
 		
-		if (empty($this->todo))
+		if (empty($this->todo)) {
 			$this->todo = new ToDo($this->todoID);
+		}
+		
+		$this->todo = new ViewableToDo($this->todo);
 		
 		if($this->todo === null || !$this->todo->todoID)
 			throw new IllegalLinkException();
@@ -90,6 +102,16 @@ class TodoPage extends AbstractPage {
 			$objectType = LikeHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo');
 			LikeHandler::getInstance()->loadLikeObjects($objectType, [$this->todo->todoID]);
 			$this->likeData = LikeHandler::getInstance()->getLikeObject($objectType, $this->todo->todoID);
+		}
+		
+		// fetch labels
+		if ($this->thread->hasLabels) {
+			$assignedLabels = TodoLabelObjectHandler::getInstance()->getAssignedLabels([$this->todoID]);
+			if (isset($assignedLabels[$this->todoID])) {
+				foreach ($assignedLabels[$this->todoID] as $label) {
+					$this->todo->addLabel($label);
+				}
+			}
 		}
 	}
 	
