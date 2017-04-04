@@ -217,6 +217,23 @@
 	float: right;
 }
 
-.todoLikeButtons {
-	flex-direction: row-reverse;
+.todoLikeContainer {
+	display: flex;
+	flex-direction: row;
+
+	@include screen-md-up {
+		.todoLikesSummery {
+			flex: 1 1 auto;
+		}
+
+		.todoLikeButtons {
+			flex: 0 1 150px;
+		}
+	}
+
+	@include screen-sm-down {
+		.todoLikesSummery, .todoLikeButtons {
+			flex: 1 1 100%;
+		}
+	}
 }

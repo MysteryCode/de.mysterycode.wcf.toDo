@@ -142,7 +142,7 @@
 
 		{event name='additionalInfo'}
 
-		{if MODULE_LIKE}<div class="section"><span class="todoLikesSummery"></span><ul class="todoLikeButtons buttonGroup"></ul></div>{/if}
+		{if MODULE_LIKE}<div class="todoLikeContainer"><span class="todoLikesSummery"></span><ul class="todoLikeButtons buttonGroup"></ul></div>{/if}
 	</section>
 
 	{if $todo->description != ''}
