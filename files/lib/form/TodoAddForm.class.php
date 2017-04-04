@@ -173,7 +173,7 @@ class TodoAddForm extends MessageForm {
 		
 		if (isset($_POST['enableComments'])) {
 			$this->enableComments = 1;
-		} elseif (!empty($_POST)) {
+		} else if (!empty($_POST)) {
 			$this->enableComments = 0;
 		}
 		
