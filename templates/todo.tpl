@@ -48,7 +48,7 @@
 	data-todo-id="{@$todo->todoID}"
 	data-is-disabled="{@$todo->isDisabled}"
 	data-is-deleted="{@$todo->isDeleted}"
-	{if MODULE_LIKE && MCPS_PACKAGE_LIKE}data-object-id="{@$package->todoID}"
+	{if MODULE_LIKE}data-object-id="{@$package->todoID}"
 		data-object-type="de.mysterycode.wcf.toDo.toDo"
 		data-like-liked="{if $todoLikeData[$todo->todoID]|isset}{@$todoLikeData[$todo->todoID]->liked}{/if}"
 		data-like-likes="{if $todoLikeData[$todo->todoID]|isset}{@$todoLikeData[$todo->todoID]->likes}{else}0{/if}"
@@ -238,7 +238,7 @@
 
 		{if MODULE_LIKE}
 			require(['WoltLabSuite/Core/Ui/Like/Handler'], function(UiLikeHandler) {
-				new UiLikeHandler('de.mysterycode.mcps.likeablePackage', {
+				new UiLikeHandler('de.mysterycode.wcf.toDo.toDo', {
 					// settings
 					isSingleItem: true,
 
