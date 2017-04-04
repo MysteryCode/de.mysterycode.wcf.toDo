@@ -29,8 +29,17 @@
 								{if $showCategory}
 									<a href="{$todo->getCategory()->getLink()}"><span class="label badge {$todo->getCategory()->cssClass}">{$todo->getCategory()->getTitle()}</span></a>
 								{/if}
-								{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike') && ($todo->likes || $todo->dislikes)}<span class="likesBadge badge jsTooltip {if $todo->cumulativeLikes > 0}green{elseif $todo->cumulativeLikes < 0}red{/if}" title="{lang likes=$todo->likes dislikes=$todo->dislikes}wcf.like.tooltip{/lang}">{if $todo->cumulativeLikes > 0}+{elseif $todo->cumulativeLikes == 0}&plusmn;{/if}{#$todo->cumulativeLikes}</span>{/if}
-								<h3{if $todo->important == 1} class="importantToDo"{/if}>{if $todo->canEnter()}{if $todo->private}<span class="icon icon16 fa-key"></span> {/if}<a href="{$todo->getLink()}">{$todo->title}</a>{else}{$todo->title}{/if}</h3>
+								<h3{if $todo->important == 1} class="importantToDo"{/if}>
+									{if $todo->canEnter()}
+										{if $todo->private}<span class="icon icon16 fa-key"></span> {/if}
+										<a href="{$todo->getLink()}">{$todo->title}</a>
+									{else}
+										{$todo->title}
+									{/if}
+									{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}
+										<small class="wcfLikeCounter{if $todo->cumulativeLikes > 0} likeCounterLiked{elseif $todo->cumulativeLikes < 0} likeCounterDisliked{/if}">{if $todo->likes || $todo->dislikes}<span class="icon icon16 fa-thumbs-o-{if $todo->cumulativeLikes < 0}down{else}up{/if} jsTooltip" title="{lang likes=$todo->likes dislikes=$todo->dislikes}wcf.like.tooltip{/lang}"></span><span class="wcfLikeValue">{if $todo->cumulativeLikes > 0}+{elseif $todo->cumulativeLikes == 0}&plusmn;{/if}{#$todo->cumulativeLikes}</span>{/if}</small>
+									{/if}
+								</h3>
 
 								<p class="todoDescription">
 									{if $__wcf->getSession()->getPermission('user.toDo.status.canView') && $todo->statusID}
