@@ -92,7 +92,8 @@ class TodoEditForm extends TodoAddForm {
 					'private' => $this->private,
 					'important' => $this->important,
 					'progress' => $this->progress,
-					'remembertime' => $this->remembertime
+					'remembertime' => $this->remembertime,
+					'enableComments' => $this->enableComments
 				],
 				'attachmentHandler' => $this->attachmentHandler,
 				'htmlInputProcessor' => $this->htmlInputProcessor,
@@ -147,6 +148,7 @@ class TodoEditForm extends TodoAddForm {
 			$this->progress = $this->todo->progress;
 			$this->important = $this->todo->important;
 			$this->private = $this->todo->private;
+			$this->enableComments = $this->todo->enableComments;
 			$this->canEditStatus = $this->canEditStatus();
 			$this->canEditResponsible = $this->canEditResponsible();
 			

@@ -88,8 +88,15 @@
 		<dl{if $errorField == 'private'} class="formError"{/if}>
 			<dt></dt>
 			<dd>
-				<label><input type="checkbox" id="private" name="private" {if $private == '1'}checked{/if} /> {lang}wcf.toDo.task.private{/lang}</label>
+				<label><input type="checkbox" id="private" name="private" value="1" {if $private}checked{/if} /> {lang}wcf.toDo.task.private{/lang}</label>
 				<p><small>{lang}wcf.toDo.task.private.description{/lang}</small></p>
+			</dd>
+		</dl>
+
+		<dl{if $errorField == 'enableComments'} class="formError"{/if}>
+			<dt></dt>
+			<dd>
+				<label><input type="checkbox" id="enableComments" name="enableComments" value="1" {if $enableComments}checked{/if} /> {lang}wcf.toDo.task.enableComments{/lang}</label>
 			</dd>
 		</dl>
 
@@ -121,7 +128,7 @@
 		<h2 class="sectionTitle">{lang}wcf.global.description{/lang}</h2>
 
 		<textarea id="text" name="description" rows="20" cols="40" data-autosave="de.mysterycode.wcf.toDo.todoAdd{if $todoID|isset}{@$todoID}{/if}.description">{$description}</textarea>
-		{include file='messageFormTabs' wysiwygContainerID='text'}
+		{include file='messageFormTabsInline' wysiwygContainerID='text'}
 		{if $errorField == 'description'}
 			<small class="innerError">
 				{if $errorType == 'empty'}

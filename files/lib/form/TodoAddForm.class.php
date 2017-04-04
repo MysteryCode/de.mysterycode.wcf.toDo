@@ -171,6 +171,12 @@ class TodoAddForm extends MessageForm {
 		if (isset($_POST['responsibles'])) $this->responsibles = StringUtil::trim($_POST['responsibles']);
 		if (isset($_POST['responsibleGroups'])) $this->responsibleGroups = StringUtil::trim($_POST['responsibleGroups']);
 		
+		if (isset($_POST['enableComments'])) {
+			$this->enableComments = 1;
+		} elseif (!empty($_POST)) {
+			$this->enableComments = 0;
+		}
+		
 		MessageQuoteManager::getInstance()->readFormParameters();
 	}
 	
@@ -216,7 +222,8 @@ class TodoAddForm extends MessageForm {
 				'important' => $this->important,
 				'categoryID' => $this->categoryID ?: null,
 				'progress' => $this->progress,
-				'remembertime' => $this->remembertime
+				'remembertime' => $this->remembertime,
+				'enableComments' => $this->enableComments
 			],
 			'attachmentHandler' => $this->attachmentHandler,
 			'htmlInputProcessor' => $this->htmlInputProcessor,
@@ -293,7 +300,8 @@ class TodoAddForm extends MessageForm {
 			'progress' => $this->progress,
 			'remembertime' => $this->remembertime,
 			'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.toDo.attachment.allowedAttachmentExtensions'))),
-			'statusList' => $this->statusList
+			'statusList' => $this->statusList,
+			'enableComments' => $this->enableComments
 		]);
 	}
 	
