@@ -20,6 +20,7 @@ use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
+use wcf\system\label\LabelHandler;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\moderation\queue\ModerationQueueActivationManager;
@@ -435,7 +436,10 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		AttachmentHandler::removeAttachments('de.mysterycode.wcf.toDo.toDo', $todoIDs);
 		
 		MessageEmbeddedObjectManager::getInstance()->removeObjects('de.mysterycode.wcf.toDo', $todoIDs);
-
+		
+		// delete label assignments
+		LabelHandler::getInstance()->removeLabels(LabelHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo')->objectTypeID, $todoIDs);
+		
 		/** @var ToDoEditor|ToDo $todo */
 		foreach ($this->objects as $todo) {
 			$todo->delete();

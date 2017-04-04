@@ -179,3 +179,5 @@ pip-log.txt
 
 # Eclipse is annoying me!
 *.properties
+
+!/files/lib/*
