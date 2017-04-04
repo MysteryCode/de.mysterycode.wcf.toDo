@@ -50,6 +50,13 @@
 	data-todo-id="{@$todo->todoID}"
 	data-is-disabled="{@$todo->isDisabled}"
 	data-is-deleted="{@$todo->isDeleted}"
+	{if MODULE_LIKE && MCPS_PACKAGE_LIKE}data-object-id="{@$package->todoID}"
+		data-object-type="de.mysterycode.wcf.toDo.toDo"
+		data-like-liked="{if $todoLikeData[$todo->todoID]|isset}{@$todoLikeData[$todo->todoID]->liked}{/if}"
+		data-like-likes="{if $todoLikeData[$todo->todoID]|isset}{@$todoLikeData[$todo->todoID]->likes}{else}0{/if}"
+		data-like-dislikes="{if $todoLikeData[$todo->todoID]|isset}{@$todoLikeData[$todo->todoID]->dislikes}{else}0{/if}"
+		data-like-users='{ {if $todoLikeData[$todo->todoID]|isset}{implode from=$todoLikeData[$todo->todoID]->getUsers() item=likeUser}"{@$likeUser->userID}": "{$likeUser->username|encodeJSON}"{/implode}{/if} }'
+	{/if}
 >
 	<section class="section todoContainer{if $todo->isDeleted} todoDeleted{/if}{if $todo->isDisabled} todoDisabled{/if}">
 		{event name='beforeInfo'}
@@ -136,6 +143,8 @@
 		</dl>
 
 		{event name='additionalInfo'}
+
+		{if MODULE_LIKE}<div class="section"><span class="todoLikesSummery"></span><ul class="todoLikeButtons buttonGroup"></ul></div>{/if}
 	</section>
 
 	{if $todo->description != ''}
@@ -229,8 +238,25 @@
 		new WCF.Todo.MarkSolved('.jsMarkSolvedTodo');
 		new WCF.Todo.UpdateProgress({$todo->todoID});
 
-		{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}
-			new WCF.Todo.Like.Detail({if $__wcf->getUser()->userID && $todo->getCategory()->getPermission('user.canLikeTodo')}1{else}0{/if}, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});
+		{if MODULE_LIKE}
+			require(['WoltLabSuite/Core/Ui/Like/Handler'], function(UiLikeHandler) {
+				new UiLikeHandler('de.mysterycode.mcps.likeablePackage', {
+					// settings
+					isSingleItem: true,
+
+					// permissions
+					canDislike: {if LIKE_ENABLE_DISLIKE}true{else}false{/if},
+					canLike: {if $__wcf->getUser()->userID && $todo->getCategory()->getPermission('user.canLikeTodo')}true{else}false{/if},
+					canLikeOwnContent: {if LIKE_ALLOW_FOR_OWN_CONTENT}true{else}false{/if},
+					canViewSummary: {if LIKE_SHOW_SUMMARY}true{else}false{/if},
+
+					// selectors
+					badgeContainerSelector: '.jsTodo',
+					buttonAppendToSelector: '.todoLikeButtons',
+					containerSelector: '.jsTodo',
+					summarySelector: '.todoLikesSummery'
+				});
+			});
 		{/if}
 	});
 </script>

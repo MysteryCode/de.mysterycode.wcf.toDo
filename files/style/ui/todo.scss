@@ -216,3 +216,7 @@
 .todoProgress {
 	float: right;
 }
+
+.todoLikeButtons {
+	flex-direction: row-reverse;
+}

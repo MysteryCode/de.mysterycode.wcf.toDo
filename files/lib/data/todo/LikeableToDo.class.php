@@ -11,6 +11,8 @@ use wcf\data\like\object\AbstractLikeObject;
  * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  * @see ToDo
+ *
+ * @method ToDo getDecoratedObject()
  */
 class LikeableToDo extends AbstractLikeObject {
 	/**
@@ -22,28 +24,28 @@ class LikeableToDo extends AbstractLikeObject {
 	 * @inheritDoc
 	 */
 	public function getTitle() {
-		return $this->title;
+		return $this->getDecoratedObject()->getTitle();
 	}
 	
 	/**
 	 * @inheritDoc
 	 */
 	public function getURL() {
-		return $this->getLink();
+		return $this->getDecoratedObject()->getLink();
 	}
 	
 	/**
 	 * @inheritDoc
 	 */
 	public function getUserID() {
-		return $this->submitter;
+		return $this->getDecoratedObject()->submitter;
 	}
 	
 	/**
 	 * @inheritDoc
 	 */
 	public function getObjectID() {
-		return $this->todoID;
+		return $this->getDecoratedObject()->todoID;
 	}
 	
 	/**
@@ -51,8 +53,6 @@ class LikeableToDo extends AbstractLikeObject {
 	 */
 	public function updateLikeCounter($cumulativeLikes) {
 		$todoEditor = new ToDoEditor($this->getDecoratedObject());
-		$todoEditor->update([
-			'cumulativeLikes' => $cumulativeLikes
-		]);
+		$todoEditor->update(['cumulativeLikes' => $cumulativeLikes]);
 	}
 }
