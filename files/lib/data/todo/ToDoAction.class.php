@@ -48,6 +48,11 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	protected $allowGuestAccess = ['getPreview', 'saveFullQuote', 'saveQuote'];
 	
 	/**
+	 * @inheitDoc
+	 */
+	protected $resetCache = ['create', 'delete', 'toggle', 'update', 'updatePosition', 'enable', 'disable', 'trash', 'restore'];
+	
+	/**
 	 * list of todo data
 	 *
 	 * @var array<array>

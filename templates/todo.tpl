@@ -1,22 +1,56 @@
+{capture assign='pageTitle'}{lang}wcf.toDo.task.detail{/lang}{/capture}
+
 {capture assign='headContent'}
 	<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Todo{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
 {/capture}
 
-{capture assign='pageTitle'}{lang}wcf.toDo.task.detail{/lang}{/capture}
-{capture assign='contentTitle'}{lang}wcf.toDo.task.detail{/lang}{/capture}
+{capture assign='contentHeader'}
+	<header class="contentHeader messageGroupContentHeader todo{if $todo->isDisabled} messageDisabled{/if}{if $todo->isDeleted} messageDeleted{/if}" data-todo-id="{@$todo->todoID}"{if $todo->canEdit()} data-is-deleted="{@$todo->isDeleted}" data-is-disabled="{@$todo->isDisabled}"{/if}>
+		<div class="contentHeaderTitle">
+			<h1 class="contentTitle">{lang}wcf.toDo.task.detail{/lang}</h1>
+			<ul class="inlineList contentHeaderMetaData">
+				{*
+				{if $todo->hasLabels()}
+					<li>
+						<span class="icon icon16 fa-tags"></span>
+						<ul class="labelList">
+							{foreach from=$todo->getLabels() item=label}
+								<li><span class="label badge{if $label->getClassNames()} {$label->getClassNames()}{/if}">{lang}{$label->label}{/lang}</span></li>
+							{/foreach}
+						</ul>
+					</li>
+				{/if}
+				*}
+			</ul>
+		</div>
 
-{capture assign='contentHeaderNavigation'}
-	{if $todo->canEdit()}<li><a class="button jsTodoInlineEditor jsOnly"><span class="icon icon16 fa-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}
-	<li class="jsReportTodo jsOnly" data-object-id="{@$todo->todoID}"><a title="{lang}wcf.moderation.report.reportContent{/lang}" class="button jsTooltip"><span class="icon icon16 fa-exclamation-triangle"></span> <span class="invisible">{lang}wcf.moderation.report.reportContent{/lang}</span></a></li>
-	{if $todo->canParticipate() && $todo->statusID != 1}<li class="jsParticipateTodo jsOnly" data-object-id="{@$todo->todoID}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.participate{/lang}" class="button jsTooltip"><span class="icon icon16 fa-signin"></span> <span class="invisible">{lang}wcf.toDo.task.participate{/lang}</span></a></li>{/if}
-	{if $todo->canEditProgress() && $todo->statusID != 1}<li class="updateProgress jsOnly" data-object-id="{@$todo->todoID}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.progress.update{/lang}" class="button jsTooltip"><span class="icon icon16 fa-refresh"></span> <span class="invisible">{lang}wcf.toDo.task.progress.update{/lang}</span></a></li>{/if}
-	{if $todo->canEditStatus() && $todo->statusID != 1}<li class="jsMarkSolvedTodo jsOnly" data-object-id="{@$todo->todoID}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.solve{/lang}" class="button jsTooltip"><span class="icon icon16 fa-check"></span> <span class="invisible">{lang}wcf.toDo.task.solve{/lang}</span></a></li>{/if}
+		{hascontent}
+			<nav class="contentHeaderNavigation">
+				<ul class="jsTodoInlineEditorContainer" data-todo-id="{@$todo->todoID}" data-is-disabled="{@$todo->isDisabled}" data-is-deleted="{@$todo->isDeleted}">
+					{content}
+						{if $todo->canEdit()}<li><a class="button jsTodoInlineEditor jsOnly"><span class="icon icon16 fa-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}
+						<li class="jsReportTodo jsOnly" data-object-id="{@$todo->todoID}"><a title="{lang}wcf.moderation.report.reportContent{/lang}" class="button jsTooltip"><span class="icon icon16 fa-exclamation-triangle"></span> <span class="invisible">{lang}wcf.moderation.report.reportContent{/lang}</span></a></li>
+						{if $todo->canParticipate() && $todo->statusID != 1}<li class="jsParticipateTodo jsOnly" data-object-id="{@$todo->todoID}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.participate{/lang}" class="button jsTooltip"><span class="icon icon16 fa-signin"></span> <span class="invisible">{lang}wcf.toDo.task.participate{/lang}</span></a></li>{/if}
+						{if $todo->canEditProgress() && $todo->statusID != 1}<li class="updateProgress jsOnly" data-object-id="{@$todo->todoID}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.progress.update{/lang}" class="button jsTooltip"><span class="icon icon16 fa-refresh"></span> <span class="invisible">{lang}wcf.toDo.task.progress.update{/lang}</span></a></li>{/if}
+						{if $todo->canEditStatus() && $todo->statusID != 1}<li class="jsMarkSolvedTodo jsOnly" data-object-id="{@$todo->todoID}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.solve{/lang}" class="button jsTooltip"><span class="icon icon16 fa-check"></span> <span class="invisible">{lang}wcf.toDo.task.solve{/lang}</span></a></li>{/if}
+						{event name='contentHeaderNavigation'}
+					{/content}
+				</ul>
+			</nav>
+		{/hascontent}
+	</header>
 {/capture}
 
 {include file='header'}
 
 {assign var='objectID' value=$todo->todoID}
-<div class="todoQuoteContainer" data-object-id="{@$todo->todoID}">
+
+<div class="todoQuoteContainer jsTodo"
+	data-object-id="{@$todo->todoID}"
+	data-todo-id="{@$todo->todoID}"
+	data-is-disabled="{@$todo->isDisabled}"
+	data-is-deleted="{@$todo->isDeleted}"
+>
 	<section class="section todoContainer{if $todo->isDeleted} todoDeleted{/if}{if $todo->isDisabled} todoDisabled{/if}">
 		{event name='beforeInfo'}
 		<h2 class="sectionTitle">{$todo->title}</h2>
@@ -176,7 +210,7 @@
 		});
 
 		var $updateHandler = new WCF.Todo.UpdateHandler.Todo();
-		var $inlineEditor = new WCF.Todo.InlineEditor('.todo');
+		var $inlineEditor = new WCF.Todo.InlineEditor('.jsTodoInlineEditorContainer');
 		$inlineEditor.setUpdateHandler($updateHandler);
 		$inlineEditor.setEnvironment('todo', {@$todo->todoID}, '{$todo->getLink()}');
 		$inlineEditor.setPermissions({
@@ -194,10 +228,6 @@
 		new WCF.Todo.Participate('.jsParticipateTodo');
 		new WCF.Todo.MarkSolved('.jsMarkSolvedTodo');
 		new WCF.Todo.UpdateProgress({$todo->todoID});
-
-		{if $todo->isDisabled || $todo->isDeleted}
-			$('.sidebar').addClass('{if $todo->isDeleted}deleted{else}disabled{/if}');
-		{/if}
 
 		{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}
 			new WCF.Todo.Like.Detail({if $__wcf->getUser()->userID && $todo->getCategory()->getPermission('user.canLikeTodo')}1{else}0{/if}, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});
