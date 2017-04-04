@@ -105,7 +105,7 @@ class TodoPage extends AbstractPage {
 		}
 		
 		// fetch labels
-		if ($this->thread->hasLabels) {
+		if ($this->todo->hasLabels) {
 			$assignedLabels = TodoLabelObjectHandler::getInstance()->getAssignedLabels([$this->todoID]);
 			if (isset($assignedLabels[$this->todoID])) {
 				foreach ($assignedLabels[$this->todoID] as $label) {
