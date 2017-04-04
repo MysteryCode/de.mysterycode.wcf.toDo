@@ -240,6 +240,7 @@
 		<item name="wcf.toDo.task.edit"><![CDATA[Edit ToDo]]></item>
 		<item name="wcf.toDo.task.add"><![CDATA[Add ToDo]]></item>
 		<item name="wcf.toDo.task.general"><![CDATA[General]]></item>
+		<item name="wcf.toDo.task.likes"><![CDATA[Acceptance]]></item>
 		<item name="wcf.toDo.task.list"><![CDATA[List ToDos]]></item>
 		<item name="wcf.toDo.task.showDetails"><![CDATA[List ToDos]]></item>
 		<item name="wcf.toDo.task.unsolved"><![CDATA[Unsolved]]></item>

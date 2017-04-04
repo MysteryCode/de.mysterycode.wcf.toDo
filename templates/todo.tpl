@@ -99,6 +99,13 @@
 			<dt>{lang}wcf.toDo.task.privacy{/lang}</dt>
 			<dd><span class="icon fa-{if $todo->private == 0}un{/if}lock"></span></dd>
 
+			{if $todo->cumulativeLikes}
+				<dt>{lang}wcf.toDo.task.likes{/lang}</dt>
+				<dd>
+					<span class="todoLikeStatus"></span>
+				</dd>
+			{/if}
+
 			{if $todo->time > 0}
 				<dt>{lang}wcf.toDo.task.submitTime{/lang}</dt>
 				<dd>{@$todo->time|time}</dd>
@@ -249,7 +256,7 @@
 					canViewSummary: {if LIKE_SHOW_SUMMARY}true{else}false{/if},
 
 					// selectors
-					badgeContainerSelector: '.jsTodo',
+					badgeContainerSelector: '.todoLikeStatus',
 					buttonAppendToSelector: '.todoLikeButtons',
 					containerSelector: '.jsTodo',
 					summarySelector: '.todoLikesSummery'
