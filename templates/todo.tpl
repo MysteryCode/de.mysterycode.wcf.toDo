@@ -24,9 +24,9 @@
 
 		{hascontent}
 			<nav class="contentHeaderNavigation">
-				<ul class="jsTodoInlineEditorContainer" data-todo-id="{@$todo->todoID}" data-is-disabled="{@$todo->isDisabled}" data-is-deleted="{@$todo->isDeleted}">
+				<ul class="jsTodoInlineEditorContainer" data-todo-id="{@$todo->todoID}" data-is-disabled="{@$todo->isDisabled}" data-is-deleted="{@$todo->isDeleted}" data-edit-url="{link controller='TodoEdit' id=$todo->todoID}{/link}">
 					{content}
-						{if $todo->canEdit()}<li><a class="button jsTodoInlineEditor jsOnly"><span class="icon icon16 fa-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}
+						{if $todo->canEdit()}<li><a href="{link controller='TodoEdit' id=$todo->todoID}{/link}" class="button jsMessageEditButton jsTodoInlineEditor"><span class="icon icon16 fa-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}
 						<li class="jsReportTodo jsOnly" data-object-id="{@$todo->todoID}"><a title="{lang}wcf.moderation.report.reportContent{/lang}" class="button jsTooltip"><span class="icon icon16 fa-exclamation-triangle"></span> <span class="invisible">{lang}wcf.moderation.report.reportContent{/lang}</span></a></li>
 						{if $todo->canParticipate() && $todo->statusID != 1}<li class="jsParticipateTodo jsOnly" data-object-id="{@$todo->todoID}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.participate{/lang}" class="button jsTooltip"><span class="icon icon16 fa-signin"></span> <span class="invisible">{lang}wcf.toDo.task.participate{/lang}</span></a></li>{/if}
 						{if $todo->canEditProgress() && $todo->statusID != 1}<li class="updateProgress jsOnly" data-object-id="{@$todo->todoID}" data-user-id="{$__wcf->user->userID}"><a title="{lang}wcf.toDo.task.progress.update{/lang}" class="button jsTooltip"><span class="icon icon16 fa-refresh"></span> <span class="invisible">{lang}wcf.toDo.task.progress.update{/lang}</span></a></li>{/if}
@@ -48,6 +48,9 @@
 	data-todo-id="{@$todo->todoID}"
 	data-is-disabled="{@$todo->isDisabled}"
 	data-is-deleted="{@$todo->isDeleted}"
+	{if $todo->canEdit()}
+		data-edit-url="{link controller='TodoEdit' id=$todo->todoID}{/link}"
+	{/if}
 	{if MODULE_LIKE}
 		data-object-type="de.mysterycode.wcf.toDo.toDo"
 		data-like-liked="{@$todoLikeData->liked}"
@@ -217,6 +220,7 @@
 		$inlineEditor.setUpdateHandler($updateHandler);
 		$inlineEditor.setEnvironment('todo', {@$todo->todoID}, '{$todo->getLink()}');
 		$inlineEditor.setPermissions({
+			canEditTodo: {if $todo->canEdit()}1{else}0{/if},
 			canEnableTodo: {if $todo->canEnable()}1{else}0{/if},
 			canDeleteTodo: {if $todo->canDelete()}1{else}0{/if},
 			canDeleteTodoCompletely: {if $todo->canDeleteCompletely()}1{else}0{/if},

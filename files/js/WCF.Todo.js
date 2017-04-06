@@ -577,7 +577,7 @@ WCF.Todo.InlineEditor = WCF.InlineEditor.extend({
 
 			// edit todo
 			case 'edit':
-				return (this._elements[elementID].data('canEdit'));
+				return (this._getPermission('canEditTodo'));
 				break;
 		}
 
