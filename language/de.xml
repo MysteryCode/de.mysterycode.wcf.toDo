@@ -97,9 +97,9 @@
 		<item name="wcf.acp.group.option.mod.toDo.responsible.canEdit"><![CDATA[Kann Zuweisungen bearbeiten]]></item>
 		
 		<item name="wcf.acp.group.option.category.admin.content.toDo.category"><![CDATA[ToDo-Kategorien]]></item>
-		<item name="wcf.acp.group.option.admin.content.toDo.category.canAdd"><![CDATA[Kann ToDo-Kategorien hinzufügen]]></item>
-		<item name="wcf.acp.group.option.admin.content.toDo.category.canEdit"><![CDATA[Kann ToDo-Kategorien bearbeiten]]></item>
-		<item name="wcf.acp.group.option.admin.content.toDo.category.canDelete"><![CDATA[Kann ToDo-Kategorien löschen]]></item>
+		<item name="wcf.acp.group.option.admin.content.toDo.category.canAddCategory"><![CDATA[Kann ToDo-Kategorien hinzufügen]]></item>
+		<item name="wcf.acp.group.option.admin.content.toDo.category.canEditCategory"><![CDATA[Kann ToDo-Kategorien bearbeiten]]></item>
+		<item name="wcf.acp.group.option.admin.content.toDo.category.canDeleteCategory"><![CDATA[Kann ToDo-Kategorien löschen]]></item>
 		
 		<item name="wcf.acp.group.option.category.admin.content.toDo.status"><![CDATA[ToDo-Status]]></item>
 		<item name="wcf.acp.group.option.admin.content.toDo.status.canAdd"><![CDATA[Kann Status hinzufügen]]></item>
