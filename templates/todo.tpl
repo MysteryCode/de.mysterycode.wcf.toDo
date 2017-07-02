@@ -53,10 +53,10 @@
 	{/if}
 	{if MODULE_LIKE}
 		data-object-type="de.mysterycode.wcf.toDo.toDo"
-		data-like-liked="{@$todoLikeData->liked}"
-		data-like-likes="{@$todoLikeData->likes}"
-		data-like-dislikes="{@$todoLikeData->dislikes}"
-		data-like-users='{ {implode from=$todoLikeData->getUsers() item=likeUser}"{@$likeUser->userID}": "{$likeUser->username|encodeJSON}"{/implode} }'
+		data-like-liked="{if !$todoLikeData->liked|empty}{@$todoLikeData->liked}{/if}"
+		data-like-likes="{if !$todoLikeData->likes|empty}{@$todoLikeData->likes}{/if}"
+		data-like-dislikes="{if !$todoLikeData->dislikes|empty}{@$todoLikeData->dislikes}{/if}"
+		data-like-users='{ {if !$todoLikeData|empty}{implode from=$todoLikeData->getUsers() item=likeUser}"{@$likeUser->userID}": "{$likeUser->username|encodeJSON}"{/implode}{/if} }'
 	{/if}
 >
 	<section class="section todoContainer{if $todo->isDeleted} todoDeleted{/if}{if $todo->isDisabled} todoDisabled{/if}">
