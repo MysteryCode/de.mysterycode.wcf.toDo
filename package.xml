@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE xml>
-<package name="de.mysterycode.wcf.toDo" xmlns="http://www.woltlab.com"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/package.xsd">
+<package name="de.mysterycode.wcf.toDo" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/package.xsd">
 	<packageinformation>
 		<packagename><![CDATA[ToDo-List]]></packagename>
 		<packagename language="de"><![CDATA[ToDo-Liste]]></packagename>
 		<packagedescription><![CDATA[Gives the possibility to manage ToDos in several custom categories on your website]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
-		<version>2.0.0 Beta 1</version>
-		<date>2017-01-23</date>
+		<version>2.0.0 Beta 2</version>
+		<date>2017-07-06</date>
 		<packageurl>https://www.mysterycode.de/index.php?page/products/todo/</packageurl>
 	</packageinformation>
 
@@ -34,6 +31,32 @@
 
 		<!-- SQL -->
 		<instruction type="sql" />
+
+		<!-- XMLs -->
+		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="templateListener">xml/templateListener.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+		<instruction type="eventListener">xml/eventListener.xml</instruction>
+		<instruction type="aclOption">xml/aclOption.xml</instruction>
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
+		<instruction type="cronjob">xml/cronjob.xml</instruction>
+		<instruction type="page">xml/page.xml</instruction>
+		<instruction type="menuItem">xml/menuItem.xml</instruction>
+
+		<instruction type="language" />
+	</instructions>
+
+	<instructions type="update" fromversion="2.0.0 Beta 1">
+		<!-- files -->
+		<instruction type="acpTemplate" />
+		<instruction type="file" />
+		<instruction type="template" />
+
+		<!-- SQL -->
+		<instruction type="sql">update200b1.sql</instruction>
 
 		<!-- XMLs -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
