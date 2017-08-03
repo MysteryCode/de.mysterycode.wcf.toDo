@@ -2,6 +2,34 @@
 	color: #ff0000;
 }
 
+.todoListBeforeActions {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-end;
+	margin-bottom: 10px;
+
+	.jsMarkAll {
+		height: 24px;
+		padding-right: 3px;
+
+		label {
+			@extend .messageCheckboxLabel;
+
+			&::before {
+				font-size: 25px;
+				position: relative;
+			}
+		}
+
+		> input[type="checkbox"]:checked + label::after {
+			display: block;
+			font-size: 14px;
+			left: 3px;
+			top: 7px;
+		}
+	}
+}
+
 .todoList {
 	.jsTodo {
 		border-bottom: 1px solid $wcfContentBorderInner;
@@ -9,6 +37,11 @@
 		&:hover {
 			background-color: $wcfTabularBoxBackgroundActive;
 		}
+	}
+
+	.messageClipboardCheckbox {
+		// fix issue with scrollbar
+		margin-right: 1px;
 	}
 
 	.todoData {

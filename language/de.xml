@@ -239,6 +239,7 @@
 		<item name="wcf.toDo.task.delete"><![CDATA[ToDo löschen]]></item>
 		<item name="wcf.toDo.task.edit"><![CDATA[ToDo bearbeiten]]></item>
 		<item name="wcf.toDo.task.add"><![CDATA[ToDo hinzufügen]]></item>
+		<item name="wcf.toDo.task.markAll"><![CDATA[Alle ToDos markieren/demarkieren]]></item>
 		<item name="wcf.toDo.task.general"><![CDATA[Allgemeines]]></item>
 		<item name="wcf.toDo.task.likes"><![CDATA[Zustimmung]]></item>
 		<item name="wcf.toDo.task.list"><![CDATA[ToDos auflisten]]></item>

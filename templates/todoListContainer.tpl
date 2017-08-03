@@ -1,8 +1,17 @@
 {if !$showCategory|isset}{assign var='showCategory' value=false}{/if}
 
 {if $todoListItems}
-	<div class="section tabularBox">
-		<ul class="todoList jsClipboardContainer" data-type="de.mysterycode.wcf.toDo.toDo">
+	<div class="section tabularBox jsClipboardContainer" data-type="de.mysterycode.wcf.toDo.toDo">
+		{if $__wcf->session->getPermission('mod.toDo.canEdit')}
+			<div class="todoListBeforeActions">
+				<span class="jsMarkAll messageClipboardCheckbox">
+					<input type="checkbox" id="todoMarkAll" class="jsClipboardMarkAll" style="display: none;">
+					<label for="todoMarkAll" class="jsTooltip" title="{lang}wcf.toDo.task.markAll{/lang}"></label>
+				</span>
+				{event name='todoListBeforeActions'}
+			</div>
+		{/if}
+		<ul class="todoList">
 			{foreach from=$todoList item=todo}
 				<li id="todo{$todo->todoID}" class="message jsClipboardObject jsTodo{if $todo->isDeleted} messageDeleted{/if}{if $todo->isDisabled} messageDisabled{/if}"
 				    data-todo-id="{@$todo->todoID}"
@@ -100,7 +109,7 @@
 
 					{if $todo->canEdit()}
 						<ul class="messageQuickOptions">
-							<li class="jsOnly"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$todo->todoID}" /></li>
+							<li class="jsOnly"><label class="messageClipboardCheckbox"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$todo->todoID}" /></label></li>
 						</ul>
 					{/if}
 				</li>
