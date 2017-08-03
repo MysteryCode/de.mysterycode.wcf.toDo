@@ -18,29 +18,28 @@ class TodoCategoryLabelGroupCacheBuilder extends AbstractCacheBuilder {
 	 * @inheritDoc
 	 */
 	protected function rebuild(array $parameters) {
+		$data = [
+			'labelGroups' => []
+		];
+		
 		// get object type
 		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.label.objectType', 'de.mysterycode.wcf.toDo.category');
-		if ($objectType === null) {
-			return [];
-		}
-		
-		// prepare conditions
-		$conditionBuilder = new PreparedStatementConditionBuilder();
-		$conditionBuilder->add('objectTypeID = ?', [$objectType->objectTypeID]);
-		
-		// read label group associations
-		$data = [];
-		$sql = "SELECT	groupID, objectID
-			FROM	wcf".WCF_N."_label_group_to_object
-			".$conditionBuilder;
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditionBuilder->getParameters());
-		while ($row = $statement->fetchArray()) {
-			if (!isset($data[$row['objectID']])) {
-				$data[$row['objectID']] = [];
-			}
+		if ($objectType !== null) {
+			// fetch data
+			$conditions = new PreparedStatementConditionBuilder();
+			$conditions->add("objectTypeID = ?", array($objectType->objectTypeID));
 			
-			$data[$row['objectID']][] = $row['groupID'];
+			$sql = "SELECT	groupID, objectID
+			FROM	wcf" . WCF_N . "_label_group_to_object " . $conditions;
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute($conditions->getParameters());
+			while ($row = $statement->fetchArray()) {
+				if (!isset($data['labelGroups'][$row['objectID']])) {
+					$data['labelGroups'][$row['objectID']] = array();
+				}
+				
+				$data['labelGroups'][$row['objectID']][] = $row['groupID'];
+			}
 		}
 		
 		return $data;

@@ -5,6 +5,7 @@ use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\label\object\TodoLabelObjectHandler;
 use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
@@ -81,6 +82,10 @@ class TodoEditForm extends TodoAddForm {
 
 		$this->note = $this->notesHtmlInputProcessor->getHtml();
 		
+		TodoLabelObjectHandler::getInstance()->setLabels($this->labelIDs, $this->todoID);
+		$labelIDs = TodoLabelObjectHandler::getInstance()->getAssignedLabels(array($this->todoID), false);
+		
+		
 		if ($this->todo->canEdit()) {
 			$todoData = [
 				'data' => [
@@ -93,7 +98,8 @@ class TodoEditForm extends TodoAddForm {
 					'important' => $this->important,
 					'progress' => $this->progress,
 					'remembertime' => $this->remembertime,
-					'enableComments' => $this->enableComments
+					'enableComments' => $this->enableComments,
+					'hasLabels' => !empty($labelIDs[$this->newsID]) ? 1 : 0
 				],
 				'attachmentHandler' => $this->attachmentHandler,
 				'htmlInputProcessor' => $this->htmlInputProcessor,
@@ -157,6 +163,14 @@ class TodoEditForm extends TodoAddForm {
 			
 			if ($this->todo->remembertime > 0)
 				$this->remembertime = DateUtil::getDateTimeByTimestamp($this->todo->remembertime);
+			
+			// labels
+			$assignedLabels = TodoLabelObjectHandler::getInstance()->getAssignedLabels(array($this->todoID), true);
+			if (!empty($assignedLabels[$this->todoID])) {
+				foreach ($assignedLabels[$this->todoID] as $label) {
+					$this->labelIDs[$label->groupID] = $label->labelID;
+				}
+			}
 		} else {
 			$this->endTime = DateUtil::getDateTimeByTimestamp($this->endTime);
 			$this->remembertime = DateUtil::getDateTimeByTimestamp($this->remembertime);

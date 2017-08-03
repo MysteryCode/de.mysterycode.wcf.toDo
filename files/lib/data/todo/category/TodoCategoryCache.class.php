@@ -8,6 +8,7 @@ use wcf\system\cache\builder\TodoCategoryDataCacheBuilder;
 use wcf\system\cache\builder\TodoCategoryLabelGroupCacheBuilder;
 use wcf\system\category\CategoryHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\label\LabelHandler;
 use wcf\system\label\object\TodoLabelObjectHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -23,9 +24,9 @@ use wcf\system\WCF;
 class TodoCategoryCache extends SingletonFactory {
 	/**
 	 * cached label groups
-	 * @var	array<array>
+	 * @var	integer[][]
 	 */
-	protected $labelGroups = [];
+	protected $cachedLabelGroups = [];
 	
 	/**
 	 * list of cached category objects
@@ -68,7 +69,7 @@ class TodoCategoryCache extends SingletonFactory {
 	 */
 	protected function init() {
 		$this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.category', 'de.mysterycode.wcf.toDo');
-		$this->labelGroups = TodoCategoryLabelGroupCacheBuilder::getInstance()->getData();
+		$this->cachedLabelGroups = TodoCategoryLabelGroupCacheBuilder::getInstance()->getData(array(), 'labelGroups');
 		
 		$this->statObjects = TodoCategoryDataCacheBuilder::getInstance()->getData([], 'statObjects');
 		$this->lastTodoIDs = TodoCategoryDataCacheBuilder::getInstance()->getData([], 'lastTodoIDs');
@@ -207,11 +208,24 @@ class TodoCategoryCache extends SingletonFactory {
 	 * Returns a list of label groups for the category with the given id.
 	 *
 	 * @param	integer		$categoryID
-	 * @return	array<array>
+	 * @return	\wcf\data\label\group\ViewableLabelGroup[]
 	 */
-	public function getLabelGroups($categoryID) {
-		if (isset($this->labelGroups[$categoryID])) {
-			return $this->labelGroups[$categoryID];
+	public function getLabelGroups($categoryID = null) {
+		$groupIDs = $this->getLabelGroupIDs($categoryID);
+		return LabelHandler::getInstance()->getLabelGroups($groupIDs);
+	}
+	
+	/**
+	 * @param integer $categoryID
+	 * @return array|\integer[]|\integer[][]
+	 */
+	public function getLabelGroupIDs($categoryID = null) {
+		if ($categoryID === null) {
+			return $this->cachedLabelGroups;
+		}
+		
+		if (isset($this->cachedLabelGroups[$categoryID])) {
+			return $this->cachedLabelGroups[$categoryID];
 		}
 		
 		return [];

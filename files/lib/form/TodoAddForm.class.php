@@ -5,6 +5,7 @@ namespace wcf\form;
 use wcf\data\category\Category;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeTree;
 use wcf\data\todo\category\TodoCategory;
+use wcf\data\todo\category\TodoCategoryCache;
 use wcf\data\todo\status\TodoStatus;
 use wcf\data\todo\status\TodoStatusList;
 use wcf\data\todo\ToDo;
@@ -15,6 +16,8 @@ use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\message\censorship\Censorship;
+use wcf\system\label\LabelHandler;
+use wcf\system\label\object\TodoLabelObjectHandler;
 use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
@@ -139,6 +142,17 @@ class TodoAddForm extends MessageForm {
 	public $categoryList = null;
 	
 	/**
+	 * @var	\wcf\data\label\group\ViewableLabelGroup[]
+	 */
+	public $labelGroups;
+	
+	/**
+	 * label ids
+	 * @var	integer[]
+	 */
+	public $labelIDs = [];
+	
+	/**
 	 * @inheritDoc
 	 */
 	public function readParameters() {
@@ -157,6 +171,8 @@ class TodoAddForm extends MessageForm {
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
+		
+		if (isset($_POST['labelIDs']) && is_array($_POST['labelIDs'])) $this->labelIDs = $_POST['labelIDs'];
 		
 		if (isset($_POST['description'])) $this->text = StringUtil::trim($_POST['description']);
 		if (isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
@@ -199,6 +215,15 @@ class TodoAddForm extends MessageForm {
 		if (($this->progress < 0 || $this->progress > 100) && TODO_PROGRESS_ENABLE) {
 			throw new UserInputException('progress', 'inValid');
 		}
+		
+		$validationResult = TodoLabelObjectHandler::getInstance()->validateLabelIDs($this->labelIDs, 'canSetLabel', false);
+		if (!empty($validationResult[0])) {
+			throw new UserInputException('labelIDs');
+		}
+		
+		if (!empty($validationResult)) {
+			throw new UserInputException('label', $validationResult);
+		}
 	}
 	
 	/**
@@ -223,7 +248,8 @@ class TodoAddForm extends MessageForm {
 				'categoryID' => $this->categoryID ?: null,
 				'progress' => $this->progress,
 				'remembertime' => $this->remembertime,
-				'enableComments' => $this->enableComments
+				'enableComments' => $this->enableComments,
+				'hasLabels' => !empty($this->labelIDs) ? 1 : 0
 			],
 			'attachmentHandler' => $this->attachmentHandler,
 			'htmlInputProcessor' => $this->htmlInputProcessor,
@@ -239,6 +265,11 @@ class TodoAddForm extends MessageForm {
 		
 		$this->objectAction = new ToDoAction([], 'create', $todoData);
 		$resultValues = $this->objectAction->executeAction();
+		
+		// save labels
+		if (!empty($this->labelIDs)) {
+			TodoLabelObjectHandler::getInstance()->setLabels($this->labelIDs, $resultValues['returnValues']->todoID);
+		}
 
 		if (!empty($this->responsibles)) {
 			$responsibleUserAction = new ToDoAction([$resultValues['returnValues']->todoID], 'updateResponsibles', ['search' => $this->responsibles]);
@@ -274,6 +305,9 @@ class TodoAddForm extends MessageForm {
 		
 		$categoryNodeTree = new RestrictedTodoCategoryNodeTree();
 		$this->categoryList = $categoryNodeTree->getIterator();
+		
+		$labelGroupIDs = TodoCategoryCache::getInstance()->getLabelGroupIDs($this->categoryID);
+		$this->labelGroups = LabelHandler::getInstance()->getLabelGroups($labelGroupIDs);
 	}
 	
 	/**
@@ -301,7 +335,9 @@ class TodoAddForm extends MessageForm {
 			'remembertime' => $this->remembertime,
 			'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.toDo.attachment.allowedAttachmentExtensions'))),
 			'statusList' => $this->statusList,
-			'enableComments' => $this->enableComments
+			'enableComments' => $this->enableComments,
+			'labelGroups' => $this->labelGroups,
+			'labelIDs' => $this->labelIDs
 		]);
 	}
 	
