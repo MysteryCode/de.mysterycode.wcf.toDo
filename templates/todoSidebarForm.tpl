@@ -33,3 +33,21 @@
 		</dd>
 	</dl>
 </section>
+
+{if !$statusList|empty}
+	<section class="box">
+		<h2 class="boxTitle"><label for="statusFilter">{lang}wcf.toDo.filter.status{/lang}</label></h2>
+
+		<dl>
+			<dt></dt>
+			<dd>
+				<select name="statusFilter" id="statusFilter" class="long">
+					{foreach from=$statusList item=status}
+					<select id="sortField" name="sortField">
+						<option value="{$status->statusID}"{if $statusFilter == $status->statusID} selected{/if}>{$status->subject|language}</option>
+					{/foreach}
+				</select>
+			</dd>
+		</dl>
+	</section>
+{/if}

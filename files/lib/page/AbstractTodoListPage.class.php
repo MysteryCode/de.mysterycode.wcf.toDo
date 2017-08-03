@@ -2,6 +2,7 @@
 
 namespace wcf\page;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
+use wcf\data\todo\status\TodoStatusCache;
 use wcf\data\todo\ViewableToDoList;
 use wcf\data\user\group\UserGroupSearchAction;
 use wcf\data\user\UserProfile;
@@ -89,6 +90,12 @@ abstract class AbstractTodoListPage extends SortablePage {
 	public $statusFilter = null;
 	
 	/**
+	 * list of available status
+	 * @var \wcf\data\todo\status\TodoStatus[]
+	 */
+	public $statusList = [];
+	
+	/**
 	 * amount of all todos
 	 * @var integer
 	 */
@@ -112,7 +119,7 @@ abstract class AbstractTodoListPage extends SortablePage {
 		parent::readParameters();
 		
 		if (!empty($_POST['responsibleFilter'])) $this->responsibleFilter = StringUtil::trim($_POST['responsibleFilter']);
-		if (!empty($_POST['statusFilter'])) $this->statusFilter = StringUtil::trim($_POST['statusFilter']);
+		if (!empty($_POST['statusFilter'])) $this->statusFilter = intval($_POST['statusFilter']);
 	}
 	
 	/**
@@ -174,6 +181,7 @@ abstract class AbstractTodoListPage extends SortablePage {
 			$this->likeData = LikeHandler::getInstance()->getLikeObjects($objectType);
 		}
 		
+		$this->statusList = TodoStatusCache::getInstance()->getStatusList();
 		$this->todoCount = ToDoHandler::getInstance()->getStats('todos');
 		$this->inProgressCount = ToDoHandler::getInstance()->getStats('todosInProgress');
 		$this->finishedCount = ToDoHandler::getInstance()->getStats('todosFinished');
@@ -190,6 +198,7 @@ abstract class AbstractTodoListPage extends SortablePage {
 			'categoryNodeList' => $this->categoryNodeList,
 			'responsibleFilter' => $this->responsibleFilter,
 			'statusFilter', $this->statusFilter,
+			'statusList', $this->statusList,
 			
 			'stats' => [
 				'total' => $this->todoCount,
