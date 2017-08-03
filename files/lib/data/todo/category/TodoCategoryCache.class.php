@@ -223,7 +223,7 @@ class TodoCategoryCache extends SingletonFactory {
 			return $this->cachedLabelGroups[$categoryID];
 		}
 		
-		return [];
+		return array();
 	}
 	
 	/**
