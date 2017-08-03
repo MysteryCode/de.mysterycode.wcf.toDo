@@ -251,6 +251,7 @@
 		<item name="wcf.toDo.task.preparation"><![CDATA[In Vorbereitung]]></item>
 		<item name="wcf.toDo.task.private"><![CDATA[Als privat markieren]]></item>
 		<item name="wcf.toDo.task.private.description"><![CDATA[Wenn Sie das ToDo als privat markieren, kann es nur vom Ersteller, den unten definierten verantwortlichen Benutzern sowie ggf. berechtigten Gruppen eingesehen werden.]]></item>
+		<item name="wcf.toDo.task.enableComments"><![CDATA[Kommentare für diese Aufgabe aktivieren]]></item>
 		<item name="wcf.toDo.task.important"><![CDATA[Als wichtig markieren]]></item>
 		<item name="wcf.toDo.task.priority"><![CDATA[Priorität]]></item>
 		<item name="wcf.toDo.task.priority.normal"><![CDATA[normal]]></item>
