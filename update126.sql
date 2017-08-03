@@ -1,0 +1,6 @@
+-- 1.2.6 (pl 1)
+ALTER TABLE wcf1_todo CHANGE timestamp time INT(10) NOT NULL DEFAULT 0;
+ALTER TABLE wcf1_todo ADD COLUMN notesHasEmbeddedObjects TINYINT(1) NOT NULL DEFAULT 0;
+ALTER TABLE wcf1_todo CHANGE private private TINYINT(1) NOT NULL DEFAULT 0;
+ALTER TABLE wcf1_todo CHANGE comments comments INT(10) NOT NULL DEFAULT 0;
+ALTER TABLE wcf1_todo CHANGE enableHtml enableHtml TINYINT(1) NOT NULL DEFAULT 0;
