@@ -7,11 +7,11 @@
 			<actionclassname><![CDATA[wcf\system\clipboard\action\ToDoClipboardAction]]></actionclassname>
 			<showorder>6</showorder>
 			<pages>
-				<page><![CDATA[wcf\page\ToDoListPage]]></page>
-				<page><![CDATA[wcf\page\ToDoCategoryPage]]></page>
-				<page><![CDATA[wcf\page\ToDoArchivePage]]></page>
-				<page><![CDATA[wcf\page\ToDoTrashPage]]></page>
-				<page><![CDATA[wcf\page\ToDoPage]]></page>
+				<page><![CDATA[wcf\page\TodoListPage]]></page>
+				<page><![CDATA[wcf\page\TodoCategoryPage]]></page>
+				<page><![CDATA[wcf\page\TodoArchivePage]]></page>
+				<page><![CDATA[wcf\page\TodoTrashPage]]></page>
+				<page><![CDATA[wcf\page\TodoPage]]></page>
 				<page><![CDATA[wcf\page\DeletedContentListPage]]></page>
 			</pages>
 		</action>
@@ -19,11 +19,11 @@
 			<actionclassname><![CDATA[wcf\system\clipboard\action\ToDoClipboardAction]]></actionclassname>
 			<showorder>7</showorder>
 			<pages>
-				<page><![CDATA[wcf\page\ToDoListPage]]></page>
-				<page><![CDATA[wcf\page\ToDoCategoryPage]]></page>
-				<page><![CDATA[wcf\page\ToDoArchivePage]]></page>
-				<page><![CDATA[wcf\page\ToDoTrashPage]]></page>
-				<page><![CDATA[wcf\page\ToDoPage]]></page>
+				<page><![CDATA[wcf\page\TodoListPage]]></page>
+				<page><![CDATA[wcf\page\TodoCategoryPage]]></page>
+				<page><![CDATA[wcf\page\TodoArchivePage]]></page>
+				<page><![CDATA[wcf\page\TodoTrashPage]]></page>
+				<page><![CDATA[wcf\page\TodoPage]]></page>
 				<page><![CDATA[wcf\page\DeletedContentListPage]]></page>
 			</pages>
 		</action>
@@ -31,11 +31,11 @@
 			<actionclassname><![CDATA[wcf\system\clipboard\action\ToDoClipboardAction]]></actionclassname>
 			<showorder>8</showorder>
 			<pages>
-				<page><![CDATA[wcf\page\ToDoListPage]]></page>
-				<page><![CDATA[wcf\page\ToDoCategoryPage]]></page>
-				<page><![CDATA[wcf\page\ToDoArchivePage]]></page>
-				<page><![CDATA[wcf\page\ToDoTrashPage]]></page>
-				<page><![CDATA[wcf\page\ToDoPage]]></page>
+				<page><![CDATA[wcf\page\TodoListPage]]></page>
+				<page><![CDATA[wcf\page\TodoCategoryPage]]></page>
+				<page><![CDATA[wcf\page\TodoArchivePage]]></page>
+				<page><![CDATA[wcf\page\TodoTrashPage]]></page>
+				<page><![CDATA[wcf\page\TodoPage]]></page>
 				<page><![CDATA[wcf\page\DeletedContentListPage]]></page>
 			</pages>
 		</action>
@@ -43,22 +43,22 @@
 			<actionclassname><![CDATA[wcf\system\clipboard\action\ToDoClipboardAction]]></actionclassname>
 			<showorder>9</showorder>
 			<pages>
-				<page><![CDATA[wcf\page\ToDoListPage]]></page>
-				<page><![CDATA[wcf\page\ToDoCategoryPage]]></page>
-				<page><![CDATA[wcf\page\ToDoArchivePage]]></page>
-				<page><![CDATA[wcf\page\ToDoTrashPage]]></page>
-				<page><![CDATA[wcf\page\ToDoPage]]></page>
+				<page><![CDATA[wcf\page\TodoListPage]]></page>
+				<page><![CDATA[wcf\page\TodoCategoryPage]]></page>
+				<page><![CDATA[wcf\page\TodoArchivePage]]></page>
+				<page><![CDATA[wcf\page\TodoTrashPage]]></page>
+				<page><![CDATA[wcf\page\TodoPage]]></page>
 			</pages>
 		</action>
 		<action name="disable">
 			<actionclassname><![CDATA[wcf\system\clipboard\action\ToDoClipboardAction]]></actionclassname>
 			<showorder>10</showorder>
 			<pages>
-				<page><![CDATA[wcf\page\ToDoListPage]]></page>
-				<page><![CDATA[wcf\page\ToDoCategoryPage]]></page>
-				<page><![CDATA[wcf\page\ToDoArchivePage]]></page>
-				<page><![CDATA[wcf\page\ToDoTrashPage]]></page>
-				<page><![CDATA[wcf\page\ToDoPage]]></page>
+				<page><![CDATA[wcf\page\TodoListPage]]></page>
+				<page><![CDATA[wcf\page\TodoCategoryPage]]></page>
+				<page><![CDATA[wcf\page\TodoArchivePage]]></page>
+				<page><![CDATA[wcf\page\TodoTrashPage]]></page>
+				<page><![CDATA[wcf\page\TodoPage]]></page>
 			</pages>
 		</action>
 	</import>

@@ -264,11 +264,11 @@
 		<item name="wcf.toDo.task.progress.update"><![CDATA[Update progress]]></item>
 		<item name="wcf.toDo.task.remembertime"><![CDATA[Reminder]]></item>
 		<item name="wcf.toDo.task.sort"><![CDATA[Sort]]></item>
-		<item name="wcf.toDo.task.unsolved.reminderSingular"><![CDATA[unsolved task in your <a href="{link controller='ToDoList'}{/link}">ToDo-List</a>]]></item>
-		<item name="wcf.toDo.task.unsolved.reminderPlural"><![CDATA[unsolved tasks in your <a href="{link controller='ToDoList'}{/link}">ToDo-List</a>]]></item>
+		<item name="wcf.toDo.task.unsolved.reminderSingular"><![CDATA[unsolved task in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
+		<item name="wcf.toDo.task.unsolved.reminderPlural"><![CDATA[unsolved tasks in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
 		<item name="wcf.toDo.task.updatetimestamp"><![CDATA[Last update]]></item>
-		<item name="wcf.toDo.task.overdue.reminderSingular"><![CDATA[overdue task in your <a href="{link controller='ToDoList'}{/link}">ToDo-List</a>]]></item>
-		<item name="wcf.toDo.task.overdue.reminderPlural"><![CDATA[overduw tasks in your <a href="{link controller='ToDoList'}{/link}">ToDo-List</a>]]></item>
+		<item name="wcf.toDo.task.overdue.reminderSingular"><![CDATA[overdue task in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
+		<item name="wcf.toDo.task.overdue.reminderPlural"><![CDATA[overduw tasks in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
 		<item name="wcf.toDo.task.participate"><![CDATA[Tackle this ToDo]]></item>
 		<item name="wcf.toDo.task.participate.shure"><![CDATA[Do you want to tackle this ToDo?]]></item>
 		<item name="wcf.toDo.task.participate.success"><![CDATA[You have been added successfully.]]></item>
@@ -367,16 +367,6 @@
 	
 	<category name="wcf.user.recentActivity">
 		<item name="wcf.user.recentActivity.de.mysterycode.wcf.toDo.toDo.recentActivityEvent"><![CDATA[ToDo]]></item>
-	</category>
-	
-	<category name="wcf.user.usersOnline">
-		<item name="wcf.user.usersOnline.location.ToDoListPage"><![CDATA[ToDo-List]]></item>
-		<item name="wcf.user.usersOnline.location.ToDoCategoryPage"><![CDATA[ToDo-List]]></item>
-		<item name="wcf.user.usersOnline.location.ToDoTrashPage"><![CDATA[Discarded ToDos]]></item>
-		<item name="wcf.user.usersOnline.location.ToDoArchivePage"><![CDATA[Completed ToDos]]></item>
-		<item name="wcf.user.usersOnline.location.ToDoPage"><![CDATA[<a href="{$todo->getLink()}">ToDo “{$todo->title}“</a>]]></item>
-		<item name="wcf.user.usersOnline.location.ToDoAddForm"><![CDATA[Adding ToDo]]></item>
-		<item name="wcf.user.usersOnline.location.ToDoEditForm"><![CDATA[Editing ToDo “{$todo->title}“]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
