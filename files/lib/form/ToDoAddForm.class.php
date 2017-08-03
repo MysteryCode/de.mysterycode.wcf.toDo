@@ -4,6 +4,7 @@ namespace wcf\form;
 use wcf\data\category\Category;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeTree;
 use wcf\data\todo\category\TodoCategory;
+use wcf\data\todo\category\TodoCategoryCache;
 use wcf\data\todo\status\TodoStatusList;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoAction;
@@ -11,6 +12,8 @@ use wcf\data\user\UserProfile;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
+use wcf\system\label\LabelHandler;
+use wcf\system\label\object\TodoLabelObjectHandler;
 use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
@@ -46,27 +49,105 @@ class ToDoAddForm extends MessageForm {
 	
 	public $enableComments = 1;
 	
+	/**
+	 * @var string[]
+	 */
 	public $neededModules = array('TODOLIST');
 	
+	/**
+	 * @var string
+	 */
 	public $description = '';
+	
+	/**
+	 * @var integer
+	 */
 	public $endTime = 0;
+	
+	/**
+	 * @var string
+	 */
 	public $note = '';
+	
+	/**
+	 * @var string
+	 */
 	public $responsibles = '';
+	
+	/**
+	 * @var string
+	 */
 	public $responsibleGroups = '';
+	/**
+	 * @var integer
+	 */
 	public $statusID = 0;
+	
+	/**
+	 * @var string
+	 */
 	public $title = '';
+	
+	/**
+	 * @var boolean
+	 */
 	public $private = 0;
+	
+	/**
+	 * @var boolean
+	 */
 	public $important = 0;
+	
+	/**
+	 * @var integer
+	 */
 	public $categoryID = 0;
+	
+	/**
+	 * @var TodoCategory
+	 */
 	public $category = null;
-	public $newCategory = '';
+	
+	/**
+	 * @var integer
+	 */
 	public $progress = 0;
+	
+	/**
+	 * @var integer
+	 */
 	public $remembertime = 0;
+	
+	/**
+	 * @var boolean
+	 */
 	public $enableSmilies = 0;
+	
+	/**
+	 * @var boolean
+	 */
 	public $enableHtml = 0;
+	
+	/**
+	 * @var boolean
+	 */
 	public $enableBBCodes = 0;
-
+	
+	/**
+	 * @var \wcf\data\todo\status\TodoStatus[]
+	 */
 	public $statusList = array();
+	
+	/**
+	 * @var	\wcf\data\label\group\ViewableLabelGroup[]
+	 */
+	public $labelGroups;
+	
+	/**
+	 * label ids
+	 * @var	integer[]
+	 */
+	public $labelIDs = array();
 	
 	/**
 	 * @see	\wcf\form\IPage::readParameters()
@@ -88,6 +169,8 @@ class ToDoAddForm extends MessageForm {
 	public function readFormParameters() {
 		parent::readFormParameters();
 		
+		if (isset($_POST['labelIDs']) && is_array($_POST['labelIDs'])) $this->labelIDs = $_POST['labelIDs'];
+		
 		if (isset($_POST['description'])) $this->description = StringUtil::trim($_POST['description']);
 		if (isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d H:i', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
 		if (isset($_POST['note'])) $this->note = StringUtil::trim($_POST['note']);
@@ -96,7 +179,6 @@ class ToDoAddForm extends MessageForm {
 		if (isset($_POST['private'])) $this->private = 1;
 		if (isset($_POST['priority'])) $this->important = StringUtil::trim($_POST['priority']);
 		if (isset($_POST['categoryID'])) $this->categoryID = StringUtil::trim($_POST['categoryID']);
-		if (isset($_POST['newCategory'])) $this->newCategory = StringUtil::trim($_POST['newCategory']);
 		if (isset($_POST['progress'])) $this->progress = StringUtil::trim($_POST['progress']);
 		if (isset($_POST['remembertime']) && $_POST['remembertime'] > 0 && $_POST['remembertime'] != '') $this->remembertime = \DateTime::createFromFormat('Y-m-d', $_POST['remembertime'], WCF::getUser()->getTimeZone())->getTimestamp();
 		if (isset($_POST['enableSmilies'])) $this->enableSmilies = 1;
@@ -131,6 +213,15 @@ class ToDoAddForm extends MessageForm {
 		if (($this->progress < 0 || $this->progress > 100) && TODO_PROGRESS_ENABLE) {
 			throw new UserInputException('progress', 'inValid');
 		}
+		
+		$validationResult = TodoLabelObjectHandler::getInstance()->validateLabelIDs($this->labelIDs, 'canSetLabel', false);
+		if (!empty($validationResult[0])) {
+			throw new UserInputException('labelIDs');
+		}
+		
+		if (!empty($validationResult)) {
+			throw new UserInputException('label', $validationResult);
+		}
 	}
 	
 	/**
@@ -153,7 +244,8 @@ class ToDoAddForm extends MessageForm {
 				'remembertime' => $this->remembertime,
 				'enableSmilies' => $this->enableSmilies,
 				'enableHtml' => $this->enableHtml,
-				'enableBBCodes' => $this->enableBBCodes
+				'enableBBCodes' => $this->enableBBCodes,
+				'hasLabels' => !empty($this->labelIDs) ? 1 : 0
 			),
 			'attachmentHandler' => $this->attachmentHandler
 		);
@@ -167,6 +259,11 @@ class ToDoAddForm extends MessageForm {
 		
 		$this->objectAction = new ToDoAction(array(), 'create', $todoData);
 		$resultValues = $this->objectAction->executeAction();
+		
+		// save labels
+		if (!empty($this->labelIDs)) {
+			TodoLabelObjectHandler::getInstance()->setLabels($this->labelIDs, $resultValues['returnValues']->todoID);
+		}
 
 		if (!empty($this->responsibles)) {
 			$responsibleUserAction = new ToDoAction(array($resultValues['returnValues']->todoID), 'updateResponsibles', array('search' => $this->responsibles));
@@ -200,8 +297,8 @@ class ToDoAddForm extends MessageForm {
 		$statusList->readObjects();
 		$this->statusList = $statusList->getObjects();
 		
-		$categoryNodeTree = new RestrictedTodoCategoryNodeTree();
-		$this->categoryList = $categoryNodeTree->getIterator();
+		$labelGroupIDs = TodoCategoryCache::getInstance()->getLabelGroupIDs($this->categoryID);
+		$this->labelGroups = LabelHandler::getInstance()->getLabelGroups($labelGroupIDs);
 	}
 	
 	/**
@@ -226,7 +323,6 @@ class ToDoAddForm extends MessageForm {
 			'important' => $this->important,
 			'categoryID' => $this->categoryID,
 			'category' => $this->category,
-			'categoryList' => $this->categoryList,
 			'progress' => $this->progress,
 			'enableSmilies' => $this->enableSmilies,
 			'enableHtml' => $this->enableHtml,
@@ -234,6 +330,8 @@ class ToDoAddForm extends MessageForm {
 			'remembertime' => $this->remembertime,
 			'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.toDo.attachment.allowedAttachmentExtensions'))),
 			'statusList' => $this->statusList,
+			'labelGroups' => $this->labelGroups,
+			'labelIDs' => $this->labelIDs,
 			'action' => 'add'
 		));
 	}

@@ -21,7 +21,10 @@ class TodoCategoryDataCacheBuilder extends AbstractCacheBuilder {
 	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
 	protected function rebuild(array $parameters) {
-		$data = array('statObjects' => array(), 'lastTodoIDs' => array());
+		$data = array(
+			'statObjects' => array(),
+			'lastTodoIDs' => array()
+		);
 		
 		//TODO
 		

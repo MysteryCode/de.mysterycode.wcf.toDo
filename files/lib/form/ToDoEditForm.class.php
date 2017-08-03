@@ -6,6 +6,7 @@ use wcf\data\todo\ToDoAction;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\label\object\TodoLabelObjectHandler;
 use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -21,9 +22,19 @@ use wcf\util\HeaderUtil;
  * @package	de.mysterycode.wcf.toDo
  */
 class ToDoEditForm extends ToDoAddForm {
+	/**
+	 * @var string[]
+	 */
 	public $neededPermissions = array();
 	
+	/**
+	 * @var ToDo
+	 */
 	public $todo = null;
+	
+	/**
+	 * @var integer
+	 */
 	public $todoID = 0;
 	
 	/**
@@ -50,6 +61,10 @@ class ToDoEditForm extends ToDoAddForm {
 	public function save() {
 		$todoData = array('data' => array());
 		
+		TodoLabelObjectHandler::getInstance()->setLabels($this->labelIDs, $this->todoID);
+		$labelIDs = TodoLabelObjectHandler::getInstance()->getAssignedLabels(array($this->todoID), false);
+		
+		
 		if ($this->todo->canEdit()) {
 			$todoData = array(
 				'data' => array(
@@ -64,7 +79,8 @@ class ToDoEditForm extends ToDoAddForm {
 					'enableSmilies' => $this->enableSmilies,
 					'enableHtml' => $this->enableHtml,
 					'enableBBCodes' => $this->enableBBCodes,
-					'remembertime' => $this->remembertime
+					'remembertime' => $this->remembertime,
+					'hasLabels' => !empty($labelIDs[$this->newsID]) ? 1 : 0
 				),
 				'attachmentHandler' => $this->attachmentHandler
 			);
@@ -128,6 +144,14 @@ class ToDoEditForm extends ToDoAddForm {
 			
 			if ($this->todo->remembertime > 0)
 				$this->remembertime = DateUtil::getDateTimeByTimestamp($this->todo->remembertime);
+			
+			// labels
+			$assignedLabels = TodoLabelObjectHandler::getInstance()->getAssignedLabels(array($this->todoID), true);
+			if (!empty($assignedLabels[$this->todoID])) {
+				foreach ($assignedLabels[$this->todoID] as $label) {
+					$this->labelIDs[$label->groupID] = $label->labelID;
+				}
+			}
 		} else {
 			$this->endTime = DateUtil::getDateTimeByTimestamp($this->endTime);
 			$this->remembertime = DateUtil::getDateTimeByTimestamp($this->remembertime);
