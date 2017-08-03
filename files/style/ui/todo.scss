@@ -165,7 +165,7 @@
 		background-image: -ms-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
 		background-image: -o-linear-gradient(top left, #ff0000 0%, #ffff00 50%, #00c324 100%);
 		.progressbar_inner {
-			//background-color: @wcfContainerBackgroundColor;
+			background-color: $wcfContentBackground;
 			height: 26px;
 			margin-top: -1px;
 			margin-left: -1px;
