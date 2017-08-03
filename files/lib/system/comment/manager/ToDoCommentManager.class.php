@@ -5,6 +5,7 @@ use wcf\data\comment\response\CommentResponse;
 use wcf\data\comment\Comment;
 use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoCache;
+use wcf\data\todo\ToDoEditor;
 use wcf\system\WCF;
 
 /**
@@ -187,6 +188,9 @@ class ToDoCommentManager extends AbstractCommentManager {
 	 * {@inheritDoc}
 	 */
 	public function updateCounter($objectID, $value) {
-
+		$todoEditor = new ToDoEditor(new ToDo($objectID));
+		$todoEditor->update([
+			'comments' => $value
+		]);
 	}
 }
