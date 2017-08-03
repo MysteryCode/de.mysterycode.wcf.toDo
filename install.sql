@@ -30,6 +30,7 @@ CREATE TABLE wcf1_todo (
 	attachments			mediumint(7)	NOT NULL DEFAULT 0,
 	hasEmbeddedObjects	tinyint(1)		NOT NULL DEFAULT 0,
 	ipAddress			varchar(39)		NOT NULL DEFAULT '',
+	hasLabels       	tinyint(1)		NOT NULL DEFAULT 0,
 	PRIMARY KEY (todoID)
 );
 
