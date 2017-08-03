@@ -14,7 +14,6 @@ use wcf\data\user\TodoUserCache;
 use wcf\data\user\User;
 use wcf\data\DatabaseObject;
 use wcf\data\IMessage;
-use wcf\data\user\UserProfile;
 use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\breadcrumb\Breadcrumb;

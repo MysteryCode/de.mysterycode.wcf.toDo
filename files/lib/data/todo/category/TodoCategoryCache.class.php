@@ -7,8 +7,8 @@ use wcf\system\cache\builder\TodoCategoryDataCacheBuilder;
 use wcf\system\cache\builder\TodoCategoryLabelGroupCacheBuilder;
 use wcf\system\category\CategoryHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\label\LabelHandler;
 use wcf\system\label\object\TodoLabelObjectHandler;
+use wcf\system\label\LabelHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 

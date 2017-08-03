@@ -64,7 +64,6 @@ class ToDoEditForm extends ToDoAddForm {
 		TodoLabelObjectHandler::getInstance()->setLabels($this->labelIDs, $this->todoID);
 		$labelIDs = TodoLabelObjectHandler::getInstance()->getAssignedLabels(array($this->todoID), false);
 		
-		
 		if ($this->todo->canEdit()) {
 			$todoData = array(
 				'data' => array(

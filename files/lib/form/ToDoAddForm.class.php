@@ -2,7 +2,6 @@
 
 namespace wcf\form;
 use wcf\data\category\Category;
-use wcf\data\todo\category\RestrictedTodoCategoryNodeTree;
 use wcf\data\todo\category\TodoCategory;
 use wcf\data\todo\category\TodoCategoryCache;
 use wcf\data\todo\status\TodoStatusList;
@@ -12,8 +11,8 @@ use wcf\data\user\UserProfile;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
-use wcf\system\label\LabelHandler;
 use wcf\system\label\object\TodoLabelObjectHandler;
+use wcf\system\label\LabelHandler;
 use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\object\ToDoUserNotificationObject;
