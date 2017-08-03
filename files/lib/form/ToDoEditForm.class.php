@@ -80,7 +80,7 @@ class ToDoEditForm extends ToDoAddForm {
 					'enableHtml' => $this->enableHtml,
 					'enableBBCodes' => $this->enableBBCodes,
 					'remembertime' => $this->remembertime,
-					'hasLabels' => !empty($labelIDs[$this->newsID]) ? 1 : 0
+					'hasLabels' => !empty($labelIDs[$this->todoID]) ? 1 : 0
 				),
 				'attachmentHandler' => $this->attachmentHandler
 			);
