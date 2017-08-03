@@ -43,7 +43,6 @@
 			<dd>
 				<select name="statusFilter" id="statusFilter" class="long">
 					{foreach from=$statusList item=status}
-					<select id="sortField" name="sortField">
 						<option value="{$status->statusID}"{if $statusFilter == $status->statusID} selected{/if}>{$status->subject|language}</option>
 					{/foreach}
 				</select>

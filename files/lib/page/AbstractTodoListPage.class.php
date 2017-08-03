@@ -197,8 +197,8 @@ abstract class AbstractTodoListPage extends SortablePage {
 			'likeData' => $this->likeData,
 			'categoryNodeList' => $this->categoryNodeList,
 			'responsibleFilter' => $this->responsibleFilter,
-			'statusFilter', $this->statusFilter,
-			'statusList', $this->statusList,
+			'statusFilter' => $this->statusFilter,
+			'statusList' => $this->statusList,
 			
 			'stats' => [
 				'total' => $this->todoCount,
