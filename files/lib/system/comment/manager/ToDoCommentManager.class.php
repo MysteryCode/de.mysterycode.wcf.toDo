@@ -189,7 +189,7 @@ class ToDoCommentManager extends AbstractCommentManager {
 	 */
 	public function updateCounter($objectID, $value) {
 		$todoEditor = new ToDoEditor(new ToDo($objectID));
-		$todoEditor->update([
+		$todoEditor->updateCounters([
 			'comments' => $value
 		]);
 	}
