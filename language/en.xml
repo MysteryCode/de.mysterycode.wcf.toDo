@@ -350,7 +350,8 @@
 		<item name="wcf.toDo.status.placeholder"><![CDATA[--------------------]]></item>
 		
 		<item name="wcf.toDo.goToTodo"><![CDATA[Go to ToDo]]></item>
-		
+
+		<item name="wcf.toDo.filter.status"><![CDATA[Filter for status]]></item>
 		<item name="wcf.toDo.filter.responsible"><![CDATA[Filter for responsibles]]></item>
 		<item name="wcf.toDo.filter.responsible.placeholder"><![CDATA[Username oder -group]]></item>
 		

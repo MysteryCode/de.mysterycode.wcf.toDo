@@ -351,6 +351,7 @@
 		
 		<item name="wcf.toDo.goToTodo"><![CDATA[ToDo öffnen]]></item>
 		
+		<item name="wcf.toDo.filter.status"><![CDATA[Nach Status filtern]]></item>
 		<item name="wcf.toDo.filter.responsible"><![CDATA[Nach Zuweisungen filtern]]></item>
 		<item name="wcf.toDo.filter.responsible.placeholder"><![CDATA[Benutzername oder -gruppe]]></item>
 		
