@@ -99,7 +99,7 @@ class TodoEditForm extends TodoAddForm {
 					'progress' => $this->progress,
 					'remembertime' => $this->remembertime,
 					'enableComments' => $this->enableComments,
-					'hasLabels' => !empty($labelIDs[$this->newsID]) ? 1 : 0
+					'hasLabels' => !empty($labelIDs[$this->todoID]) ? 1 : 0
 				],
 				'attachmentHandler' => $this->attachmentHandler,
 				'htmlInputProcessor' => $this->htmlInputProcessor,
