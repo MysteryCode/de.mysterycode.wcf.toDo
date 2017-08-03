@@ -3,7 +3,7 @@
 namespace wcf\page;
 use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
 use wcf\data\todo\status\TodoStatusCache;
-use wcf\data\todo\ViewableToDoList;
+use wcf\data\todo\AccessibleToDoList;
 use wcf\data\user\group\UserGroupSearchAction;
 use wcf\data\user\UserProfile;
 use wcf\system\like\LikeHandler;
@@ -54,7 +54,7 @@ abstract class AbstractTodoListPage extends SortablePage {
 	/**
 	 * @inheritDoc
 	 */
-	public $objectListClassName = ViewableToDoList::class;
+	public $objectListClassName = AccessibleToDoList::class;
 	
 	public $neededModules = ['TODOLIST'];
 	
