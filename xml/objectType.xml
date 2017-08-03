@@ -94,7 +94,7 @@
 		<type>
 			<name>de.mysterycode.wcf.toDo.toDo</name>
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
-			<listclassname>wcf\data\todo\TodoList</listclassname>
+			<listclassname>wcf\data\todo\ToDoList</listclassname>
 		</type>
 		<!-- moderation -->
 		<type>
