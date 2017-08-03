@@ -81,7 +81,7 @@
 		new WCF.Search.User('#responsibleFilter', null, true, [ ], true);
 
 		new WCF.Todo.Clipboard($updateHandler);
-		WCF.Clipboard.init('wcf\\page\\TodoCategoryPage', {@$hasMarkedItems}, { });
+		WCF.Clipboard.init('wcf\\page\\TodoCategoryPage', {@$hasMarkedItems}, { }, {$category->categoryID});
 	});
 	//]]>
 </script>

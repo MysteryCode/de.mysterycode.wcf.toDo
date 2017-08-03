@@ -2,7 +2,7 @@
 
 {if $todoListItems}
 	<div class="section tabularBox">
-		<ul class="todoList">
+		<ul class="todoList jsClipboardContainer" data-type="de.mysterycode.wcf.toDo.toDo">
 			{foreach from=$todoList item=todo}
 				<li id="todo{$todo->todoID}" class="message jsClipboardObject jsTodo{if $todo->isDeleted} messageDeleted{/if}{if $todo->isDisabled} messageDisabled{/if}"
 				    data-todo-id="{@$todo->todoID}"
