@@ -5,8 +5,8 @@
 		<packagename language="de"><![CDATA[ToDo-Liste]]></packagename>
 		<packagedescription><![CDATA[Gives the possibility to manage ToDos in several custom categories on your website]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
-		<version>1.2.6</version>
-		<date>2017-01-23</date>
+		<version>1.2.6 pl 1</version>
+		<date>2017-08-03</date>
 		<packageurl>https://www.mysterycode.de/index.php?page/products/todo/</packageurl>
 	</packageinformation>
 
@@ -58,13 +58,23 @@
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 
+		<!-- XMLs -->
+		<instruction type="objectType">xml/objectType.xml</instruction>
+
 		<!-- SQL -->
 		<instruction type="sql">update.sql</instruction>
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo_1.2.0.php</instruction>
 
 		<!-- language -->
 		<instruction type="language">language/*.xml</instruction>
+	</instructions>
 
-		<!-- XMLs -->
-		<instruction type="objectType">xml/objectType.xml</instruction>
+	<instructions type="update" fromversion="1.2.6">
+		<!-- files -->
+		<instruction type="file">files.tar</instruction>
+
+		<!-- SQL -->
+		<instruction type="sql">update126.sql</instruction>
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo_1.2.0.php</instruction>
 	</instructions>
 </package>
