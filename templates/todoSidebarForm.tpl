@@ -1,4 +1,4 @@
-<section class="box">
+<section class="box todoSidebarFormBox">
 	<h2 class="boxTitle"><label for="sortField">{lang}wcf.toDo.task.sort{/lang}</label></h2>
 
 	<dl>
@@ -23,7 +23,7 @@
 	</dl>
 </section>
 
-<section class="box">
+<section class="box todoSidebarFormBox">
 	<h2 class="boxTitle"><label for="responsibleFilter">{lang}wcf.toDo.filter.responsible{/lang}</label></h2>
 
 	<dl>
@@ -35,13 +35,14 @@
 </section>
 
 {if !$statusList|empty}
-	<section class="box">
+	<section class="box todoSidebarFormBox">
 		<h2 class="boxTitle"><label for="statusFilter">{lang}wcf.toDo.filter.status{/lang}</label></h2>
 
 		<dl>
 			<dt></dt>
 			<dd>
 				<select name="statusFilter" id="statusFilter" class="long">
+					<option value=""{if $statusFilter|empty} selected{/if}>{lang}wcf.global.noSelection{/lang}</option>
 					{foreach from=$statusList item=status}
 						<option value="{$status->statusID}"{if $statusFilter == $status->statusID} selected{/if}>{$status->subject|language}</option>
 					{/foreach}
@@ -50,3 +51,13 @@
 		</dl>
 	</section>
 {/if}
+
+<script data-relocate="true">
+	$(function() {
+		$('.todoSidebarFormBox select').each(function (k, v) {
+			$(v).change(function (event) {
+				$(event.currentTarget).closest('form').submit();
+			})
+		})
+	});
+</script>
