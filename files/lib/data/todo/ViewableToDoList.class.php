@@ -3,7 +3,7 @@
 namespace wcf\data\todo;
 use wcf\data\moderation\queue\ModerationQueue;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\system\label\object\ToDoLabelObjectHandler;
+use wcf\system\label\object\TodoLabelObjectHandler;
 use wcf\system\like\LikeHandler;
 use wcf\system\visitTracker\VisitTracker;
 use wcf\system\WCF;
@@ -93,7 +93,7 @@ class ViewableToDoList extends ToDoList {
 		}
 		
 		if (!empty($todoIDs)) {
-			$assignedLabels = ToDoLabelObjectHandler::getInstance()->getAssignedLabels($todoIDs);
+			$assignedLabels = TodoLabelObjectHandler::getInstance()->getAssignedLabels($todoIDs);
 			foreach ($assignedLabels as $todoID => $labels) {
 				foreach ($labels as $label) {
 					$this->objects[$todoID]->addLabel($label);
