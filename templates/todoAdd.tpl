@@ -224,6 +224,7 @@
 	$(function() {
 		new WCF.Search.User('#responsibles', null, false, [ ], true);
 		new WCF.Todo.Search.User('#responsibleGroups', null, [ ], true);
+		new WCF.Label.Chooser({ {implode from=$labelIDs key=groupID item=labelID}{@$groupID}: {@$labelID}{/implode} }, '#messageContainer');
 
 		{include file='__messageQuoteManager' wysiwygSelector='text' supportPaste=true}
 		new WCF.Todo.QuoteHandler($quoteManager);
