@@ -58,7 +58,7 @@ abstract class AbstractToDoListPage extends SortablePage {
 	/**
 	 * @see \wcf\page\MultipleLinkPage::$objectListClassName
 	 */
-	public $objectListClassName = 'wcf\data\todo\ViewableToDoList';
+	public $objectListClassName = 'wcf\data\todo\AccessibleToDoList';
 	
 	public $neededModules = array('TODOLIST');
 	
