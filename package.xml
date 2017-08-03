@@ -55,9 +55,6 @@
 		<instruction type="file" />
 		<instruction type="template" />
 
-		<!-- SQL -->
-		<instruction type="sql">update126.sql</instruction>
-
 		<!-- XMLs -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
@@ -71,6 +68,10 @@
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="page">xml/page.xml</instruction>
 		<instruction type="menuItem">xml/menuItem.xml</instruction>
+
+		<!-- SQL -->
+		<instruction type="sql">update126.sql</instruction>
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo.php</instruction>
 
 		<instruction type="language" />
 	</instructions>
@@ -80,9 +81,6 @@
 		<instruction type="file" />
 		<instruction type="template" />
 
-		<!-- SQL -->
-		<instruction type="sql">update200b2.sql</instruction>
-
 		<!-- XMLs -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
@@ -96,6 +94,9 @@
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="page">xml/page.xml</instruction>
 		<instruction type="menuItem">xml/menuItem.xml</instruction>
+
+		<!-- SQL -->
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo_1.2.0.php</instruction>
 
 		<instruction type="language" />
 	</instructions>
