@@ -307,7 +307,7 @@ class TodoAddForm extends MessageForm {
 		$this->categoryList = $categoryNodeTree->getIterator();
 		
 		$labelGroupIDs = TodoCategoryCache::getInstance()->getLabelGroupIDs($this->categoryID);
-		$this->labelGroups = LabelHandler::getInstance()->getLabelGroups($labelGroupIDs);
+		if (!empty($labelGroupIDs)) $this->labelGroups = LabelHandler::getInstance()->getLabelGroups($labelGroupIDs);
 	}
 	
 	/**

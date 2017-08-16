@@ -132,10 +132,10 @@ class TodoEditForm extends TodoAddForm {
 	 * @inheritDoc
 	 */
 	public function readData() {
-		parent::readData();
-		
 		$this->category = $this->todo->getCategory();
 		$this->categoryID = $this->category->categoryID;
+		
+		parent::readData();
 		
 		if (empty($_POST)) {
 			$this->responsibles = $this->todo->getFormattedResponsibles();
