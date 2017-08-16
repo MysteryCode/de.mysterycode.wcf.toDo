@@ -2,7 +2,7 @@
  * Todo-related classes.
  * 
  * @author	Florian Gail
- * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
+ * @copyright	2014-2017 Florian Gail <http://www.mysterycode.de/>
  * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
  */
 
