@@ -17,7 +17,7 @@ class ToDoClipboardAction extends AbstractClipboardAction {
 	/**
 	 * @inheritDoc
 	 */
-	protected $actionClassActions = ['enable', 'disable', 'delete', 'restore'];
+	protected $actionClassActions = ['enable', 'disable', 'trash', 'delete', 'restore'];
 
 	/**
 	 * @inheritDoc
