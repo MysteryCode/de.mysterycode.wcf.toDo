@@ -122,7 +122,7 @@
 		<instruction type="menuItem">xml/menuItem.xml</instruction>
 
 		<!-- SQL -->
-		<instruction type="script">acp/update_de.mysterycode.wcf.todo_1.2.0.php</instruction>
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo.php</instruction>
 
 		<instruction type="language" />
 	</instructions>
