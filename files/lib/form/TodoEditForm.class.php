@@ -59,7 +59,7 @@ class TodoEditForm extends TodoAddForm {
 	 * @inheritDoc
 	 */
 	public function readParameters() {
-		parent::readParameters();
+		MessageForm::readParameters();
 		
 		MessageQuoteManager::getInstance()->readParameters();
 		
