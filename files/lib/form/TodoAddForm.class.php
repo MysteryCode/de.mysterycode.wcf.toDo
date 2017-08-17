@@ -216,13 +216,16 @@ class TodoAddForm extends MessageForm {
 			throw new UserInputException('progress', 'inValid');
 		}
 		
-		$validationResult = TodoLabelObjectHandler::getInstance()->validateLabelIDs($this->labelIDs, 'canSetLabel', false);
-		if (!empty($validationResult[0])) {
-			throw new UserInputException('labelIDs');
-		}
-		
-		if (!empty($validationResult)) {
-			throw new UserInputException('label', $validationResult);
+		$labelGroupIDs = TodoCategoryCache::getInstance()->getLabelGroupIDs($this->categoryID);
+		if (!empty($labelGroupIDs)) {
+			$validationResult = TodoLabelObjectHandler::getInstance()->validateLabelIDs($this->labelIDs, 'canSetLabel', false);
+			if (!empty($validationResult[0])) {
+				throw new UserInputException('labelIDs');
+			}
+			
+			if (!empty($validationResult)) {
+				throw new UserInputException('label', $validationResult);
+			}
 		}
 	}
 	
