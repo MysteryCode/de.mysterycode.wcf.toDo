@@ -242,7 +242,7 @@
 
 					// permissions
 					canDislike: {if LIKE_ENABLE_DISLIKE}true{else}false{/if},
-					canLike: {if $__wcf->getUser()->userID && $todo->getCategory()->getPermission('user.canLikeTodo')}true{else}false{/if},
+					canLike: {if $__wcf->getUser()->userID && ($__wcf->getUser()->userID != $todo->submitter) && $todo->getCategory()->getPermission('user.canLikeTodo')}true{else}false{/if},
 					canLikeOwnContent: {if LIKE_ALLOW_FOR_OWN_CONTENT}true{else}false{/if},
 					canViewSummary: {if LIKE_SHOW_SUMMARY}true{else}false{/if},
 
