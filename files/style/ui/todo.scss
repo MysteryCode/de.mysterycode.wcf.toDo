@@ -57,6 +57,7 @@
 			@include screen-md-up {
 				flex: 1 1 auto;
 				margin-right: 20px;
+				max-width: 41%;
 			}
 
 			@include screen-sm-down {
