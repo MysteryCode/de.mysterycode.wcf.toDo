@@ -16,14 +16,29 @@ class TodoStatusAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @inheritDoc
 	 */
-	public function delete() {
+	protected $permissionsDelete = ['admin.content.toDo.status.canDelete'];
+	
+	/**
+	 * @inheritDoc
+	 */
+	protected $permissionsUpdate = ['admin.content.toDo.status.canEdit'];
+	
+	/**
+	 * @inheritDoc
+	 */
+	protected $permissionsCreate = ['admin.content.toDo.status.canAdd'];
+	
+	/**
+	 * @inheritDoc
+	 */
+	public function validateDelete() {
+		parent::validateDelete();
+		
 		/** @var \wcf\data\todo\status\TodoStatus $status */
 		foreach ($this->objects as $status) {
 			if ($status->locked) {
 				throw new PermissionDeniedException();
 			}
 		}
-
-		parent::delete();
 	}
 }
