@@ -106,7 +106,7 @@ class ToDoCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
 			return false;
 		
 		$returnValue = $todo->canEnter();
-		if (!$todo->canEnter()) {
+		if ($todo === null || !$todo->canEnter()) {
 // 			// remove subscription
 // 			UserObjectWatchHandler::getInstance()->deleteObjects('de.mysterycode.wcf.toDo', array($todo->todoID), array(WCF::getUser()->userID));
 			
