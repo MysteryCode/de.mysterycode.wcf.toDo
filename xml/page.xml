@@ -5,6 +5,7 @@
 			<controller>wcf\page\TodoListPage</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
+			<permissions>user.toDo.toDo.canView</permissions>
 
 			<name language="de">ToDo-Liste</name>
 			<name language="en">ToDo-List</name>
@@ -20,6 +21,7 @@
 			<controller>wcf\page\MyTodosPage</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
+			<permissions>user.toDo.toDo.canView</permissions>
 			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
 
 			<name language="de">Meine ToDos</name>
@@ -36,6 +38,7 @@
 			<controller>wcf\page\TodoArchivePage</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
+			<permissions>user.toDo.toDo.canView</permissions>
 			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
 
 			<name language="de">Archiv</name>
@@ -52,6 +55,7 @@
 			<controller>wcf\page\TodoTrashPage</controller>
 			<pageType>system</pageType>
 			<options>todolist</options>
+			<permissions>user.toDo.toDo.canView</permissions>
 			<parent>de.mysterycode.wcf.todo.ToDoList</parent>
 
 			<name language="de">Papierkorb</name>
