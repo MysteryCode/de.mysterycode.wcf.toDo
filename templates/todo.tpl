@@ -155,9 +155,13 @@
 
 	{if $todo->description != ''}
 		<section class="section todoDescription">
-			<h2 class="sectionTitle">{lang}wcf.toDo.task.description{/lang}</h2>
+			<header class="sectionHeader">
+				<h2 class="sectionTitle">{lang}wcf.toDo.task.description{/lang}</h2>
+			</header>
 
-			{@$todo->getFormattedMessage()}
+			<div class="htmlContent">
+				{@$todo->getFormattedMessage()}
+			</div>
 
 			{include file='attachments'}
 		</section>
@@ -165,9 +169,13 @@
 
 	{if $todo->note != ''}
 		<section class="section todoNotes">
-			<h2 class="sectionTitle">{lang}wcf.toDo.task.note{/lang}</h2>
+			<header class="sectionHeader">
+				<h2 class="sectionTitle">{lang}wcf.toDo.task.note{/lang}</h2>
+			</header>
 
-			{@$todo->getFormattedNote()}
+			<div class="htmlContent">
+				{@$todo->getFormattedNote()}
+			</div>
 		</section>
 	{/if}
 </div>
