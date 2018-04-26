@@ -19,6 +19,21 @@ class TodoStatusAction extends AbstractDatabaseObjectAction {
 	protected $className = 'wcf\data\todo\status\TodoStatusEditor';
 	
 	/**
+	 * @inheritDoc
+	 */
+	protected $permissionsCreate = ['admin.content.toDo.status.canAdd'];
+	
+	/**
+	 * @inheritDoc
+	 */
+	protected $permissionsUpdate = ['admin.content.toDo.status.canEdit'];
+	
+	/**
+	 * @inheritDoc
+	 */
+	protected $permissionsDelete = ['admin.content.toDo.status.canDelete'];
+	
+	/**
 	 * @see \wcf\data\AbstractDatabaseObjectAction::delete()
 	 */
 	public function delete() {
