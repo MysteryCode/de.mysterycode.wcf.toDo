@@ -111,6 +111,12 @@ abstract class AbstractToDoListPage extends SortablePage {
 	public $finishedCount = 0;
 	
 	/**
+	 * users online list
+	 * @var	\wcf\data\user\online\UsersOnlineList
+	 */
+	protected $usersOnlineList = array();
+	
+	/**
 	 * @see \wcf\page\SortablePage::readParameters()
 	 */
 	public function readParameters() {
