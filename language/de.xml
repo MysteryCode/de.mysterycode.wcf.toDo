@@ -133,7 +133,12 @@
 		<item name="wcf.acp.option.todo_progress_enable"><![CDATA[Fortschrittsanzeige aktivieren]]></item>
 		<item name="wcf.acp.option.todo_mobile_optimization_enable"><![CDATA[Für Mobilgeräte optimiertes Layout aktivieren]]></item>
 		<item name="wcf.acp.option.todo_enable_stats"><![CDATA[ToDo-Statistik auf Übersichtsseite anzeigen]]></item>
-		
+
+		<item name="wcf.acp.option.todo_todos_unread_enable"><![CDATA[ToDo-Counter aktivieren]]></item>
+		<item name="wcf.acp.option.todo_todos_unread_include_open"><![CDATA[Ausstehende ToDos mitzählen]]></item>
+		<item name="wcf.acp.option.todo_todos_unread_include_inprogress"><![CDATA[ToDos in Arbeit mitzählen]]></item>
+		<item name="wcf.acp.option.todo_todos_unread_include_inpreparation"><![CDATA[ToDos in Vorbereitung mitzählen]]></item>
+
 		<item name="wcf.acp.option.category.toDo.sort"><![CDATA[Sortierung]]></item>
 		<item name="wcf.acp.option.todo_todos_per_page"><![CDATA[ToDos pro Seite]]></item>
 		<item name="wcf.acp.option.todo_default_sort_field"><![CDATA[Sortierung]]></item>

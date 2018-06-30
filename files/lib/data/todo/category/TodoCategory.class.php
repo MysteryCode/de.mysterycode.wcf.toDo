@@ -2,6 +2,7 @@
 
 namespace wcf\data\todo\category;
 use wcf\data\category\AbstractDecoratedCategory;
+use wcf\data\todo\AccessibleToDoList;
 use wcf\data\user\User;
 use wcf\data\ITitledLinkObject;
 use wcf\system\request\IRouteController;
@@ -289,5 +290,27 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	
 	public function canEditPriority() {
 		return $this->getPermission('user.canEditPriority');
+	}
+	
+	/**
+	 * Counts the amout of open todos assigned to the category
+	 *
+	 * @return integer
+	 */
+	public function countOpenTasks() {
+		$statusIDs = [];
+		
+		if (TODO_TODOS_UNREAD_INCLUDE_INPREPARATION) $statusIDs[] = 5;
+		if (TODO_TODOS_UNREAD_INCLUDE_INPROGRESS) $statusIDs[] = 3;
+		if (TODO_TODOS_UNREAD_INCLUDE_OPEN) $statusIDs[] = 2;
+		
+		if (empty($statusIDs)) return 0;
+		
+		$todoList = new AccessibleToDoList();
+		$todoList->getConditionBuilder()->add('todo_table.categoryID = ?', [$this->categoryID]);
+		$todoList->getConditionBuilder()->add('todo_table.statusID IN (' . implode(', ', $statusIDs) . ')');
+		$todoList->readObjectIDs();
+		
+		return $todoList->getObjectIDs() === null ? 0 : count($todoList->getObjectIDs());
 	}
 }

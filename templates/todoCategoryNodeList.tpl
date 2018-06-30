@@ -8,7 +8,7 @@
 
 						<div>
 							<div class="containerHeadline">
-								<h3><a href="{link controller='TodoCategory' object=$categoryNode}{/link}">{$categoryNode->title|language}</a></h3>
+								<h3><a href="{link controller='TodoCategory' object=$categoryNode}{/link}">{$categoryNode->title|language}</a>{if TODO_TODOS_UNREAD_ENABLE} <span class="badge badgeUpdate">{#$categoryNode->countOpenTasks()}</span>{/if}</h3>
 								<p class="todoCategoryDescription">{if $categoryNode->descriptionUseHtml}{@$categoryNode->description|language}{else}{@$categoryNode->description|language|newlineToBreak}{/if}</p>
 							</div>
 
