@@ -366,10 +366,12 @@
 	
 	<category name="wcf.user.profile">
 		<item name="wcf.user.profile.recentActivity.todo"><![CDATA[Created the ToDo <a href="{$todo->getLink()}">{$todo->title}</a>.]]></item>
+		<item name="wcf.user.profile.recentActivity.todo.like"><![CDATA[Likes the ToDo <a href="{$todo->getLink()}">{$todo->title}</a>.]]></item>
 	</category>
 	
 	<category name="wcf.user.recentActivity">
 		<item name="wcf.user.recentActivity.de.mysterycode.wcf.toDo.toDo.recentActivityEvent"><![CDATA[ToDo]]></item>
+		<item name="wcf.user.recentActivity.de.mysterycode.wcf.toDo.toDo.like.recentActivityEvent"><![CDATA[Like (ToDo)]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">

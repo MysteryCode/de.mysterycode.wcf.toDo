@@ -6,33 +6,30 @@ use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
 /**
- * Shows the todo user activity event.
+ * Shows the todo like activity event.
  *
- * @author	Florian Gail <https://www.mysterycode.de/>
- * @copyright	2014-2018 Florian Gail <https://www.mysterycode.de/>
- * @license	Kostenlose Plugins <https://www.mysterycode.de/licenses/kostenlose-plugins/>
+ * @author		Florian Gail
+ * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
-class ToDoUserActivityEvent extends SingletonFactory implements IUserActivityEvent {
+class ToDoLikeUserActivityEvent extends SingletonFactory implements IUserActivityEvent {
 	/**
 	 * language variable to be used in event output
 	 * @var	string
 	 */
-	protected $languageVariable = 'wcf.user.profile.recentActivity.todo';
-
+	protected $languageVariable = 'wcf.user.profile.recentActivity.todo.like';
+	
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function prepare(array $events) {
 		$objectIDs = [];
-		foreach ($events as $event) {
+		foreach ($events as $event)
 			$objectIDs[] = $event->objectID;
-		}
 		
 		$todoList = new ToDoList();
-		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", [
-			$objectIDs
-		]);
+		$todoList->getConditionBuilder()->add("todo_table.todoID IN (?)", [$objectIDs]);
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
@@ -42,14 +39,12 @@ class ToDoUserActivityEvent extends SingletonFactory implements IUserActivityEve
 				/** @var \wcf\data\todo\ToDo $todo */
 				$todo = $todos[$event->objectID];
 				
-				if (!$todo->canEnter()) {
+				if (!$todo->isVisible())
 					continue;
-				}
+				
 				$event->setIsAccessible();
 				
-				$text = WCF::getLanguage()->getDynamicVariable($this->languageVariable, [
-					'todo' => $todo
-				]);
+				$text = WCF::getLanguage()->getDynamicVariable($this->languageVariable, ['todo' => $todo]);
 				$event->setTitle($text);
 				
 				$event->setDescription($todo->getSimplifiedFormattedMessage());

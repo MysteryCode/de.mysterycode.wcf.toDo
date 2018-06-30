@@ -7,6 +7,7 @@ use wcf\data\todo\ToDoList;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
+use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\user\activity\point\UserActivityPointHandler;
 use wcf\system\WCF;
 
@@ -63,7 +64,7 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 		// fetch cumulative likes
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("objectTypeID = ?", [
-			ObjectTypeCache::getInstance()->getObjectTypeIDByName('com.woltlab.wcf.like.likeableObject', 'de.mysterycode.wcf.toDo.toDo')
+			ObjectTypeCache::getInstance()->getObjectTypeIDByName('com.woltlab.wcf.like.likeableObject', 'de.mysterycode.wcf.toDo.toDo.like')
 		]);
 		$conditions->add("objectID IN (?)", [
 			$this->objectList->getObjectIDs()
@@ -86,6 +87,10 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 		while ($row = $statement->fetchArray()) {
 			$cumulativeLikes[$row['objectID']] = $row['cumulativeLikes'];
 		}
+		
+		UserActivityEventHandler::getInstance()->removeEvents('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $this->objectList->getObjectIDs());
+		UserActivityEventHandler::getInstance()->removeEvents('de.mysterycode.wcf.toDo.toDo.like.recentActivityEvent', $this->objectList->getObjectIDs());
+		UserActivityPointHandler::getInstance()->removeEvents('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $this->objectList->getObjectIDs());
 		
 		$userStats = [];
 		WCF::getDB()->beginTransaction();
@@ -114,6 +119,7 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 			if (!$todo->enableHtml) {
 				$this->getHtmlInputProcessor()->process($todo->description, 'de.mysterycode.wcf.toDo', $todo->todoID, true);
 				$data['description'] = $this->getHtmlInputProcessor()->getHtml();
+				$data['enableHtml'] = 1;
 			} else {
 				$this->getHtmlInputProcessor()->processEmbeddedContent($todo->description, 'de.mysterycode.wcf.toDo', $todo->todoID);
 			}
@@ -134,6 +140,8 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 
 			// update data
 			$editor->update($data);
+			
+			UserActivityEventHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->todoID, null, $todo->submitter ?: null, $todo->time);
 		}
 		WCF::getDB()->commitTransaction();
 		

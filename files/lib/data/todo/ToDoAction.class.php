@@ -21,6 +21,7 @@ use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\label\LabelHandler;
+use wcf\system\like\LikeHandler;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\message\quote\MessageQuoteManager;
 use wcf\system\moderation\queue\ModerationQueueActivationManager;
@@ -77,6 +78,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		if (!empty($this->parameters['htmlInputProcessor'])) {
 			/** @noinspection PhpUndefinedMethodInspection */
 			$this->parameters['data']['description'] = $this->parameters['htmlInputProcessor']->getHtml();
+			$this->parameters['data']['enableHtml'] = 1;
 		}
 
 		if (!empty($this->parameters['notesNtmlInputProcessor'])) {
@@ -437,6 +439,9 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		MessageEmbeddedObjectManager::getInstance()->removeObjects('de.mysterycode.wcf.toDo', $todoIDs);
 		
+		// delete likes
+		LikeHandler::getInstance()->removeLikes('de.mysterycode.wcf.toDo.toDo.like', $todoIDs);
+		
 		// delete label assignments
 		LabelHandler::getInstance()->removeLabels(LabelHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo')->objectTypeID, $todoIDs);
 		
@@ -572,6 +577,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	protected function removeActivityEvents(array $todoIDs) {
 		UserActivityEventHandler::getInstance()->removeEvents('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todoIDs);
+		UserActivityEventHandler::getInstance()->removeEvents('de.mysterycode.wcf.toDo.toDo.like.recentActivityEvent', $todoIDs);
 		UserActivityPointHandler::getInstance()->removeEvents('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $todoIDs);
 	}
 

@@ -2,12 +2,13 @@
 
 namespace wcf\system\page\handler;
 
+use wcf\data\todo\category\RestrictedTodoCategoryNodeList;
 use wcf\data\todo\category\TodoCategoryCache;
 
 /**
  * {@inheritDoc}
  */
-class ToDoCategoryPageHandler extends AbstractMenuPageHandler {
+class ToDoCategoryPageHandler extends AbstractLookupPageHandler {
 	/**
 	 * @inheritdoc
 	 */
@@ -29,5 +30,20 @@ class ToDoCategoryPageHandler extends AbstractMenuPageHandler {
 	public function isVisible($objectID = null) {
 		$category = TodoCategoryCache::getInstance()->getCategory($objectID);
 		return $category !== null && $category->canEnter();
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
+	public function lookup($searchString) {
+		$categoryList = new RestrictedTodoCategoryNodeList();
+		
+		$categories = [];
+		/** @var \wcf\data\category\CategoryNode $category */
+		foreach ($categoryList as $category) {
+			if (stristr($category->getTitle(), $searchString)) $categories[$category->categoryID] = $category->getTitle();
+		}
+		
+		return $categories;
 	}
 }

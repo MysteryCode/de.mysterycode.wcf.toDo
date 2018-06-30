@@ -6,6 +6,7 @@
 			<pageType>system</pageType>
 			<options>todolist</options>
 			<permissions>user.toDo.toDo.canView</permissions>
+			<handler>wcf\system\page\handler\ToDoListPageHandler</handler>
 
 			<name language="de">ToDo-Liste</name>
 			<name language="en">ToDo-List</name>

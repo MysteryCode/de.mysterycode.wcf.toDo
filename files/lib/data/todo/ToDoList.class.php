@@ -11,6 +11,9 @@ use wcf\system\WCF;
  * @copyright	2014-2018 Florian Gail <https://www.mysterycode.de/>
  * @license	Kostenlose Plugins <https://www.mysterycode.de/licenses/kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
+ *
+ * @method ToDo[] getObjects()
+ * @property ToDo[] $objects
  */
 class ToDoList extends DatabaseObjectList {
 	/**

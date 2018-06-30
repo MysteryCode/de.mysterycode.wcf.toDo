@@ -13,6 +13,7 @@ use wcf\data\like\object\AbstractLikeObject;
  * @see ToDo
  *
  * @method ToDo getDecoratedObject()
+ * @mixin ToDo
  */
 class LikeableToDo extends AbstractLikeObject {
 	/**

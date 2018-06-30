@@ -99,7 +99,7 @@ class TodoPage extends AbstractPage {
 		MessageEmbeddedObjectManager::getInstance()->setActiveMessage('de.mysterycode.wcf.toDo', $this->todoID);
 		
 		if (MODULE_LIKE) {
-			$objectType = LikeHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo');
+			$objectType = LikeHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo.like');
 			LikeHandler::getInstance()->loadLikeObjects($objectType, [$this->todo->todoID]);
 			$this->likeData = LikeHandler::getInstance()->getLikeObject($objectType, $this->todo->todoID);
 		}
