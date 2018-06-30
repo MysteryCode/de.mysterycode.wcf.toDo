@@ -78,6 +78,7 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		if (!empty($this->parameters['htmlInputProcessor'])) {
 			/** @noinspection PhpUndefinedMethodInspection */
 			$this->parameters['data']['description'] = $this->parameters['htmlInputProcessor']->getHtml();
+			$this->parameters['data']['enableHtml'] = 1;
 		}
 
 		if (!empty($this->parameters['notesNtmlInputProcessor'])) {

@@ -20,6 +20,9 @@ class ToDoLikeUserActivityEvent extends SingletonFactory implements IUserActivit
 	 */
 	protected $languageVariable = 'wcf.user.profile.recentActivity.todo.like';
 	
+	/**
+	 * @inheritDoc
+	 */
 	public function prepare(array $events) {
 		$objectIDs = [];
 		foreach ($events as $event)
@@ -30,6 +33,7 @@ class ToDoLikeUserActivityEvent extends SingletonFactory implements IUserActivit
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
+		/** @var \wcf\data\user\activity\event\ViewableUserActivityEvent $event */
 		foreach ($events as $event) {
 			if (isset($todos[$event->objectID])) {
 				/** @var \wcf\data\todo\ToDo $todo */

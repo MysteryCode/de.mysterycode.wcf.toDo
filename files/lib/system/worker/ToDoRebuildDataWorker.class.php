@@ -119,6 +119,7 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 			if (!$todo->enableHtml) {
 				$this->getHtmlInputProcessor()->process($todo->description, 'de.mysterycode.wcf.toDo', $todo->todoID, true);
 				$data['description'] = $this->getHtmlInputProcessor()->getHtml();
+				$data['enableHtml'] = 1;
 			} else {
 				$this->getHtmlInputProcessor()->processEmbeddedContent($todo->description, 'de.mysterycode.wcf.toDo', $todo->todoID);
 			}
@@ -139,6 +140,8 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 
 			// update data
 			$editor->update($data);
+			
+			UserActivityEventHandler::getInstance()->fireEvent('de.mysterycode.wcf.toDo.toDo.recentActivityEvent', $todo->todoID, null, $todo->submitter ?: null, $todo->time);
 		}
 		WCF::getDB()->commitTransaction();
 		

@@ -36,8 +36,10 @@ class ToDoUserActivityEvent extends SingletonFactory implements IUserActivityEve
 		$todoList->readObjects();
 		$todos = $todoList->getObjects();
 		
+		/** @var \wcf\data\user\activity\event\ViewableUserActivityEvent $event */
 		foreach ($events as $event) {
 			if (isset($todos[$event->objectID])) {
+				/** @var \wcf\data\todo\ToDo $todo */
 				$todo = $todos[$event->objectID];
 				
 				if (!$todo->canEnter()) {
@@ -50,7 +52,7 @@ class ToDoUserActivityEvent extends SingletonFactory implements IUserActivityEve
 				]);
 				$event->setTitle($text);
 				
-				$event->setDescription($todo->getExcerpt());
+				$event->setDescription($todo->getSimplifiedFormattedMessage());
 			} else {
 				$event->setIsOrphaned();
 			}
