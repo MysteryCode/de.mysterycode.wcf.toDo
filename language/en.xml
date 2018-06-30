@@ -166,6 +166,10 @@
 		<item name="wcf.acp.rebuildData.de.mysterycode.wcf.toDo.category"><![CDATA[Rebuild ToDo-Categories]]></item>
 		<item name="wcf.acp.rebuildData.de.mysterycode.wcf.toDo.category.description"><![CDATA[Rebuilds the stats of ToDp-Categories]]></item>
 	</category>
+
+	<category name="wcf.acp.sitemap">
+		<item name="wcf.acp.sitemap.objectType.de.mysterycode.wcf.sitemap.object.todo"><![CDATA[ToDos]]></item>
+	</category>
 	
 	<category name="wcf.acp.todo">
 		<item name="wcf.acp.todo.category.list"><![CDATA[List Categories]]></item>

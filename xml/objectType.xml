@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE xml>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/objectType.xsd">
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://www.woltlab.com/XSD/tornado/objectType.xsd">
 	<import>
 		<!-- category -->
 		<type>
@@ -150,6 +148,15 @@
 			<name>de.mysterycode.wcf.toDo</name>
 			<definitionname>com.woltlab.wcf.user.objectWatch</definitionname>
 			<classname>wcf\system\user\object\watch\TodoUserObjectWatch</classname>
+		</type>
+		<!-- sitemap -->
+		<type>
+			<name>de.mysterycode.wcf.sitemap.object.todo</name>
+			<definitionname>com.woltlab.wcf.sitemap.object</definitionname>
+			<classname>wcf\system\sitemap\object\TodoSitemapObject</classname>
+			<priority>0.5</priority>
+			<changeFreq>monthly</changeFreq>
+			<rebuildTime>259200</rebuildTime>
 		</type>
 	</import>
 	<delete>
