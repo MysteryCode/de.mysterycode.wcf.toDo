@@ -144,7 +144,7 @@ class TodoAddForm extends MessageForm {
 	/**
 	 * @var	\wcf\data\label\group\ViewableLabelGroup[]
 	 */
-	public $labelGroups;
+	public $labelGroups = [];
 	
 	/**
 	 * label ids

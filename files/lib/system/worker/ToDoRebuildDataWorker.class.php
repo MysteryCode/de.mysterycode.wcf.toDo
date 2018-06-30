@@ -56,7 +56,7 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 			UserActivityPointHandler::getInstance()->reset('de.mysterycode.wcf.toDo.toDo.activityPointEvent');
 		}
 		
-		if (!count($this->objectList)) {
+		if ($this->objectList === null || !count($this->objectList)) {
 			return;
 		}
 		

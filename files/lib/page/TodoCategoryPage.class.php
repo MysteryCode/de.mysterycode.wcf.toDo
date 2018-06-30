@@ -29,12 +29,6 @@ class TodoCategoryPage extends AbstractTodoListPage {
 	public $category = null;
 	
 	/**
-	 * category node list
-	 * @var	\wcf\data\todo\category\RestrictedTodoCategoryNodeList
-	 */
-	public $categoryNodeList = null;
-	
-	/**
 	 * @inheritDoc
 	 */
 	public function readParameters() {

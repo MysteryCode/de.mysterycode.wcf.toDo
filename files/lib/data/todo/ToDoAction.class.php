@@ -728,8 +728,9 @@ class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * Validates todo profile preview.
 	 */
 	public function validateGetTodoProfile() {
-		if (count($this->objectIDs) != 1)
+		if (count($this->objectIDs) != 1) {
 			throw new UserInputException('objectIDs');
+		}
 	}
 	
 	/**
