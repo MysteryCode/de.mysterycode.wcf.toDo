@@ -56,7 +56,7 @@ class TodoAddForm extends MessageForm {
 
 	/**
 	 * timestamp the todo until has to be solved
-	 * @var integer
+	 * @var integer|\DateTime
 	 */
 	public $endTime = 0;
 
@@ -117,7 +117,7 @@ class TodoAddForm extends MessageForm {
 	public $progress = 0;
 
 	/**
-	 * @var integer
+	 * @var integer|\DateTime
 	 */
 	public $remembertime = 0;
 
@@ -175,7 +175,7 @@ class TodoAddForm extends MessageForm {
 		if (isset($_POST['labelIDs']) && is_array($_POST['labelIDs'])) $this->labelIDs = $_POST['labelIDs'];
 		
 		if (isset($_POST['description'])) $this->text = StringUtil::trim($_POST['description']);
-		if (isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $_POST['endTime'], WCF::getUser()->getTimeZone())->getTimestamp();
+		if (isset($_POST['endTime']) && $_POST['endTime'] > 0 && $_POST['endTime'] != '') $this->endTime = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $_POST['endTime'], WCF::getUser()->getTimeZone());
 		if (isset($_POST['note'])) $this->note = StringUtil::trim($_POST['note']);
 		if (isset($_POST['statusID'])) $this->statusID = StringUtil::trim($_POST['statusID']);
 		if (isset($_POST['title'])) $this->subject = StringUtil::trim($_POST['title']);
@@ -183,7 +183,7 @@ class TodoAddForm extends MessageForm {
 		if (isset($_POST['priority'])) $this->important = StringUtil::trim($_POST['priority']);
 		if (isset($_POST['categoryID'])) $this->categoryID = StringUtil::trim($_POST['categoryID']);
 		if (isset($_POST['progress'])) $this->progress = StringUtil::trim($_POST['progress']);
-		if (isset($_POST['remembertime']) && $_POST['remembertime'] > 0 && $_POST['remembertime'] != '') $this->remembertime = \DateTime::createFromFormat('Y-m-d', $_POST['remembertime'], WCF::getUser()->getTimeZone())->getTimestamp();
+		if (isset($_POST['remembertime']) && $_POST['remembertime'] > 0 && $_POST['remembertime'] != '') $this->remembertime = \DateTime::createFromFormat('Y-m-d', $_POST['remembertime'], WCF::getUser()->getTimeZone());
 		if (isset($_POST['responsibles'])) $this->responsibles = StringUtil::trim($_POST['responsibles']);
 		if (isset($_POST['responsibleGroups'])) $this->responsibleGroups = StringUtil::trim($_POST['responsibleGroups']);
 		
@@ -245,12 +245,12 @@ class TodoAddForm extends MessageForm {
 				'submitter' => WCF::getUser()->userID,
 				'username' => WCF::getUser()->username,
 				'time' => TIME_NOW,
-				'endTime' => $this->endTime,
+				'endTime' => $this->endTime instanceof \DateTime ? $this->endTime->getTimestamp() : $this->endTime,
+				'remembertime' => $this->remembertime instanceof \DateTime ? $this->remembertime->getTimestamp() : $this->remembertime,
 				'private' => $this->private,
 				'important' => $this->important,
 				'categoryID' => $this->categoryID ?: null,
 				'progress' => $this->progress,
-				'remembertime' => $this->remembertime,
 				'enableComments' => $this->enableComments,
 				'hasLabels' => !empty($this->labelIDs) ? 1 : 0
 			],
@@ -328,14 +328,14 @@ class TodoAddForm extends MessageForm {
 			'statusID' => $this->statusID,
 			'responsibles' => $this->responsibles,
 			'responsibleGroups' => $this->responsibleGroups,
-			'endTime' => $this->endTime,
+			'endTime' => $this->endTime instanceof \DateTime ? $this->endTime->format('c') : $this->endTime,
+			'remembertime' => $this->remembertime instanceof \DateTime ? $this->remembertime->format('Y-m-d') : $this->remembertime,
 			'private' => $this->private,
 			'important' => $this->important,
 			'categoryID' => $this->categoryID,
 			'category' => $this->category,
 			'categoryList' => $this->categoryList,
 			'progress' => $this->progress,
-			'remembertime' => $this->remembertime,
 			'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.toDo.attachment.allowedAttachmentExtensions'))),
 			'statusList' => $this->statusList,
 			'enableComments' => $this->enableComments,

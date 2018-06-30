@@ -59,7 +59,7 @@
 			<dl{if $errorField == 'endTime'} class="formError"{/if}>
 				<dt><label for="endTime">{lang}wcf.toDo.task.endTime{/lang}</label></dt>
 				<dd>
-					<input type="datetime" id="endTime" name="endTime" value="{if $endTime > 0}{$endTime}{/if}" />
+					<input type="datetime" id="endTime" name="endTime" value="{if $endTime}{$endTime}{/if}" />
 				</dd>
 			</dl>
 		{/if}
@@ -68,7 +68,7 @@
 			<dl{if $errorField == 'remembertime'} class="formError"{/if}>
 				<dt><label for="remembertime">{lang}wcf.toDo.task.remembertime{/lang}</label></dt>
 				<dd>
-					<input type="date" id="remembertime" name="remembertime" value="{if $remembertime > 0}{$remembertime}{/if}" />
+					<input type="date" id="remembertime" name="remembertime" value="{if $remembertime}{$remembertime}{/if}" />
 				</dd>
 			</dl>
 		{/if}

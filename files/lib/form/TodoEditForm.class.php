@@ -92,11 +92,11 @@ class TodoEditForm extends TodoAddForm {
 					'description' => $this->text,
 					'note' => $this->note,
 					'updatetimestamp' => TIME_NOW,
-					'endTime' => $this->endTime,
+					'endTime' => $this->endTime instanceof \DateTime ? $this->endTime->getTimestamp() : $this->endTime,
+					'remembertime' => $this->remembertime instanceof \DateTime ? $this->remembertime->getTimestamp() : $this->remembertime,
 					'private' => $this->private,
 					'important' => $this->important,
 					'progress' => $this->progress,
-					'remembertime' => $this->remembertime,
 					'enableComments' => $this->enableComments,
 					'hasLabels' => !empty($labelIDs[$this->todoID]) ? 1 : 0
 				],
@@ -177,11 +177,9 @@ class TodoEditForm extends TodoAddForm {
 		
 		if (!empty($this->endTime)) {
 			$this->endTime->setTimezone(WCF::getUser()->getTimeZone());
-			$this->endTime = $this->endTime->format('c');
 		}
 		if (!empty($this->remembertime)) {
 			$this->remembertime->setTimezone(WCF::getUser()->getTimeZone());
-			$this->remembertime = $this->remembertime->format('Y-m-d');
 		}
 	}
 	
