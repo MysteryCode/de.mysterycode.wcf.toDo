@@ -190,6 +190,7 @@
 			{include file='__commentJavaScript' commentContainerID='toDoCommentList'}
 
 			<ul id="toDoCommentList" class="commentList containerList" data-can-add="{if $commentCanAdd}true{else}false{/if}" data-object-id="{@$todo->todoID}" data-object-type-id="{@$commentObjectTypeID}" data-comments="{@$commentList->countObjects()}" data-last-comment-time="{@$lastCommentTime}">
+				{if $commentCanAdd}{include file='commentListAddComment' wysiwygSelector='toDoCommentListAddComment'}{/if}
 				{include file='commentList'}
 			</ul>
 		</section>
