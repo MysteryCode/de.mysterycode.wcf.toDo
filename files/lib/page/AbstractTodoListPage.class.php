@@ -176,7 +176,7 @@ abstract class AbstractTodoListPage extends SortablePage {
 			foreach ($this->objectList as $todo) {
 				$todoIDs[] = $todo->todoID;
 			}
-			$objectType = LikeHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo');
+			$objectType = LikeHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo.like');
 			LikeHandler::getInstance()->loadLikeObjects($objectType, $todoIDs);
 			$this->likeData = LikeHandler::getInstance()->getLikeObjects($objectType);
 		}

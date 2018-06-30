@@ -244,7 +244,7 @@
 
 		{if MODULE_LIKE}
 			require(['WoltLabSuite/Core/Ui/Like/Handler'], function(UiLikeHandler) {
-				new UiLikeHandler('de.mysterycode.wcf.toDo.toDo', {
+				new UiLikeHandler('de.mysterycode.wcf.toDo.toDo.like', {
 					// settings
 					isSingleItem: true,
 

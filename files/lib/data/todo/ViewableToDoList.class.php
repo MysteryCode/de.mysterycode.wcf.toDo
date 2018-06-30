@@ -63,7 +63,7 @@ class ViewableToDoList extends ToDoList {
 		if (!empty($this->sqlSelects))
 			$this->sqlSelects .= ',';
 		$this->sqlSelects .= "like_object.likes, like_object.dislikes";
-		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_like_object like_object ON (like_object.objectTypeID = ".LikeHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo')->objectTypeID." AND like_object.objectID = todo_table.todoID)";
+		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_like_object like_object ON (like_object.objectTypeID = ".LikeHandler::getInstance()->getObjectType('de.mysterycode.wcf.toDo.toDo.like')->objectTypeID." AND like_object.objectID = todo_table.todoID)";
 		
 		// get report status
 		if (WCF::getSession()->getPermission('mod.general.canUseModeration')) {

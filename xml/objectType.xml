@@ -25,7 +25,7 @@
 		</type>
 		<!-- like -->
 		<type>
-			<name>de.mysterycode.wcf.toDo.toDo</name>
+			<name>de.mysterycode.wcf.toDo.toDo.like</name>
 			<definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
 			<classname>wcf\data\todo\LikeableToDoProvider</classname>
 		</type>
@@ -83,6 +83,11 @@
 			<name>de.mysterycode.wcf.toDo.toDo.recentActivityEvent</name>
 			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
 			<classname>wcf\system\user\activity\event\ToDoUserActivityEvent</classname>
+		</type>
+		<type>
+			<name>de.mysterycode.wcf.toDo.toDo.like.recentActivityEvent</name>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>wcf\system\user\activity\event\ToDoLikeUserActivityEvent</classname>
 		</type>
 		<!-- activity points -->
 		<type>
