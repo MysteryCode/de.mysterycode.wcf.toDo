@@ -87,7 +87,7 @@
 	{/foreach}
 </ul>
 
-<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Todo{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+{js file='WCF.Todo' application='wcf'}
 
 <script data-relocate="true">
 	require(['Language'], function (Language) {

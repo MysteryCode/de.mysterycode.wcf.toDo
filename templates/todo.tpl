@@ -1,7 +1,7 @@
 {capture assign='pageTitle'}{lang}wcf.toDo.task.detail{/lang}{/capture}
 
 {capture assign='headContent'}
-	<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Todo{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
+	{js file='WCF.Todo' application='wcf'}
 {/capture}
 
 {capture assign='contentHeader'}

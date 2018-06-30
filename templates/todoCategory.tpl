@@ -1,5 +1,5 @@
 {capture assign='headContent'}
-	<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Todo{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
+	{js file='WCF.Todo' application='wcf'}
 	{capture assign='canonicalURLParameters'}sortField={@$sortField}&sortOrder={@$sortOrder}{/capture}
 {/capture}
 
