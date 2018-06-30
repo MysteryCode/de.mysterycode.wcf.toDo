@@ -5,9 +5,11 @@
 		<packagename language="de"><![CDATA[ToDo-Liste]]></packagename>
 		<packagedescription><![CDATA[Gives the possibility to manage ToDos in several custom categories on your website]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Ermöglicht die Verwaltung von ToDos in mehreren Kategorien auf Ihrer Website]]></packagedescription>
-		<version>2.0.2</version>
-		<date>2017-10-01</date>
+		<version>2.0.3</version>
+		<date>2018-06-30</date>
 		<packageurl>https://www.mysterycode.de/products/todo/</packageurl>
+
+		<pluginStoreFileID>1612</pluginStoreFileID>
 	</packageinformation>
 
 	<compatibility>
@@ -53,67 +55,22 @@
 		<instruction type="language" />
 	</instructions>
 
-	<instructions type="update" fromversion="1.2.6 pl 1">
+	<instructions type="update" fromversion="2.0.2">
 		<!-- files -->
 		<instruction type="acpTemplate" />
 		<instruction type="file" />
 		<instruction type="template" />
 
-		<!-- XMLs -->
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
-		<instruction type="cronjob">xml/cronjob.xml</instruction>
-		<instruction type="page">xml/page.xml</instruction>
-		<instruction type="menuItem">xml/menuItem.xml</instruction>
-
-		<!-- SQL -->
-		<instruction type="sql">update126.sql</instruction>
-		<instruction type="script">acp/update_de.mysterycode.wcf.todo.php</instruction>
-
-		<instruction type="language" />
-	</instructions>
-	<instructions type="update" fromversion="1.2.7">
-		<!-- files -->
-		<instruction type="acpTemplate" />
-		<instruction type="file" />
-		<instruction type="template" />
+		<!-- fix likes -->
+		<instruction type="sql" flushCache="true" run="standalone">fix_like_objecttype.sql</instruction>
 
 		<!-- XMLs -->
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
-		<instruction type="cronjob">xml/cronjob.xml</instruction>
-		<instruction type="page">xml/page.xml</instruction>
-		<instruction type="menuItem">xml/menuItem.xml</instruction>
-
-		<!-- SQL -->
-		<instruction type="sql">update126.sql</instruction>
-		<instruction type="script">acp/update_de.mysterycode.wcf.todo.php</instruction>
+		<instruction type="objectType" flushCache="true">xml/objectType.xml</instruction>
 
 		<instruction type="language" />
-	</instructions>
-	<instructions type="update" fromversion="2.0.1">
-		<!-- files -->
-		<instruction type="acpTemplate" />
-		<instruction type="file" />
-		<instruction type="template" />
 
-		<!-- XMLs -->
+		<!-- database update -->
+		<instruction type="sql">update202.sql</instruction>
 		<instruction type="page">xml/page.xml</instruction>
-
-		<instruction type="language" />
 	</instructions>
 </package>
