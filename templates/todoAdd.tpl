@@ -24,6 +24,11 @@
 			</dd>
 		</dl>
 
+		<dl>
+			<dt>{lang}wcf.toDo.category{/lang}</dt>
+			<dd><a href="{$category()->getLink()}"><span class="label badge" style="background-color: {$category()->color};">{$category()->getTitle()}</span></a></dd>
+		</dl>
+
 		{if ($action == 'add' && $category->canEditStatus()) || ($action == 'edit' && $todo->canEditStatus())}
 			<dl{if $errorField == 'statusID'} class="formError"{/if}>
 				<dt><label for="statusID">{lang}wcf.toDo.task.status{/lang}</label></dt>
