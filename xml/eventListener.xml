@@ -55,6 +55,7 @@
 			<environment>admin</environment>
 			<eventclassname>wcf\acp\action\UserExportGdprAction</eventclassname>
 			<eventname>export</eventname>
+			<inherit>1</inherit>
 			<listenerclassname>wcf\system\event\listener\TodoExportGdprActionListener</listenerclassname>
 		</eventlistener>
 		<eventlistener name="gdprExportFrontend">
@@ -63,6 +64,20 @@
 			<eventname>export</eventname>
 			<inherit>1</inherit>
 			<listenerclassname>wcf\system\event\listener\TodoExportGdprActionListener</listenerclassname>
+		</eventlistener>
+		<eventlistener name="gdprIpRemovalAdmin">
+			<environment>admin</environment>
+			<eventclassname>wcf\system\cronjob\RemoveIpAddressesCronjob</eventclassname>
+			<eventname>setDatabaseTableData</eventname>
+			<inherit>1</inherit>
+			<listenerclassname>wcf\system\event\listener\TodoIpAddressRemovalGdprActionListener</listenerclassname>
+		</eventlistener>
+		<eventlistener name="gdprIpRemovalUser">
+			<environment>admin</environment>
+			<eventclassname>wcf\system\cronjob\RemoveIpAddressesCronjob</eventclassname>
+			<eventname>setDatabaseTableData</eventname>
+			<inherit>1</inherit>
+			<listenerclassname>wcf\system\event\listener\TodoIpAddressRemovalGdprActionListener</listenerclassname>
 		</eventlistener>
 	</import>
 	<delete>
