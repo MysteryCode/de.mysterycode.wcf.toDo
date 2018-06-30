@@ -8,9 +8,9 @@ use wcf\system\cache\builder\AssignCacheBuilder;
 /**
  * Provides functions to edit todo status.
  *
- * @author		Florian Gail
- * @copyright	2014-2016 Florian Gail <https://www.mysterycode.de/>
- * @license	Kostenlose Plugins <https://downloads.mysterycode.de/license/6-kostenlose-plugins/>
+ * @author	Florian Gail <https://www.mysterycode.de/>
+ * @copyright	2014-2018 Florian Gail <https://www.mysterycode.de/>
+ * @license	Kostenlose Plugins <https://www.mysterycode.de/licenses/kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
  */
 class AssignedGroupEditor extends DatabaseObjectEditor implements IEditableCachedObject {
