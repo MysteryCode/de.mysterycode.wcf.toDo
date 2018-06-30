@@ -62,6 +62,7 @@
 		
 		<item name="wcf.acp.group.option.category.user.toDo.comment"><![CDATA[Comments]]></item>
 		<item name="wcf.acp.group.option.user.toDo.comment.canAdd"><![CDATA[Can comment ToDos]]></item>
+		<item name="wcf.acp.group.option.user.toDo.comment.canAddWithoutModeration"><![CDATA[Can comment ToDos without moderation]]></item>
 		<item name="wcf.acp.group.option.user.toDo.comment.canEditOwn"><![CDATA[Can edit own commments]]></item>
 		<item name="wcf.acp.group.option.user.toDo.comment.canDeleteOwn"><![CDATA[Can delete own comments]]></item>
 		

@@ -22,6 +22,11 @@ class ToDoCommentManager extends AbstractCommentManager {
 	/**
 	 * @inheritDoc
 	 */
+	protected $permissionAddWithoutModeration = 'user.toDo.comment.canAddWithoutModeration';
+	
+	/**
+	 * @inheritDoc
+	 */
 	protected $permissionEdit = 'user.toDo.comment.canEditOwn';
 	
 	/**
