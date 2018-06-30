@@ -207,6 +207,7 @@
 
 	<category name="wcf.tagging">
 		<item name="wcf.tagging.taggedObjects.de.mysterycode.wcf.toDo.toDo"><![CDATA[ToDos]]></item>
+		<item name="wcf.tagging.objectType.de.mysterycode.wcf.toDo.toDo"><![CDATA[ToDos]]></item>
 	</category>
 	
 	<category name="wcf.toDo">
