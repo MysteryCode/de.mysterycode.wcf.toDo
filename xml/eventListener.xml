@@ -49,6 +49,21 @@
 			<eventname>finalizeAction</eventname>
 			<listenerclassname>wcf\system\event\listener\TodoCategoryActionListener</listenerclassname>
 		</eventlistener>
+
+		<!-- GDPR export -->
+		<eventlistener name="gdprExportAdmin">
+			<environment>admin</environment>
+			<eventclassname>wcf\acp\action\UserExportGdprAction</eventclassname>
+			<eventname>export</eventname>
+			<listenerclassname>wcf\system\event\listener\TodoExportGdprActionListener</listenerclassname>
+		</eventlistener>
+		<eventlistener name="gdprExportFrontend">
+			<environment>user</environment>
+			<eventclassname>wcf\acp\action\UserExportGdprAction</eventclassname>
+			<eventname>export</eventname>
+			<inherit>1</inherit>
+			<listenerclassname>wcf\system\event\listener\TodoExportGdprActionListener</listenerclassname>
+		</eventlistener>
 	</import>
 	<delete>
 		<!-- show hint -->
