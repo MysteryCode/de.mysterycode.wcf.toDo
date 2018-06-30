@@ -1,9 +1,6 @@
 <?php
 
 namespace wcf\system\comment\manager;
-use wcf\data\comment\response\CommentResponse;
-use wcf\data\comment\Comment;
-use wcf\data\todo\ToDo;
 use wcf\data\todo\ToDoCache;
 use wcf\data\todo\ToDoEditor;
 use wcf\system\WCF;
@@ -18,100 +15,46 @@ use wcf\system\WCF;
  */
 class ToDoCommentManager extends AbstractCommentManager {
 	/**
-	 * @var null|ToDo
+	 * @inheritDoc
 	 */
-	protected $currentToDo = null;
+	protected $permissionAdd = 'user.toDo.comment.canAdd';
 	
 	/**
 	 * @inheritDoc
 	 */
-	public function canAdd($objectID) {
-		if (!$this->isAccessible($objectID)) {
-			return false;
-		}
-		
-		return WCF::getSession()->getPermission('user.toDo.comment.canAdd');
-	}
+	protected $permissionEdit = 'user.toDo.comment.canEditOwn';
 	
 	/**
 	 * @inheritDoc
 	 */
-	public function canEditComment(Comment $comment) {
-		$this->setCurrentToDo($comment->objectID);
-		
-		return $this->canEdit(($comment->userID == WCF::getUser()->userID));
-	}
+	protected $permissionDelete = 'user.toDo.comment.canDeleteOwn';
 	
 	/**
 	 * @inheritDoc
 	 */
-	public function canEditResponse(CommentResponse $response) {
-		$this->setCurrentToDo($response->getComment()->objectID);
-		
-		return $this->canEdit(($response->userID == WCF::getUser()->userID));
-	}
+	protected $permissionModEdit = 'mod.toDo.comment.canEdit';
 	
 	/**
 	 * @inheritDoc
 	 */
-	public function canDeleteComment(Comment $comment) {
-		$this->setCurrentToDo($comment->objectID);
-		
-		return $this->canDelete(($comment->userID == WCF::getUser()->userID));
-	}
+	protected $permissionModDelete = 'mod.toDo.comment.canDelete';
 	
 	/**
 	 * @inheritDoc
 	 */
-	public function canDeleteResponse(CommentResponse $response) {
-		$this->setCurrentToDo($response->getComment()->objectID);
-		
-		return $this->canDelete(($response->userID == WCF::getUser()->userID));
-	}
-	
-	/**
-	 * @inheritDoc
-	 */
-	public function canModerate($objectTypeID, $objectID) {
-		if (!$this->isAccessible($objectID)) {
-			return false;
-		}
-		
-		if (!WCF::getUser()->userID) {
-			return false;
-		}
-		
-		return WCF::getSession()->getPermission('mod.toDo.comment.canModerate');
-	}
-
-	/**
-	 * Sets the current entry.
-	 *
-	 * @param integer $todoID
-	 * @throws \wcf\system\exception\SystemException
-	 */
-	protected function setCurrentToDo($todoID) {
-		$this->currentToDo = ToDoCache::getInstance()->getTodo($todoID);
-		
-		if (empty($this->currentToDo))
-			$this->currentToDo = new ToDo($todoID);
-	}
+	protected $permissionCanModerate = 'mod.toDo.comment.canModerate';
 	
 	/**
 	 * @inheritDoc
 	 */
 	public function isAccessible($objectID, $validateWritePermission = false) {
-		$this->setCurrentToDo($objectID);
+		$todo = ToDoCache::getInstance()->getTodo($objectID);
 		
-		if (!$this->currentToDo)
-			return false;
-		
-		// check object id
-		if (!$this->currentToDo->todoID)
+		if ($todo === null || !$todo->todoID)
 			return false;
 		
 		// check view permission
-		if (!$this->currentToDo->canEnter())
+		if (!$todo->canEnter())
 			return false;
 		
 		return true;
@@ -120,57 +63,9 @@ class ToDoCommentManager extends AbstractCommentManager {
 	/**
 	 * @inheritDoc
 	 */
-	protected function canEdit($isOwner) {
-		return $this->canModify($isOwner, 'mod.toDo.comment.canEdit');
-	}
-	
-	/**
-	 *
-	 * @inheritDoc
-	 */
-	protected function canDelete($isOwner) {
-		return $this->canModify($isOwner, 'mod.toDo.comment.canDelete');
-	}
-	
-	/**
-	 * Returns true if the active user has the permission to modify a comment.
-	 *
-	 * @param integer $isOwner        	
-	 * @param string $modifyPermission        	
-	 * @return boolean
-	 */
-	protected function canModify($isOwner, $modifyPermission) {
-		// disallow guests
-		if (!WCF::getUser()->userID) {
-			return false;
-		}
-		
-		if ($this->currentToDo === null) {
-			return false;
-		}
-		
-		// check access
-		if (!$this->isAccessible($this->currentToDo->todoID)) {
-			return false;
-		}
-		
-		if (WCF::getSession()->getPermission($modifyPermission)) {
-			return true;
-		}
-		
-		if ($isOwner && WCF::getSession()->getPermission($modifyPermission) . 'Own') {
-			return true;
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * @inheritDoc
-	 */
 	public function getLink($objectTypeID, $objectID) {
-		$todo = new ToDo($objectID);
-		return $todo->getLink();
+		$todo = ToDoCache::getInstance()->getTodo($objectID);
+		return $todo === null ? '' : $todo->getLink();
 	}
 	
 	/**
@@ -188,9 +83,9 @@ class ToDoCommentManager extends AbstractCommentManager {
 	 * {@inheritDoc}
 	 */
 	public function updateCounter($objectID, $value) {
-		$todoEditor = new ToDoEditor(new ToDo($objectID));
-		$todoEditor->updateCounters([
-			'comments' => $value
-		]);
+		$todo = ToDoCache::getInstance()->getTodo($objectID);
+		
+		$todoEditor = new ToDoEditor($todo);
+		$todoEditor->updateCounters(['comments' => $value]);
 	}
 }
