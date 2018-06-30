@@ -108,7 +108,7 @@
 
 		<div id="labelSelectionContainer">
 			{foreach from=$labelGroups item=labelGroup}
-				{if $labelGroup|is_array && $labelGroup|count}
+				{if $labelGroup !== null && $labelGroup->count()}
 					<dl{if $errorField == 'label' && $errorType[$labelGroup->groupID]|isset} class="formError"{/if}>
 						<dt><label>{$labelGroup->getTitle()}</label></dt>
 						<dd>
@@ -218,8 +218,11 @@
 </form>
 
 <script data-relocate="true">
-	//<![CDATA[
-	$(function() {
+	require(['Language'], function (Language) {
+		Language.addObject({
+			'wcf.label.none': '{lang}wcf.label.none{/lang}'
+		});
+
 		new WCF.Search.User('#responsibles', null, false, [ ], true);
 		new WCF.Todo.Search.User('#responsibleGroups', null, [ ], true);
 		new WCF.Label.Chooser({ {implode from=$labelIDs key=groupID item=labelID}{@$groupID}: {@$labelID}{/implode} }, '#messageContainer');
@@ -238,7 +241,6 @@
 			$('#priority').val(WCF.String.escapeHTML($(event.currentTarget).data('prio')));
 		});
 	});
-	//]]>
 </script>
 
 {include file='footer'}
