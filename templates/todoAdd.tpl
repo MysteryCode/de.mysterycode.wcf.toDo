@@ -26,7 +26,7 @@
 
 		<dl>
 			<dt>{lang}wcf.toDo.category{/lang}</dt>
-			<dd><a href="{$category()->getLink()}"><span class="label badge" style="background-color: {$category()->color};">{$category()->getTitle()}</span></a></dd>
+			<dd><a href="{$category->getLink()}"><span class="label badge" style="background-color: {$category->color};">{$category->getTitle()}</span></a></dd>
 		</dl>
 
 		{if ($action == 'add' && $category->canEditStatus()) || ($action == 'edit' && $todo->canEditStatus())}
