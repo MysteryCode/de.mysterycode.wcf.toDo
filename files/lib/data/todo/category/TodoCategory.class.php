@@ -208,7 +208,7 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 		foreach (TodoCategoryCache::getInstance()->getCategories() as $category) {
 			$result = true;
 			foreach ($permissions as $permission) {
-				$result = $result && $category->getPermission($permission);
+				$result = $result && $category->getPermission($permission) && !$category->isDisabled;
 			}
 			
 			// add category if accessible
@@ -249,11 +249,11 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 	}
 	
 	public function canViewTodos() {
-		$this->getPermission('user.canViewTodos');
+		return !$this->isDisabled && $this->getPermission('user.canViewTodos');
 	}
 	
 	public function canEnterTodos() {
-		return $this->getPermission('user.canEnterTodos');
+		return !$this->isDisabled && $this->getPermission('user.canEnterTodos');
 	}
 	
 	public function canEditStatus() {
