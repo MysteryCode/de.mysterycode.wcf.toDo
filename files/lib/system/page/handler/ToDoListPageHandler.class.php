@@ -15,6 +15,7 @@ class ToDoListPageHandler extends AbstractMenuPageHandler {
 	 * @inheritdoc
 	 */
 	public function isVisible($objectID = null) {
+		UserStorageHandler::getInstance()->resetAll('todoListAccessable');
 		$test = UserStorageHandler::getInstance()->getField('todoListAccessable');
 		
 		if ($test === null) {
@@ -22,7 +23,16 @@ class ToDoListPageHandler extends AbstractMenuPageHandler {
 			$todoList = new AccessibleToDoList();
 			$todoList->readObjectIDs();
 			
-			$test = empty($categoryList) && empty($todoList->getObjectIDs());
+			$res = false;
+			foreach ($categoryList as $category) {
+				if ($category->categoryID) {
+					$res = true;
+					break;
+				}
+			}
+			
+			$test = intval($res || !empty($todoList->getObjectIDs()));
+			
 			UserStorageHandler::getInstance()->update(WCF::getUser()->userID, 'todoListAccessable', $test);
 		}
 		

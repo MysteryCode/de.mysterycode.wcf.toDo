@@ -9,6 +9,7 @@ use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\user\activity\point\UserActivityPointHandler;
+use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
 /**
@@ -147,6 +148,7 @@ class ToDoRebuildDataWorker extends AbstractRebuildDataWorker {
 		
 		// update activity points
 		UserActivityPointHandler::getInstance()->fireEvents('de.mysterycode.wcf.toDo.toDo.activityPointEvent', $userStats, false);
+		UserStorageHandler::getInstance()->resetAll('todoListAccessable');
 	}
 
 	/**

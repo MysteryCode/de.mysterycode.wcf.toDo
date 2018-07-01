@@ -7,6 +7,7 @@ use wcf\data\IEditableCachedObject;
 use wcf\system\cache\builder\TodoCategoryACLOptionCacheBuilder;
 use wcf\system\cache\builder\TodoCategoryDataCacheBuilder;
 use wcf\system\cache\builder\TodoCategoryLabelGroupCacheBuilder;
+use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
 /**
@@ -84,6 +85,7 @@ class TodoCategoryEditor extends CategoryEditor implements IEditableCachedObject
 		static::resetDataCache();
 		static::resetACLOptionCache();
 		static::resetLabelGroupCache();
+		UserStorageHandler::getInstance()->resetAll('todoListAccessable');
 	}
 	
 	/**

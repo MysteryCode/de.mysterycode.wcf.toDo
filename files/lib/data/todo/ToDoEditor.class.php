@@ -55,5 +55,7 @@ class ToDoEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		UserStorageHandler::getInstance()->resetAll('unsolvedTodoCount');
 		UserStorageHandler::getInstance()->resetAll('overdueTodoCount');
 		UserStorageHandler::getInstance()->resetAll('waitingTodoCount');
+		
+		UserStorageHandler::getInstance()->resetAll('todoListAccessable');
 	}
 }
