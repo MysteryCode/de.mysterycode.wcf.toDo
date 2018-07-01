@@ -135,6 +135,7 @@
 		<item name="wcf.acp.option.todo_mobile_optimization_enable"><![CDATA[Für Mobilgeräte optimiertes Layout aktivieren]]></item>
 		<item name="wcf.acp.option.todo_enable_stats"><![CDATA[ToDo-Statistik auf Übersichtsseite anzeigen]]></item>
 
+		<item name="wcf.acp.option.category.toDo.general.unread"><![CDATA[ToDo-Counter]]></item>
 		<item name="wcf.acp.option.todo_todos_unread_enable"><![CDATA[ToDo-Counter aktivieren]]></item>
 		<item name="wcf.acp.option.todo_todos_unread_include_open"><![CDATA[Ausstehende ToDos mitzählen]]></item>
 		<item name="wcf.acp.option.todo_todos_unread_include_inprogress"><![CDATA[ToDos in Arbeit mitzählen]]></item>
