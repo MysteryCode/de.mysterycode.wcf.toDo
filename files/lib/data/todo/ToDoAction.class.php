@@ -42,6 +42,10 @@ use wcf\util\StringUtil;
  * @copyright	2014-2018 Florian Gail <https://www.mysterycode.de/>
  * @license	Kostenlose Plugins <https://www.mysterycode.de/licenses/kostenlose-plugins/>
  * @package	de.mysterycode.wcf.toDo
+ *
+ * @property    ToDoEditor[]    $objects
+ * @method      ToDoEditor[]    getObjects()
+ * @method      ToDoEditor      getSingleObject()
  */
 class ToDoAction extends AbstractDatabaseObjectAction implements IClipboardAction, IMessageInlineEditorAction, IMessageQuoteAction {
 	/**
