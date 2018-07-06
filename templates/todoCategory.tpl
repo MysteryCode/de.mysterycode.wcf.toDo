@@ -26,9 +26,7 @@
 	</div>
 {/hascontent}
 
-{if $categoryNodeList|count > 0}
-	{include file='todoCategoryNodeList'}
-{/if}
+{include file='todoCategoryNodeList'}
 
 {include file='todoListContainer' todoList=$objects todoListItems=$items}
 
