@@ -2,19 +2,16 @@ language: php
 php:
   - 7.2
 before_install:
-  - export PATH="$PATH:$(composer global config bin-dir --absolute)"
-  - composer global require "squizlabs/php_codesniffer=3.*"
-  - phpenv rehash
+#  - export PATH="$PATH:$(composer global config bin-dir --absolute)"
+#  - composer global require "squizlabs/php_codesniffer=3.*"
+#  - phpenv rehash
 before_script:
-  - git clone --branch=master --depth=1 --quiet git://github.com/WoltLab/WCF.git WCF
+#  - git clone --branch=master --depth=1 --quiet git://github.com/WoltLab/WCF.git WCF
   - wget https://static.mysterycode.de/wcf/master/WCFSetup.tar.gz -P run/
   - wget https://static.mysterycode.de/wcf/master/install.php -P run/
 script:
 #  - find . -type f -name '*.php' -not -path './WCF/*' -not -path './run/*' -prune -o -path './WCF' -prune -o -path './run' -print0 |xargs -0 -I file -P 4 php -l file > /dev/null
 #  - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" . --ignore="/WCF/*"
-  - php run/install.php
-  - php -r 'foreach(getenv() as $key => $value) { echo $key . " => " . $value . "\n"; putenv("$key=$value"); $_ENV[$key] = $value; }'
-  - php -r 'var_dump($_ENV);'
-  - php -r 'var_dump(getenv());'
+  - php run/install.php dev=1
 notifications:
   email: false
