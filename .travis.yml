@@ -11,11 +11,11 @@ before_install:
   - phpenv rehash
 before_script:
   - git clone --branch=master --depth=1 --quiet git://github.com/WoltLab/WCF.git WCF
-  - wget https://static.mysterycode.de/wcf/master/WCFSetup.tar.gz
-  - wget https://static.mysterycode.de/wcf/master/install.php
+  - wget https://static.mysterycode.de/wcf/master/WCFSetup.tar.gz -P run/
+  - wget https://static.mysterycode.de/wcf/master/install.php -P run/
 script:
-  - find . -type f -name '*.php' -not -path './WCF/*' -print0 |xargs -0 -I file -P 4 php -l file > /dev/null
+  - find . -type f -name '*.php' -not -path './WCF/*' -prune -o -path './WCF' -prune -o -path './run' -print0 |xargs -0 -I file -P 4 php -l file > /dev/null
   - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" . --ignore="/WCF/*"
-  - php install.php
+  - php run/install.php
 notifications:
   email: false
