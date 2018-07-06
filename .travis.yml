@@ -12,7 +12,7 @@ before_script:
 script:
 #  - find . -type f -name '*.php' -not -path './WCF/*' -not -path './run/*' -prune -o -path './WCF' -prune -o -path './run' -print0 |xargs -0 -I file -P 4 php -l file > /dev/null
 #  - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" . --ignore="/WCF/*"
-  - php run/install.php dev=1
+  - php run/install.php
 notifications:
   email: false
 
