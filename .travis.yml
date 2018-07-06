@@ -1,6 +1,8 @@
 language: php
 php:
   - 7.2
+addons:
+  mariadb: '10.3'
 before_install:
 #  - export PATH="$PATH:$(composer global config bin-dir --absolute)"
 #  - composer global require "squizlabs/php_codesniffer=3.*"
@@ -9,6 +11,10 @@ before_script:
 #  - git clone --branch=master --depth=1 --quiet git://github.com/WoltLab/WCF.git WCF
   - wget https://static.mysterycode.de/wcf/master/WCFSetup.tar.gz -P run/
   - wget https://static.mysterycode.de/wcf/master/install.txt -O run/install.php
+  - sudo mysql -e 'CREATE DATABASE wcf;'
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('root') where User='root'; update user set plugin='mysql_native_password'; FLUSH PRIVILEGES;"
+  - sudo mysql_upgrade
+  - sudo service mysql restart
 script:
 #  - find . -type f -name '*.php' -not -path './WCF/*' -not -path './run/*' -prune -o -path './WCF' -prune -o -path './run' -print0 |xargs -0 -I file -P 4 php -l file > /dev/null
 #  - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" . --ignore="/WCF/*"
