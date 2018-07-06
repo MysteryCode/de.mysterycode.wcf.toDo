@@ -64,6 +64,31 @@
 		<instruction type="eventListener">xml/eventListener.xml</instruction>
 		<instruction type="page">xml/page.xml</instruction>
 
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo_menuitem.php</instruction>
+
 		<instruction type="language" />
+	</instructions>
+	<instructions type="update" fromversion="2.0.3 pl 1">
+		<!-- files -->
+		<instruction type="acpTemplate" />
+		<instruction type="file" />
+		<instruction type="template" />
+
+		<!-- XMLs -->
+		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+		<instruction type="eventListener">xml/eventListener.xml</instruction>
+		<instruction type="page">xml/page.xml</instruction>
+
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo_menuitem.php</instruction>
+
+		<instruction type="language" />
+	</instructions>
+	<instructions type="update" fromversion="2.1.0 Beta 1">
+		<!-- files -->
+		<instruction type="file" />
+
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo_menuitem.php</instruction>
 	</instructions>
 </package>
