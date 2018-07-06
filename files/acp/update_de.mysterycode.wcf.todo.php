@@ -39,5 +39,3 @@ if ($objectTypeID !== false || !($objectTypeID > 0)) {
 		]);
 	}
 }
-
-

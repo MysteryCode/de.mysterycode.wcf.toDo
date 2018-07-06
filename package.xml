@@ -72,9 +72,19 @@
 		<!-- database update -->
 		<instruction type="sql">update202.sql</instruction>
 		<instruction type="page">xml/page.xml</instruction>
+
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo_menuitem.php</instruction>
 	</instructions>
 	<instructions type="update" fromversion="2.0.3">
 		<!-- files -->
 		<instruction type="file" />
+
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo_menuitem.php</instruction>
+	</instructions>
+	<instructions type="update" fromversion="2.0.3 pl 1">
+		<!-- files -->
+		<instruction type="file" />
+
+		<instruction type="script">acp/update_de.mysterycode.wcf.todo_menuitem.php</instruction>
 	</instructions>
 </package>
