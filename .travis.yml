@@ -14,5 +14,6 @@ script:
 #  - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" . --ignore="/WCF/*"
   - php run/install.php
   - php -r 'var_dump($_ENV);'
+  - php -r 'var_dump(getenv());'
 notifications:
   email: false
