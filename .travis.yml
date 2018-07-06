@@ -13,6 +13,6 @@ script:
 #  - find . -type f -name '*.php' -not -path './WCF/*' -not -path './run/*' -prune -o -path './WCF' -prune -o -path './run' -print0 |xargs -0 -I file -P 4 php -l file > /dev/null
 #  - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" . --ignore="/WCF/*"
   - php run/install.php
-  - php -r "var_dump($_ENV['WCFSETUP_DBHOST']);"
+  - php -r "var_dump($_ENV);"
 notifications:
   email: false
