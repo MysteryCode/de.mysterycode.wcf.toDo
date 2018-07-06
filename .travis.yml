@@ -13,7 +13,7 @@ script:
 #  - find . -type f -name '*.php' -not -path './WCF/*' -not -path './run/*' -prune -o -path './WCF' -prune -o -path './run' -print0 |xargs -0 -I file -P 4 php -l file > /dev/null
 #  - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" . --ignore="/WCF/*"
   - php run/install.php
-  - php -r 'foreach(getenv() as $key => $value) { putenv("$key=$value"); }'
+  - php -r 'foreach(getenv() as $key => $value) { echo $key . " => " . $value . "\n"; putenv("$key=$value"); }'
   - php -r 'var_dump($_ENV);'
   - php -r 'var_dump(getenv());'
 notifications:
