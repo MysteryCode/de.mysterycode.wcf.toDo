@@ -2,6 +2,7 @@
 
 {capture assign='headContent'}
 	{js file='WCF.Todo' application='wcf'}
+	{event name='headContent'}
 {/capture}
 
 {capture assign='contentHeader'}
