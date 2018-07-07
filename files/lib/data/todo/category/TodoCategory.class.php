@@ -21,7 +21,7 @@ use wcf\system\WCF;
 class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObject, IRouteController {
 	/**
 	 * acl permissions for the active user of this category
-	 * @var	array<boolean>
+	 * @var	boolean[]
 	 */
 	protected $permissions = null;
 	
@@ -206,9 +206,9 @@ class TodoCategory extends AbstractDecoratedCategory implements ITitledLinkObjec
 		
 		// loop through all categories
 		foreach (TodoCategoryCache::getInstance()->getCategories() as $category) {
-			$result = true;
+			$result = (!$category->isDisabled);
 			foreach ($permissions as $permission) {
-				$result = $result && $category->getPermission($permission) && !$category->isDisabled;
+				$result = $result && $category->getPermission($permission);
 			}
 			
 			// add category if accessible

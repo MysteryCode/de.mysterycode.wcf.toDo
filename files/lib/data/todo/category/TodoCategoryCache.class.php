@@ -30,7 +30,7 @@ class TodoCategoryCache extends SingletonFactory {
 	
 	/**
 	 * list of cached category objects
-	 * @var	array<\wcf\data\todo\category\TodoCategory>
+	 * @var	\wcf\data\todo\category\TodoCategory[]
 	 */
 	protected $categories = null;
 	
@@ -42,25 +42,25 @@ class TodoCategoryCache extends SingletonFactory {
 	
 	/**
 	 * list of cached stat objects
-	 * @var	array<\wcf\data\todo\category\stat\TodoCategoryStat>
+	 * @var	wcf\data\todo\category\stat\TodoCategoryStat[]
 	 */
 	protected $statObjects = [];
 	
 	/**
 	 * list of users which are online in the categories
-	 * @var	array<\wcf\data\user\User>
+	 * @var	\wcf\data\user\User[]
 	 */
 	protected $usersOnline = null;
 	
 	/**
 	 * list of cached last todo ids
-	 * @var	array<integer>
+	 * @var	integer[]
 	 */
 	protected $lastTodoIDs = [];
 	
 	/**
 	 * list of cached last todos
-	 * @var array<\wcf\data\todo\ToDo>
+	 * @var \wcf\data\todo\ToDo[]
 	 */
 	protected $lastTodos = null;
 	
@@ -78,7 +78,7 @@ class TodoCategoryCache extends SingletonFactory {
 	/**
 	 * Returns a list of category objects.
 	 *
-	 * @return array <\wcf\data\todo\category\TodoCategory>
+	 * @return \wcf\data\todo\category\TodoCategory[]
 	 * @throws \wcf\system\exception\SystemException
 	 */
 	public function getCategories() {
@@ -97,7 +97,7 @@ class TodoCategoryCache extends SingletonFactory {
 	/**
 	 * Returns a list of category ids.
 	 *
-	 * @return	array<integer>
+	 * @return	integer[]
 	 */
 	public function getCategoryIDs() {
 		$categoryIDs = [];
@@ -153,7 +153,7 @@ class TodoCategoryCache extends SingletonFactory {
 	 * Returns a list of users which are online in the category with the given id.
 	 *
 	 * @param	integer		$categoryID
-	 * @return	array<\wcf\data\user\User>
+	 * @return	\wcf\data\user\User[]
 	 */
 	public function getUsersOnline($categoryID) {
 		if ($this->usersOnline === null) {
