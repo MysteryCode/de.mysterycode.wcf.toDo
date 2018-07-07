@@ -170,9 +170,6 @@ class TodoEditForm extends TodoAddForm {
 					$this->labelIDs[$label->groupID] = $label->labelID;
 				}
 			}
-		} else {
-			$this->endTime = DateUtil::getDateTimeByTimestamp($this->endTime);
-			$this->remembertime = DateUtil::getDateTimeByTimestamp($this->remembertime);
 		}
 		
 		if (!empty($this->endTime)) {
