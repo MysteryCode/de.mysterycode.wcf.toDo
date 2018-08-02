@@ -12,6 +12,7 @@
 				<page><![CDATA[wcf\page\TodoArchivePage]]></page>
 				<page><![CDATA[wcf\page\TodoTrashPage]]></page>
 				<page><![CDATA[wcf\page\TodoPage]]></page>
+				<page><![CDATA[wcf\page\MyTodosPage]]></page>
 				<page><![CDATA[wcf\page\DeletedContentListPage]]></page>
 			</pages>
 		</action>
@@ -24,6 +25,7 @@
 				<page><![CDATA[wcf\page\TodoArchivePage]]></page>
 				<page><![CDATA[wcf\page\TodoTrashPage]]></page>
 				<page><![CDATA[wcf\page\TodoPage]]></page>
+				<page><![CDATA[wcf\page\MyTodosPage]]></page>
 				<page><![CDATA[wcf\page\DeletedContentListPage]]></page>
 			</pages>
 		</action>
@@ -36,6 +38,7 @@
 				<page><![CDATA[wcf\page\TodoArchivePage]]></page>
 				<page><![CDATA[wcf\page\TodoTrashPage]]></page>
 				<page><![CDATA[wcf\page\TodoPage]]></page>
+				<page><![CDATA[wcf\page\MyTodosPage]]></page>
 				<page><![CDATA[wcf\page\DeletedContentListPage]]></page>
 			</pages>
 		</action>
@@ -47,6 +50,7 @@
 				<page><![CDATA[wcf\page\TodoCategoryPage]]></page>
 				<page><![CDATA[wcf\page\TodoArchivePage]]></page>
 				<page><![CDATA[wcf\page\TodoTrashPage]]></page>
+				<page><![CDATA[wcf\page\MyTodosPage]]></page>
 				<page><![CDATA[wcf\page\TodoPage]]></page>
 			</pages>
 		</action>
@@ -58,6 +62,7 @@
 				<page><![CDATA[wcf\page\TodoCategoryPage]]></page>
 				<page><![CDATA[wcf\page\TodoArchivePage]]></page>
 				<page><![CDATA[wcf\page\TodoTrashPage]]></page>
+				<page><![CDATA[wcf\page\MyTodosPage]]></page>
 				<page><![CDATA[wcf\page\TodoPage]]></page>
 			</pages>
 		</action>
