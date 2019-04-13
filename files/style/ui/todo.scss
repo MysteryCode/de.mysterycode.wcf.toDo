@@ -277,3 +277,10 @@
 .todoLikeStatus {
 	display: inline-block;
 }
+
+@media screen and (min-width: 769px), print{
+	.todoList .todoData .todoStats {
+		flex: 0 0 30%;
+		margin-right: 35%;
+	}
+}
