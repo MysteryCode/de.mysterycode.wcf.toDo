@@ -267,11 +267,13 @@
 		<item name="wcf.toDo.task.progress.update"><![CDATA[Fortschritt aktualisieren]]></item>
 		<item name="wcf.toDo.task.remembertime"><![CDATA[Erinnerung]]></item>
 		<item name="wcf.toDo.task.sort"><![CDATA[Sortierung]]></item>
-		<item name="wcf.toDo.task.unsolved.reminderSingular"><![CDATA[ausstehende Aufgabe in der <a href="{link controller='TodoList'}{/link}">ToDo-Liste</a>]]></item>
-		<item name="wcf.toDo.task.unsolved.reminderPlural"><![CDATA[ausstehende Aufgaben in der <a href="{link controller='TodoList'}{/link}">ToDo-Liste</a>]]></item>
+		<item name="wcf.toDo.task.unsolved.reminderSingular"><![CDATA[Eine ausstehende Aufgabe in der <a href="{link controller='TodoList'}{/link}">ToDo-Liste</a>]]></item>
+		<item name="wcf.toDo.task.unsolved.reminderPlural"><![CDATA[{$unsolvedToDoCount} ausstehende Aufgaben in der <a href="{link controller='TodoList'}{/link}">ToDo-Liste</a>]]></item>
 		<item name="wcf.toDo.task.updatetimestamp"><![CDATA[Aktualisierungsdatum]]></item>
-		<item name="wcf.toDo.task.overdue.reminderSingular"><![CDATA[überfällige Aufgabe in der <a href="{link controller='TodoList'}{/link}">ToDo-Liste</a>]]></item>
-		<item name="wcf.toDo.task.overdue.reminderPlural"><![CDATA[überfällige Aufgaben in der <a href="{link controller='TodoList'}{/link}">ToDo-Liste</a>]]></item>
+		<item name="wcf.toDo.task.overdue.reminderSingular"><![CDATA[Eine überfällige Aufgabe in der <a href="{link controller='TodoList'}{/link}">ToDo-Liste</a>]]></item>
+		<item name="wcf.toDo.task.overdue.reminderPlural"><![CDATA[{$overdueToDoCount} überfällige Aufgaben in der <a href="{link controller='TodoList'}{/link}">ToDo-Liste</a>]]></item>
+		<item name="wcf.toDo.task.waiting.reminderSingular"><![CDATA[Eine wartende Aufgabe in der <a href="{link controller='TodoList'}{/link}">ToDo-Liste</a>]]></item>
+		<item name="wcf.toDo.task.waiting.reminderPlural"><![CDATA[{$waitingToDoCount} artende Aufgaben in der <a href="{link controller='TodoList'}{/link}">ToDo-Liste</a>]]></item>
 		<item name="wcf.toDo.task.participate"><![CDATA[ToDo übernehmen]]></item>
 		<item name="wcf.toDo.task.participate.shure"><![CDATA[Wollen Sie sich wirklich zu den Verantwortlichen für dieses ToDo hinzufügen?]]></item>
 		<item name="wcf.toDo.task.participate.success"><![CDATA[Sie wurden erfolgreich eingetragen.]]></item>

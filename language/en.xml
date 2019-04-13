@@ -266,11 +266,13 @@
 		<item name="wcf.toDo.task.progress.update"><![CDATA[Update progress]]></item>
 		<item name="wcf.toDo.task.remembertime"><![CDATA[Reminder]]></item>
 		<item name="wcf.toDo.task.sort"><![CDATA[Sort]]></item>
-		<item name="wcf.toDo.task.unsolved.reminderSingular"><![CDATA[unsolved task in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
-		<item name="wcf.toDo.task.unsolved.reminderPlural"><![CDATA[unsolved tasks in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
+		<item name="wcf.toDo.task.unsolved.reminderSingular"><![CDATA[One unsolved task in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
+		<item name="wcf.toDo.task.unsolved.reminderPlural"><![CDATA[{$unsolvedToDoCount} unsolved tasks in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
 		<item name="wcf.toDo.task.updatetimestamp"><![CDATA[Last update]]></item>
-		<item name="wcf.toDo.task.overdue.reminderSingular"><![CDATA[overdue task in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
-		<item name="wcf.toDo.task.overdue.reminderPlural"><![CDATA[overduw tasks in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
+		<item name="wcf.toDo.task.overdue.reminderSingular"><![CDATA[One overdue task in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
+		<item name="wcf.toDo.task.overdue.reminderPlural"><![CDATA[{$overdueToDoCount} overdue tasks in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
+		<item name="wcf.toDo.task.waiting.reminderSingular"><![CDATA[One waiting task in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
+		<item name="wcf.toDo.task.waiting.reminderPlural"><![CDATA[{$waitingToDoCount} waiting tasks in your <a href="{link controller='TodoList'}{/link}">ToDo-List</a>]]></item>
 		<item name="wcf.toDo.task.participate"><![CDATA[Tackle this ToDo]]></item>
 		<item name="wcf.toDo.task.participate.shure"><![CDATA[Do you want to tackle this ToDo?]]></item>
 		<item name="wcf.toDo.task.participate.success"><![CDATA[You have been added successfully.]]></item>

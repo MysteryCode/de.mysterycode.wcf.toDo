@@ -1,12 +1,12 @@
 {if $__wcf->getUser()->userID && $__wcf->getSession()->getPermission('user.toDo.warning.canSee')}
 	{if $unsolvedToDoCount|isset && $unsolvedToDoCount > 0 && TODO_UNSOLVED_WARNING}
-		<div class="jsOnly info toDoInfo" id="todoWarningUnsolved">{$unsolvedToDoCount} {lang}wcf.toDo.task.unsolved.reminder{if $unsolvedToDoCount == 1}Singular{else}Plural{/if}{/lang}{if $__wcf->getSession()->getPermission('user.toDo.warning.canHide')}<a><span class="icon fa-remove pointer" style="float:right;"></span></a>{/if}</div>
+		<div class="jsOnly info toDoInfo" id="todoWarningUnsolved">{$unsolvedToDoCount} {lang unsolvedToDoCount=$unsolvedToDoCount}wcf.toDo.task.unsolved.reminder{if $unsolvedToDoCount == 1}Singular{else}Plural{/if}{/lang}{if $__wcf->getSession()->getPermission('user.toDo.warning.canHide')}<a><span class="icon fa-remove pointer" style="float:right;"></span></a>{/if}</div>
 	{/if}
 	{if $overdueToDoCount|isset && $overdueToDoCount > 0 && TODO_OVERDUE_WARNING}
-		<div class="jsOnly error toDoWarning" id="todoWarningOverdue">{$overdueToDoCount} {lang}wcf.toDo.task.overdue.reminder{if $overdueToDoCount == 1}Singular{else}Plural{/if}{/lang}{if $__wcf->getSession()->getPermission('user.toDo.warning.canHide')}<a><span class="icon fa-remove pointer" style="float:right;"></span></a>{/if}</div>
+		<div class="jsOnly error toDoWarning" id="todoWarningOverdue">{$overdueToDoCount} {lang overdueToDoCount=$overdueToDoCount}wcf.toDo.task.overdue.reminder{if $overdueToDoCount == 1}Singular{else}Plural{/if}{/lang}{if $__wcf->getSession()->getPermission('user.toDo.warning.canHide')}<a><span class="icon fa-remove pointer" style="float:right;"></span></a>{/if}</div>
 	{/if}
 	{if $waitingToDoCount|isset && $waitingToDoCount > 0 && TODO_WAITING_WARNING}
-		<div class="jsOnly error toDoWarning" id="todoWarningWaiting">{$waitingToDoCount} {lang}wcf.toDo.task.waiting.reminder{if $waitingToDoCount == 1}Singular{else}Plural{/if}{/lang}{if $__wcf->getSession()->getPermission('user.toDo.warning.canHide')}<a><span class="icon fa-remove pointer" style="float:right;"></span></a>{/if}</div>
+		<div class="jsOnly error toDoWarning" id="todoWarningWaiting">{$waitingToDoCount} {lang waitingToDoCount=$waitingToDoCount}wcf.toDo.task.waiting.reminder{if $waitingToDoCount == 1}Singular{else}Plural{/if}{/lang}{if $__wcf->getSession()->getPermission('user.toDo.warning.canHide')}<a><span class="icon fa-remove pointer" style="float:right;"></span></a>{/if}</div>
 	{/if}
 	{if $__wcf->getSession()->getPermission('user.toDo.warning.canHide')}
 		<script data-relocate="true">
